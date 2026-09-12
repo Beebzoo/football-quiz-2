@@ -1669,15 +1669,11 @@
   .h2ballwrap.ghost{z-index:4;pointer-events:none}
   .h2ballwrap.g1 .h2ball{opacity:.36;filter:blur(.6px)}
   .h2ballwrap.g2 .h2ball{opacity:.17;filter:blur(1.2px)}
-  .h2ball{display:block;width:100%;height:100%;border-radius:50%;position:relative;
-    background:radial-gradient(circle at 34% 28%,#fff 0 40%,#f2f2f2 60%,#c2c2c2 100%);
-    box-shadow:0 2px 6px rgba(0,0,0,.85), 0 0 10px rgba(255,255,255,.45),
-               inset 0 -2px 3px rgba(0,0,0,.22)}
-  .h2ball::before{content:"";position:absolute;left:50%;top:50%;width:40%;height:40%;
-    transform:translate(-50%,-50%);background:#222;
-    clip-path:polygon(50% 0,100% 38%,81% 100%,19% 100%,0 38%)}
-  .h2ball::after{content:"";position:absolute;left:6%;top:62%;width:24%;height:24%;
-    background:#222;border-radius:50% 0 40% 30%}
+  /* The app's own ball: the Teamgeist off the menu, not a drawn substitute.
+     drop-shadow, NOT box-shadow: the image is a cutout, and a box-shadow would
+     trace the square it sits in rather than the ball itself. */
+  .h2ball{display:block;width:100%;height:100%;object-fit:contain;
+    filter:drop-shadow(0 2px 4px rgba(0,0,0,.85)) drop-shadow(0 0 6px rgba(255,255,255,.35))}
   .h2ballwrap.pass{animation:h2fly var(--dur,.8s) cubic-bezier(.42,.05,.35,1) both}
   @keyframes h2fly{from{left:var(--fx);top:var(--fy)}to{left:var(--tx);top:var(--ty)}}
   .h2ballwrap.pass .h2lift{animation:h2arc var(--dur,.8s) cubic-bezier(.33,0,.67,1) both}
@@ -1808,12 +1804,8 @@
 
   .g3-ball{position:absolute;left:34%;top:78%;width:20px;height:20px;z-index:5;
     transform:translate(-50%,-50%) scale(1.5)}
-  .g3-ball .b{display:block;width:100%;height:100%;border-radius:50%;position:relative;
-    background:radial-gradient(circle at 34% 28%,#fff 0 40%,#f2f2f2 60%,#c2c2c2 100%);
-    box-shadow:0 2px 7px rgba(0,0,0,.8),0 0 12px rgba(255,255,255,.4)}
-  .g3-ball .b::before{content:"";position:absolute;left:50%;top:50%;width:40%;height:40%;
-    transform:translate(-50%,-50%);background:#222;
-    clip-path:polygon(50% 0,100% 38%,81% 100%,19% 100%,0 38%)}
+  .g3-ball .b{display:block;width:100%;height:100%;object-fit:contain;
+    filter:drop-shadow(0 2px 5px rgba(0,0,0,.85)) drop-shadow(0 0 7px rgba(255,255,255,.3))}
   /* struck: away from the camera, so it shrinks as it goes, into the top corner */
   .g3.scored .g3-ball{animation:g3in .95s cubic-bezier(.3,.55,.5,1) both}
   @keyframes g3in{
@@ -6020,7 +6012,7 @@ function h2PitchHTML(tappable){
                      '%;--lift:' + lift.toFixed(0) + 'px' : "";
   const ball = (cls, extra) =>
     '<div class="h2ballwrap' + (A ? " pass" : "") + cls + '" style="left:' + bx + '%;top:' + by + '%' +
-    flight + extra + '"><span class="h2lift"><span class="h2ball"></span></span></div>';
+    flight + extra + '"><span class="h2lift"><img class="h2ball" src="assets/ball.png" alt=""></span></div>';
   /* Two ghosts running the same flight a fraction behind smear into a trail.
      Cheaper and better looking than trying to draw one. */
   if(A){ out += ball(" ghost g2", ";animation-delay:-.12s") + ball(" ghost g1", ";animation-delay:-.06s"); }
@@ -6059,7 +6051,7 @@ function h2GoalSceneHTML(state){
     '<div class="g3-bulge"></div>' +
     '<div class="g3-keeper" style="--gk:' + gkKit + '" title="' + esc(keeper) + '">' +
       '<span class="sh"></span><span class="lg"></span></div>' +
-    '<div class="g3-ball"><span class="b"></span></div>' +
+    '<div class="g3-ball"><img class="b" src="assets/ball.png" alt=""></div>' +
     '<div class="g3-striker" style="--kit:' + kit + ';--ink:' + ink + '">' +
       '<span class="sh"></span><i>' + h2No(H.at, H.who) + '</i></div>' +
     '<div class="g3-cry">' + (state === "scored" ? "GOAL" : state === "saved" ? "SAVED" : "") + '</div>' +
