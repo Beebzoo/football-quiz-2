@@ -35,13 +35,46 @@ const OUT = path.join(REPO, "assets", "wc2006", "index.json");
 const DRY = process.argv.includes("--dry");
 const UA = "BALL-quiz-build/1.0 (personal project; contact via repo owner)";
 
-const get = url => new Promise((res, rej) => {
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+
+const once = url => new Promise((res, rej) => {
   https.get(url, { headers: { "User-Agent": UA } }, r => {
-    if (r.statusCode !== 200) return rej(new Error("HTTP " + r.statusCode + " for " + url));
+    if (r.statusCode !== 200) {
+      r.resume();
+      const e = new Error("HTTP " + r.statusCode + " for " + url);
+      e.status = r.statusCode;
+      return rej(e);
+    }
     let b = ""; r.setEncoding("utf8");
     r.on("data", d => b += d); r.on("end", () => res(b));
   }).on("error", rej);
 });
+
+/* BE POLITE OR BE THROTTLED.
+   The first version of this fired a search plus up to six entity lookups for
+   every one of the 32 countries, back to back and as fast as node could manage.
+   Wikipedia answered with 429s, and the damage was not a crash: the failures
+   fell through to fallbacks, so the build "succeeded" and quietly wrote a deck
+   with three null kit colours and 27 made-up country codes. A throttle and a
+   backoff are cheap; a build that lies is not. */
+let lastCall = 0;
+const GAP = 180;            // ms between requests
+async function get(url, tries = 4) {
+  for (let i = 0; i < tries; i++) {
+    const wait = GAP - (Date.now() - lastCall);
+    if (wait > 0) await sleep(wait);
+    lastCall = Date.now();
+    try {
+      return await once(url);
+    } catch (e) {
+      const retryable = e.status === 429 || e.status >= 500;
+      if (!retryable || i === tries - 1) throw e;
+      const back = 1500 * Math.pow(2, i);
+      console.log("    " + e.status + ", waiting " + (back / 1000) + "s");
+      await sleep(back);
+    }
+  }
+}
 
 /* [[Álvaro Mesén]] -> Álvaro Mesén ; [[Luis Marín Murillo|Luis Marín]] -> Luis Marín */
 function unlink(t) {
@@ -226,6 +259,77 @@ function pickXI(players) {
     return DRY ? null : await downloadFlag(country);
   }
 
+  /* ---------- three-letter codes for the scoreboard ----------
+     A broadcast scorebug says NED 1-0 ITA, not Netherlands 1-0 Italy, and
+     definitely not the first three letters of the name, which would give NET
+     and SER. So the trigram is read off Wikidata: P3441 is the code FIFA
+     assigns, P984 the IOC one as a fallback for anywhere FIFA has not. Both
+     property ids were found by SEARCHING for them rather than typed from
+     memory, which is the rule in this repo and the reason none of the six
+     wrong competition ids in the original app happened again here.
+
+     Only a country carries either property, which conveniently doubles as the
+     check that the right entity was picked out of the search results. */
+  /* TWO QUERIES, NOT SIXTY-FOUR.
+     The first attempt at this searched Wikidata once per country and then
+     fetched each candidate's claims, and got itself throttled into uselessness
+     inside a minute. Both code lists are small and public, so they come down
+     whole in a single SPARQL query each and the matching happens here.
+
+     P3441 does NOT sit on the country. It sits on the national TEAM, which is
+     why the labels being matched read "Netherlands national association
+     football team" rather than "Netherlands", and why the junk filter has to
+     throw out the women's, youth, futsal and beach sides that all legitimately
+     share a country's code. P984, the IOC one, does sit on the country, and it
+     is what covers Serbia and Montenegro: FIFA's code for them is not recorded
+     anywhere on Wikidata, but the IOC's is SCG and so is their ISO alpha-3. */
+  const SPARQL = "https://query.wikidata.org/sparql?format=json&query=";
+  const sparqlRows = async prop => {
+    const q = "SELECT ?code ?label WHERE { ?i wdt:" + prop + " ?code . " +
+              "?i rdfs:label ?label . FILTER(lang(?label)='en') }";
+    const j = JSON.parse(await get(SPARQL + encodeURIComponent(q)));
+    return j.results.bindings.map(b => ({ code: b.code.value, label: b.label.value }));
+  };
+  const JUNK = /women|under-|futsal|beach|olympic|amateur|federation|B team/i;
+  const CODE_ALIAS = {
+    "United States": ["United States", "United States of America"],
+    "Czech Republic": ["Czech Republic", "Czechia"],
+    "South Korea": ["South Korea", "Korea Republic"],
+    "Ivory Coast": ["Ivory Coast", "Côte d'Ivoire"],
+    "Iran": ["Iran", "IR Iran"],
+  };
+  const rx = t => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  let TEAM_CODES = [], COUNTRY_CODES = [];
+
+  function codeFor(country) {
+    const names = CODE_ALIAS[country] || [country];
+    // the men's senior side, named exactly
+    for (const n of names) {
+      const re = new RegExp("^" + rx(n) + " (men's )?national (association )?football team$", "i");
+      const hit = TEAM_CODES.find(r => !JUNK.test(r.label) && re.test(r.label));
+      if (hit) return hit.code;
+    }
+    // any national side of theirs that is not one of the excluded kinds
+    for (const n of names) {
+      const hit = TEAM_CODES.find(r => !JUNK.test(r.label) &&
+        r.label.toLowerCase().startsWith(n.toLowerCase() + " ") && /national/i.test(r.label));
+      if (hit) return hit.code;
+    }
+    // the country's own Olympic code, for states that no longer field a team
+    for (const n of names) {
+      const hit = COUNTRY_CODES.find(r => r.label.toLowerCase() === n.toLowerCase());
+      if (hit) return hit.code;
+    }
+    return null;
+  }
+
+  if(!DRY){
+    console.log("fetching country codes...");
+    TEAM_CODES = await sparqlRows("P3441");
+    COUNTRY_CODES = await sparqlRows("P984");
+    console.log("  " + TEAM_CODES.length + " team codes, " + COUNTRY_CODES.length + " country codes");
+  }
+
   const out = {};
   const missing = [];
   let short = 0;
@@ -236,14 +340,22 @@ function pickXI(players) {
     const kit = kitFor(t.name);
     let colour = kit ? kit.c : await harvestKit(t.name);
     if (!colour) missing.push(t.name);
+    const flag = await flagFor(t.name);
+    /* last resort is the two letter flag code in caps, which is at least real
+       and never a guess at what a trigram might be */
+    const abbr = codeFor(t.name) || (flag ? flag.slice(0,3).toUpperCase() : "???");
     out[t.name] = {
       kit: colour,
-      flag: await flagFor(t.name),
+      abbr,
+      flag,
       slug: kit ? kit.s : null,
       squad: t.players.length,
       xi,
     };
   }
+  console.log("\ncodes: " + Object.entries(out).map(([c, v]) => v.abbr).join(" "));
+  const guessed = Object.entries(out).filter(([, v]) => v.abbr.length !== 3 || v.abbr === "???");
+  if(guessed.length) console.log("  !! not a real trigram: " + guessed.map(([c, v]) => c + "=" + v.abbr).join(", "));
   const noflag = Object.entries(out).filter(([, v]) => !v.flag).map(([c]) => c);
   console.log("flags resolved:    " + (Object.keys(out).length - noflag.length) + "/" + Object.keys(out).length +
               (noflag.length ? "   MISSING: " + noflag.join(", ") : ""));
@@ -256,6 +368,29 @@ function pickXI(players) {
     console.log("  " + SHAPE[i].padEnd(3) + " #" + String(p.no).padEnd(3) + p.n + "   (" + p.full + ")"));
 
   if (DRY) { console.log("\n--dry, nothing written"); return; }
+
+  /* REFUSE TO WRITE A DECK THAT IS KNOWN TO BE WRONG.
+     Every fallback in this file is there so a single missing field cannot take
+     the whole build down. Put together, though, they are perfectly capable of
+     producing a deck that looks fine and is full of nulls and invented country
+     codes, and that is exactly what a throttled run did once. So the fallbacks
+     stay, and the build now checks its own output before it replaces anything. */
+  const problems = [];
+  for (const [c, v] of Object.entries(out)) {
+    if (!v.kit) problems.push(c + ": no kit colour");
+    if (!v.flag) problems.push(c + ": no flag");
+    if (!/^[A-Z]{3}$/.test(v.abbr || "")) problems.push(c + ": '" + v.abbr + "' is not a country code");
+    if (!v.xi || v.xi.length !== 11) problems.push(c + ": not eleven men");
+  }
+  if (problems.length && !process.argv.includes("--force")) {
+    console.log("\nNOT WRITING. " + problems.length + " problem(s):");
+    problems.slice(0, 12).forEach(p => console.log("  " + p));
+    if (problems.length > 12) console.log("  ...and " + (problems.length - 12) + " more");
+    console.log("\nMost likely a rate limit. Wait a minute and run it again.");
+    console.log("--force writes it anyway.");
+    process.exitCode = 1;
+    return;
+  }
   fs.mkdirSync(path.dirname(OUT), { recursive: true });
   fs.writeFileSync(OUT, JSON.stringify(out));
   console.log("\nwrote " + path.relative(REPO, OUT) + "  (" + (fs.statSync(OUT).size / 1024).toFixed(1) + " KB)");

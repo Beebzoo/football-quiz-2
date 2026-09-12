@@ -39,12 +39,13 @@ SHOT_STATE="$STATE" node -e '
 const fs=require("fs");
 const state=process.env.SHOT_STATE||"pick";
 const base=`S=freshState(["Martijn","Bram"],false,"h2h",0); h2Start();`;
-const nl=`${base} S.h2h.teams=["Netherlands","Italy"]; S.h2h.tossed=true;`;
+const picked=`${base} h2PickTeam("Netherlands"); h2PickTeam("Italy");`;
+const nl=`${picked} S.h2h.tossed=true;`;
 const setups={
   teams: `${base} render();`,
-  toss:  `${base} render();`,
-  flip:  `${base} render(); h2Call("heads");`,
-  landed:`${base} render(); h2Call("heads"); h2Land();`,
+  toss:  `${picked} render();`,
+  flip:  `${picked} render(); h2Call("heads");`,
+  landed:`${picked} render(); h2Call("heads"); h2Land();`,
   pick:  `${base} S.h2h.tossed=true; S.h2h.who=0; S.h2h.at=0; S.phase="h_pick"; render();`,
   sel:   `${base} S.h2h.tossed=true; S.h2h.who=0; S.h2h.at=0; S.phase="h_pick"; render(); h2Select(5);`,
   att:   `${base} S.h2h.tossed=true; S.h2h.who=0; S.h2h.at=9; S.phase="h_pick"; render();`,

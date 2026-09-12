@@ -1553,7 +1553,12 @@
     --base:translateY(-50%);
     transform:var(--base);transform-origin:50% 50%;
     background:
-      repeating-linear-gradient(180deg,rgba(255,255,255,.028) 0 7.6%,transparent 7.6% 15.2%),
+      radial-gradient(ellipse 46% 26% at 16% 10%,rgba(228,248,228,.13),transparent 72%),
+      radial-gradient(ellipse 46% 26% at 84% 10%,rgba(228,248,228,.13),transparent 72%),
+      radial-gradient(ellipse 46% 26% at 16% 90%,rgba(228,248,228,.13),transparent 72%),
+      radial-gradient(ellipse 46% 26% at 84% 90%,rgba(228,248,228,.13),transparent 72%),
+      radial-gradient(ellipse 78% 58% at 50% 50%,transparent 48%,rgba(0,0,0,.34) 100%),
+      repeating-linear-gradient(180deg,rgba(255,255,255,.032) 0 7.6%,transparent 7.6% 15.2%),
       linear-gradient(180deg,#0d3a1c 0%,#17552c 50%,#0d3a1c 100%);
     border-radius:12px;user-select:none;
     box-shadow:0 18px 38px rgba(0,0,0,.55);
@@ -1735,8 +1740,7 @@
      Nothing here is an image. */
   .g3{position:relative;width:100%;max-width:400px;margin:2px auto 0;aspect-ratio:10/8.2;
     perspective:540px;perspective-origin:50% 34%;overflow:hidden;border-radius:14px;
-    background:
-      linear-gradient(180deg,#07200f 0%,#0c2f18 26%,#143f20 27%,#0e3319 100%);
+    background:linear-gradient(180deg,#04120b 0%,#071d11 24%,#143f20 27%,#0e3319 100%);
     box-shadow:0 16px 34px rgba(0,0,0,.55);user-select:none}
   /* the grass, running away from the camera */
   .g3-grass{position:absolute;left:-30%;right:-30%;bottom:0;height:74%;
@@ -1748,7 +1752,7 @@
   .g3-line{position:absolute;left:12%;right:12%;top:62%;height:2px;
     background:rgba(255,255,255,.3);border-radius:2px}
 
-  .g3-goal{position:absolute;left:11%;right:11%;top:16%;height:45%;
+  .g3-goal{position:absolute;left:11%;right:11%;top:17%;height:44%;z-index:3;
     transform-style:preserve-3d}
   .g3-net{position:absolute;background-color:rgba(4,20,10,.42);
     background-image:
@@ -1765,42 +1769,156 @@
   .g3-postl{left:-1.5%;top:-6px;bottom:0;width:7px}
   .g3-postr{right:-1.5%;top:-6px;bottom:0;width:7px}
 
+  /* ---------- THE GROUND AROUND THE GOAL ----------
+     A stand of people behind the net, boards along the back of the pitch, and
+     floodlights washing down onto it. The crowd is not drawn one person at a
+     time: it is four stacked background layers, three grids of dots offset from
+     each other in pale, skin and shirt colours, over a repeating row shadow.
+     At this size a speckle in tiers reads as thousands of people, and it costs
+     one element. */
+  .g3-sky{position:absolute;left:0;right:0;top:0;height:9%;
+    background:linear-gradient(180deg,#04120b,#071d11)}
+  .g3-stand{position:absolute;left:0;right:0;top:6%;height:21%;
+    background-color:#101d17;
+    background-image:
+      radial-gradient(circle,rgba(238,232,220,.68) 0 1.2px,transparent 1.8px),
+      radial-gradient(circle,rgba(214,146,104,.58) 0 1.2px,transparent 1.8px),
+      radial-gradient(circle,rgba(132,170,222,.54) 0 1.2px,transparent 1.8px),
+      repeating-linear-gradient(180deg,rgba(0,0,0,.42) 0 3px,transparent 3px 8px);
+    background-size:7px 8px, 11px 9px, 13px 11px, 100% 8px;
+    background-position:0 0, 3px 4px, 7px 2px, 0 0;
+    box-shadow:inset 0 -10px 16px -6px rgba(0,0,0,.9), inset 0 8px 14px -8px rgba(0,0,0,.9)}
+  /* the roof line and the two towers */
+  .g3-stand::before{content:"";position:absolute;left:0;right:0;top:0;height:14%;
+    background:linear-gradient(180deg,#0c2018,rgba(12,32,24,0))}
+  .g3-flood{position:absolute;top:-2%;width:34%;height:30%;pointer-events:none;z-index:2}
+  .g3-flood.l{left:-6%;background:radial-gradient(ellipse at 30% 0%,rgba(226,242,226,.36),transparent 64%)}
+  .g3-flood.r{right:-6%;background:radial-gradient(ellipse at 70% 0%,rgba(226,242,226,.36),transparent 64%)}
+  .g3-flood i{position:absolute;top:4%;width:26px;height:9px;border-radius:2px;
+    background:linear-gradient(180deg,#f3f7e8,#b9c4a8);
+    box-shadow:0 0 22px 7px rgba(238,248,226,.5)}
+  .g3-flood.l i{left:16%} .g3-flood.r i{right:16%}
+  /* the boards along the back of the pitch. No names on them: an invented
+     sponsor is a lie on a screenshot, and abstract panels read the same. */
+  .g3-ads{position:absolute;left:-4%;right:-4%;top:24.5%;height:4.6%;z-index:2;
+    background:repeating-linear-gradient(90deg,
+      #16324a 0 11%, #1d4f2c 11% 22%, #4a3312 22% 33%, #2a1b46 33% 44%);
+    box-shadow:inset 0 2px 0 rgba(255,255,255,.22), inset 0 -3px 6px rgba(0,0,0,.6),
+               0 3px 8px rgba(0,0,0,.55)}
+  .g3-ads::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(180deg,rgba(255,255,255,.16),transparent 60%)}
+  /* the floodlights falling on the grass */
+  .g3-wash{position:absolute;left:0;right:0;top:26%;bottom:0;pointer-events:none;z-index:1;
+    background:
+      radial-gradient(ellipse 62% 48% at 22% 22%,rgba(228,248,228,.19),transparent 70%),
+      radial-gradient(ellipse 62% 48% at 78% 22%,rgba(228,248,228,.19),transparent 70%),
+      radial-gradient(ellipse 90% 70% at 50% 100%,rgba(0,0,0,.34),transparent 68%)}
+
+  /* camera flashes going off in the stand when it hits the net */
+  .g3-flash{position:absolute;left:0;right:0;top:6%;height:21%;pointer-events:none;z-index:3}
+  .g3-flash i{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;
+    opacity:0;box-shadow:0 0 7px 3px rgba(255,255,255,.85)}
+  .g3.scored .g3-flash i{animation:g3flash .5s ease-out infinite}
+  @keyframes g3flash{0%{opacity:0;transform:scale(.5)}
+    12%{opacity:1;transform:scale(1.4)}100%{opacity:0;transform:scale(.8)}}
+
+  /* ---------- A FOOTBALLER, DRAWN ----------
+     Head, arms, shirt, shorts, legs, socks, boots, all absolutely positioned as
+     percentages of one box, so the whole man scales from a single --h and there
+     is no second set of numbers to keep in step. No sprites, nothing to load.
+
+     Proportions are roughly a real footballer's: the head is a seventh of him,
+     the shirt reaches mid-thigh, the legs are a shade under half. At 70px that
+     reads as a person; at 150px it still does, which is what lets the same
+     component be the keeper on his line and the striker in the foreground. */
+  .fig{position:relative;width:calc(var(--h) * .54);height:var(--h);
+    --skin:#e3b58c; --shorts:color-mix(in srgb, var(--kit) 42%, #10140f);
+    filter:drop-shadow(0 3px 5px rgba(0,0,0,.6))}
+  .fig > *{position:absolute}
+
+  .f-head{left:50%;top:0;width:30%;height:17.5%;transform:translateX(-50%);
+    border-radius:50% 50% 46% 46%;background:var(--skin);
+    box-shadow:inset 0 -2px 3px rgba(0,0,0,.18)}
+  .f-head::after{content:"";position:absolute;left:-5%;right:-5%;top:-5%;height:44%;
+    border-radius:52% 52% 26% 26%;background:#2a1c12}      /* hair */
+
+  .f-torso{left:14%;top:15%;width:72%;height:35%;background:var(--kit);
+    border-radius:22% 22% 12% 12%/28% 28% 10% 10%;
+    background-image:linear-gradient(180deg,rgba(255,255,255,.2),rgba(0,0,0,.26));
+    display:flex;align-items:center;justify-content:center}
+  .f-torso i{font:800 calc(var(--h) * .12)/1 var(--ui);font-style:normal;color:var(--ink,#fff);
+    opacity:.92;margin-top:8%}
+  .f-torso::before{content:"";position:absolute;left:33%;right:33%;top:-3%;height:12%;
+    background:rgba(0,0,0,.4);border-radius:0 0 60% 60%/0 0 130% 130%}   /* collar */
+
+  .f-arm{top:17%;width:12%;height:31%;background:var(--kit);border-radius:40%;
+    background-image:linear-gradient(180deg,rgba(255,255,255,.14),rgba(0,0,0,.3))}
+  .f-arm::after{content:"";position:absolute;left:0;right:0;bottom:0;height:34%;
+    background:var(--skin);border-radius:40%}               /* forearm and hand */
+  .f-arm.l{left:6%;transform-origin:50% 6%;transform:rotate(9deg)}
+  .f-arm.r{right:6%;transform-origin:50% 6%;transform:rotate(-9deg)}
+
+  .f-shorts{left:19%;top:47%;width:62%;height:17%;background:var(--shorts);
+    border-radius:14% 14% 8% 8%;
+    background-image:linear-gradient(180deg,rgba(255,255,255,.16),rgba(0,0,0,.22))}
+  .f-shorts::after{content:"";position:absolute;left:48%;right:48%;top:40%;bottom:0;
+    background:rgba(0,0,0,.35)}                             /* the gap between the legs */
+
+  .f-leg{top:62%;width:16%;height:38%;background:var(--skin);border-radius:34% 34% 20% 20%}
+  .f-leg.l{left:22%;transform-origin:50% 0}
+  .f-leg.r{right:22%;transform-origin:50% 0}
+  .f-leg::before{content:"";position:absolute;left:0;right:0;top:46%;bottom:14%;
+    background:var(--kit);border-radius:12%;
+    background-image:linear-gradient(180deg,rgba(255,255,255,.12),rgba(0,0,0,.28))}  /* sock */
+  .f-leg::after{content:"";position:absolute;left:-22%;right:-6%;bottom:0;height:15%;
+    background:#15181a;border-radius:44% 30% 22% 40%}       /* boot */
+  .f-leg.r::after{left:-6%;right:-22%;border-radius:30% 44% 40% 22%}
+
+  /* the keeper: set, big, arms out and away from his body */
+  .fig.gk .f-arm.l{transform:rotate(34deg)}
+  .fig.gk .f-arm.r{transform:rotate(-34deg)}
+  .fig.gk .f-leg.l{transform:rotate(7deg)}
+  .fig.gk .f-leg.r{transform:rotate(-7deg)}
+  .fig.gk .f-torso{background-image:
+    linear-gradient(180deg,rgba(255,255,255,.2),rgba(0,0,0,.26)),
+    repeating-linear-gradient(135deg,rgba(0,0,0,.14) 0 4px,transparent 4px 9px)}
+  .fig.gk .f-arm::after{height:40%;background:#1d2630;border-radius:38%}   /* gloves */
+
+  /* the man taking it, seen from behind: one leg back through the ball */
+  .fig.str .f-head::after{height:62%;border-radius:52% 52% 38% 38%}   /* back of the head */
+  .fig.str .f-arm.l{transform:rotate(26deg)}
+  .fig.str .f-arm.r{transform:rotate(-17deg)}
+  .fig.str .f-leg.l{transform:rotate(-15deg)}
+  .fig.str .f-leg.r{transform:rotate(12deg)}
+
   /* the man in the way */
-  .g3-keeper{position:absolute;left:50%;top:29%;width:54px;z-index:4;
-    transform:translate(-50%,0);transition:none}
-  .g3-keeper .sh{display:block;width:42px;height:38px;margin:0 auto;
-    background-color:var(--gk,#f0c948);
-    background-image:linear-gradient(180deg,rgba(255,255,255,.22),rgba(0,0,0,.28));
-    clip-path:polygon(30% 0,42% 9%,58% 9%,70% 0,100% 22%,86% 38%,78% 30%,78% 100%,22% 100%,22% 30%,14% 38%,0 22%);
-    filter:drop-shadow(0 2px 4px rgba(0,0,0,.6))}
-  .g3-keeper .lg{display:block;width:20px;height:14px;margin:0 auto;
-    background:rgba(0,0,0,.55);border-radius:0 0 3px 3px}
+  .g3-keeper{position:absolute;left:50%;bottom:37%;z-index:4;transform:translateX(-50%)}
+  .g3.scored .g3-keeper .g3-name,.g3.saved .g3-keeper .g3-name{opacity:0;transition:opacity .2s}
+  .g3-name{display:block;text-align:center;margin-top:3px;
+    font:700 8.5px/1.2 var(--ui);letter-spacing:.03em;color:rgba(255,255,255,.72);
+    text-shadow:0 1px 3px rgba(0,0,0,.95)}
   /* he goes the wrong way on a goal, and the right way on a save */
+  .g3-keeper{transform-origin:50% 88%}
   .g3.scored .g3-keeper{animation:g3wrong 1.1s cubic-bezier(.3,.8,.4,1) both}
-  @keyframes g3wrong{0%{transform:translate(-50%,0) rotate(0)}
-    100%{transform:translate(-96%,14%) rotate(-26deg)}}
+  @keyframes g3wrong{0%{transform:translateX(-50%) rotate(0)}
+    100%{transform:translateX(-104%) translateY(10%) rotate(-58deg)}}
   .g3.saved .g3-keeper{animation:g3dive .85s cubic-bezier(.25,1.1,.4,1) both}
-  @keyframes g3dive{0%{transform:translate(-50%,0) rotate(0)}
-    55%{transform:translate(-14%,6%) rotate(20deg)}
-    100%{transform:translate(-20%,4%) rotate(16deg)}}
+  @keyframes g3dive{0%{transform:translateX(-50%) rotate(0)}
+    55%{transform:translateX(-4%) translateY(4%) rotate(52deg)}
+    100%{transform:translateX(-12%) translateY(2%) rotate(46deg)}}
 
   /* the man taking it, close to the camera and mostly out of shot */
-  .g3-striker{position:absolute;left:24%;bottom:-5%;width:118px;z-index:6;
-    transform:translateX(-50%)}
-  .g3-striker .sh{display:block;width:98px;height:88px;margin:0 auto;
-    background-color:var(--kit,#e04a34);
-    background-image:
-      linear-gradient(90deg,rgba(0,0,0,.3) 0 18%,transparent 25% 75%,rgba(0,0,0,.3) 82%),
-      linear-gradient(180deg,rgba(255,255,255,.2),rgba(0,0,0,.3));
-    clip-path:polygon(30% 0,42% 9%,58% 9%,70% 0,100% 22%,86% 38%,78% 30%,78% 100%,22% 100%,22% 30%,14% 38%,0 22%);
-    filter:drop-shadow(0 -2px 10px rgba(0,0,0,.7))}
-  .g3-striker i{position:absolute;left:50%;top:36%;transform:translateX(-50%);
-    font:900 30px/1 var(--ui);font-style:normal;color:var(--ink,#fff);opacity:.92;
-    text-shadow:0 1px 2px rgba(0,0,0,.35)}
-  .g3.scored .g3-striker,.g3.saved .g3-striker{animation:g3swing .45s ease-out both}
+  .g3-striker{position:absolute;left:21%;bottom:-13%;z-index:6;transform:translateX(-50%)}
+  .g3-striker .g3-name{font-size:11px;color:rgba(255,255,255,.85)}
+  .g3-striker{transform-origin:50% 96%}
+  .g3.scored .g3-striker,.g3.saved .g3-striker{animation:g3swing .5s ease-out both}
   @keyframes g3swing{0%{transform:translateX(-50%) rotate(0)}
-    40%{transform:translateX(-50%) rotate(-7deg) translateY(3px)}
-    100%{transform:translateX(-50%) rotate(0)}}
+    30%{transform:translateX(-50%) rotate(-9deg) translateY(4px)}
+    100%{transform:translateX(-50%) rotate(-2deg)}}
+  /* the leg that went through it */
+  .g3.scored .g3-striker .f-leg.r,.g3.saved .g3-striker .f-leg.r{
+    animation:g3boot .5s cubic-bezier(.3,1.2,.4,1) both}
+  @keyframes g3boot{0%{transform:rotate(12deg)}35%{transform:rotate(-34deg)}100%{transform:rotate(4deg)}}
 
   .g3-ball{position:absolute;left:34%;top:78%;width:20px;height:20px;z-index:5;
     transform:translate(-50%,-50%) scale(1.5)}
@@ -1822,16 +1940,38 @@
     100%{left:22%;top:64%;transform:translate(-50%,-50%) scale(1.05)}
   }
   /* the net takes it: the back of the goal bulges where the ball hits */
-  .g3-bulge{position:absolute;left:60%;top:26%;width:46px;height:40px;z-index:3;
+  .g3-bulge{position:absolute;left:60%;top:26%;width:52px;height:44px;z-index:4;
     border-radius:50%;opacity:0;pointer-events:none;
-    background:radial-gradient(circle,rgba(255,255,255,.55),transparent 68%)}
-  .g3.scored .g3-bulge{animation:g3bulge .75s .82s ease-out both}
-  @keyframes g3bulge{0%{opacity:0;transform:scale(.3)}
-    30%{opacity:1;transform:scale(1.15)}100%{opacity:0;transform:scale(1.5)}}
-  /* and the whole frame shakes for a moment */
-  .g3.scored .g3-goal{animation:g3shake .5s .85s ease-out both}
+    background:radial-gradient(circle,rgba(255,255,255,.7),transparent 66%)}
+  .g3.scored .g3-bulge{animation:g3bulge .8s .8s ease-out both}
+  @keyframes g3bulge{0%{opacity:0;transform:scale(.25)}
+    26%{opacity:1;transform:scale(1.2)}100%{opacity:0;transform:scale(1.7)}}
+
+  /* THE NET TAKES IT. The back of the goal is a plane sitting 104px behind the
+     line, so the ball hitting it is that plane being driven further back and
+     swinging forward again: punch, overshoot, settle. It is the depth that
+     sells it, which is the whole reason the goal is a box and not a picture. */
+  .g3.scored .g3-back{animation:g3punch 1.15s .78s cubic-bezier(.22,.9,.3,1) both}
+  @keyframes g3punch{
+    0%{transform:translateZ(-104px) scale(1)}
+    14%{transform:translateZ(-134px) scale(1.055)}
+    38%{transform:translateZ(-92px) scale(.982)}
+    60%{transform:translateZ(-116px) scale(1.026)}
+    80%{transform:translateZ(-99px) scale(.994)}
+    100%{transform:translateZ(-104px) scale(1)}
+  }
+  /* the mesh itself shivers with it */
+  .g3.scored .g3-net{animation:g3mesh .7s .78s ease-out both}
+  @keyframes g3mesh{
+    0%{background-position:0 0,0 0,0 0,0 0}
+    30%{background-position:1px 2px,2px 1px,0 0,0 0}
+    60%{background-position:-1px 1px,1px -1px,0 0,0 0}
+    100%{background-position:0 0,0 0,0 0,0 0}
+  }
+  /* and the whole frame rattles */
+  .g3.scored .g3-goal{animation:g3shake .55s .8s ease-out both}
   @keyframes g3shake{0%,100%{transform:translateX(0)}
-    25%{transform:translateX(-2px)}60%{transform:translateX(2px)}}
+    20%{transform:translateX(-3px)}45%{transform:translateX(2.5px)}72%{transform:translateX(-1.2px)}}
 
   .g3-cry{position:absolute;left:0;right:0;top:6%;text-align:center;z-index:8;pointer-events:none;
     font:900 clamp(1.5rem,8vw,2.2rem)/1 var(--ui);font-style:italic;letter-spacing:.05em}
@@ -1860,13 +2000,38 @@
   .h2opt.dim{opacity:.4}
 
   /* the scoreline */
-  .h2score{display:flex;align-items:center;justify-content:center;gap:12px;margin:2px 0 4px}
-  .h2team{display:flex;align-items:center;gap:7px;padding:5px 11px;border-radius:9px;
-    border:1px solid transparent;font-weight:700;font-size:.95rem;transition:all .25s}
-  .h2team .kit{width:12px;height:14px;border-radius:3px 3px 2px 2px;flex:none}
-  .h2team.on{border-color:var(--tc);background:rgba(255,255,255,.06);
-    box-shadow:0 0 0 1px var(--tc) inset, 0 0 14px -4px var(--tc)}
-  .h2goals{font-size:1.65rem;font-weight:800;font-variant-numeric:tabular-nums}
+  /* ---------- the scorebug ---------- */
+  .sb{display:flex;align-items:stretch;justify-content:center;margin:2px auto 3px;
+    width:100%;max-width:400px;border-radius:11px;overflow:hidden;
+    background:linear-gradient(180deg,rgba(10,26,16,.96),rgba(6,18,11,.98));
+    border:1px solid rgba(255,255,255,.14);
+    box-shadow:0 8px 22px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.09)}
+  .sb-t{flex:1 1 0;display:flex;align-items:center;gap:8px;padding:8px 9px;min-width:0;
+    position:relative;transition:background .3s}
+  .sb-t::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--tc)}
+  .sb-t.away{flex-direction:row-reverse}
+  .sb-t.away::before{left:auto;right:0}
+  /* whoever is on the ball is lit */
+  .sb-t.on{background:linear-gradient(90deg,color-mix(in srgb,var(--tc) 26%,transparent),transparent)}
+  .sb-t.away.on{background:linear-gradient(270deg,color-mix(in srgb,var(--tc) 26%,transparent),transparent)}
+  .sb-t.on::after{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--tc);
+    box-shadow:0 0 14px 2px var(--tc);animation:sbpulse 1.9s ease-in-out infinite}
+  .sb-t.away.on::after{left:auto;right:0}
+  @keyframes sbpulse{0%,100%{opacity:1}50%{opacity:.45}}
+  .sb-flag{width:34px;height:23px;object-fit:cover;border-radius:3px;flex:none;
+    box-shadow:0 0 0 1px rgba(0,0,0,.6), 0 2px 4px rgba(0,0,0,.5)}
+  .sb-t b{font:800 1.24rem var(--ui);letter-spacing:.06em;white-space:nowrap}
+  .sb-names{display:flex;justify-content:space-between;width:100%;max-width:400px;margin:0 auto 5px;
+    padding:0 12px;font:700 .64rem var(--ui);letter-spacing:.09em;text-transform:uppercase}
+  .sb-names span{opacity:.42;transition:opacity .3s,color .3s}
+  .sb-names em{font-style:normal;opacity:.34;font-size:.58rem;letter-spacing:.14em;
+    align-self:center}
+  .sb-names span.on{opacity:1;color:#f7e3a6}
+  .sb-mid{flex:none;display:flex;align-items:center;gap:8px;padding:0 11px;
+    background:rgba(0,0,0,.42);box-shadow:inset 1px 0 0 rgba(255,255,255,.08), inset -1px 0 0 rgba(255,255,255,.08)}
+  .sb-mid b{font:800 1.72rem var(--ui);font-variant-numeric:tabular-nums;color:#f7e3a6;
+    text-shadow:0 2px 0 rgba(0,0,0,.5), 0 0 16px rgba(249,221,150,.35)}
+  .sb-mid s{width:9px;height:2px;background:rgba(255,255,255,.34);border-radius:2px;text-decoration:none}
   .h2where{position:relative;z-index:6;text-align:center;font-size:.88rem;opacity:.85;margin:10px 0 5px;font-style:italic}
   .h2toggles{display:flex;justify-content:center;gap:18px;margin:0 0 2px;position:relative;z-index:6}
   .h2view{display:block;margin:0 auto 2px;position:relative;z-index:6;background:none;border:0;cursor:pointer;
@@ -1892,10 +2057,11 @@
      Montenegro were fetched by _tools/build-wc2006.js from the flag Wikidata
      names for that state, which matters because modern Serbia's is a different
      flag to the one that played in 2006. */
-  .h2flag{width:25px;height:17px;object-fit:cover;border-radius:2px;flex:none;
-    box-shadow:0 0 0 1px rgba(0,0,0,.55), 0 1px 2px rgba(0,0,0,.5)}
-  .h2flag.sm{width:19px;height:13px}
-  .h2flag.lg{width:30px;height:20px;vertical-align:-3px;margin:0 9px}
+  .h2flag{width:34px;height:23px;object-fit:cover;border-radius:3px;flex:none;
+    box-shadow:0 0 0 1px rgba(0,0,0,.55), 0 2px 5px rgba(0,0,0,.55)}
+  .h2flag.sm{width:26px;height:18px}
+  .h2flag.lg{width:52px;height:35px;vertical-align:-7px;margin:0 12px;border-radius:4px;
+    box-shadow:0 0 0 1px rgba(0,0,0,.6), 0 4px 12px rgba(0,0,0,.6)}
 
   /* picking a country: thirty two of them, so a two column list with the kit
      colour as the swatch, which is also the thing you will see on the pitch */
@@ -1907,6 +2073,17 @@
   .h2teambtn:disabled{opacity:.26;cursor:default}
   .h2teambtn .sw{width:14px;height:16px;border-radius:3px 3px 2px 2px;flex:none;
     box-shadow:0 0 0 1px rgba(0,0,0,.45) inset, 0 1px 2px rgba(0,0,0,.45)}
+
+  /* the fixture, before a ball is kicked */
+  .h2vs{display:flex;align-items:flex-start;justify-content:center;gap:14px;
+    width:100%;margin:12px 0 2px}
+  .h2vs-s{flex:1 1 0;display:flex;flex-direction:column;align-items:center;gap:7px;min-width:0}
+  .h2vs-s img{width:78px;height:52px;object-fit:cover;border-radius:5px;
+    box-shadow:0 0 0 1px rgba(0,0,0,.65), 0 7px 20px rgba(0,0,0,.7)}
+  .h2vs-s b{font:800 1.02rem/1.12 var(--ui);font-style:italic;text-align:center}
+  .h2vs-s i{font:700 .58rem var(--ui);font-style:normal;opacity:.45;
+    letter-spacing:.12em;text-transform:uppercase}
+  .h2vs em{font:900 1.6rem var(--ui);font-style:italic;opacity:.3;flex:none;margin-top:16px}
 
   /* the toss */
   .h2big{text-align:center;font-size:clamp(1.4rem,6.5vw,1.9rem);font-weight:800;font-style:italic;margin:6px 0}
@@ -5737,6 +5914,8 @@ function h2CrowdStop(){ try{ if(h2CrowdEl) h2CrowdEl.pause(); }catch(e){} }
 let h2Turn = false;            // set for one render when the camera should swing
 let h2Cele = false;            // ... and when the scoring side should celebrate
 let h2Lost = null;             // the man who just gave it away, for one render
+const h2Abbr  = w => { const q = h2Squad(w); return (q && q.abbr) ||
+  (S.players[w] ? S.players[w].name.slice(0, 3).toUpperCase() : "???"); };
 const h2Flag  = w => { const q = h2Squad(w); return q && q.flag ? "assets/natflags/" + q.flag + ".png" : null; };
 const h2Kit   = w => { const q = h2Squad(w); return (q && q.kit) || H2_KITS[w]; };
 /* the name under the shirt: the man who wore it in 2006, or the position */
@@ -6077,13 +6256,38 @@ function h2PitchHTML(tappable){
 
    state is "set" while the keeper is still being asked his question, then
    "scored" or "saved" once it has been called. */
+/* One footballer, built once and used for both men in the goal scene. */
+function h2FigHTML(cls, kit, h, no){
+  return '<div class="fig ' + cls + '" style="--kit:' + kit + ';--ink:' + kitInk(kit) +
+    ';--h:' + h + 'px">' +
+    '<span class="f-head"></span>' +
+    '<span class="f-arm l"></span><span class="f-arm r"></span>' +
+    '<span class="f-torso">' + (no ? '<i>' + no + '</i>' : '') + '</span>' +
+    '<span class="f-shorts"></span>' +
+    '<span class="f-leg l"></span><span class="f-leg r"></span>' +
+  '</div>';
+}
+
 function h2GoalSceneHTML(state){
   const H = h2();
   const kit = h2Kit(H.who), ink = kitInk(kit);
   const gkKit = h2Kit(h2Other());
   const striker = h2Who(H.at, H.who), keeper = h2Who(0, h2Other());
+  /* Fixed positions, not random: a crowd that reshuffles itself on every
+     render is a crowd nobody believes. */
+  const FLASHES = [[9,14],[17,62],[26,31],[34,78],[41,9],[48,47],[55,88],[62,22],
+                   [69,66],[76,38],[83,80],[90,17],[12,44],[58,6],[95,53]];
+  const flashes = FLASHES.map((f, i) =>
+    '<i style="left:' + f[0] + '%;top:' + f[1] + '%;animation-delay:' + (i * 137 % 900) + 'ms"></i>').join("");
+
   return '<div class="g3 ' + state + '">' +
+    '<div class="g3-sky"></div>' +
+    '<div class="g3-stand"></div>' +
+    '<div class="g3-flash">' + flashes + '</div>' +
+    '<div class="g3-ads"></div>' +
     '<div class="g3-grass"></div><div class="g3-line"></div>' +
+    '<div class="g3-wash"></div>' +
+    '<div class="g3-flood l"><i></i></div><div class="g3-flood r"><i></i></div>' +
     '<div class="g3-goal">' +
       '<div class="g3-net g3-back"></div>' +
       '<div class="g3-net g3-top"></div>' +
@@ -6094,24 +6298,47 @@ function h2GoalSceneHTML(state){
       '<div class="g3-bar g3-postr"></div>' +
     '</div>' +
     '<div class="g3-bulge"></div>' +
-    '<div class="g3-keeper" style="--gk:' + gkKit + '" title="' + esc(keeper) + '">' +
-      '<span class="sh"></span><span class="lg"></span></div>' +
+    '<div class="g3-keeper">' + h2FigHTML("gk", gkKit, 96, 1) +
+      '<span class="g3-name">' + esc(keeper) + '</span></div>' +
     '<div class="g3-ball"><img class="b" src="assets/ball.png" alt=""></div>' +
-    '<div class="g3-striker" style="--kit:' + kit + ';--ink:' + ink + '">' +
-      '<span class="sh"></span><i>' + h2No(H.at, H.who) + '</i></div>' +
+    '<div class="g3-striker">' + h2FigHTML("str", kit, 168, h2No(H.at, H.who)) +
+      '<span class="g3-name">' + esc(striker) + '</span></div>' +
     '<div class="g3-cry">' + (state === "scored" ? "GOAL" : state === "saved" ? "SAVED" : "") + '</div>' +
   '</div>';
 }
 
+/* A broadcast scorebug rather than two name chips: country code, flag, and the
+   score between them, with the side in possession lit. The kit colour runs down
+   the outer edge of each half, so the bar tells you which colour you are on the
+   grass without having to look. */
+/* A broadcast scorebug: flag, country code, score, and the kit colour running
+   down the outer edge of each half so the bar tells you which colour you are on
+   the grass. The side in possession is lit and its edge breathes.
+
+   The players' own names go on a strip UNDERNEATH rather than inside the bar.
+   They were in it to begin with and "MARTIJN" kept being ellipsised to "MART..."
+   because the column sizes itself to the country code next to it. A full width
+   strip has room and is what a broadcast does anyway. */
 function h2ScoreHTML(){
   const H = h2();
-  return '<div class="h2score">' + S.players.slice(0, 2).map((p, i) =>
-    '<div class="h2team' + (H.who === i ? " on" : "") + '" style="--tc:' + h2Kit(i) + '">' +
-      (h2Flag(i) ? '<img class="h2flag sm" src="' + h2Flag(i) + '" alt="">'
-                 : '<span class="kit" style="background:' + h2Kit(i) + '"></span>') +
-      '<span>' + esc(p.name) + (h2Team(i) ? '<i class="h2ctry">' + esc(h2Team(i)) + '</i>' : "") + '</span>' +
-      '<span class="h2goals">' + p.score + '</span>' +
-    '</div>').join('<span style="opacity:.4">v</span>') + '</div>';
+  const side = (i, away) => {
+    const flag = h2Flag(i);
+    return '<div class="sb-t' + (away ? " away" : "") + (H.who === i ? " on" : "") +
+      '" style="--tc:' + h2Kit(i) + '">' +
+      (flag ? '<img class="sb-flag" src="' + flag + '" alt="">' : '') +
+      '<b>' + esc(h2Abbr(i)) + '</b>' +
+    '</div>';
+  };
+  return '<div class="sb">' +
+      side(0, false) +
+      '<div class="sb-mid"><b>' + S.players[0].score + '</b><s></s><b>' + S.players[1].score + '</b></div>' +
+      side(1, true) +
+    '</div>' +
+    '<div class="sb-names">' +
+      '<span' + (H.who === 0 ? ' class="on"' : '') + '>' + esc(S.players[0].name) + '</span>' +
+      '<em>' + (S.phase === "h_toss" ? "KICK OFF" : "ROUND " + (S.round || 1)) + '</em>' +
+      '<span' + (H.who === 1 ? ' class="on"' : '') + '>' + esc(S.players[1].name) + '</span>' +
+    '</div>';
 }
 
 function h2Render(st){
@@ -6148,11 +6375,18 @@ function h2Render(st){
     const face = H.coin ? (H.coin === "heads" ? "H" : "T") : "?";
     st.innerHTML =
       '<div class="kick">' + ico('users') + 'One on One · first to ' + H2_TARGET + '</div>' +
-      '<div class="h2big">' +
-        (h2Flag(0) ? '<img class="h2flag lg" src="' + h2Flag(0) + '" alt="">' : "") +
-        esc(h2Team(0) || S.players[0].name) + ' <span style="opacity:.45">v</span> ' +
-        esc(h2Team(1) || S.players[1].name) +
-        (h2Flag(1) ? '<img class="h2flag lg" src="' + h2Flag(1) + '" alt="">' : "") +
+      '<div class="h2vs">' +
+        '<div class="h2vs-s">' +
+          (h2Flag(0) ? '<img src="' + h2Flag(0) + '" alt="">' : "") +
+          '<b>' + esc(h2Team(0) || S.players[0].name) + '</b>' +
+          '<i>' + esc(S.players[0].name) + '</i>' +
+        '</div>' +
+        '<em>v</em>' +
+        '<div class="h2vs-s">' +
+          (h2Flag(1) ? '<img src="' + h2Flag(1) + '" alt="">' : "") +
+          '<b>' + esc(h2Team(1) || S.players[1].name) + '</b>' +
+          '<i>' + esc(S.players[1].name) + '</i>' +
+        '</div>' +
       '</div>' +
       '<div class="h2coinwrap"><div class="h2coin' + (H.flipping ? " flip" : H.tossed ? " landed" : "") + '">' +
         face + '</div></div>' +

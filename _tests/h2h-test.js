@@ -199,6 +199,66 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
     check("a wide man keeps it infield", m && +m[1] < squad()[10].x, m && m[1]);
   }
 
+  console.log("\n--- the scorebug ---");
+  await place(0, GK);
+  check("it shows the country codes, not the country names",
+    stage(app).includes(">NED<") && stage(app).includes(">ITA<"),
+    "no codes in the bug");
+  check("every country in the deck has a real three letter code",
+    Object.values(WC).every(t => /^[A-Z]{3}$/.test(t.abbr || "")),
+    Object.entries(WC).filter(([, t]) => !/^[A-Z]{3}$/.test(t.abbr || "")).map(([c, t]) => c + "=" + t.abbr).join(","));
+  check("and they are the real ones, not the first three letters",
+    WC["Netherlands"].abbr === "NED" && WC["Germany"].abbr === "GER" &&
+    WC["Ivory Coast"].abbr === "CIV" && WC["South Korea"].abbr === "KOR",
+    [WC["Netherlands"].abbr, WC["Germany"].abbr, WC["Ivory Coast"].abbr, WC["South Korea"].abbr].join(","));
+  check("including the side that no longer exists",
+    WC["Serbia and Montenegro"].abbr === "SCG", WC["Serbia and Montenegro"].abbr);
+  check("both flags are in the bar", (stage(app).match(/class="sb-flag"/g) || []).length === 2,
+    (stage(app).match(/class="sb-flag"/g) || []).length);
+  check("the side on the ball is lit", /class="sb-t on"/.test(stage(app)), "nothing lit");
+  await place(1, GK);
+  check("and it moves with possession", /class="sb-t away on"/.test(stage(app)), "the light did not move");
+
+  console.log("\n--- the ground ---");
+  await place(0, ST);
+  run(app, "h2Shoot()"); await tick(160);
+  run(app, "h2Reveal()"); await tick(130);
+  run(app, "h2Judge(true)"); await tick(180);
+  const scene = stage(app);
+  check("there is a crowd behind the goal", scene.includes("g3-stand"), "no stand");
+  check("boards along the back of the pitch", scene.includes("g3-ads"), "no boards");
+  check("floodlights over it", (scene.match(/g3-flood/g) || []).length >= 2,
+    (scene.match(/g3-flood/g) || []).length);
+  check("and light falling on the grass", scene.includes("g3-wash"), "no wash");
+  check("camera flashes ready in the stand",
+    (scene.match(/class="g3-flash"/g) || []).length === 1 && scene.includes("animation-delay"),
+    "no flashes");
+
+  console.log("\n--- the two men ---");
+  check("both are drawn figures, not shirts",
+    (scene.match(/class="fig /g) || []).length === 2,
+    (scene.match(/class="fig /g) || []).length);
+  check("the keeper has a head, arms and legs",
+    /class="fig gk"[\s\S]{0,400}f-head[\s\S]{0,400}f-arm[\s\S]{0,400}f-leg/.test(scene),
+    "the keeper is missing parts");
+  check("so does the man who hit it",
+    /class="fig str"[\s\S]{0,400}f-head[\s\S]{0,400}f-torso[\s\S]{0,400}f-leg/.test(scene),
+    "the striker is missing parts");
+  check("the keeper wears the other country's kit",
+    scene.includes("--kit:" + WC["Italy"].kit), "wrong keeper kit");
+  check("and they are named", scene.includes("Buffon") && scene.includes("van Nistelrooy"),
+    "the men are anonymous");
+
+  run(app, "h2SaveReveal()"); await tick(130);
+  run(app, "h2SaveJudge(false)"); await tick(220);
+  check("a goal puts the scene in its scored state",
+    /class="g3 scored"/.test(stage(app)), "not scored");
+  run(app, "h2AfterStrike()"); await tick(260);
+  run(app, "h2KickOn()"); await tick(260);
+  /* that was a real goal, so the match is 1-0 now. Everything below assumes a
+     fresh one, so give it one rather than leaving a score lying around. */
+  await start();
+
   console.log("\n--- sound ---");
   await place(0, ST);
   check("it is on by default", ev(app, "h2Sound") === true, ev(app, "h2Sound"));
