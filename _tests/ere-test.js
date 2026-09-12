@@ -104,9 +104,9 @@ const TIERS = ["easy", "normal", "hard", "extreme", "ball"];
   console.log("\n--- the wiring ---");
   const app = makeInstance("ere");
   await tick(400);
-  check("the app loaded the deck", ev(app, "ERE && ERE.hard.length") === bank.hard.length, ev(app, "ERE && ERE.hard.length"));
+  check("the app loaded the deck", ev(app, "DECKS.ere && DECKS.ere.hard.length") === bank.hard.length, ev(app, "DECKS.ere && DECKS.ere.hard.length"));
   check("named in the mode drawer", ev(app, "MODE_META.ere && MODE_META.ere[1]") === "Eredivisie", ev(app, "MODE_META.ere && MODE_META.ere[1]"));
-  check("named in the record book", ev(app, "MODE_LABEL.ere") === "Eredivisie", ev(app, "MODE_LABEL.ere"));
+  check("named in the record book", ev(app, "matchLabel({mode:'ere'})") === "Eredivisie", ev(app, "matchLabel({mode:'ere'})"));
   check("its icon exists", !!ev(app, "IPATHS[MODE_META.ere[0]]"), ev(app, "MODE_META.ere[0]"));
   check("no other mode wears that icon", ev(app, "Object.entries(MODE_META).filter(([k,v])=>v[0]===MODE_META.ere[0]).length") === 1);
   check("in the Rainbow Road pool", ev(app, "RR_POOL.includes('ere')"));
@@ -114,12 +114,17 @@ const TIERS = ["easy", "normal", "hard", "extreme", "ball"];
   check("the deck is in the install", sw.includes("assets/eredivisie/index.json"), "not precached");
   check("and so is the old mark", sw.includes("assets/eredivisie/logo.png"), "not precached");
   check("the old mark is on disk", fs.existsSync(path.join(REPO, "assets/eredivisie/logo.png")), "missing");
-  check("the drawer dims the tile until the deck lands", /ere:!ERE/.test(html), "no off gate");
-  check("starting is gated on the deck", /setupMode==="ere" && !ERE/.test(html), "no start gate");
-  check("resuming is gated on the deck", /S\.mode==="ere" && !ERE/.test(html), "no resume gate");
+  /* One gate now, and it asks about the COMBINATION rather than the mode, so
+     Eredivisie read aloud can be ready while its multiple choice is not. */
+  check("the drawer lights the tile once a deck lands", ev(app, "modeLive('ere')") === true, "tile never lights");
+  check("and dims it when nothing is loaded",
+    ev(app, "(()=>{const k=DECKS.ere,m=DECKS['ere-mc'];delete DECKS.ere;delete DECKS['ere-mc'];" +
+            "const r=modeLive('ere');DECKS.ere=k;if(m)DECKS['ere-mc']=m;return r;})()") === false, "lit with no deck");
+  check("starting is gated on the combination", html.indexOf("modeReady(setupMode, setupPlay, setupMc)") > 0, "no start gate");
+  check("resuming is gated on the combination", html.indexOf("modeReady(S.mode, S.play, S.mc)") > 0, "no resume gate");
 
   console.log("\n--- a go ---");
-  run(app, 'S = freshState(["Ale","Bram","Martijn"], false, "ere", 0); render();');
+  run(app, 'S = freshState(["Ale","Bram","Martijn"], false, "ere", 0, "board", false); render();');
   await tick(60);
   check("opens on the picker", ev(app, "S.phase") === "pick", ev(app, "S.phase"));
   check("the body is dressed for the mode", ev(app, "document.body.classList.contains('eremode')"), "no eremode class");
@@ -167,7 +172,7 @@ const TIERS = ["easy", "normal", "hard", "extreme", "ball"];
   check("and stays off on the menu", !ev(app, "document.body.classList.contains('eremode')"), "still dressed");
 
   console.log("\n--- the deck and the resume ---");
-  run(app, 'S = freshState(["Ale","Bram"], false, "ere", 0);');
+  run(app, 'S = freshState(["Ale","Bram"], false, "ere", 0, "board", false);');
   const seen = new Set();
   for (let n = 0; n < 25; n++) { run(app, "pickTier('extreme'); S.phase='pick';"); seen.add(ev(app, "S.qi")); }
   check("twenty-five deals, twenty-five different questions", seen.size === 25, seen.size);

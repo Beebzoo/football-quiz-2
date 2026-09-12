@@ -32,8 +32,8 @@ const GK = 0, LCB = 1, SIX = 5, EIGHT = 6, TEN = 7, ST = 9;
   await tick(340);
   const MC = JSON.parse(fs.readFileSync(path.join(REPO, "assets/mc/index.json"), "utf8"));
   const WC = JSON.parse(fs.readFileSync(path.join(REPO, "assets/wc2006/index.json"), "utf8"));
-  run(app, "MC = " + JSON.stringify(MC));
-  run(app, "WC06 = " + JSON.stringify(WC));
+  run(app, "DECKS['classic-mc'] = " + JSON.stringify(MC));
+  run(app, "TEAMS.classic = " + JSON.stringify(WC));
 
   const phase = () => ev(app, "S.phase");
   const pos = () => ev(app, "S.h2h.at");
@@ -42,7 +42,7 @@ const GK = 0, LCB = 1, SIX = 5, EIGHT = 6, TEN = 7, ST = 9;
   const opts = () => (stage(app).match(/class="h2opt/g) || []).length;
 
   const start = async () => {
-    run(app, 'S = freshState(["Martijn","Bram"], false, "h2mc", 0); h2Start(); ' +
+    run(app, 'S = freshState(["Martijn","Bram"], false, "classic", 0, "pitch", true); h2Start(); ' +
              'h2PickTeam("Netherlands"); h2PickTeam("Italy"); render();');
     await tick(180);
   };
@@ -76,8 +76,10 @@ const GK = 0, LCB = 1, SIX = 5, EIGHT = 6, TEN = 7, ST = 9;
 
   console.log("\n--- it is the same mode, asked differently ---");
   await start();
-  check("it is in the drawer", ev(app, '!!MODE_META["h2mc"]'), "missing");
-  check("picking it sets the table to two", ev(app, '(setMode("h2mc"), setupCount)') === 2, ev(app, "setupCount"));
+  /* Pick One is no longer a mode id: it is the classic quiz on the pitch with
+     multiple choice on. What the menu has to offer is that combination. */
+  check("the multiple choice toggle exists", ev(app, 'typeof setMc === "function"'), "missing");
+  check("picking the pitch sets the table to two", ev(app, '(setMode("classic"), setPlay("pitch"), setMc(true), setupCount)') === 2, ev(app, "setupCount"));
   await start();
   check("it opens on the same country picker", phase() === "h_toss", phase());
   check("the ladder is the ladder",
@@ -154,7 +156,7 @@ const GK = 0, LCB = 1, SIX = 5, EIGHT = 6, TEN = 7, ST = 9;
   check("and the keeper has it on his line", who() === 1 && pos() === GK, who() + "/" + pos());
 
   console.log("\n--- the spoken version is untouched ---");
-  run(app, 'S = freshState(["Martijn","Bram"], false, "h2h", 0); h2Start(); ' +
+  run(app, 'S = freshState(["Martijn","Bram"], false, "classic", 0, "pitch", false); h2Start(); ' +
            'h2PickTeam("Netherlands"); h2PickTeam("Italy"); render();');
   await tick(180);
   await place(0, GK);

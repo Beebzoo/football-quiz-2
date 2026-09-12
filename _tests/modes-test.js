@@ -32,14 +32,25 @@ const load = f => JSON.parse(fs.readFileSync(path.join(REPO, f), "utf8"));
 
   console.log("--- the app comes up at all ---");
   check("no boot error", ev(app, "typeof render") === "function", ev(app, "typeof render"));
-  check("drawer holds exactly five modes",
-    ev(app, "Object.keys(MODE_META).sort().join(',')") === "badge,career,ere,h2h,h2mc",
+  /* h2h and h2mc are gone as mode ids: One on One is the classic quiz with
+     play "pitch", and Pick One is that with mc on. So the drawer is one row
+     per QUIZ plus the two picture modes, and how a match is played is two
+     toggles rather than two more ids. */
+  check("every mode is a quiz or a picture mode",
+    ev(app, "Object.keys(MODE_META).sort().join(',')") === "badge,career,classic,ere",
     ev(app, "Object.keys(MODE_META).sort().join(',')"));
-  check("six labels in total, Let's Ball included",
-    ev(app, "Object.keys(MODE_LABEL).sort().join(',')") === "badge,career,classic,ere,h2h,h2mc",
-    ev(app, "Object.keys(MODE_LABEL).sort().join(',')"));
-  check("every drawer mode has a label",
-    ev(app, "Object.keys(MODE_META).every(m=>!!MODE_LABEL[m])"), "a mode is missing its label");
+  check("Let's Ball is the classic quiz, not a label of its own",
+    ev(app, "matchLabel({mode:'classic'})") === "Let's Ball", ev(app, "matchLabel({mode:'classic'})"));
+  check("every mode has a label", ev(app, "Object.keys(MODE_META).every(m=>!!matchLabel({mode:m}))"),
+    "a mode is missing its label");
+  check("the pitch is offered where there are teams, and only there",
+    ev(app, "Object.keys(MODE_META).filter(canPitch).sort().join(',')") === "classic,ere",
+    ev(app, "Object.keys(MODE_META).filter(canPitch).sort().join(',')"));
+  check("One on One reads back as the classic quiz on the pitch",
+    ev(app, "matchLabel({mode:'classic',play:'pitch'}) + ' / ' + playLabel({mode:'classic',play:'pitch'})") === "Let's Ball / One on One",
+    ev(app, "matchLabel({mode:'classic',play:'pitch'}) + ' / ' + playLabel({mode:'classic',play:'pitch'})"));
+  check("and an old h2h row in the record book still reads right",
+    ev(app, "matchLabel({mode:'h2h'})") === "One on One", ev(app, "matchLabel({mode:'h2h'})"));
   check("nothing hidden on a second shelf", ev(app, "MODE_EXTRA.size") === 0, ev(app, "MODE_EXTRA.size"));
 
   console.log("\n--- Let's Ball (the embedded classic bank) ---");
@@ -51,8 +62,8 @@ const load = f => JSON.parse(fs.readFileSync(path.join(REPO, f), "utf8"));
   check("a right answer scores", ev(app, "S.players[0].score") > 0, ev(app, "S.players[0].score"));
 
   console.log("\n--- Eredivisie ---");
-  run(app, "ERE = " + JSON.stringify(load("assets/eredivisie/index.json")));
-  run(app, 'S = freshState(["Martijn","Bram"], false, "ere", 0); render();'); await tick(280);
+  run(app, "DECKS.ere = " + JSON.stringify(load("assets/eredivisie/index.json")));
+  run(app, 'S = freshState(["Martijn","Bram"], false, "ere", 0, "board", false); render();'); await tick(280);
   const ereTier = ev(app, 'Object.keys(TIERS).find(t=>bankFor(t)&&bankFor(t).length)');
   run(app, 'pickTier("' + ereTier + '")'); await tick(280);
   check("a question is dealt (" + ereTier + ")", !!ev(app, "q().q"), ev(app, "S.phase"));

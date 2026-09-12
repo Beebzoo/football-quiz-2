@@ -32,7 +32,7 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
      in by hand. It is the real file off disk, not a fixture, so the shape
      being driven is the shape that ships. */
   const WC = JSON.parse(fs.readFileSync(path.join(REPO, "assets/wc2006/index.json"), "utf8"));
-  run(app, "WC06 = " + JSON.stringify(WC));
+  run(app, "TEAMS.classic = " + JSON.stringify(WC));
 
   const tier = (a, b) => ev(app, `h2TierFor(${a},${b})`);
   const pos = () => ev(app, "S.h2h.at");
@@ -47,7 +47,7 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
 
   // a match with both countries already chosen, parked on the toss
   const start = async () => {
-    run(app, 'S = freshState(["Martijn","Bram"], false, "h2h", 0); h2Start(); ' +
+    run(app, 'S = freshState(["Martijn","Bram"], false, "classic", 0, "pitch", false); h2Start(); ' +
              'h2PickTeam("Netherlands"); h2PickTeam("Italy"); render();');
     await tick(180);
   };
@@ -87,7 +87,7 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   check("and so is a square one",        tier(LCB, RCB) === "easy",    tier(LCB, RCB));
 
   console.log("\n--- picking a country ---");
-  run(app, 'S = freshState(["Martijn","Bram"], false, "h2h", 0); h2Start(); render();');
+  run(app, 'S = freshState(["Martijn","Bram"], false, "classic", 0, "pitch", false); h2Start(); render();');
   await tick(180);
   check("it opens on the team picker", phase() === "h_teams", phase());
   check("all thirty two sides are offered",

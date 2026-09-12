@@ -52,6 +52,8 @@ const setups={
      is exactly as invisible in the code as a collapsed pitch was */
   menu:  `S=null; render();`,
   modes: `S=null; modesOpen=true; setupMode="classic"; render();`,
+  setup: `S=null; setupMode="classic"; setupPlay="pitch"; render();`,
+  setupb:`S=null; setupMode="classic"; setupPlay="board"; render();`,
   board: `S=freshState(["Martijn","Bram","Ale"],false,"classic",100); S.phase="pick"; render();`,
   qcard: `S=freshState(["Martijn","Bram","Ale"],false,"classic",100); S.phase="pick"; render(); pickTier("hard");`,
   teams: `${base} render();`,

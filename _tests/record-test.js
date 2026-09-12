@@ -137,7 +137,9 @@ function restart(old, label) {
   await tick(300);
   check("it starts as Martijn, Bram and Ale",
     ev(names, "JSON.stringify(setupNames)") === '["Martijn","Bram","Ale"]', ev(names, "JSON.stringify(setupNames)"));
-  run(names, 'S = null; setupMode = "classic"; setupCount = 3; render();');
+  /* three boxes is a BOARD thing: the pitch is two men and draws two, so the
+     play axis has to be set as well as the count. */
+  run(names, 'S = null; setupMode = "classic"; setupPlay = "board"; setupCount = 3; render();');
   await tick(60);
   const boxes = names.__els["stage"] ? names.__els["stage"].innerHTML : "";
   check("and the boxes come up filled in",
