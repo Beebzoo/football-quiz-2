@@ -1631,10 +1631,14 @@
   .h2kit i{position:relative;top:1px;font:800 11px/1 var(--ui);font-style:normal;
     color:var(--ink,#fff);opacity:.95;letter-spacing:-.03em;
     text-shadow:0 1px 1px rgba(0,0,0,.3)}
-  .h2lb{position:absolute;left:0;right:0;top:100%;margin-top:7px;
-    font:700 8.4px/1.2 var(--ui);
+  .h2lb{position:absolute;left:0;right:0;top:100%;margin-top:6px;z-index:4;
+    font:700 8.6px/1.2 var(--ui);
     letter-spacing:.01em;white-space:nowrap;
-    color:rgba(255,255,255,.94);text-shadow:0 1px 3px rgba(0,0,0,.98),0 0 6px rgba(0,0,0,.8)}
+    color:#fff;text-shadow:0 1px 3px rgba(0,0,0,1),0 0 7px rgba(0,0,0,.95)}
+  /* stand the name up out of the turf, same angle as the man, hinged on its
+     top edge so it hangs just under his boots rather than swinging away */
+  .h2pitch.tilt .h2man .h2lb{transform-origin:50% 0;
+    transform:rotateX(-46deg) translateZ(3px)}
 
   .h2man.them{opacity:.72;z-index:1}
   .h2man.them .h2lb{display:none}
@@ -6361,8 +6365,8 @@ function h2PitchHTML(tappable){
       (o.hold ? '<span class="h2ring"></span>' : "") +
       '<span class="h2fig">' +
         h2FigHTML("pm", kit, o.them ? 34 : 48, h2No(i, who)) +
-        (o.them ? "" : '<span class="h2lb">' + esc(h2Who(i, who)) + '</span>') +
       '</span>' +
+      (o.them ? "" : '<span class="h2lb">' + esc(h2Who(i, who)) + '</span>') +
       (o.can ? '<span class="h2hit" onclick="h2Select(' + i + ')"></span>' : "") +
       '</div>';
   };
