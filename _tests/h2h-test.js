@@ -396,6 +396,23 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   check("a pass leaves a trail behind the ball",
     (stage(app).match(/h2ballwrap[^"]*ghost/g) || []).length === 2,
     (stage(app).match(/h2ballwrap[^"]*ghost/g) || []).length);
+  /* The shadow is the cue that says how high it is, so it has to travel the
+     ground path and NOT ride inside the lift with the ball. */
+  check("the ball keeps a shadow on the grass", stage(app).includes("h2bsh"), "no ball shadow");
+  check("and the shadow is outside the lift, or it would climb with it",
+    /class="h2bsh"><\/span><span class="h2lift"/.test(stage(app)), "the shadow is in the wrong place");
+  {
+    /* A footballer is about 1:4 shoulders to height. At .54 the torso came out
+       wider than it was tall and they read as snowmen, so the build ratio is
+       worth pinning: it is the difference between players and blobs. */
+    const css = fs.readFileSync(path.join(REPO, "index.html"), "utf8");
+    const m = css.match(/\.fig\{position:relative;width:calc\(var\(--h\) \* \.(\d+)\)/);
+    const ratio = m ? +("0." + m[1]) : null;
+    check("the men are a footballer's build, not a snowman's",
+      ratio !== null && ratio <= 0.45, "shoulders are " + ratio + " of height");
+    check("and his eleven are drawn smaller than yours",
+      /o\.them \? 34 : 48/.test(css), "the two sides are the same size");
+  }
   check("and the ball is lofted, higher for a longer ball",
     /--lift:\d+px/.test(stage(app)), "no arc on the pass");
   check("the eight and the ten are off the centre line, and not on top of each other",

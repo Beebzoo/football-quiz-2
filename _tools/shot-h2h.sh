@@ -54,6 +54,7 @@ const setups={
   it:    `${nl} S.h2h.who=1; S.h2h.at=0; S.phase="h_pick"; render(); h2Select(7);`,
   heat:  `${nl} S.h2h.who=0; S.h2h.at=5; S.h2h.safe=3; S.phase="h_pick"; render(); h2Select(6);`,
   tackle:`${nl} S.h2h.who=0; S.h2h.at=5; S.h2h.safe=3; S.phase="h_pick"; render(); h2Select(6); h2Play();`,
+  inflight:`${nl} S.h2h.who=0; S.h2h.at=0; S.phase="h_pick"; render(); setTimeout(()=>{ h2Select(5); h2Play(); h2Reveal(); h2Judge(true); }, 4450);`,
   shot:  `${nl} S.h2h.who=0; S.h2h.at=9; S.phase="h_pick"; render(); h2Shoot(); h2Reveal(); h2Judge(true);`,
   strike:`${nl} S.h2h.who=0; S.h2h.at=9; S.phase="h_pick"; render(); h2Shoot(); h2Reveal(); h2Judge(true); h2SaveReveal(); setTimeout(()=>h2SaveJudge(false), 3700);`,
   save:  `${nl} S.h2h.who=0; S.h2h.at=9; S.phase="h_pick"; render(); h2Shoot(); h2Reveal(); h2Judge(true); h2SaveReveal(); setTimeout(()=>h2SaveJudge(true), 3800);`,

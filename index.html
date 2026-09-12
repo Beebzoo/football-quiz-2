@@ -1668,7 +1668,7 @@
     letter-spacing:.01em;white-space:nowrap;
     color:rgba(255,255,255,.94);text-shadow:0 1px 3px rgba(0,0,0,.98),0 0 6px rgba(0,0,0,.8)}
 
-  .h2man.them{opacity:.78;z-index:1}
+  .h2man.them{opacity:.72;z-index:1}
   .h2man.them .h2lb{display:none}
   .h2man.can{cursor:pointer}
   .h2man .fig.pm{transition:transform .18s,filter .18s}
@@ -1691,12 +1691,27 @@
     brightness(1.08)}
   .h2man.hold .h2lb{color:#f7e3a6;text-shadow:0 1px 3px rgba(0,0,0,.98),0 0 8px rgba(245,221,150,.5)}
   /* the boot going through it, and the man who collects it */
-  .h2man.from .fig.pm{animation:h2boot .42s ease-out}
-  @keyframes h2boot{0%,100%{transform:none}38%{transform:translateY(-2px) scale(1.12)}}
-  .h2man.from .fig.pm .f-leg.r{animation:h2pmboot .42s cubic-bezier(.3,1.2,.4,1)}
-  @keyframes h2pmboot{0%,100%{transform:none}40%{transform:rotate(-26deg)}}
-  .h2man.to .fig.pm{animation:h2recv .46s .42s cubic-bezier(.2,1.75,.4,1) both}
-  @keyframes h2recv{0%,100%{transform:none}45%{transform:scale(1.26)}}
+  /* the man playing it */
+  .h2man.from .fig.pm{animation:h2lean .5s cubic-bezier(.3,1.1,.4,1)}
+  @keyframes h2lean{0%,100%{transform:rotate(0)}
+    22%{transform:rotate(4deg) translateY(-1px)}
+    48%{transform:rotate(-7deg) translateY(-2px)}}
+  .h2man.from .fig.pm .f-leg.r{animation:h2strike .5s cubic-bezier(.32,1.15,.4,1)}
+  @keyframes h2strike{
+    0%{transform:rotate(0)}
+    24%{transform:rotate(30deg)}      /* back lift */
+    46%{transform:rotate(-46deg)}     /* through the ball */
+    70%{transform:rotate(-22deg)}     /* follow through */
+    100%{transform:rotate(0)}}
+  .h2man.from .fig.pm .f-leg.l{animation:h2plant .5s ease-out}
+  @keyframes h2plant{0%,100%{transform:rotate(0)}44%{transform:rotate(-9deg)}}
+  .h2man.from .fig.pm .f-arm.l{animation:h2balance .5s ease-out}
+  @keyframes h2balance{0%,100%{transform:rotate(8deg)}46%{transform:rotate(42deg)}}
+  /* the man taking it */
+  .h2man.to .fig.pm{animation:h2settle .5s .4s cubic-bezier(.25,1.5,.4,1) both}
+  @keyframes h2settle{0%,100%{transform:translateY(0)}40%{transform:translateY(-2px)}}
+  .h2man.to .fig.pm .f-leg.l{animation:h2touch .5s .4s cubic-bezier(.3,1.3,.4,1) both}
+  @keyframes h2touch{0%,100%{transform:rotate(0)}42%{transform:rotate(26deg)}}
 
   /* the pass, drawn on the grass so it lies in the tilted plane */
   .h2line{position:absolute;height:2.5px;transform-origin:0 50%;z-index:1;pointer-events:none;
@@ -1711,6 +1726,15 @@
      ground, the lift carries the ball up and down over that path, and the ball
      itself spins. How high it goes is set per pass in --lift. */
   .h2lift{display:block;width:100%;height:100%}
+  /* on the grass, under the ball, and NOT inside the lift: that is the point */
+  .h2bsh{display:block;position:absolute;left:50%;top:62%;width:78%;height:26%;
+    transform:translate(-50%,-50%);background:rgba(0,0,0,.5);border-radius:50%;
+    filter:blur(1.4px);pointer-events:none}
+  .h2ballwrap.ghost .h2bsh{display:none}
+  .h2ballwrap.pass .h2bsh{animation:h2bshadow var(--dur,.8s) cubic-bezier(.33,0,.67,1) both}
+  @keyframes h2bshadow{
+    0%,100%{transform:translate(-50%,-50%) scale(1);opacity:.5}
+    50%{transform:translate(-50%,-50%) scale(.5);opacity:.18}}
   /* the ghosts run the identical flight a frame or two behind */
   .h2ballwrap.ghost{z-index:4;pointer-events:none}
   .h2ballwrap.g1 .h2ball{opacity:.36;filter:blur(.6px)}
@@ -1730,9 +1754,9 @@
   }
   .h2ballwrap.pass .h2ball{animation:h2hop var(--dur,.8s) ease-in-out both}
   @keyframes h2hop{
-    0%{transform:scale(.85) rotate(0)}
-    50%{transform:scale(1.45) rotate(260deg)}
-    100%{transform:scale(1) rotate(520deg)}
+    0%{transform:scale(.92) rotate(0)}
+    50%{transform:scale(1.16) rotate(400deg)}
+    100%{transform:scale(1) rotate(760deg)}
   }
 
   /* the man who just gave it away flashes as the ball is taken off him */
@@ -1872,18 +1896,18 @@
      the shirt reaches mid-thigh, the legs are a shade under half. At 70px that
      reads as a person; at 150px it still does, which is what lets the same
      component be the keeper on his line and the striker in the foreground. */
-  .fig{position:relative;width:calc(var(--h) * .54);height:var(--h);
+  .fig{position:relative;width:calc(var(--h) * .42);height:var(--h);
     --skin:#e3b58c; --shorts:color-mix(in srgb, var(--kit) 42%, #10140f);
     filter:drop-shadow(0 3px 5px rgba(0,0,0,.6))}
   .fig > *{position:absolute}
 
-  .f-head{left:50%;top:0;width:30%;height:17.5%;transform:translateX(-50%);
+  .f-head{left:50%;top:0;width:40%;height:16.5%;transform:translateX(-50%);
     border-radius:50% 50% 46% 46%;background:var(--skin);
     box-shadow:inset 0 -2px 3px rgba(0,0,0,.18)}
   .f-head::after{content:"";position:absolute;left:-5%;right:-5%;top:-5%;height:44%;
     border-radius:52% 52% 26% 26%;background:#2a1c12}      /* hair */
 
-  .f-torso{left:14%;top:15%;width:72%;height:35%;background:var(--kit);
+  .f-torso{left:16%;top:14.5%;width:68%;height:35.5%;background:var(--kit);
     border-radius:22% 22% 12% 12%/28% 28% 10% 10%;
     background-image:linear-gradient(180deg,rgba(255,255,255,.2),rgba(0,0,0,.26));
     display:flex;align-items:center;justify-content:center}
@@ -1892,22 +1916,22 @@
   .f-torso::before{content:"";position:absolute;left:33%;right:33%;top:-3%;height:12%;
     background:rgba(0,0,0,.4);border-radius:0 0 60% 60%/0 0 130% 130%}   /* collar */
 
-  .f-arm{top:17%;width:12%;height:31%;background:var(--kit);border-radius:40%;
+  .f-arm{top:16.5%;width:14%;height:32%;background:var(--kit);border-radius:44%;
     background-image:linear-gradient(180deg,rgba(255,255,255,.14),rgba(0,0,0,.3))}
   .f-arm::after{content:"";position:absolute;left:0;right:0;bottom:0;height:34%;
     background:var(--skin);border-radius:40%}               /* forearm and hand */
-  .f-arm.l{left:6%;transform-origin:50% 6%;transform:rotate(9deg)}
-  .f-arm.r{right:6%;transform-origin:50% 6%;transform:rotate(-9deg)}
+  .f-arm.l{left:3%;transform-origin:50% 6%;transform:rotate(8deg)}
+  .f-arm.r{right:3%;transform-origin:50% 6%;transform:rotate(-8deg)}
 
-  .f-shorts{left:19%;top:47%;width:62%;height:17%;background:var(--shorts);
+  .f-shorts{left:21%;top:47%;width:58%;height:17%;background:var(--shorts);
     border-radius:14% 14% 8% 8%;
     background-image:linear-gradient(180deg,rgba(255,255,255,.16),rgba(0,0,0,.22))}
   .f-shorts::after{content:"";position:absolute;left:48%;right:48%;top:40%;bottom:0;
     background:rgba(0,0,0,.35)}                             /* the gap between the legs */
 
-  .f-leg{top:62%;width:16%;height:38%;background:var(--skin);border-radius:34% 34% 20% 20%}
-  .f-leg.l{left:22%;transform-origin:50% 0}
-  .f-leg.r{right:22%;transform-origin:50% 0}
+  .f-leg{top:62%;width:20%;height:38%;background:var(--skin);border-radius:34% 34% 20% 20%}
+  .f-leg.l{left:20%;transform-origin:50% 0}
+  .f-leg.r{right:20%;transform-origin:50% 0}
   .f-leg::before{content:"";position:absolute;left:0;right:0;top:46%;bottom:14%;
     background:var(--kit);border-radius:12%;
     background-image:linear-gradient(180deg,rgba(255,255,255,.12),rgba(0,0,0,.28))}  /* sock */
@@ -6341,7 +6365,7 @@ function h2PitchHTML(tappable){
       '<span class="h2sh"></span>' +
       (o.hold ? '<span class="h2ring"></span>' : "") +
       '<span class="h2fig">' +
-        h2FigHTML("pm", kit, o.them ? 40 : 46, h2No(i, who)) +
+        h2FigHTML("pm", kit, o.them ? 34 : 48, h2No(i, who)) +
         (o.them ? "" : '<span class="h2lb">' + esc(h2Who(i, who)) + '</span>') +
       '</span>' +
       (o.can ? '<span class="h2hit" onclick="h2Select(' + i + ')"></span>' : "") +
@@ -6371,7 +6395,8 @@ function h2PitchHTML(tappable){
                      '%;--lift:' + lift.toFixed(0) + 'px' : "";
   const ball = (cls, extra) =>
     '<div class="h2ballwrap' + (A ? " pass" : "") + cls + '" style="left:' + bx + '%;top:' + by + '%' +
-    flight + extra + '"><span class="h2lift"><img class="h2ball" src="assets/ball.png" alt=""></span></div>';
+    flight + extra + '"><span class="h2bsh"></span>' +
+    '<span class="h2lift"><img class="h2ball" src="assets/ball.png" alt=""></span></div>';
   /* Two ghosts running the same flight a fraction behind smear into a trail.
      Cheaper and better looking than trying to draw one. */
   if(A){ out += ball(" ghost g2", ";animation-delay:-.12s") + ball(" ghost g1", ";animation-delay:-.06s"); }
