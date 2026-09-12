@@ -382,7 +382,12 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   check("van Persie wears 17", ev(app, "h2No(10,0)") === 17 || ev(app, "h2No(8,0)") === 17 ||
     squad().some((_, i) => ev(app, "h2No(" + i + ",0)") === 17), "17 is not in the Dutch eleven");
   check("nobody has a floating head any more", !stage(app).includes("h2head"), "heads are still drawn");
-  check("the shirt has a collar and a number slot", stage(app).includes("h2kit"), "no kit");
+  /* the pitch used to draw little jerseys and the goal scene drew footballers.
+     They are the same component now, so the pitch men have torsos and legs. */
+  check("the pitch men are drawn figures, same as in the goal",
+    (stage(app).match(/class="fig pm"/g) || []).length === 22,
+    (stage(app).match(/class="fig pm"/g) || []).length);
+  check("with a torso carrying the number", stage(app).includes("f-torso"), "no torso");
   await place(0, GK);
   run(app, "h2Select(" + SIX + ")"); await tick(140);
   run(app, "h2Play()"); await tick(150);

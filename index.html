@@ -1547,7 +1547,7 @@
   .h2stage{position:relative;width:100%;max-width:400px;margin:2px auto 0;
     perspective:820px;perspective-origin:50% 38%}
   .h2stage:not(.tilt){aspect-ratio:10/13}
-  .h2stage.tilt{aspect-ratio:10/11}
+  .h2stage.tilt{aspect-ratio:10/11.6}
   .h2pitch{
     position:absolute;left:0;right:0;top:50%;aspect-ratio:10/13;
     --base:translateY(-50%);
@@ -1560,7 +1560,7 @@
       radial-gradient(ellipse 78% 58% at 50% 50%,transparent 48%,rgba(0,0,0,.34) 100%),
       repeating-linear-gradient(180deg,rgba(255,255,255,.032) 0 7.6%,transparent 7.6% 15.2%),
       linear-gradient(180deg,#0d3a1c 0%,#17552c 50%,#0d3a1c 100%);
-    border-radius:12px;user-select:none;
+    border-radius:4px;user-select:none;
     box-shadow:0 18px 38px rgba(0,0,0,.55);
     transition:transform .45s ease;
   }
@@ -1584,6 +1584,40 @@
   /* markings */
   .h2pitch::before{content:"";position:absolute;inset:2% 2.5%;border:2px solid rgba(255,255,255,.34);border-radius:3px;pointer-events:none}
   .h2pitch::after{content:"";position:absolute;left:2.5%;right:2.5%;top:50%;border-top:2px solid rgba(255,255,255,.28);pointer-events:none}
+  /* ---------- THE GROUND ROUND THE PITCH ----------
+     The pitch is a plane in 3D, so a stand is just another plane hinged along
+     one of its edges and folded up. transform-origin does the hinging: the far
+     stand pivots on its bottom edge where it meets the goal line, the side
+     stands on the edge that meets the touchline.
+
+     The crowd is the same four-layer speckle the goal scene uses. It has to be
+     denser here because these stands are seen at a sharper angle and a sparse
+     dot pattern stretched across a steep plane looks like dirt. */
+  .h2bowl{position:absolute;pointer-events:none;
+    background-color:#16261d;
+    background-image:
+      radial-gradient(circle,rgba(244,238,226,.8) 0 1px,transparent 1.5px),
+      radial-gradient(circle,rgba(226,158,116,.7) 0 1px,transparent 1.5px),
+      radial-gradient(circle,rgba(146,184,234,.66) 0 1px,transparent 1.5px),
+      repeating-linear-gradient(180deg,rgba(0,0,0,.45) 0 2px,transparent 2px 6px);
+    background-size:6px 6px, 9px 7px, 11px 9px, 100% 6px;
+    background-position:0 0, 2px 3px, 5px 1px, 0 0;
+    box-shadow:inset 0 0 22px rgba(0,0,0,.7)}
+  .h2bowl.far{left:-20%;right:-20%;bottom:103%;height:82px;
+    transform-origin:50% 100%;transform:rotateX(-60deg)}
+  .h2bowl.left{right:104%;top:-14%;bottom:-14%;width:40px;
+    transform-origin:100% 50%;transform:rotateY(56deg)}
+  .h2bowl.right{left:104%;top:-14%;bottom:-14%;width:40px;
+    transform-origin:0 50%;transform:rotateY(-56deg)}
+  /* the perimeter itself: a dark apron the stands sit behind */
+  .h2pitch::before{box-shadow:0 0 0 14px rgba(6,16,10,.85)}
+  /* a lit roof edge, which is most of what makes a dark slab read as a stand */
+  .h2bowl::after{content:"";position:absolute;background:rgba(190,214,196,.3);
+    box-shadow:0 0 12px rgba(190,214,196,.28)}
+  .h2bowl.far::after{left:0;right:0;top:0;height:3px}
+  .h2bowl.left::after{left:0;top:0;bottom:0;width:3px}
+  .h2bowl.right::after{right:0;top:0;bottom:0;width:3px}
+
   .h2box{position:absolute;left:26%;right:26%;height:9%;border:2px solid rgba(255,255,255,.28);pointer-events:none}
   .h2box.t{top:2%;border-top-color:transparent}
   .h2box.b{bottom:2%;border-bottom-color:transparent}
@@ -1600,9 +1634,12 @@
     text-align:center;pointer-events:none;-webkit-tap-highlight-color:transparent}
   .h2hit{position:absolute;left:50%;top:50%;width:34px;height:40px;
     transform:translate(-50%,-58%);pointer-events:auto;cursor:pointer;border-radius:8px}
-  .h2sh{display:block;position:absolute;left:50%;top:50%;width:20px;height:7px;transform:translate(-50%,-30%);
+  .h2sh{display:block;position:absolute;left:50%;top:50%;width:22px;height:7px;transform:translate(-50%,18%);
     background:rgba(0,0,0,.42);border-radius:50%;filter:blur(1.6px)}
   .h2fig{display:block;position:relative;transform-origin:50% 92%}
+  .h2man .fig.pm{margin:0 auto;transform-origin:50% 100%}
+  .h2man .h2fig{transform:translateY(-46%)}
+  .h2pitch.tilt .h2man .h2fig{transform:translateY(-46%) rotateX(-46deg)}
   .h2pitch.tilt .h2fig{transform:rotateX(-46deg)}
   /* No head: at this size it read as a blob on top of the shirt and stole the
      room the number needed. The shirt is the man. */
@@ -1622,6 +1659,8 @@
   .h2kit::before{content:"";position:absolute;left:50%;top:5%;width:29%;height:15%;
     transform:translateX(-50%);background:rgba(0,0,0,.4);
     border-radius:0 0 70% 70% / 0 0 140% 140%}
+  .fig.pm .f-torso i{font-size:calc(var(--h) * .19);margin-top:6%}
+  .fig.pm{filter:drop-shadow(0 2px 3px rgba(0,0,0,.55))}
   .h2kit i{position:relative;top:1px;font:800 11px/1 var(--ui);font-style:normal;
     color:var(--ink,#fff);opacity:.95;letter-spacing:-.03em;
     text-shadow:0 1px 1px rgba(0,0,0,.3)}
@@ -1629,33 +1668,35 @@
     letter-spacing:.01em;white-space:nowrap;
     color:rgba(255,255,255,.94);text-shadow:0 1px 3px rgba(0,0,0,.98),0 0 6px rgba(0,0,0,.8)}
 
-  .h2man.them{opacity:.62;z-index:1}
-  .h2man.them .h2kit{width:27px;height:24px}
-  .h2man.them .h2kit i{font-size:9px;opacity:.72}
+  .h2man.them{opacity:.78;z-index:1}
   .h2man.them .h2lb{display:none}
   .h2man.can{cursor:pointer}
-  .h2man.can .h2kit{box-shadow:0 0 0 1.5px rgba(255,255,255,.4)}
-  .h2man.sel .h2kit{transform:scale(1.3);filter:drop-shadow(0 0 6px #fff) drop-shadow(0 1px 1px rgba(0,0,0,.5))}
+  .h2man .fig.pm{transition:transform .18s,filter .18s}
+  .h2man.can .fig.pm .f-torso{box-shadow:0 0 0 1px rgba(255,255,255,.32)}
+  .h2man.sel .fig.pm{transform:scale(1.26);
+    filter:drop-shadow(0 0 7px #fff) drop-shadow(0 3px 4px rgba(0,0,0,.6))}
   .h2man.sel .h2lb{color:#fff}
   /* The man in possession stands in a lit ring on the grass. It is a direct
      child of the man and NOT of the figure, so it never gets the standing-up
      counter-rotation and stays lying flat on the pitch where a marker belongs. */
-  .h2ring{position:absolute;left:50%;top:50%;width:36px;height:14px;pointer-events:none;
+  .h2ring{position:absolute;left:50%;top:50%;width:38px;height:15px;pointer-events:none;
     border-radius:50%;border:2px solid rgba(247,227,166,.95);
     box-shadow:0 0 14px rgba(245,221,150,.6), inset 0 0 9px rgba(245,221,150,.4);
     animation:h2ring 1.9s ease-in-out infinite}
   @keyframes h2ring{
-    0%,100%{transform:translate(-50%,-16%) scale(1);opacity:.95}
-    50%{transform:translate(-50%,-16%) scale(1.18);opacity:.55}
+    0%,100%{transform:translate(-50%,24%) scale(1);opacity:.95}
+    50%{transform:translate(-50%,24%) scale(1.18);opacity:.55}
   }
-  .h2man.hold .h2kit{filter:drop-shadow(0 0 8px #f5dd9a) drop-shadow(0 1px 1px rgba(0,0,0,.5))
-    brightness(1.1)}
+  .h2man.hold .fig.pm{filter:drop-shadow(0 0 9px #f5dd9a) drop-shadow(0 3px 4px rgba(0,0,0,.6))
+    brightness(1.08)}
   .h2man.hold .h2lb{color:#f7e3a6;text-shadow:0 1px 3px rgba(0,0,0,.98),0 0 8px rgba(245,221,150,.5)}
   /* the boot going through it, and the man who collects it */
-  .h2man.from .h2kit{animation:h2boot .42s ease-out}
-  @keyframes h2boot{0%,100%{transform:none}38%{transform:translateY(-2px) scale(1.14)}}
-  .h2man.to .h2kit{animation:h2recv .46s .42s cubic-bezier(.2,1.75,.4,1) both}
-  @keyframes h2recv{0%,100%{transform:none}45%{transform:scale(1.32)}}
+  .h2man.from .fig.pm{animation:h2boot .42s ease-out}
+  @keyframes h2boot{0%,100%{transform:none}38%{transform:translateY(-2px) scale(1.12)}}
+  .h2man.from .fig.pm .f-leg.r{animation:h2pmboot .42s cubic-bezier(.3,1.2,.4,1)}
+  @keyframes h2pmboot{0%,100%{transform:none}40%{transform:rotate(-26deg)}}
+  .h2man.to .fig.pm{animation:h2recv .46s .42s cubic-bezier(.2,1.75,.4,1) both}
+  @keyframes h2recv{0%,100%{transform:none}45%{transform:scale(1.26)}}
 
   /* the pass, drawn on the grass so it lies in the tilted plane */
   .h2line{position:absolute;height:2.5px;transform-origin:0 50%;z-index:1;pointer-events:none;
@@ -1695,7 +1736,7 @@
   }
 
   /* the man who just gave it away flashes as the ball is taken off him */
-  .h2man.lost .h2kit{animation:h2lost .65s ease-out both}
+  .h2man.lost .fig.pm{animation:h2lost .65s ease-out both}
   @keyframes h2lost{
     0%{filter:drop-shadow(0 2px 3px rgba(0,0,0,.55))}
     22%{filter:drop-shadow(0 0 9px #ff6a55) brightness(1.55)}
@@ -1704,7 +1745,7 @@
 
   /* A GOAL stops the game. The scoring eleven go up one after another rather
      than as a block, the net takes the ball, and the word lands on top. */
-  .h2pitch.cele .h2man:not(.them) .h2kit{
+  .h2pitch.cele .h2man:not(.them) .fig.pm{
     animation:h2jump .75s cubic-bezier(.3,1.5,.4,1) both;
     animation-delay:calc(var(--i,0) * 55ms)}
   @keyframes h2jump{
@@ -6269,6 +6310,10 @@ function h2PitchHTML(tappable){
 
   let out = '<div class="h2stage' + tilt + '"><div class="h2pitch' + tilt + (turn ? " turned" : "") +
     (cele ? " cele" : "") + '">' +
+    /* three stands, hinged along the far edge and the two touchlines and folded
+       up out of the pitch plane. They only exist in the 3D view: flat on, a
+       stand is a stripe of noise and reads as a mistake. */
+    (h2Tilt ? '<div class="h2bowl far"></div><div class="h2bowl left"></div><div class="h2bowl right"></div>' : "") +
     '<div class="h2box t"></div><div class="h2box b"></div>' +
     '<div class="h2six t"></div><div class="h2six b"></div>' +
     '<div class="h2circle"></div><div class="h2spot"></div>';
@@ -6289,12 +6334,14 @@ function h2PitchHTML(tappable){
     const cls = (o.them ? "them" : "") + " " +
       [o.can && "can", o.sel && "sel", o.hold && "hold", o.from && "from", o.to && "to",
        o.lost && "lost"].filter(Boolean).join(" ");
+    /* The goal scene had proper footballers and the pitch had little jerseys,
+       and side by side the jerseys looked wrong. Same component, smaller. */
     return '<div class="h2man ' + cls + '" style="left:' + h2VX(i, mine) + '%;top:' + h2VY(i, mine) +
       '%;--i:' + i + '">' +
       '<span class="h2sh"></span>' +
       (o.hold ? '<span class="h2ring"></span>' : "") +
       '<span class="h2fig">' +
-        '<span class="h2kit" style="--kit:' + kit + ';--ink:' + kitInk(kit) + '"><i>' + h2No(i, who) + '</i></span>' +
+        h2FigHTML("pm", kit, o.them ? 40 : 46, h2No(i, who)) +
         (o.them ? "" : '<span class="h2lb">' + esc(h2Who(i, who)) + '</span>') +
       '</span>' +
       (o.can ? '<span class="h2hit" onclick="h2Select(' + i + ')"></span>' : "") +
