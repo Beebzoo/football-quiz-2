@@ -1,0 +1,14 @@
+[
+{"tier":"ball","cat":"stories","q":"Which 2006 scandal saw Juventus stripped of a title and relegated to Serie B?","a":"Calciopoli","src":"https://en.wikipedia.org/wiki/2006_Italian_football_scandal","conf":"sure"},
+{"tier":"ball","cat":"stories","q":"Which club was relegated to Serie B in 2006 over match-fixing and came straight back up?","a":"Juventus","src":"https://en.wikipedia.org/wiki/2006_Italian_football_scandal","conf":"sure"},
+{"tier":"ball","cat":"stories","q":"Which club won the Champions League in 2010 as part of a treble, managed by Jose Mourinho?","a":"Inter Milan","src":"https://en.wikipedia.org/wiki/2009%E2%80%9310_Inter_Milan_season","conf":"sure"},
+{"tier":"ball","cat":"stories","q":"AC Milan led 3-0 at half time in the 2005 Champions League final and lost. Who beat them?","a":"Liverpool","sub":"On penalties, in Istanbul.","src":"https://en.wikipedia.org/wiki/2005_UEFA_Champions_League_final","conf":"sure"},
+{"tier":"ball","cat":"stories","q":"Which club won Serie A in 2022-23, its first title in thirty-three years?","a":"Napoli","src":"https://en.wikipedia.org/wiki/2022%E2%80%9323_Serie_A","conf":"sure"},
+{"tier":"ball","cat":"stories","q":"Which Italian club folded in 2004 after the collapse of its parent dairy company?","a":"Parma","sub":"Parmalat took the club down with it.","src":"https://en.wikipedia.org/wiki/Parma_Calcio_1913","conf":"sure"},
+{"tier":"ball","cat":"stories","q":"Which club won Serie A in 2020-21, ending Juventus's run of nine titles in a row?","a":"Inter Milan","src":"https://en.wikipedia.org/wiki/2020%E2%80%9321_Serie_A","conf":"sure"},
+{"tier":"ball","cat":"stories","q":"Which club did Diego Maradona take to their first Serie A title in 1987?","a":"Napoli","src":"https://en.wikipedia.org/wiki/Diego_Maradona","conf":"sure"},
+{"tier":"ball","cat":"stories","q":"Which Roma captain spent his entire twenty-five year career at the club?","a":"Francesco Totti","src":"https://en.wikipedia.org/wiki/Francesco_Totti","conf":"sure"},
+{"tier":"ball","cat":"stories","q":"AC Milan went unbeaten through Serie A in 1991-92 under which manager?","a":"Fabio Capello","src":"https://en.wikipedia.org/wiki/1991%E2%80%9392_Serie_A","conf":"sure"},
+{"tier":"ball","cat":"stories","q":"Which Dutch trio played together for AC Milan in the late 1980s?","a":"Marco van Basten, Ruud Gullit and Frank Rijkaard","src":"https://en.wikipedia.org/wiki/AC_Milan","conf":"sure"},
+{"tier":"ball","cat":"stories","q":"Which Italian club was refounded in 2018 after bankruptcy and had to start again in Serie D?","a":"Bari","src":"https://en.wikipedia.org/wiki/S.S.C._Bari","conf":"likely"}
+]

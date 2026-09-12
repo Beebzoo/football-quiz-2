@@ -1,0 +1,1119 @@
+[
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2000-01 Belgian Pro League?",
+  "a": "Anderlecht",
+  "src": "https://en.wikipedia.org/wiki/2000%E2%80%9301_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2000-01 Belgian Pro League?",
+  "a": "Club Brugge",
+  "src": "https://en.wikipedia.org/wiki/2000%E2%80%9301_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2000-01 Belgian Pro League?",
+  "a": "Standard Liège",
+  "src": "https://en.wikipedia.org/wiki/2000%E2%80%9301_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Belgian Pro League in 2000-01?",
+  "a": "Harelbeke, Mechelen",
+  "src": "https://en.wikipedia.org/wiki/2000%E2%80%9301_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2000-01 Belgian Pro League?",
+  "a": "Club Brugge",
+  "src": "https://en.wikipedia.org/wiki/2000%E2%80%9301_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2001-02 Belgian Pro League?",
+  "a": "Genk",
+  "src": "https://en.wikipedia.org/wiki/2001%E2%80%9302_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2001-02 Belgian Pro League?",
+  "a": "Club Brugge",
+  "src": "https://en.wikipedia.org/wiki/2001%E2%80%9302_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2001-02 Belgian Pro League?",
+  "a": "Anderlecht",
+  "src": "https://en.wikipedia.org/wiki/2001%E2%80%9302_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Belgian Pro League in 2001-02?",
+  "a": "Molenbeek, Eendracht Aalst",
+  "src": "https://en.wikipedia.org/wiki/2001%E2%80%9302_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2001-02 Belgian Pro League?",
+  "a": "Lokeren",
+  "src": "https://en.wikipedia.org/wiki/2001%E2%80%9302_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2002-03 Belgian Pro League?",
+  "a": "Club Brugge",
+  "src": "https://en.wikipedia.org/wiki/2002%E2%80%9303_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2002-03 Belgian Pro League?",
+  "a": "Anderlecht",
+  "src": "https://en.wikipedia.org/wiki/2002%E2%80%9303_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2002-03 Belgian Pro League?",
+  "a": "Lokeren",
+  "src": "https://en.wikipedia.org/wiki/2002%E2%80%9303_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Belgian Pro League in 2002-03?",
+  "a": "Mechelen, Lommel",
+  "src": "https://en.wikipedia.org/wiki/2002%E2%80%9303_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2002-03 Belgian Pro League?",
+  "a": "Lommel",
+  "src": "https://en.wikipedia.org/wiki/2002%E2%80%9303_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2003-04 Belgian Pro League?",
+  "a": "Anderlecht",
+  "src": "https://en.wikipedia.org/wiki/2003%E2%80%9304_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2003-04 Belgian Pro League?",
+  "a": "Club Brugge",
+  "src": "https://en.wikipedia.org/wiki/2003%E2%80%9304_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2003-04 Belgian Pro League?",
+  "a": "Standard Liège",
+  "src": "https://en.wikipedia.org/wiki/2003%E2%80%9304_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Belgian Pro League in 2003-04?",
+  "a": "Heusden-Zolder, Antwerp",
+  "src": "https://en.wikipedia.org/wiki/2003%E2%80%9304_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2004-05 Belgian Pro League?",
+  "a": "Brussels",
+  "src": "https://en.wikipedia.org/wiki/2004%E2%80%9305_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2004-05 Belgian Pro League?",
+  "a": "Anderlecht",
+  "src": "https://en.wikipedia.org/wiki/2004%E2%80%9305_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2004-05 Belgian Pro League?",
+  "a": "Standard Liège",
+  "src": "https://en.wikipedia.org/wiki/2004%E2%80%9305_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Belgian Pro League in 2004-05?",
+  "a": "Oostende, Mons",
+  "src": "https://en.wikipedia.org/wiki/2004%E2%80%9305_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2005-06 Belgian Pro League?",
+  "a": "Anderlecht",
+  "src": "https://en.wikipedia.org/wiki/2005%E2%80%9306_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2005-06 Belgian Pro League?",
+  "a": "Standard Liège",
+  "src": "https://en.wikipedia.org/wiki/2005%E2%80%9306_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2005-06 Belgian Pro League?",
+  "a": "Club Brugge",
+  "src": "https://en.wikipedia.org/wiki/2005%E2%80%9306_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Belgian Pro League in 2005-06?",
+  "a": "La Louvière",
+  "src": "https://en.wikipedia.org/wiki/2005%E2%80%9306_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2005-06 Belgian Pro League?",
+  "a": "Lierse",
+  "src": "https://en.wikipedia.org/wiki/2005%E2%80%9306_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2006-07 Belgian Pro League?",
+  "a": "Anderlecht",
+  "src": "https://en.wikipedia.org/wiki/2006%E2%80%9307_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2006-07 Belgian Pro League?",
+  "a": "Genk",
+  "src": "https://en.wikipedia.org/wiki/2006%E2%80%9307_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2006-07 Belgian Pro League?",
+  "a": "Standard Liège",
+  "src": "https://en.wikipedia.org/wiki/2006%E2%80%9307_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Belgian Pro League in 2006-07?",
+  "a": "Beveren, Lierse",
+  "src": "https://en.wikipedia.org/wiki/2006%E2%80%9307_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2006-07 Belgian Pro League?",
+  "a": "Mechelen",
+  "src": "https://en.wikipedia.org/wiki/2006%E2%80%9307_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2007-08 Belgian Pro League?",
+  "a": "Standard Liège",
+  "src": "https://en.wikipedia.org/wiki/2007%E2%80%9308_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2007-08 Belgian Pro League?",
+  "a": "Anderlecht",
+  "src": "https://en.wikipedia.org/wiki/2007%E2%80%9308_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2007-08 Belgian Pro League?",
+  "a": "Club Brugge",
+  "src": "https://en.wikipedia.org/wiki/2007%E2%80%9308_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Belgian Pro League in 2007-08?",
+  "a": "Sint-Truiden, Brussels",
+  "src": "https://en.wikipedia.org/wiki/2007%E2%80%9308_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2007-08 Belgian Pro League?",
+  "a": "Cercle Brugge",
+  "src": "https://en.wikipedia.org/wiki/2007%E2%80%9308_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2008-09 Belgian Pro League?",
+  "a": "Standard Liège",
+  "src": "https://en.wikipedia.org/wiki/2008%E2%80%9309_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Belgian Pro League in 2008-09?",
+  "a": "Dender, Tubize, Mons",
+  "src": "https://en.wikipedia.org/wiki/2008%E2%80%9309_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2008-09 Belgian Pro League?",
+  "a": "Anderlecht",
+  "src": "https://en.wikipedia.org/wiki/2008%E2%80%9309_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2009-10 Belgian Pro League?",
+  "a": "Anderlecht",
+  "src": "https://en.wikipedia.org/wiki/2009%E2%80%9310_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Belgian Pro League in 2009-10?",
+  "a": "Roeselare, Mouscron",
+  "src": "https://en.wikipedia.org/wiki/2009%E2%80%9310_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2009-10 Belgian Pro League?",
+  "a": "Genk",
+  "src": "https://en.wikipedia.org/wiki/2009%E2%80%9310_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2009-10 Belgian Pro League?",
+  "a": "Mouscron",
+  "src": "https://en.wikipedia.org/wiki/2009%E2%80%9310_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2010-11 Belgian Pro League?",
+  "a": "Genk",
+  "src": "https://en.wikipedia.org/wiki/2010%E2%80%9311_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Belgian Pro League in 2010-11?",
+  "a": "Eupen, Charleroi",
+  "src": "https://en.wikipedia.org/wiki/2010%E2%80%9311_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2010-11 Belgian Pro League?",
+  "a": "Sint-Truiden",
+  "src": "https://en.wikipedia.org/wiki/2010%E2%80%9311_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2010-11 Belgian Pro League?",
+  "a": "Cercle Brugge",
+  "src": "https://en.wikipedia.org/wiki/2010%E2%80%9311_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2011-12 Belgian Pro League?",
+  "a": "Anderlecht",
+  "src": "https://en.wikipedia.org/wiki/2011%E2%80%9312_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2011-12 Belgian Pro League?",
+  "a": "Genk",
+  "src": "https://en.wikipedia.org/wiki/2011%E2%80%9312_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2011-12 Belgian Pro League?",
+  "a": "Club Brugge",
+  "src": "https://en.wikipedia.org/wiki/2011%E2%80%9312_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "The 2011-12 Belgian Pro League was decided on goal difference. Which club took it?",
+  "a": "Anderlecht",
+  "src": "https://en.wikipedia.org/wiki/2011%E2%80%9312_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Belgian Pro League in 2011-12?",
+  "a": "Westerlo, Sint-Truiden",
+  "src": "https://en.wikipedia.org/wiki/2011%E2%80%9312_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2011-12 Belgian Pro League?",
+  "a": "Genk",
+  "src": "https://en.wikipedia.org/wiki/2011%E2%80%9312_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2011-12 Belgian Pro League?",
+  "a": "Mons",
+  "src": "https://en.wikipedia.org/wiki/2011%E2%80%9312_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2012-13 Belgian Pro League?",
+  "a": "Anderlecht",
+  "src": "https://en.wikipedia.org/wiki/2012%E2%80%9313_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Belgian Pro League in 2012-13?",
+  "a": "Beerschot",
+  "src": "https://en.wikipedia.org/wiki/2012%E2%80%9313_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2012-13 Belgian Pro League?",
+  "a": "Waasland-Beveren",
+  "src": "https://en.wikipedia.org/wiki/2012%E2%80%9313_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2012-13 Belgian Pro League?",
+  "a": "Cercle Brugge",
+  "src": "https://en.wikipedia.org/wiki/2012%E2%80%9313_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2012-13 Belgian Pro League?",
+  "a": "Carlos Bacca",
+  "src": "https://en.wikipedia.org/wiki/2012%E2%80%9313_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 25 of them."
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2013-14 Belgian Pro League?",
+  "a": "Anderlecht",
+  "src": "https://en.wikipedia.org/wiki/2013%E2%80%9314_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Belgian Pro League in 2013-14?",
+  "a": "OH Leuven, Mons",
+  "src": "https://en.wikipedia.org/wiki/2013%E2%80%9314_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2013-14 Belgian Pro League?",
+  "a": "Waasland-Beveren",
+  "src": "https://en.wikipedia.org/wiki/2013%E2%80%9314_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2013-14 Belgian Pro League?",
+  "a": "Oostende",
+  "src": "https://en.wikipedia.org/wiki/2013%E2%80%9314_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2013-14 Belgian Pro League?",
+  "a": "Hamdi Harbaoui",
+  "src": "https://en.wikipedia.org/wiki/2013%E2%80%9314_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 22 of them."
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2014-15 Belgian Pro League?",
+  "a": "Gent",
+  "src": "https://en.wikipedia.org/wiki/2014%E2%80%9315_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Belgian Pro League in 2014-15?",
+  "a": "Lierse, Cercle Brugge",
+  "src": "https://en.wikipedia.org/wiki/2014%E2%80%9315_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2014-15 Belgian Pro League?",
+  "a": "Kortrijk",
+  "src": "https://en.wikipedia.org/wiki/2014%E2%80%9315_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2014-15 Belgian Pro League?",
+  "a": "Mechelen",
+  "src": "https://en.wikipedia.org/wiki/2014%E2%80%9315_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2014-15 Belgian Pro League?",
+  "a": "Aleksandar Mitrović",
+  "src": "https://en.wikipedia.org/wiki/2014%E2%80%9315_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 20 of them."
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2015-16 Belgian Pro League?",
+  "a": "Club Brugge",
+  "src": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Belgian Pro League in 2015-16?",
+  "a": "OH Leuven",
+  "src": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2015-16 Belgian Pro League?",
+  "a": "OH Leuven",
+  "src": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2015-16 Belgian Pro League?",
+  "a": "Kortrijk",
+  "src": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2015-16 Belgian Pro League?",
+  "a": "Jérémy Perbet",
+  "src": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 20 of them."
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2016-17 Belgian Pro League?",
+  "a": "Anderlecht",
+  "src": "https://en.wikipedia.org/wiki/2016%E2%80%9317_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Belgian Pro League in 2016-17?",
+  "a": "Westerlo",
+  "src": "https://en.wikipedia.org/wiki/2016%E2%80%9317_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2016-17 Belgian Pro League?",
+  "a": "Sint-Truiden",
+  "src": "https://en.wikipedia.org/wiki/2016%E2%80%9317_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2016-17 Belgian Pro League?",
+  "a": "Genk",
+  "src": "https://en.wikipedia.org/wiki/2016%E2%80%9317_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2016-17 Belgian Pro League?",
+  "a": "Henry Onyekuru",
+  "src": "https://en.wikipedia.org/wiki/2016%E2%80%9317_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 22 of them."
+ },
+ {
+  "tier": "easy",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2017-18 Belgian Pro League?",
+  "a": "Hamdi Harbaoui",
+  "src": "https://en.wikipedia.org/wiki/2017%E2%80%9318_Belgian_First_Division_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 22 of them."
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2018-19 Belgian Pro League?",
+  "a": "Genk",
+  "src": "https://en.wikipedia.org/wiki/2018%E2%80%9319_Belgian_First_Division_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Belgian Pro League in 2018-19?",
+  "a": "Lokeren",
+  "src": "https://en.wikipedia.org/wiki/2018%E2%80%9319_Belgian_First_Division_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2018-19 Belgian Pro League?",
+  "a": "Lokeren",
+  "src": "https://en.wikipedia.org/wiki/2018%E2%80%9319_Belgian_First_Division_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2018-19 Belgian Pro League?",
+  "a": "Charleroi",
+  "src": "https://en.wikipedia.org/wiki/2018%E2%80%9319_Belgian_First_Division_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2018-19 Belgian Pro League?",
+  "a": "Hamdi Harbaoui",
+  "src": "https://en.wikipedia.org/wiki/2018%E2%80%9319_Belgian_First_Division_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 25 of them."
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2020-21 Belgian Pro League?",
+  "a": "Club Brugge",
+  "src": "https://en.wikipedia.org/wiki/2020%E2%80%9321_Belgian_First_Division_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2020-21 Belgian Pro League?",
+  "a": "Antwerp",
+  "src": "https://en.wikipedia.org/wiki/2020%E2%80%9321_Belgian_First_Division_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2020-21 Belgian Pro League?",
+  "a": "Anderlecht",
+  "src": "https://en.wikipedia.org/wiki/2020%E2%80%9321_Belgian_First_Division_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Belgian Pro League in 2020-21?",
+  "a": "Excel Mouscron",
+  "src": "https://en.wikipedia.org/wiki/2020%E2%80%9321_Belgian_First_Division_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2021-22 Belgian Pro League?",
+  "a": "Club Brugge",
+  "src": "https://en.wikipedia.org/wiki/2021%E2%80%9322_Belgian_First_Division_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Belgian Pro League in 2021-22?",
+  "a": "Beerschot",
+  "src": "https://en.wikipedia.org/wiki/2021%E2%80%9322_Belgian_First_Division_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2021-22 Belgian Pro League?",
+  "a": "Cercle Brugge",
+  "src": "https://en.wikipedia.org/wiki/2021%E2%80%9322_Belgian_First_Division_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2022-23 Belgian Pro League?",
+  "a": "Antwerp",
+  "src": "https://en.wikipedia.org/wiki/2022%E2%80%9323_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Belgian Pro League in 2022-23?",
+  "a": "Zulte Waregem, Oostende, Seraing",
+  "src": "https://en.wikipedia.org/wiki/2022%E2%80%9323_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2022-23 Belgian Pro League?",
+  "a": "OH Leuven",
+  "src": "https://en.wikipedia.org/wiki/2022%E2%80%9323_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2022-23 Belgian Pro League?",
+  "a": "Gent",
+  "src": "https://en.wikipedia.org/wiki/2022%E2%80%9323_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2023-24 Belgian Pro League?",
+  "a": "Club Brugge",
+  "src": "https://en.wikipedia.org/wiki/2023%E2%80%9324_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Belgian Pro League in 2023-24?",
+  "a": "RWD Molenbeek, Eupen",
+  "src": "https://en.wikipedia.org/wiki/2023%E2%80%9324_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2023-24 Belgian Pro League?",
+  "a": "Gent",
+  "src": "https://en.wikipedia.org/wiki/2023%E2%80%9324_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2023-24 Belgian Pro League?",
+  "a": "Charleroi",
+  "src": "https://en.wikipedia.org/wiki/2023%E2%80%9324_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2024-25 Belgian Pro League?",
+  "a": "Union SG",
+  "src": "https://en.wikipedia.org/wiki/2024%E2%80%9325_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2024-25 Belgian Pro League?",
+  "a": "Club Brugge",
+  "src": "https://en.wikipedia.org/wiki/2024%E2%80%9325_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2024-25 Belgian Pro League?",
+  "a": "Charleroi",
+  "src": "https://en.wikipedia.org/wiki/2024%E2%80%9325_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Belgian Pro League in 2024-25?",
+  "a": "Kortrijk, Beerschot",
+  "src": "https://en.wikipedia.org/wiki/2024%E2%80%9325_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2025-26 Belgian Pro League?",
+  "a": "Club Brugge",
+  "src": "https://en.wikipedia.org/wiki/2025%E2%80%9326_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2025-26 Belgian Pro League?",
+  "a": "Union SG",
+  "src": "https://en.wikipedia.org/wiki/2025%E2%80%9326_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2025-26 Belgian Pro League?",
+  "a": "Standard Liège",
+  "src": "https://en.wikipedia.org/wiki/2025%E2%80%9326_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Belgian Pro League in 2025-26?",
+  "a": "Dender EH",
+  "src": "https://en.wikipedia.org/wiki/2025%E2%80%9326_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2025-26 Belgian Pro League?",
+  "a": "Genk",
+  "src": "https://en.wikipedia.org/wiki/2025%E2%80%9326_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ }
+]

@@ -1,0 +1,847 @@
+{
+ "easy": [
+  {
+   "q": "Which two clubs share the San Siro?",
+   "a": "AC Milan and Inter Milan",
+   "cat": "grounds"
+  },
+  {
+   "q": "By what official name is the San Siro also known?",
+   "a": "The Stadio Giuseppe Meazza",
+   "cat": "grounds"
+  },
+  {
+   "q": "Which club plays at the Stadio Diego Armando Maradona?",
+   "a": "Napoli",
+   "cat": "grounds"
+  },
+  {
+   "q": "Which club moved into its own stadium in Turin in 2011, unusually for Italy?",
+   "a": "Juventus",
+   "cat": "grounds"
+  },
+  {
+   "q": "Which club plays at the Stadio Artemio Franchi in Florence?",
+   "a": "Fiorentina",
+   "cat": "grounds"
+  },
+  {
+   "q": "Which club plays at the Stadio Luigi Ferraris, sharing it with Sampdoria?",
+   "a": "Genoa",
+   "cat": "grounds"
+  },
+  {
+   "q": "What is the Italian league title colloquially called?",
+   "a": "The Scudetto",
+   "sub": "The little shield the champions wear the following season.",
+   "cat": "records"
+  },
+  {
+   "q": "What is the Milan derby called?",
+   "a": "The Derby della Madonnina",
+   "cat": "records"
+  },
+  {
+   "q": "What is the Rome derby between Roma and Lazio called?",
+   "a": "The Derby della Capitale",
+   "cat": "records",
+   "club": "roma"
+  },
+  {
+   "q": "Which club is nicknamed the Nerazzurri, the black and blues?",
+   "a": "Inter Milan",
+   "cat": "records"
+  },
+  {
+   "q": "Which club is nicknamed the Rossoneri, the red and blacks?",
+   "a": "AC Milan",
+   "cat": "records"
+  },
+  {
+   "q": "What is the Italian defensive system of the 1960s known as?",
+   "a": "Catenaccio",
+   "cat": "records"
+  },
+  {
+   "q": "What is the Italian domestic cup called?",
+   "a": "The Coppa Italia",
+   "cat": "cups"
+  },
+  {
+   "q": "Which Argentine forward played for Napoli in the 1980s and won them two league titles?",
+   "a": "Diego Maradona",
+   "cat": "imports",
+   "club": "napoli"
+  },
+  {
+   "q": "Which Swedish striker played for Juventus, Inter Milan and AC Milan?",
+   "a": "Zlatan Ibrahimovic",
+   "cat": "imports",
+   "club": "juventus"
+  },
+  {
+   "q": "Which Portuguese forward joined Juventus from Real Madrid in 2018?",
+   "a": "Cristiano Ronaldo",
+   "cat": "imports",
+   "club": "juventus"
+  },
+  {
+   "q": "Which Frenchman joined Juventus from Manchester United in 2012 on a free transfer?",
+   "a": "Paul Pogba",
+   "cat": "imports",
+   "club": "juventus"
+  },
+  {
+   "q": "Which Italian striker won the treble with Inter Milan in 2010 and later played for AC Milan?",
+   "a": "Mario Balotelli",
+   "cat": "imports",
+   "club": "inter"
+  },
+  {
+   "q": "Which manager won the treble with Inter Milan in 2010 before joining Real Madrid?",
+   "a": "Jose Mourinho",
+   "cat": "managers",
+   "club": "inter"
+  },
+  {
+   "q": "Which manager took charge of Juventus in 2011 and won the first three of their title run?",
+   "a": "Antonio Conte",
+   "cat": "managers",
+   "club": "juventus"
+  },
+  {
+   "q": "Which Italian manager won the Champions League twice with AC Milan and later managed Real Madrid?",
+   "a": "Carlo Ancelotti",
+   "cat": "managers",
+   "club": "milan"
+  },
+  {
+   "q": "Which club captained by Francesco Totti for many years plays in Rome?",
+   "a": "Roma",
+   "cat": "records"
+  },
+  {
+   "q": "Which goalkeeper captained Juventus and Italy and played into his forties?",
+   "a": "Gianluigi Buffon",
+   "cat": "records",
+   "club": "juventus"
+  },
+  {
+   "q": "Which AC Milan defender captained the club for years and played until he was forty-one?",
+   "a": "Paolo Maldini",
+   "cat": "records",
+   "club": "milan"
+  }
+ ],
+ "normal": [
+  {
+   "q": "Which club won the 1995-96 Serie A?",
+   "a": "Milan",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the 1997-98 Serie A?",
+   "a": "Juventus",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the 1998-99 Serie A?",
+   "a": "Milan",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the 2000-01 Serie A?",
+   "a": "Roma",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the 2002-03 Serie A?",
+   "a": "Juventus",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the 2003-04 Serie A?",
+   "a": "Milan",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the 2005-06 Serie A?",
+   "a": "Inter Milan",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the 2007-08 Serie A?",
+   "a": "Internazionale",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the 2008-09 Serie A?",
+   "a": "Internazionale",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the 2010-11 Serie A?",
+   "a": "Milan",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the 2012-13 Serie A?",
+   "a": "Juventus",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2016-17 Serie A?",
+   "a": "Roma",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2017-18 Serie A?",
+   "a": "Napoli",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2018-19 Serie A?",
+   "a": "Napoli",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2019-20 Serie A?",
+   "a": "Internazionale",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2020-21 Serie A?",
+   "a": "Milan",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2021-22 Serie A?",
+   "a": "Inter Milan",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2022-23 Serie A?",
+   "a": "Lazio",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2023-24 Serie A?",
+   "a": "Milan",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2024-25 Serie A?",
+   "a": "Inter Milan",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2025-26 Serie A?",
+   "a": "Napoli",
+   "cat": "champions"
+  }
+ ],
+ "hard": [
+  {
+   "q": "Which club finished second in the 1995-96 Serie A?",
+   "a": "Juventus",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 1996-97 Serie A?",
+   "a": "Parma",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 1997-98 Serie A?",
+   "a": "Internazionale",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 1998-99 Serie A?",
+   "a": "Lazio",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 1999-00 Serie A?",
+   "a": "Juventus",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2000-01 Serie A?",
+   "a": "Juventus",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2001-02 Serie A?",
+   "a": "Roma",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2002-03 Serie A?",
+   "a": "Internazionale",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2003-04 Serie A?",
+   "a": "Roma",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2006-07 Serie A?",
+   "a": "Roma",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2007-08 Serie A?",
+   "a": "Roma",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2008-09 Serie A?",
+   "a": "Milan",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2009-10 Serie A?",
+   "a": "Roma",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2010-11 Serie A?",
+   "a": "Internazionale",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2011-12 Serie A?",
+   "a": "Milan",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2012-13 Serie A?",
+   "a": "Napoli",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2013-14 Serie A?",
+   "a": "Roma",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2014-15 Serie A?",
+   "a": "Roma",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2015-16 Serie A?",
+   "a": "Napoli",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished third in the 2016-17 Serie A?",
+   "a": "Napoli",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Serie A in 2016-17?",
+   "a": "Empoli, Palermo, Pescara",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2017-18 Serie A?",
+   "a": "Roma",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Serie A in 2017-18?",
+   "a": "Crotone, Hellas Verona, Benevento",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2018-19 Serie A?",
+   "a": "Atalanta",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Serie A in 2018-19?",
+   "a": "Empoli, Frosinone, Chievo",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2019-20 Serie A?",
+   "a": "Atalanta",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Serie A in 2019-20?",
+   "a": "Lecce, Brescia, SPAL",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2020-21 Serie A?",
+   "a": "Atalanta",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Serie A in 2020-21?",
+   "a": "Benevento, Crotone, Parma",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2021-22 Serie A?",
+   "a": "Napoli",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Serie A in 2021-22?",
+   "a": "Cagliari, Genoa, Venezia",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2022-23 Serie A?",
+   "a": "Inter Milan",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Serie A in 2022-23?",
+   "a": "Spezia, Cremonese, Sampdoria",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2023-24 Serie A?",
+   "a": "Juventus",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Serie A in 2023-24?",
+   "a": "Frosinone, Sassuolo, Salernitana",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2024-25 Serie A?",
+   "a": "Atalanta",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Serie A in 2024-25?",
+   "a": "Empoli, Venezia, Monza",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2025-26 Serie A?",
+   "a": "Roma",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Serie A in 2025-26?",
+   "a": "Cremonese, Hellas Verona, Pisa",
+   "cat": "relegation"
+  }
+ ],
+ "extreme": [
+  {
+   "q": "Which club finished third in the 1995-96 Serie A?",
+   "a": "Lazio",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Serie A in 1995-96?",
+   "a": "Bari, Torino, Cremonese, Padova",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club scored the most goals in the 1995-96 Serie A?",
+   "a": "Lazio",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 1996-97 Serie A?",
+   "a": "Internazionale",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Serie A in 1996-97?",
+   "a": "Cagliari, Perugia, Hellas Verona, Reggiana",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club scored the most goals in the 1996-97 Serie A?",
+   "a": "Sampdoria",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 1997-98 Serie A?",
+   "a": "Udinese",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Serie A in 1997-98?",
+   "a": "Brescia, Atalanta, Lecce, Napoli",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 1997-98 Serie A?",
+   "a": "Internazionale",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 1998-99 Serie A?",
+   "a": "Fiorentina",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Serie A in 1998-99?",
+   "a": "Salernitana, Sampdoria, Vicenza, Empoli",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club scored the most goals in the 1998-99 Serie A?",
+   "a": "Roma",
+   "cat": "records"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 1998-99 Serie A?",
+   "a": "Lazio",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 1999-00 Serie A?",
+   "a": "Milan",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Serie A in 1999-00?",
+   "a": "Torino, Venezia, Cagliari, Piacenza",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club scored the most goals in the 1999-00 Serie A?",
+   "a": "Milan",
+   "cat": "records"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 1999-00 Serie A?",
+   "a": "Juventus",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 2000-01 Serie A?",
+   "a": "Lazio",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Serie A in 2000-01?",
+   "a": "Reggina, Vicenza, Napoli, Bari",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 2000-01 Serie A?",
+   "a": "Juventus",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 2001-02 Serie A?",
+   "a": "Internazionale",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Serie A in 2001-02?",
+   "a": "Hellas Verona, Lecce, Fiorentina, Venezia",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2002-03 Serie A?",
+   "a": "Milan",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Serie A in 2002-03?",
+   "a": "Atalanta, Piacenza, Como, Torino",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2003-04 Serie A?",
+   "a": "Juventus",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Serie A in 2003-04?",
+   "a": "Perugia, Modena, Empoli, Ancona",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club scored the most goals in the 2003-04 Serie A?",
+   "a": "Roma",
+   "cat": "records"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 2003-04 Serie A?",
+   "a": "Roma",
+   "cat": "records"
+  },
+  {
+   "q": "Which clubs went down from the Serie A in 2004-05?",
+   "a": "Bologna, Brescia, Atalanta",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which clubs went down from the Serie A in 2005-06?",
+   "a": "Juventus, Lecce, Treviso",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club scored the most goals in the 2005-06 Serie A?",
+   "a": "Milan",
+   "cat": "records"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 2005-06 Serie A?",
+   "a": "Juventus",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 2006-07 Serie A?",
+   "a": "Fiorentina",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Serie A in 2006-07?",
+   "a": "Chievo, Ascoli, Messina",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 2006-07 Serie A?",
+   "a": "Fiorentina",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 2007-08 Serie A?",
+   "a": "Juventus",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Serie A in 2007-08?",
+   "a": "Empoli, Parma, Livorno",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club scored the most goals in the 2007-08 Serie A?",
+   "a": "Roma",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 2008-09 Serie A?",
+   "a": "Juventus",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Serie A in 2008-09?",
+   "a": "Torino, Reggina, Lecce",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2009-10 Serie A?",
+   "a": "Milan",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Serie A in 2009-10?",
+   "a": "Atalanta, Siena, Livorno",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2010-11 Serie A?",
+   "a": "Napoli",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Serie A in 2010-11?",
+   "a": "Sampdoria, Brescia, Bari",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club scored the most goals in the 2010-11 Serie A?",
+   "a": "Internazionale",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 2011-12 Serie A?",
+   "a": "Udinese",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Serie A in 2011-12?",
+   "a": "Lecce, Novara, Cesena",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club scored the most goals in the 2011-12 Serie A?",
+   "a": "Milan",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 2012-13 Serie A?",
+   "a": "Milan",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Serie A in 2012-13?",
+   "a": "Siena, Palermo, Pescara",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club scored the most goals in the 2012-13 Serie A?",
+   "a": "Napoli",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 2013-14 Serie A?",
+   "a": "Napoli",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Serie A in 2013-14?",
+   "a": "Catania, Bologna, Livorno",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2014-15 Serie A?",
+   "a": "Lazio",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Serie A in 2014-15?",
+   "a": "Cagliari, Parma, Cesena",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2015-16 Serie A?",
+   "a": "Roma",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Serie A in 2015-16?",
+   "a": "Carpi, Frosinone, Hellas Verona",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club scored the most goals in the 2015-16 Serie A?",
+   "a": "Roma",
+   "cat": "records"
+  },
+  {
+   "q": "Which club scored the most goals in the 2016-17 Serie A?",
+   "a": "Napoli",
+   "cat": "records"
+  },
+  {
+   "q": "Which club scored the most goals in the 2017-18 Serie A?",
+   "a": "Lazio",
+   "cat": "records"
+  },
+  {
+   "q": "Which club scored the most goals in the 2018-19 Serie A?",
+   "a": "Atalanta",
+   "cat": "records"
+  },
+  {
+   "q": "Which club scored the most goals in the 2019-20 Serie A?",
+   "a": "Atalanta",
+   "cat": "records"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 2019-20 Serie A?",
+   "a": "Internazionale",
+   "cat": "records"
+  },
+  {
+   "q": "Which club scored the most goals in the 2020-21 Serie A?",
+   "a": "Atalanta",
+   "cat": "records"
+  },
+  {
+   "q": "Which club scored the most goals in the 2021-22 Serie A?",
+   "a": "Inter Milan",
+   "cat": "records"
+  },
+  {
+   "q": "Which club scored the most goals in the 2024-25 Serie A?",
+   "a": "Inter Milan",
+   "cat": "records"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 2025-26 Serie A?",
+   "a": "Como",
+   "cat": "records"
+  }
+ ],
+ "ball": [
+  {
+   "q": "Which 2006 scandal saw Juventus stripped of a title and relegated to Serie B?",
+   "a": "Calciopoli",
+   "cat": "stories",
+   "club": "juventus"
+  },
+  {
+   "q": "Which club was relegated to Serie B in 2006 over match-fixing and came straight back up?",
+   "a": "Juventus",
+   "cat": "stories"
+  },
+  {
+   "q": "Which club won the Champions League in 2010 as part of a treble, managed by Jose Mourinho?",
+   "a": "Inter Milan",
+   "cat": "stories"
+  },
+  {
+   "q": "AC Milan led 3-0 at half time in the 2005 Champions League final and lost. Who beat them?",
+   "a": "Liverpool",
+   "sub": "On penalties, in Istanbul.",
+   "cat": "stories",
+   "club": "milan"
+  },
+  {
+   "q": "Which club won Serie A in 2022-23, its first title in thirty-three years?",
+   "a": "Napoli",
+   "cat": "stories"
+  },
+  {
+   "q": "Which Italian club folded in 2004 after the collapse of its parent dairy company?",
+   "a": "Parma",
+   "sub": "Parmalat took the club down with it.",
+   "cat": "stories"
+  },
+  {
+   "q": "Which club won Serie A in 2020-21, ending Juventus's run of nine titles in a row?",
+   "a": "Inter Milan",
+   "cat": "stories",
+   "club": "juventus"
+  },
+  {
+   "q": "Which club did Diego Maradona take to their first Serie A title in 1987?",
+   "a": "Napoli",
+   "cat": "stories"
+  },
+  {
+   "q": "Which Roma captain spent his entire twenty-five year career at the club?",
+   "a": "Francesco Totti",
+   "cat": "stories",
+   "club": "roma"
+  },
+  {
+   "q": "AC Milan went unbeaten through Serie A in 1991-92 under which manager?",
+   "a": "Fabio Capello",
+   "cat": "stories",
+   "club": "milan"
+  },
+  {
+   "q": "Which Dutch trio played together for AC Milan in the late 1980s?",
+   "a": "Marco van Basten, Ruud Gullit and Frank Rijkaard",
+   "cat": "stories",
+   "club": "milan"
+  },
+  {
+   "q": "Which Italian club was refounded in 2018 after bankruptcy and had to start again in Serie D?",
+   "a": "Bari",
+   "cat": "stories"
+  }
+ ]
+}

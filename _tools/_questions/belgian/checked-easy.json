@@ -1,0 +1,183 @@
+[
+ {
+  "tier": "easy",
+  "cat": "grounds",
+  "q": "Which Belgian club plays at the Jan Breydel Stadium in Bruges?",
+  "a": "Club Brugge",
+  "sub": "Cercle Brugge play there too.",
+  "src": "https://en.wikipedia.org/wiki/Jan_Breydel_Stadium",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "grounds",
+  "q": "Which Belgian club plays at the Lotto Park in Brussels?",
+  "a": "Anderlecht",
+  "src": "https://en.wikipedia.org/wiki/Constant_Vanden_Stock_Stadium",
+  "conf": "likely",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "grounds",
+  "q": "Which Belgian club plays at the Bosuilstadion?",
+  "a": "Royal Antwerp",
+  "src": "https://en.wikipedia.org/wiki/Bosuilstadion",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "grounds",
+  "q": "Which club plays at the Cegeka Arena in Limburg?",
+  "a": "Genk",
+  "src": "https://en.wikipedia.org/wiki/Cegeka_Arena",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "grounds",
+  "q": "Which club plays at the Stade Maurice Dufrasne in Liege?",
+  "a": "Standard Liege",
+  "src": "https://en.wikipedia.org/wiki/Stade_Maurice_Dufrasne",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "grounds",
+  "q": "Which club plays at the Planet Group Arena in Ghent?",
+  "a": "Gent",
+  "src": "https://en.wikipedia.org/wiki/Ghelamco_Arena",
+  "conf": "likely",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "records",
+  "q": "Which Belgian club has won the national title more often than any other?",
+  "a": "Anderlecht",
+  "src": "https://en.wikipedia.org/wiki/R.S.C._Anderlecht",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "records",
+  "q": "Which two clubs contest the Bruges derby?",
+  "a": "Club Brugge and Cercle Brugge",
+  "src": "https://en.wikipedia.org/wiki/Bruges_derby",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "records",
+  "q": "Which Belgian club is the oldest, carrying the number one in the federation's register?",
+  "a": "Royal Antwerp",
+  "src": "https://en.wikipedia.org/wiki/Royal_Antwerp_F.C.",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "records",
+  "q": "In which Belgian city do Anderlecht and Union Saint-Gilloise both play?",
+  "a": "Brussels",
+  "src": "https://en.wikipedia.org/wiki/Royale_Union_Saint-Gilloise",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "cups",
+  "q": "Which club won the Belgian Cup most often in the twentieth century, and shares its city with the national stadium?",
+  "a": "Anderlecht",
+  "src": "https://en.wikipedia.org/wiki/Belgian_Cup",
+  "conf": "likely",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "records",
+  "q": "After the regular season, the top Belgian clubs play a second phase with their points halved. What is it called?",
+  "a": "The Champions' play-offs",
+  "src": "https://en.wikipedia.org/wiki/Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "imports",
+  "q": "Which Belgian midfielder came through Genk before joining Chelsea and later Manchester City?",
+  "a": "Kevin De Bruyne",
+  "src": "https://en.wikipedia.org/wiki/Kevin_De_Bruyne",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "imports",
+  "q": "Which Belgian forward came through Anderlecht before joining Chelsea in 2011?",
+  "a": "Romelu Lukaku",
+  "src": "https://en.wikipedia.org/wiki/Romelu_Lukaku",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "imports",
+  "q": "Which Belgian goalkeeper came through Genk before joining Chelsea and then Real Madrid?",
+  "a": "Thibaut Courtois",
+  "src": "https://en.wikipedia.org/wiki/Thibaut_Courtois",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "imports",
+  "q": "Which Belgian winger played for Lille and Chelsea and came through the Belgian youth system?",
+  "a": "Eden Hazard",
+  "src": "https://en.wikipedia.org/wiki/Eden_Hazard",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "europe",
+  "q": "Which Belgian club reached the 1988 Cup Winners' Cup final and has the most Belgian titles?",
+  "a": "Anderlecht",
+  "src": "https://en.wikipedia.org/wiki/R.S.C._Anderlecht",
+  "conf": "likely",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "records",
+  "q": "Which Belgian club is nicknamed Blauw-Zwart, the blue and blacks?",
+  "a": "Club Brugge",
+  "src": "https://en.wikipedia.org/wiki/Club_Brugge_KV",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "records",
+  "q": "Which Belgian club rose from the third tier to the top flight and into Europe from 2018 onwards?",
+  "a": "Union Saint-Gilloise",
+  "src": "https://en.wikipedia.org/wiki/Royale_Union_Saint-Gilloise",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "records",
+  "q": "Which Belgian club plays in the Limburg province and is nicknamed the Smurfs?",
+  "a": "Genk",
+  "src": "https://en.wikipedia.org/wiki/K.R.C._Genk",
+  "conf": "likely",
+  "verdict": "ok"
+ }
+]

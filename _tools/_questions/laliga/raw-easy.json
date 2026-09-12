@@ -1,0 +1,37 @@
+[
+{"tier":"easy","cat":"grounds","q":"Which club plays its home games at the Santiago Bernabeu?","a":"Real Madrid","src":"https://en.wikipedia.org/wiki/Santiago_Bernab%C3%A9u_Stadium","conf":"sure"},
+{"tier":"easy","cat":"grounds","q":"Which club plays its home games at the Camp Nou?","a":"Barcelona","src":"https://en.wikipedia.org/wiki/Camp_Nou","conf":"sure"},
+{"tier":"easy","cat":"grounds","q":"Which Basque club plays at San Mames?","a":"Athletic Bilbao","src":"https://en.wikipedia.org/wiki/San_Mam%C3%A9s_Stadium","conf":"sure"},
+{"tier":"easy","cat":"grounds","q":"Which club moved into the Metropolitano in 2017?","a":"Atletico Madrid","sub":"They left the Vicente Calderon behind.","src":"https://en.wikipedia.org/wiki/Riyadh_Air_Metropolitano","conf":"sure"},
+{"tier":"easy","cat":"grounds","q":"Which club plays at the Mestalla?","a":"Valencia","src":"https://en.wikipedia.org/wiki/Mestalla_Stadium","conf":"sure"},
+{"tier":"easy","cat":"grounds","q":"Which Seville club plays at the Ramon Sanchez-Pizjuan?","a":"Sevilla","src":"https://en.wikipedia.org/wiki/Ram%C3%B3n_S%C3%A1nchez_Pizju%C3%A1n_Stadium","conf":"sure"},
+{"tier":"easy","cat":"grounds","q":"Which club plays at the Benito Villamarin in Seville?","a":"Real Betis","src":"https://en.wikipedia.org/wiki/Estadio_Benito_Villamar%C3%ADn","conf":"sure"},
+{"tier":"easy","cat":"grounds","q":"Which club plays at the Reale Arena in San Sebastian?","a":"Real Sociedad","src":"https://en.wikipedia.org/wiki/Anoeta_Stadium","conf":"sure"},
+
+{"tier":"easy","cat":"records","q":"What is the match between Real Madrid and Barcelona called?","a":"El Clasico","src":"https://en.wikipedia.org/wiki/El_Cl%C3%A1sico","conf":"sure"},
+{"tier":"easy","cat":"records","q":"Which club contests the Basque derby with Real Sociedad?","a":"Athletic Bilbao","src":"https://en.wikipedia.org/wiki/Basque_derby","conf":"sure"},
+{"tier":"easy","cat":"records","q":"Which club is nicknamed Los Blancos?","a":"Real Madrid","src":"https://en.wikipedia.org/wiki/Real_Madrid_CF","conf":"sure"},
+{"tier":"easy","cat":"records","q":"Which club is nicknamed Los Colchoneros, the mattress makers?","a":"Atletico Madrid","sub":"Red and white stripes, like an old Spanish mattress.","src":"https://en.wikipedia.org/wiki/Atl%C3%A9tico_Madrid","conf":"sure"},
+{"tier":"easy","cat":"records","q":"Which Spanish club has a policy of fielding only Basque players?","a":"Athletic Bilbao","src":"https://en.wikipedia.org/wiki/Athletic_Bilbao","conf":"sure"},
+
+{"tier":"easy","cat":"imports","q":"Which Argentine spent his entire European club career at Barcelona before leaving in 2021?","a":"Lionel Messi","src":"https://en.wikipedia.org/wiki/Lionel_Messi","conf":"sure"},
+{"tier":"easy","cat":"imports","q":"Which Portuguese forward joined Real Madrid from Manchester United in 2009?","a":"Cristiano Ronaldo","src":"https://en.wikipedia.org/wiki/Cristiano_Ronaldo","conf":"sure"},
+{"tier":"easy","cat":"imports","q":"Which French striker joined Real Madrid from Lyon in 2009 and stayed for over a decade?","a":"Karim Benzema","src":"https://en.wikipedia.org/wiki/Karim_Benzema","conf":"sure"},
+{"tier":"easy","cat":"imports","q":"Which Uruguayan striker joined Barcelona from Liverpool in 2014?","a":"Luis Suarez","src":"https://en.wikipedia.org/wiki/Luis_Su%C3%A1rez","conf":"sure"},
+{"tier":"easy","cat":"imports","q":"Which Brazilian forward left Barcelona for Paris Saint-Germain in 2017?","a":"Neymar","src":"https://en.wikipedia.org/wiki/Neymar","conf":"sure"},
+{"tier":"easy","cat":"imports","q":"Which Croatian midfielder joined Real Madrid from Tottenham Hotspur in 2012?","a":"Luka Modric","src":"https://en.wikipedia.org/wiki/Luka_Modri%C4%87","conf":"sure"},
+{"tier":"easy","cat":"imports","q":"Which Welsh winger joined Real Madrid from Tottenham Hotspur in 2013?","a":"Gareth Bale","src":"https://en.wikipedia.org/wiki/Gareth_Bale","conf":"sure"},
+
+{"tier":"easy","cat":"managers","q":"Which manager led Barcelona from 2008 to 2012 and later managed Manchester City?","a":"Pep Guardiola","src":"https://en.wikipedia.org/wiki/Pep_Guardiola","conf":"sure"},
+{"tier":"easy","cat":"managers","q":"Which Argentine has managed Atletico Madrid since 2011?","a":"Diego Simeone","src":"https://en.wikipedia.org/wiki/Diego_Simeone","conf":"sure"},
+{"tier":"easy","cat":"managers","q":"Which Frenchman managed Real Madrid to three Champions League titles in a row?","a":"Zinedine Zidane","src":"https://en.wikipedia.org/wiki/Zinedine_Zidane","conf":"sure"},
+
+{"tier":"easy","cat":"cups","q":"What is the name of the Spanish domestic cup?","a":"The Copa del Rey","src":"https://en.wikipedia.org/wiki/Copa_del_Rey","conf":"sure"},
+{"tier":"easy","cat":"cups","q":"Which club won the Champions League in 2014, 2016, 2017 and 2018?","a":"Real Madrid","src":"https://en.wikipedia.org/wiki/Real_Madrid_CF_in_international_football","conf":"sure"},
+{"tier":"easy","cat":"europe","q":"Which Spanish club has won the Europa League more than any other?","a":"Sevilla","src":"https://en.wikipedia.org/wiki/Sevilla_FC","conf":"sure"},
+
+{"tier":"easy","cat":"scorers","q":"Which Barcelona forward won the Ballon d'Or a record number of times?","a":"Lionel Messi","src":"https://en.wikipedia.org/wiki/Lionel_Messi","conf":"sure"},
+{"tier":"easy","cat":"records","q":"Which club is known as Barca?","a":"Barcelona","src":"https://en.wikipedia.org/wiki/FC_Barcelona","conf":"sure"},
+{"tier":"easy","cat":"records","q":"Which Spanish club is nicknamed Atleti?","a":"Atletico Madrid","src":"https://en.wikipedia.org/wiki/Atl%C3%A9tico_Madrid","conf":"sure"},
+{"tier":"easy","cat":"grounds","q":"In which city do both Sevilla and Real Betis play?","a":"Seville","src":"https://en.wikipedia.org/wiki/Seville_derby","conf":"sure"}
+]

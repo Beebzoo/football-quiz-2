@@ -1,0 +1,92 @@
+[
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which Belgian player's court case in the 1990s gave players the right to move freely at the end of a contract?",
+  "a": "Jean-Marc Bosman",
+  "sub": "He was at RFC Liege, and he never really played again.",
+  "src": "https://en.wikipedia.org/wiki/Bosman_ruling",
+  "conf": "sure"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "The ruling that ended transfer fees for out-of-contract players is named after a Belgian. What is it called?",
+  "a": "The Bosman ruling",
+  "src": "https://en.wikipedia.org/wiki/Bosman_ruling",
+  "conf": "sure"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which Belgian club reached the 1978 European Cup final and lost to Liverpool at Wembley?",
+  "a": "Club Brugge",
+  "src": "https://en.wikipedia.org/wiki/1978_European_Cup_final",
+  "conf": "sure"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which Belgian club won the Cup Winners' Cup twice and the UEFA Cup once between 1976 and 1983?",
+  "a": "Anderlecht",
+  "src": "https://en.wikipedia.org/wiki/R.S.C._Anderlecht",
+  "conf": "likely"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which Brussels club went unbeaten for sixty league games in the 1930s?",
+  "a": "Union Saint-Gilloise",
+  "sub": "They did not win the league again for ninety years.",
+  "src": "https://en.wikipedia.org/wiki/Royale_Union_Saint-Gilloise",
+  "conf": "likely"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which Belgian club climbed from the third tier in 2015 to the Champions League within a decade?",
+  "a": "Union Saint-Gilloise",
+  "src": "https://en.wikipedia.org/wiki/Royale_Union_Saint-Gilloise",
+  "conf": "likely"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which Belgian club is registered as matricule number one with the national federation?",
+  "a": "Royal Antwerp",
+  "src": "https://en.wikipedia.org/wiki/Royal_Antwerp_F.C.",
+  "conf": "sure"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which Belgian club won the league in 2024-25, its first title since the 1930s?",
+  "a": "Union Saint-Gilloise",
+  "src": "https://en.wikipedia.org/wiki/Royale_Union_Saint-Gilloise",
+  "conf": "likely"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which Belgian club shares a stadium with its city rival and wears green rather than blue?",
+  "a": "Cercle Brugge",
+  "src": "https://en.wikipedia.org/wiki/Cercle_Brugge_K.S.V.",
+  "conf": "sure"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which Belgian club drew its support from the Limburg coalfields and took its name from the mining town?",
+  "a": "Genk",
+  "src": "https://en.wikipedia.org/wiki/K.R.C._Genk",
+  "conf": "likely"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which Belgian club did Vincent Kompany captain before joining Hamburg and then Manchester City?",
+  "a": "Anderlecht",
+  "src": "https://en.wikipedia.org/wiki/Vincent_Kompany",
+  "conf": "sure"
+ }
+]

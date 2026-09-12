@@ -1,0 +1,2300 @@
+[
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 1992-93 Premier League?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/1992%E2%80%9393_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 1992-93 Premier League?",
+  "a": "Aston Villa",
+  "src": "https://en.wikipedia.org/wiki/1992%E2%80%9393_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 1992-93 Premier League?",
+  "a": "Norwich City",
+  "src": "https://en.wikipedia.org/wiki/1992%E2%80%9393_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 1992-93?",
+  "a": "Crystal Palace, Middlesbrough, Nottingham Forest",
+  "src": "https://en.wikipedia.org/wiki/1992%E2%80%9393_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 1992-93 Premier League?",
+  "a": "Blackburn Rovers",
+  "src": "https://en.wikipedia.org/wiki/1992%E2%80%9393_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 1992-93 Premier League?",
+  "a": "Teddy Sheringham",
+  "src": "https://en.wikipedia.org/wiki/1992%E2%80%9393_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "scorers",
+  "q": "Which club was Teddy Sheringham playing for when he top scored in the 1992-93 Premier League?",
+  "a": "style=\"text-align:center\"|1",
+  "src": "https://en.wikipedia.org/wiki/1992%E2%80%9393_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 1993-94 Premier League?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/1993%E2%80%9394_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 1993-94 Premier League?",
+  "a": "Blackburn Rovers",
+  "src": "https://en.wikipedia.org/wiki/1993%E2%80%9394_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 1993-94 Premier League?",
+  "a": "Newcastle United",
+  "src": "https://en.wikipedia.org/wiki/1993%E2%80%9394_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 1993-94?",
+  "a": "Sheffield United, Oldham Athletic, Swindon Town",
+  "src": "https://en.wikipedia.org/wiki/1993%E2%80%9394_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 1993-94 Premier League?",
+  "a": "Newcastle United",
+  "src": "https://en.wikipedia.org/wiki/1993%E2%80%9394_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 1993-94 Premier League?",
+  "a": "Arsenal",
+  "src": "https://en.wikipedia.org/wiki/1993%E2%80%9394_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 1993-94 Premier League?",
+  "a": "Andy Cole",
+  "src": "https://en.wikipedia.org/wiki/1993%E2%80%9394_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "scorers",
+  "q": "Which club was Andy Cole playing for when he top scored in the 1993-94 Premier League?",
+  "a": "align=center|1",
+  "src": "https://en.wikipedia.org/wiki/1993%E2%80%9394_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 1994-95 Premier League?",
+  "a": "Blackburn Rovers",
+  "src": "https://en.wikipedia.org/wiki/1994%E2%80%9395_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 1994-95 Premier League?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/1994%E2%80%9395_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 1994-95 Premier League?",
+  "a": "Nottingham Forest",
+  "src": "https://en.wikipedia.org/wiki/1994%E2%80%9395_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 1994-95?",
+  "a": "Crystal Palace, Norwich City, Leicester City, Ipswich Town",
+  "src": "https://en.wikipedia.org/wiki/1994%E2%80%9395_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 1994-95 Premier League?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/1994%E2%80%9395_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 1994-95 Premier League?",
+  "a": "Alan Shearer",
+  "src": "https://en.wikipedia.org/wiki/1994%E2%80%9395_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "scorers",
+  "q": "Which club was Alan Shearer playing for when he top scored in the 1994-95 Premier League?",
+  "a": "align=center|1",
+  "src": "https://en.wikipedia.org/wiki/1994%E2%80%9395_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 1995-96 Premier League?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/1995%E2%80%9396_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 1995-96 Premier League?",
+  "a": "Newcastle United",
+  "src": "https://en.wikipedia.org/wiki/1995%E2%80%9396_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 1995-96 Premier League?",
+  "a": "Liverpool",
+  "src": "https://en.wikipedia.org/wiki/1995%E2%80%9396_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 1995-96?",
+  "a": "Manchester City, Queens Park Rangers, Bolton Wanderers",
+  "src": "https://en.wikipedia.org/wiki/1995%E2%80%9396_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 1995-96 Premier League?",
+  "a": "Arsenal",
+  "src": "https://en.wikipedia.org/wiki/1995%E2%80%9396_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 1995-96 Premier League?",
+  "a": "Alan Shearer",
+  "src": "https://en.wikipedia.org/wiki/1995%E2%80%9396_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "scorers",
+  "q": "Which club was Alan Shearer playing for when he top scored in the 1995-96 Premier League?",
+  "a": "align=center|1",
+  "src": "https://en.wikipedia.org/wiki/1995%E2%80%9396_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 1996-97 Premier League?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/1996%E2%80%9397_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 1996-97 Premier League?",
+  "a": "Newcastle United",
+  "src": "https://en.wikipedia.org/wiki/1996%E2%80%9397_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 1996-97 Premier League?",
+  "a": "Arsenal",
+  "src": "https://en.wikipedia.org/wiki/1996%E2%80%9397_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 1996-97?",
+  "a": "Middlesbrough, Sunderland, Nottingham Forest",
+  "src": "https://en.wikipedia.org/wiki/1996%E2%80%9397_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 1996-97 Premier League?",
+  "a": "Arsenal",
+  "src": "https://en.wikipedia.org/wiki/1996%E2%80%9397_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 1996-97 Premier League?",
+  "a": "Alan Shearer",
+  "src": "https://en.wikipedia.org/wiki/1996%E2%80%9397_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "scorers",
+  "q": "Which club was Alan Shearer playing for when he top scored in the 1996-97 Premier League?",
+  "a": "align=center|1",
+  "src": "https://en.wikipedia.org/wiki/1996%E2%80%9397_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 1997-98 Premier League?",
+  "a": "Arsenal",
+  "src": "https://en.wikipedia.org/wiki/1997%E2%80%9398_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 1997-98 Premier League?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/1997%E2%80%9398_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 1997-98 Premier League?",
+  "a": "Liverpool",
+  "src": "https://en.wikipedia.org/wiki/1997%E2%80%9398_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 1997-98?",
+  "a": "Bolton Wanderers, Barnsley, Crystal Palace",
+  "src": "https://en.wikipedia.org/wiki/1997%E2%80%9398_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 1997-98 Premier League?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/1997%E2%80%9398_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 1997-98 Premier League?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/1997%E2%80%9398_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 1997-98 Premier League?",
+  "a": "Dion Dublin",
+  "src": "https://en.wikipedia.org/wiki/1997%E2%80%9398_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "scorers",
+  "q": "Which club was Dion Dublin playing for when he top scored in the 1997-98 Premier League?",
+  "a": "Coventry City",
+  "src": "https://en.wikipedia.org/wiki/1997%E2%80%9398_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 1998-99 Premier League?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/1998%E2%80%9399_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 1998-99 Premier League?",
+  "a": "Arsenal",
+  "src": "https://en.wikipedia.org/wiki/1998%E2%80%9399_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 1998-99 Premier League?",
+  "a": "Chelsea",
+  "src": "https://en.wikipedia.org/wiki/1998%E2%80%9399_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 1998-99?",
+  "a": "Charlton Athletic, Blackburn Rovers, Nottingham Forest",
+  "src": "https://en.wikipedia.org/wiki/1998%E2%80%9399_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 1998-99 Premier League?",
+  "a": "Arsenal",
+  "src": "https://en.wikipedia.org/wiki/1998%E2%80%9399_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 1998-99 Premier League?",
+  "a": "Jimmy Floyd Hasselbaink",
+  "src": "https://en.wikipedia.org/wiki/1998%E2%80%9399_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "scorers",
+  "q": "Which club was Jimmy Floyd Hasselbaink playing for when he top scored in the 1998-99 Premier League?",
+  "a": "Leeds United",
+  "src": "https://en.wikipedia.org/wiki/1998%E2%80%9399_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 1999-00 Premier League?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/1999%E2%80%9300_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 1999-00 Premier League?",
+  "a": "Arsenal",
+  "src": "https://en.wikipedia.org/wiki/1999%E2%80%9300_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 1999-00 Premier League?",
+  "a": "Leeds United",
+  "src": "https://en.wikipedia.org/wiki/1999%E2%80%9300_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 1999-00?",
+  "a": "Wimbledon, Sheffield Wednesday, Watford",
+  "src": "https://en.wikipedia.org/wiki/1999%E2%80%9300_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 1999-00 Premier League?",
+  "a": "Liverpool",
+  "src": "https://en.wikipedia.org/wiki/1999%E2%80%9300_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 1999-00 Premier League?",
+  "a": "Kevin Phillips",
+  "src": "https://en.wikipedia.org/wiki/1999%E2%80%9300_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "scorers",
+  "q": "Which club was Kevin Phillips playing for when he top scored in the 1999-00 Premier League?",
+  "a": "align=center|1",
+  "src": "https://en.wikipedia.org/wiki/1999%E2%80%9300_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2000-01 Premier League?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/2000%E2%80%9301_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2000-01 Premier League?",
+  "a": "Arsenal",
+  "src": "https://en.wikipedia.org/wiki/2000%E2%80%9301_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2000-01 Premier League?",
+  "a": "Liverpool",
+  "src": "https://en.wikipedia.org/wiki/2000%E2%80%9301_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 2000-01?",
+  "a": "Manchester City, Coventry City, Bradford City",
+  "src": "https://en.wikipedia.org/wiki/2000%E2%80%9301_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2000-01 Premier League?",
+  "a": "Jimmy Floyd Hasselbaink",
+  "src": "https://en.wikipedia.org/wiki/2000%E2%80%9301_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "scorers",
+  "q": "Which club was Jimmy Floyd Hasselbaink playing for when he top scored in the 2000-01 Premier League?",
+  "a": "align=center|1",
+  "src": "https://en.wikipedia.org/wiki/2000%E2%80%9301_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2001-02 Premier League?",
+  "a": "Arsenal",
+  "src": "https://en.wikipedia.org/wiki/2001%E2%80%9302_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2001-02 Premier League?",
+  "a": "Liverpool",
+  "src": "https://en.wikipedia.org/wiki/2001%E2%80%9302_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2001-02 Premier League?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/2001%E2%80%9302_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 2001-02?",
+  "a": "Ipswich Town, Derby County, Leicester City",
+  "src": "https://en.wikipedia.org/wiki/2001%E2%80%9302_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2001-02 Premier League?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/2001%E2%80%9302_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2001-02 Premier League?",
+  "a": "Liverpool",
+  "src": "https://en.wikipedia.org/wiki/2001%E2%80%9302_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2001-02 Premier League?",
+  "a": "Thierry Henry",
+  "src": "https://en.wikipedia.org/wiki/2001%E2%80%9302_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 24 of them."
+ },
+ {
+  "tier": "hard",
+  "cat": "scorers",
+  "q": "Which club was Thierry Henry playing for when he top scored in the 2001-02 Premier League?",
+  "a": "Arsenal",
+  "src": "https://en.wikipedia.org/wiki/2001%E2%80%9302_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2002-03 Premier League?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/2002%E2%80%9303_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2002-03 Premier League?",
+  "a": "Arsenal",
+  "src": "https://en.wikipedia.org/wiki/2002%E2%80%9303_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2002-03 Premier League?",
+  "a": "Newcastle United",
+  "src": "https://en.wikipedia.org/wiki/2002%E2%80%9303_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 2002-03?",
+  "a": "West Ham United, West Bromwich Albion, Sunderland",
+  "src": "https://en.wikipedia.org/wiki/2002%E2%80%9303_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2002-03 Premier League?",
+  "a": "Arsenal",
+  "src": "https://en.wikipedia.org/wiki/2002%E2%80%9303_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2002-03 Premier League?",
+  "a": "Ruud van Nistelrooy",
+  "src": "https://en.wikipedia.org/wiki/2002%E2%80%9303_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "scorers",
+  "q": "Which club was Ruud van Nistelrooy playing for when he top scored in the 2002-03 Premier League?",
+  "a": "align=center|1",
+  "src": "https://en.wikipedia.org/wiki/2002%E2%80%9303_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2003-04 Premier League?",
+  "a": "Arsenal",
+  "src": "https://en.wikipedia.org/wiki/2003%E2%80%9304_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2003-04 Premier League?",
+  "a": "Chelsea",
+  "src": "https://en.wikipedia.org/wiki/2003%E2%80%9304_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2003-04 Premier League?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/2003%E2%80%9304_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 2003-04?",
+  "a": "Leicester City, Leeds United, Wolverhampton Wanderers",
+  "src": "https://en.wikipedia.org/wiki/2003%E2%80%9304_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2004-05 Premier League?",
+  "a": "Chelsea",
+  "src": "https://en.wikipedia.org/wiki/2004%E2%80%9305_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2004-05 Premier League?",
+  "a": "Arsenal",
+  "src": "https://en.wikipedia.org/wiki/2004%E2%80%9305_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2004-05 Premier League?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/2004%E2%80%9305_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 2004-05?",
+  "a": "Crystal Palace, Norwich City, Southampton",
+  "src": "https://en.wikipedia.org/wiki/2004%E2%80%9305_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2004-05 Premier League?",
+  "a": "Arsenal",
+  "src": "https://en.wikipedia.org/wiki/2004%E2%80%9305_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2005-06 Premier League?",
+  "a": "Chelsea",
+  "src": "https://en.wikipedia.org/wiki/2005%E2%80%9306_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2005-06 Premier League?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/2005%E2%80%9306_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2005-06 Premier League?",
+  "a": "Liverpool",
+  "src": "https://en.wikipedia.org/wiki/2005%E2%80%9306_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 2005-06?",
+  "a": "Birmingham City, West Bromwich Albion, Sunderland",
+  "src": "https://en.wikipedia.org/wiki/2005%E2%80%9306_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2006-07 Premier League?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/2006%E2%80%9307_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2006-07 Premier League?",
+  "a": "Chelsea",
+  "src": "https://en.wikipedia.org/wiki/2006%E2%80%9307_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2006-07 Premier League?",
+  "a": "Liverpool",
+  "src": "https://en.wikipedia.org/wiki/2006%E2%80%9307_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 2006-07?",
+  "a": "Sheffield United, Charlton Athletic, Watford",
+  "src": "https://en.wikipedia.org/wiki/2006%E2%80%9307_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2006-07 Premier League?",
+  "a": "Chelsea",
+  "src": "https://en.wikipedia.org/wiki/2006%E2%80%9307_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2006-07 Premier League?",
+  "a": "Didier Drogba",
+  "src": "https://en.wikipedia.org/wiki/2006%E2%80%9307_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "scorers",
+  "q": "Which club was Didier Drogba playing for when he top scored in the 2006-07 Premier League?",
+  "a": "align=center|1",
+  "src": "https://en.wikipedia.org/wiki/2006%E2%80%9307_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2007-08 Premier League?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/2007%E2%80%9308_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2007-08 Premier League?",
+  "a": "Chelsea",
+  "src": "https://en.wikipedia.org/wiki/2007%E2%80%9308_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2007-08 Premier League?",
+  "a": "Arsenal",
+  "src": "https://en.wikipedia.org/wiki/2007%E2%80%9308_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 2007-08?",
+  "a": "Reading, Birmingham City, Derby County",
+  "src": "https://en.wikipedia.org/wiki/2007%E2%80%9308_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2007-08 Premier League?",
+  "a": "Cristiano Ronaldo",
+  "src": "https://en.wikipedia.org/wiki/2007%E2%80%9308_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "scorers",
+  "q": "Which club was Cristiano Ronaldo playing for when he top scored in the 2007-08 Premier League?",
+  "a": "align=center|1",
+  "src": "https://en.wikipedia.org/wiki/2007%E2%80%9308_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2008-09 Premier League?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/2008%E2%80%9309_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2008-09 Premier League?",
+  "a": "Liverpool",
+  "src": "https://en.wikipedia.org/wiki/2008%E2%80%9309_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2008-09 Premier League?",
+  "a": "Chelsea",
+  "src": "https://en.wikipedia.org/wiki/2008%E2%80%9309_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 2008-09?",
+  "a": "Newcastle United, Middlesbrough, West Bromwich Albion",
+  "src": "https://en.wikipedia.org/wiki/2008%E2%80%9309_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2008-09 Premier League?",
+  "a": "Liverpool",
+  "src": "https://en.wikipedia.org/wiki/2008%E2%80%9309_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2008-09 Premier League?",
+  "a": "Nicolas Anelka",
+  "src": "https://en.wikipedia.org/wiki/2008%E2%80%9309_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "scorers",
+  "q": "Which club was Nicolas Anelka playing for when he top scored in the 2008-09 Premier League?",
+  "a": "align=center|1",
+  "src": "https://en.wikipedia.org/wiki/2008%E2%80%9309_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2009-10 Premier League?",
+  "a": "Chelsea",
+  "src": "https://en.wikipedia.org/wiki/2009%E2%80%9310_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2009-10 Premier League?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/2009%E2%80%9310_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2009-10 Premier League?",
+  "a": "Arsenal",
+  "src": "https://en.wikipedia.org/wiki/2009%E2%80%9310_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 2009-10?",
+  "a": "Burnley, Hull City, Portsmouth",
+  "src": "https://en.wikipedia.org/wiki/2009%E2%80%9310_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2009-10 Premier League?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/2009%E2%80%9310_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2009-10 Premier League?",
+  "a": "Didier Drogba",
+  "src": "https://en.wikipedia.org/wiki/2009%E2%80%9310_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 29 of them."
+ },
+ {
+  "tier": "hard",
+  "cat": "scorers",
+  "q": "Which club was Didier Drogba playing for when he top scored in the 2009-10 Premier League?",
+  "a": "Chelsea",
+  "src": "https://en.wikipedia.org/wiki/2009%E2%80%9310_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2010-11 Premier League?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/2010%E2%80%9311_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2010-11 Premier League?",
+  "a": "Chelsea",
+  "src": "https://en.wikipedia.org/wiki/2010%E2%80%9311_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2010-11 Premier League?",
+  "a": "Manchester City",
+  "src": "https://en.wikipedia.org/wiki/2010%E2%80%9311_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 2010-11?",
+  "a": "Birmingham City, Blackpool, West Ham United",
+  "src": "https://en.wikipedia.org/wiki/2010%E2%80%9311_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2010-11 Premier League?",
+  "a": "Chelsea",
+  "src": "https://en.wikipedia.org/wiki/2010%E2%80%9311_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2010-11 Premier League?",
+  "a": "Dimitar Berbatov",
+  "src": "https://en.wikipedia.org/wiki/2010%E2%80%9311_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 18 of them."
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2011-12 Premier League?",
+  "a": "Manchester City",
+  "src": "https://en.wikipedia.org/wiki/2011%E2%80%9312_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2011-12 Premier League?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/2011%E2%80%9312_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2011-12 Premier League?",
+  "a": "Arsenal",
+  "src": "https://en.wikipedia.org/wiki/2011%E2%80%9312_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "The 2011-12 Premier League was decided on goal difference. Which club took it?",
+  "a": "Manchester City",
+  "src": "https://en.wikipedia.org/wiki/2011%E2%80%9312_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 2011-12?",
+  "a": "Bolton Wanderers, Blackburn Rovers, Wolverhampton Wanderers",
+  "src": "https://en.wikipedia.org/wiki/2011%E2%80%9312_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2011-12 Premier League?",
+  "a": "Robin van Persie",
+  "src": "https://en.wikipedia.org/wiki/2011%E2%80%9312_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 30 of them."
+ },
+ {
+  "tier": "hard",
+  "cat": "scorers",
+  "q": "Which club was Robin van Persie playing for when he top scored in the 2011-12 Premier League?",
+  "a": "Arsenal",
+  "src": "https://en.wikipedia.org/wiki/2011%E2%80%9312_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2012-13 Premier League?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/2012%E2%80%9313_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2012-13 Premier League?",
+  "a": "Manchester City",
+  "src": "https://en.wikipedia.org/wiki/2012%E2%80%9313_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2012-13 Premier League?",
+  "a": "Chelsea",
+  "src": "https://en.wikipedia.org/wiki/2012%E2%80%9313_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 2012-13?",
+  "a": "Wigan Athletic, Reading, Queens Park Rangers",
+  "src": "https://en.wikipedia.org/wiki/2012%E2%80%9313_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2012-13 Premier League?",
+  "a": "Manchester City",
+  "src": "https://en.wikipedia.org/wiki/2012%E2%80%9313_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2012-13 Premier League?",
+  "a": "Robin van Persie",
+  "src": "https://en.wikipedia.org/wiki/2012%E2%80%9313_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 26 of them."
+ },
+ {
+  "tier": "hard",
+  "cat": "scorers",
+  "q": "Which club was Robin van Persie playing for when he top scored in the 2012-13 Premier League?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/2012%E2%80%9313_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2013-14 Premier League?",
+  "a": "Manchester City",
+  "src": "https://en.wikipedia.org/wiki/2013%E2%80%9314_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2013-14 Premier League?",
+  "a": "Liverpool",
+  "src": "https://en.wikipedia.org/wiki/2013%E2%80%9314_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2013-14 Premier League?",
+  "a": "Chelsea",
+  "src": "https://en.wikipedia.org/wiki/2013%E2%80%9314_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 2013-14?",
+  "a": "Norwich City, Fulham, Cardiff City",
+  "src": "https://en.wikipedia.org/wiki/2013%E2%80%9314_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2013-14 Premier League?",
+  "a": "Chelsea",
+  "src": "https://en.wikipedia.org/wiki/2013%E2%80%9314_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2013-14 Premier League?",
+  "a": "Luis Suárez",
+  "src": "https://en.wikipedia.org/wiki/2013%E2%80%9314_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 31 of them."
+ },
+ {
+  "tier": "hard",
+  "cat": "scorers",
+  "q": "Which club was Luis Suárez playing for when he top scored in the 2013-14 Premier League?",
+  "a": "Liverpool",
+  "src": "https://en.wikipedia.org/wiki/2013%E2%80%9314_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2014-15 Premier League?",
+  "a": "Chelsea",
+  "src": "https://en.wikipedia.org/wiki/2014%E2%80%9315_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2014-15 Premier League?",
+  "a": "Manchester City",
+  "src": "https://en.wikipedia.org/wiki/2014%E2%80%9315_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2014-15 Premier League?",
+  "a": "Arsenal",
+  "src": "https://en.wikipedia.org/wiki/2014%E2%80%9315_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 2014-15?",
+  "a": "Hull City, Burnley, Queens Park Rangers",
+  "src": "https://en.wikipedia.org/wiki/2014%E2%80%9315_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2014-15 Premier League?",
+  "a": "Manchester City",
+  "src": "https://en.wikipedia.org/wiki/2014%E2%80%9315_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2014-15 Premier League?",
+  "a": "Sergio Agüero",
+  "src": "https://en.wikipedia.org/wiki/2014%E2%80%9315_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 26 of them."
+ },
+ {
+  "tier": "hard",
+  "cat": "scorers",
+  "q": "Which club was Sergio Agüero playing for when he top scored in the 2014-15 Premier League?",
+  "a": "Manchester City",
+  "src": "https://en.wikipedia.org/wiki/2014%E2%80%9315_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2015-16 Premier League?",
+  "a": "Leicester City",
+  "src": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2015-16 Premier League?",
+  "a": "Arsenal",
+  "src": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2015-16 Premier League?",
+  "a": "Tottenham Hotspur",
+  "src": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 2015-16?",
+  "a": "Newcastle United, Norwich City, Aston Villa",
+  "src": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2015-16 Premier League?",
+  "a": "Manchester City",
+  "src": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2015-16 Premier League?",
+  "a": "Tottenham Hotspur",
+  "src": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2015-16 Premier League?",
+  "a": "Harry Kane",
+  "src": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 25 of them."
+ },
+ {
+  "tier": "hard",
+  "cat": "scorers",
+  "q": "Which club was Harry Kane playing for when he top scored in the 2015-16 Premier League?",
+  "a": "Tottenham Hotspur",
+  "src": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2016-17 Premier League?",
+  "a": "Chelsea",
+  "src": "https://en.wikipedia.org/wiki/2016%E2%80%9317_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2016-17 Premier League?",
+  "a": "Tottenham Hotspur",
+  "src": "https://en.wikipedia.org/wiki/2016%E2%80%9317_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2016-17 Premier League?",
+  "a": "Manchester City",
+  "src": "https://en.wikipedia.org/wiki/2016%E2%80%9317_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 2016-17?",
+  "a": "Hull City, Middlesbrough, Sunderland",
+  "src": "https://en.wikipedia.org/wiki/2016%E2%80%9317_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2016-17 Premier League?",
+  "a": "Tottenham Hotspur",
+  "src": "https://en.wikipedia.org/wiki/2016%E2%80%9317_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2016-17 Premier League?",
+  "a": "Tottenham Hotspur",
+  "src": "https://en.wikipedia.org/wiki/2016%E2%80%9317_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2016-17 Premier League?",
+  "a": "Harry Kane",
+  "src": "https://en.wikipedia.org/wiki/2016%E2%80%9317_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 29 of them."
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Which club was Harry Kane playing for when he top scored in the 2016-17 Premier League?",
+  "a": "Tottenham Hotspur",
+  "src": "https://en.wikipedia.org/wiki/2016%E2%80%9317_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2017-18 Premier League?",
+  "a": "Manchester City",
+  "src": "https://en.wikipedia.org/wiki/2017%E2%80%9318_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2017-18 Premier League?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/2017%E2%80%9318_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2017-18 Premier League?",
+  "a": "Tottenham Hotspur",
+  "src": "https://en.wikipedia.org/wiki/2017%E2%80%9318_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 2017-18?",
+  "a": "Swansea City, Stoke City, West Bromwich Albion",
+  "src": "https://en.wikipedia.org/wiki/2017%E2%80%9318_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2017-18 Premier League?",
+  "a": "Mohamed Salah",
+  "src": "https://en.wikipedia.org/wiki/2017%E2%80%9318_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 32 of them."
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Which club was Mohamed Salah playing for when he top scored in the 2017-18 Premier League?",
+  "a": "Liverpool",
+  "src": "https://en.wikipedia.org/wiki/2017%E2%80%9318_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2018-19 Premier League?",
+  "a": "Manchester City",
+  "src": "https://en.wikipedia.org/wiki/2018%E2%80%9319_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2018-19 Premier League?",
+  "a": "Liverpool",
+  "src": "https://en.wikipedia.org/wiki/2018%E2%80%9319_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2018-19 Premier League?",
+  "a": "Chelsea",
+  "src": "https://en.wikipedia.org/wiki/2018%E2%80%9319_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 2018-19?",
+  "a": "Cardiff City, Fulham, Huddersfield Town",
+  "src": "https://en.wikipedia.org/wiki/2018%E2%80%9319_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2018-19 Premier League?",
+  "a": "Liverpool",
+  "src": "https://en.wikipedia.org/wiki/2018%E2%80%9319_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2018-19 Premier League?",
+  "a": "Premier League Golden Boot",
+  "src": "https://en.wikipedia.org/wiki/2018%E2%80%9319_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 21 of them."
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Which club was Premier League Golden Boot playing for when he top scored in the 2018-19 Premier League?",
+  "a": "====Top scorers==== {{multiple image",
+  "src": "https://en.wikipedia.org/wiki/2018%E2%80%9319_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2019-20 Premier League?",
+  "a": "Liverpool",
+  "src": "https://en.wikipedia.org/wiki/2019%E2%80%9320_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2019-20 Premier League?",
+  "a": "Manchester City",
+  "src": "https://en.wikipedia.org/wiki/2019%E2%80%9320_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2019-20 Premier League?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/2019%E2%80%9320_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 2019-20?",
+  "a": "Bournemouth, Watford, Norwich City",
+  "src": "https://en.wikipedia.org/wiki/2019%E2%80%9320_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2019-20 Premier League?",
+  "a": "Manchester City",
+  "src": "https://en.wikipedia.org/wiki/2019%E2%80%9320_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2019-20 Premier League?",
+  "a": "Jamie Vardy",
+  "src": "https://en.wikipedia.org/wiki/2019%E2%80%9320_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 23 of them."
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Which club was Jamie Vardy playing for when he top scored in the 2019-20 Premier League?",
+  "a": "Leicester City",
+  "src": "https://en.wikipedia.org/wiki/2019%E2%80%9320_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2020-21 Premier League?",
+  "a": "Manchester City",
+  "src": "https://en.wikipedia.org/wiki/2020%E2%80%9321_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2020-21 Premier League?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/2020%E2%80%9321_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2020-21 Premier League?",
+  "a": "Liverpool",
+  "src": "https://en.wikipedia.org/wiki/2020%E2%80%9321_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 2020-21?",
+  "a": "Fulham, West Bromwich Albion, Sheffield United",
+  "src": "https://en.wikipedia.org/wiki/2020%E2%80%9321_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2020-21 Premier League?",
+  "a": "Harry Kane",
+  "src": "https://en.wikipedia.org/wiki/2020%E2%80%9321_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 23 of them."
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Which club was Harry Kane playing for when he top scored in the 2020-21 Premier League?",
+  "a": "Tottenham Hotspur",
+  "src": "https://en.wikipedia.org/wiki/2020%E2%80%9321_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2021-22 Premier League?",
+  "a": "Manchester City",
+  "src": "https://en.wikipedia.org/wiki/2021%E2%80%9322_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2021-22 Premier League?",
+  "a": "Liverpool",
+  "src": "https://en.wikipedia.org/wiki/2021%E2%80%9322_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2021-22 Premier League?",
+  "a": "Chelsea",
+  "src": "https://en.wikipedia.org/wiki/2021%E2%80%9322_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 2021-22?",
+  "a": "Burnley, Watford, Norwich City",
+  "src": "https://en.wikipedia.org/wiki/2021%E2%80%9322_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2021-22 Premier League?",
+  "a": "Mohamed Salah",
+  "src": "https://en.wikipedia.org/wiki/2021%E2%80%9322_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 23 of them."
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Which club was Mohamed Salah playing for when he top scored in the 2021-22 Premier League?",
+  "a": "Liverpool",
+  "src": "https://en.wikipedia.org/wiki/2021%E2%80%9322_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2022-23 Premier League?",
+  "a": "Manchester City",
+  "src": "https://en.wikipedia.org/wiki/2022%E2%80%9323_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2022-23 Premier League?",
+  "a": "Arsenal",
+  "src": "https://en.wikipedia.org/wiki/2022%E2%80%9323_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2022-23 Premier League?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/2022%E2%80%9323_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 2022-23?",
+  "a": "Leicester City, Leeds United, Southampton",
+  "src": "https://en.wikipedia.org/wiki/2022%E2%80%9323_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2022-23 Premier League?",
+  "a": "Erling Haaland",
+  "src": "https://en.wikipedia.org/wiki/2022%E2%80%9323_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 36 of them."
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Which club was Erling Haaland playing for when he top scored in the 2022-23 Premier League?",
+  "a": "Manchester City",
+  "src": "https://en.wikipedia.org/wiki/2022%E2%80%9323_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2023-24 Premier League?",
+  "a": "Manchester City",
+  "src": "https://en.wikipedia.org/wiki/2023%E2%80%9324_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2023-24 Premier League?",
+  "a": "Arsenal",
+  "src": "https://en.wikipedia.org/wiki/2023%E2%80%9324_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2023-24 Premier League?",
+  "a": "Liverpool",
+  "src": "https://en.wikipedia.org/wiki/2023%E2%80%9324_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 2023-24?",
+  "a": "Luton Town, Burnley, Sheffield United",
+  "src": "https://en.wikipedia.org/wiki/2023%E2%80%9324_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2023-24 Premier League?",
+  "a": "Arsenal",
+  "src": "https://en.wikipedia.org/wiki/2023%E2%80%9324_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2023-24 Premier League?",
+  "a": "Erling Haaland",
+  "src": "https://en.wikipedia.org/wiki/2023%E2%80%9324_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 27 of them."
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Which club was Erling Haaland playing for when he top scored in the 2023-24 Premier League?",
+  "a": "Manchester City",
+  "src": "https://en.wikipedia.org/wiki/2023%E2%80%9324_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2024-25 Premier League?",
+  "a": "Liverpool",
+  "src": "https://en.wikipedia.org/wiki/2024%E2%80%9325_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2024-25 Premier League?",
+  "a": "Arsenal",
+  "src": "https://en.wikipedia.org/wiki/2024%E2%80%9325_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2024-25 Premier League?",
+  "a": "Manchester City",
+  "src": "https://en.wikipedia.org/wiki/2024%E2%80%9325_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 2024-25?",
+  "a": "Leicester City, Ipswich Town, Southampton",
+  "src": "https://en.wikipedia.org/wiki/2024%E2%80%9325_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2024-25 Premier League?",
+  "a": "Arsenal",
+  "src": "https://en.wikipedia.org/wiki/2024%E2%80%9325_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2024-25 Premier League?",
+  "a": "Mohamed Salah",
+  "src": "https://en.wikipedia.org/wiki/2024%E2%80%9325_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 29 of them."
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Which club was Mohamed Salah playing for when he top scored in the 2024-25 Premier League?",
+  "a": "Liverpool",
+  "src": "https://en.wikipedia.org/wiki/2024%E2%80%9325_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2025-26 Premier League?",
+  "a": "Arsenal",
+  "src": "https://en.wikipedia.org/wiki/2025%E2%80%9326_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2025-26 Premier League?",
+  "a": "Manchester City",
+  "src": "https://en.wikipedia.org/wiki/2025%E2%80%9326_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2025-26 Premier League?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/2025%E2%80%9326_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Premier League in 2025-26?",
+  "a": "West Ham United, Burnley, Wolverhampton Wanderers",
+  "src": "https://en.wikipedia.org/wiki/2025%E2%80%9326_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2025-26 Premier League?",
+  "a": "Manchester City",
+  "src": "https://en.wikipedia.org/wiki/2025%E2%80%9326_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2025-26 Premier League?",
+  "a": "Erling Haaland",
+  "src": "https://en.wikipedia.org/wiki/2025%E2%80%9326_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 27 of them."
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Which club was Erling Haaland playing for when he top scored in the 2025-26 Premier League?",
+  "a": "Manchester City",
+  "src": "https://en.wikipedia.org/wiki/2025%E2%80%9326_Premier_League",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ }
+]

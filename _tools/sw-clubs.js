@@ -29,6 +29,11 @@ for (const d of DIRS) {
   const f = path.join(REPO, "assets", d, "clubs.json");
   if (!fs.existsSync(f)) { console.log("  no deck yet for " + d + ", skipped"); continue; }
   decks.push("assets/" + d + "/clubs.json");
+  /* the question decks go in the same list: a league that has its clubs
+     precached and not its questions is a team picker that opens onto nothing */
+  for (const also of ["index.json", "mc.json"]) {
+    if (fs.existsSync(path.join(REPO, "assets", d, also))) decks.push("assets/" + d + "/" + also);
+  }
   const rows = JSON.parse(fs.readFileSync(f, "utf8"));
   for (const name of Object.keys(rows)) {
     clubs++;

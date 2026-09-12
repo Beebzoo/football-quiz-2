@@ -1,0 +1,113 @@
+[
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which club won the Bundesliga in 2023-24, ending Bayern Munich's run of eleven in a row?",
+  "a": "Bayer Leverkusen",
+  "sub": "They went the whole league season unbeaten doing it.",
+  "src": "https://en.wikipedia.org/wiki/2023%E2%80%9324_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Bayer Leverkusen were runners-up in the league, the cup and the Champions League in 2002. What nickname did that earn them?",
+  "a": "Neverkusen",
+  "src": "https://en.wikipedia.org/wiki/Bayer_04_Leverkusen",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which German club won the UEFA Cup in 1997, beating Inter Milan on penalties in the final?",
+  "a": "Schalke 04",
+  "sub": "The side is still called the Eurofighters.",
+  "src": "https://en.wikipedia.org/wiki/1997_UEFA_Cup_final",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which substitute scored the winning goal for Germany in the 2014 World Cup final, having come through Borussia Dortmund?",
+  "a": "Mario Gotze",
+  "src": "https://en.wikipedia.org/wiki/Mario_G%C3%B6tze",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Borussia Dortmund's team bus was attacked before a Champions League tie in 2017. Which player was injured?",
+  "a": "Marc Bartra",
+  "src": "https://en.wikipedia.org/wiki/Borussia_Dortmund_team_bus_bombing",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which two German clubs met in the 2013 Champions League final at Wembley?",
+  "a": "Bayern Munich and Borussia Dortmund",
+  "src": "https://en.wikipedia.org/wiki/2013_UEFA_Champions_League_final",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which German club was founded by Bayer employees and still carries the company name?",
+  "a": "Bayer Leverkusen",
+  "src": "https://en.wikipedia.org/wiki/Bayer_04_Leverkusen",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Hamburger SV kept a clock in its stadium counting what, until it stopped in 2018?",
+  "a": "The time they had spent in the Bundesliga without ever being relegated",
+  "src": "https://en.wikipedia.org/wiki/Hamburger_SV",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which club won the Bundesliga in 2008-09, its only title, under Felix Magath?",
+  "a": "VfL Wolfsburg",
+  "src": "https://en.wikipedia.org/wiki/2008%E2%80%9309_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which club won the Bundesliga in 1997-98 having been promoted two years earlier?",
+  "a": "1. FC Kaiserslautern",
+  "sub": "Otto Rehhagel took them up and then straight to the title.",
+  "src": "https://en.wikipedia.org/wiki/1._FC_Kaiserslautern",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which Bayern Munich striker scored five goals in nine minutes as a substitute against Wolfsburg in 2015?",
+  "a": "Robert Lewandowski",
+  "src": "https://en.wikipedia.org/wiki/Robert_Lewandowski",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which German club plays in a stadium built inside a former quarry and is famous for its fan culture at Millerntor?",
+  "a": "St Pauli",
+  "src": "https://en.wikipedia.org/wiki/FC_St._Pauli",
+  "conf": "likely",
+  "verdict": "ok"
+ }
+]

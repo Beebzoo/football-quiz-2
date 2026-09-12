@@ -30,6 +30,6 @@
 {"tier":"extreme","cat":"champions","q":"Which club did Manchester United beat on the final day of 1995-96 to seal the title, having been twelve points behind Newcastle in January?","a":"Middlesbrough","src":"https://en.wikipedia.org/wiki/1995%E2%80%9396_FA_Premier_League","conf":"likely"},
 
 {"tier":"ball","cat":"champions","q":"Chasing Manchester United in 1995-96, which Newcastle manager said on television that he would love it if they beat them?","a":"Kevin Keegan","sub":"Love it. He resigned the following January.","src":"https://en.wikipedia.org/wiki/Kevin_Keegan","conf":"sure"},
-{"tier":"ball","cat":"champions","q":"Where were Leicester City's players watching when Chelsea's draw with Tottenham confirmed them as champions in 2016?","a":"At Jamie Vardy's house","sub":"The party was on television before it was on the pitch.","src":"https://en.wikipedia.org/wiki/2015%E2%80%9316_Leicester_City_F.C._season","conf":"likely"},
+{"tier":"ball","cat":"champions","q":"Leicester City were confirmed as champions in 2016 without kicking a ball. Which game decided it?","a":"Chelsea against Tottenham Hotspur","sub":"Spurs led 2-0 and drew 2-2.","src":"https://en.wikipedia.org/wiki/2015%E2%80%9316_Premier_League","conf":"sure"},
 {"tier":"ball","cat":"champions","q":"Which Manchester City goalkeeper was pictured weeping on the pitch after the 2011-12 title was won in stoppage time?","a":"Joe Hart","src":"https://en.wikipedia.org/wiki/2011%E2%80%9312_Manchester_City_F.C._season","conf":"likely"}
 ]

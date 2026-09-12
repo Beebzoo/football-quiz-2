@@ -1,0 +1,116 @@
+[
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which Barcelona striker bit an opponent at the 2014 World Cup, months before the club signed him?",
+  "a": "Luis Suarez",
+  "sub": "He bit Giorgio Chiellini, and served the ban before his debut.",
+  "src": "https://en.wikipedia.org/wiki/Luis_Su%C3%A1rez",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Real Madrid's galactico era began in 2000 with a signing taken from Barcelona. Who was he?",
+  "a": "Luis Figo",
+  "src": "https://en.wikipedia.org/wiki/Lu%C3%ADs_Figo",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "What was thrown at Luis Figo from the Camp Nou crowd when he returned there with Real Madrid?",
+  "a": "A pig's head",
+  "src": "https://en.wikipedia.org/wiki/Lu%C3%ADs_Figo",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which Real Madrid defender headed a stoppage-time equaliser in the 2014 Champions League final?",
+  "a": "Sergio Ramos",
+  "sub": "La Decima, in the ninety-third minute.",
+  "src": "https://en.wikipedia.org/wiki/2014_UEFA_Champions_League_final",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Barcelona overturned a 4-0 deficit against Paris Saint-Germain in 2017. What is that night called?",
+  "a": "La Remontada",
+  "sub": "6-1, with three goals in the last seven minutes.",
+  "src": "https://en.wikipedia.org/wiki/Barcelona_6%E2%80%931_Paris_Saint-Germain",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which club won La Liga in 1999-2000, the only league title in its history?",
+  "a": "Deportivo La Coruna",
+  "sub": "Super Depor, under Javier Irureta.",
+  "src": "https://en.wikipedia.org/wiki/Deportivo_de_La_Coru%C3%B1a",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which club broke Madrid and Barcelona's hold on La Liga in 2013-14 under Diego Simeone?",
+  "a": "Atletico Madrid",
+  "sub": "Sealed with a draw at the Camp Nou on the final day.",
+  "src": "https://en.wikipedia.org/wiki/2013%E2%80%9314_La_Liga",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which goalkeeper captained Real Madrid for a decade and lifted the World Cup for Spain in 2010?",
+  "a": "Iker Casillas",
+  "src": "https://en.wikipedia.org/wiki/Iker_Casillas",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Lionel Messi left Barcelona in 2021 because the club could not register his contract. Which club did he join?",
+  "a": "Paris Saint-Germain",
+  "src": "https://en.wikipedia.org/wiki/Lionel_Messi",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which club did Rafael Benitez manage to two La Liga titles before he joined Liverpool?",
+  "a": "Valencia",
+  "src": "https://en.wikipedia.org/wiki/Rafael_Ben%C3%ADtez",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which Barcelona defender captained the side through the Guardiola years and retired in 2014?",
+  "a": "Carles Puyol",
+  "src": "https://en.wikipedia.org/wiki/Carles_Puyol",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which Spanish club is owned by its members rather than a proprietor, who elect its president?",
+  "a": "Barcelona",
+  "sub": "Real Madrid, Athletic Bilbao and Osasuna are member-owned too.",
+  "src": "https://en.wikipedia.org/wiki/FC_Barcelona",
+  "conf": "sure",
+  "verdict": "ok"
+ }
+]

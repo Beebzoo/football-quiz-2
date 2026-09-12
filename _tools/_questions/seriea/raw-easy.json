@@ -1,0 +1,32 @@
+[
+{"tier":"easy","cat":"grounds","q":"Which two clubs share the San Siro?","a":"AC Milan and Inter Milan","src":"https://en.wikipedia.org/wiki/San_Siro","conf":"sure"},
+{"tier":"easy","cat":"grounds","q":"By what official name is the San Siro also known?","a":"The Stadio Giuseppe Meazza","src":"https://en.wikipedia.org/wiki/San_Siro","conf":"sure"},
+{"tier":"easy","cat":"grounds","q":"Which two Rome clubs share the Stadio Olimpico?","a":"Roma and Lazio","src":"https://en.wikipedia.org/wiki/Stadio_Olimpico","conf":"sure"},
+{"tier":"easy","cat":"grounds","q":"Which club plays at the Stadio Diego Armando Maradona?","a":"Napoli","src":"https://en.wikipedia.org/wiki/Stadio_Diego_Armando_Maradona","conf":"sure"},
+{"tier":"easy","cat":"grounds","q":"Which club moved into its own stadium in Turin in 2011, unusually for Italy?","a":"Juventus","src":"https://en.wikipedia.org/wiki/Allianz_Stadium_(Turin)","conf":"sure"},
+{"tier":"easy","cat":"grounds","q":"Which club plays at the Stadio Artemio Franchi in Florence?","a":"Fiorentina","src":"https://en.wikipedia.org/wiki/Stadio_Artemio_Franchi","conf":"sure"},
+{"tier":"easy","cat":"grounds","q":"Which club plays at the Stadio Luigi Ferraris, sharing it with Sampdoria?","a":"Genoa","src":"https://en.wikipedia.org/wiki/Stadio_Luigi_Ferraris","conf":"sure"},
+
+{"tier":"easy","cat":"records","q":"What is the Italian league title colloquially called?","a":"The Scudetto","sub":"The little shield the champions wear the following season.","src":"https://en.wikipedia.org/wiki/Scudetto","conf":"sure"},
+{"tier":"easy","cat":"records","q":"Which club is nicknamed the Old Lady?","a":"Juventus","src":"https://en.wikipedia.org/wiki/Juventus_FC","conf":"sure"},
+{"tier":"easy","cat":"records","q":"What is the Milan derby called?","a":"The Derby della Madonnina","src":"https://en.wikipedia.org/wiki/Derby_della_Madonnina","conf":"sure"},
+{"tier":"easy","cat":"records","q":"What is the Rome derby between Roma and Lazio called?","a":"The Derby della Capitale","src":"https://en.wikipedia.org/wiki/Derby_della_Capitale","conf":"sure"},
+{"tier":"easy","cat":"records","q":"Which club is nicknamed the Nerazzurri, the black and blues?","a":"Inter Milan","src":"https://en.wikipedia.org/wiki/Inter_Milan","conf":"sure"},
+{"tier":"easy","cat":"records","q":"Which club is nicknamed the Rossoneri, the red and blacks?","a":"AC Milan","src":"https://en.wikipedia.org/wiki/AC_Milan","conf":"sure"},
+{"tier":"easy","cat":"records","q":"What is the Italian defensive system of the 1960s known as?","a":"Catenaccio","src":"https://en.wikipedia.org/wiki/Catenaccio","conf":"sure"},
+{"tier":"easy","cat":"cups","q":"What is the Italian domestic cup called?","a":"The Coppa Italia","src":"https://en.wikipedia.org/wiki/Coppa_Italia","conf":"sure"},
+
+{"tier":"easy","cat":"imports","q":"Which Argentine forward played for Napoli in the 1980s and won them two league titles?","a":"Diego Maradona","src":"https://en.wikipedia.org/wiki/Diego_Maradona","conf":"sure"},
+{"tier":"easy","cat":"imports","q":"Which Swedish striker played for Juventus, Inter Milan and AC Milan?","a":"Zlatan Ibrahimovic","src":"https://en.wikipedia.org/wiki/Zlatan_Ibrahimovi%C4%87","conf":"sure"},
+{"tier":"easy","cat":"imports","q":"Which Portuguese forward joined Juventus from Real Madrid in 2018?","a":"Cristiano Ronaldo","src":"https://en.wikipedia.org/wiki/Cristiano_Ronaldo","conf":"sure"},
+{"tier":"easy","cat":"imports","q":"Which Frenchman joined Juventus from Manchester United in 2012 on a free transfer?","a":"Paul Pogba","src":"https://en.wikipedia.org/wiki/Paul_Pogba","conf":"sure"},
+{"tier":"easy","cat":"imports","q":"Which Italian striker won the treble with Inter Milan in 2010 and later played for AC Milan?","a":"Mario Balotelli","src":"https://en.wikipedia.org/wiki/Mario_Balotelli","conf":"sure"},
+
+{"tier":"easy","cat":"managers","q":"Which manager won the treble with Inter Milan in 2010 before joining Real Madrid?","a":"Jose Mourinho","src":"https://en.wikipedia.org/wiki/2009%E2%80%9310_Inter_Milan_season","conf":"sure"},
+{"tier":"easy","cat":"managers","q":"Which manager took charge of Juventus in 2011 and won the first three of their title run?","a":"Antonio Conte","src":"https://en.wikipedia.org/wiki/Antonio_Conte","conf":"sure"},
+{"tier":"easy","cat":"managers","q":"Which Italian manager won the Champions League twice with AC Milan and later managed Real Madrid?","a":"Carlo Ancelotti","src":"https://en.wikipedia.org/wiki/Carlo_Ancelotti","conf":"sure"},
+
+{"tier":"easy","cat":"records","q":"Which club captained by Francesco Totti for many years plays in Rome?","a":"Roma","src":"https://en.wikipedia.org/wiki/Francesco_Totti","conf":"sure"},
+{"tier":"easy","cat":"records","q":"Which goalkeeper captained Juventus and Italy and played into his forties?","a":"Gianluigi Buffon","src":"https://en.wikipedia.org/wiki/Gianluigi_Buffon","conf":"sure"},
+{"tier":"easy","cat":"records","q":"Which AC Milan defender captained the club for years and played until he was forty-one?","a":"Paolo Maldini","src":"https://en.wikipedia.org/wiki/Paolo_Maldini","conf":"sure"}
+]

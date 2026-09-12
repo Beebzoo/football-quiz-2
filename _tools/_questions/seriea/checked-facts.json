@@ -1,0 +1,1462 @@
+[
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 1995-96 Serie A?",
+  "a": "Milan",
+  "src": "https://en.wikipedia.org/wiki/1995%E2%80%9396_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 1995-96 Serie A?",
+  "a": "Juventus",
+  "src": "https://en.wikipedia.org/wiki/1995%E2%80%9396_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 1995-96 Serie A?",
+  "a": "Lazio",
+  "src": "https://en.wikipedia.org/wiki/1995%E2%80%9396_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Serie A in 1995-96?",
+  "a": "Bari, Torino, Cremonese, Padova",
+  "src": "https://en.wikipedia.org/wiki/1995%E2%80%9396_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 1995-96 Serie A?",
+  "a": "Lazio",
+  "src": "https://en.wikipedia.org/wiki/1995%E2%80%9396_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 1996-97 Serie A?",
+  "a": "Juventus",
+  "src": "https://en.wikipedia.org/wiki/1996%E2%80%9397_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 1996-97 Serie A?",
+  "a": "Parma",
+  "src": "https://en.wikipedia.org/wiki/1996%E2%80%9397_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 1996-97 Serie A?",
+  "a": "Internazionale",
+  "src": "https://en.wikipedia.org/wiki/1996%E2%80%9397_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Serie A in 1996-97?",
+  "a": "Cagliari, Perugia, Hellas Verona, Reggiana",
+  "src": "https://en.wikipedia.org/wiki/1996%E2%80%9397_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 1996-97 Serie A?",
+  "a": "Sampdoria",
+  "src": "https://en.wikipedia.org/wiki/1996%E2%80%9397_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 1997-98 Serie A?",
+  "a": "Juventus",
+  "src": "https://en.wikipedia.org/wiki/1997%E2%80%9398_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 1997-98 Serie A?",
+  "a": "Internazionale",
+  "src": "https://en.wikipedia.org/wiki/1997%E2%80%9398_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 1997-98 Serie A?",
+  "a": "Udinese",
+  "src": "https://en.wikipedia.org/wiki/1997%E2%80%9398_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Serie A in 1997-98?",
+  "a": "Brescia, Atalanta, Lecce, Napoli",
+  "src": "https://en.wikipedia.org/wiki/1997%E2%80%9398_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 1997-98 Serie A?",
+  "a": "Internazionale",
+  "src": "https://en.wikipedia.org/wiki/1997%E2%80%9398_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 1998-99 Serie A?",
+  "a": "Milan",
+  "src": "https://en.wikipedia.org/wiki/1998%E2%80%9399_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 1998-99 Serie A?",
+  "a": "Lazio",
+  "src": "https://en.wikipedia.org/wiki/1998%E2%80%9399_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 1998-99 Serie A?",
+  "a": "Fiorentina",
+  "src": "https://en.wikipedia.org/wiki/1998%E2%80%9399_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Serie A in 1998-99?",
+  "a": "Salernitana, Sampdoria, Vicenza, Empoli",
+  "src": "https://en.wikipedia.org/wiki/1998%E2%80%9399_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 1998-99 Serie A?",
+  "a": "Roma",
+  "src": "https://en.wikipedia.org/wiki/1998%E2%80%9399_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 1998-99 Serie A?",
+  "a": "Lazio",
+  "src": "https://en.wikipedia.org/wiki/1998%E2%80%9399_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 1999-00 Serie A?",
+  "a": "Lazio",
+  "src": "https://en.wikipedia.org/wiki/1999%E2%80%9300_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 1999-00 Serie A?",
+  "a": "Juventus",
+  "src": "https://en.wikipedia.org/wiki/1999%E2%80%9300_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 1999-00 Serie A?",
+  "a": "Milan",
+  "src": "https://en.wikipedia.org/wiki/1999%E2%80%9300_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Serie A in 1999-00?",
+  "a": "Torino, Venezia, Cagliari, Piacenza",
+  "src": "https://en.wikipedia.org/wiki/1999%E2%80%9300_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 1999-00 Serie A?",
+  "a": "Milan",
+  "src": "https://en.wikipedia.org/wiki/1999%E2%80%9300_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 1999-00 Serie A?",
+  "a": "Juventus",
+  "src": "https://en.wikipedia.org/wiki/1999%E2%80%9300_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2000-01 Serie A?",
+  "a": "Roma",
+  "src": "https://en.wikipedia.org/wiki/2000%E2%80%9301_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2000-01 Serie A?",
+  "a": "Juventus",
+  "src": "https://en.wikipedia.org/wiki/2000%E2%80%9301_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2000-01 Serie A?",
+  "a": "Lazio",
+  "src": "https://en.wikipedia.org/wiki/2000%E2%80%9301_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Serie A in 2000-01?",
+  "a": "Reggina, Vicenza, Napoli, Bari",
+  "src": "https://en.wikipedia.org/wiki/2000%E2%80%9301_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2000-01 Serie A?",
+  "a": "Juventus",
+  "src": "https://en.wikipedia.org/wiki/2000%E2%80%9301_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2001-02 Serie A?",
+  "a": "Juventus",
+  "src": "https://en.wikipedia.org/wiki/2001%E2%80%9302_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2001-02 Serie A?",
+  "a": "Roma",
+  "src": "https://en.wikipedia.org/wiki/2001%E2%80%9302_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2001-02 Serie A?",
+  "a": "Internazionale",
+  "src": "https://en.wikipedia.org/wiki/2001%E2%80%9302_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Serie A in 2001-02?",
+  "a": "Hellas Verona, Lecce, Fiorentina, Venezia",
+  "src": "https://en.wikipedia.org/wiki/2001%E2%80%9302_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2002-03 Serie A?",
+  "a": "Juventus",
+  "src": "https://en.wikipedia.org/wiki/2002%E2%80%9303_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2002-03 Serie A?",
+  "a": "Internazionale",
+  "src": "https://en.wikipedia.org/wiki/2002%E2%80%9303_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2002-03 Serie A?",
+  "a": "Milan",
+  "src": "https://en.wikipedia.org/wiki/2002%E2%80%9303_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Serie A in 2002-03?",
+  "a": "Atalanta, Piacenza, Como, Torino",
+  "src": "https://en.wikipedia.org/wiki/2002%E2%80%9303_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2003-04 Serie A?",
+  "a": "Milan",
+  "src": "https://en.wikipedia.org/wiki/2003%E2%80%9304_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2003-04 Serie A?",
+  "a": "Roma",
+  "src": "https://en.wikipedia.org/wiki/2003%E2%80%9304_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2003-04 Serie A?",
+  "a": "Juventus",
+  "src": "https://en.wikipedia.org/wiki/2003%E2%80%9304_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Serie A in 2003-04?",
+  "a": "Perugia, Modena, Empoli, Ancona",
+  "src": "https://en.wikipedia.org/wiki/2003%E2%80%9304_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2003-04 Serie A?",
+  "a": "Roma",
+  "src": "https://en.wikipedia.org/wiki/2003%E2%80%9304_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2003-04 Serie A?",
+  "a": "Roma",
+  "src": "https://en.wikipedia.org/wiki/2003%E2%80%9304_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Serie A in 2004-05?",
+  "a": "Bologna, Brescia, Atalanta",
+  "src": "https://en.wikipedia.org/wiki/2004%E2%80%9305_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2005-06 Serie A?",
+  "a": "Inter Milan",
+  "src": "https://en.wikipedia.org/wiki/2005%E2%80%9306_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Serie A in 2005-06?",
+  "a": "Juventus, Lecce, Treviso",
+  "src": "https://en.wikipedia.org/wiki/2005%E2%80%9306_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2005-06 Serie A?",
+  "a": "Milan",
+  "src": "https://en.wikipedia.org/wiki/2005%E2%80%9306_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2005-06 Serie A?",
+  "a": "Juventus",
+  "src": "https://en.wikipedia.org/wiki/2005%E2%80%9306_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2006-07 Serie A?",
+  "a": "Internazionale",
+  "src": "https://en.wikipedia.org/wiki/2006%E2%80%9307_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2006-07 Serie A?",
+  "a": "Roma",
+  "src": "https://en.wikipedia.org/wiki/2006%E2%80%9307_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2006-07 Serie A?",
+  "a": "Fiorentina",
+  "src": "https://en.wikipedia.org/wiki/2006%E2%80%9307_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Serie A in 2006-07?",
+  "a": "Chievo, Ascoli, Messina",
+  "src": "https://en.wikipedia.org/wiki/2006%E2%80%9307_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2006-07 Serie A?",
+  "a": "Fiorentina",
+  "src": "https://en.wikipedia.org/wiki/2006%E2%80%9307_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2007-08 Serie A?",
+  "a": "Internazionale",
+  "src": "https://en.wikipedia.org/wiki/2007%E2%80%9308_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2007-08 Serie A?",
+  "a": "Roma",
+  "src": "https://en.wikipedia.org/wiki/2007%E2%80%9308_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2007-08 Serie A?",
+  "a": "Juventus",
+  "src": "https://en.wikipedia.org/wiki/2007%E2%80%9308_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Serie A in 2007-08?",
+  "a": "Empoli, Parma, Livorno",
+  "src": "https://en.wikipedia.org/wiki/2007%E2%80%9308_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2007-08 Serie A?",
+  "a": "Roma",
+  "src": "https://en.wikipedia.org/wiki/2007%E2%80%9308_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2008-09 Serie A?",
+  "a": "Internazionale",
+  "src": "https://en.wikipedia.org/wiki/2008%E2%80%9309_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2008-09 Serie A?",
+  "a": "Milan",
+  "src": "https://en.wikipedia.org/wiki/2008%E2%80%9309_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2008-09 Serie A?",
+  "a": "Juventus",
+  "src": "https://en.wikipedia.org/wiki/2008%E2%80%9309_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Serie A in 2008-09?",
+  "a": "Torino, Reggina, Lecce",
+  "src": "https://en.wikipedia.org/wiki/2008%E2%80%9309_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2009-10 Serie A?",
+  "a": "Internazionale",
+  "src": "https://en.wikipedia.org/wiki/2009%E2%80%9310_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2009-10 Serie A?",
+  "a": "Roma",
+  "src": "https://en.wikipedia.org/wiki/2009%E2%80%9310_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2009-10 Serie A?",
+  "a": "Milan",
+  "src": "https://en.wikipedia.org/wiki/2009%E2%80%9310_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Serie A in 2009-10?",
+  "a": "Atalanta, Siena, Livorno",
+  "src": "https://en.wikipedia.org/wiki/2009%E2%80%9310_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2010-11 Serie A?",
+  "a": "Milan",
+  "src": "https://en.wikipedia.org/wiki/2010%E2%80%9311_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2010-11 Serie A?",
+  "a": "Internazionale",
+  "src": "https://en.wikipedia.org/wiki/2010%E2%80%9311_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2010-11 Serie A?",
+  "a": "Napoli",
+  "src": "https://en.wikipedia.org/wiki/2010%E2%80%9311_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Serie A in 2010-11?",
+  "a": "Sampdoria, Brescia, Bari",
+  "src": "https://en.wikipedia.org/wiki/2010%E2%80%9311_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2010-11 Serie A?",
+  "a": "Internazionale",
+  "src": "https://en.wikipedia.org/wiki/2010%E2%80%9311_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2011-12 Serie A?",
+  "a": "Juventus",
+  "src": "https://en.wikipedia.org/wiki/2011%E2%80%9312_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2011-12 Serie A?",
+  "a": "Milan",
+  "src": "https://en.wikipedia.org/wiki/2011%E2%80%9312_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2011-12 Serie A?",
+  "a": "Udinese",
+  "src": "https://en.wikipedia.org/wiki/2011%E2%80%9312_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Serie A in 2011-12?",
+  "a": "Lecce, Novara, Cesena",
+  "src": "https://en.wikipedia.org/wiki/2011%E2%80%9312_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2011-12 Serie A?",
+  "a": "Milan",
+  "src": "https://en.wikipedia.org/wiki/2011%E2%80%9312_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2012-13 Serie A?",
+  "a": "Juventus",
+  "src": "https://en.wikipedia.org/wiki/2012%E2%80%9313_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2012-13 Serie A?",
+  "a": "Napoli",
+  "src": "https://en.wikipedia.org/wiki/2012%E2%80%9313_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2012-13 Serie A?",
+  "a": "Milan",
+  "src": "https://en.wikipedia.org/wiki/2012%E2%80%9313_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Serie A in 2012-13?",
+  "a": "Siena, Palermo, Pescara",
+  "src": "https://en.wikipedia.org/wiki/2012%E2%80%9313_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2012-13 Serie A?",
+  "a": "Napoli",
+  "src": "https://en.wikipedia.org/wiki/2012%E2%80%9313_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2013-14 Serie A?",
+  "a": "Juventus",
+  "src": "https://en.wikipedia.org/wiki/2013%E2%80%9314_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2013-14 Serie A?",
+  "a": "Roma",
+  "src": "https://en.wikipedia.org/wiki/2013%E2%80%9314_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2013-14 Serie A?",
+  "a": "Napoli",
+  "src": "https://en.wikipedia.org/wiki/2013%E2%80%9314_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Serie A in 2013-14?",
+  "a": "Catania, Bologna, Livorno",
+  "src": "https://en.wikipedia.org/wiki/2013%E2%80%9314_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2014-15 Serie A?",
+  "a": "Juventus",
+  "src": "https://en.wikipedia.org/wiki/2014%E2%80%9315_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2014-15 Serie A?",
+  "a": "Roma",
+  "src": "https://en.wikipedia.org/wiki/2014%E2%80%9315_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2014-15 Serie A?",
+  "a": "Lazio",
+  "src": "https://en.wikipedia.org/wiki/2014%E2%80%9315_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Serie A in 2014-15?",
+  "a": "Cagliari, Parma, Cesena",
+  "src": "https://en.wikipedia.org/wiki/2014%E2%80%9315_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2015-16 Serie A?",
+  "a": "Juventus",
+  "src": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2015-16 Serie A?",
+  "a": "Napoli",
+  "src": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2015-16 Serie A?",
+  "a": "Roma",
+  "src": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Serie A in 2015-16?",
+  "a": "Carpi, Frosinone, Hellas Verona",
+  "src": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2015-16 Serie A?",
+  "a": "Roma",
+  "src": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2016-17 Serie A?",
+  "a": "Juventus",
+  "src": "https://en.wikipedia.org/wiki/2016%E2%80%9317_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2016-17 Serie A?",
+  "a": "Roma",
+  "src": "https://en.wikipedia.org/wiki/2016%E2%80%9317_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2016-17 Serie A?",
+  "a": "Napoli",
+  "src": "https://en.wikipedia.org/wiki/2016%E2%80%9317_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Serie A in 2016-17?",
+  "a": "Empoli, Palermo, Pescara",
+  "src": "https://en.wikipedia.org/wiki/2016%E2%80%9317_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2016-17 Serie A?",
+  "a": "Napoli",
+  "src": "https://en.wikipedia.org/wiki/2016%E2%80%9317_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2017-18 Serie A?",
+  "a": "Juventus",
+  "src": "https://en.wikipedia.org/wiki/2017%E2%80%9318_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2017-18 Serie A?",
+  "a": "Napoli",
+  "src": "https://en.wikipedia.org/wiki/2017%E2%80%9318_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2017-18 Serie A?",
+  "a": "Roma",
+  "src": "https://en.wikipedia.org/wiki/2017%E2%80%9318_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Serie A in 2017-18?",
+  "a": "Crotone, Hellas Verona, Benevento",
+  "src": "https://en.wikipedia.org/wiki/2017%E2%80%9318_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2017-18 Serie A?",
+  "a": "Lazio",
+  "src": "https://en.wikipedia.org/wiki/2017%E2%80%9318_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2018-19 Serie A?",
+  "a": "Juventus",
+  "src": "https://en.wikipedia.org/wiki/2018%E2%80%9319_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2018-19 Serie A?",
+  "a": "Napoli",
+  "src": "https://en.wikipedia.org/wiki/2018%E2%80%9319_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2018-19 Serie A?",
+  "a": "Atalanta",
+  "src": "https://en.wikipedia.org/wiki/2018%E2%80%9319_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Serie A in 2018-19?",
+  "a": "Empoli, Frosinone, Chievo",
+  "src": "https://en.wikipedia.org/wiki/2018%E2%80%9319_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2018-19 Serie A?",
+  "a": "Atalanta",
+  "src": "https://en.wikipedia.org/wiki/2018%E2%80%9319_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2019-20 Serie A?",
+  "a": "Juventus",
+  "src": "https://en.wikipedia.org/wiki/2019%E2%80%9320_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2019-20 Serie A?",
+  "a": "Internazionale",
+  "src": "https://en.wikipedia.org/wiki/2019%E2%80%9320_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2019-20 Serie A?",
+  "a": "Atalanta",
+  "src": "https://en.wikipedia.org/wiki/2019%E2%80%9320_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Serie A in 2019-20?",
+  "a": "Lecce, Brescia, SPAL",
+  "src": "https://en.wikipedia.org/wiki/2019%E2%80%9320_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2019-20 Serie A?",
+  "a": "Atalanta",
+  "src": "https://en.wikipedia.org/wiki/2019%E2%80%9320_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2019-20 Serie A?",
+  "a": "Internazionale",
+  "src": "https://en.wikipedia.org/wiki/2019%E2%80%9320_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2020-21 Serie A?",
+  "a": "Inter Milan",
+  "src": "https://en.wikipedia.org/wiki/2020%E2%80%9321_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2020-21 Serie A?",
+  "a": "Milan",
+  "src": "https://en.wikipedia.org/wiki/2020%E2%80%9321_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2020-21 Serie A?",
+  "a": "Atalanta",
+  "src": "https://en.wikipedia.org/wiki/2020%E2%80%9321_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Serie A in 2020-21?",
+  "a": "Benevento, Crotone, Parma",
+  "src": "https://en.wikipedia.org/wiki/2020%E2%80%9321_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2020-21 Serie A?",
+  "a": "Atalanta",
+  "src": "https://en.wikipedia.org/wiki/2020%E2%80%9321_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2021-22 Serie A?",
+  "a": "Milan",
+  "src": "https://en.wikipedia.org/wiki/2021%E2%80%9322_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2021-22 Serie A?",
+  "a": "Inter Milan",
+  "src": "https://en.wikipedia.org/wiki/2021%E2%80%9322_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2021-22 Serie A?",
+  "a": "Napoli",
+  "src": "https://en.wikipedia.org/wiki/2021%E2%80%9322_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Serie A in 2021-22?",
+  "a": "Cagliari, Genoa, Venezia",
+  "src": "https://en.wikipedia.org/wiki/2021%E2%80%9322_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2021-22 Serie A?",
+  "a": "Inter Milan",
+  "src": "https://en.wikipedia.org/wiki/2021%E2%80%9322_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2022-23 Serie A?",
+  "a": "Napoli",
+  "src": "https://en.wikipedia.org/wiki/2022%E2%80%9323_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2022-23 Serie A?",
+  "a": "Lazio",
+  "src": "https://en.wikipedia.org/wiki/2022%E2%80%9323_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2022-23 Serie A?",
+  "a": "Inter Milan",
+  "src": "https://en.wikipedia.org/wiki/2022%E2%80%9323_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Serie A in 2022-23?",
+  "a": "Spezia, Cremonese, Sampdoria",
+  "src": "https://en.wikipedia.org/wiki/2022%E2%80%9323_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2023-24 Serie A?",
+  "a": "Inter Milan",
+  "src": "https://en.wikipedia.org/wiki/2023%E2%80%9324_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2023-24 Serie A?",
+  "a": "Milan",
+  "src": "https://en.wikipedia.org/wiki/2023%E2%80%9324_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2023-24 Serie A?",
+  "a": "Juventus",
+  "src": "https://en.wikipedia.org/wiki/2023%E2%80%9324_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Serie A in 2023-24?",
+  "a": "Frosinone, Sassuolo, Salernitana",
+  "src": "https://en.wikipedia.org/wiki/2023%E2%80%9324_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2024-25 Serie A?",
+  "a": "Napoli",
+  "src": "https://en.wikipedia.org/wiki/2024%E2%80%9325_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2024-25 Serie A?",
+  "a": "Inter Milan",
+  "src": "https://en.wikipedia.org/wiki/2024%E2%80%9325_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2024-25 Serie A?",
+  "a": "Atalanta",
+  "src": "https://en.wikipedia.org/wiki/2024%E2%80%9325_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Serie A in 2024-25?",
+  "a": "Empoli, Venezia, Monza",
+  "src": "https://en.wikipedia.org/wiki/2024%E2%80%9325_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2024-25 Serie A?",
+  "a": "Inter Milan",
+  "src": "https://en.wikipedia.org/wiki/2024%E2%80%9325_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2025-26 Serie A?",
+  "a": "Inter Milan",
+  "src": "https://en.wikipedia.org/wiki/2025%E2%80%9326_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2025-26 Serie A?",
+  "a": "Napoli",
+  "src": "https://en.wikipedia.org/wiki/2025%E2%80%9326_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2025-26 Serie A?",
+  "a": "Roma",
+  "src": "https://en.wikipedia.org/wiki/2025%E2%80%9326_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Serie A in 2025-26?",
+  "a": "Cremonese, Hellas Verona, Pisa",
+  "src": "https://en.wikipedia.org/wiki/2025%E2%80%9326_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2025-26 Serie A?",
+  "a": "Como",
+  "src": "https://en.wikipedia.org/wiki/2025%E2%80%9326_Serie_A",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ }
+]

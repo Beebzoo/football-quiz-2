@@ -57,9 +57,9 @@
  {
   "tier": "normal",
   "cat": "managers",
-  "q": "Which manager won the Premier League with Chelsea in 2014-15 and 2016-17 under different owners of the dugout?",
-  "a": "Jose Mourinho in 2014-15 and Antonio Conte in 2016-17",
-  "src": "https://en.wikipedia.org/wiki/Chelsea_F.C.",
+  "q": "Which manager won the 2014-15 Premier League with Chelsea in his second spell at the club?",
+  "a": "Jose Mourinho",
+  "src": "https://en.wikipedia.org/wiki/2014%E2%80%9315_Premier_League",
   "conf": "sure",
   "verdict": "ok"
  },
@@ -130,12 +130,11 @@
  {
   "tier": "hard",
   "cat": "managers",
-  "q": "Which manager won the Premier League with Manchester United in 2012-13, Ferguson's last season, as his assistant?",
-  "a": "Mike Phelan was his assistant",
-  "src": "https://en.wikipedia.org/wiki/Mike_Phelan",
-  "conf": "likely",
-  "verdict": "review",
-  "note": "season 2012-13 not in source"
+  "q": "Which striker did Manchester United sign in 2012 to help win Ferguson's final title?",
+  "a": "Robin van Persie",
+  "src": "https://en.wikipedia.org/wiki/Robin_van_Persie",
+  "conf": "sure",
+  "verdict": "ok"
  },
  {
   "tier": "hard",
@@ -168,10 +167,10 @@
  {
   "tier": "extreme",
   "cat": "managers",
-  "q": "Which Frenchman managed Newcastle United between 2010 and 2015?",
+  "q": "Which manager took charge of Newcastle United in 2010 and left for Crystal Palace five years later?",
   "a": "Alan Pardew",
   "src": "https://en.wikipedia.org/wiki/Alan_Pardew",
-  "conf": "likely",
+  "conf": "sure",
   "verdict": "ok"
  },
  {

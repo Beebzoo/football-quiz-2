@@ -163,6 +163,43 @@ function giveaway(row) {
   return null;
 }
 
+/* ---------- the hedge check ----------
+   MY OWN FAILURE MODE, WRITTEN DOWN SO IT IS CAUGHT RATHER THAN REMEMBERED.
+   Writing the BALL tier from memory, I twice produced rows whose "answer"
+   argued with the question instead of answering it: "Nobody. It was Tim Howard
+   for Everton", "Carlos Tevez went the other way, City to United is wrong".
+   Every one of them came from being unsure of the fact and hedging rather than
+   dropping the question. A reader cannot judge an answer like that in a second,
+   which is the one thing every row in this bank has to allow, so they are
+   flagged wherever they come from. */
+const HEDGE = [
+  /^nobody\b/i, /^none\b/i, /^nothing\b/i, /^neither\b/i,
+  /\b(is|was|were|did|does|do|had|has) not\b/i, /\bisn't\b/i, /\bdidn't\b/i,
+  /\bis wrong\b/i, /\bnot the\b[^.]*\bbut\b/i, /\bwent the other way\b/i,
+  /\bthe famous (one|answer)\b/i, /\bactually\b/i, /\bnot that far\b/i,
+  /\bprobably\b/i, /\bmay have\b/i, /\bthought to be\b/i, /\bnot quite\b/i,
+  /\bdrop this\b/i, /\bthe correct answer\b/i, /\bof the sort\b/i,
+  /\bthen\b/i,      // "Conte then Allegri" is a sequence, not an answer
+];
+function hedged(row) {
+  const a = String(row.a);
+  for (const re of HEDGE) if (re.test(a)) return "the answer hedges instead of answering";
+  /* an answer long enough to be a paragraph is an explanation, not an answer */
+  if (a.split(/\s+/).length > 14) return "the answer is an explanation, not an answer";
+  /* A YEAR THAT CANNOT BE RIGHT. "finished second in 1002" was a typo for 2002
+     and nothing else caught it: the season check only looks for a 2002-03
+     shape, and 1002 on its own is a perfectly findable string. Football in
+     this bank runs from the 1850s, so anything earlier is a slip of the hand. */
+  /* ODDS ARE NOT YEARS. Leicester being 5000-1 tripped this immediately, so a
+     four figure number attached to a hyphen and another number is left alone:
+     that is a price, or a scoreline, or a range. */
+  const text = String(row.q + " " + a);
+  const years = (text.match(/(?:^|[^\d-])(\d{4})(?![\d-])/g) || [])
+    .map(m => m.replace(/[^\d]/g, ""));
+  for (const y of years) if (+y < 1850 || +y > 2100) return "the year " + y + " cannot be right";
+  return null;
+}
+
 (async () => {
   if (!fs.existsSync(SRCDIR)) { console.error("no folder at " + path.relative(REPO, SRCDIR)); process.exit(1); }
   const files = fs.readdirSync(SRCDIR).filter(f => /^raw-.*\.json$/.test(f)).sort();
@@ -178,6 +215,8 @@ function giveaway(row) {
       const problems = [];
       const g = giveaway(row);
       if (g) problems.push(g);
+      const h = hedged(row);
+      if (h) problems.push(h);
       if (!row.src) problems.push("no source cited");
       else {
         const title = decodeURIComponent(String(row.src).replace(/^https?:\/\/en\.wikipedia\.org\/wiki\//, "")).replace(/_/g, " ");

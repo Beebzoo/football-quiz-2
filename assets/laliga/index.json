@@ -1,0 +1,857 @@
+{
+ "easy": [
+  {
+   "q": "Which club plays its home games at the Camp Nou?",
+   "a": "Barcelona",
+   "cat": "grounds"
+  },
+  {
+   "q": "Which Basque club plays at San Mames?",
+   "a": "Athletic Bilbao",
+   "cat": "grounds"
+  },
+  {
+   "q": "Which club moved into the Metropolitano in 2017?",
+   "a": "Atletico Madrid",
+   "sub": "They left the Vicente Calderon behind.",
+   "cat": "grounds"
+  },
+  {
+   "q": "Which club plays at the Mestalla?",
+   "a": "Valencia",
+   "cat": "grounds"
+  },
+  {
+   "q": "Which Seville club plays at the Ramon Sanchez-Pizjuan?",
+   "a": "Sevilla",
+   "cat": "grounds"
+  },
+  {
+   "q": "Which club plays at the Benito Villamarin in Seville?",
+   "a": "Real Betis",
+   "cat": "grounds"
+  },
+  {
+   "q": "Which club plays at the Reale Arena in San Sebastian?",
+   "a": "Real Sociedad",
+   "cat": "grounds"
+  },
+  {
+   "q": "What is the match between Real Madrid and Barcelona called?",
+   "a": "El Clasico",
+   "cat": "records",
+   "club": "real-madrid"
+  },
+  {
+   "q": "Which club contests the Basque derby with Real Sociedad?",
+   "a": "Athletic Bilbao",
+   "cat": "records",
+   "club": "real-sociedad"
+  },
+  {
+   "q": "Which Spanish club has a policy of fielding only Basque players?",
+   "a": "Athletic Bilbao",
+   "cat": "records"
+  },
+  {
+   "q": "Which Argentine spent his entire European club career at Barcelona before leaving in 2021?",
+   "a": "Lionel Messi",
+   "cat": "imports",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which Portuguese forward joined Real Madrid from Manchester United in 2009?",
+   "a": "Cristiano Ronaldo",
+   "cat": "imports",
+   "club": "real-madrid"
+  },
+  {
+   "q": "Which French striker joined Real Madrid from Lyon in 2009 and stayed for over a decade?",
+   "a": "Karim Benzema",
+   "cat": "imports",
+   "club": "real-madrid"
+  },
+  {
+   "q": "Which Uruguayan striker joined Barcelona from Liverpool in 2014?",
+   "a": "Luis Suarez",
+   "cat": "imports",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which Brazilian forward left Barcelona for Paris Saint-Germain in 2017?",
+   "a": "Neymar",
+   "cat": "imports",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which Croatian midfielder joined Real Madrid from Tottenham Hotspur in 2012?",
+   "a": "Luka Modric",
+   "cat": "imports",
+   "club": "real-madrid"
+  },
+  {
+   "q": "Which Welsh winger joined Real Madrid from Tottenham Hotspur in 2013?",
+   "a": "Gareth Bale",
+   "cat": "imports",
+   "club": "real-madrid"
+  },
+  {
+   "q": "Which manager led Barcelona from 2008 to 2012 and later managed Manchester City?",
+   "a": "Pep Guardiola",
+   "cat": "managers",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which Argentine has managed Atletico Madrid since 2011?",
+   "a": "Diego Simeone",
+   "cat": "managers"
+  },
+  {
+   "q": "Which Frenchman managed Real Madrid to three Champions League titles in a row?",
+   "a": "Zinedine Zidane",
+   "cat": "managers",
+   "club": "real-madrid"
+  },
+  {
+   "q": "What is the name of the Spanish domestic cup?",
+   "a": "The Copa del Rey",
+   "cat": "cups"
+  },
+  {
+   "q": "Which Spanish club has won the Europa League more than any other?",
+   "a": "Sevilla",
+   "cat": "europe"
+  },
+  {
+   "q": "Which Barcelona forward won the Ballon d'Or a record number of times?",
+   "a": "Lionel Messi",
+   "cat": "scorers",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which club is known as Barca?",
+   "a": "Barcelona",
+   "cat": "records"
+  }
+ ],
+ "normal": [
+  {
+   "q": "Which club won the 1995-96 La Liga?",
+   "a": "Atlético Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the 1996-97 La Liga?",
+   "a": "Real Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the 1998-99 La Liga?",
+   "a": "Barcelona",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the 2000-01 La Liga?",
+   "a": "Real Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the 2001-02 La Liga?",
+   "a": "Valencia",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the 2003-04 La Liga?",
+   "a": "Valencia",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the 2005-06 La Liga?",
+   "a": "Barcelona",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the 2006-07 La Liga?",
+   "a": "Real Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the 2008-09 La Liga?",
+   "a": "Barcelona",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the 2010-11 La Liga?",
+   "a": "Barcelona",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the 2011-12 La Liga?",
+   "a": "Real Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the 2013-14 La Liga?",
+   "a": "Atlético Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2016-17 La Liga?",
+   "a": "Barcelona",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2017-18 La Liga?",
+   "a": "Atlético Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2018-19 La Liga?",
+   "a": "Atlético Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2019-20 La Liga?",
+   "a": "Barcelona",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2020-21 La Liga?",
+   "a": "Real Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2021-22 La Liga?",
+   "a": "Barcelona",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2022-23 La Liga?",
+   "a": "Real Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2023-24 La Liga?",
+   "a": "Barcelona",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2024-25 La Liga?",
+   "a": "Real Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2025-26 La Liga?",
+   "a": "Real Madrid",
+   "cat": "champions"
+  }
+ ],
+ "hard": [
+  {
+   "q": "Which club finished second in the 1995-96 La Liga?",
+   "a": "Valencia CF",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 1996-97 La Liga?",
+   "a": "FC Barcelona",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 1997-98 La Liga?",
+   "a": "Athletic Bilbao",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 1998-99 La Liga?",
+   "a": "Real Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2000-01 La Liga?",
+   "a": "Deportivo La Coruña",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2001-02 La Liga?",
+   "a": "Deportivo La Coruña",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2002-03 La Liga?",
+   "a": "Real Sociedad",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2003-04 La Liga?",
+   "a": "Barcelona",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2004-05 La Liga?",
+   "a": "Real Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2005-06 La Liga?",
+   "a": "Real Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2007-08 La Liga?",
+   "a": "Villarreal",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2008-09 La Liga?",
+   "a": "Real Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2009-10 La Liga?",
+   "a": "Real Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2010-11 La Liga?",
+   "a": "Real Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2011-12 La Liga?",
+   "a": "Barcelona",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2012-13 La Liga?",
+   "a": "Real Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2013-14 La Liga?",
+   "a": "Barcelona",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2014-15 La Liga?",
+   "a": "Real Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2015-16 La Liga?",
+   "a": "Real Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished third in the 2016-17 La Liga?",
+   "a": "Atlético&nbsp;Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the La Liga in 2016-17?",
+   "a": "Sporting Gijón, Osasuna, Granada",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2017-18 La Liga?",
+   "a": "Real Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the La Liga in 2017-18?",
+   "a": "Deportivo La Coruña, Las Palmas, Málaga",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2018-19 La Liga?",
+   "a": "Real Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the La Liga in 2018-19?",
+   "a": "Girona, Huesca, Rayo Vallecano",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2019-20 La Liga?",
+   "a": "Atlético Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the La Liga in 2019-20?",
+   "a": "Leganés, Mallorca, Espanyol",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2020-21 La Liga?",
+   "a": "Barcelona",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the La Liga in 2020-21?",
+   "a": "Huesca, Valladolid, Eibar",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2021-22 La Liga?",
+   "a": "Atlético Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the La Liga in 2021-22?",
+   "a": "Granada, Levante, Alavés",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2022-23 La Liga?",
+   "a": "Atlético Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the La Liga in 2022-23?",
+   "a": "Valladolid, Espanyol, Elche",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2023-24 La Liga?",
+   "a": "Girona",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the La Liga in 2023-24?",
+   "a": "Cádiz, Almería, Granada",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2024-25 La Liga?",
+   "a": "Atlético Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the La Liga in 2024-25?",
+   "a": "Leganés, Las Palmas, Valladolid",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2025-26 La Liga?",
+   "a": "Villarreal",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the La Liga in 2025-26?",
+   "a": "Mallorca, Girona, Real Oviedo",
+   "cat": "relegation"
+  }
+ ],
+ "extreme": [
+  {
+   "q": "Which club finished third in the 1995-96 La Liga?",
+   "a": "FC Barcelona",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the La Liga in 1995-96?",
+   "a": "Albacete Balompié, UD Salamanca",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club scored the most goals in the 1995-96 La Liga?",
+   "a": "Valencia CF",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 1996-97 La Liga?",
+   "a": "Betis",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the La Liga in 1996-97?",
+   "a": "Rayo Vallecano, CF Extremadura, Sevilla FC, CD Logroñés",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club scored the most goals in the 1996-97 La Liga?",
+   "a": "FC Barcelona",
+   "cat": "records"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 1996-97 La Liga?",
+   "a": "Deportivo de La Coruña",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 1997-98 La Liga?",
+   "a": "Real Sociedad",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the La Liga in 1997-98?",
+   "a": "Compostela, Mérida, Sporting Gijón",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club scored the most goals in the 1997-98 La Liga?",
+   "a": "Atlético Madrid",
+   "cat": "records"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 1997-98 La Liga?",
+   "a": "Espanyol",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 1998-99 La Liga?",
+   "a": "Mallorca",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the La Liga in 1998-99?",
+   "a": "Extremadura, Villarreal, Tenerife, Salamanca",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 1998-99 La Liga?",
+   "a": "Mallorca",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 2000-01 La Liga?",
+   "a": "Mallorca",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the La Liga in 2000-01?",
+   "a": "Oviedo, Racing Santander, Numancia",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 2000-01 La Liga?",
+   "a": "Valencia",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 2001-02 La Liga?",
+   "a": "Real Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the La Liga in 2001-02?",
+   "a": "Las Palmas, Tenerife, Zaragoza",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club scored the most goals in the 2001-02 La Liga?",
+   "a": "Real Madrid",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 2002-03 La Liga?",
+   "a": "Deportivo La Coruña",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the La Liga in 2002-03?",
+   "a": "Recreativo, Alavés, Rayo Vallecano",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 2002-03 La Liga?",
+   "a": "Valencia",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 2003-04 La Liga?",
+   "a": "Deportivo La Coruña",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the La Liga in 2003-04?",
+   "a": "Valladolid, Celta de Vigo, Murcia",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club scored the most goals in the 2003-04 La Liga?",
+   "a": "Real Madrid",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 2004-05 La Liga?",
+   "a": "Villarreal",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the La Liga in 2004-05?",
+   "a": "Levante, Numancia, Albacete",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2005-06 La Liga?",
+   "a": "Valencia",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the La Liga in 2005-06?",
+   "a": "Alavés, Málaga",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 2005-06 La Liga?",
+   "a": "Valencia",
+   "cat": "records"
+  },
+  {
+   "q": "Which clubs went down from the La Liga in 2006-07?",
+   "a": "Celta de Vigo, Real Sociedad, Gimnàstic",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club scored the most goals in the 2006-07 La Liga?",
+   "a": "Barcelona",
+   "cat": "records"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 2006-07 La Liga?",
+   "a": "Barcelona",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 2007-08 La Liga?",
+   "a": "Barcelona",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the La Liga in 2007-08?",
+   "a": "Zaragoza, Murcia, Levante",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2008-09 La Liga?",
+   "a": "Sevilla",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the La Liga in 2008-09?",
+   "a": "Betis, Numancia, Recreativo",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2009-10 La Liga?",
+   "a": "Valencia",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the La Liga in 2009-10?",
+   "a": "Valladolid, Tenerife, Xerez",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club scored the most goals in the 2009-10 La Liga?",
+   "a": "Real Madrid",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 2010-11 La Liga?",
+   "a": "Valencia",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the La Liga in 2010-11?",
+   "a": "Deportivo La Coruña, Hércules, Almería",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club scored the most goals in the 2010-11 La Liga?",
+   "a": "Real Madrid",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 2011-12 La Liga?",
+   "a": "Valencia",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the La Liga in 2011-12?",
+   "a": "Villarreal, Sporting Gijón, Racing Santander",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 2011-12 La Liga?",
+   "a": "Barcelona",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 2012-13 La Liga?",
+   "a": "Atlético Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the La Liga in 2012-13?",
+   "a": "Mallorca, Deportivo La Coruña, Zaragoza",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 2012-13 La Liga?",
+   "a": "Atlético Madrid",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 2013-14 La Liga?",
+   "a": "Real Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the La Liga in 2013-14?",
+   "a": "Osasuna, Valladolid, Real Betis",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club scored the most goals in the 2013-14 La Liga?",
+   "a": "Real Madrid",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 2014-15 La Liga?",
+   "a": "Atlético Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the La Liga in 2014-15?",
+   "a": "Elche, Almería, Córdoba",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club scored the most goals in the 2014-15 La Liga?",
+   "a": "Real Madrid",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 2015-16 La Liga?",
+   "a": "Atlético Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the La Liga in 2015-16?",
+   "a": "Rayo Vallecano, Getafe, Levante",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 2015-16 La Liga?",
+   "a": "Atlético Madrid",
+   "cat": "records"
+  },
+  {
+   "q": "Which club scored the most goals in the 2016-17 La Liga?",
+   "a": "Barcelona",
+   "cat": "records"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 2016-17 La Liga?",
+   "a": "Atlético&nbsp;Madrid",
+   "cat": "records"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 2017-18 La Liga?",
+   "a": "Atlético Madrid",
+   "cat": "records"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 2018-19 La Liga?",
+   "a": "Atlético Madrid",
+   "cat": "records"
+  },
+  {
+   "q": "Which club scored the most goals in the 2019-20 La Liga?",
+   "a": "Barcelona",
+   "cat": "records"
+  },
+  {
+   "q": "Which club scored the most goals in the 2020-21 La Liga?",
+   "a": "Barcelona",
+   "cat": "records"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 2021-22 La Liga?",
+   "a": "Sevilla",
+   "cat": "records"
+  },
+  {
+   "q": "Which club scored the most goals in the 2022-23 La Liga?",
+   "a": "Real Madrid",
+   "cat": "records"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 2024-25 La Liga?",
+   "a": "Athletic Bilbao",
+   "cat": "records"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 2025-26 La Liga?",
+   "a": "Real Madrid",
+   "cat": "records"
+  }
+ ],
+ "ball": [
+  {
+   "q": "Which Barcelona striker bit an opponent at the 2014 World Cup, months before the club signed him?",
+   "a": "Luis Suarez",
+   "sub": "He bit Giorgio Chiellini, and served the ban before his debut.",
+   "cat": "stories",
+   "club": "barcelona"
+  },
+  {
+   "q": "Real Madrid's galactico era began in 2000 with a signing taken from Barcelona. Who was he?",
+   "a": "Luis Figo",
+   "cat": "stories",
+   "club": "real-madrid"
+  },
+  {
+   "q": "What was thrown at Luis Figo from the Camp Nou crowd when he returned there with Real Madrid?",
+   "a": "A pig's head",
+   "cat": "stories",
+   "club": "real-madrid"
+  },
+  {
+   "q": "Barcelona overturned a 4-0 deficit against Paris Saint-Germain in 2017. What is that night called?",
+   "a": "La Remontada",
+   "sub": "6-1, with three goals in the last seven minutes.",
+   "cat": "stories",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which club broke Madrid and Barcelona's hold on La Liga in 2013-14 under Diego Simeone?",
+   "a": "Atletico Madrid",
+   "sub": "Sealed with a draw at the Camp Nou on the final day.",
+   "cat": "stories",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which goalkeeper captained Real Madrid for a decade and lifted the World Cup for Spain in 2010?",
+   "a": "Iker Casillas",
+   "cat": "stories",
+   "club": "real-madrid"
+  },
+  {
+   "q": "Lionel Messi left Barcelona in 2021 because the club could not register his contract. Which club did he join?",
+   "a": "Paris Saint-Germain",
+   "cat": "stories",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which club did Rafael Benitez manage to two La Liga titles before he joined Liverpool?",
+   "a": "Valencia",
+   "cat": "stories"
+  },
+  {
+   "q": "Which Barcelona defender captained the side through the Guardiola years and retired in 2014?",
+   "a": "Carles Puyol",
+   "cat": "stories",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which Spanish club is owned by its members rather than a proprietor, who elect its president?",
+   "a": "Barcelona",
+   "sub": "Real Madrid, Athletic Bilbao and Osasuna are member-owned too.",
+   "cat": "stories"
+  }
+ ]
+}

@@ -256,13 +256,12 @@
  {
   "tier": "ball",
   "cat": "champions",
-  "q": "Where were Leicester City's players watching when Chelsea's draw with Tottenham confirmed them as champions in 2016?",
-  "a": "At Jamie Vardy's house",
-  "sub": "The party was on television before it was on the pitch.",
-  "src": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Leicester_City_F.C._season",
-  "conf": "likely",
-  "verdict": "review",
-  "note": "answer not in source"
+  "q": "Leicester City were confirmed as champions in 2016 without kicking a ball. Which game decided it?",
+  "a": "Chelsea against Tottenham Hotspur",
+  "sub": "Spurs led 2-0 and drew 2-2.",
+  "src": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Premier_League",
+  "conf": "sure",
+  "verdict": "ok"
  },
  {
   "tier": "ball",

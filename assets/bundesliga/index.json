@@ -1,0 +1,888 @@
+{
+ "easy": [
+  {
+   "q": "Which club plays at the Westfalenstadion, also called Signal Iduna Park?",
+   "a": "Borussia Dortmund",
+   "cat": "grounds"
+  },
+  {
+   "q": "What is the Borussia Dortmund stand known as, the largest terrace in European football?",
+   "a": "The Yellow Wall",
+   "cat": "grounds",
+   "club": "borussia-dortmund"
+  },
+  {
+   "q": "Which club plays at the Veltins-Arena in Gelsenkirchen?",
+   "a": "Schalke 04",
+   "cat": "grounds"
+  },
+  {
+   "q": "Which club plays at the Volksparkstadion in Hamburg?",
+   "a": "Hamburger SV",
+   "cat": "grounds"
+  },
+  {
+   "q": "Which club plays at the BayArena in Leverkusen?",
+   "a": "Bayer Leverkusen",
+   "cat": "grounds"
+  },
+  {
+   "q": "Which club plays at the Weserstadion in Bremen?",
+   "a": "Werder Bremen",
+   "cat": "grounds"
+  },
+  {
+   "q": "What is the trophy given to the Bundesliga champions called?",
+   "a": "The Meisterschale",
+   "cat": "records"
+  },
+  {
+   "q": "What is the German domestic cup called?",
+   "a": "The DFB-Pokal",
+   "cat": "records"
+  },
+  {
+   "q": "Borussia Dortmund and Schalke 04 contest a derby named after which industrial region?",
+   "a": "The Ruhr",
+   "sub": "The Revierderby.",
+   "cat": "records",
+   "club": "borussia-dortmund"
+  },
+  {
+   "q": "Which German club is nicknamed Die Roten, the Reds?",
+   "a": "Bayern Munich",
+   "cat": "records"
+  },
+  {
+   "q": "What rule requires German clubs to keep majority control of their own voting rights?",
+   "a": "The fifty plus one rule",
+   "cat": "records"
+  },
+  {
+   "q": "Which German club is nicknamed Die Werkself, the works eleven, for its factory origins?",
+   "a": "Bayer Leverkusen",
+   "cat": "records"
+  },
+  {
+   "q": "Which Polish striker scored prolifically for Borussia Dortmund and then Bayern Munich?",
+   "a": "Robert Lewandowski",
+   "cat": "scorers",
+   "club": "borussia-dortmund"
+  },
+  {
+   "q": "Which German striker known as Der Bomber scored heavily for Bayern Munich in the 1970s?",
+   "a": "Gerd Muller",
+   "cat": "scorers",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "Which Norwegian striker scored for Borussia Dortmund before joining Manchester City in 2022?",
+   "a": "Erling Haaland",
+   "cat": "scorers",
+   "club": "borussia-dortmund"
+  },
+  {
+   "q": "Which manager led Borussia Dortmund to two Bundesliga titles before joining Liverpool?",
+   "a": "Jurgen Klopp",
+   "cat": "managers",
+   "club": "borussia-dortmund"
+  },
+  {
+   "q": "Which Bayern Munich great was nicknamed Der Kaiser and later managed Germany?",
+   "a": "Franz Beckenbauer",
+   "cat": "managers",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "Which Spaniard managed Bayern Munich from 2013 to 2016?",
+   "a": "Pep Guardiola",
+   "cat": "managers",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "Which German midfielder left Borussia Dortmund for Bayern Munich in 2013?",
+   "a": "Mario Gotze",
+   "cat": "imports",
+   "club": "borussia-dortmund"
+  },
+  {
+   "q": "Which Bayern Munich goalkeeper joined from Schalke 04 in 2011?",
+   "a": "Manuel Neuer",
+   "cat": "imports",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "Which English midfielder joined Borussia Dortmund from Manchester City in 2017?",
+   "a": "Jadon Sancho",
+   "cat": "imports",
+   "club": "borussia-dortmund"
+  },
+  {
+   "q": "Which German midfielder came through Bayer Leverkusen and won the 2023-24 Bundesliga with them?",
+   "a": "Florian Wirtz",
+   "cat": "imports",
+   "club": "bayer-leverkusen"
+  },
+  {
+   "q": "Which German club has won the European Cup or Champions League more than any other?",
+   "a": "Bayern Munich",
+   "cat": "europe"
+  },
+  {
+   "q": "Which club plays at the Mercedes-Benz Arena in Stuttgart?",
+   "a": "VfB Stuttgart",
+   "cat": "grounds"
+  },
+  {
+   "q": "Which German club is owned in effect by a drinks company and joined the top flight in 2016?",
+   "a": "RB Leipzig",
+   "cat": "records"
+  },
+  {
+   "q": "Who was the top scorer in the 2016-17 Bundesliga?",
+   "a": "Pierre-Emerick Aubameyang",
+   "sub": "He got 31 of them.",
+   "cat": "scorers"
+  },
+  {
+   "q": "Who was the top scorer in the 2017-18 Bundesliga?",
+   "a": "Robert Lewandowski",
+   "sub": "He got 29 of them.",
+   "cat": "scorers"
+  },
+  {
+   "q": "Who was the top scorer in the 2018-19 Bundesliga?",
+   "a": "Robert Lewandowski",
+   "sub": "He got 22 of them.",
+   "cat": "scorers"
+  },
+  {
+   "q": "Who was the top scorer in the 2019-20 Bundesliga?",
+   "a": "Robert Lewandowski",
+   "sub": "He got 34 of them.",
+   "cat": "scorers"
+  },
+  {
+   "q": "Who was the top scorer in the 2020-21 Bundesliga?",
+   "a": "Robert Lewandowski",
+   "sub": "He got 41 of them.",
+   "cat": "scorers"
+  }
+ ],
+ "normal": [
+  {
+   "q": "Which club won the 1996-97 Bundesliga?",
+   "a": "Bayern Munich",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the 1998-99 Bundesliga?",
+   "a": "Bayern Munich",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the 2001-02 Bundesliga?",
+   "a": "Borussia Dortmund",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the 2003-04 Bundesliga?",
+   "a": "Werder Bremen",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the 2005-06 Bundesliga?",
+   "a": "Bayern Munich",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the 2006-07 Bundesliga?",
+   "a": "VfB Stuttgart",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the 2008-09 Bundesliga?",
+   "a": "VfL Wolfsburg",
+   "cat": "champions"
+  },
+  {
+   "q": "Who was the top scorer in the 2009-10 Bundesliga?",
+   "a": "Edin Džeko",
+   "sub": "He got 22 of them.",
+   "cat": "scorers"
+  },
+  {
+   "q": "Which club won the 2010-11 Bundesliga?",
+   "a": "Borussia Dortmund",
+   "cat": "champions"
+  },
+  {
+   "q": "Who was the top scorer in the 2010-11 Bundesliga?",
+   "a": "Mario Gómez",
+   "sub": "He got 28 of them.",
+   "cat": "scorers"
+  },
+  {
+   "q": "Who was the top scorer in the 2011-12 Bundesliga?",
+   "a": "Klaas-Jan Huntelaar",
+   "sub": "He got 29 of them.",
+   "cat": "scorers"
+  },
+  {
+   "q": "Which club won the 2012-13 Bundesliga?",
+   "a": "Bayern Munich",
+   "cat": "champions"
+  },
+  {
+   "q": "Who was the top scorer in the 2012-13 Bundesliga?",
+   "a": "Stefan Kießling",
+   "sub": "He got 25 of them.",
+   "cat": "scorers"
+  },
+  {
+   "q": "Who was the top scorer in the 2013-14 Bundesliga?",
+   "a": "Borussia Dortmund",
+   "cat": "scorers"
+  },
+  {
+   "q": "Which club finished second in the 2016-17 Bundesliga?",
+   "a": "RB Leipzig",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2017-18 Bundesliga?",
+   "a": "Schalke 04",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2018-19 Bundesliga?",
+   "a": "Borussia Dortmund",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2019-20 Bundesliga?",
+   "a": "Borussia Dortmund",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2020-21 Bundesliga?",
+   "a": "RB Leipzig",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2021-22 Bundesliga?",
+   "a": "Borussia Dortmund",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2022-23 Bundesliga?",
+   "a": "Borussia Dortmund",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2023-24 Bundesliga?",
+   "a": "VfB Stuttgart",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2024-25 Bundesliga?",
+   "a": "Bayer Leverkusen",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2025-26 Bundesliga?",
+   "a": "Borussia Dortmund",
+   "cat": "champions"
+  }
+ ],
+ "hard": [
+  {
+   "q": "Which club finished second in the 1995-96 Bundesliga?",
+   "a": "Bayern Munich",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 1996-97 Bundesliga?",
+   "a": "Bayer Leverkusen",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 1997-98 Bundesliga?",
+   "a": "Bayern Munich",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 1998-99 Bundesliga?",
+   "a": "Bayer Leverkusen",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2000-01 Bundesliga?",
+   "a": "Schalke 04",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2001-02 Bundesliga?",
+   "a": "Bayer Leverkusen",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2002-03 Bundesliga?",
+   "a": "VfB Stuttgart",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2003-04 Bundesliga?",
+   "a": "Bayern Munich",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2004-05 Bundesliga?",
+   "a": "Schalke 04",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2005-06 Bundesliga?",
+   "a": "Werder Bremen",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2006-07 Bundesliga?",
+   "a": "Schalke 04",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2007-08 Bundesliga?",
+   "a": "Werder Bremen",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2008-09 Bundesliga?",
+   "a": "Bayern Munich",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2009-10 Bundesliga?",
+   "a": "Schalke 04",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2010-11 Bundesliga?",
+   "a": "Bayer Leverkusen",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2011-12 Bundesliga?",
+   "a": "Bayern Munich",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2012-13 Bundesliga?",
+   "a": "Borussia Dortmund",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2013-14 Bundesliga?",
+   "a": "Borussia Dortmund",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2014-15 Bundesliga?",
+   "a": "VfL Wolfsburg",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in the 2015-16 Bundesliga?",
+   "a": "Borussia Dortmund",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished third in the 2016-17 Bundesliga?",
+   "a": "Borussia Dortmund",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Bundesliga in 2016-17?",
+   "a": "FC Ingolstadt, Darmstadt 98",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2017-18 Bundesliga?",
+   "a": "1899 Hoffenheim",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Bundesliga in 2017-18?",
+   "a": "Hamburger SV",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2018-19 Bundesliga?",
+   "a": "RB Leipzig",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Bundesliga in 2018-19?",
+   "a": "VfB Stuttgart, Hannover 96",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2019-20 Bundesliga?",
+   "a": "RB Leipzig",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Bundesliga in 2019-20?",
+   "a": "SC Paderborn",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2020-21 Bundesliga?",
+   "a": "Borussia Dortmund",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Bundesliga in 2020-21?",
+   "a": "Werder Bremen, Schalke 04",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2021-22 Bundesliga?",
+   "a": "Bayer Leverkusen",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Bundesliga in 2021-22?",
+   "a": "Arminia Bielefeld",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2022-23 Bundesliga?",
+   "a": "RB Leipzig",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Bundesliga in 2022-23?",
+   "a": "Schalke 04, Hertha BSC",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2023-24 Bundesliga?",
+   "a": "Bayern Munich",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Bundesliga in 2023-24?",
+   "a": "Darmstadt 98",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2024-25 Bundesliga?",
+   "a": "Eintracht Frankfurt",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Bundesliga in 2024-25?",
+   "a": "Holstein Kiel, VfL Bochum",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2025-26 Bundesliga?",
+   "a": "RB Leipzig",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Bundesliga in 2025-26?",
+   "a": "VfL Wolfsburg, 1. FC Heidenheim, FC St. Pauli",
+   "cat": "relegation"
+  }
+ ],
+ "extreme": [
+  {
+   "q": "Which club finished third in the 1995-96 Bundesliga?",
+   "a": "Schalke 04",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Bundesliga in 1995-96?",
+   "a": "1. FC Kaiserslautern, Eintracht Frankfurt, KFC Uerdingen",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 1995-96 Bundesliga?",
+   "a": "1. FC Köln",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 1996-97 Bundesliga?",
+   "a": "Borussia Dortmund",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Bundesliga in 1996-97?",
+   "a": "Fortuna Düsseldorf, SC Freiburg, FC St. Pauli",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club scored the most goals in the 1996-97 Bundesliga?",
+   "a": "VfB Stuttgart",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 1997-98 Bundesliga?",
+   "a": "Bayer Leverkusen",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Bundesliga in 1997-98?",
+   "a": "Karlsruher SC, 1. FC Köln, Arminia Bielefeld",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club scored the most goals in the 1997-98 Bundesliga?",
+   "a": "Bayern Munich",
+   "cat": "records"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 1997-98 Bundesliga?",
+   "a": "Schalke 04",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 1998-99 Bundesliga?",
+   "a": "Hertha BSC",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Bundesliga in 1998-99?",
+   "a": "1. FC Nürnberg, VfL Bochum, Borussia Mönchengladbach",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2000-01 Bundesliga?",
+   "a": "Borussia Dortmund",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Bundesliga in 2000-01?",
+   "a": "SpVgg Unterhaching, Eintracht Frankfurt, VfL Bochum",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club scored the most goals in the 2000-01 Bundesliga?",
+   "a": "Schalke 04",
+   "cat": "records"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 2000-01 Bundesliga?",
+   "a": "Schalke 04",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 2001-02 Bundesliga?",
+   "a": "Bayern Munich",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Bundesliga in 2001-02?",
+   "a": "SC Freiburg, 1. FC Köln, FC St. Pauli",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club scored the most goals in the 2001-02 Bundesliga?",
+   "a": "Bayer Leverkusen",
+   "cat": "records"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 2001-02 Bundesliga?",
+   "a": "Bayern Munich",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 2002-03 Bundesliga?",
+   "a": "Borussia Dortmund",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Bundesliga in 2002-03?",
+   "a": "Arminia Bielefeld, 1. FC Nürnberg, Energie Cottbus",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2003-04 Bundesliga?",
+   "a": "Bayer Leverkusen",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Bundesliga in 2003-04?",
+   "a": "Eintracht Frankfurt, 1860 Munich, 1. FC Köln",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 2003-04 Bundesliga?",
+   "a": "VfB Stuttgart",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 2004-05 Bundesliga?",
+   "a": "Werder Bremen",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Bundesliga in 2004-05?",
+   "a": "VfL Bochum, Hansa Rostock, SC Freiburg",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 2004-05 Bundesliga?",
+   "a": "Hertha BSC",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 2005-06 Bundesliga?",
+   "a": "Hamburger SV",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Bundesliga in 2005-06?",
+   "a": "1. FC Kaiserslautern, 1. FC Köln, MSV Duisburg",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club scored the most goals in the 2005-06 Bundesliga?",
+   "a": "Werder Bremen",
+   "cat": "records"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 2005-06 Bundesliga?",
+   "a": "Hamburger SV",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 2006-07 Bundesliga?",
+   "a": "Werder Bremen",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Bundesliga in 2006-07?",
+   "a": "Mainz 05, Alemannia Aachen, Borussia Mönchengladbach",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club scored the most goals in the 2006-07 Bundesliga?",
+   "a": "Werder Bremen",
+   "cat": "records"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 2006-07 Bundesliga?",
+   "a": "Schalke 04",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 2007-08 Bundesliga?",
+   "a": "Schalke 04",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Bundesliga in 2007-08?",
+   "a": "1. FC Nürnberg, Hansa Rostock, MSV Duisburg",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club scored the most goals in the 2007-08 Bundesliga?",
+   "a": "Werder Bremen",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 2008-09 Bundesliga?",
+   "a": "VfB Stuttgart",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Bundesliga in 2008-09?",
+   "a": "Energie Cottbus, Karlsruher SC, Arminia Bielefeld",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 2008-09 Bundesliga?",
+   "a": "Schalke 04",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 2009-10 Bundesliga?",
+   "a": "Werder Bremen",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Bundesliga in 2009-10?",
+   "a": "VfL Bochum, Hertha BSC",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2010-11 Bundesliga?",
+   "a": "Bayern Munich",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Bundesliga in 2010-11?",
+   "a": "Eintracht Frankfurt, FC St. Pauli",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club scored the most goals in the 2010-11 Bundesliga?",
+   "a": "Bayern Munich",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 2011-12 Bundesliga?",
+   "a": "Schalke 04",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Bundesliga in 2011-12?",
+   "a": "Hertha BSC, 1. FC Köln, 1. FC Kaiserslautern",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 2011-12 Bundesliga?",
+   "a": "Bayern Munich",
+   "cat": "records"
+  },
+  {
+   "q": "Which club finished third in the 2012-13 Bundesliga?",
+   "a": "Bayer Leverkusen",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Bundesliga in 2012-13?",
+   "a": "Fortuna Düsseldorf, Greuther Fürth",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2013-14 Bundesliga?",
+   "a": "Schalke 04",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Bundesliga in 2013-14?",
+   "a": "1. FC Nürnberg, Eintracht Braunschweig",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2014-15 Bundesliga?",
+   "a": "Borussia Mönchengladbach",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Bundesliga in 2014-15?",
+   "a": "SC Freiburg, SC Paderborn",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club finished third in the 2015-16 Bundesliga?",
+   "a": "Bayer Leverkusen",
+   "cat": "champions"
+  },
+  {
+   "q": "Which clubs went down from the Bundesliga in 2015-16?",
+   "a": "VfB Stuttgart, Hannover 96",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club scored the most goals in the 2015-16 Bundesliga?",
+   "a": "Borussia Dortmund",
+   "cat": "records"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 2018-19 Bundesliga?",
+   "a": "RB Leipzig",
+   "cat": "records"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 2020-21 Bundesliga?",
+   "a": "RB Leipzig",
+   "cat": "records"
+  },
+  {
+   "q": "The 2022-23 Bundesliga was decided on goal difference. Which club took it?",
+   "a": "Bayern Munich",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club scored the most goals in the 2023-24 Bundesliga?",
+   "a": "Bayern Munich",
+   "cat": "records"
+  },
+  {
+   "q": "Which club conceded the fewest goals in the 2025-26 Bundesliga?",
+   "a": "Borussia Dortmund",
+   "cat": "records"
+  }
+ ],
+ "ball": [
+  {
+   "q": "Which club won the Bundesliga in 2023-24, ending Bayern Munich's run of eleven in a row?",
+   "a": "Bayer Leverkusen",
+   "sub": "They went the whole league season unbeaten doing it.",
+   "cat": "stories",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "Bayer Leverkusen were runners-up in the league, the cup and the Champions League in 2002. What nickname did that earn them?",
+   "a": "Neverkusen",
+   "cat": "stories",
+   "club": "bayer-leverkusen"
+  },
+  {
+   "q": "Which German club won the UEFA Cup in 1997, beating Inter Milan on penalties in the final?",
+   "a": "Schalke 04",
+   "sub": "The side is still called the Eurofighters.",
+   "cat": "stories"
+  },
+  {
+   "q": "Which substitute scored the winning goal for Germany in the 2014 World Cup final, having come through Borussia Dortmund?",
+   "a": "Mario Gotze",
+   "cat": "stories",
+   "club": "borussia-dortmund"
+  },
+  {
+   "q": "Borussia Dortmund's team bus was attacked before a Champions League tie in 2017. Which player was injured?",
+   "a": "Marc Bartra",
+   "cat": "stories",
+   "club": "borussia-dortmund"
+  },
+  {
+   "q": "Which German club was founded by Bayer employees and still carries the company name?",
+   "a": "Bayer Leverkusen",
+   "cat": "stories"
+  },
+  {
+   "q": "Hamburger SV kept a clock in its stadium counting what, until it stopped in 2018?",
+   "a": "The time they had spent in the Bundesliga without ever being relegated",
+   "cat": "stories",
+   "club": "hamburger-sv"
+  },
+  {
+   "q": "Which club won the Bundesliga in 2008-09, its only title, under Felix Magath?",
+   "a": "VfL Wolfsburg",
+   "cat": "stories"
+  },
+  {
+   "q": "Which club won the Bundesliga in 1997-98 having been promoted two years earlier?",
+   "a": "1. FC Kaiserslautern",
+   "sub": "Otto Rehhagel took them up and then straight to the title.",
+   "cat": "stories"
+  },
+  {
+   "q": "Which Bayern Munich striker scored five goals in nine minutes as a substitute against Wolfsburg in 2015?",
+   "a": "Robert Lewandowski",
+   "cat": "stories",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "Which German club plays in a stadium built inside a former quarry and is famous for its fan culture at Millerntor?",
+   "a": "St Pauli",
+   "cat": "stories"
+  }
+ ]
+}

@@ -1,0 +1,35 @@
+[
+{"tier":"easy","cat":"grounds","q":"Which club plays its home games at the Allianz Arena?","a":"Bayern Munich","src":"https://en.wikipedia.org/wiki/Allianz_Arena","conf":"sure"},
+{"tier":"easy","cat":"grounds","q":"Which club plays at the Westfalenstadion, also called Signal Iduna Park?","a":"Borussia Dortmund","src":"https://en.wikipedia.org/wiki/Westfalenstadion","conf":"sure"},
+{"tier":"easy","cat":"grounds","q":"What is the Borussia Dortmund stand known as, the largest terrace in European football?","a":"The Yellow Wall","src":"https://en.wikipedia.org/wiki/Westfalenstadion","conf":"sure"},
+{"tier":"easy","cat":"grounds","q":"Which club plays at the Veltins-Arena in Gelsenkirchen?","a":"Schalke 04","src":"https://en.wikipedia.org/wiki/Veltins-Arena","conf":"sure"},
+{"tier":"easy","cat":"grounds","q":"Which club plays at the Volksparkstadion in Hamburg?","a":"Hamburger SV","src":"https://en.wikipedia.org/wiki/Volksparkstadion","conf":"sure"},
+{"tier":"easy","cat":"grounds","q":"Which club plays at the BayArena in Leverkusen?","a":"Bayer Leverkusen","src":"https://en.wikipedia.org/wiki/BayArena","conf":"sure"},
+{"tier":"easy","cat":"grounds","q":"Which club plays at the Weserstadion in Bremen?","a":"Werder Bremen","src":"https://en.wikipedia.org/wiki/Weserstadion","conf":"sure"},
+{"tier":"easy","cat":"grounds","q":"Which club plays its home games at the Red Bull Arena in Saxony?","a":"RB Leipzig","src":"https://en.wikipedia.org/wiki/Red_Bull_Arena_(Leipzig)","conf":"sure"},
+
+{"tier":"easy","cat":"records","q":"What is the trophy given to the Bundesliga champions called?","a":"The Meisterschale","src":"https://en.wikipedia.org/wiki/Meisterschale","conf":"sure"},
+{"tier":"easy","cat":"records","q":"What is the German domestic cup called?","a":"The DFB-Pokal","src":"https://en.wikipedia.org/wiki/DFB-Pokal","conf":"sure"},
+{"tier":"easy","cat":"records","q":"Borussia Dortmund and Schalke 04 contest a derby named after which industrial region?","a":"The Ruhr","sub":"The Revierderby.","src":"https://en.wikipedia.org/wiki/Revierderby","conf":"sure"},
+{"tier":"easy","cat":"records","q":"Which German club is nicknamed Die Roten, the Reds?","a":"Bayern Munich","src":"https://en.wikipedia.org/wiki/FC_Bayern_Munich","conf":"sure"},
+{"tier":"easy","cat":"records","q":"What rule requires German clubs to keep majority control of their own voting rights?","a":"The fifty plus one rule","src":"https://en.wikipedia.org/wiki/50%2B1_rule","conf":"sure"},
+{"tier":"easy","cat":"records","q":"Which German club is nicknamed Die Werkself, the works eleven, for its factory origins?","a":"Bayer Leverkusen","src":"https://en.wikipedia.org/wiki/Bayer_04_Leverkusen","conf":"sure"},
+
+{"tier":"easy","cat":"scorers","q":"Which Polish striker scored prolifically for Borussia Dortmund and then Bayern Munich?","a":"Robert Lewandowski","src":"https://en.wikipedia.org/wiki/Robert_Lewandowski","conf":"sure"},
+{"tier":"easy","cat":"scorers","q":"Which German striker known as Der Bomber scored heavily for Bayern Munich in the 1970s?","a":"Gerd Muller","src":"https://en.wikipedia.org/wiki/Gerd_M%C3%BCller","conf":"sure"},
+{"tier":"easy","cat":"scorers","q":"Which Norwegian striker scored for Borussia Dortmund before joining Manchester City in 2022?","a":"Erling Haaland","src":"https://en.wikipedia.org/wiki/Erling_Haaland","conf":"sure"},
+
+{"tier":"easy","cat":"managers","q":"Which manager led Borussia Dortmund to two Bundesliga titles before joining Liverpool?","a":"Jurgen Klopp","src":"https://en.wikipedia.org/wiki/J%C3%BCrgen_Klopp","conf":"sure"},
+{"tier":"easy","cat":"managers","q":"Which Bayern Munich great was nicknamed Der Kaiser and later managed Germany?","a":"Franz Beckenbauer","src":"https://en.wikipedia.org/wiki/Franz_Beckenbauer","conf":"sure"},
+{"tier":"easy","cat":"managers","q":"Which Spaniard managed Bayern Munich from 2013 to 2016?","a":"Pep Guardiola","src":"https://en.wikipedia.org/wiki/Pep_Guardiola","conf":"sure"},
+
+{"tier":"easy","cat":"imports","q":"Which German midfielder left Borussia Dortmund for Bayern Munich in 2013?","a":"Mario Gotze","src":"https://en.wikipedia.org/wiki/Mario_G%C3%B6tze","conf":"sure"},
+{"tier":"easy","cat":"imports","q":"Which Bayern Munich goalkeeper joined from Schalke 04 in 2011?","a":"Manuel Neuer","src":"https://en.wikipedia.org/wiki/Manuel_Neuer","conf":"sure"},
+{"tier":"easy","cat":"imports","q":"Which English midfielder joined Borussia Dortmund from Manchester City in 2017?","a":"Jadon Sancho","src":"https://en.wikipedia.org/wiki/Jadon_Sancho","conf":"sure"},
+{"tier":"easy","cat":"imports","q":"Which German midfielder came through Bayer Leverkusen and won the 2023-24 Bundesliga with them?","a":"Florian Wirtz","src":"https://en.wikipedia.org/wiki/Florian_Wirtz","conf":"sure"},
+
+{"tier":"easy","cat":"europe","q":"Which German club has won the European Cup or Champions League more than any other?","a":"Bayern Munich","src":"https://en.wikipedia.org/wiki/FC_Bayern_Munich","conf":"sure"},
+{"tier":"easy","cat":"grounds","q":"Which club plays at the Mercedes-Benz Arena in Stuttgart?","a":"VfB Stuttgart","src":"https://en.wikipedia.org/wiki/MHPArena","conf":"likely"},
+{"tier":"easy","cat":"records","q":"Which club is nicknamed Die Fohlen, the Foals?","a":"Borussia Monchengladbach","src":"https://en.wikipedia.org/wiki/Borussia_M%C3%B6nchengladbach","conf":"sure"},
+{"tier":"easy","cat":"records","q":"Which German club is owned in effect by a drinks company and joined the top flight in 2016?","a":"RB Leipzig","src":"https://en.wikipedia.org/wiki/RB_Leipzig","conf":"sure"}
+]

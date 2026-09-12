@@ -1,0 +1,1482 @@
+[
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 1995-96 La Liga?",
+  "a": "Atlético Madrid",
+  "src": "https://en.wikipedia.org/wiki/1995%E2%80%9396_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 1995-96 La Liga?",
+  "a": "Valencia CF",
+  "src": "https://en.wikipedia.org/wiki/1995%E2%80%9396_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 1995-96 La Liga?",
+  "a": "FC Barcelona",
+  "src": "https://en.wikipedia.org/wiki/1995%E2%80%9396_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the La Liga in 1995-96?",
+  "a": "Albacete Balompié, UD Salamanca",
+  "src": "https://en.wikipedia.org/wiki/1995%E2%80%9396_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 1995-96 La Liga?",
+  "a": "Valencia CF",
+  "src": "https://en.wikipedia.org/wiki/1995%E2%80%9396_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 1996-97 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/1996%E2%80%9397_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 1996-97 La Liga?",
+  "a": "FC Barcelona",
+  "src": "https://en.wikipedia.org/wiki/1996%E2%80%9397_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 1996-97 La Liga?",
+  "a": "Betis",
+  "src": "https://en.wikipedia.org/wiki/1996%E2%80%9397_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the La Liga in 1996-97?",
+  "a": "Rayo Vallecano, CF Extremadura, Sevilla FC, CD Logroñés",
+  "src": "https://en.wikipedia.org/wiki/1996%E2%80%9397_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 1996-97 La Liga?",
+  "a": "FC Barcelona",
+  "src": "https://en.wikipedia.org/wiki/1996%E2%80%9397_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 1996-97 La Liga?",
+  "a": "Deportivo de La Coruña",
+  "src": "https://en.wikipedia.org/wiki/1996%E2%80%9397_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 1997-98 La Liga?",
+  "a": "Barcelona",
+  "src": "https://en.wikipedia.org/wiki/1997%E2%80%9398_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 1997-98 La Liga?",
+  "a": "Athletic Bilbao",
+  "src": "https://en.wikipedia.org/wiki/1997%E2%80%9398_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 1997-98 La Liga?",
+  "a": "Real Sociedad",
+  "src": "https://en.wikipedia.org/wiki/1997%E2%80%9398_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the La Liga in 1997-98?",
+  "a": "Compostela, Mérida, Sporting Gijón",
+  "src": "https://en.wikipedia.org/wiki/1997%E2%80%9398_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 1997-98 La Liga?",
+  "a": "Atlético Madrid",
+  "src": "https://en.wikipedia.org/wiki/1997%E2%80%9398_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 1997-98 La Liga?",
+  "a": "Espanyol",
+  "src": "https://en.wikipedia.org/wiki/1997%E2%80%9398_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 1998-99 La Liga?",
+  "a": "Barcelona",
+  "src": "https://en.wikipedia.org/wiki/1998%E2%80%9399_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 1998-99 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/1998%E2%80%9399_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 1998-99 La Liga?",
+  "a": "Mallorca",
+  "src": "https://en.wikipedia.org/wiki/1998%E2%80%9399_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the La Liga in 1998-99?",
+  "a": "Extremadura, Villarreal, Tenerife, Salamanca",
+  "src": "https://en.wikipedia.org/wiki/1998%E2%80%9399_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 1998-99 La Liga?",
+  "a": "Mallorca",
+  "src": "https://en.wikipedia.org/wiki/1998%E2%80%9399_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2000-01 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/2000%E2%80%9301_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2000-01 La Liga?",
+  "a": "Deportivo La Coruña",
+  "src": "https://en.wikipedia.org/wiki/2000%E2%80%9301_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2000-01 La Liga?",
+  "a": "Mallorca",
+  "src": "https://en.wikipedia.org/wiki/2000%E2%80%9301_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the La Liga in 2000-01?",
+  "a": "Oviedo, Racing Santander, Numancia",
+  "src": "https://en.wikipedia.org/wiki/2000%E2%80%9301_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2000-01 La Liga?",
+  "a": "Valencia",
+  "src": "https://en.wikipedia.org/wiki/2000%E2%80%9301_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2001-02 La Liga?",
+  "a": "Valencia",
+  "src": "https://en.wikipedia.org/wiki/2001%E2%80%9302_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2001-02 La Liga?",
+  "a": "Deportivo La Coruña",
+  "src": "https://en.wikipedia.org/wiki/2001%E2%80%9302_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2001-02 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/2001%E2%80%9302_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the La Liga in 2001-02?",
+  "a": "Las Palmas, Tenerife, Zaragoza",
+  "src": "https://en.wikipedia.org/wiki/2001%E2%80%9302_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2001-02 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/2001%E2%80%9302_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2002-03 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/2002%E2%80%9303_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2002-03 La Liga?",
+  "a": "Real Sociedad",
+  "src": "https://en.wikipedia.org/wiki/2002%E2%80%9303_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2002-03 La Liga?",
+  "a": "Deportivo La Coruña",
+  "src": "https://en.wikipedia.org/wiki/2002%E2%80%9303_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the La Liga in 2002-03?",
+  "a": "Recreativo, Alavés, Rayo Vallecano",
+  "src": "https://en.wikipedia.org/wiki/2002%E2%80%9303_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2002-03 La Liga?",
+  "a": "Valencia",
+  "src": "https://en.wikipedia.org/wiki/2002%E2%80%9303_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2003-04 La Liga?",
+  "a": "Valencia",
+  "src": "https://en.wikipedia.org/wiki/2003%E2%80%9304_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2003-04 La Liga?",
+  "a": "Barcelona",
+  "src": "https://en.wikipedia.org/wiki/2003%E2%80%9304_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2003-04 La Liga?",
+  "a": "Deportivo La Coruña",
+  "src": "https://en.wikipedia.org/wiki/2003%E2%80%9304_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the La Liga in 2003-04?",
+  "a": "Valladolid, Celta de Vigo, Murcia",
+  "src": "https://en.wikipedia.org/wiki/2003%E2%80%9304_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2003-04 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/2003%E2%80%9304_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2004-05 La Liga?",
+  "a": "Barcelona",
+  "src": "https://en.wikipedia.org/wiki/2004%E2%80%9305_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2004-05 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/2004%E2%80%9305_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2004-05 La Liga?",
+  "a": "Villarreal",
+  "src": "https://en.wikipedia.org/wiki/2004%E2%80%9305_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the La Liga in 2004-05?",
+  "a": "Levante, Numancia, Albacete",
+  "src": "https://en.wikipedia.org/wiki/2004%E2%80%9305_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2005-06 La Liga?",
+  "a": "Barcelona",
+  "src": "https://en.wikipedia.org/wiki/2005%E2%80%9306_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2005-06 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/2005%E2%80%9306_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2005-06 La Liga?",
+  "a": "Valencia",
+  "src": "https://en.wikipedia.org/wiki/2005%E2%80%9306_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the La Liga in 2005-06?",
+  "a": "Alavés, Málaga",
+  "src": "https://en.wikipedia.org/wiki/2005%E2%80%9306_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2005-06 La Liga?",
+  "a": "Valencia",
+  "src": "https://en.wikipedia.org/wiki/2005%E2%80%9306_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2006-07 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/2006%E2%80%9307_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the La Liga in 2006-07?",
+  "a": "Celta de Vigo, Real Sociedad, Gimnàstic",
+  "src": "https://en.wikipedia.org/wiki/2006%E2%80%9307_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2006-07 La Liga?",
+  "a": "Barcelona",
+  "src": "https://en.wikipedia.org/wiki/2006%E2%80%9307_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2006-07 La Liga?",
+  "a": "Barcelona",
+  "src": "https://en.wikipedia.org/wiki/2006%E2%80%9307_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2007-08 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/2007%E2%80%9308_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2007-08 La Liga?",
+  "a": "Villarreal",
+  "src": "https://en.wikipedia.org/wiki/2007%E2%80%9308_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2007-08 La Liga?",
+  "a": "Barcelona",
+  "src": "https://en.wikipedia.org/wiki/2007%E2%80%9308_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the La Liga in 2007-08?",
+  "a": "Zaragoza, Murcia, Levante",
+  "src": "https://en.wikipedia.org/wiki/2007%E2%80%9308_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2008-09 La Liga?",
+  "a": "Barcelona",
+  "src": "https://en.wikipedia.org/wiki/2008%E2%80%9309_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2008-09 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/2008%E2%80%9309_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2008-09 La Liga?",
+  "a": "Sevilla",
+  "src": "https://en.wikipedia.org/wiki/2008%E2%80%9309_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the La Liga in 2008-09?",
+  "a": "Betis, Numancia, Recreativo",
+  "src": "https://en.wikipedia.org/wiki/2008%E2%80%9309_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2009-10 La Liga?",
+  "a": "Barcelona",
+  "src": "https://en.wikipedia.org/wiki/2009%E2%80%9310_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2009-10 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/2009%E2%80%9310_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2009-10 La Liga?",
+  "a": "Valencia",
+  "src": "https://en.wikipedia.org/wiki/2009%E2%80%9310_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the La Liga in 2009-10?",
+  "a": "Valladolid, Tenerife, Xerez",
+  "src": "https://en.wikipedia.org/wiki/2009%E2%80%9310_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2009-10 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/2009%E2%80%9310_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2010-11 La Liga?",
+  "a": "Barcelona",
+  "src": "https://en.wikipedia.org/wiki/2010%E2%80%9311_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2010-11 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/2010%E2%80%9311_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2010-11 La Liga?",
+  "a": "Valencia",
+  "src": "https://en.wikipedia.org/wiki/2010%E2%80%9311_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the La Liga in 2010-11?",
+  "a": "Deportivo La Coruña, Hércules, Almería",
+  "src": "https://en.wikipedia.org/wiki/2010%E2%80%9311_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2010-11 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/2010%E2%80%9311_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2011-12 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/2011%E2%80%9312_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2011-12 La Liga?",
+  "a": "Barcelona",
+  "src": "https://en.wikipedia.org/wiki/2011%E2%80%9312_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2011-12 La Liga?",
+  "a": "Valencia",
+  "src": "https://en.wikipedia.org/wiki/2011%E2%80%9312_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the La Liga in 2011-12?",
+  "a": "Villarreal, Sporting Gijón, Racing Santander",
+  "src": "https://en.wikipedia.org/wiki/2011%E2%80%9312_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2011-12 La Liga?",
+  "a": "Barcelona",
+  "src": "https://en.wikipedia.org/wiki/2011%E2%80%9312_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2012-13 La Liga?",
+  "a": "Barcelona",
+  "src": "https://en.wikipedia.org/wiki/2012%E2%80%9313_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2012-13 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/2012%E2%80%9313_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2012-13 La Liga?",
+  "a": "Atlético Madrid",
+  "src": "https://en.wikipedia.org/wiki/2012%E2%80%9313_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the La Liga in 2012-13?",
+  "a": "Mallorca, Deportivo La Coruña, Zaragoza",
+  "src": "https://en.wikipedia.org/wiki/2012%E2%80%9313_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2012-13 La Liga?",
+  "a": "Atlético Madrid",
+  "src": "https://en.wikipedia.org/wiki/2012%E2%80%9313_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2013-14 La Liga?",
+  "a": "Atlético Madrid",
+  "src": "https://en.wikipedia.org/wiki/2013%E2%80%9314_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2013-14 La Liga?",
+  "a": "Barcelona",
+  "src": "https://en.wikipedia.org/wiki/2013%E2%80%9314_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2013-14 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/2013%E2%80%9314_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the La Liga in 2013-14?",
+  "a": "Osasuna, Valladolid, Real Betis",
+  "src": "https://en.wikipedia.org/wiki/2013%E2%80%9314_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2013-14 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/2013%E2%80%9314_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2014-15 La Liga?",
+  "a": "Barcelona",
+  "src": "https://en.wikipedia.org/wiki/2014%E2%80%9315_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2014-15 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/2014%E2%80%9315_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2014-15 La Liga?",
+  "a": "Atlético Madrid",
+  "src": "https://en.wikipedia.org/wiki/2014%E2%80%9315_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the La Liga in 2014-15?",
+  "a": "Elche, Almería, Córdoba",
+  "src": "https://en.wikipedia.org/wiki/2014%E2%80%9315_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2014-15 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/2014%E2%80%9315_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2015-16 La Liga?",
+  "a": "Barcelona",
+  "src": "https://en.wikipedia.org/wiki/2015%E2%80%9316_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2015-16 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/2015%E2%80%9316_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2015-16 La Liga?",
+  "a": "Atlético Madrid",
+  "src": "https://en.wikipedia.org/wiki/2015%E2%80%9316_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the La Liga in 2015-16?",
+  "a": "Rayo Vallecano, Getafe, Levante",
+  "src": "https://en.wikipedia.org/wiki/2015%E2%80%9316_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2015-16 La Liga?",
+  "a": "Atlético Madrid",
+  "src": "https://en.wikipedia.org/wiki/2015%E2%80%9316_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2016-17 La Liga?",
+  "a": "Real&nbsp;Madrid",
+  "src": "https://en.wikipedia.org/wiki/2016%E2%80%9317_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2016-17 La Liga?",
+  "a": "Barcelona",
+  "src": "https://en.wikipedia.org/wiki/2016%E2%80%9317_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2016-17 La Liga?",
+  "a": "Atlético&nbsp;Madrid",
+  "src": "https://en.wikipedia.org/wiki/2016%E2%80%9317_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the La Liga in 2016-17?",
+  "a": "Sporting Gijón, Osasuna, Granada",
+  "src": "https://en.wikipedia.org/wiki/2016%E2%80%9317_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2016-17 La Liga?",
+  "a": "Barcelona",
+  "src": "https://en.wikipedia.org/wiki/2016%E2%80%9317_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2016-17 La Liga?",
+  "a": "Atlético&nbsp;Madrid",
+  "src": "https://en.wikipedia.org/wiki/2016%E2%80%9317_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2017-18 La Liga?",
+  "a": "Barcelona",
+  "src": "https://en.wikipedia.org/wiki/2017%E2%80%9318_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2017-18 La Liga?",
+  "a": "Atlético Madrid",
+  "src": "https://en.wikipedia.org/wiki/2017%E2%80%9318_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2017-18 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/2017%E2%80%9318_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the La Liga in 2017-18?",
+  "a": "Deportivo La Coruña, Las Palmas, Málaga",
+  "src": "https://en.wikipedia.org/wiki/2017%E2%80%9318_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2017-18 La Liga?",
+  "a": "Atlético Madrid",
+  "src": "https://en.wikipedia.org/wiki/2017%E2%80%9318_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2018-19 La Liga?",
+  "a": "Barcelona",
+  "src": "https://en.wikipedia.org/wiki/2018%E2%80%9319_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2018-19 La Liga?",
+  "a": "Atlético Madrid",
+  "src": "https://en.wikipedia.org/wiki/2018%E2%80%9319_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2018-19 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/2018%E2%80%9319_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the La Liga in 2018-19?",
+  "a": "Girona, Huesca, Rayo Vallecano",
+  "src": "https://en.wikipedia.org/wiki/2018%E2%80%9319_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2018-19 La Liga?",
+  "a": "Atlético Madrid",
+  "src": "https://en.wikipedia.org/wiki/2018%E2%80%9319_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2019-20 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/2019%E2%80%9320_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2019-20 La Liga?",
+  "a": "Barcelona",
+  "src": "https://en.wikipedia.org/wiki/2019%E2%80%9320_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2019-20 La Liga?",
+  "a": "Atlético Madrid",
+  "src": "https://en.wikipedia.org/wiki/2019%E2%80%9320_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the La Liga in 2019-20?",
+  "a": "Leganés, Mallorca, Espanyol",
+  "src": "https://en.wikipedia.org/wiki/2019%E2%80%9320_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2019-20 La Liga?",
+  "a": "Barcelona",
+  "src": "https://en.wikipedia.org/wiki/2019%E2%80%9320_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2020-21 La Liga?",
+  "a": "Atlético Madrid",
+  "src": "https://en.wikipedia.org/wiki/2020%E2%80%9321_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2020-21 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/2020%E2%80%9321_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2020-21 La Liga?",
+  "a": "Barcelona",
+  "src": "https://en.wikipedia.org/wiki/2020%E2%80%9321_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the La Liga in 2020-21?",
+  "a": "Huesca, Valladolid, Eibar",
+  "src": "https://en.wikipedia.org/wiki/2020%E2%80%9321_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2020-21 La Liga?",
+  "a": "Barcelona",
+  "src": "https://en.wikipedia.org/wiki/2020%E2%80%9321_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2021-22 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/2021%E2%80%9322_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2021-22 La Liga?",
+  "a": "Barcelona",
+  "src": "https://en.wikipedia.org/wiki/2021%E2%80%9322_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2021-22 La Liga?",
+  "a": "Atlético Madrid",
+  "src": "https://en.wikipedia.org/wiki/2021%E2%80%9322_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the La Liga in 2021-22?",
+  "a": "Granada, Levante, Alavés",
+  "src": "https://en.wikipedia.org/wiki/2021%E2%80%9322_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2021-22 La Liga?",
+  "a": "Sevilla",
+  "src": "https://en.wikipedia.org/wiki/2021%E2%80%9322_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2022-23 La Liga?",
+  "a": "Barcelona",
+  "src": "https://en.wikipedia.org/wiki/2022%E2%80%9323_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2022-23 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/2022%E2%80%9323_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2022-23 La Liga?",
+  "a": "Atlético Madrid",
+  "src": "https://en.wikipedia.org/wiki/2022%E2%80%9323_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the La Liga in 2022-23?",
+  "a": "Valladolid, Espanyol, Elche",
+  "src": "https://en.wikipedia.org/wiki/2022%E2%80%9323_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2022-23 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/2022%E2%80%9323_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2023-24 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/2023%E2%80%9324_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2023-24 La Liga?",
+  "a": "Barcelona",
+  "src": "https://en.wikipedia.org/wiki/2023%E2%80%9324_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2023-24 La Liga?",
+  "a": "Girona",
+  "src": "https://en.wikipedia.org/wiki/2023%E2%80%9324_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the La Liga in 2023-24?",
+  "a": "Cádiz, Almería, Granada",
+  "src": "https://en.wikipedia.org/wiki/2023%E2%80%9324_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2024-25 La Liga?",
+  "a": "Barcelona",
+  "src": "https://en.wikipedia.org/wiki/2024%E2%80%9325_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2024-25 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/2024%E2%80%9325_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2024-25 La Liga?",
+  "a": "Atlético Madrid",
+  "src": "https://en.wikipedia.org/wiki/2024%E2%80%9325_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the La Liga in 2024-25?",
+  "a": "Leganés, Las Palmas, Valladolid",
+  "src": "https://en.wikipedia.org/wiki/2024%E2%80%9325_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2024-25 La Liga?",
+  "a": "Athletic Bilbao",
+  "src": "https://en.wikipedia.org/wiki/2024%E2%80%9325_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2025-26 La Liga?",
+  "a": "Barcelona",
+  "src": "https://en.wikipedia.org/wiki/2025%E2%80%9326_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2025-26 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/2025%E2%80%9326_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2025-26 La Liga?",
+  "a": "Villarreal",
+  "src": "https://en.wikipedia.org/wiki/2025%E2%80%9326_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the La Liga in 2025-26?",
+  "a": "Mallorca, Girona, Real Oviedo",
+  "src": "https://en.wikipedia.org/wiki/2025%E2%80%9326_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2025-26 La Liga?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/2025%E2%80%9326_La_Liga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ }
+]

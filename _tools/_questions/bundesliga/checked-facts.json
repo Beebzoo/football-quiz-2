@@ -1,0 +1,1551 @@
+[
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 1995-96 Bundesliga?",
+  "a": "Borussia Dortmund",
+  "src": "https://en.wikipedia.org/wiki/1995%E2%80%9396_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 1995-96 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/1995%E2%80%9396_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 1995-96 Bundesliga?",
+  "a": "Schalke 04",
+  "src": "https://en.wikipedia.org/wiki/1995%E2%80%9396_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Bundesliga in 1995-96?",
+  "a": "1. FC Kaiserslautern, Eintracht Frankfurt, KFC Uerdingen",
+  "src": "https://en.wikipedia.org/wiki/1995%E2%80%9396_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 1995-96 Bundesliga?",
+  "a": "1. FC Köln",
+  "src": "https://en.wikipedia.org/wiki/1995%E2%80%9396_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 1996-97 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/1996%E2%80%9397_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 1996-97 Bundesliga?",
+  "a": "Bayer Leverkusen",
+  "src": "https://en.wikipedia.org/wiki/1996%E2%80%9397_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 1996-97 Bundesliga?",
+  "a": "Borussia Dortmund",
+  "src": "https://en.wikipedia.org/wiki/1996%E2%80%9397_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Bundesliga in 1996-97?",
+  "a": "Fortuna Düsseldorf, SC Freiburg, FC St. Pauli",
+  "src": "https://en.wikipedia.org/wiki/1996%E2%80%9397_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 1996-97 Bundesliga?",
+  "a": "VfB Stuttgart",
+  "src": "https://en.wikipedia.org/wiki/1996%E2%80%9397_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 1997-98 Bundesliga?",
+  "a": "1. FC Kaiserslautern",
+  "src": "https://en.wikipedia.org/wiki/1997%E2%80%9398_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 1997-98 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/1997%E2%80%9398_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 1997-98 Bundesliga?",
+  "a": "Bayer Leverkusen",
+  "src": "https://en.wikipedia.org/wiki/1997%E2%80%9398_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Bundesliga in 1997-98?",
+  "a": "Karlsruher SC, 1. FC Köln, Arminia Bielefeld",
+  "src": "https://en.wikipedia.org/wiki/1997%E2%80%9398_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 1997-98 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/1997%E2%80%9398_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 1997-98 Bundesliga?",
+  "a": "Schalke 04",
+  "src": "https://en.wikipedia.org/wiki/1997%E2%80%9398_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 1998-99 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/1998%E2%80%9399_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 1998-99 Bundesliga?",
+  "a": "Bayer Leverkusen",
+  "src": "https://en.wikipedia.org/wiki/1998%E2%80%9399_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 1998-99 Bundesliga?",
+  "a": "Hertha BSC",
+  "src": "https://en.wikipedia.org/wiki/1998%E2%80%9399_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Bundesliga in 1998-99?",
+  "a": "1. FC Nürnberg, VfL Bochum, Borussia Mönchengladbach",
+  "src": "https://en.wikipedia.org/wiki/1998%E2%80%9399_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2000-01 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/2000%E2%80%9301_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2000-01 Bundesliga?",
+  "a": "Schalke 04",
+  "src": "https://en.wikipedia.org/wiki/2000%E2%80%9301_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2000-01 Bundesliga?",
+  "a": "Borussia Dortmund",
+  "src": "https://en.wikipedia.org/wiki/2000%E2%80%9301_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Bundesliga in 2000-01?",
+  "a": "SpVgg Unterhaching, Eintracht Frankfurt, VfL Bochum",
+  "src": "https://en.wikipedia.org/wiki/2000%E2%80%9301_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2000-01 Bundesliga?",
+  "a": "Schalke 04",
+  "src": "https://en.wikipedia.org/wiki/2000%E2%80%9301_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2000-01 Bundesliga?",
+  "a": "Schalke 04",
+  "src": "https://en.wikipedia.org/wiki/2000%E2%80%9301_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2001-02 Bundesliga?",
+  "a": "Borussia Dortmund",
+  "src": "https://en.wikipedia.org/wiki/2001%E2%80%9302_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2001-02 Bundesliga?",
+  "a": "Bayer Leverkusen",
+  "src": "https://en.wikipedia.org/wiki/2001%E2%80%9302_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2001-02 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/2001%E2%80%9302_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Bundesliga in 2001-02?",
+  "a": "SC Freiburg, 1. FC Köln, FC St. Pauli",
+  "src": "https://en.wikipedia.org/wiki/2001%E2%80%9302_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2001-02 Bundesliga?",
+  "a": "Bayer Leverkusen",
+  "src": "https://en.wikipedia.org/wiki/2001%E2%80%9302_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2001-02 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/2001%E2%80%9302_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2002-03 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/2002%E2%80%9303_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2002-03 Bundesliga?",
+  "a": "VfB Stuttgart",
+  "src": "https://en.wikipedia.org/wiki/2002%E2%80%9303_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2002-03 Bundesliga?",
+  "a": "Borussia Dortmund",
+  "src": "https://en.wikipedia.org/wiki/2002%E2%80%9303_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Bundesliga in 2002-03?",
+  "a": "Arminia Bielefeld, 1. FC Nürnberg, Energie Cottbus",
+  "src": "https://en.wikipedia.org/wiki/2002%E2%80%9303_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2003-04 Bundesliga?",
+  "a": "Werder Bremen",
+  "src": "https://en.wikipedia.org/wiki/2003%E2%80%9304_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2003-04 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/2003%E2%80%9304_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2003-04 Bundesliga?",
+  "a": "Bayer Leverkusen",
+  "src": "https://en.wikipedia.org/wiki/2003%E2%80%9304_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Bundesliga in 2003-04?",
+  "a": "Eintracht Frankfurt, 1860 Munich, 1. FC Köln",
+  "src": "https://en.wikipedia.org/wiki/2003%E2%80%9304_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2003-04 Bundesliga?",
+  "a": "VfB Stuttgart",
+  "src": "https://en.wikipedia.org/wiki/2003%E2%80%9304_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2004-05 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/2004%E2%80%9305_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2004-05 Bundesliga?",
+  "a": "Schalke 04",
+  "src": "https://en.wikipedia.org/wiki/2004%E2%80%9305_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2004-05 Bundesliga?",
+  "a": "Werder Bremen",
+  "src": "https://en.wikipedia.org/wiki/2004%E2%80%9305_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Bundesliga in 2004-05?",
+  "a": "VfL Bochum, Hansa Rostock, SC Freiburg",
+  "src": "https://en.wikipedia.org/wiki/2004%E2%80%9305_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2004-05 Bundesliga?",
+  "a": "Hertha BSC",
+  "src": "https://en.wikipedia.org/wiki/2004%E2%80%9305_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2005-06 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/2005%E2%80%9306_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2005-06 Bundesliga?",
+  "a": "Werder Bremen",
+  "src": "https://en.wikipedia.org/wiki/2005%E2%80%9306_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2005-06 Bundesliga?",
+  "a": "Hamburger SV",
+  "src": "https://en.wikipedia.org/wiki/2005%E2%80%9306_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Bundesliga in 2005-06?",
+  "a": "1. FC Kaiserslautern, 1. FC Köln, MSV Duisburg",
+  "src": "https://en.wikipedia.org/wiki/2005%E2%80%9306_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2005-06 Bundesliga?",
+  "a": "Werder Bremen",
+  "src": "https://en.wikipedia.org/wiki/2005%E2%80%9306_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2005-06 Bundesliga?",
+  "a": "Hamburger SV",
+  "src": "https://en.wikipedia.org/wiki/2005%E2%80%9306_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2006-07 Bundesliga?",
+  "a": "VfB Stuttgart",
+  "src": "https://en.wikipedia.org/wiki/2006%E2%80%9307_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2006-07 Bundesliga?",
+  "a": "Schalke 04",
+  "src": "https://en.wikipedia.org/wiki/2006%E2%80%9307_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2006-07 Bundesliga?",
+  "a": "Werder Bremen",
+  "src": "https://en.wikipedia.org/wiki/2006%E2%80%9307_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Bundesliga in 2006-07?",
+  "a": "Mainz 05, Alemannia Aachen, Borussia Mönchengladbach",
+  "src": "https://en.wikipedia.org/wiki/2006%E2%80%9307_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2006-07 Bundesliga?",
+  "a": "Werder Bremen",
+  "src": "https://en.wikipedia.org/wiki/2006%E2%80%9307_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2006-07 Bundesliga?",
+  "a": "Schalke 04",
+  "src": "https://en.wikipedia.org/wiki/2006%E2%80%9307_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2007-08 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/2007%E2%80%9308_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2007-08 Bundesliga?",
+  "a": "Werder Bremen",
+  "src": "https://en.wikipedia.org/wiki/2007%E2%80%9308_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2007-08 Bundesliga?",
+  "a": "Schalke 04",
+  "src": "https://en.wikipedia.org/wiki/2007%E2%80%9308_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Bundesliga in 2007-08?",
+  "a": "1. FC Nürnberg, Hansa Rostock, MSV Duisburg",
+  "src": "https://en.wikipedia.org/wiki/2007%E2%80%9308_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2007-08 Bundesliga?",
+  "a": "Werder Bremen",
+  "src": "https://en.wikipedia.org/wiki/2007%E2%80%9308_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2008-09 Bundesliga?",
+  "a": "VfL Wolfsburg",
+  "src": "https://en.wikipedia.org/wiki/2008%E2%80%9309_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2008-09 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/2008%E2%80%9309_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2008-09 Bundesliga?",
+  "a": "VfB Stuttgart",
+  "src": "https://en.wikipedia.org/wiki/2008%E2%80%9309_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Bundesliga in 2008-09?",
+  "a": "Energie Cottbus, Karlsruher SC, Arminia Bielefeld",
+  "src": "https://en.wikipedia.org/wiki/2008%E2%80%9309_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2008-09 Bundesliga?",
+  "a": "Schalke 04",
+  "src": "https://en.wikipedia.org/wiki/2008%E2%80%9309_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2009-10 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/2009%E2%80%9310_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2009-10 Bundesliga?",
+  "a": "Schalke 04",
+  "src": "https://en.wikipedia.org/wiki/2009%E2%80%9310_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2009-10 Bundesliga?",
+  "a": "Werder Bremen",
+  "src": "https://en.wikipedia.org/wiki/2009%E2%80%9310_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Bundesliga in 2009-10?",
+  "a": "VfL Bochum, Hertha BSC",
+  "src": "https://en.wikipedia.org/wiki/2009%E2%80%9310_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2009-10 Bundesliga?",
+  "a": "Edin Džeko",
+  "src": "https://en.wikipedia.org/wiki/2009%E2%80%9310_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 22 of them."
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2010-11 Bundesliga?",
+  "a": "Borussia Dortmund",
+  "src": "https://en.wikipedia.org/wiki/2010%E2%80%9311_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2010-11 Bundesliga?",
+  "a": "Bayer Leverkusen",
+  "src": "https://en.wikipedia.org/wiki/2010%E2%80%9311_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2010-11 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/2010%E2%80%9311_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Bundesliga in 2010-11?",
+  "a": "Eintracht Frankfurt, FC St. Pauli",
+  "src": "https://en.wikipedia.org/wiki/2010%E2%80%9311_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2010-11 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/2010%E2%80%9311_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2010-11 Bundesliga?",
+  "a": "Mario Gómez",
+  "src": "https://en.wikipedia.org/wiki/2010%E2%80%9311_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 28 of them."
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2011-12 Bundesliga?",
+  "a": "Borussia Dortmund",
+  "src": "https://en.wikipedia.org/wiki/2011%E2%80%9312_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2011-12 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/2011%E2%80%9312_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2011-12 Bundesliga?",
+  "a": "Schalke 04",
+  "src": "https://en.wikipedia.org/wiki/2011%E2%80%9312_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Bundesliga in 2011-12?",
+  "a": "Hertha BSC, 1. FC Köln, 1. FC Kaiserslautern",
+  "src": "https://en.wikipedia.org/wiki/2011%E2%80%9312_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2011-12 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/2011%E2%80%9312_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2011-12 Bundesliga?",
+  "a": "Klaas-Jan Huntelaar",
+  "src": "https://en.wikipedia.org/wiki/2011%E2%80%9312_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 29 of them."
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2012-13 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/2012%E2%80%9313_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2012-13 Bundesliga?",
+  "a": "Borussia Dortmund",
+  "src": "https://en.wikipedia.org/wiki/2012%E2%80%9313_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2012-13 Bundesliga?",
+  "a": "Bayer Leverkusen",
+  "src": "https://en.wikipedia.org/wiki/2012%E2%80%9313_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Bundesliga in 2012-13?",
+  "a": "Fortuna Düsseldorf, Greuther Fürth",
+  "src": "https://en.wikipedia.org/wiki/2012%E2%80%9313_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2012-13 Bundesliga?",
+  "a": "Stefan Kießling",
+  "src": "https://en.wikipedia.org/wiki/2012%E2%80%9313_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 25 of them."
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2013-14 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/2013%E2%80%9314_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2013-14 Bundesliga?",
+  "a": "Borussia Dortmund",
+  "src": "https://en.wikipedia.org/wiki/2013%E2%80%9314_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2013-14 Bundesliga?",
+  "a": "Schalke 04",
+  "src": "https://en.wikipedia.org/wiki/2013%E2%80%9314_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Bundesliga in 2013-14?",
+  "a": "1. FC Nürnberg, Eintracht Braunschweig",
+  "src": "https://en.wikipedia.org/wiki/2013%E2%80%9314_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2013-14 Bundesliga?",
+  "a": "Borussia Dortmund",
+  "src": "https://en.wikipedia.org/wiki/2013%E2%80%9314_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2014-15 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/2014%E2%80%9315_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2014-15 Bundesliga?",
+  "a": "VfL Wolfsburg",
+  "src": "https://en.wikipedia.org/wiki/2014%E2%80%9315_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2014-15 Bundesliga?",
+  "a": "Borussia Mönchengladbach",
+  "src": "https://en.wikipedia.org/wiki/2014%E2%80%9315_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Bundesliga in 2014-15?",
+  "a": "SC Freiburg, SC Paderborn",
+  "src": "https://en.wikipedia.org/wiki/2014%E2%80%9315_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club won the 2015-16 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2015-16 Bundesliga?",
+  "a": "Borussia Dortmund",
+  "src": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "Which club finished third in the 2015-16 Bundesliga?",
+  "a": "Bayer Leverkusen",
+  "src": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Bundesliga in 2015-16?",
+  "a": "VfB Stuttgart, Hannover 96",
+  "src": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2015-16 Bundesliga?",
+  "a": "Borussia Dortmund",
+  "src": "https://en.wikipedia.org/wiki/2015%E2%80%9316_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2016-17 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/2016%E2%80%9317_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2016-17 Bundesliga?",
+  "a": "RB Leipzig",
+  "src": "https://en.wikipedia.org/wiki/2016%E2%80%9317_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2016-17 Bundesliga?",
+  "a": "Borussia Dortmund",
+  "src": "https://en.wikipedia.org/wiki/2016%E2%80%9317_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Bundesliga in 2016-17?",
+  "a": "FC Ingolstadt, Darmstadt 98",
+  "src": "https://en.wikipedia.org/wiki/2016%E2%80%9317_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2016-17 Bundesliga?",
+  "a": "Pierre-Emerick Aubameyang",
+  "src": "https://en.wikipedia.org/wiki/2016%E2%80%9317_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 31 of them."
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2017-18 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/2017%E2%80%9318_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2017-18 Bundesliga?",
+  "a": "Schalke 04",
+  "src": "https://en.wikipedia.org/wiki/2017%E2%80%9318_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2017-18 Bundesliga?",
+  "a": "1899 Hoffenheim",
+  "src": "https://en.wikipedia.org/wiki/2017%E2%80%9318_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Bundesliga in 2017-18?",
+  "a": "Hamburger SV",
+  "src": "https://en.wikipedia.org/wiki/2017%E2%80%9318_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2017-18 Bundesliga?",
+  "a": "Robert Lewandowski",
+  "src": "https://en.wikipedia.org/wiki/2017%E2%80%9318_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 29 of them."
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2018-19 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/2018%E2%80%9319_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2018-19 Bundesliga?",
+  "a": "Borussia Dortmund",
+  "src": "https://en.wikipedia.org/wiki/2018%E2%80%9319_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2018-19 Bundesliga?",
+  "a": "RB Leipzig",
+  "src": "https://en.wikipedia.org/wiki/2018%E2%80%9319_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Bundesliga in 2018-19?",
+  "a": "VfB Stuttgart, Hannover 96",
+  "src": "https://en.wikipedia.org/wiki/2018%E2%80%9319_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2018-19 Bundesliga?",
+  "a": "RB Leipzig",
+  "src": "https://en.wikipedia.org/wiki/2018%E2%80%9319_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2018-19 Bundesliga?",
+  "a": "Robert Lewandowski",
+  "src": "https://en.wikipedia.org/wiki/2018%E2%80%9319_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 22 of them."
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2019-20 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/2019%E2%80%9320_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2019-20 Bundesliga?",
+  "a": "Borussia Dortmund",
+  "src": "https://en.wikipedia.org/wiki/2019%E2%80%9320_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2019-20 Bundesliga?",
+  "a": "RB Leipzig",
+  "src": "https://en.wikipedia.org/wiki/2019%E2%80%9320_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Bundesliga in 2019-20?",
+  "a": "SC Paderborn",
+  "src": "https://en.wikipedia.org/wiki/2019%E2%80%9320_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2019-20 Bundesliga?",
+  "a": "Robert Lewandowski",
+  "src": "https://en.wikipedia.org/wiki/2019%E2%80%9320_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 34 of them."
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2020-21 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/2020%E2%80%9321_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2020-21 Bundesliga?",
+  "a": "RB Leipzig",
+  "src": "https://en.wikipedia.org/wiki/2020%E2%80%9321_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2020-21 Bundesliga?",
+  "a": "Borussia Dortmund",
+  "src": "https://en.wikipedia.org/wiki/2020%E2%80%9321_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Bundesliga in 2020-21?",
+  "a": "Werder Bremen, Schalke 04",
+  "src": "https://en.wikipedia.org/wiki/2020%E2%80%9321_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2020-21 Bundesliga?",
+  "a": "RB Leipzig",
+  "src": "https://en.wikipedia.org/wiki/2020%E2%80%9321_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "scorers",
+  "q": "Who was the top scorer in the 2020-21 Bundesliga?",
+  "a": "Robert Lewandowski",
+  "src": "https://en.wikipedia.org/wiki/2020%E2%80%9321_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table",
+  "sub": "He got 41 of them."
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2021-22 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/2021%E2%80%9322_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2021-22 Bundesliga?",
+  "a": "Borussia Dortmund",
+  "src": "https://en.wikipedia.org/wiki/2021%E2%80%9322_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2021-22 Bundesliga?",
+  "a": "Bayer Leverkusen",
+  "src": "https://en.wikipedia.org/wiki/2021%E2%80%9322_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Bundesliga in 2021-22?",
+  "a": "Arminia Bielefeld",
+  "src": "https://en.wikipedia.org/wiki/2021%E2%80%9322_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2022-23 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/2022%E2%80%9323_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2022-23 Bundesliga?",
+  "a": "Borussia Dortmund",
+  "src": "https://en.wikipedia.org/wiki/2022%E2%80%9323_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2022-23 Bundesliga?",
+  "a": "RB Leipzig",
+  "src": "https://en.wikipedia.org/wiki/2022%E2%80%9323_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "champions",
+  "q": "The 2022-23 Bundesliga was decided on goal difference. Which club took it?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/2022%E2%80%9323_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Bundesliga in 2022-23?",
+  "a": "Schalke 04, Hertha BSC",
+  "src": "https://en.wikipedia.org/wiki/2022%E2%80%9323_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2023-24 Bundesliga?",
+  "a": "Bayer Leverkusen",
+  "src": "https://en.wikipedia.org/wiki/2023%E2%80%9324_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2023-24 Bundesliga?",
+  "a": "VfB Stuttgart",
+  "src": "https://en.wikipedia.org/wiki/2023%E2%80%9324_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2023-24 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/2023%E2%80%9324_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Bundesliga in 2023-24?",
+  "a": "Darmstadt 98",
+  "src": "https://en.wikipedia.org/wiki/2023%E2%80%9324_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club scored the most goals in the 2023-24 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/2023%E2%80%9324_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2024-25 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/2024%E2%80%9325_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2024-25 Bundesliga?",
+  "a": "Bayer Leverkusen",
+  "src": "https://en.wikipedia.org/wiki/2024%E2%80%9325_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2024-25 Bundesliga?",
+  "a": "Eintracht Frankfurt",
+  "src": "https://en.wikipedia.org/wiki/2024%E2%80%9325_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Bundesliga in 2024-25?",
+  "a": "Holstein Kiel, VfL Bochum",
+  "src": "https://en.wikipedia.org/wiki/2024%E2%80%9325_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2025-26 Bundesliga?",
+  "a": "Bayern Munich",
+  "src": "https://en.wikipedia.org/wiki/2025%E2%80%9326_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club finished second in the 2025-26 Bundesliga?",
+  "a": "Borussia Dortmund",
+  "src": "https://en.wikipedia.org/wiki/2025%E2%80%9326_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished third in the 2025-26 Bundesliga?",
+  "a": "RB Leipzig",
+  "src": "https://en.wikipedia.org/wiki/2025%E2%80%9326_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which clubs went down from the Bundesliga in 2025-26?",
+  "a": "VfL Wolfsburg, 1. FC Heidenheim, FC St. Pauli",
+  "src": "https://en.wikipedia.org/wiki/2025%E2%80%9326_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ },
+ {
+  "tier": "extreme",
+  "cat": "records",
+  "q": "Which club conceded the fewest goals in the 2025-26 Bundesliga?",
+  "a": "Borussia Dortmund",
+  "src": "https://en.wikipedia.org/wiki/2025%E2%80%9326_Bundesliga",
+  "conf": "sure",
+  "verdict": "ok",
+  "note": "harvested from the season table"
+ }
+]
