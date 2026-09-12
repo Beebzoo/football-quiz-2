@@ -1,0 +1,26 @@
+# local working files - the question bank stays off the public repo
+Football Quiz Question Bank.xlsx
+_bank_data.tsv
+~$*
+
+# the YuNet face model, fetched on demand by _tools/build-facecrop.py
+_tools/_models/
+__pycache__/
+
+# the badge fame cache: rebuildable, and 2,894 lookups nobody needs in git
+_tools/_models/
+
+# the Canva export the celebration cutouts come out of: 14MB of print-resolution
+# source for 1.1MB of shipped WebP. Keep it locally, run _tools/build-stickers.py
+Untitled design*.pdf
+
+# ---------------------------------------------------------------------------
+# Decks for modes this build does not carry. The files stay on disk so a mode
+# can be brought back without re-harvesting anything, they just do not need to
+# be served: nothing in the five modes fetches them, and between them they are
+# 108MB of the repo. The small dead decks (nations, leagues, mystery, and the
+# rest) DO stay in, because build-mc.js reads them to find its wrong answers.
+assets/stadiums/
+assets/kits/
+# the 7 source photos the assets/players cutouts were made from
+assets/originals/

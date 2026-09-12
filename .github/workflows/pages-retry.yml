@@ -1,0 +1,32 @@
+name: Retry a failed Pages deploy
+
+# Why this exists: on 6 Aug 2026 the Stadium mode deploy died at "Getting action
+# download info" with a 503, before actions/checkout had even run. The in-run
+# retry inside pages.yml only wraps the deploy step, so it could never fire, and
+# the feature sat undeployed for five days. This watches the whole run instead
+# and starts it again from the top when GitHub has a wobble.
+
+on:
+  workflow_run:
+    workflows: ["Deploy to GitHub Pages"]
+    types: [completed]
+
+permissions:
+  actions: write
+
+jobs:
+  retry:
+    # run_attempt guards the loop: a genuinely broken commit gets 3 shots, not infinite
+    if: github.event.workflow_run.conclusion == 'failure' && github.event.workflow_run.run_attempt < 3
+    runs-on: ubuntu-latest
+    steps:
+      - name: Let the outage pass
+        run: sleep 300
+      - name: Start the failed jobs again
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RUN_ID: ${{ github.event.workflow_run.id }}
+        run: |
+          echo "Attempt ${{ github.event.workflow_run.run_attempt }} of run $RUN_ID failed, re-running."
+          gh api --method POST -H "Accept: application/vnd.github+json" \
+            "/repos/${{ github.repository }}/actions/runs/$RUN_ID/rerun-failed-jobs"

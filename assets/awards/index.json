@@ -1,0 +1,278 @@
+{
+ "easy": [],
+ "normal": [
+  {
+   "q": "Who won the Ballon d'Or in 1992?",
+   "a": "Marco van Basten"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 1993?",
+   "a": "Roberto Baggio"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 1994?",
+   "a": "Hristo Stoichkov"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 1996?",
+   "a": "Matthias Sammer"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 1997?",
+   "a": "Ronaldo"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 1998?",
+   "a": "Zinedine Zidane"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 1999?",
+   "a": "Rivaldo"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 2000?",
+   "a": "Luís Figo"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 2001?",
+   "a": "Michael Owen"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 2002?",
+   "a": "Ronaldo"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 2003?",
+   "a": "Pavel Nedvěd"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 2004?",
+   "a": "Andriy Shevchenko"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 2005?",
+   "a": "Ronaldinho"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 2006?",
+   "a": "Fabio Cannavaro"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 2007?",
+   "a": "Kaká"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 2008?",
+   "a": "Cristiano Ronaldo"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 2022?",
+   "a": "Karim Benzema"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 2024?",
+   "a": "Rodri"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 2025?",
+   "a": "Ousmane Dembélé"
+  }
+ ],
+ "hard": [
+  {
+   "q": "Who won the Ballon d'Or in 1957?",
+   "a": "Alfredo Di Stéfano"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 1959?",
+   "a": "Alfredo Di Stéfano"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 1961?",
+   "a": "Omar Sívori"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 1966?",
+   "a": "Bobby Charlton"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 1967?",
+   "a": "Flórián Albert"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 1971?",
+   "a": "Johan Cruyff"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 1973?",
+   "a": "Johan Cruyff"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 1974?",
+   "a": "Johan Cruyff"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 1975?",
+   "a": "Oleh Blokhin"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 1980?",
+   "a": "Karl-Heinz Rummenigge"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 1981?",
+   "a": "Karl-Heinz Rummenigge"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 1983?",
+   "a": "Michel Platini"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 1984?",
+   "a": "Michel Platini"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 1985?",
+   "a": "Michel Platini"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 1987?",
+   "a": "Ruud Gullit"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 1988?",
+   "a": "Marco van Basten"
+  },
+  {
+   "q": "Who won the Ballon d'Or in 1989?",
+   "a": "Marco van Basten"
+  },
+  {
+   "q": "Who won FIFA World Player of the Year in 1992?",
+   "a": "Marco van Basten"
+  },
+  {
+   "q": "Who won FIFA World Player of the Year in 1993?",
+   "a": "Roberto Baggio"
+  },
+  {
+   "q": "Who won FIFA World Player of the Year in 1994?",
+   "a": "Romário"
+  },
+  {
+   "q": "Who won FIFA World Player of the Year in 1996?",
+   "a": "Ronaldo"
+  },
+  {
+   "q": "Who won FIFA World Player of the Year in 1997?",
+   "a": "Ronaldo"
+  },
+  {
+   "q": "Who won FIFA World Player of the Year in 1998?",
+   "a": "Zinedine Zidane"
+  },
+  {
+   "q": "Who won FIFA World Player of the Year in 1999?",
+   "a": "Rivaldo"
+  },
+  {
+   "q": "Who won FIFA World Player of the Year in 2000?",
+   "a": "Zinedine Zidane"
+  },
+  {
+   "q": "Who won FIFA World Player of the Year in 2001?",
+   "a": "Luís Figo"
+  },
+  {
+   "q": "Who won FIFA World Player of the Year in 2002?",
+   "a": "Ronaldo"
+  },
+  {
+   "q": "Who won FIFA World Player of the Year in 2003?",
+   "a": "Zinedine Zidane"
+  },
+  {
+   "q": "Who won FIFA World Player of the Year in 2004?",
+   "a": "Ronaldinho"
+  },
+  {
+   "q": "Who won FIFA World Player of the Year in 2005?",
+   "a": "Ronaldinho"
+  },
+  {
+   "q": "Who won FIFA World Player of the Year in 2006?",
+   "a": "Fabio Cannavaro"
+  },
+  {
+   "q": "Who won FIFA World Player of the Year in 2007?",
+   "a": "Kaká"
+  },
+  {
+   "q": "Who won FIFA World Player of the Year in 2008?",
+   "a": "Cristiano Ronaldo"
+  },
+  {
+   "q": "Who won the European Golden Shoe in 2001?",
+   "a": "Henrik Larsson"
+  },
+  {
+   "q": "Who won the European Golden Shoe in 2002?",
+   "a": "Mário Jardel"
+  },
+  {
+   "q": "Who won the European Golden Shoe in 2003?",
+   "a": "Roy Makaay"
+  },
+  {
+   "q": "Who won the European Golden Shoe in 2004?",
+   "a": "Thierry Henry"
+  },
+  {
+   "q": "Who won the European Golden Shoe in 2007?",
+   "a": "Francesco Totti"
+  },
+  {
+   "q": "Who won the European Golden Shoe in 2008?",
+   "a": "Cristiano Ronaldo"
+  },
+  {
+   "q": "Who won the European Golden Shoe in 2009?",
+   "a": "Diego Forlán"
+  },
+  {
+   "q": "Who won the European Golden Shoe in 2010?",
+   "a": "Thomas Müller"
+  },
+  {
+   "q": "Who won the European Golden Shoe in 2011?",
+   "a": "Cristiano Ronaldo"
+  },
+  {
+   "q": "Who won the European Golden Shoe in 2014?",
+   "a": "Luis Suárez"
+  },
+  {
+   "q": "Who won the European Golden Shoe in 2016?",
+   "a": "Luis Suárez"
+  },
+  {
+   "q": "Who won the European Golden Shoe in 2021?",
+   "a": "Robert Lewandowski"
+  },
+  {
+   "q": "Who won the European Golden Shoe in 1999?",
+   "a": "Mário Jardel"
+  },
+  {
+   "q": "Who won the European Golden Shoe in 1997?",
+   "a": "Ronaldo"
+  }
+ ],
+ "extreme": [
+  {
+   "q": "Who won the European Golden Shoe in 1976?",
+   "a": "Sotiris Kaiafas"
+  }
+ ],
+ "ball": []
+}

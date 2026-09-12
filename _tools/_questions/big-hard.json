@@ -1,0 +1,3362 @@
+[
+ {
+  "tier": "hard",
+  "q": "Feyenoord won the 1974 UEFA Cup against Tottenham. Which Limburg-born coach was in charge?",
+  "a": "Wiel Coerver",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Real Sociedad won La Liga in 1981 and 1982. Who was their Spain goalkeeper and captain?",
+  "a": "Luis Arconada",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Colombian club did Alfredo Di Stéfano star for before joining Real Madrid?",
+  "a": "Millonarios",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Argentine club won three Copa Libertadores in a row, from 1968 to 1970?",
+  "a": "Estudiantes de La Plata",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Who scored the only goal of the 1980 European Cup final for Nottingham Forest?",
+  "a": "John Robertson",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Kevin Keegan won two Ballons d'Or in the late 1970s while playing at which club?",
+  "a": "Hamburg",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Belgium reached the 1986 World Cup semi-finals. Who captained the side?",
+  "a": "Jan Ceulemans",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Brazilian great was the marquee signing when Japan's J.League launched in 1993?",
+  "a": "Zico",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Who captained Uruguay in the 1950 Maracanazo, and took the ball off the referee to slow the game down?",
+  "a": "Obdulio Varela",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Ukrainian coach built the great Dynamo Kyiv sides of the 1970s and 1980s?",
+  "a": "Valeriy Lobanovskyi",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "In 1975 Dynamo Kyiv beat Bayern Munich home and away to win which trophy?",
+  "a": "The European Super Cup",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Swedish club won the UEFA Cup twice in the 1980s, in 1982 and 1987?",
+  "a": "IFK Göteborg",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which coach won the 1982 UEFA Cup with IFK Göteborg before a long career in Portugal, Italy and England?",
+  "a": "Sven-Göran Eriksson",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Belgian club won its only league title in 1997, with Eric Gerets as coach?",
+  "a": "Lierse",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Belgian side Beveren became a feeder club for which Ivorian academy in the 2000s?",
+  "a": "ASEC Mimosas",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Spanish club is known as the Submarino Amarillo?",
+  "a": "Villarreal",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Argentine coach lost three European finals in a row, one with Mallorca and two with Valencia?",
+  "a": "Héctor Cúper",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Real Madrid's 1980s youth wave was called La Quinta del Buitre. Which player was the Buitre?",
+  "a": "Emilio Butragueño",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which club won the 1991 Copa Libertadores, still the only Chilean side to do it?",
+  "a": "Colo-Colo",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Yugoslav coach led Colo-Colo to their 1991 Copa Libertadores title?",
+  "a": "Mirko Jozić",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Peñarol were founded in 1891 under an English name. What was the club originally called?",
+  "a": "Central Uruguay Railway Cricket Club",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which country hosted the first World Cup finals played on artificial pitches, in 2015?",
+  "a": "Canada, at the Women's World Cup",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Belgian club plays at the Bosuilstadion?",
+  "a": "Royal Antwerp",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Royal Antwerp lost the 1993 Cup Winners' Cup final to which Italian club?",
+  "a": "Parma",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Who scored all four goals in the Netherlands' first official international, a 4-1 win in 1905?",
+  "a": "Eddy de Neve",
+  "src": "https://nl.wikipedia.org/wiki/Eddy_de_Neve",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "The KNVB Cup trophy is nicknamed after the object its shape resembles. Which object?",
+  "a": "A pine cone, de dennenappel",
+  "src": "https://sportgeschiedenis.nl/sporten/voetbal/de-dennenappel-als-trofee-van-de-knvb-beker-bestaat-sinds-1948/",
+  "conf": "verified"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Amsterdam club won the very first Dutch cup competition, in 1899?",
+  "a": "RAP",
+  "src": "https://historiek.net/knvb-beker-geschiedenis-winnaars-dennenappel/102485/",
+  "conf": "verified"
+ },
+ {
+  "tier": "extreme",
+  "q": "Bert van Marwijk played for Go Ahead Eagles, AZ and Fortuna Sittard. Which other Limburg club?",
+  "a": "MVV Maastricht",
+  "src": "https://football.fandom.com/wiki/Bert_van_Marwijk",
+  "conf": "verified"
+ },
+ {
+  "tier": "ball",
+  "q": "Which club from the province of Groningen went bankrupt in 2013 after 119 years?",
+  "a": "SC Veendam",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Louis van Gaal spent most of his playing career at which Dutch club?",
+  "a": "Sparta Rotterdam",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Dutch club lost the 1975 UEFA Cup final to Borussia Mönchengladbach?",
+  "a": "FC Twente",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which coach took the Netherlands to the 1990 World Cup after the squad rejected his predecessor?",
+  "a": "Leo Beenhakker",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Dutch coach did the players force out before the 1990 World Cup, clearing the way for Beenhakker?",
+  "a": "Thijs Libregts",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Ruud Krol left Ajax in 1980 for which North American club?",
+  "a": "Vancouver Whitecaps",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Between 1933 and 1935 Union Saint-Gilloise went unbeaten in the Belgian league for how many matches?",
+  "a": "60",
+  "src": "https://en.wikipedia.org/wiki/Royale_Union_Saint-Gilloise",
+  "conf": "verified"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Belgian coach won the 1993 Champions League with Marseille?",
+  "a": "Raymond Goethals",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Belgium won Olympic football gold in 1920. Which Belgian city hosted those Games?",
+  "a": "Antwerp",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "The 1920 Olympic football final ended early when the opponents walked off in protest. Which country?",
+  "a": "Czechoslovakia",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Belgian club won its first league title in 2015, under Hein Vanhaezebrouck?",
+  "a": "KAA Gent",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Belgian club is nicknamed Les Zèbres?",
+  "a": "Charleroi",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which 1960s Anderlecht forward became the club's record scorer and later managed Belgium?",
+  "a": "Paul Van Himst",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which small West Flemish club reached the UEFA Cup semi-final in 1986?",
+  "a": "KSV Waregem",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Enzo Scifo played for Belgium but was born to parents from which country?",
+  "a": "Italy",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Belgian goalkeeper won a string of Bundesliga titles with Bayern Munich in the 1980s?",
+  "a": "Jean-Marie Pfaff",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Club Brugge and Cercle Brugge share which stadium?",
+  "a": "The Jan Breydel Stadium",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Brussels club won the Belgian league in 1975 and later collapsed?",
+  "a": "RWD Molenbeek",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Espanyol lost UEFA Cup finals on penalties in 1988 and 2007. Which Spanish club beat them in 2007?",
+  "a": "Sevilla",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Athletic Bilbao's old San Mamés ground carried which nickname?",
+  "a": "La Catedral",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Sevilla player collapsed during a match in August 2007 and died three days later?",
+  "a": "Antonio Puerta",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "During the Franco years the Copa del Rey went by which name?",
+  "a": "Copa del Generalísimo",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Las Palmas captain Juan Guedes died at 28 in 1971. Which nickname did the fans give him?",
+  "a": "El Mariscal, the marshal",
+  "src": "https://www.udlaspalmas.es/noticias/50-anos-sin-el-mariscal-guedes",
+  "conf": "verified"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Madrid club's ultras call themselves the Bukaneros?",
+  "a": "Rayo Vallecano",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Sporting Gijón's Mareo academy produced which striker who won the 2010 World Cup with Spain?",
+  "a": "David Villa",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Colombian club beat Boca Juniors on penalties to win the 2004 Copa Libertadores?",
+  "a": "Once Caldas",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Atlético Nacional won Colombia's first Copa Libertadores in 1989 with which goalkeeper?",
+  "a": "René Higuita",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Peruvian scored five goals at the 1970 World Cup and five more at the 1978 one?",
+  "a": "Teófilo Cubillas",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Independiente fans buried black cats at Racing Club's stadium to curse them. How many?",
+  "a": "Seven",
+  "src": "https://buenosairesherald.com/sports/heralds-halloween-special-the-legend-of-racing-club-and-the-seven-buried-cats",
+  "conf": "verified"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Brazilian coach won back-to-back Copa Libertadores with São Paulo in 1992 and 1993?",
+  "a": "Telê Santana",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Paraguayan club won the Copa Libertadores in 1979, 1990 and 2002?",
+  "a": "Olimpia",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "In 1993 Brazil lost a World Cup qualifier for the first time ever. To which country, and where?",
+  "a": "Bolivia, in La Paz",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "River Plate were relegated in 2011 after a playoff against which club?",
+  "a": "Belgrano",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which club won Serie A in 1985, their only Italian title?",
+  "a": "Hellas Verona",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Two big clubs were relegated for the 1980 Totonero betting scandal in Italy. Name either.",
+  "a": "Milan or Lazio",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Guy Roux managed which French club for more than four decades?",
+  "a": "Auxerre",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Benfica's long run of lost European finals is blamed on a curse laid by which former coach?",
+  "a": "Béla Guttmann",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which club won the Portuguese league in 2001, a rare break in the big three's grip?",
+  "a": "Boavista",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Schalke were German champions for four minutes in 2001 before Bayern scored. What did fans call them?",
+  "a": "Meister der Herzen, champions of hearts",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which East German club won the 1974 Cup Winners' Cup, the only European trophy won by a DDR side?",
+  "a": "1. FC Magdeburg",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Dynamo Berlin won ten straight East German titles backed by the chief of which organisation?",
+  "a": "The Stasi",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Arrigo Sacchi answered doubts about his lack of a playing career with which line about jockeys?",
+  "a": "You do not need to have been a horse to become a jockey",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Italian club won the 1991 Serie A title with Gianluca Vialli and Roberto Mancini up front?",
+  "a": "Sampdoria",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Bulgarian scored the header that knocked holders Germany out of the 1994 World Cup?",
+  "a": "Yordan Letchkov",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Nigeria won Olympic football gold in 1996. Which country did they beat in the final?",
+  "a": "Argentina",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which AZ striker became the first Dutchman to win the European Golden Boot, in 1979?",
+  "a": "Kees Kist",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Dutch referee took charge of the 2001 Champions League final in Milan?",
+  "a": "Dick Jol",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Through the 1990s the KNVB Cup carried the name of which Dutch brewer?",
+  "a": "Amstel",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Limburg coach won the KNVB Cup with Roda JC in both 1997 and 2000?",
+  "a": "Sef Vergoossen",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Dutch club's supporters sing Hand in hand, kameraden before kick-off?",
+  "a": "Feyenoord",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Anderlecht's stadium was renamed in 1983 after which club president?",
+  "a": "Constant Vanden Stock",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Schalke fans nicknamed which Belgian midfielder Das Kampfschwein, the battle pig?",
+  "a": "Marc Wilmots",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Belgian club won the Cup Winners' Cup twice in three years, in 1976 and 1978?",
+  "a": "Anderlecht",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Belgium reached the Euro 1980 final in Rome. Which country beat them?",
+  "a": "West Germany",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Club Brugge lost European finals to Liverpool in 1976 and 1978. Which trophy was at stake in 1976?",
+  "a": "The UEFA Cup",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Belgian club plays at the ground known as the Freethiel?",
+  "a": "Beveren",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which three Dutch reserve sides were let into the Eerste Divisie in 2013?",
+  "a": "Jong Ajax, Jong PSV and Jong Twente",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Real Madrid's 1966 European Cup winners were the Yé-yé side. Which club did they beat in the final?",
+  "a": "Partizan Belgrade",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "The 1984 Copa del Rey final ended in a mass brawl in front of the king. Which two clubs played?",
+  "a": "Athletic Bilbao and Barcelona",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "A disputed 1970 decision by referee Emilio Guruceta caused a riot at the Camp Nou. Against which club?",
+  "a": "Real Madrid",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Real Betis fans say Viva er Betis manque pierda. What does that mean?",
+  "a": "Long live Betis even when they lose",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Brazil lost just one match with Garrincha in the side. Against which country, at the 1966 World Cup?",
+  "a": "Hungary",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Ecuadorian club won the 2008 Copa Libertadores, a first for the country?",
+  "a": "LDU Quito",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Peru's classic red and white shirt carries which distinctive marking?",
+  "a": "A diagonal red sash",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Spanish club were nicknamed Los Zaraguayos in the 1970s for their South American signings?",
+  "a": "Real Zaragoza",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which restriction on English footballers did Jimmy Hill's players' union get abolished in 1961?",
+  "a": "The maximum wage",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Arsenal manager of the 1930s pushed through numbered shirts and floodlit matches?",
+  "a": "Herbert Chapman",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Kuwait walked off at the 1982 World Cup over a goal. Which royal came onto the pitch to argue?",
+  "a": "Prince Fahid, their FA president",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Japan conceded a stoppage-time equaliser to Iraq in 1993 and missed the World Cup. What is it called?",
+  "a": "The Agony of Doha",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Australia beat which country on penalties in 2005 to reach their first World Cup since 1974?",
+  "a": "Uruguay",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Dozens of Al Ahly fans died in a 2012 stadium disaster in which Egyptian city?",
+  "a": "Port Said",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which club won the first Bundesliga title, in 1963-64?",
+  "a": "1. FC Köln",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which English club did Bayern Munich beat in the 1975 European Cup final?",
+  "a": "Leeds United",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Norwegian club beat Milan at the San Siro in the 1996 Champions League?",
+  "a": "Rosenborg",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Rosenborg won the Norwegian league every year from 1992. How many titles did that run reach?",
+  "a": "13, up to 2004",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Slovak club won the 1969 Cup Winners' Cup, the only European trophy for a Czechoslovak side?",
+  "a": "Slovan Bratislava",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Romanian playmaker was nicknamed the Maradona of the Carpathians?",
+  "a": "Gheorghe Hagi",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Icelandic assistant coach at Euro 2016 also worked as a dentist back home?",
+  "a": "Heimir Hallgrímsson",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Uruguayan club won the Copa Libertadores in 1971, 1980 and 1988?",
+  "a": "Nacional",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Argentine playmaker starred for Las Palmas from 1978 and later coached Argentina?",
+  "a": "Miguel Ángel Brindisi",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Juan Carlos Valerón spent 13 years at which club before returning to Las Palmas in 2013?",
+  "a": "Deportivo La Coruña",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Belgian club won the league in 1999 and 2002, its first titles, from the Limburg coalfield?",
+  "a": "Genk",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which trophy do the Eredivisie champions and KNVB Cup winners contest each August?",
+  "a": "The Johan Cruijff Schaal",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Spanish club did Johan Cruyff briefly turn out for in 1981, between his American spells?",
+  "a": "Levante",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which club did Luis Aragonés serve longest, first as a player and later as manager?",
+  "a": "Atlético Madrid",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which club did Vincent Kompany take up from the English Championship in 2023?",
+  "a": "Burnley",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "The Dortmund end called the Yellow Wall is officially which stand?",
+  "a": "The Südtribüne, the south stand",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Argentine club plays at El Cilindro in Avellaneda?",
+  "a": "Racing Club",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Brazilian club plays at the Vila Belmiro?",
+  "a": "Santos",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which country won the first Copa América, held in 1916?",
+  "a": "Uruguay",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which country won the Africa Cup of Nations in 2019, their first title since 1990?",
+  "a": "Algeria",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Danish forward shared the Golden Boot at Euro 1992?",
+  "a": "Henrik Larsen",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Oleg Salenko scored five goals in one 1994 World Cup match. Against which country?",
+  "a": "Cameroon",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Basque club did Xabi Alonso spend a loan season with in the Segunda in 2000-01?",
+  "a": "Eibar",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Croatian club did Luka Modrić come through before Tottenham signed him?",
+  "a": "Dinamo Zagreb",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Luka Modrić was toughened up as a teenager on loan in the Bosnian league. At which club?",
+  "a": "Zrinjski Mostar",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which defender was the first player sent off in an FA Cup final at Wembley, in 1985?",
+  "a": "Kevin Moran",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Milan derby name refers to the cathedral statue of the Virgin Mary?",
+  "a": "The Derby della Madonnina",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which club won the first Copa Libertadores, in 1960?",
+  "a": "Peñarol",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Brazilian club won the Copa Libertadores for the first time in 1981, with Zico?",
+  "a": "Flamengo",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which German club did Grêmio beat to win the 1983 Intercontinental Cup?",
+  "a": "Hamburg",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which city hosted the Intercontinental Cup every year from 1980 to 2004?",
+  "a": "Tokyo",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which English non-league club wore the first shirt sponsor in 1976 and was ordered to take it off?",
+  "a": "Kettering Town",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which German club became the first to sell shirt space, wearing a drinks brand from 1973?",
+  "a": "Eintracht Braunschweig",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "The 1970 World Cup brought in two things football had never had at a finals. Substitutes and what else?",
+  "a": "Yellow and red cards",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Why was the 1970 Adidas Telstar ball made with black panels?",
+  "a": "So it showed up on black and white television",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "In 2006 Barcelona put a name on their shirt for the first time and paid for the privilege. Whose name?",
+  "a": "UNICEF",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Athletic Bilbao's 1910 shirt order was so big that half of it went to which other club?",
+  "a": "Atlético Madrid",
+  "src": "https://www.athletic-club.eus/en/news/2021/01/09/how-athletic-turned-red-and-white/",
+  "conf": "verified"
+ },
+ {
+  "tier": "extreme",
+  "q": "Juventus took their black and white stripes from a set of shirts sent over from which English club?",
+  "a": "Notts County",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Italy play in blue although the flag has no blue in it. Which royal house does the colour come from?",
+  "a": "The House of Savoy",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "The offside law was changed in 1925 to require how many defenders between attacker and goal?",
+  "a": "Two, down from three",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Goal nets were patented in 1890 by an engineer from which English city?",
+  "a": "Liverpool",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "A 1968 European Championship semi-final was settled by the toss of a coin. Which two countries?",
+  "a": "Italy and the Soviet Union",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "How many substitutes were teams allowed at the 1966 World Cup?",
+  "a": "None",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "The six second rule for goalkeepers replaced which older restriction on holding the ball?",
+  "a": "The four step rule",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which country hosted the first Women's World Cup, in 1991?",
+  "a": "China",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which women's team drew a crowd of 53,000 to Goodison Park on Boxing Day 1920?",
+  "a": "Dick, Kerr Ladies",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Dutch winger was named FIFA's best women's player of 2017 after starring at the home Euros?",
+  "a": "Lieke Martens",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which American defender scored the winning penalty in the 1999 Women's World Cup final shoot-out?",
+  "a": "Brandi Chastain",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which country won the men's Olympic football gold in 1992, on home soil?",
+  "a": "Spain",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which country won the last ever Confederations Cup, in 2017?",
+  "a": "Germany",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which country hosted and won the 1995 Copa América?",
+  "a": "Uruguay",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which north African country won the 2004 Africa Cup of Nations on home soil?",
+  "a": "Tunisia",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which country won three straight Asian Cups, in 1968, 1972 and 1976?",
+  "a": "Iran",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which non-league club knocked Coventry out of the FA Cup in January 1989?",
+  "a": "Sutton United",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which non-league club beat Premier League Norwich in the 2013 FA Cup fourth round?",
+  "a": "Luton Town",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "NAC Breda is a merger of NOAD and ADVENDO. What did NOAD stand for?",
+  "a": "Nooit Opgeven Altijd Doorzetten",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "The AZ in AZ Alkmaar's name is short for which two words?",
+  "a": "Alkmaar Zaanstreek",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Athletic Bilbao carry an English word in their name. Who founded the club?",
+  "a": "British shipyard and mine workers, with Basque students back from England",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Genoa's full name keeps two English words that give away who founded them. Which two?",
+  "a": "Cricket and Athletic Club",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Buenos Aires club's name translates as Western Railway?",
+  "a": "Ferro Carril Oeste",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Colo-Colo are named after a leader of which indigenous people?",
+  "a": "The Mapuche",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Flamengo's full name gives away the sport the club started in. Which sport?",
+  "a": "Rowing",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Mexican goalkeeper appeared at five World Cups between 1950 and 1966?",
+  "a": "Antonio Carbajal",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Laudrup brother refused to play under Richard Møller Nielsen and missed Euro 1992?",
+  "a": "Michael Laudrup",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which brother of Michael Laudrup did play at Euro 1992 and won it with Denmark?",
+  "a": "Brian Laudrup",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Belgian club produced Romelu Lukaku, Youri Tielemans and Leander Dendoncker?",
+  "a": "Anderlecht",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Dutch coach won the 2008 UEFA Cup with Zenit St Petersburg?",
+  "a": "Dick Advocaat",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Dutch great managed Terek Grozny in Chechnya in 2011?",
+  "a": "Ruud Gullit",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Dutch former Milan midfielder took charge of Cameroon in 2018?",
+  "a": "Clarence Seedorf",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Dutch coach took Poland to Euro 2008?",
+  "a": "Leo Beenhakker",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Dutch coach won the Portuguese title with Porto in 2006?",
+  "a": "Co Adriaanse",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Dutch coach won Belgian league titles with both Mechelen and Anderlecht?",
+  "a": "Aad de Mos",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Dutch midfielder became player-manager of fourth-tier Barnet and gave himself the number 1 shirt?",
+  "a": "Edgar Davids",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Belgian turned down Milan to stay at Club Brugge for almost his whole career?",
+  "a": "Jan Ceulemans",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Argentine club did Diego Simeone win a title with as a coach in 2006?",
+  "a": "Estudiantes",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Mexican club did Pep Guardiola finish his playing career at, in 2006?",
+  "a": "Dorados de Sinaloa",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Diego Costa was born in Brazil but played at a World Cup for which country?",
+  "a": "Spain",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Besides Argentina and Colombia, which country did Alfredo Di Stéfano play internationals for?",
+  "a": "Spain",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Hungarian-born forward played for Spain at the 1962 World Cup?",
+  "a": "Ferenc Puskás",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Argentine played in the 1930 World Cup final for one country and the 1934 final for another?",
+  "a": "Luis Monti, for Argentina then Italy",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Brazilian-born forward won the 1958 World Cup with Brazil and later played for Italy?",
+  "a": "José Altafini",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Brazilian club did Ronaldo start his career at, before moving to PSV?",
+  "a": "Cruzeiro",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Uruguayan club did Luis Suárez play for before joining Groningen?",
+  "a": "Nacional",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Uruguayan club did Edinson Cavani leave to join Palermo in 2007?",
+  "a": "Danubio",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Colombian club did James Rodríguez start at before moving to Argentina?",
+  "a": "Envigado",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Rosario club did Ángel Di María start his career at?",
+  "a": "Rosario Central",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which European trophy did Manchester United win in 1991, Alex Ferguson's first with the club?",
+  "a": "The Cup Winners' Cup",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which country was the first to win a World Cup outside its own continent?",
+  "a": "Brazil, in Sweden in 1958",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which stadium hosted the 1994 World Cup final?",
+  "a": "The Rose Bowl, in Pasadena",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which was the first World Cup final to be decided on penalties?",
+  "a": "1994, Brazil against Italy",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Portuguese club did Bobby Robson win back-to-back league titles with in 1995 and 1996?",
+  "a": "Porto",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which future manager worked as Bobby Robson's interpreter in Portugal and Spain?",
+  "a": "José Mourinho",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which German coach won the Champions League with Borussia Dortmund in 1997 and Bayern in 2001?",
+  "a": "Ottmar Hitzfeld",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Belgian striker has played for Anderlecht, Everton, Manchester United, Chelsea and Inter?",
+  "a": "Romelu Lukaku",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Belgian club did Eden Hazard leave to join Lille as a teenager?",
+  "a": "Tubize",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which French club did Eden Hazard play for before Chelsea signed him in 2012?",
+  "a": "Lille",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Belgian defender captained Manchester City to their first Premier League title in 2012?",
+  "a": "Vincent Kompany",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which English club did Ronald Koeman manage from 2014 to 2016 before Everton?",
+  "a": "Southampton",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which country did Marco van Basten's Netherlands lose to in the last 16 of the 2006 World Cup?",
+  "a": "Portugal",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "The 2006 Netherlands against Portugal match got a nickname for its 16 cards. What is it?",
+  "a": "The Battle of Nuremberg",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Russian referee took charge of the 2006 match known as the Battle of Nuremberg?",
+  "a": "Valentin Ivanov",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which country knocked the Netherlands out of Euro 2004 in the semi-finals?",
+  "a": "Portugal",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Portugal defender scored the own goal in their Euro 2004 semi-final against the Netherlands?",
+  "a": "Jorge Andrade",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which country did Greece beat in the Euro 2004 semi-final?",
+  "a": "The Czech Republic",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Scottish club did Brian Laudrup win a title with in the 1990s?",
+  "a": "Rangers",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which country did Denmark beat in the Euro 1992 semi-final?",
+  "a": "The Netherlands",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Who missed the decisive penalty for the Netherlands in the Euro 1992 semi-final shoot-out?",
+  "a": "Marco van Basten",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Danish goalkeeper starred in the Euro 1992 run and later won the Premier League?",
+  "a": "Peter Schmeichel",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Danish club did Peter Schmeichel play for before Manchester United?",
+  "a": "Brøndby",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "FC Twente were formed by a 1965 merger. Which of the two clubs had won the Eredivisie in 1959?",
+  "a": "Sportclub Enschede",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Liverpool lost 5-1 to Ajax in Amsterdam in 1966. What did Bill Shankly blame for the result?",
+  "a": "The fog",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Go Ahead Eagles' ground is called De Adelaarshorst. What does the name mean?",
+  "a": "The eagle's nest",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Belgium's Red Devils nickname was coined by a journalist in which decade?",
+  "a": "The 1900s, in 1906",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Hungarian-born forward starred for Barcelona in the 1950s and had a film made about him?",
+  "a": "László Kubala",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Basque club, from a town of about 27,000 people, reached La Liga in 2014?",
+  "a": "Eibar",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Chinese club signed Jonathan Viera from Las Palmas in 2018?",
+  "a": "Beijing Guoan",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Argentine club beat Manchester United over two brutal legs to win the 1968 Intercontinental Cup?",
+  "a": "Estudiantes",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Manchester United forward was sent off in the 1968 Intercontinental Cup against Estudiantes?",
+  "a": "George Best",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Argentine club beat Real Madrid to win the 2000 Intercontinental Cup in Tokyo?",
+  "a": "Boca Juniors",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Who scored both Boca goals as they beat Real Madrid in the 2000 Intercontinental Cup?",
+  "a": "Martín Palermo",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Argentine striker missed three penalties in a single Copa América match in 1999?",
+  "a": "Martín Palermo",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Brazilian club won the first FIFA Club World Cup, in 2000?",
+  "a": "Corinthians",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Peruvian club lost almost its entire squad in a plane crash off Lima in 1987?",
+  "a": "Alianza Lima",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Brazilian club lost most of its squad in a 2016 plane crash in Colombia?",
+  "a": "Chapecoense",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Chapecoense were flying to a Copa Sudamericana final against which club?",
+  "a": "Atlético Nacional",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which African country lost its national squad in a plane crash off Gabon in 1993?",
+  "a": "Zambia",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Scottish club was founded in 1887 by a Marist brother to feed poor Irish immigrants?",
+  "a": "Celtic",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which English club started life as the football side of St Domingo's church?",
+  "a": "Everton",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which English club began as Newton Heath, a railway works team?",
+  "a": "Manchester United",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which English club began as the works team of Thames Ironworks?",
+  "a": "West Ham United",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which English club began as Dial Square, named after a sundial at a munitions works?",
+  "a": "Arsenal",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "The Bayer in Bayer Leverkusen refers to what?",
+  "a": "The pharmaceutical company that founded the club",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which German club is owned by Volkswagen?",
+  "a": "Wolfsburg",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "India withdrew from the 1950 World Cup. Which colourful reason is usually given but is a myth?",
+  "a": "That FIFA banned them from playing barefoot",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "African nations boycotted the 1966 World Cup. What were they protesting about?",
+  "a": "Africa had no guaranteed qualifying place",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Colombia's league was suspended in 1989 after which shocking event?",
+  "a": "A referee was murdered",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Uruguayan club beat PSV to win the 1988 Intercontinental Cup?",
+  "a": "Nacional",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Belgian striker scored twice in the 4-3 extra-time win over the Soviet Union at the 1986 World Cup?",
+  "a": "Nico Claesen",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Spanish city is home to Deportivo Alavés?",
+  "a": "Vitoria-Gasteiz",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which club did Maradona manage in the United Arab Emirates from 2017?",
+  "a": "Fujairah",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Mexican second division club did Maradona manage in 2018 and 2019?",
+  "a": "Dorados de Sinaloa",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which country did Diego Maradona manage at the 2010 World Cup?",
+  "a": "Argentina",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which country did Uruguay beat 4-2 in the 1954 World Cup to reach the semi-finals?",
+  "a": "England",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "The 1954 World Cup semi-final between Hungary and Uruguay is often called what?",
+  "a": "The match of the century",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Hungarian coach masterminded the Magical Magyars of the 1950s?",
+  "a": "Gusztáv Sebes",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which English defender was left chasing Hidegkuti and Puskás in the 6-3 at Wembley in 1953?",
+  "a": "Billy Wright",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Hungarian scored a hat-trick in the 6-3 win at Wembley in 1953?",
+  "a": "Nándor Hidegkuti",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which country knocked Hungary out of the 1958 World Cup group stage in a play-off?",
+  "a": "Wales",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which country knocked Wales out of the 1958 World Cup quarter-final?",
+  "a": "Brazil",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Who scored Brazil's winner against Wales in the 1958 quarter-final, his first World Cup goal?",
+  "a": "Pelé",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Spanish club won the league and cup double in 1996 under Radomir Antić?",
+  "a": "Atlético Madrid",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which coach has taken charge of Real Madrid, Barcelona and Atlético Madrid?",
+  "a": "Radomir Antić",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which French club did Valencia beat in the 2004 UEFA Cup final?",
+  "a": "Marseille",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Spanish club won the first Europa League, in 2010?",
+  "a": "Atlético Madrid",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Uruguayan scored both goals in the 2010 Europa League final?",
+  "a": "Diego Forlán",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which English club did Atlético Madrid beat in the 2010 Europa League final?",
+  "a": "Fulham",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Spanish club did Atlético Madrid beat in the 2012 Europa League final?",
+  "a": "Athletic Bilbao",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Argentine coach took Athletic Bilbao to the 2012 Europa League final?",
+  "a": "Marcelo Bielsa",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which country did Argentina beat on penalties in the 1990 World Cup semi-final?",
+  "a": "Italy",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Argentine goalkeeper became a shoot-out hero at the 1990 World Cup?",
+  "a": "Sergio Goycochea",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Cameroon defender was sent off for a flying challenge on Claudio Caniggia in 1990?",
+  "a": "Benjamin Massing",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Dutch striker scored the late equaliser in the 1998 World Cup semi-final against Brazil?",
+  "a": "Patrick Kluivert",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which country did France beat in the Euro 2000 final?",
+  "a": "Italy",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which substitute equalised for France deep in stoppage time in the Euro 2000 final?",
+  "a": "Sylvain Wiltord",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which country did France beat in the 1998 World Cup semi-final?",
+  "a": "Croatia",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which French defender scored both goals in the 1998 World Cup semi-final against Croatia?",
+  "a": "Lilian Thuram",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "How many goals did Lilian Thuram score in his 142 games for France?",
+  "a": "Two, both in the 1998 semi-final",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which country finished third at the 2002 World Cup?",
+  "a": "Turkey",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which country did Turkey beat in the 2002 World Cup quarter-final?",
+  "a": "Senegal",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Who scored the golden goal that knocked Italy out of the 2002 World Cup?",
+  "a": "Ahn Jung-hwan",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "What did Perugia do to Ahn Jung-hwan after his goal knocked Italy out in 2002?",
+  "a": "Cancelled his contract",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which manager won league titles with both Blackburn Rovers and Liverpool?",
+  "a": "Kenny Dalglish",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which club did Brian Clough win the English title with in 1972, before Nottingham Forest?",
+  "a": "Derby County",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which club won the English league in 1978 having just come up from the second division?",
+  "a": "Nottingham Forest",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "What made Spain's Euro 2012 final win a record for a European Championship?",
+  "a": "The 4-0 scoreline, the biggest in a final",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Spanish coach was in charge for the Euro 2012 title?",
+  "a": "Vicente del Bosque",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which formation did Spain famously use at Euro 2012, with no recognised striker?",
+  "a": "The false nine",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which country did Morocco beat in the 2022 World Cup quarter-final?",
+  "a": "Portugal",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Moroccan goalkeeper saved two penalties in the 2022 World Cup shoot-out against Spain?",
+  "a": "Yassine Bounou",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Spanish club did Yassine Bounou play for when he won the 2022 Zamora Trophy?",
+  "a": "Sevilla",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Argentine club did Diego Simeone play for at the very start and end of his career?",
+  "a": "Vélez Sarsfield",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Argentine club won the 1994 Copa Libertadores under Carlos Bianchi?",
+  "a": "Vélez Sarsfield",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Argentine coach won four Copa Libertadores titles with Vélez and Boca?",
+  "a": "Carlos Bianchi",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which French club did Carlos Bianchi score more than 30 league goals a season for in the 1970s?",
+  "a": "Reims",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which country won the Copa América in 1993, ending a long trophy drought?",
+  "a": "Argentina",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which country hosted the 2016 Copa América Centenario?",
+  "a": "The United States",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which country beat Argentina in both the 2015 and 2016 Copa América finals?",
+  "a": "Chile",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Chilean coach won the 2015 Copa América on home soil?",
+  "a": "Jorge Sampaoli",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which club did Alexis Sánchez join Barcelona from in 2011?",
+  "a": "Udinese",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Chilean club did Alexis Sánchez start his career at?",
+  "a": "Cobreloa",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Italian club did Miroslav Klose play for after Bayern Munich?",
+  "a": "Lazio",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Brazilian did Klose overtake to become the World Cup's leading scorer?",
+  "a": "Ronaldo",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "The 2019-20 Eerste Divisie was abandoned with Cambuur well clear at the top. What did the KNVB decide?",
+  "a": "Nobody was promoted or relegated",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Belgian club returned to the top flight in 2021 after 48 years away?",
+  "a": "Union Saint-Gilloise",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Argentine club is nicknamed El Ciclón?",
+  "a": "San Lorenzo",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Argentine club counts Pope Francis as a lifelong member?",
+  "a": "San Lorenzo",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Buenos Aires club is nicknamed El Bicho, the bug?",
+  "a": "Argentinos Juniors",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Roberto Carlos bent an impossible free kick against France in 1997. In which tournament?",
+  "a": "Le Tournoi de France",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which French goalkeeper did Roberto Carlos beat with his bending free kick in 1997?",
+  "a": "Fabien Barthez",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Juventus director general was at the centre of the Calciopoli scandal?",
+  "a": "Luciano Moggi",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which German referee was jailed in 2005 for fixing matches he officiated?",
+  "a": "Robert Hoyzer",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Chelsea captain was suspended for the 2012 Champions League final but joined the celebrations in full kit?",
+  "a": "John Terry",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which club lost the 2012 Champions League final in their own stadium?",
+  "a": "Bayern Munich",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which was the first Champions League final between two clubs from the same country?",
+  "a": "2003, Milan against Juventus",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which was the first all-English Champions League final?",
+  "a": "2008, Manchester United against Chelsea",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Chelsea player slipped taking his penalty in the 2008 Champions League shoot-out?",
+  "a": "John Terry",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which city hosted the 2008 Champions League final?",
+  "a": "Moscow",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which city hosted the 2018 Champions League final?",
+  "a": "Kyiv",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Liverpool goalkeeper made two costly errors in the 2018 Champions League final?",
+  "a": "Loris Karius",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Who became the first woman to referee a men's World Cup match, in 2022?",
+  "a": "Stéphanie Frappart",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "English clubs were banned from Europe after Heysel. Which one served an extra year?",
+  "a": "Liverpool",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which English club won a European trophy in 1985 and then could not defend it because of the ban?",
+  "a": "Everton",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Dutch club sued the KNVB in 2020 for blocking their promotion to the Eredivisie?",
+  "a": "Cambuur",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Spanish club were relegated from La Liga in 1998 and never came back until 2015?",
+  "a": "Las Palmas",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which German club won the 1997 UEFA Cup and called their side the Eurofighters?",
+  "a": "Schalke",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Italian club did Schalke beat on penalties in the 1997 UEFA Cup final?",
+  "a": "Inter",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which country provided both finalists in the 1990, 1991 and 1995 UEFA Cup finals?",
+  "a": "Italy",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Czech club did Pavel Nedvěd leave for Lazio in 1996?",
+  "a": "Sparta Prague",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Nedvěd missed the 2003 Champions League final. Why?",
+  "a": "He was suspended after picking up a booking in the semi-final",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which country did Karel Poborský's famous scooped goal knock out at Euro 1996?",
+  "a": "Portugal",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Dutch defender scored the winner for Barcelona in the 1992 European Cup final at Wembley?",
+  "a": "Ronald Koeman",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Italian club did Barcelona beat in the 1992 European Cup final at Wembley?",
+  "a": "Sampdoria",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Dutch club reached the Europa Conference League final in 2022, losing to Roma?",
+  "a": "Feyenoord",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Portuguese manager won the first Europa Conference League, with Roma in 2022?",
+  "a": "José Mourinho",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Dutch coach led Feyenoord in the 2022 Europa Conference League final?",
+  "a": "Arne Slot",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "The 2011 boardroom coup at Ajax, led by Johan Cruyff, is known by which name in the Netherlands?",
+  "a": "De fluwelen revolutie, the velvet revolution",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Who scored Belgium's stoppage-time winner against Japan at the 2018 World Cup?",
+  "a": "Nacer Chadli",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "How did Belgium's first goal against Brazil in the 2018 quarter-final come about?",
+  "a": "A Fernandinho own goal from a corner",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Spanish club did Ronaldo Nazário buy a controlling stake in, in 2018?",
+  "a": "Real Valladolid",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which club did Gerard Piqué's investment group take over and push up the Spanish divisions?",
+  "a": "FC Andorra",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Uruguayan striker top-scored for Atlético Madrid in their 2021 title season?",
+  "a": "Luis Suárez",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Brazilian club did Ronaldinho win the Copa Libertadores with in 2013?",
+  "a": "Atlético Mineiro",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Brazilian club won the 2019 Copa Libertadores with a stoppage-time turnaround against River Plate?",
+  "a": "Flamengo",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Portuguese coach led Flamengo to the 2019 Copa Libertadores title?",
+  "a": "Jorge Jesus",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Brazilian club won the Copa Libertadores in both 2020 and 2021?",
+  "a": "Palmeiras",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Italian goalkeeper saved the decisive penalty in the Euro 2020 final?",
+  "a": "Gianluigi Donnarumma",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which country won the Nations League in 2021?",
+  "a": "France",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which English club did Phillip Cocu manage from 2019?",
+  "a": "Derby County",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Spanish club did Phillip Cocu play for between PSV spells?",
+  "a": "Barcelona",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Spanish club did Ruud van Nistelrooy join from Manchester United in 2006?",
+  "a": "Real Madrid",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which French club did Memphis Depay rebuild his career at from 2017?",
+  "a": "Lyon",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Italian club did Christian Eriksen win the Serie A title with in 2021?",
+  "a": "Inter",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "The Football Association was founded in 1863 at a London tavern. Which one?",
+  "a": "The Freemasons' Tavern",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which city hosted the first official international, in 1872?",
+  "a": "Glasgow, at Hamilton Crescent in Partick",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which major footballing nation refused to join FIFA at its 1904 founding?",
+  "a": "England",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which West German defender played most of the 1970 semi-final against Italy with a dislocated shoulder?",
+  "a": "Franz Beckenbauer",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "A plaque outside the Azteca marks the 1970 Italy against West Germany semi-final. What does it call the game?",
+  "a": "The game of the century",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which German goalkeeper flattened Patrick Battiston in the 1982 World Cup semi-final?",
+  "a": "Harald Schumacher",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "What punishment did the referee give Harald Schumacher for flattening Battiston in 1982?",
+  "a": "None, he awarded a goal kick",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "What did FIFA change permanently after the 1982 Disgrace of Gijón?",
+  "a": "Final group games are now played at the same time",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Argentine forward is credited with the first rabona, in 1948, after a magazine cover made it famous?",
+  "a": "Ricardo Infante",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which player was sent home from the 1978 World Cup after failing a drugs test for Scotland?",
+  "a": "Willie Johnston",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which drug did Diego Maradona test positive for at the 1994 World Cup?",
+  "a": "Ephedrine",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Brazilian forward's bicycle kicks made him the star of the 1938 World Cup?",
+  "a": "Leônidas",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Asian country played at the 1938 World Cup under a colonial name and never returned?",
+  "a": "The Dutch East Indies, now Indonesia",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "The 1950 World Cup had no final as such. What decided the winner instead?",
+  "a": "A final group of four",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Uruguay's Estadio Centenario was built in 1930 to mark the centenary of what?",
+  "a": "Uruguay's first constitution",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which two countries played the violent 1954 World Cup quarter-final known as the Battle of Berne?",
+  "a": "Hungary and Brazil",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Soviet-era Kyiv side is remembered for the wartime Death Match against a German team in 1942?",
+  "a": "FC Start, made up of Dynamo Kyiv players",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which country beat Germany 2-0 at the 1936 Olympics, causing a national scandal?",
+  "a": "Norway",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "The Jules Rimet trophy was stolen for good in 1983. From which country's federation?",
+  "a": "Brazil",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which ball did players complain about at the 2010 World Cup for moving unpredictably?",
+  "a": "The Jabulani",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which instrument became the sound of the 2010 World Cup in South Africa?",
+  "a": "The vuvuzela",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "You'll Never Walk Alone comes from which musical?",
+  "a": "Carousel",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Liverpool band's version of You'll Never Walk Alone made it the Anfield anthem?",
+  "a": "Gerry and the Pacemakers",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which German striker's 1994 celebration was a mocking dive after his reputation for going down easily?",
+  "a": "Jürgen Klinsmann",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which England striker performed a robot dance as a goal celebration in the 2000s?",
+  "a": "Peter Crouch",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which English club were persuaded by the Football League not to enter the first European Cup in 1955?",
+  "a": "Chelsea",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which English striker scored two penalties against Cameroon in the 1990 quarter-final?",
+  "a": "Gary Lineker",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Gary Lineker never received a card in his professional career. Which award did that earn him in 1990?",
+  "a": "The FIFA Fair Play Award",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which American club did Gerd Müller play for after leaving Bayern?",
+  "a": "Fort Lauderdale Strikers",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Moroccan striker was given permission to wear the number 0 shirt at Aberdeen?",
+  "a": "Hicham Zerouali",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which French defender wore the number 69 shirt at Bayern Munich, and why?",
+  "a": "Bixente Lizarazu, born in 1969 and 1.69m tall",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Chilean striker wore 1+8 on his Inter shirt when the number 9 was taken?",
+  "a": "Iván Zamorano",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which shirt number did Napoli retire in honour of Diego Maradona?",
+  "a": "10",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which club retired the number 3 shirt when Paolo Maldini left?",
+  "a": "Milan",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Romanian fourth division defender was transferred in 2006 for 15 kilos of sausages?",
+  "a": "Marius Cioară",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which MLS club became the first to win the CONCACAF Champions League, in 2022?",
+  "a": "Seattle Sounders",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which MLS club did Thierry Henry play for from 2010?",
+  "a": "New York Red Bulls",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Italian forward won the MLS Cup with Toronto in 2017 after leaving Juventus?",
+  "a": "Sebastian Giovinco",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Japanese club did Zico play for and later manage?",
+  "a": "Kashima Antlers",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which country won the Africa Cup of Nations three times in a row, in 2006, 2008 and 2010?",
+  "a": "Egypt",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which midfielder captained Ivory Coast to the 2015 Africa Cup of Nations title?",
+  "a": "Yaya Touré",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which coach led Egypt to three straight Africa Cup of Nations titles from 2006?",
+  "a": "Hassan Shehata",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which country hosted the first Africa Cup of Nations, in 1957?",
+  "a": "Sudan",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which manager signed George Weah for Monaco from a club in Cameroon?",
+  "a": "Arsène Wenger",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Japanese club did Arsène Wenger manage before joining Arsenal?",
+  "a": "Nagoya Grampus Eight",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which trophy did Arsène Wenger win in Japan in 1995?",
+  "a": "The Emperor's Cup",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which country's Super League launched in 2014 with a marquee-player model and city franchises?",
+  "a": "India",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which competition replaced Australia's National Soccer League in 2005?",
+  "a": "The A-League",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Congolese club reached the FIFA Club World Cup final in 2010?",
+  "a": "TP Mazembe",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Auckland City have been regulars at the Club World Cup. Which country do they represent?",
+  "a": "New Zealand",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which father and son both played for Barcelona and the Netherlands?",
+  "a": "Johan and Jordi Cruyff",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which brothers played against each other at the 2010 World Cup, for Germany and Ghana?",
+  "a": "Jérôme and Kevin-Prince Boateng",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Danish father and son have both kept goal at major tournaments?",
+  "a": "Peter and Kasper Schmeichel",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Norwegian father and son have both scored in the Premier League?",
+  "a": "Alf-Inge and Erling Haaland",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Norwegian club did Erling Haaland play for before Molde?",
+  "a": "Bryne",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Arsenal winger of the 1930s and 1940s also played Test cricket for England?",
+  "a": "Denis Compton",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Gianluigi Buffon named his first son after which Cameroonian goalkeeper?",
+  "a": "Thomas N'Kono",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which manager coined the phrase squeaky bum time?",
+  "a": "Alex Ferguson",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which manager's stock answer to awkward questions was that he did not see the incident?",
+  "a": "Arsène Wenger",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Who said quality without results is pointless, and results without quality is boring?",
+  "a": "Johan Cruyff",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which country did Zambia beat in the 2012 Africa Cup of Nations final?",
+  "a": "Ivory Coast",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Egyptian club has won the CAF Champions League more often than any other?",
+  "a": "Al Ahly",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Swiss club did Mohamed Salah join from Egypt in 2012?",
+  "a": "Basel",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Senegalese striker was Liverpool's other Africa Cup of Nations winner in 2022?",
+  "a": "Sadio Mané",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which country did Senegal beat on penalties to win the 2021 Africa Cup of Nations?",
+  "a": "Egypt",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Austrian club did Sadio Mané play for before Southampton?",
+  "a": "Red Bull Salzburg",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which German club did Sadio Mané join in 2022?",
+  "a": "Bayern Munich",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Dutch club did Nwankwo Kanu leave to join Inter in 1996?",
+  "a": "Ajax",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Ghanaian midfielder was three times African Footballer of the Year in the early 1990s?",
+  "a": "Abedi Pele",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which country reached the last 16 at their first World Cup in 2006, from Africa?",
+  "a": "Ghana",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which country knocked Ghana out of the 2006 World Cup?",
+  "a": "Brazil",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Ivorian striker played for Chelsea, Marseille and Galatasaray?",
+  "a": "Didier Drogba",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Didier Drogba is credited with helping end a civil war with a televised plea. In which country?",
+  "a": "Ivory Coast",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Portuguese club plays at the Estádio José Alvalade?",
+  "a": "Sporting CP",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Portuguese club won the Europa League in 2011, beating Braga in an all-Portuguese final?",
+  "a": "Porto",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Colombian striker top-scored for Porto in their 2011 Europa League win?",
+  "a": "Radamel Falcao",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which manager won the 2011 Europa League with Porto in his first season in charge?",
+  "a": "André Villas-Boas",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Spanish club did Radamel Falcao win the 2012 Europa League with?",
+  "a": "Atlético Madrid",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Swiss club, founded in 1879, claims to be the oldest in continental Europe?",
+  "a": "FC St. Gallen",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Scottish club won a cup tie 36-0 in 1885, still a British record?",
+  "a": "Arbroath",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which magazine created the Ballon d'Or in 1956?",
+  "a": "France Football",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Until which year was the Ballon d'Or open only to European players?",
+  "a": "1994, it opened up in 1995",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which separate award did FIFA run from 1991 until it merged with the Ballon d'Or in 2010?",
+  "a": "FIFA World Player of the Year",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which annual award goes to the leading league scorer across Europe, weighted by league strength?",
+  "a": "The European Golden Shoe",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which trophy is given to the Belgian footballer of the year?",
+  "a": "The Gouden Schoen, the Golden Shoe",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "The Premier League trophy has two lions on its handles. Who is meant to be the third?",
+  "a": "The captain lifting it",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which German ownership rule keeps a club's members in majority control?",
+  "a": "The 50+1 rule",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Two German clubs are exempt from the 50+1 rule because of long company backing. Name either.",
+  "a": "Bayer Leverkusen or Wolfsburg",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Four Spanish clubs are still owned by their members rather than investors. Name any two.",
+  "a": "Real Madrid, Barcelona, Athletic Bilbao and Osasuna",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "What is the Spanish word for a club member who part-owns the club?",
+  "a": "A socio",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "What does the Italian word catenaccio literally mean?",
+  "a": "The door bolt",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "What does the German term gegenpressing describe?",
+  "a": "Pressing to win the ball back immediately after losing it",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "What do Argentines call the creative number 10 who links midfield and attack?",
+  "a": "The enganche",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "What is Feyenoord's academy and training complex called?",
+  "a": "Varkenoord",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "What is PSV's training and academy base called?",
+  "a": "De Herdgang",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "What is Athletic Bilbao's academy and training base called?",
+  "a": "Lezama",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Belgian club plays at Sclessin?",
+  "a": "Standard Liège",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Spanish club left the Sarrià stadium in 1997 and moved into the Olympic stadium on Montjuïc?",
+  "a": "Espanyol",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Italian club's supporters fill the Curva Sud at the San Siro?",
+  "a": "Milan",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Dutch club's travelling support calls itself Het Legioen?",
+  "a": "Feyenoord",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which substitution decision by Louis van Gaal in the 2014 quarter-final became famous?",
+  "a": "Bringing on Tim Krul purely for the shoot-out",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Spanish club did Louis van Gaal manage twice, in 1997 and 2002?",
+  "a": "Barcelona",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Brazilian club is nicknamed O Timão?",
+  "a": "Corinthians",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Argentine derby is called the Clásico de Avellaneda?",
+  "a": "Independiente against Racing Club",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Brazilian derby is called the Fla-Flu?",
+  "a": "Flamengo against Fluminense",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Turkish derby is called the Intercontinental Derby?",
+  "a": "Fenerbahçe against Galatasaray",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Portuguese derby is called O Clássico?",
+  "a": "Benfica against Porto",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Egyptian derby is the biggest in Africa?",
+  "a": "Al Ahly against Zamalek",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which German derby is called the Revierderby?",
+  "a": "Schalke against Borussia Dortmund",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Italian derby is called the Derby della Capitale?",
+  "a": "Roma against Lazio",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Dutch derby is called the Twentse derby?",
+  "a": "FC Twente against Heracles Almelo",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Limburg derby pits MVV Maastricht against their neighbours from the mining towns?",
+  "a": "MVV against Roda JC",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Argentine club's fans are known as La Doce, the twelfth man?",
+  "a": "Boca Juniors",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which French club is nicknamed Les Gones?",
+  "a": "Lyon",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Brazilian club is nicknamed O Peixe, the fish?",
+  "a": "Santos",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Spanish club is nicknamed Los Leones, the lions?",
+  "a": "Athletic Bilbao",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Dutch club's fanatical support stands in the Bunnikside?",
+  "a": "FC Utrecht",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Belgian club plays in paars-wit, purple and white?",
+  "a": "Anderlecht",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Italian club did Diego Simeone manage before going back to Argentina in 2011?",
+  "a": "Catania",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Dutch club reached the UEFA Cup semi-final in 2005 and went out on away goals?",
+  "a": "AZ",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Portuguese club knocked AZ out of the 2005 UEFA Cup semi-final?",
+  "a": "Sporting CP",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Only four European countries travelled to the 1930 World Cup. Name any two.",
+  "a": "Belgium, France, Romania and Yugoslavia",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Belgian striker top-scored for PSV in the late 1990s before joining Aston Villa?",
+  "a": "Luc Nilis",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Belgian striker's career was ended by a broken leg months after joining Aston Villa in 2000?",
+  "a": "Luc Nilis",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Dutch club plays in the town of Waalwijk?",
+  "a": "RKC",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "What does the RKC in RKC Waalwijk stand for?",
+  "a": "Rooms Katholieke Combinatie",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "What does the NEC in Nijmegen's club name stand for?",
+  "a": "Nijmegen Eendracht Combinatie",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "What does the ADO in ADO Den Haag stand for?",
+  "a": "Alles Door Oefening",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "What does the VVV in VVV-Venlo stand for?",
+  "a": "Venlose Voetbal Vereniging",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "What does the JC in Roda JC stand for?",
+  "a": "Juliana Combinatie",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Dutch club won the Eredivisie in 2009, ending a 28 year wait?",
+  "a": "AZ",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Belgian club did Romelu Lukaku score his first senior goals for, aged 16?",
+  "a": "Anderlecht",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Belgian club plays at the Ghelamco Arena in Ghent?",
+  "a": "KAA Gent",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Belgian club reached the Champions League last 16 in 2016, a first for them?",
+  "a": "KAA Gent",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Danish club did Rafael van der Vaart finish his career at?",
+  "a": "Esbjerg",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Belgian city hosts the club Standard, whose ground is on the Meuse?",
+  "a": "Liège",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Dutch club won the Eerste Divisie in 2021 and went up after four years away?",
+  "a": "Cambuur",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "ball",
+  "q": "Which Belgian club from Leuven is known as OHL?",
+  "a": "Oud-Heverlee Leuven",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Dutch club is based in Almelo?",
+  "a": "Heracles",
+  "src": "general knowledge",
+  "conf": "confident"
+ }
+]

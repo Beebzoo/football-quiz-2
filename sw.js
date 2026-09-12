@@ -1,0 +1,222 @@
+/* BALL quiz service worker: network-first so updates land instantly,
+   cache fallback so the pub's dead wifi can't stop the game. */
+const CACHE = "ball-quiz-2-v11";
+const NATFLAGS = "ad,ae,af,ag,al,am,ao,ar,at,au,az,ba,be,bf,bg,bi,bj,bm,bn,bo,br,by,ca,cd,cf,cg,ch,ci,cl,cm,cn,co,cr,cu,cv,cy,cz,de,dk,do,dz,ec,ee,eg,es,et,fi,fr,ga,gb,gd,ge,gh,gm,gn,gq,gr,gt,gw,gy,hn,hr,ht,hu,id,ie,il,in,iq,ir,is,it,jm,jo,jp,ke,kn,kr,kw,kz,lb,lc,li,lk,lr,lt,lu,lv,ly,ma,md,me,mg,mk,ml,mr,mt,mu,mw,mx,my,mz,na,ne,ng,nl,no,nz,pa,pe,ph,pk,pl,pt,py,qa,ro,rs,ru,rw,sa,sc,sd,se,si,sk,sl,sm,sn,so,sr,st,sv,sy,sz,td,tg,th,tl,tm,tn,tr,tt,tz,ua,ug,us,uy,uz,ve,vn,ws,xk,za,zm,zw".split(",");
+/* These two lists are generated, by _tools/build-stickers.py and by the
+   Eredivisie build-ere.js, and they are declared HERE, above EXTRA_ASSETS,
+   because that is what spreads them. They used to sit below it, which threw
+   a ReferenceError on every install from v111 to v123: const is not hoisted,
+   so the whole service worker died and the app quietly ran with no cache at
+   all. assets-test.js now evaluates this file so it cannot come back. */
+/* The Eredivisie club crests, written by _tools/_questions/eredivisie/build-ere.js.
+   Small, and a question that shows a broken crest looks broken, so they go in
+   the install rather than being fetched on first sight like the portraits. */
+/* ERECRESTS:BEGIN */
+const ERECRESTS = ["assets/logos/ado-den-haag.png", "assets/logos/ajax.png", "assets/logos/almere-city.png", "assets/logos/az-alkmaar.png", "assets/logos/de-graafschap.png", "assets/logos/excelsior-rotterdam.png", "assets/logos/fc-den-bosch.png", "assets/logos/fc-dordrecht.png", "assets/logos/fc-groningen.png", "assets/logos/fc-utrecht.png", "assets/logos/feyenoord.png", "assets/logos/fortuna-sittard.png", "assets/logos/go-ahead-eagles.png", "assets/logos/heracles-almelo.png", "assets/logos/mvv-maastricht.png", "assets/logos/nac-breda.png", "assets/logos/nec-nijmegen.png", "assets/logos/pec-zwolle.png", "assets/logos/psv.png", "assets/logos/rbc-roosendaal.png", "assets/logos/rkc-waalwijk.png", "assets/logos/roda-jc-kerkrade.png", "assets/logos/sc-cambuur.png", "assets/logos/sc-heerenveen.png", "assets/logos/sparta-rotterdam.png", "assets/logos/telstar.png", "assets/logos/twente.png", "assets/logos/vitesse.png", "assets/logos/volendam.png", "assets/logos/vvv-venlo.png", "assets/logos/willem-ii.png"];
+/* ERECRESTS:END */
+/* The celebration cutouts, all of them. 37 WebP files come to 1.1MB, which is
+   worth carrying: a right answer that silently fails to celebrate on the pub's
+   dead wifi is exactly the sort of quiet breakage the service worker exists to
+   prevent. Kept in step by _tools/build-stickers.py; do not hand-edit. */
+/* STICKERS:BEGIN */
+const STICKERS = ["assets/stickers/index.json", "assets/stickers/sticker-01.webp", "assets/stickers/sticker-02.webp", "assets/stickers/sticker-03.webp", "assets/stickers/sticker-04.webp", "assets/stickers/sticker-05.webp", "assets/stickers/sticker-06.webp", "assets/stickers/sticker-07.webp", "assets/stickers/sticker-08.webp", "assets/stickers/sticker-09.webp", "assets/stickers/sticker-10.webp", "assets/stickers/sticker-11.webp", "assets/stickers/sticker-12.webp", "assets/stickers/sticker-13.webp", "assets/stickers/sticker-14.webp", "assets/stickers/sticker-15.webp", "assets/stickers/sticker-16.webp", "assets/stickers/sticker-17.webp", "assets/stickers/sticker-18.webp", "assets/stickers/sticker-19.webp", "assets/stickers/sticker-20.webp", "assets/stickers/sticker-21.webp", "assets/stickers/sticker-22.webp", "assets/stickers/sticker-23.webp", "assets/stickers/sticker-24.webp", "assets/stickers/sticker-25.webp", "assets/stickers/sticker-26.webp", "assets/stickers/sticker-27.webp", "assets/stickers/sticker-28.webp", "assets/stickers/sticker-29.webp", "assets/stickers/sticker-30.webp", "assets/stickers/sticker-31.webp", "assets/stickers/sticker-32.webp", "assets/stickers/sticker-33.webp", "assets/stickers/sticker-34.webp", "assets/stickers/sticker-35.webp", "assets/stickers/sticker-36.webp", "assets/stickers/sticker-37.webp"];
+/* STICKERS:END */
+const EXTRA_ASSETS = ["assets/ball.png", "assets/facts/index.json", "assets/deep/index.json", "assets/nicknames/index.json", "assets/awards/index.json", "assets/extra/index.json", "assets/mc/index.json", "assets/wc2006/index.json", "assets/eredivisie/index.json", "assets/eredivisie/logo.png",
+  "assets/badges/index.json",
+  /* The 680 portraits are NOT precached: images you only see on a
+     reveal should not sit in the install. The network-first fetch handler
+     caches each one the first time it is shown, so a face you have already
+     seen still works on the pub's dead wifi. Worth revisiting now that
+     cropping them to heads keeps the set at 14MB for 680 faces. */
+  "assets/faces/index.json",
+  "assets/vendor/supabase.js",
+  /* The interface font, precached rather than fetched: a pub with no signal
+     would otherwise fall back mid-match and reflow the whole menu. Both
+     subsets, because latin alone drops the accented names. */
+  ...["400", "600", "700", "700i"].flatMap(w => ["latin", "latin-ext"].map(
+    s => `assets/fonts/barlow-semicondensed-${w}-${s}.woff2`)),
+  ...["latin", "latin-ext"].map(s => `assets/fonts/lora-400i-${s}.woff2`),
+  ...STICKERS, ...ERECRESTS];
+/* Manager Path crests that Career Path does not already cache, so the dugout
+   deck survives the pub wifi too. Generated by _tools/build-managers.js;
+   regenerate whenever assets/managers/index.json is rebuilt. */
+const MANAGER_LOGOS = [
+  "1-fc-magdeburg","aberdeen","academica-de-coimbra","acireale-calcio","acr-messina",
+  "adanaspor","admira","aek-larnaca","ael","ajaccio","akhmat","al-fateh",
+  "al-ittihad-alexandria","al-masry","albania-national-team","aldosivi","amora","ancona",
+  "angola-national-team","ankaragucu","antalyaspor","arezzo","argentina-national-team",
+  "arges-pitesti","arminia-bielefeld","arsenal-tula","asteras","athletic-club",
+  "atlanta-united","atlante","atromitos","australia-national-team","austria-national-team",
+  "austria-wien","azerbaijan-national-team","barnet","beira-mar","beitar-jerusalem",
+  "belgium-national-team","benevento","blackpool","bodrum-fk","bolivia-national-team",
+  "bosnia-and-herzegovina-national-team","bradford","brazil-national-team","brommapojkarna",
+  "bulgaria-national-team","bursaspor","cadiz","camacha","cambridge-united",
+  "cameroon-national-team","carlisle","carrarese","casa-pia-ac","castellon",
+  "catalonia-national-team","catania","catanzaro","cd-guadalajara","celje","cesena","cfr-cluj",
+  "chaves","chesterfield","chile-national-team","china-national-team","club-america",
+  "club-lleida-esportiu","colombia-national-team","concordia","cordoba","corum",
+  "corvinul-hunedoara","costa-rica-national-team","cote-d-ivoire-national-team","crawley-town",
+  "croatia-national-team","curacao-national-team","defensa-y-justicia","denmark-national-team",
+  "deportivo","dijon","dinamo-bucuresti","dutch-national-team","egypt-national-team",
+  "eintracht-braunschweig","elche","england-national-team","equatorial-guinea-national-team",
+  "erzgebirge","estoril","estrela-da-amadora","etar","eupen","excelsior-rotterdam",
+  "fatih-karagumruk","fc-andorra","fc-cartagena","fc-dordrecht","fc-gifu","fc-tokyo",
+  "fc-wacker-innsbruck","fcsb","fehervar","felgueiras","finland-national-team","foggia",
+  "forest-green-rovers","fortaleza","fortuna-dusseldorf","fortuna-koln","france-national-team",
+  "fremad-amager","frosinone","fsv-zwickau","fujieda-myfc","gabon-national-team","gamba-osaka",
+  "genclerbirligi","georgia-national-team","germany-national-team","ghana-national-team",
+  "gimnastic-de-tarragona","giravanz-kitakyushu","go-ahead-eagles","granada","grasshoppers",
+  "greece-national-team","grosseto","guinea-national-team","hartlepool","hatayspor",
+  "hibernian","hokkaido-consadole-sapporo","honduras-national-team","huddersfield",
+  "hungary-national-team","iceland-national-team","indonesia-national-team","inverness",
+  "iran-national-team","iraq-national-team","ismaily","israel-national-team","istanbulspor",
+  "italy-national-team","jamaica-national-team","japan-national-team","jef-united-chiba",
+  "jordan-national-team","juventude","kagoshima-united","kataller-toyama","kayserispor",
+  "kochi-united","kosovo-national-team","lask","lausanne-sport","lecco","legia-warszawa",
+  "lierse","litex","logrones","lorca-deportiva","lugano","lugo","luzern","lyn","lyngby",
+  "maccabi-netanya","maccabi-tel-aviv","machida-zelvia","mainz-05","mali-national-team",
+  "mexico-national-team","miami-fc","mirandes","modena","montedio-yamagata","moreirense",
+  "morocco-national-team","motherwell","murcia","nagoya-grampus","nancy",
+  "nigeria-national-team","norwich-city","ofi","oldham","olhanense","oman-national-team",
+  "orebro","os-belenenses","oud-heverlee-leuven","panetolikos","paok","paraguay-national-team",
+  "partick","petrolul-ploiesti","pistoiese","plymouth-argyle","poland-national-team",
+  "pontedera","portuguese-football-federation","prato","preston-north-end","pro-patria",
+  "pro-vercelli","pyramids","qatar-national-team","racing-club","rapid-bucuresti",
+  "rapid-vienna","rb-omiya-ardija","red-star-fc","reggina","renofa-yamaguchi",
+  "republic-of-ireland-national-team","rfc-liege","ried","roasso-kumamoto","roda-jc-kerkrade",
+  "romania-national-team","rostov","russia-national-team","saarbrucken","sabadell",
+  "salford-city","san-lorenzo-de-almagro","sanfrecce-hiroshima","saudi-arabia-national-team",
+  "sc-sagamihara","scotland-national-team","senegal-national-team","serbia-national-team",
+  "shimizu-s-pulse","shonan-bellmare","siena","smouha","south-africa-national-team",
+  "south-korea-national-team","spain-national-team","spal","spezia","st-gallen",
+  "st-louis-city-sc","st-mirren","stabaek","stade-de-reims","sv-waldhof-mannheim",
+  "sweden-national-team","swindon-town","switzerland-national-team","thespa-gunma","thun",
+  "tirol","tokyo-verdy","toulouse","trinidad-and-tobago-national-team","tunisia-national-team",
+  "turkey-national-team","u-cluj","u-craiova","uae-national-team","ukraine-national-team",
+  "ulsan-hd-fc","umraniyespor","urawa-reds","uruguay-national-team","us-avellino-1912",
+  "usa-national-team","uzbekistan-national-team","v-varen-nagasaki","vegalta-sendai",
+  "vigor-lamezia","viking","vitoria","volendam","voluntari","wales-national-team","winterthur",
+  "wycombe","xamax","yenisey","yokohama-f-marinos","yokohama-fc","zamalek",
+  "zambia-national-team","zurich"];
+const CAREER_LOGOS = [
+  "mvv-maastricht","bordeaux","fleetwood-town","leicester","boulogne","al-ittihad",
+  "brescia","le-havre-ac","al-ahli",
+  "dc-united","derby-county","vissel-kobe","independiente","argeninos-juniors",
+  "newells-old-boys","levante","vasco-da-gama","fluminense","palmeiras",
+  "deportivo-la-coruna","olympiacos","aek-athens","sporting-gijon","auxerre",
+  "leeds-united","cagliari","dynamo-kyiv","sparta-praha","rennes","banfield",
+  "udinese","botafogo","lille","fc-den-bosch","malaga","pec-zwolle","sc-cambuur",
+  "willem-ii","fulham","villarreal","roma","bahia","como-1907","basaksehir",
+  "eintracht-frankfurt","chicago-fire-fc","vancouver-whitecaps-fc",
+  "borussia-monchengladbach","vfb-stuttgart","beveren","bolton",
+  "west-bromwich-albion","portsmouth","de-graafschap","rb-leipzig","brentford",
+  "bryne","molde","aik","birmingham","rio-ave","fc-nurnberg","karlsruher",
+  "cremonese","vicenza","padova","bologna","cf-montreal","standard-liege",
+  "tenerife","oviedo","almeria","nac-breda","vitesse","az-alkmaar","sparta-rotterdam",
+  "stoke-city","blackburn-rovers","millwall","nottingham-forest","crystal-palace",
+  "sunderland","bristol-city","aston-villa","kyoto-sanga","cska-sofia",
+  "estudiantes-de-la-plata","racing","genoa","instituto-cordoba","internacional",
+  "figueirense","hoffenheim","sochaux","club-brugge","teplice","cska-moskva",
+  "sint-truidense","gent","zenit","girona","antwerp","san-jose-earthquakes",
+  "brest","al-shabab","grenoble-foot-38","troyes","valladolid","bordeaux","lille",
+  "charleroi","leganes","verona","albacete","farul-constanta","crvena-zvezda",
+  "atalanta","pisa","maritimo","besiktas","vitoria-de-guimaraes","wolves","sc-braga",
+  "velez-sarsfield","celta","watford","kasimpasa","reading","panathinaikos","burnley",
+  "livorno","bari","union-berlin","toronto-fc","pescara","torino","paris-fc",
+  "piacenza","perugia","rangers","salernitana","sion","swansea-city","eibar",
+  "nantes","spartak-moskva","dynamo-moscow","lorient","lecce","monterrey",
+  "portland-timbers","ado-den-haag","nec-nijmegen","middlesbrough","bournemouth",
+  "shakhtar","sassuolo","neom","olympiacos","guingamp","celtic","bolton",
+  "sv-austria-salzburg","ascoli","chievo","koln","gornik-zabrze","vfl-bochum",
+  "coventry-city","shamrock-rovers","ipswich","brighton","dundee-united",
+  "hull-city","cardiff-city","ferencvaros","espanyol","alanyaspor","hertha-bsc",
+  "young-boys","new-england-revolution","rangers","amiens","stade-lavallois",
+  "northampton","exeter","al-ettifaq","sheffield-united","getafe","osasuna",
+  "monterrey","monza","adana-demirspor","sion","empoli","venezia","charlton",
+  "real-zaragoza","colo-colo","heracles","hajduk-split","tours","osijek",
+  "pumas-unam","cannes","stuttgarter-kickers","al-sadd","penarol","fc-nordsjaelland",
+  "beijing-guoan","1860-munich","cartagena","recreativo-huelva","almere-city",
+  "apollon-limassol","melbourne-victory","western-sydney","sydney-fc","emirates-club",
+  "al-duhail","shandong-taishan","bate-borisov","kosice","pyunik","vojvodina",
+  "rnk-split","zeljeznicar","nk-zagreb","lokomotiva-zagreb","independiente-medellin",
+  "saprissa","nacional-uy","cerro","uniao-sao-joao","olimpija","chemnitzer-fc",
+  "melbourne-city","kickers-offenbach","bayer-uerdingen","partizan",
+  "universidad-catolica","atletico-junior","america-de-cali","koge","istres",
+  "asec-mimosas","al-shahania","queens-park-fc","atk","agf-aarhus","al-arabi",
+  "al-ahli-doha","racing-santander","al-rayyan","lusail","hereford","peterborough",
+  "lumezzane","shanghai-shenhua","al-ain","albinoleffe","chieti","helsingborgs",
+  "guadalajara","widzew-lodz","leon","domzale","brondby","nimes","newcastle-jets",
+  "wydad","sepahan","rbc-roosendaal","campomaiorense",
+  "kashima-antlers","botafogo-sp","santos","guarani","kashiwa-reysol","pisa",
+  "jubilo-iwata","reggiana","sport-recife","halmstad","seattle-sounders-fc",
+  "copenhagen","notts-county","stromsgodset","cerezo-osaka","pachuca",
+  "colorado-rapids","atlas","san-diego-fc","rennes","rubin","sturm-graz",
+  "rc-lens","brighton","coventry-city","nantes","montpellier","rc-strasbourg-alsace",
+  "sakaryaspor","wigan","servette","hansa-rostock","telstar","boavista",
+  "sheffield-wednesday","gent","gaziantep","novara","athletico-paranaense",
+  "santos","palmeiras","fluminense","salzburg","bastia",
+  "ajax","al-hilal","al-nassr","al-qadsiah","anderlecht","arsenal","as-monaco",
+  "as-saint-etienne","atletico-madrid","atletico-mineiro","barcelona","basel",
+  "bayer-leverkusen","bayern-munchen","benfica","boca-juniors","borussia-dortmund",
+  "celtic","chelsea","corinthians","cruzeiro","dinamo-zagreb","everton","fc-groningen",
+  "fc-kaiserslautern","fc-metz","fc-porto","fc-utrecht","fenerbahce","feyenoord",
+  "fiorentina","flamengo","fortuna-sittard","galatasaray","genk","gremio","guingamp",
+  "hamburger-sv","inter","inter-miami-cf","juventus","la-galaxy","las-palmas","lazio",
+  "le-mans","lech-poznan","lille","liverpool","los-angeles-fc","lyon","malmo","mallorca",
+  "manchester-city","manchester-united","marseille","milan","napoli","new-york-city-fc",
+  "new-york-red-bulls","newcastle","nice","orlando-city","palermo","paris-saint-germain",
+  "parma","psv","queens-park-rangers","rayo-vallecano","real-betis","real-madrid",
+  "real-sociedad","river-plate","roma","rosario-central","salzburg","sampdoria",
+  "santos","sao-paulo","sc-heerenveen","schalke-04","sevilla","southampton","sporting-cp",
+  "tottenham","twente","valencia","werder-bremen","west-ham","wolfsburg",
+];
+const ASSETS = [
+  "./",
+  "index.html",
+  "manifest.webmanifest",
+  "icons/icon-192.png",
+  "icons/icon-512.png",
+  "icons/icon-180.png",
+  "icons/icon-maskable-512.png",
+  ...EXTRA_ASSETS,
+  ...CAREER_LOGOS.map(s => "assets/logos/" + s + ".png"),  "assets/flags/nl.webp",
+  "assets/flags/gran-canaria.webp",
+  "assets/flags/morocco.webp",
+  "assets/players/zidane.png",
+  "assets/players/pedri.png",
+  "assets/players/sinkgraven.png",
+  "assets/players/deijl.png",
+  "assets/players/taarabt.png",
+  "assets/players/ajax.png",
+  "assets/players/mvv-hero.png",
+];
+
+
+self.addEventListener("install", e => {
+  // skipWaiting before the kits so a new build takes over straight away
+  // rather than sitting behind a thousand shirt downloads
+  e.waitUntil(caches.open(CACHE)
+    .then(c => c.addAll(ASSETS).then(() => self.skipWaiting())));
+});
+
+self.addEventListener("activate", e => {
+  e.waitUntil(
+    caches.keys()
+      .then(keys => Promise.all(keys.filter(k => k !== CACHE).map(k => caches.delete(k))))
+      .then(() => self.clients.claim())
+  );
+});
+
+self.addEventListener("fetch", e => {
+  if (e.request.method !== "GET") return;
+  e.respondWith(
+    fetch(e.request)
+      .then(res => {
+        const copy = res.clone();
+        caches.open(CACHE).then(c => c.put(e.request, copy));
+        return res;
+      })
+      .catch(() => caches.match(e.request, { ignoreSearch: true })
+        .then(hit => hit || caches.match("index.html")))
+  );
+});

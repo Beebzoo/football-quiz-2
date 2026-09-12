@@ -1,0 +1,632 @@
+[
+ {
+  "tier": "extreme",
+  "q": "Las Palmas trailed Real Madrid 1-3 at the Estadio Insular in March 1986 with eight minutes left. How did it finish?",
+  "a": "4-3 to Las Palmas",
+  "src": "https://www.resultados-futbol.com/noticia/25-anos-gran-remontada-ud-palmas-4-3-real-madrid",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "Confirmed 29 Mar 1986, Madrid led 3-1 with eight minutes left, Las Palmas scored three in five."
+ },
+ {
+  "tier": "extreme",
+  "q": "Las Palmas left the Estadio Insular in 2003. What is on the site now?",
+  "a": "A public park",
+  "src": "https://en.wikipedia.org/wiki/Estadio_Insular",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "Dropped \"knocked down\": only partially demolished in 2014, the site reopened as a public park in 2016."
+ },
+ {
+  "tier": "extreme",
+  "q": "Rayo Vallecano's diagonal red sash was copied from a South American club. Which one?",
+  "a": "River Plate",
+  "src": "https://www.laliga.com/en-US/news/five-things-you-may-not-know-about-rayo-vallecano",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "LaLiga confirms the sash was taken from River Plate in the early 1950s after the Atletico affiliation."
+ },
+ {
+  "tier": "extreme",
+  "q": "What is missing from Rayo Vallecano's Estadio de Vallecas that every other top flight ground in Spain has?",
+  "a": "A fourth stand, it only has three, with flats behind one goal",
+  "src": "https://www.laliga.com/en-US/news/five-things-you-may-not-know-about-rayo-vallecano",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "Confirmed three stands, flats and a wall behind one goal."
+ },
+ {
+  "tier": "extreme",
+  "q": "Villarreal fans got the Yellow Submarine nickname in 1967 by playing a record behind the goal. Whose record?",
+  "a": "The Beatles",
+  "src": "https://www.uefa.com/uefachampionsleague/news/022c-0e9411486b94-bad6e1e8997f-1000--why-villarreal-are-known-as-the-yellow-submarine/",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "Club's own history confirms 1967/68, a battery record player in the stand, The Beatles."
+ },
+ {
+  "tier": "extreme",
+  "q": "CA Osasuna's name comes from the Basque language, unusually for a La Liga club. What does the word mean?",
+  "a": "Health",
+  "src": "https://en.wikipedia.org/wiki/CA_Osasuna",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "Meaning \"health\" confirmed; softened the \"only club in La Liga\" superlative, which shifts with promotion."
+ },
+ {
+  "tier": "extreme",
+  "q": "Real Sociedad ran a Basques only policy for decades. Which Liverpool striker broke it in 1989 as their first foreign signing?",
+  "a": "John Aldridge",
+  "src": "https://en.wikipedia.org/wiki/John_Aldridge",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "Aldridge confirmed; cut \"in almost 30 years\", sources say only \"several decades\"."
+ },
+ {
+  "tier": "extreme",
+  "q": "In October 2009 third tier Alcorcón hosted Real Madrid in the Copa del Rey. What was the score in the Alcorconazo?",
+  "a": "4-0 to Alcorcón",
+  "src": "https://en.wikipedia.org/wiki/Alcorconazo",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "27 Oct 2009, Copa del Rey round of 32 first leg, Alcorcon in third-tier Segunda B, 4-0 confirmed."
+ },
+ {
+  "tier": "extreme",
+  "q": "Boca Juniors picked blue and yellow in 1907 by walking to the docks and taking the colours of the next ship's flag. Which country's flag was it?",
+  "a": "Sweden",
+  "src": "https://www.beinsports.com/en-us/soccer/liga-profesional-argentina/articles-video/boca-juniors-founding-story-as-club-marks-120-years-2025-04-03",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "3 Apr 1907, the Swedish ship Drottning Sophia; two independent sources agree."
+ },
+ {
+  "tier": "extreme",
+  "q": "Corinthians of São Paulo took their name in 1910 from a touring team the founders had just watched. Where were those tourists from?",
+  "a": "England, the amateur club Corinthian FC of London",
+  "src": "https://www.fifa.com/en/tournaments/womens/womens-champions-cup/2026/articles/corinthians-inspired-english-roots",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "Founders watched Corinthian FC of London on their Brazil tour on 31 Aug 1910, founded the club 1 Sept."
+ },
+ {
+  "tier": "extreme",
+  "q": "Newell's Old Boys of Rosario are named after Isaac Newell. What was his job?",
+  "a": "He was an English schoolteacher",
+  "src": "https://en.wikipedia.org/wiki/Newell%27s_Old_Boys",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "Isaac Newell, English schoolteacher, founded the school whose old boys formed the club."
+ },
+ {
+  "tier": "extreme",
+  "q": "Ecuador's biggest club, Barcelona SC of Guayaquil, was founded in 1925. Why the name?",
+  "a": "The founder Eutimio Pérez was a Spanish immigrant from Barcelona",
+  "src": "https://en.wikipedia.org/wiki/Barcelona_S.C.",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "Eutimio Perez, Spanish immigrant from Barcelona, founded the club 1 May 1925."
+ },
+ {
+  "tier": "extreme",
+  "q": "Fluminense fans throw clouds of white powder in the air and the club is nicknamed after it. What is the powder?",
+  "a": "Rice powder, pó de arroz",
+  "src": "https://www.fluminense.com.br/noticia/109-anos-do-po-de-arroz-a-verdadeira-historia-do-maior-simbolo-da-torcida-tricolor",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "Club's own page confirms po de arroz and the stands tradition; the neutral version avoids the disputed racism origin."
+ },
+ {
+  "tier": "extreme",
+  "q": "The 2018 Copa Libertadores final between Boca and River was moved out of South America after River fans attacked the Boca bus. Where was it played?",
+  "a": "Madrid, at the Bernabéu",
+  "src": "https://www.si.com/soccer/2018/11/24/boca-juniors-bus-attacked-copa-libertadores-final-vs-river-plate",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "Second leg moved to the Bernabeu, played 9 Dec 2018 after the bus attack."
+ },
+ {
+  "tier": "extreme",
+  "q": "The 1986 World Cup was awarded to Colombia, who gave it up in 1982 because they could not afford it. Who took it on?",
+  "a": "Mexico",
+  "src": "https://en.wikipedia.org/wiki/Colombian_withdrawal_from_the_1986_FIFA_World_Cup",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "Awarded 1974, withdrawn Oct-Nov 1982 on cost, Mexico picked May 1983."
+ },
+ {
+  "tier": "extreme",
+  "q": "Chile hosted the 1962 World Cup two years after a national catastrophe. What was it?",
+  "a": "The 1960 Valdivia earthquake, the strongest ever recorded",
+  "src": "https://en.wikipedia.org/wiki/Carlos_Dittborn",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "1960 Valdivia quake, magnitude 9.5, strongest recorded; destroyed planned host cities."
+ },
+ {
+  "tier": "extreme",
+  "q": "Mexican club Cruz Azul was founded in 1927 by the workers of one factory. What did the factory make?",
+  "a": "Cement",
+  "src": "https://en.wikipedia.org/wiki/Cruz_Azul",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "Founded 22 May 1927 by the Cooperativa La Cruz Azul cement works."
+ },
+ {
+  "tier": "extreme",
+  "q": "Chivas de Guadalajara have kept one unwritten rule since 1943. What is it?",
+  "a": "They only field Mexican players",
+  "src": "https://www.espn.com/soccer/story/_/id/37369014/chivas-clings-nationalistic-identity",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "Mexican-only policy dates from the 1943-44 season; now framed as nationality rather than birthplace."
+ },
+ {
+  "tier": "extreme",
+  "q": "Which country became the first African side to top a World Cup group, in Mexico in 1986?",
+  "a": "Morocco",
+  "src": "https://inside.fifa.com/news/morocco-make-world-cup-history-2800839",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "Morocco topped Group F in 1986, first African side through a group stage."
+ },
+ {
+  "tier": "extreme",
+  "q": "Zambia won the 2012 Africa Cup of Nations final in Libreville, close to a place that haunts their football. What happened there in 1993?",
+  "a": "The plane carrying the national team crashed into the sea, killing everyone on board",
+  "src": "https://en.wikipedia.org/wiki/2012_Africa_Cup_of_Nations_final",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "Dropped \"a few hundred metres\", sources only say near the crash site. Crash and death toll confirmed."
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Saudi player ran most of the length of the pitch to score against Belgium at the 1994 World Cup and put his country into the second round?",
+  "a": "Saeed Al-Owairan",
+  "src": "https://www.fifa.com/en/tournaments/mens/worldcup/canadamexicousa2026/articles/saeed-al-owairan-saudi-arabia-belgium-goal-1994",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "29 Jun 1994, roughly 69m solo run, the win sent Saudi Arabia to the round of 16."
+ },
+ {
+  "tier": "extreme",
+  "q": "North Korea were based in one English town for the 1966 World Cup and the locals adopted them completely. Which town?",
+  "a": "Middlesbrough",
+  "src": "https://en.wikipedia.org/wiki/Pak_Doo-ik",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "Based in Middlesbrough, played at Ayresome Park, 3,000 locals followed them to Liverpool."
+ },
+ {
+  "tier": "extreme",
+  "q": "What was the score when Iran beat the Maldives in a 1997 World Cup qualifier, still the Maldives' worst defeat?",
+  "a": "17-0",
+  "src": "https://en.wikipedia.org/wiki/Maldives_national_football_team",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "Killed a false superlative: Australia 31-0 American Samoa in 2001 beat it. 17-0 itself confirmed."
+ },
+ {
+  "tier": "extreme",
+  "q": "Which dictator's son ran Iraqi football and the Olympic committee from 1984, and had players beaten and tortured for losing?",
+  "a": "Uday Hussein, son of Saddam",
+  "src": "https://www.espn.com/oly/bloodontherings.html",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "Uday took the Olympic committee and football association in 1984 at 20; torture well documented."
+ },
+ {
+  "tier": "ball",
+  "q": "Penarol's founding club of 1891 was named for cricket and for the employer whose staff set it up. Which employer?",
+  "a": "The Central Uruguay Railway",
+  "src": "https://en.wikipedia.org/wiki/Central_Uruguay_Railway_Cricket_Club",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "\"Not a football club at all\" was wrong: the 1891 CURCC statutes name cricket, football and other sports. Retiered to ball, the railway answer is a deep cut."
+ },
+ {
+  "tier": "extreme",
+  "q": "UD Las Palmas' mascot Pío-Pío came out of a fan competition in the 1990s. What animal is he?",
+  "a": "A canary, in the club's yellow",
+  "src": "https://www.canarias7.es/deportes/futbol/piopio-mascotas-20221127194444-nt.html",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "Canary in club yellow, fan competition run by Colectivo pa Primera, debut Dec 1996."
+ },
+ {
+  "tier": "extreme",
+  "q": "Mexico did not play a single qualifier for the 1990 World Cup. Why not?",
+  "a": "FIFA banned them for two years after they fielded overage players in a youth tournament",
+  "src": "https://en.wikipedia.org/wiki/Cachirules",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "Sharper phrasing: FIFA banned all Mexican teams for two years from Apr 1988 over the Cachirules overage scandal."
+ },
+ {
+  "tier": "extreme",
+  "q": "Facing relegation over a capital shortfall in 2014, Eibar sold 50 euro shares online to fans in about 50 countries. What is that called?",
+  "a": "Crowdfunding",
+  "src": "https://edition.cnn.com/2014/08/22/sport/football/football-spain-eibar-tv-barcelona",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "Confirmed: 50 euro shares, about 12,500 sold in 48 countries, to meet a 1.7m capital rule."
+ },
+ {
+  "tier": "ball",
+  "q": "Guruceta gave Real Madrid a penalty for a foul outside the box at Camp Nou in 1970. What had the crowd covered the pitch with?",
+  "a": "Seat cushions",
+  "src": "https://en.wikipedia.org/wiki/Emilio_Guruceta",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "Spanish sources confirm the foul was one to two metres outside the box and the rain of almohadillas; game ended five minutes early. Shortened, was 168 characters."
+ },
+ {
+  "tier": "ball",
+  "q": "Racing Santander's players took the field for a 2014 Copa del Rey tie and refused to kick off. What were they protesting about?",
+  "a": "Months of unpaid wages, they wanted the board out",
+  "src": "https://bleacherreport.com/articles/1942629-racing-santander-players-refuse-to-play-postponing-match-vs-real-sociedad",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "30 Jan 2014, second leg, players stood on the centre circle and refused to start; unpaid since September, demanding the board go. CNN link was geoblocked, swapped. Shortened, was 163 characters."
+ },
+ {
+  "tier": "ball",
+  "q": "After signing John Aldridge in 1989, Real Sociedad ran an odd compromise policy until 2001. What was it?",
+  "a": "They would sign Basques and foreigners, but no other Spaniards",
+  "src": "https://global.espn.com/football/story/_/id/37416115/when-john-aldridge-returned-real-sociedad-got-hero-welcome-writes-sid-lowe",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "Sid Lowe confirms Basques and foreigners but no other Spaniards, ended in 2001 when Boris arrived from Oviedo. Dead ESPN link swapped."
+ },
+ {
+  "tier": "ball",
+  "q": "Barcelona top scorer Quini was taken at gunpoint in March 1981 and the title challenge fell apart. How long was he held?",
+  "a": "25 days",
+  "src": "https://www.fcbarcelona.com/en/club/news/1628256/barca-rewind-quinis-kidnapping",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "Old answer \"who took him\" was circular. Taken 1 Mar, freed 25 Mar 1981; three unemployed men, ransom demand."
+ },
+ {
+  "tier": "ball",
+  "q": "Barcelona took the Salvadoran genius Mágico González on a pre-season tour of the United States in 1984. How did it end?",
+  "a": "Menotti sent him back to Cádiz and the transfer never happened",
+  "src": "https://futbolretro.es/magico-gonzalez/?lang=en",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "Wikipedia did not support it; futbolretro and others confirm Menotti sent him back to Cadiz after a curfew night in New Jersey, 1984."
+ },
+ {
+  "tier": "ball",
+  "q": "The touring Basque side of the Civil War settled abroad and entered the local league for 1938-39. Which country was it?",
+  "a": "Mexico, where they finished second as CD Euzkadi",
+  "src": "https://en.wikipedia.org/wiki/C.D._Euzkadi",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "Was 170 characters, over the 150 cut-off. Mexico and the runners-up finish as CD Euzkadi confirmed."
+ },
+ {
+  "tier": "ball",
+  "q": "El Salvador lost 10-1 to Hungary at Elche in 1982 with only 20 men in a 22 man squad. Where had the other two places gone?",
+  "a": "To government officials who wanted a trip to Europe",
+  "src": "https://en.wikipedia.org/wiki/Hungary_v_El_Salvador_(1982_FIFA_World_Cup)",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "15 Jun 1982 at Elche, 10-1, squad of 20 because two places went to officials who never attended a match. FourFourTwo link paywalled, swapped."
+ },
+ {
+  "tier": "extreme",
+  "q": "Atlético Madrid could not register players in the summer of 2017, so they bought Vitolo and immediately parked him somewhere for six months. Where?",
+  "a": "Las Palmas, on loan",
+  "src": "https://www.espn.com/soccer/story/_/id/37526658/atletico-madrid-sign-sevilla-vitolo-loan-las-palmas",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "Confirmed six-month Las Palmas loan around the FIFA registration ban. Retiered to extreme, any Spanish fan knows this one."
+ },
+ {
+  "tier": "ball",
+  "q": "UD Las Palmas moved into the Estadio Insular the year they were founded without building it. Which club had opened it in 1944?",
+  "a": "Marino FC",
+  "src": "https://en.wikipedia.org/wiki/Estadio_Insular",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "Marino CF built it with Eufemiano Fuentes money, opened 25 Dec 1944; Las Palmas played there from 9 Oct 1949, their founding year."
+ },
+ {
+  "tier": "ball",
+  "q": "For its first seven years the Estadio Insular had a pitch no La Liga club would accept today. What was it?",
+  "a": "Dirt, grass was only laid in 1951",
+  "src": "https://en.wikipedia.org/wiki/Estadio_Insular",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "Original claimed dirt during top flight football. Wrong: grass went down 2 Sept 1951, right as Las Palmas entered La Liga."
+ },
+ {
+  "tier": "ball",
+  "q": "Real Madrid's 1966 European Cup winners are known as the Yé-yé side. Where did the name come from?",
+  "a": "The Beatles, after four players posed as them for a Marca photo",
+  "src": "https://en.wikipedia.org/wiki/Y%C3%A9-y%C3%A9_(Real_Madrid)",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "Marca photo of four players as The Beatles, from the She Loves You yeah-yeah-yeah. Confirmed."
+ },
+ {
+  "tier": "ball",
+  "q": "Racing Club's long title drought was blamed on something Independiente fans were said to have buried under the pitch. What was it?",
+  "a": "Seven dead cats",
+  "src": "https://buenosairesherald.com/sports/heralds-halloween-special-the-legend-of-racing-club-and-the-seven-buried-cats",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "The 2001 dig is folklore: the Herald source says the tale probably never happened, dates the dig to 1980 and says six were found. Reframed as the legend it is."
+ },
+ {
+  "tier": "ball",
+  "q": "Colo-Colo have carried a black band on the crest since 1927. Who is it mourning?",
+  "a": "Founder David Arellano, who died in Valladolid on the club's Spanish tour",
+  "src": "https://en.wikipedia.org/wiki/David_Arellano",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "Arellano died 3 May 1927 in Valladolid of peritonitis after a collision on the Spanish tour; black line over the crest."
+ },
+ {
+  "tier": "ball",
+  "q": "Brazil ditched the white shirt after the Maracanazo and picked the yellow one through a newspaper competition in 1953. Who won it?",
+  "a": "Aldyr Schlee, a teenager from Rio Grande do Sul",
+  "src": "https://globalvoices.org/2023/06/13/the-origins-of-brazils-national-jersey-and-its-changing-symbolism-70-years-later/",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "Correio da Manha competition Sept 1953, 401 entries. He was born Nov 1934 so 18, not 19, at the time. Age removed. BBC link unfetchable, swapped."
+ },
+ {
+  "tier": "ball",
+  "q": "Argentina boasted they had everything while bidding for the 1962 World Cup. What was Chile's Carlos Dittborn's famous reply?",
+  "a": "Because we have nothing, we will do everything",
+  "src": "https://en.wikipedia.org/wiki/Carlos_Dittborn",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "Was 155 characters, over the cut-off. Quote confirmed word for word: porque nada tenemos, lo haremos todo."
+ },
+ {
+  "tier": "ball",
+  "q": "Carlos Dittborn won Chile the 1962 World Cup and rebuilt the country to hold it, but never saw a match. Why not?",
+  "a": "He died about a month before it started",
+  "src": "https://en.wikipedia.org/wiki/Carlos_Dittborn",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "Died 28 Apr 1962, tournament kicked off 30 May. Confirmed."
+ },
+ {
+  "tier": "ball",
+  "q": "Three Estudiantes players were jailed for 30 days after the brutal 1969 Intercontinental Cup second leg against Milan. Who ordered it?",
+  "a": "Argentina's military ruler, President Juan Carlos Onganía",
+  "src": "https://en.wikipedia.org/wiki/1969_Intercontinental_Cup",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "Poletti, Manera and Aguirre Suarez each got 30 days on Ongania orders. Wikipedia is thin, Spanish match reports confirm."
+ },
+ {
+  "tier": "ball",
+  "q": "Chile's keeper Roberto Rojas went down bleeding when a flare landed near him at the Maracanã in 1989. What did the investigation find?",
+  "a": "The flare had missed him and he had cut himself with a blade",
+  "src": "https://en.wikipedia.org/wiki/El_Maracanazo",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "Flare landed just over a metre away, Rojas cut himself with a blade hidden in his glove. Confirmed. Shortened, was 158 characters."
+ },
+ {
+  "tier": "ball",
+  "q": "What did Chile lose as punishment for the Roberto Rojas fake injury in 1989?",
+  "a": "The 1994 World Cup, they were barred from even entering qualifying",
+  "src": "https://en.wikipedia.org/wiki/El_Maracanazo",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "Precision: FIFA barred Chile from the 1994 qualifying rounds, they never had a place to lose."
+ },
+ {
+  "tier": "ball",
+  "q": "Rio's grand clubs told Vasco da Gama in 1924 to drop twelve players because they were black or working class. What did Vasco do?",
+  "a": "Refused, in a letter known as the Historical Response, and took being shut out of the elite league",
+  "src": "https://outsidewrite.substack.com/p/how-vasco-da-gama-fought-for-equality",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "Vasco did not walk out. The grand clubs formed AMEA and excluded Vasco; Vasco refused to drop the players. Back with the elite by 1925."
+ },
+ {
+  "tier": "ball",
+  "q": "Honduras were flown into the 2001 Copa América to replace Argentina, arriving hours before their first game. How far did they get?",
+  "a": "Third place, beating holders Brazil 2-0 in the quarter-final",
+  "src": "https://en.wikipedia.org/wiki/2001_Copa_Am%C3%A9rica",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "Was 176 characters. Third place and the 2-0 quarter-final win over holders Brazil confirmed."
+ },
+ {
+  "tier": "ball",
+  "q": "Football's deadliest disaster happened at the Estadio Nacional in Lima in 1964, with 328 killed. What set it off?",
+  "a": "The referee disallowing a late Peru equaliser against Argentina",
+  "src": "https://en.wikipedia.org/wiki/Estadio_Nacional_disaster",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "24 May 1964, 328 dead, Peru v Argentina Olympic qualifier, Lobaton equaliser disallowed with six minutes left. Still the deadliest."
+ },
+ {
+  "tier": "ball",
+  "q": "Carlos Henrique Raposo, known as Kaiser, was signed through the 1980s by Botafogo, Flamengo, Fluminense and Vasco. What did he never do?",
+  "a": "Play a competitive match, he faked injuries and fitness the whole time",
+  "src": "https://en.wikipedia.org/wiki/Carlos_Kaiser_(footballer)",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "Cut \"almost 20 years\" and Ajaccio: the career ran about a decade and the Ajaccio spell is the part his own friend says he invented."
+ },
+ {
+  "tier": "ball",
+  "q": "When FIFA banned internationals above 2,500 metres in 2007, Diego Maradona played an exhibition in La Paz in protest. Who led the team against him?",
+  "a": "Bolivia's president Evo Morales",
+  "src": "https://en.wikipedia.org/wiki/High-altitude_football_controversy",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "2007 FIFA limit of 2,500m confirmed; Maradona 7-4 over a Bolivia side led by Morales at the Hernando Siles."
+ },
+ {
+  "tier": "ball",
+  "q": "Palmeiras were called Palestra Itália until the Brazilian government forced a change in 1942. Why?",
+  "a": "Brazil had joined the Allies and banned names linked to the Axis powers",
+  "src": "https://en.wikipedia.org/wiki/History_of_SE_Palmeiras",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "Renamed 14 Sept 1942 under the wartime decree on foreign names, after Brazil declared war on the Axis."
+ },
+ {
+  "tier": "ball",
+  "q": "River Plate blew a 2-0 lead in the 1966 Libertadores final play-off. What did rival fans throw at them days later, giving River a nickname that stuck?",
+  "a": "A chicken, painted with a red sash",
+  "src": "https://www.mediotiempo.com/futbol/por-que-a-river-plate-se-le-conoce-como-las-gallinas",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "Half-time detail unverified and it was the very next league game at Banfield, not a week later. Chicken with a red sash confirmed."
+ },
+ {
+  "tier": "ball",
+  "q": "Alcides Ghiggia, who scored the winner in the 1950 Maracanazo, said only three people had ever silenced the Maracanã. Who were the other two?",
+  "a": "The Pope and Frank Sinatra",
+  "src": "https://www.fifa.com/en/tournaments/mens/worldcup/articles/alcides-ghiggia-uruguay-interview",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "Quote confirmed in several sources: the Pope, Frank Sinatra and me."
+ },
+ {
+  "tier": "ball",
+  "q": "René Higuita spent seven months in a Colombian jail in 1993 and missed the World Cup. What had he done?",
+  "a": "Acted as a go between in a kidnapping and taken money for it, which was illegal",
+  "src": "https://en.wikipedia.org/wiki/Ren%C3%A9_Higuita",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "Seven months in 1993 for brokering a kidnap ransom and taking 64,000 dollars; left out of the 1994 squad."
+ },
+ {
+  "tier": "ball",
+  "q": "Spain’s oldest club was founded in 1889 by two Scottish doctors working at the Rio Tinto mines. Which club?",
+  "a": "Recreativo de Huelva",
+  "src": "https://www.thelocal.es/20220502/the-scottish-roots-of-spains-oldest-football-club",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "Source says the club was to keep the founders and their colleagues fit, not \"their patients\". Recreativo, 23 Dec 1889, confirmed."
+ },
+ {
+  "tier": "ball",
+  "q": "Argentinos Juniors, the club that produced Maradona, grew out of two anarchist teams in 1904. One was named after which martyrs?",
+  "a": "The Chicago martyrs of the Haymarket affair",
+  "src": "https://es.wikipedia.org/wiki/Asociaci%C3%B3n_Atl%C3%A9tica_Argentinos_Juniors",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "Embroidery killed: the club was never officially called Martires de Chicago, that was one of the two merging teams. First name was Argentinos Unidos de Villa Crespo."
+ },
+ {
+  "tier": "ball",
+  "q": "Joe Gaetjens scored the goal that beat England at the 1950 World Cup. What happened to him in Haiti in 1964?",
+  "a": "Duvalier's secret police arrested him and he was never seen again",
+  "src": "https://www.aljazeera.com/sports/2010/6/12/mysterious-fate-of-a-world-cup-hero",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "\"At gunpoint\" is not in the sources: Tontons Macoutes arrested him at his dry cleaning shop, 8 Jul 1964, taken to Fort Dimanche."
+ },
+ {
+  "tier": "ball",
+  "q": "Haiti's Emmanuel Sanon scored past Dino Zoff at the 1974 World Cup and ended a record that still stands. What record?",
+  "a": "Zoff had gone over 1,100 minutes of international football without conceding",
+  "src": "https://www.irishtimes.com/sport/soccer/international/world-cup-moments-emmanuel-sanon-ends-dino-zoff-s-resistance-1.3479195",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "The minute count is disputed, 1,142 in most accounts and 1,143 in the cited Irish Times piece. Number removed so nobody argues."
+ },
+ {
+  "tier": "ball",
+  "q": "Ethiopia reached the final of the first Africa Cup of Nations in 1957 without playing a match. How?",
+  "a": "Four entered, South Africa were thrown out for refusing a mixed race side, so Ethiopia had a bye",
+  "src": "https://en.wikipedia.org/wiki/1957_African_Cup_of_Nations",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "Correction: four teams entered and three played. South Africa were expelled over apartheid selection, Ethiopia got the bye."
+ },
+ {
+  "tier": "ball",
+  "q": "Referee Janny Sikazwe blew full time twice too early in Tunisia against Mali at the January 2022 Africa Cup of Nations. What was the given reason?",
+  "a": "Heatstroke and severe dehydration",
+  "src": "https://www.cnn.com/2022/01/12/football/mali-tunisia-afcon-referee-controversy-spt-intl",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "Was over 150 characters. Heatstroke and severe dehydration confirmed by the AFCON head of referees and by Sikazwe himself."
+ },
+ {
+  "tier": "ball",
+  "q": "Ghana's team are the Black Stars after a symbol borrowed from a Pan-Africanist's shipping line. Whose line was it?",
+  "a": "Marcus Garvey's Black Star Line",
+  "src": "https://nowandthen.ashp.cuny.edu/2010/06/how-the-black-stars-of-ghana-got-their-names/",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "Garvey link confirmed; the symbol came into the national flag, designed by Theodosia Okoh, so crediting Nkrumah personally was loose."
+ },
+ {
+  "tier": "ball",
+  "q": "Two countries got to keep an Africa Cup of Nations trophy outright by winning it three times. Ghana in 1978 and who in 2000?",
+  "a": "Cameroon",
+  "src": "https://en.wikipedia.org/wiki/Africa_Cup_of_Nations_trophy",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "Ghana kept the Salem Cup in 1978, Cameroon the Unity Cup in 2000. Egypt won three in a row but only got a replica, so two is right."
+ },
+ {
+  "tier": "ball",
+  "q": "Nigeria pulled out of the 1996 Africa Cup of Nations in South Africa on the orders of dictator Sani Abacha. What did it cost them?",
+  "a": "A ban from the next tournament, in 1998",
+  "src": "https://en.wikipedia.org/wiki/1996_African_Cup_of_Nations",
+  "from": "spain",
+  "verdict": "ok",
+  "note": "Withdrew under Abacha after the Saro-Wiwa executions row with South Africa; CAF barred them from 1998, back in 2000 as co-hosts."
+ },
+ {
+  "tier": "ball",
+  "q": "Uzbekistan beat Bahrain 1-0 in a 2006 World Cup play-off, complained about the referee and had the result annulled. How did that work out?",
+  "a": "The replay finished 1-1, the second leg 0-0, and Bahrain went through on away goals",
+  "src": "https://en.wikipedia.org/wiki/2006_FIFA_World_Cup_qualification_%E2%80%93_AFC_fourth_round",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "It was a 2006 qualifier played in 2005, and the away-goals exit came over both legs, not the replay alone. Shortened again, was 157 characters."
+ },
+ {
+  "tier": "ball",
+  "q": "The Dutch East Indies played at the 1938 World Cup and hold a record no one has taken off them. What record?",
+  "a": "The shortest World Cup history of any nation, one match, a 6-0 loss to Hungary",
+  "src": "https://en.wikipedia.org/wiki/Indonesia_at_the_FIFA_World_Cup",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "\"Fewest matches\" is shared by eight 1934 teams. Reframed as the unique record. Checked: Indonesia missed 2026, so it still stands."
+ },
+ {
+  "tier": "ball",
+  "q": "India qualified for the 1950 World Cup and withdrew. Legend says FIFA banned their bare feet, but what reason did the federation give?",
+  "a": "Team selection disputes and not enough time to prepare",
+  "src": "https://scroll.in/field/1024901/not-barefoot-but-cold-feet-the-events-that-led-to-indias-absence-at-1950-fifa-world-cup-in-brazil",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "Cost was the wrong answer: Brazil offered to cover most expenses. AIFF officially cited selection disagreements and insufficient practice."
+ },
+ {
+  "tier": "ball",
+  "q": "Timor-Leste were banned from the 2023 Asian Cup back in 2017 and had 29 results wiped. What had they been doing?",
+  "a": "Fielding Brazilian born players on faked Timorese birth documents",
+  "src": "https://www.insideworldfootball.com/2017/01/20/east-timor-kicked-2023-asian-cup-probe-finds-12-brazilians-faked-passports/",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "Correction: the expulsion was from the Asian Cup itself, not just qualifying. Twelve Brazilians on falsified Timorese certificates, 29 matches forfeited."
+ },
+ {
+  "tier": "ball",
+  "q": "Belenenses started a 2021 league game against Benfica with nine players after a Covid outbreak. Why was it abandoned early in the second half?",
+  "a": "They were down to six on the pitch, below the minimum of seven",
+  "src": "https://www.espn.com/soccer/portuguese-liga/story/4532864/portugal-league-match-abandoned-as-covid-outbreak-reduces-belenenses-to-nine-playerstwo-keepers",
+  "from": "spain",
+  "verdict": "fixed",
+  "note": "27 Nov 2021, started nine with two keepers, 7-0 at the break, abandoned two minutes into the second half when a sixth man went down. Shortened, was 155 characters."
+ }
+]

@@ -1,0 +1,5758 @@
+{
+ "easy": [
+  {
+   "s": "real-madrid",
+   "n": "Real Madrid CF"
+  },
+  {
+   "s": "ajax",
+   "n": "AFC Ajax"
+  },
+  {
+   "s": "manchester-united",
+   "n": "Manchester United"
+  },
+  {
+   "s": "atletico-madrid",
+   "n": "Atletico Madrid"
+  },
+  {
+   "s": "united-of-manchester",
+   "n": "Manchester United F.C."
+  },
+  {
+   "s": "feyenoord",
+   "n": "Feyenoord"
+  },
+  {
+   "s": "liverpool",
+   "n": "Liverpool F.C."
+  },
+  {
+   "s": "athletic-club",
+   "n": "Athletic Bilbao"
+  },
+  {
+   "s": "manchester-city",
+   "n": "Manchester City"
+  },
+  {
+   "s": "espanyol",
+   "n": "Espanyol"
+  },
+  {
+   "s": "arsenal",
+   "n": "Arsenal F.C."
+  },
+  {
+   "s": "villarreal",
+   "n": "Villarreal CF"
+  },
+  {
+   "s": "celta",
+   "n": "RC Celta de Vigo"
+  },
+  {
+   "s": "inter-miami-cf",
+   "n": "Inter Miami CF"
+  },
+  {
+   "s": "az-alkmaar",
+   "n": "AZ Alkmaar"
+  },
+  {
+   "s": "girona",
+   "n": "Girona FC"
+  },
+  {
+   "s": "levante",
+   "n": "Levante UD"
+  },
+  {
+   "s": "bayern-munchen",
+   "n": "FC Bayern Munich"
+  },
+  {
+   "s": "mallorca",
+   "n": "RCD Mallorca"
+  },
+  {
+   "s": "granada",
+   "n": "Granada CF"
+  },
+  {
+   "s": "bayer-leverkusen",
+   "n": "Bayer 04 Leverkusen"
+  },
+  {
+   "s": "malaga",
+   "n": "Málaga CF"
+  },
+  {
+   "s": "tottenham",
+   "n": "Tottenham Hotspur F.C."
+  },
+  {
+   "s": "wrexham",
+   "n": "Wrexham A.F.C."
+  },
+  {
+   "s": "fc-groningen",
+   "n": "FC Groningen"
+  },
+  {
+   "s": "almeria",
+   "n": "UD Almería"
+  },
+  {
+   "s": "elche",
+   "n": "Elche CF"
+  },
+  {
+   "s": "psv",
+   "n": "PSV Eindhoven"
+  },
+  {
+   "s": "las-palmas",
+   "n": "UD Las Palmas"
+  },
+  {
+   "s": "borussia-dortmund",
+   "n": "Borussia Dortmund"
+  },
+  {
+   "s": "vitesse",
+   "n": "SBV Vitesse"
+  },
+  {
+   "s": "aston-villa",
+   "n": "Aston Villa F.C."
+  },
+  {
+   "s": "fc-utrecht",
+   "n": "FC Utrecht"
+  },
+  {
+   "s": "club-milano",
+   "n": "Inter Milan"
+  },
+  {
+   "s": "eibar",
+   "n": "SD Eibar"
+  },
+  {
+   "s": "crystal-palace",
+   "n": "Crystal Palace F.C."
+  },
+  {
+   "s": "cadiz",
+   "n": "Cádiz CF"
+  },
+  {
+   "s": "sevilla",
+   "n": "Sevilla FC"
+  },
+  {
+   "s": "juventus",
+   "n": "Juventus"
+  },
+  {
+   "s": "ado-den-haag",
+   "n": "Ado Den Haag"
+  },
+  {
+   "s": "leicester",
+   "n": "Leicester City F.C."
+  },
+  {
+   "s": "leganes",
+   "n": "CD Leganés"
+  },
+  {
+   "s": "milan",
+   "n": "AC Milan"
+  },
+  {
+   "s": "real-sociedad",
+   "n": "Real Sociedad"
+  },
+  {
+   "s": "coritiba",
+   "n": "Coritiba Foot Ball Club"
+  },
+  {
+   "s": "nottingham-forest",
+   "n": "Nottingham Forest"
+  },
+  {
+   "s": "ipswich",
+   "n": "Ipswich Town F.C."
+  },
+  {
+   "s": "valencia",
+   "n": "Valencia CF"
+  },
+  {
+   "s": "west-ham",
+   "n": "West Ham United F.C."
+  },
+  {
+   "s": "willem-ii",
+   "n": "Willem II Tilburg"
+  },
+  {
+   "s": "al-hilal",
+   "n": "Al Hilal SFC"
+  },
+  {
+   "s": "hercules",
+   "n": "Hercules"
+  },
+  {
+   "s": "newcastle",
+   "n": "Newcastle"
+  },
+  {
+   "s": "excelsior-rotterdam",
+   "n": "Excelsior Rotterdam"
+  },
+  {
+   "s": "real-betis",
+   "n": "Real Betis"
+  },
+  {
+   "s": "fortuna-sittard",
+   "n": "Fortuna Sittard"
+  },
+  {
+   "s": "celtic",
+   "n": "Celtic F.C."
+  },
+  {
+   "s": "cordoba",
+   "n": "Córdoba CF"
+  },
+  {
+   "s": "brighton",
+   "n": "Brighton & Hove Albion F.C."
+  },
+  {
+   "s": "vvv-venlo",
+   "n": "VVV Venlo"
+  },
+  {
+   "s": "sporting-cp",
+   "n": "Sporting CP"
+  },
+  {
+   "s": "de-graafschap",
+   "n": "De Graafschap"
+  },
+  {
+   "s": "albacete",
+   "n": "Albacete Balompié"
+  },
+  {
+   "s": "everton",
+   "n": "Everton F.C."
+  },
+  {
+   "s": "fc-emmen",
+   "n": "FC Emmen"
+  },
+  {
+   "s": "roma",
+   "n": "AS Roma"
+  },
+  {
+   "s": "eintracht-frankfurt",
+   "n": "Eintracht Frankfurt"
+  },
+  {
+   "s": "leeds-united",
+   "n": "Leeds United"
+  },
+  {
+   "s": "atalanta",
+   "n": "Atalanta BC"
+  },
+  {
+   "s": "wolves",
+   "n": "Wolverhampton Wanderers F.C."
+  },
+  {
+   "s": "rangers",
+   "n": "Rangers"
+  },
+  {
+   "s": "volendam",
+   "n": "FC Volendam"
+  },
+  {
+   "s": "fenerbahce",
+   "n": "Fenerbahçe S.K. (football)"
+  },
+  {
+   "s": "lugo",
+   "n": "CD Lugo"
+  },
+  {
+   "s": "como-1907",
+   "n": "Como 1907"
+  },
+  {
+   "s": "lazio",
+   "n": "SS Lazio"
+  },
+  {
+   "s": "napoli",
+   "n": "SSC Napoli"
+  },
+  {
+   "s": "xerez-cd",
+   "n": "Xerez CD"
+  },
+  {
+   "s": "sunderland",
+   "n": "Sunderland A.F.C."
+  },
+  {
+   "s": "fiorentina",
+   "n": "ACF Fiorentina"
+  },
+  {
+   "s": "gimnastic-de-tarragona",
+   "n": "Gimnastic De Tarragona"
+  },
+  {
+   "s": "bournemouth",
+   "n": "AFC Bournemouth"
+  },
+  {
+   "s": "fc-porto",
+   "n": "FC Porto"
+  },
+  {
+   "s": "fulham",
+   "n": "Fulham F.C."
+  },
+  {
+   "s": "rayo-vallecano",
+   "n": "Rayo Vallecano"
+  },
+  {
+   "s": "galatasaray",
+   "n": "Galatasaray"
+  },
+  {
+   "s": "castellon",
+   "n": "Castellon"
+  },
+  {
+   "s": "southampton",
+   "n": "Southampton F.C."
+  },
+  {
+   "s": "benfica",
+   "n": "S.L. Benfica"
+  },
+  {
+   "s": "colo-colo",
+   "n": "Colo Colo"
+  },
+  {
+   "s": "marseille",
+   "n": "Olympique de Marseille"
+  },
+  {
+   "s": "flamengo",
+   "n": "CR Flamengo"
+  },
+  {
+   "s": "cultural-leonesa",
+   "n": "Cultural y Deportiva Leonesa"
+  },
+  {
+   "s": "birmingham",
+   "n": "Birmingham City F.C."
+  },
+  {
+   "s": "almere-city-fc",
+   "n": "Almere City FC"
+  },
+  {
+   "s": "brentford",
+   "n": "Brentford F.C."
+  },
+  {
+   "s": "rb-leipzig",
+   "n": "RB Leipzig"
+  },
+  {
+   "s": "mirandes",
+   "n": "CD Mirandés"
+  },
+  {
+   "s": "burnley",
+   "n": "Burnley F.C."
+  },
+  {
+   "s": "bologna",
+   "n": "Bologna FC 1909"
+  },
+  {
+   "s": "twente",
+   "n": "FC Twente"
+  },
+  {
+   "s": "besiktas",
+   "n": "Besiktas"
+  },
+  {
+   "s": "borussia-monchengladbach",
+   "n": "Borussia Monchengladbach"
+  },
+  {
+   "s": "blackburn-rovers",
+   "n": "Blackburn Rovers"
+  },
+  {
+   "s": "dynamo-kyiv",
+   "n": "FC Dynamo Kyiv"
+  },
+  {
+   "s": "genoa",
+   "n": "Genoa CFC"
+  },
+  {
+   "s": "luton-town",
+   "n": "Luton Town F.C."
+  },
+  {
+   "s": "vfb-stuttgart",
+   "n": "VFB Stuttgart"
+  },
+  {
+   "s": "coventry-city",
+   "n": "Coventry City F.C."
+  },
+  {
+   "s": "as-monaco",
+   "n": "AS Monaco FC"
+  },
+  {
+   "s": "valladolid",
+   "n": "Real Valladolid"
+  },
+  {
+   "s": "sheffield-united",
+   "n": "Sheffield United F.C."
+  },
+  {
+   "s": "sc-heerenveen",
+   "n": "SC Heerenveen"
+  },
+  {
+   "s": "lyon",
+   "n": "Olympique Lyonnais"
+  },
+  {
+   "s": "werder-bremen",
+   "n": "SV Werder Bremen"
+  },
+  {
+   "s": "club-america",
+   "n": "Club America"
+  },
+  {
+   "s": "osasuna",
+   "n": "CA Osasuna"
+  },
+  {
+   "s": "west-bromwich-albion",
+   "n": "West Bromwich Albion F.C."
+  },
+  {
+   "s": "go-ahead-eagles",
+   "n": "Go Ahead Eagles"
+  },
+  {
+   "s": "zenit",
+   "n": "FC Zenit Saint Petersburg"
+  },
+  {
+   "s": "al-ittihad",
+   "n": "Al-Ittihad Club (Jeddah)"
+  },
+  {
+   "s": "alcorcon",
+   "n": "AD Alcorcón"
+  },
+  {
+   "s": "bordeaux",
+   "n": "FC Girondins de Bordeaux"
+  },
+  {
+   "s": "arenas-club",
+   "n": "Arenas Club"
+  },
+  {
+   "s": "cartagena",
+   "n": "FC Cartagena"
+  },
+  {
+   "s": "sheffield-wednesday",
+   "n": "Sheffield Wednesday"
+  },
+  {
+   "s": "sabadell",
+   "n": "CE Sabadell FC"
+  },
+  {
+   "s": "queens-park-rangers",
+   "n": "Queens Park Rangers"
+  },
+  {
+   "s": "lille",
+   "n": "Lille OSC"
+  },
+  {
+   "s": "wolfsburg",
+   "n": "Wolfsburg"
+  },
+  {
+   "s": "dundee",
+   "n": "Dundee F.C."
+  },
+  {
+   "s": "fc-dordrecht",
+   "n": "FC Dordrecht"
+  },
+  {
+   "s": "fc-eindhoven",
+   "n": "FC Eindhoven"
+  },
+  {
+   "s": "middlesbrough",
+   "n": "Middlesbrough F.C."
+  },
+  {
+   "s": "udinese",
+   "n": "Udinese"
+  },
+  {
+   "s": "salzburg",
+   "n": "Salzburg"
+  },
+  {
+   "s": "schalke-04",
+   "n": "Schalke 04"
+  },
+  {
+   "s": "plymouth-argyle",
+   "n": "Plymouth Argyle F.C."
+  },
+  {
+   "s": "fc-den-bosch",
+   "n": "FC Den Bosch"
+  },
+  {
+   "s": "cagliari",
+   "n": "Cagliari Calcio"
+  }
+ ],
+ "normal": [
+  {
+   "s": "burgos",
+   "n": "Burgos"
+  },
+  {
+   "s": "panathinaikos",
+   "n": "Panathinaikos"
+  },
+  {
+   "s": "real-jaen-cf",
+   "n": "Real Jaén"
+  },
+  {
+   "s": "cska-moskva",
+   "n": "CSKA Moskva"
+  },
+  {
+   "s": "koln",
+   "n": "1. FC Köln"
+  },
+  {
+   "s": "derby-county",
+   "n": "Derby County F.C."
+  },
+  {
+   "s": "alcoyano",
+   "n": "CD Alcoyano"
+  },
+  {
+   "s": "st-pauli",
+   "n": "FC St. Pauli"
+  },
+  {
+   "s": "augsburg",
+   "n": "Augsburg"
+  },
+  {
+   "s": "crvena-zvezda",
+   "n": "Red Star Belgrade"
+  },
+  {
+   "s": "los-angeles-fc",
+   "n": "Los Angeles FC"
+  },
+  {
+   "s": "hoffenheim",
+   "n": "TSG 1899 Hoffenheim"
+  },
+  {
+   "s": "watford",
+   "n": "Watford F.C."
+  },
+  {
+   "s": "norwich-city",
+   "n": "Norwich City F.C."
+  },
+  {
+   "s": "portsmouth",
+   "n": "Portsmouth"
+  },
+  {
+   "s": "fluminense",
+   "n": "Fluminense"
+  },
+  {
+   "s": "freiburg",
+   "n": "SC Freiburg"
+  },
+  {
+   "s": "la-galaxy",
+   "n": "LA Galaxy"
+  },
+  {
+   "s": "al-nassr",
+   "n": "Al Nassr"
+  },
+  {
+   "s": "bolton",
+   "n": "Bolton Wanderers F.C."
+  },
+  {
+   "s": "cardiff-city",
+   "n": "Cardiff City F.C."
+  },
+  {
+   "s": "pec-zwolle",
+   "n": "PEC Zwolle"
+  },
+  {
+   "s": "fcsb",
+   "n": "FCSB"
+  },
+  {
+   "s": "real-zaragoza",
+   "n": "Real Zaragoza"
+  },
+  {
+   "s": "nec-nijmegen",
+   "n": "NEC Nijmegen"
+  },
+  {
+   "s": "dinamo-zagreb",
+   "n": "GNK Dinamo Zagreb"
+  },
+  {
+   "s": "hull-city",
+   "n": "Hull City A.F.C."
+  },
+  {
+   "s": "sassuolo",
+   "n": "US Sassuolo Calcio"
+  },
+  {
+   "s": "millwall",
+   "n": "Millwall F.C."
+  },
+  {
+   "s": "verona",
+   "n": "Hellas Verona FC"
+  },
+  {
+   "s": "salford-city",
+   "n": "Salford City F.C."
+  },
+  {
+   "s": "wigan",
+   "n": "Wigan Athletic F.C."
+  },
+  {
+   "s": "stoke-city",
+   "n": "Stoke City F.C."
+  },
+  {
+   "s": "basel",
+   "n": "FC Basel"
+  },
+  {
+   "s": "afc-wimbledon",
+   "n": "AFC Wimbledon"
+  },
+  {
+   "s": "dynamo-moscow",
+   "n": "FC Dynamo Moscow"
+  },
+  {
+   "s": "swansea-city",
+   "n": "Swansea City A.F.C."
+  },
+  {
+   "s": "ce-europa",
+   "n": "Ce Europa"
+  },
+  {
+   "s": "oxford-united",
+   "n": "Oxford United F.C."
+  },
+  {
+   "s": "as-saint-etienne",
+   "n": "AS Saint Etienne"
+  },
+  {
+   "s": "oviedo",
+   "n": "Real Oviedo"
+  },
+  {
+   "s": "club-brugge",
+   "n": "Club Brugge KV"
+  },
+  {
+   "s": "preston-north-end",
+   "n": "Preston North End F.C."
+  },
+  {
+   "s": "union-berlin",
+   "n": "1. FC Union Berlin"
+  },
+  {
+   "s": "shakhtar",
+   "n": "FC Shakhtar Donetsk"
+  },
+  {
+   "s": "aberdeen",
+   "n": "Aberdeen F.C."
+  },
+  {
+   "s": "fc-kaiserslautern",
+   "n": "FC Kaiserslautern"
+  },
+  {
+   "s": "malmo",
+   "n": "Malmö FF"
+  },
+  {
+   "s": "santos",
+   "n": "Santos"
+  },
+  {
+   "s": "fc-nurnberg",
+   "n": "1. FC Nürnberg"
+  },
+  {
+   "s": "top-oss",
+   "n": "Top Oss"
+  },
+  {
+   "s": "union-saint-gilloise",
+   "n": "Union Saint Gilloise"
+  },
+  {
+   "s": "ud-ibiza",
+   "n": "UD Ibiza"
+  },
+  {
+   "s": "sao-paulo",
+   "n": "São Paulo FC"
+  },
+  {
+   "s": "al-ahly",
+   "n": "Al Ahly SC"
+  },
+  {
+   "s": "hamburger-sv",
+   "n": "Hamburger SV"
+  },
+  {
+   "s": "copenhagen",
+   "n": "F.C. Copenhagen"
+  },
+  {
+   "s": "sparta-rotterdam",
+   "n": "Sparta Rotterdam"
+  },
+  {
+   "s": "mk-dons",
+   "n": "Milton Keynes Dons F.C."
+  },
+  {
+   "s": "empoli",
+   "n": "Empoli FC"
+  },
+  {
+   "s": "krasnodar",
+   "n": "FC Krasnodar"
+  },
+  {
+   "s": "cd-basconia",
+   "n": "CD Basconia"
+  },
+  {
+   "s": "charlton",
+   "n": "Charlton Athletic F.C."
+  },
+  {
+   "s": "trabzonspor",
+   "n": "Trabzonspor"
+  },
+  {
+   "s": "atletico-baleares",
+   "n": "CD Atlético Baleares"
+  },
+  {
+   "s": "notts-county",
+   "n": "Notts County"
+  },
+  {
+   "s": "fortuna-dusseldorf",
+   "n": "Fortuna Dusseldorf"
+  },
+  {
+   "s": "cd-guadalajara",
+   "n": "C.D. Guadalajara"
+  },
+  {
+   "s": "huddersfield",
+   "n": "Huddersfield Town A.F.C."
+  },
+  {
+   "s": "parma",
+   "n": "Parma Calcio 1913"
+  },
+  {
+   "s": "nice",
+   "n": "OGC Nice"
+  },
+  {
+   "s": "fc-metz",
+   "n": "FC Metz"
+  },
+  {
+   "s": "ferencvaros",
+   "n": "Ferencvaros"
+  },
+  {
+   "s": "jeonbuk",
+   "n": "Jeonbuk Hyundai Motors"
+  },
+  {
+   "s": "lecce",
+   "n": "US Lecce"
+  },
+  {
+   "s": "al-ain",
+   "n": "Al Ain FC"
+  },
+  {
+   "s": "vfl-bochum",
+   "n": "VFL Bochum"
+  },
+  {
+   "s": "1860-munich",
+   "n": "TSV 1860 Munich"
+  },
+  {
+   "s": "spartak-moskva",
+   "n": "Spartak Moskva"
+  },
+  {
+   "s": "austria-wien",
+   "n": "Austria Wien"
+  },
+  {
+   "s": "new-york-red-bulls",
+   "n": "New York Red Bulls"
+  },
+  {
+   "s": "blackpool",
+   "n": "Blackpool F.C."
+  },
+  {
+   "s": "young-boys",
+   "n": "BSC Young Boys"
+  },
+  {
+   "s": "deportivo-cali",
+   "n": "Deportivo Cali"
+  },
+  {
+   "s": "polish-football-association",
+   "n": "Oldest football clubs"
+  },
+  {
+   "s": "cd-badajoz",
+   "n": "CD Badajoz"
+  },
+  {
+   "s": "new-york-city-fc",
+   "n": "New York City FC"
+  },
+  {
+   "s": "eldense",
+   "n": "CD Eldense"
+  },
+  {
+   "s": "atletico-mineiro",
+   "n": "Clube Atlético Mineiro"
+  },
+  {
+   "s": "barnsley",
+   "n": "Barnsley"
+  },
+  {
+   "s": "hibernian",
+   "n": "Hibernian F.C."
+  },
+  {
+   "s": "gama",
+   "n": "CR Vasco da Gama"
+  },
+  {
+   "s": "chievo",
+   "n": "AC ChievoVerona"
+  },
+  {
+   "s": "vasco-da-gama",
+   "n": "Vasco Da Gama"
+  },
+  {
+   "s": "karlsruher",
+   "n": "Karlsruher SC"
+  },
+  {
+   "s": "lorient",
+   "n": "FC Lorient"
+  },
+  {
+   "s": "bristol-city",
+   "n": "Bristol City F.C."
+  },
+  {
+   "s": "molde",
+   "n": "Molde FK"
+  },
+  {
+   "s": "reading",
+   "n": "Reading F.C."
+  },
+  {
+   "s": "auxerre",
+   "n": "AJ Auxerre"
+  },
+  {
+   "s": "adana-demirspor",
+   "n": "Adana Demirspor"
+  },
+  {
+   "s": "basaksehir",
+   "n": "İstanbul Başakşehir F.K."
+  },
+  {
+   "s": "goteborg",
+   "n": "IFK Göteborg"
+  },
+  {
+   "s": "rc-strasbourg-alsace",
+   "n": "Rc Strasbourg Alsace"
+  },
+  {
+   "s": "arminia-bielefeld",
+   "n": "Arminia Bielefeld"
+  },
+  {
+   "s": "racing-santander",
+   "n": "Racing Santander"
+  },
+  {
+   "s": "bate-borisov",
+   "n": "FC BATE Borisov"
+  },
+  {
+   "s": "catania",
+   "n": "Catania FC"
+  },
+  {
+   "s": "san-diego-fc",
+   "n": "San Diego FC"
+  },
+  {
+   "s": "grasshoppers",
+   "n": "Grasshopper Club Zurich"
+  },
+  {
+   "s": "qarabag",
+   "n": "Qarabağ FK"
+  },
+  {
+   "s": "crotone",
+   "n": "FC Crotone"
+  },
+  {
+   "s": "stockport-county",
+   "n": "Stockport County F.C."
+  },
+  {
+   "s": "dinamo-minsk",
+   "n": "FC Dinamo Minsk"
+  },
+  {
+   "s": "the-new-saints",
+   "n": "The New Saints"
+  },
+  {
+   "s": "dundee-united",
+   "n": "Dundee United F.C."
+  },
+  {
+   "s": "forest-green-rovers",
+   "n": "Forest Green Rovers"
+  },
+  {
+   "s": "nac-breda",
+   "n": "NAC Breda"
+  },
+  {
+   "s": "maccabi-tel-aviv",
+   "n": "Maccabi Tel Aviv F.C."
+  },
+  {
+   "s": "venezia",
+   "n": "Venezia FC"
+  },
+  {
+   "s": "columbus-crew",
+   "n": "Columbus Crew"
+  },
+  {
+   "s": "brescia",
+   "n": "Brescia Calcio"
+  },
+  {
+   "s": "al-qadsiah",
+   "n": "Al Qadsiah"
+  },
+  {
+   "s": "brondby",
+   "n": "Brøndby IF"
+  },
+  {
+   "s": "fc-heidenheim",
+   "n": "1. FC Heidenheim"
+  },
+  {
+   "s": "fortaleza",
+   "n": "Fortaleza Esporte Clube"
+  },
+  {
+   "s": "frosinone",
+   "n": "Frosinone Calcio"
+  },
+  {
+   "s": "vissel-kobe",
+   "n": "Vissel Kobe"
+  },
+  {
+   "s": "midtjylland",
+   "n": "FC Midtjylland"
+  },
+  {
+   "s": "sparta-praha",
+   "n": "AC Sparta Prague"
+  },
+  {
+   "s": "viktoria-plzen",
+   "n": "FC Viktoria Plzeň"
+  },
+  {
+   "s": "rc-lens",
+   "n": "Rc Lens"
+  },
+  {
+   "s": "wisla-krakow",
+   "n": "Wisła Kraków"
+  },
+  {
+   "s": "mainz-05",
+   "n": "1. FSV Mainz 05"
+  },
+  {
+   "s": "amorebieta",
+   "n": "SD Amorebieta"
+  },
+  {
+   "s": "cruz-azul",
+   "n": "Cruz Azul"
+  },
+  {
+   "s": "barakaldo",
+   "n": "Barakaldo CF"
+  },
+  {
+   "s": "palmeiras",
+   "n": "SE Palmeiras"
+  },
+  {
+   "s": "logrones",
+   "n": "UD Logroñés"
+  },
+  {
+   "s": "ud-logrones",
+   "n": "UD Logrones"
+  },
+  {
+   "s": "pachuca",
+   "n": "C.F. Pachuca"
+  },
+  {
+   "s": "afc-dws",
+   "n": "AFC Dws"
+  },
+  {
+   "s": "brann",
+   "n": "SK Brann"
+  },
+  {
+   "s": "bodo-glimt",
+   "n": "FK Bodø/Glimt"
+  },
+  {
+   "s": "bursaspor",
+   "n": "Bursaspor"
+  },
+  {
+   "s": "dc-united",
+   "n": "D.C. United"
+  },
+  {
+   "s": "hertha-bsc",
+   "n": "Hertha BSC"
+  },
+  {
+   "s": "djurgarden",
+   "n": "Djurgarden"
+  },
+  {
+   "s": "sc-braga",
+   "n": "S.C. Braga"
+  },
+  {
+   "s": "livorno",
+   "n": "US Livorno 1915"
+  },
+  {
+   "s": "al-sadd",
+   "n": "Al Sadd SC"
+  },
+  {
+   "s": "tenerife",
+   "n": "CD Tenerife"
+  },
+  {
+   "s": "angers",
+   "n": "Angers"
+  },
+  {
+   "s": "athletico-paranaense",
+   "n": "Club Athletico Paranaense"
+  },
+  {
+   "s": "newells-old-boys",
+   "n": "Newells Old Boys"
+  },
+  {
+   "s": "cfr-cluj",
+   "n": "Cfr Cluj"
+  },
+  {
+   "s": "darmstadt",
+   "n": "SV Darmstadt 98"
+  },
+  {
+   "s": "sporting-gijon",
+   "n": "Sporting de Gijón"
+  },
+  {
+   "s": "dinamo-bucuresti",
+   "n": "FC Dinamo București"
+  },
+  {
+   "s": "eintracht-braunschweig",
+   "n": "Eintracht Braunschweig"
+  },
+  {
+   "s": "noah",
+   "n": "FC Noah"
+  },
+  {
+   "s": "estudiantes-de-la-plata",
+   "n": "Estudiantes De LA Plata"
+  },
+  {
+   "s": "hajduk-split",
+   "n": "Hajduk Split"
+  },
+  {
+   "s": "maidstone",
+   "n": "Maidstone United F.C."
+  },
+  {
+   "s": "badalona",
+   "n": "CF Badalona"
+  },
+  {
+   "s": "aik",
+   "n": "AIK Fotboll"
+  },
+  {
+   "s": "cf-intercity",
+   "n": "CF Intercity"
+  },
+  {
+   "s": "guingamp",
+   "n": "En Avant Guingamp"
+  },
+  {
+   "s": "lugano",
+   "n": "FC Lugano"
+  },
+  {
+   "s": "emirates-club",
+   "n": "Emirates Club"
+  },
+  {
+   "s": "yokohama-f-marinos",
+   "n": "Yokohama F. Marinos"
+  },
+  {
+   "s": "akhmat",
+   "n": "FC Akhmat Grozny"
+  },
+  {
+   "s": "sc-cambuur",
+   "n": "SC Cambuur"
+  },
+  {
+   "s": "bari",
+   "n": "SSC Bari"
+  },
+  {
+   "s": "torino",
+   "n": "Torino FC"
+  },
+  {
+   "s": "bastia",
+   "n": "SC Bastia"
+  },
+  {
+   "s": "new-england-revolution",
+   "n": "New England Revolution"
+  },
+  {
+   "s": "cska-sofia",
+   "n": "CSKA Sofia"
+  },
+  {
+   "s": "newport",
+   "n": "Newport County A.F.C."
+  },
+  {
+   "s": "dijon",
+   "n": "Dijon FCO"
+  },
+  {
+   "s": "peterborough",
+   "n": "Peterborough United F.C."
+  },
+  {
+   "s": "dynamo-dresden",
+   "n": "Dynamo Dresden"
+  },
+  {
+   "s": "atlanta-united",
+   "n": "Atlanta United FC"
+  },
+  {
+   "s": "elfsborg",
+   "n": "Elfsborg"
+  },
+  {
+   "s": "energie-cottbus",
+   "n": "FC Energie Cottbus"
+  },
+  {
+   "s": "tigres-uanl",
+   "n": "Tigres Uanl"
+  },
+  {
+   "s": "hammarby",
+   "n": "Hammarby Fotboll"
+  },
+  {
+   "s": "kairat",
+   "n": "FC Kairat"
+  },
+  {
+   "s": "partizan",
+   "n": "FK Partizan"
+  },
+  {
+   "s": "krylya-sovetov",
+   "n": "PFC Krylia Sovetov Samara"
+  },
+  {
+   "s": "toronto-fc",
+   "n": "Toronto FC"
+  },
+  {
+   "s": "levski",
+   "n": "PFC Levski Sofia"
+  },
+  {
+   "s": "bromley",
+   "n": "Bromley F.C."
+  },
+  {
+   "s": "sochaux",
+   "n": "FC Sochaux-Montbéliard"
+  },
+  {
+   "s": "leyton-orient",
+   "n": "Leyton Orient F.C."
+  },
+  {
+   "s": "urawa-reds",
+   "n": "Urawa Red Diamonds"
+  },
+  {
+   "s": "racing-club",
+   "n": "Racing Club de Avellaneda"
+  },
+  {
+   "s": "vitoria-de-guimaraes",
+   "n": "Vitória S.C."
+  },
+  {
+   "s": "vojvodina",
+   "n": "FK Vojvodina"
+  },
+  {
+   "s": "monterrey",
+   "n": "C.F. Monterrey"
+  },
+  {
+   "s": "alemannia-aachen",
+   "n": "Alemannia Aachen"
+  },
+  {
+   "s": "heracles-almelo",
+   "n": "Heracles Almelo"
+  },
+  {
+   "s": "algeciras",
+   "n": "Algeciras"
+  },
+  {
+   "s": "seattle-sounders-fc",
+   "n": "Seattle Sounders FC"
+  },
+  {
+   "s": "beitar-jerusalem",
+   "n": "Beitar Jerusalem"
+  },
+  {
+   "s": "monza",
+   "n": "AC Monza"
+  },
+  {
+   "s": "benevento",
+   "n": "Benevento Calcio"
+  },
+  {
+   "s": "stade-de-reims",
+   "n": "Stade De Reims"
+  },
+  {
+   "s": "lechia",
+   "n": "Lechia Gdańsk"
+  },
+  {
+   "s": "bristol-rovers",
+   "n": "Bristol Rovers"
+  }
+ ],
+ "hard": [
+  {
+   "s": "maccabi-haifa",
+   "n": "Maccabi Haifa F.C."
+  },
+  {
+   "s": "sampdoria",
+   "n": "Sampdoria"
+  },
+  {
+   "s": "mechelen",
+   "n": "KV Mechelen"
+  },
+  {
+   "s": "shamrock-rovers",
+   "n": "Shamrock Rovers"
+  },
+  {
+   "s": "agf-aarhus",
+   "n": "Aarhus Gymnastikforening"
+  },
+  {
+   "s": "amiens",
+   "n": "Amiens"
+  },
+  {
+   "s": "boavista",
+   "n": "Boavista"
+  },
+  {
+   "s": "paris-fc",
+   "n": "Paris FC"
+  },
+  {
+   "s": "hapoel-tel-aviv",
+   "n": "Hapoel Tel Aviv F.C."
+  },
+  {
+   "s": "salernitana",
+   "n": "US Salernitana 1919"
+  },
+  {
+   "s": "vitoria-de-setubal",
+   "n": "Vitória F.C."
+  },
+  {
+   "s": "cf-montreal",
+   "n": "CF Montreal"
+  },
+  {
+   "s": "sturm-graz",
+   "n": "Sturm Graz"
+  },
+  {
+   "s": "ajaccio",
+   "n": "AC Ajaccio"
+  },
+  {
+   "s": "ascoli",
+   "n": "Ascoli Calcio 1898 FC"
+  },
+  {
+   "s": "swindon-town",
+   "n": "Swindon Town F.C."
+  },
+  {
+   "s": "athletic",
+   "n": "Oldham Athletic A.F.C."
+  },
+  {
+   "s": "cerezo-osaka",
+   "n": "Cerezo Osaka"
+  },
+  {
+   "s": "chornomorets",
+   "n": "FC Chornomorets Odesa"
+  },
+  {
+   "s": "cremonese",
+   "n": "US Cremonese"
+  },
+  {
+   "s": "rotherham",
+   "n": "Rotherham United F.C."
+  },
+  {
+   "s": "charlotte-fc",
+   "n": "Charlotte FC"
+  },
+  {
+   "s": "dundalk",
+   "n": "Dundalk F.C."
+  },
+  {
+   "s": "chicago-fire-fc",
+   "n": "Chicago Fire FC"
+  },
+  {
+   "s": "fc-nordsjaelland",
+   "n": "FC Nordsjaelland"
+  },
+  {
+   "s": "fc-torpedo",
+   "n": "FC Torpedo Moscow"
+  },
+  {
+   "s": "wycombe",
+   "n": "Wycombe Wanderers F.C."
+  },
+  {
+   "s": "luzern",
+   "n": "FC Luzern"
+  },
+  {
+   "s": "bury",
+   "n": "Bury F.C."
+  },
+  {
+   "s": "gremio",
+   "n": "Grêmio FBPA"
+  },
+  {
+   "s": "ceuta",
+   "n": "AD Ceuta FC"
+  },
+  {
+   "s": "ud-marbella",
+   "n": "Marbella FC"
+  },
+  {
+   "s": "port-vale",
+   "n": "Port Vale F.C."
+  },
+  {
+   "s": "atletico-nacional",
+   "n": "Atletico Nacional"
+  },
+  {
+   "s": "bohemian",
+   "n": "Bohemian F.C."
+  },
+  {
+   "s": "crawley-town",
+   "n": "Crawley Town F.C."
+  },
+  {
+   "s": "celje",
+   "n": "NK Celje"
+  },
+  {
+   "s": "vancouver-whitecaps-fc",
+   "n": "Vancouver Whitecaps FC"
+  },
+  {
+   "s": "thun",
+   "n": "FC Thun"
+  },
+  {
+   "s": "vicenza",
+   "n": "LR Vicenza"
+  },
+  {
+   "s": "zeljeznicar",
+   "n": "FK Željezničar Sarajevo"
+  },
+  {
+   "s": "zorya-luhansk",
+   "n": "FC Zorya Luhansk"
+  },
+  {
+   "s": "nacional-uy",
+   "n": "Club Nacional de Football"
+  },
+  {
+   "s": "1-fc-magdeburg",
+   "n": "1. FC Magdeburg"
+  },
+  {
+   "s": "academica-de-coimbra",
+   "n": "Académica de Coimbra (football)"
+  },
+  {
+   "s": "ael",
+   "n": "AEL Limassol"
+  },
+  {
+   "s": "hashtag-united",
+   "n": "Hashtag United F.C."
+  },
+  {
+   "s": "amkar",
+   "n": "FC Amkar Perm"
+  },
+  {
+   "s": "rkc-waalwijk",
+   "n": "Rkc Waalwijk"
+  },
+  {
+   "s": "ankaraspor",
+   "n": "Ankaraspor"
+  },
+  {
+   "s": "s-bratislava",
+   "n": "S Bratislava"
+  },
+  {
+   "s": "antalyaspor",
+   "n": "Antalyaspor"
+  },
+  {
+   "s": "san-jose-earthquakes",
+   "n": "San Jose Earthquakes"
+  },
+  {
+   "s": "carpi",
+   "n": "AC Carpi"
+  },
+  {
+   "s": "independiente",
+   "n": "Club Atlético Independiente"
+  },
+  {
+   "s": "orlando-city",
+   "n": "Orlando City SC"
+  },
+  {
+   "s": "le-mans",
+   "n": "Le Mans FC"
+  },
+  {
+   "s": "melbourne-city",
+   "n": "Melbourne City FC"
+  },
+  {
+   "s": "modena",
+   "n": "Modena FC 2018"
+  },
+  {
+   "s": "fc-cincinnati",
+   "n": "FC Cincinnati"
+  },
+  {
+   "s": "shkendija",
+   "n": "KF Shkëndija"
+  },
+  {
+   "s": "fc-seoul",
+   "n": "FC Seoul"
+  },
+  {
+   "s": "viking",
+   "n": "Viking FK"
+  },
+  {
+   "s": "fleetwood-town",
+   "n": "Fleetwood Town F.C."
+  },
+  {
+   "s": "vorskla-poltava",
+   "n": "Vorskla Poltava"
+  },
+  {
+   "s": "tranmere",
+   "n": "Tranmere Rovers F.C."
+  },
+  {
+   "s": "zrinjski",
+   "n": "HŠK Zrinjski Mostar"
+  },
+  {
+   "s": "palermo",
+   "n": "Palermo FC"
+  },
+  {
+   "s": "cacereno",
+   "n": "CP Cacereño"
+  },
+  {
+   "s": "up-langreo",
+   "n": "UP Langreo"
+  },
+  {
+   "s": "accrington",
+   "n": "Accrington Stanley F.C."
+  },
+  {
+   "s": "paris-saint-germain",
+   "n": "Paris Saint Germain"
+  },
+  {
+   "s": "ankaragucu",
+   "n": "MKE Ankaragücü"
+  },
+  {
+   "s": "standard-liege",
+   "n": "Standard Liege"
+  },
+  {
+   "s": "chapecoense",
+   "n": "Associação Chapecoense de Futebol"
+  },
+  {
+   "s": "fc-dallas",
+   "n": "FC Dallas"
+  },
+  {
+   "s": "burton",
+   "n": "Burton Albion F.C."
+  },
+  {
+   "s": "falkirk",
+   "n": "Falkirk F.C."
+  },
+  {
+   "s": "ulsan-hd-fc",
+   "n": "Ulsan Hd FC"
+  },
+  {
+   "s": "helsingborg",
+   "n": "Helsingborg"
+  },
+  {
+   "s": "queen-s-park",
+   "n": "Queen S Park"
+  },
+  {
+   "s": "karpaty",
+   "n": "FC Karpaty Lviv"
+  },
+  {
+   "s": "queens-park-fc",
+   "n": "Queen's Park F.C."
+  },
+  {
+   "s": "kasimpasa",
+   "n": "Kasımpaşa S.K."
+  },
+  {
+   "s": "portland-timbers",
+   "n": "Portland Timbers"
+  },
+  {
+   "s": "liberec",
+   "n": "FC Slovan Liberec"
+  },
+  {
+   "s": "troyes",
+   "n": "ES Troyes AC"
+  },
+  {
+   "s": "lillestrom",
+   "n": "Lillestrøm SK"
+  },
+  {
+   "s": "cambridge-united",
+   "n": "Cambridge United F.C."
+  },
+  {
+   "s": "northampton",
+   "n": "Northampton Town F.C."
+  },
+  {
+   "s": "widzew-lodz",
+   "n": "Widzew Łódź"
+  },
+  {
+   "s": "zamalek",
+   "n": "Zamalek SC"
+  },
+  {
+   "s": "huesca",
+   "n": "SD Huesca"
+  },
+  {
+   "s": "colorado-rapids",
+   "n": "Colorado Rapids"
+  },
+  {
+   "s": "rayo-majadahonda",
+   "n": "CF Rayo Majadahonda"
+  },
+  {
+   "s": "cracovia",
+   "n": "KS Cracovia"
+  },
+  {
+   "s": "chesterfield",
+   "n": "Chesterfield F.C."
+  },
+  {
+   "s": "gil-vicente",
+   "n": "Gil Vicente F.C."
+  },
+  {
+   "s": "toulouse",
+   "n": "Toulouse"
+  },
+  {
+   "s": "tokyo-verdy",
+   "n": "Tokyo Verdy"
+  },
+  {
+   "s": "real-union",
+   "n": "Real Union"
+  },
+  {
+   "s": "nantes",
+   "n": "FC Nantes"
+  },
+  {
+   "s": "aek-larnaca",
+   "n": "AEK Larnaca FC"
+  },
+  {
+   "s": "apollon-limassol",
+   "n": "Apollon Limassol"
+  },
+  {
+   "s": "mansfield",
+   "n": "Mansfield Town F.C."
+  },
+  {
+   "s": "apollon",
+   "n": "Apollon Limassol FC"
+  },
+  {
+   "s": "banik",
+   "n": "FC Baník Ostrava"
+  },
+  {
+   "s": "sporting-kansas-city",
+   "n": "Sporting Kansas City"
+  },
+  {
+   "s": "brest",
+   "n": "FC Dynamo Brest"
+  },
+  {
+   "s": "bahia",
+   "n": "Esporte Clube Bahia"
+  },
+  {
+   "s": "cerro",
+   "n": "Cerro Porteño"
+  },
+  {
+   "s": "cork-city",
+   "n": "Cork City F.C."
+  },
+  {
+   "s": "omonoia",
+   "n": "AC Omonia"
+  },
+  {
+   "s": "doncaster-rovers",
+   "n": "Doncaster Rovers"
+  },
+  {
+   "s": "slavia-praha",
+   "n": "SK Slavia Prague"
+  },
+  {
+   "s": "fc-tokyo",
+   "n": "FC Tokyo"
+  },
+  {
+   "s": "st-mirren",
+   "n": "St Mirren F.C."
+  },
+  {
+   "s": "lanus",
+   "n": "Club Atlético Lanús"
+  },
+  {
+   "s": "penarol",
+   "n": "Penarol"
+  },
+  {
+   "s": "u-craiova",
+   "n": "CS Universitatea Craiova"
+  },
+  {
+   "s": "wydad",
+   "n": "Wydad AC"
+  },
+  {
+   "s": "ad-merida",
+   "n": "Mérida AD"
+  },
+  {
+   "s": "altach",
+   "n": "SC Rheindorf Altach"
+  },
+  {
+   "s": "ludogorets",
+   "n": "PFC Ludogorets Razgrad"
+  },
+  {
+   "s": "busan-ipark",
+   "n": "Busan Ipark"
+  },
+  {
+   "s": "servette",
+   "n": "Servette FC"
+  },
+  {
+   "s": "essen",
+   "n": "Rot-Weiss Essen"
+  },
+  {
+   "s": "montpellier",
+   "n": "Montpellier HSC"
+  },
+  {
+   "s": "gomel",
+   "n": "FC Gomel"
+  },
+  {
+   "s": "haka",
+   "n": "FC Haka"
+  },
+  {
+   "s": "crewe",
+   "n": "Crewe Alexandra F.C."
+  },
+  {
+   "s": "khimki",
+   "n": "FC Khimki"
+  },
+  {
+   "s": "le-havre-ac",
+   "n": "Le Havre AC"
+  },
+  {
+   "s": "larissa",
+   "n": "Athlitiki Enosi Larissa F.C."
+  },
+  {
+   "s": "shrewsbury",
+   "n": "Shrewsbury"
+  },
+  {
+   "s": "leiria",
+   "n": "U.D. Leiria"
+  },
+  {
+   "s": "carlisle",
+   "n": "Carlisle"
+  },
+  {
+   "s": "mlada-boleslav",
+   "n": "FK Mladá Boleslav"
+  },
+  {
+   "s": "lincoln-city",
+   "n": "Lincoln City F.C."
+  },
+  {
+   "s": "olomouc",
+   "n": "SK Sigma Olomouc"
+  },
+  {
+   "s": "gillingham",
+   "n": "Gillingham F.C."
+  },
+  {
+   "s": "1-fc-lokomotive-leipzig",
+   "n": "1. FC Lokomotive Leipzig"
+  },
+  {
+   "s": "rapid-vienna",
+   "n": "SK Rapid Wien"
+  },
+  {
+   "s": "aab",
+   "n": "AaB Fodbold"
+  },
+  {
+   "s": "al-rayyan",
+   "n": "Al-Rayyan SC"
+  },
+  {
+   "s": "albirex-niigata",
+   "n": "Albirex Niigata"
+  },
+  {
+   "s": "philadelphia-union",
+   "n": "Philadelphia Union"
+  },
+  {
+   "s": "arsenal-tula",
+   "n": "Arsenal Tula"
+  },
+  {
+   "s": "exeter",
+   "n": "Exeter City F.C."
+  },
+  {
+   "s": "banfield",
+   "n": "Club Atlético Banfield"
+  },
+  {
+   "s": "grimsby",
+   "n": "Grimsby"
+  },
+  {
+   "s": "ca-huracan",
+   "n": "Club Atlético Huracán"
+  },
+  {
+   "s": "motherwell",
+   "n": "Motherwell F.C."
+  },
+  {
+   "s": "real-salt-lake",
+   "n": "Real Salt Lake"
+  },
+  {
+   "s": "minnesota-united-fc",
+   "n": "Minnesota United FC"
+  },
+  {
+   "s": "domzale",
+   "n": "NK Domžale"
+  },
+  {
+   "s": "fredrikstad",
+   "n": "Fredrikstad"
+  },
+  {
+   "s": "gaziantep",
+   "n": "Gaziantep F.K."
+  },
+  {
+   "s": "al-ahli-doha",
+   "n": "Al Ahli SC (Doha)"
+  },
+  {
+   "s": "kalmar",
+   "n": "Kalmar FF"
+  },
+  {
+   "s": "holstein-kiel",
+   "n": "Holstein Kiel"
+  },
+  {
+   "s": "ross-county",
+   "n": "Ross County F.C."
+  },
+  {
+   "s": "vejle-boldklub",
+   "n": "Vejle Boldklub"
+  },
+  {
+   "s": "dorking-wanderers",
+   "n": "Dorking Wanderers"
+  },
+  {
+   "s": "kilmarnock",
+   "n": "Kilmarnock F.C."
+  },
+  {
+   "s": "xamax",
+   "n": "Neuchâtel Xamax FCS"
+  },
+  {
+   "s": "zaglebie-lubin",
+   "n": "Zagłębie Lubin"
+  },
+  {
+   "s": "nordsjaelland",
+   "n": "FC Nordsjælland"
+  },
+  {
+   "s": "club-leon",
+   "n": "Club Leon"
+  },
+  {
+   "s": "al-masry",
+   "n": "Al Masry"
+  },
+  {
+   "s": "leon",
+   "n": "Club León"
+  },
+  {
+   "s": "inverness",
+   "n": "Inverness"
+  },
+  {
+   "s": "alanyaspor",
+   "n": "Alanyaspor"
+  },
+  {
+   "s": "anorthosis",
+   "n": "Anorthosis"
+  },
+  {
+   "s": "rio-ave",
+   "n": "Rio Ave F.C."
+  },
+  {
+   "s": "arouca",
+   "n": "F.C. Arouca"
+  },
+  {
+   "s": "asteras",
+   "n": "Asteras"
+  },
+  {
+   "s": "st-louis-city-sc",
+   "n": "St Louis City SC"
+  },
+  {
+   "s": "bfc-dynamo",
+   "n": "Berliner FC Dynamo"
+  },
+  {
+   "s": "bay-fc",
+   "n": "Bay FC"
+  },
+  {
+   "s": "botev-plovdiv",
+   "n": "Botev Plovdiv"
+  },
+  {
+   "s": "colchester",
+   "n": "Colchester"
+  },
+  {
+   "s": "derry-city",
+   "n": "Derry City F.C."
+  },
+  {
+   "s": "erzgebirge",
+   "n": "FC Erzgebirge Aue"
+  },
+  {
+   "s": "estoril",
+   "n": "G.D. Estoril Praia"
+  },
+  {
+   "s": "nashville-sc",
+   "n": "Nashville SC"
+  },
+  {
+   "s": "gais",
+   "n": "GAIS"
+  },
+  {
+   "s": "melbourne-victory",
+   "n": "Melbourne Victory FC"
+  },
+  {
+   "s": "godoy-cruz",
+   "n": "Godoy Cruz Antonio Tomba"
+  },
+  {
+   "s": "estrela-da-amadora",
+   "n": "Estrela Da Amadora"
+  },
+  {
+   "s": "goztepe-izmir",
+   "n": "Göztepe S.K."
+  },
+  {
+   "s": "necaxa",
+   "n": "Club Necaxa"
+  },
+  {
+   "s": "grazer-ak",
+   "n": "Grazer Ak"
+  },
+  {
+   "s": "sydney-fc",
+   "n": "Sydney FC"
+  },
+  {
+   "s": "mariehamn",
+   "n": "IFK Mariehamn"
+  },
+  {
+   "s": "western-sydney",
+   "n": "Western Sydney"
+  },
+  {
+   "s": "aalesund",
+   "n": "Aalesund"
+  },
+  {
+   "s": "aris-limassol",
+   "n": "Aris Limassol"
+  },
+  {
+   "s": "racing-club-ferrol",
+   "n": "Racing de Ferrol"
+  },
+  {
+   "s": "arka",
+   "n": "Arka Gdynia"
+  },
+  {
+   "s": "atletico-junior",
+   "n": "Atletico Junior"
+  },
+  {
+   "s": "persib-bandung",
+   "n": "Persib Bandung"
+  },
+  {
+   "s": "avai",
+   "n": "Avaí FC"
+  },
+  {
+   "s": "avispa-fukuoka",
+   "n": "Avispa Fukuoka"
+  },
+  {
+   "s": "bayer-uerdingen",
+   "n": "KFC Uerdingen 05"
+  },
+  {
+   "s": "fatih-karagumruk",
+   "n": "Fatih Karagümrük S.K."
+  },
+  {
+   "s": "beira-mar",
+   "n": "S.C. Beira-Mar"
+  },
+  {
+   "s": "bohemians-praha",
+   "n": "Bohemians Praha"
+  },
+  {
+   "s": "sutton-united",
+   "n": "Sutton United F.C."
+  },
+  {
+   "s": "walsall",
+   "n": "Walsall F.C."
+  },
+  {
+   "s": "austins-fc",
+   "n": "Austin FC"
+  },
+  {
+   "s": "cukaricki",
+   "n": "FK Čukarički"
+  },
+  {
+   "s": "barrow",
+   "n": "Barrow A.F.C."
+  },
+  {
+   "s": "denizlispor",
+   "n": "Denizlispor"
+  },
+  {
+   "s": "drita",
+   "n": "FC Drita"
+  },
+  {
+   "s": "scunthorpe",
+   "n": "Scunthorpe United F.C."
+  },
+  {
+   "s": "esbjerg",
+   "n": "Esbjerg fB"
+  },
+  {
+   "s": "barnet",
+   "n": "Barnet F.C."
+  },
+  {
+   "s": "famalicao",
+   "n": "F.C. Famalicão"
+  },
+  {
+   "s": "unionistas-de-salamanca",
+   "n": "Unionistas De Salamanca"
+  },
+  {
+   "s": "fsv-frankfurt",
+   "n": "Fsv Frankfurt"
+  },
+  {
+   "s": "rb-bragantino",
+   "n": "Red Bull Bragantino"
+  },
+  {
+   "s": "goias",
+   "n": "Goias"
+  },
+  {
+   "s": "stevenage",
+   "n": "Stevenage F.C."
+  },
+  {
+   "s": "gyor",
+   "n": "Győri ETO FC"
+  },
+  {
+   "s": "yeovil",
+   "n": "Yeovil Town F.C."
+  },
+  {
+   "s": "lyngby",
+   "n": "Lyngby Boldklub"
+  },
+  {
+   "s": "al-arabi",
+   "n": "Al-Arabi SC (Qatar)"
+  },
+  {
+   "s": "mjallby",
+   "n": "Mjällby AIF"
+  },
+  {
+   "s": "york",
+   "n": "York City F.C."
+  },
+  {
+   "s": "beerschot-wilrijk",
+   "n": "K Beerschot VA"
+  },
+  {
+   "s": "aarau",
+   "n": "FC Aarau"
+  },
+  {
+   "s": "nagoya-grampus",
+   "n": "Nagoya Grampus"
+  },
+  {
+   "s": "al-ahli",
+   "n": "Shabab Al Ahli Club"
+  },
+  {
+   "s": "roda-jc-kerkrade",
+   "n": "Roda Jc Kerkrade"
+  },
+  {
+   "s": "atlas",
+   "n": "Atlas"
+  },
+  {
+   "s": "sion",
+   "n": "FC Sion"
+  },
+  {
+   "s": "atletico-sanluqueno",
+   "n": "Atletico Sanluqueno"
+  },
+  {
+   "s": "st-johnstone",
+   "n": "St Johnstone"
+  },
+  {
+   "s": "beijing-guoan",
+   "n": "Beijing Guoan F.C."
+  },
+  {
+   "s": "cheltenham",
+   "n": "Cheltenham Town F.C."
+  },
+  {
+   "s": "beroe",
+   "n": "PFC Beroe Stara Zagora"
+  },
+  {
+   "s": "figueirense",
+   "n": "Figueirense"
+  },
+  {
+   "s": "shelbourne",
+   "n": "Shelbourne F.C."
+  },
+  {
+   "s": "lahti",
+   "n": "FC Lahti"
+  },
+  {
+   "s": "triestina",
+   "n": "US Triestina Calcio 1918"
+  },
+  {
+   "s": "lask",
+   "n": "LASK"
+  },
+  {
+   "s": "us-avellino-1912",
+   "n": "US Avellino 1912"
+  },
+  {
+   "s": "gornik-zabrze",
+   "n": "Gornik Zabrze"
+  },
+  {
+   "s": "vegalta-sendai",
+   "n": "Vegalta Sendai"
+  }
+ ],
+ "ball": [
+  {
+   "s": "rapid-bucuresti",
+   "n": "FC Rapid București"
+  },
+  {
+   "s": "winterthur",
+   "n": "FC Winterthur"
+  },
+  {
+   "s": "hannover-96",
+   "n": "Hannover 96"
+  },
+  {
+   "s": "yokohama-fc",
+   "n": "Yokohama FC"
+  },
+  {
+   "s": "recreativo-huelva",
+   "n": "Recreativo de Huelva"
+  },
+  {
+   "s": "acr-messina",
+   "n": "Acr Messina"
+  },
+  {
+   "s": "telstar",
+   "n": "SC Telstar"
+  },
+  {
+   "s": "al-fateh",
+   "n": "Al Fateh SC"
+  },
+  {
+   "s": "jagiellonia",
+   "n": "Jagiellonia Białystok"
+  },
+  {
+   "s": "atromitos",
+   "n": "Atromitos"
+  },
+  {
+   "s": "boulogne",
+   "n": "US Boulogne"
+  },
+  {
+   "s": "kashima-antlers",
+   "n": "Kashima Antlers"
+  },
+  {
+   "s": "boston-united",
+   "n": "Boston United F.C."
+  },
+  {
+   "s": "colon-santa-fe",
+   "n": "Club Atlético Colón"
+  },
+  {
+   "s": "hartlepool",
+   "n": "Hartlepool United F.C."
+  },
+  {
+   "s": "dumbarton",
+   "n": "Dumbarton F.C."
+  },
+  {
+   "s": "leixoes",
+   "n": "Leixões S.C."
+  },
+  {
+   "s": "rosenborg",
+   "n": "Rosenborg BK"
+  },
+  {
+   "s": "shinnik",
+   "n": "FC Shinnik Yaroslavl"
+  },
+  {
+   "s": "ternana",
+   "n": "Ternana Calcio"
+  },
+  {
+   "s": "casa-pia-ac",
+   "n": "Casa Pia A.C."
+  },
+  {
+   "s": "viborg",
+   "n": "Viborg FF"
+  },
+  {
+   "s": "avs-futebol-sad",
+   "n": "Avs Futebol Sad"
+  },
+  {
+   "s": "baltika",
+   "n": "FC Baltika Kaliningrad"
+  },
+  {
+   "s": "kawasaki-frontale",
+   "n": "Kawasaki Frontale"
+  },
+  {
+   "s": "bellinzona",
+   "n": "AC Bellinzona"
+  },
+  {
+   "s": "oud-heverlee-leuven",
+   "n": "Oud Heverlee Leuven"
+  },
+  {
+   "s": "bnei-yehuda",
+   "n": "Bnei Yehuda Tel Aviv F.C."
+  },
+  {
+   "s": "dorados-de-sinaloa",
+   "n": "Dorados De Sinaloa"
+  },
+  {
+   "s": "ceara",
+   "n": "Ceará Sporting Club"
+  },
+  {
+   "s": "morecambe",
+   "n": "Morecambe F.C."
+  },
+  {
+   "s": "chemnitzer-fc",
+   "n": "Chemnitzer FC"
+  },
+  {
+   "s": "houston-dynamo",
+   "n": "Houston Dynamo FC"
+  },
+  {
+   "s": "dunfermline",
+   "n": "Dunfermline Athletic F.C."
+  },
+  {
+   "s": "southend",
+   "n": "Southend United F.C."
+  },
+  {
+   "s": "guarani",
+   "n": "Club Guaraní"
+  },
+  {
+   "s": "velez-sarsfield",
+   "n": "Velez Sarsfield"
+  },
+  {
+   "s": "afc-amsterdam",
+   "n": "AFC Amsterdam"
+  },
+  {
+   "s": "cd-tudelano",
+   "n": "CD Tudelano"
+  },
+  {
+   "s": "millonarios",
+   "n": "Millonarios"
+  },
+  {
+   "s": "al-taawoun",
+   "n": "Al Taawoun FC"
+  },
+  {
+   "s": "stade-malherbe-caen",
+   "n": "Stade Malherbe Caen"
+  },
+  {
+   "s": "america-de-cali",
+   "n": "America De Cali"
+  },
+  {
+   "s": "phoenix-rising-fc",
+   "n": "Phoenix Rising FC"
+  },
+  {
+   "s": "cannes",
+   "n": "AS Cannes"
+  },
+  {
+   "s": "pafos",
+   "n": "Pafos"
+  },
+  {
+   "s": "chaves",
+   "n": "G.D. Chaves"
+  },
+  {
+   "s": "cherno-more",
+   "n": "PFC Cherno More Varna"
+  },
+  {
+   "s": "criciuma",
+   "n": "Criciúma Esporte Clube"
+  },
+  {
+   "s": "drogheda-united",
+   "n": "Drogheda United F.C."
+  },
+  {
+   "s": "miami-fc",
+   "n": "Miami FC"
+  },
+  {
+   "s": "dukla",
+   "n": "FK Dukla Prague"
+  },
+  {
+   "s": "fc-andorra",
+   "n": "FC Andorra"
+  },
+  {
+   "s": "machida-zelvia",
+   "n": "FC Machida Zelvia"
+  },
+  {
+   "s": "foggia",
+   "n": "Calcio Foggia 1920"
+  },
+  {
+   "s": "internacional",
+   "n": "SC Internacional"
+  },
+  {
+   "s": "fortuna-koln",
+   "n": "SC Fortuna Köln"
+  },
+  {
+   "s": "rubin",
+   "n": "FC Rubin Kazan"
+  },
+  {
+   "s": "lech-poznan",
+   "n": "Lech Poznan"
+  },
+  {
+   "s": "haugesund",
+   "n": "FK Haugesund"
+  },
+  {
+   "s": "livingston",
+   "n": "Livingston F.C."
+  },
+  {
+   "s": "lyn",
+   "n": "Lyn Fotball"
+  },
+  {
+   "s": "eyupspor",
+   "n": "Eyupspor"
+  },
+  {
+   "s": "ventforet-kofu",
+   "n": "Ventforet Kofu"
+  },
+  {
+   "s": "zbrojovka-brno",
+   "n": "FC Zbrojovka Brno"
+  },
+  {
+   "s": "torquay-united",
+   "n": "Torquay United F.C."
+  },
+  {
+   "s": "partick",
+   "n": "Partick Thistle F.C."
+  },
+  {
+   "s": "bala-town-fc",
+   "n": "Bala Town F.C."
+  },
+  {
+   "s": "barry-town-united",
+   "n": "Barry Town United F.C."
+  },
+  {
+   "s": "cittadella",
+   "n": "AS Cittadella"
+  },
+  {
+   "s": "juventude",
+   "n": "Esporte Clube Juventude"
+  },
+  {
+   "s": "club-tijuana",
+   "n": "Club Tijuana"
+  },
+  {
+   "s": "dagenham-and-redbridge",
+   "n": "Dagenham & Redbridge F.C."
+  },
+  {
+   "s": "tamworth",
+   "n": "Tamworth F.C."
+  },
+  {
+   "s": "farense",
+   "n": "S.C. Farense"
+  },
+  {
+   "s": "wealdstone",
+   "n": "Wealdstone"
+  },
+  {
+   "s": "gefle",
+   "n": "Gefle IF"
+  },
+  {
+   "s": "maritimo",
+   "n": "C.S. Marítimo"
+  },
+  {
+   "s": "tokushima-vortis",
+   "n": "Tokushima Vortis"
+  },
+  {
+   "s": "lokomotiv-moskva",
+   "n": "FC Lokomotiv Moscow"
+  },
+  {
+   "s": "mvv-maastricht",
+   "n": "MVV Maastricht"
+  },
+  {
+   "s": "wiesbaden",
+   "n": "Wiesbaden"
+  },
+  {
+   "s": "st-patricks-athletic",
+   "n": "St Patrick's Athletic F.C."
+  },
+  {
+   "s": "aldershot-town",
+   "n": "Aldershot Town"
+  },
+  {
+   "s": "solihull-moors",
+   "n": "Solihull Moors"
+  },
+  {
+   "s": "atletico-goianiense",
+   "n": "Atlético Clube Goianiense"
+  },
+  {
+   "s": "rijeka",
+   "n": "HNK Rijeka"
+  },
+  {
+   "s": "shanghai-shenhua",
+   "n": "Shanghai Shenhua"
+  },
+  {
+   "s": "catanzaro",
+   "n": "US Catanzaro 1929"
+  },
+  {
+   "s": "chateauroux",
+   "n": "LB Châteauroux"
+  },
+  {
+   "s": "os-belenenses",
+   "n": "Os Belenenses"
+  },
+  {
+   "s": "darlington",
+   "n": "Darlington F.C."
+  },
+  {
+   "s": "enosis-neon-paralimniou",
+   "n": "Enosis Neon Paralimni FC"
+  },
+  {
+   "s": "fagiano-okayama",
+   "n": "Fagiano Okayama"
+  },
+  {
+   "s": "ayr",
+   "n": "Ayr United F.C."
+  },
+  {
+   "s": "hallescher",
+   "n": "Hallescher"
+  },
+  {
+   "s": "lincoln-red-imps",
+   "n": "Lincoln Red Imps"
+  },
+  {
+   "s": "hartberg",
+   "n": "TSV Hartberg"
+  },
+  {
+   "s": "shandong-taishan",
+   "n": "Shandong Taishan"
+  },
+  {
+   "s": "lustenau",
+   "n": "SC Austria Lustenau"
+  },
+  {
+   "s": "atletico-de-san-luis",
+   "n": "Atletico De San Luis"
+  },
+  {
+   "s": "quilmes",
+   "n": "Quilmes Atlético Club"
+  },
+  {
+   "s": "al-riyadh",
+   "n": "Al-Riyadh SC"
+  },
+  {
+   "s": "vfr-aalen",
+   "n": "Vfr Aalen"
+  },
+  {
+   "s": "gateshead",
+   "n": "Gateshead"
+  },
+  {
+   "s": "waterford",
+   "n": "Waterford F.C."
+  },
+  {
+   "s": "santos-laguna",
+   "n": "Santos Laguna"
+  },
+  {
+   "s": "xanthi",
+   "n": "Xanthi F.C."
+  },
+  {
+   "s": "santa-clara",
+   "n": "Santa Clara"
+  },
+  {
+   "s": "yenisey",
+   "n": "FC Yenisey Krasnoyarsk"
+  },
+  {
+   "s": "zlin",
+   "n": "FC Zlín"
+  },
+  {
+   "s": "rizespor",
+   "n": "Çaykur Rizespor"
+  },
+  {
+   "s": "al-wehda",
+   "n": "Al Wehda FC"
+  },
+  {
+   "s": "rosario-central",
+   "n": "Rosario Central"
+  },
+  {
+   "s": "america-mineiro",
+   "n": "América Futebol Clube (MG)"
+  },
+  {
+   "s": "arema-fc",
+   "n": "Arema F.C."
+  },
+  {
+   "s": "asec-mimosas",
+   "n": "Asec Mimosas"
+  },
+  {
+   "s": "blaublitz-akita",
+   "n": "Blaublitz Akita"
+  },
+  {
+   "s": "fc-liefering",
+   "n": "FC Liefering"
+  },
+  {
+   "s": "brommapojkarna",
+   "n": "IF Brommapojkarna"
+  },
+  {
+   "s": "clyde",
+   "n": "Clyde F.C."
+  },
+  {
+   "s": "ehime-fc",
+   "n": "Ehime FC"
+  },
+  {
+   "s": "raith",
+   "n": "Raith Rovers F.C."
+  },
+  {
+   "s": "fc-gifu",
+   "n": "FC Gifu"
+  },
+  {
+   "s": "harrogate-town",
+   "n": "Harrogate Town A.F.C."
+  },
+  {
+   "s": "feirense",
+   "n": "C.D. Feirense"
+  },
+  {
+   "s": "odense-boldklub",
+   "n": "Odense Boldklub"
+  },
+  {
+   "s": "first-vienna",
+   "n": "First Vienna FC"
+  },
+  {
+   "s": "gif-sundsvall",
+   "n": "Gif Sundsvall"
+  },
+  {
+   "s": "persija-jakarta",
+   "n": "Persija Jakarta"
+  },
+  {
+   "s": "katowice",
+   "n": "GKS Katowice"
+  },
+  {
+   "s": "thespa-gunma",
+   "n": "Thespa Gunma"
+  },
+  {
+   "s": "rochdale",
+   "n": "Rochdale A.F.C."
+  },
+  {
+   "s": "tochigi-sc",
+   "n": "Tochigi SC"
+  },
+  {
+   "s": "sanfrecce-hiroshima",
+   "n": "Sanfrecce Hiroshima"
+  },
+  {
+   "s": "vizela",
+   "n": "F.C. Vizela"
+  },
+  {
+   "s": "wisla-plock",
+   "n": "Wisła Płock"
+  },
+  {
+   "s": "queretaro-fc",
+   "n": "Querétaro F.C."
+  },
+  {
+   "s": "atlante",
+   "n": "Atlante F.C."
+  },
+  {
+   "s": "talleres",
+   "n": "Talleres"
+  },
+  {
+   "s": "ceske-budejovice",
+   "n": "Ceske Budejovice"
+  },
+  {
+   "s": "saarbrucken",
+   "n": "Saarbrucken"
+  },
+  {
+   "s": "connahs-quay-nomads",
+   "n": "Connahs Quay Nomads"
+  },
+  {
+   "s": "defensa-y-justicia",
+   "n": "Defensa Y Justicia"
+  },
+  {
+   "s": "ethnikos-achnas",
+   "n": "Ethnikos Achnas"
+  },
+  {
+   "s": "farul-constanta",
+   "n": "Farul Constanta"
+  },
+  {
+   "s": "murcia",
+   "n": "Real Murcia CF"
+  },
+  {
+   "s": "fsv-zwickau",
+   "n": "Fsv Zwickau"
+  },
+  {
+   "s": "sivasspor",
+   "n": "Sivasspor"
+  },
+  {
+   "s": "u-cluj",
+   "n": "FC Universitatea Cluj"
+  },
+  {
+   "s": "virtus-entella",
+   "n": "Virtus Entella"
+  },
+  {
+   "s": "wattenscheid-09",
+   "n": "Wattenscheid 09"
+  },
+  {
+   "s": "wuppertaler-sv",
+   "n": "Wuppertaler SV"
+  },
+  {
+   "s": "newcastle-jets",
+   "n": "Newcastle Jets"
+  },
+  {
+   "s": "wurzburger-kickers",
+   "n": "FC Würzburger Kickers"
+  },
+  {
+   "s": "kidderminster-harriers",
+   "n": "Kidderminster Harriers"
+  },
+  {
+   "s": "antequera",
+   "n": "Antequera CF"
+  },
+  {
+   "s": "cd-arenteiro",
+   "n": "CD Arenteiro"
+  },
+  {
+   "s": "albinoleffe",
+   "n": "UC AlbinoLeffe"
+  },
+  {
+   "s": "eastleigh",
+   "n": "Eastleigh F.C."
+  },
+  {
+   "s": "ashdod",
+   "n": "Ashdod"
+  },
+  {
+   "s": "hatayspor",
+   "n": "Hatayspor"
+  },
+  {
+   "s": "atletico-morelia",
+   "n": "Atletico Morelia"
+  },
+  {
+   "s": "tampa-bay-rowdies",
+   "n": "Tampa Bay Rowdies"
+  },
+  {
+   "s": "atletico-tucuman",
+   "n": "Atletico Tucuman"
+  },
+  {
+   "s": "bray-wanderers",
+   "n": "Bray Wanderers"
+  },
+  {
+   "s": "bw-linz",
+   "n": "FC Blau-Weiß Linz"
+  },
+  {
+   "s": "cuiaba",
+   "n": "Cuiabá Esporte Clube"
+  },
+  {
+   "s": "daejeon-hana-citizen",
+   "n": "Daejeon Hana Citizen"
+  },
+  {
+   "s": "degerfors",
+   "n": "Degerfors"
+  },
+  {
+   "s": "diosgyor",
+   "n": "Diósgyőri VTK"
+  },
+  {
+   "s": "ponferradina",
+   "n": "SD Ponferradina"
+  },
+  {
+   "s": "fc-08-homburg",
+   "n": "FC 08 Homburg"
+  },
+  {
+   "s": "wil",
+   "n": "FC Wil"
+  },
+  {
+   "s": "abha",
+   "n": "Abha Club"
+  },
+  {
+   "s": "ab",
+   "n": "Akademisk Boldklub"
+  },
+  {
+   "s": "aberystwyth-town",
+   "n": "Aberystwyth Town"
+  },
+  {
+   "s": "arges-pitesti",
+   "n": "Arges Pitesti"
+  },
+  {
+   "s": "barbastro",
+   "n": "UD Barbastro"
+  },
+  {
+   "s": "hansa-rostock",
+   "n": "Hansa Rostock"
+  },
+  {
+   "s": "botosani",
+   "n": "FC Botoșani"
+  },
+  {
+   "s": "bryne",
+   "n": "Bryne FK"
+  },
+  {
+   "s": "cowdenbeath",
+   "n": "Cowdenbeath F.C."
+  },
+  {
+   "s": "dnepr",
+   "n": "FC Dnepr Mogilev"
+  },
+  {
+   "s": "pyramids",
+   "n": "Pyramids"
+  },
+  {
+   "s": "fakel",
+   "n": "FC Fakel Voronezh"
+  },
+  {
+   "s": "lausanne-sport",
+   "n": "Lausanne Sport"
+  },
+  {
+   "s": "finn-harps",
+   "n": "Finn Harps"
+  },
+  {
+   "s": "suwon-fc",
+   "n": "Suwon FC"
+  },
+  {
+   "s": "llanelli-town",
+   "n": "Llanelli Town A.F.C."
+  },
+  {
+   "s": "woking",
+   "n": "Woking F.C."
+  },
+  {
+   "s": "tsc",
+   "n": "FK TSC"
+  },
+  {
+   "s": "adanaspor",
+   "n": "Adanaspor"
+  },
+  {
+   "s": "sagan-tosu",
+   "n": "Sagan Tosu"
+  },
+  {
+   "s": "airdrie",
+   "n": "Airdrieonians F.C."
+  },
+  {
+   "s": "ebbsfleet-united",
+   "n": "Ebbsfleet United F.C."
+  },
+  {
+   "s": "airdrieonians",
+   "n": "Airdrieonians"
+  },
+  {
+   "s": "alverca",
+   "n": "F.C. Alverca"
+  },
+  {
+   "s": "st-gallen",
+   "n": "FC St. Gallen"
+  },
+  {
+   "s": "bnei-sakhnin",
+   "n": "Bnei Sakhnin"
+  },
+  {
+   "s": "halifax-town",
+   "n": "FC Halifax Town"
+  },
+  {
+   "s": "broughton",
+   "n": "Airbus UK Broughton F.C."
+  },
+  {
+   "s": "portimonense",
+   "n": "Portimonense"
+  },
+  {
+   "s": "central-cordoba",
+   "n": "Instituto Atlético Central Córdoba"
+  },
+  {
+   "s": "valerenga",
+   "n": "Vålerenga Fotball"
+  },
+  {
+   "s": "fc-martigues",
+   "n": "FC Martigues"
+  },
+  {
+   "s": "ferro-carril-oeste",
+   "n": "Ferro Carril Oeste"
+  },
+  {
+   "s": "klagenfurt",
+   "n": "SK Austria Klagenfurt (2007)"
+  },
+  {
+   "s": "lamia",
+   "n": "PAS Lamia 1964"
+  },
+  {
+   "s": "pohang-steelers",
+   "n": "Pohang Steelers"
+  },
+  {
+   "s": "warta",
+   "n": "Warta Poznań"
+  },
+  {
+   "s": "yverdon-sport-fc",
+   "n": "Yverdon Sport FC"
+  },
+  {
+   "s": "slask",
+   "n": "Śląsk Wrocław"
+  },
+  {
+   "s": "al-mokawloon-al-arab",
+   "n": "Al Mokawloon Al Arab SC"
+  },
+  {
+   "s": "al-orobah",
+   "n": "Al-Orobah FC"
+  },
+  {
+   "s": "altrincham",
+   "n": "Altrincham F.C."
+  },
+  {
+   "s": "valenciennes",
+   "n": "Valenciennes"
+  },
+  {
+   "s": "arezzo",
+   "n": "SS Arezzo"
+  },
+  {
+   "s": "bali-united",
+   "n": "Bali United F.C."
+  },
+  {
+   "s": "oakland-roots-sc",
+   "n": "Oakland Roots SC"
+  },
+  {
+   "s": "bradford",
+   "n": "Bradford (Park Avenue) A.F.C."
+  },
+  {
+   "s": "morton",
+   "n": "Greenock Morton F.C."
+  },
+  {
+   "s": "deportes-tolima",
+   "n": "Deportes Tolima"
+  },
+  {
+   "s": "jubilo-iwata",
+   "n": "Jubilo Iwata"
+  },
+  {
+   "s": "ssv-ulm-1846",
+   "n": "Ssv Ulm 1846"
+  },
+  {
+   "s": "gretna",
+   "n": "Gretna F.C."
+  },
+  {
+   "s": "koge",
+   "n": "HB Køge"
+  },
+  {
+   "s": "kristiansund",
+   "n": "Kristiansund BK"
+  },
+  {
+   "s": "gamba-osaka",
+   "n": "Gamba Osaka"
+  },
+  {
+   "s": "landskrona",
+   "n": "Landskrona BoIS"
+  },
+  {
+   "s": "fc-juarez",
+   "n": "FC Juarez"
+  },
+  {
+   "s": "vozdovac",
+   "n": "FK Voždovac"
+  },
+  {
+   "s": "kayserispor",
+   "n": "Kayserispor"
+  },
+  {
+   "s": "academico-de-viseu",
+   "n": "Academico De Viseu"
+  },
+  {
+   "s": "aguilas-doradas",
+   "n": "Aguilas Doradas"
+  },
+  {
+   "s": "b-93",
+   "n": "Boldklubben af 1893"
+  },
+  {
+   "s": "konyaspor",
+   "n": "Konyaspor"
+  },
+  {
+   "s": "bruk-bet-termalica-nieciecza",
+   "n": "Bruk Bet Termalica Nieciecza"
+  },
+  {
+   "s": "stabaek",
+   "n": "Stabæk Fotball"
+  },
+  {
+   "s": "cosenza",
+   "n": "Cosenza Calcio"
+  },
+  {
+   "s": "paksi",
+   "n": "Paksi FC"
+  },
+  {
+   "s": "daegu-fc",
+   "n": "Daegu FC"
+  },
+  {
+   "s": "dynamo-makhachkala",
+   "n": "FC Dynamo Makhachkala"
+  },
+  {
+   "s": "olimpija",
+   "n": "NK Olimpija Ljubljana"
+  },
+  {
+   "s": "fc-wacker-innsbruck",
+   "n": "FC Wacker Innsbruck"
+  },
+  {
+   "s": "hokkaido-consadole-sapporo",
+   "n": "Hokkaido Consadole Sapporo"
+  },
+  {
+   "s": "fk-zemun",
+   "n": "FK Zemun"
+  },
+  {
+   "s": "borneo-fc",
+   "n": "Borneo F.C. Samarinda"
+  },
+  {
+   "s": "fredericia",
+   "n": "FC Fredericia"
+  },
+  {
+   "s": "mazatlan-fc",
+   "n": "Mazatlán F.C."
+  },
+  {
+   "s": "haladas",
+   "n": "Szombathelyi Haladás"
+  },
+  {
+   "s": "boreham-wood",
+   "n": "Boreham Wood F.C."
+  },
+  {
+   "s": "londrina",
+   "n": "Londrina Esporte Clube"
+  },
+  {
+   "s": "queen-of-the-south",
+   "n": "Queen Of The South"
+  },
+  {
+   "s": "longford-town",
+   "n": "Longford Town F.C."
+  },
+  {
+   "s": "torreense",
+   "n": "S.C.U. Torreense"
+  },
+  {
+   "s": "rakow",
+   "n": "Raków Częstochowa"
+  },
+  {
+   "s": "varzim",
+   "n": "Varzim S.C."
+  },
+  {
+   "s": "samsunspor",
+   "n": "Samsunspor"
+  },
+  {
+   "s": "abc",
+   "n": "ABC Futebol Clube"
+  },
+  {
+   "s": "al-okhdood",
+   "n": "Al-Okhdood Club"
+  },
+  {
+   "s": "america-rj",
+   "n": "America Football Club (Rio de Janeiro)"
+  },
+  {
+   "s": "arbroath",
+   "n": "Arbroath F.C."
+  },
+  {
+   "s": "botafogo-pb",
+   "n": "Botafogo Futebol Clube (PB)"
+  },
+  {
+   "s": "padova",
+   "n": "Calcio Padova"
+  },
+  {
+   "s": "brage",
+   "n": "IK Brage"
+  },
+  {
+   "s": "bucaramanga",
+   "n": "Atlético Bucaramanga"
+  },
+  {
+   "s": "frem",
+   "n": "Boldklubben Frem"
+  },
+  {
+   "s": "karvina",
+   "n": "MFK Karviná"
+  },
+  {
+   "s": "latina",
+   "n": "Latina Calcio 1932"
+  },
+  {
+   "s": "mirassol",
+   "n": "Mirassol Futebol Clube"
+  },
+  {
+   "s": "voluntari",
+   "n": "FC Voluntari"
+  },
+  {
+   "s": "zweigen-kanazawa",
+   "n": "Zweigen Kanazawa"
+  },
+  {
+   "s": "chester-fc",
+   "n": "Chester F.C."
+  },
+  {
+   "s": "akron",
+   "n": "FC Akron Tolyatti"
+  },
+  {
+   "s": "madura-united",
+   "n": "Madura United F.C."
+  },
+  {
+   "s": "al-ittihad-alexandria",
+   "n": "Al Ittihad Alexandria Club"
+  },
+  {
+   "s": "detroit-city-fc",
+   "n": "Detroit City FC"
+  },
+  {
+   "s": "al-khaleej",
+   "n": "Al-Khaleej FC"
+  },
+  {
+   "s": "las-vegas-lights-fc",
+   "n": "Las Vegas Lights FC"
+  },
+  {
+   "s": "alloa-athletic",
+   "n": "Alloa Athletic F.C."
+  },
+  {
+   "s": "america-rn",
+   "n": "América Futebol Clube (RN)"
+  },
+  {
+   "s": "atletico-clube-de-portugal",
+   "n": "Atletico Clube De Portugal"
+  },
+  {
+   "s": "saprissa",
+   "n": "Saprissa"
+  },
+  {
+   "s": "puebla",
+   "n": "Club Puebla"
+  },
+  {
+   "s": "boluspor",
+   "n": "Boluspor"
+  },
+  {
+   "s": "persebaya-surabaya",
+   "n": "Persebaya Surabaya"
+  },
+  {
+   "s": "botev-vratsa",
+   "n": "POFC Botev Vratsa"
+  },
+  {
+   "s": "hacken",
+   "n": "BK Häcken"
+  },
+  {
+   "s": "carrarese",
+   "n": "Carrarese"
+  },
+  {
+   "s": "psm-makassar",
+   "n": "Psm Makassar"
+  },
+  {
+   "s": "clube-do-remo",
+   "n": "Clube Do Remo"
+  },
+  {
+   "s": "sepahan",
+   "n": "Sepahan S.C."
+  },
+  {
+   "s": "deportivo-pasto",
+   "n": "Deportivo Pasto"
+  },
+  {
+   "s": "deportivo-pereira",
+   "n": "Deportivo Pereira"
+  },
+  {
+   "s": "dunkerque",
+   "n": "USL Dunkerque"
+  },
+  {
+   "s": "enppi",
+   "n": "ENPPI SC"
+  },
+  {
+   "s": "rostov",
+   "n": "FC Rostov"
+  },
+  {
+   "s": "fc-ryukyu",
+   "n": "FC Ryukyu"
+  },
+  {
+   "s": "numancia",
+   "n": "CD Numancia"
+  },
+  {
+   "s": "fc-viktoria-koln",
+   "n": "FC Viktoria Köln"
+  },
+  {
+   "s": "quick-boys",
+   "n": "Quick Boys"
+  },
+  {
+   "s": "feralpisalo",
+   "n": "Feralpisalo"
+  },
+  {
+   "s": "gimnasia-de-jujuy",
+   "n": "Gimnasia De Jujuy"
+  },
+  {
+   "s": "lommel",
+   "n": "Lommel SK"
+  },
+  {
+   "s": "ujpest",
+   "n": "Ujpest"
+  },
+  {
+   "s": "mezokovesd",
+   "n": "Mezőkövesdi SE"
+  },
+  {
+   "s": "pisa",
+   "n": "Pisa SC"
+  },
+  {
+   "s": "miedz",
+   "n": "Miedź Legnica"
+  },
+  {
+   "s": "veres",
+   "n": "NK Veres Rivne"
+  },
+  {
+   "s": "vfb-lubeck",
+   "n": "VfB Lübeck"
+  },
+  {
+   "s": "vila-nova",
+   "n": "Vila Nova Futebol Clube"
+  },
+  {
+   "s": "volos",
+   "n": "Volos"
+  },
+  {
+   "s": "brackley-town",
+   "n": "Brackley Town F.C."
+  },
+  {
+   "s": "al-faisaly-fc",
+   "n": "Al Faisaly FC"
+  },
+  {
+   "s": "shonan-bellmare",
+   "n": "Shonan Bellmare"
+  },
+  {
+   "s": "athlone-town",
+   "n": "Athlone Town A.F.C."
+  },
+  {
+   "s": "afc-fylde",
+   "n": "AFC Fylde"
+  },
+  {
+   "s": "gwangju-fc",
+   "n": "Gwangju FC"
+  },
+  {
+   "s": "braintree-town",
+   "n": "Braintree Town F.C."
+  },
+  {
+   "s": "cesena",
+   "n": "Cesena FC"
+  },
+  {
+   "s": "oxford-city",
+   "n": "Oxford City F.C."
+  },
+  {
+   "s": "chernomorets-novorossiisk",
+   "n": "Chernomorets Novorossiisk"
+  },
+  {
+   "s": "pyunik",
+   "n": "FC Pyunik"
+  },
+  {
+   "s": "concarneau",
+   "n": "US Concarneau"
+  },
+  {
+   "s": "msv-duisburg",
+   "n": "Msv Duisburg"
+  },
+  {
+   "s": "cska-1948",
+   "n": "FC CSKA 1948 Sofia"
+  },
+  {
+   "s": "dover-athletic",
+   "n": "Dover Athletic F.C."
+  },
+  {
+   "s": "east-fife",
+   "n": "East Fife F.C."
+  },
+  {
+   "s": "southport",
+   "n": "Southport F.C."
+  },
+  {
+   "s": "sligo-rovers",
+   "n": "Sligo Rovers"
+  },
+  {
+   "s": "fc-imabari",
+   "n": "FC Imabari"
+  },
+  {
+   "s": "paderborn",
+   "n": "SC Paderborn 07"
+  },
+  {
+   "s": "fujieda-myfc",
+   "n": "Fujieda Myfc"
+  },
+  {
+   "s": "la-equidad",
+   "n": "La Equidad"
+  },
+  {
+   "s": "meppen",
+   "n": "SV Meppen"
+  },
+  {
+   "s": "orleans",
+   "n": "US Orléans"
+  },
+  {
+   "s": "vendsyssel",
+   "n": "Vendsyssel"
+  },
+  {
+   "s": "puskas-akademia",
+   "n": "Puskás Akadémia FC"
+  },
+  {
+   "s": "vfb-oldenburg",
+   "n": "VFB Oldenburg"
+  },
+  {
+   "s": "preussen-munster",
+   "n": "SC Preußen Münster"
+  },
+  {
+   "s": "al-batin",
+   "n": "Al Batin FC"
+  },
+  {
+   "s": "almagro",
+   "n": "Club Almagro"
+  },
+  {
+   "s": "pescara",
+   "n": "Delfino Pescara 1936"
+  },
+  {
+   "s": "annecy",
+   "n": "FC Annecy"
+  },
+  {
+   "s": "sacramento-republic-fc",
+   "n": "Sacramento Republic FC"
+  },
+  {
+   "s": "bath-city",
+   "n": "Bath City F.C."
+  },
+  {
+   "s": "botafogo-sp",
+   "n": "Botafogo Futebol Clube (SP)"
+  },
+  {
+   "s": "bourg-en-bresse-peronnas",
+   "n": "Bourg En Bresse Peronnas"
+  },
+  {
+   "s": "polissya",
+   "n": "FC Polissya Zhytomyr"
+  },
+  {
+   "s": "boyaca-chico",
+   "n": "Boyacá Chicó F.C."
+  },
+  {
+   "s": "brechin",
+   "n": "Brechin City F.C."
+  },
+  {
+   "s": "indy-eleven",
+   "n": "Indy Eleven"
+  },
+  {
+   "s": "east-stirling",
+   "n": "East Stirling"
+  },
+  {
+   "s": "eastbourne-borough",
+   "n": "Eastbourne Borough F.C."
+  },
+  {
+   "s": "tromso",
+   "n": "Tromso"
+  },
+  {
+   "s": "eintracht-trier",
+   "n": "SV Eintracht Trier 05"
+  },
+  {
+   "s": "floridsdorfer-ac",
+   "n": "Floridsdorfer AC"
+  },
+  {
+   "s": "linares-deportivo",
+   "n": "Linares Deportivo"
+  },
+  {
+   "s": "kongsvinger",
+   "n": "Kongsvinger IL Toppfotball"
+  },
+  {
+   "s": "panetolikos",
+   "n": "Panetolikos"
+  },
+  {
+   "s": "la-union",
+   "n": "Unión La Calera"
+  },
+  {
+   "s": "leones-negros-udeg",
+   "n": "Leones Negros UdeG"
+  },
+  {
+   "s": "truro-city",
+   "n": "Truro City F.C."
+  },
+  {
+   "s": "maidenhead",
+   "n": "Maidenhead United F.C."
+  },
+  {
+   "s": "mtk",
+   "n": "MTK Budapest FC"
+  },
+  {
+   "s": "tsv-havelse",
+   "n": "TSV Havelse"
+  },
+  {
+   "s": "hereford-fc",
+   "n": "Hereford F.C."
+  },
+  {
+   "s": "aldosivi",
+   "n": "Club Atlético Aldosivi"
+  },
+  {
+   "s": "ayia-napa",
+   "n": "Ayia Napa FC"
+  },
+  {
+   "s": "osijek",
+   "n": "Osijek"
+  },
+  {
+   "s": "barracas-central",
+   "n": "Barracas Central"
+  },
+  {
+   "s": "spartans",
+   "n": "Spartans"
+  },
+  {
+   "s": "caxias",
+   "n": "Sociedade Esportiva e Recreativa Caxias do Sul"
+  },
+  {
+   "s": "gyeongnam",
+   "n": "Gyeongnam FC"
+  },
+  {
+   "s": "hermannstadt",
+   "n": "Hermannstadt"
+  },
+  {
+   "s": "jahn",
+   "n": "SSV Jahn Regensburg"
+  },
+  {
+   "s": "karmiotissa",
+   "n": "Karmiotissa FC"
+  },
+  {
+   "s": "sochi",
+   "n": "Sochi"
+  },
+  {
+   "s": "smouha",
+   "n": "Smouha SC"
+  },
+  {
+   "s": "sport-recife",
+   "n": "Sport Club do Recife"
+  },
+  {
+   "s": "union-magdalena",
+   "n": "Union Magdalena"
+  },
+  {
+   "s": "zamora",
+   "n": "Zamora F.C."
+  },
+  {
+   "s": "moreirense",
+   "n": "Moreirense"
+  },
+  {
+   "s": "al-kholood",
+   "n": "Al-Kholood Club"
+  },
+  {
+   "s": "amed",
+   "n": "Amed S.F.K."
+  },
+  {
+   "s": "atletico-atlanta",
+   "n": "Club Atlético Atlanta"
+  },
+  {
+   "s": "caernarfon-town",
+   "n": "Caernarfon Town F.C."
+  },
+  {
+   "s": "colwyn-bay",
+   "n": "Colwyn Bay F.C."
+  },
+  {
+   "s": "etoile-carouge-fc",
+   "n": "Etoile Carouge FC"
+  },
+  {
+   "s": "silkeborg",
+   "n": "Silkeborg IF"
+  },
+  {
+   "s": "fc-helsingor",
+   "n": "FC Helsingor"
+  },
+  {
+   "s": "nimes-olympique",
+   "n": "Nimes Olympique"
+  },
+  {
+   "s": "fc-stade-lausanne-ouchy",
+   "n": "FC Stade Lausanne Ouchy"
+  },
+  {
+   "s": "nimes",
+   "n": "Nimes"
+  },
+  {
+   "s": "fc-stade-nyonnais",
+   "n": "FC Stade Nyonnais"
+  },
+  {
+   "s": "jena",
+   "n": "FC Carl Zeiss Jena"
+  },
+  {
+   "s": "fremad-amager",
+   "n": "Fremad Amager"
+  },
+  {
+   "s": "haras-el-hodoud",
+   "n": "Haras El Hodoud"
+  },
+  {
+   "s": "orange-county-sc",
+   "n": "Orange County SC"
+  },
+  {
+   "s": "jerv",
+   "n": "FK Jerv"
+  },
+  {
+   "s": "monastir-1983",
+   "n": "US Monastir (football)"
+  },
+  {
+   "s": "ingolstadt",
+   "n": "FC Ingolstadt 04"
+  },
+  {
+   "s": "umraniyespor",
+   "n": "Umraniyespor"
+  },
+  {
+   "s": "kyoto-sanga",
+   "n": "Kyoto Sanga"
+  },
+  {
+   "s": "volta-redonda",
+   "n": "Volta Redonda FC"
+  },
+  {
+   "s": "panionios",
+   "n": "Panionios"
+  },
+  {
+   "s": "wexford",
+   "n": "Wexford F.C."
+  },
+  {
+   "s": "helmond-sport",
+   "n": "Helmond Sport"
+  },
+  {
+   "s": "znicz-pruszkow",
+   "n": "Znicz Pruszkow"
+  },
+  {
+   "s": "kifisia",
+   "n": "A.E. Kifisia F.C."
+  },
+  {
+   "s": "almirante-brown",
+   "n": "Club Almirante Brown"
+  },
+  {
+   "s": "aviron-bayonnais-fc",
+   "n": "Aviron Bayonnais FC"
+  },
+  {
+   "s": "bodrum-fk",
+   "n": "Bodrum F.K."
+  },
+  {
+   "s": "kashiwa-reysol",
+   "n": "Kashiwa Reysol"
+  },
+  {
+   "s": "ferroviaria",
+   "n": "Associação Ferroviária de Esportes"
+  },
+  {
+   "s": "forfar",
+   "n": "Forfar Athletic F.C."
+  },
+  {
+   "s": "ried",
+   "n": "SV Ried"
+  },
+  {
+   "s": "tombense",
+   "n": "Tombense"
+  },
+  {
+   "s": "wadi-degla",
+   "n": "Wadi Degla SC"
+  },
+  {
+   "s": "persis-solo",
+   "n": "Persis Solo"
+  },
+  {
+   "s": "zeleznicar-pancevo",
+   "n": "FK Železničar Pančevo"
+  },
+  {
+   "s": "afc-telford-united",
+   "n": "AFC Telford United"
+  },
+  {
+   "s": "hsv-hoek",
+   "n": "HSV Hoek"
+  },
+  {
+   "s": "al-najma",
+   "n": "Al-Najma SC (Saudi Arabia)"
+  },
+  {
+   "s": "pacos-ferreira",
+   "n": "F.C. Paços de Ferreira"
+  },
+  {
+   "s": "bonner-sc",
+   "n": "Bonner SC"
+  },
+  {
+   "s": "cavese",
+   "n": "Cavese"
+  },
+  {
+   "s": "chelmsford-city",
+   "n": "Chelmsford City"
+  },
+  {
+   "s": "reggiana",
+   "n": "AC Reggiana 1919"
+  },
+  {
+   "s": "deportivo-moron",
+   "n": "Deportivo Moron"
+  },
+  {
+   "s": "loudoun-united-fc",
+   "n": "Loudoun United FC"
+  },
+  {
+   "s": "deportivo-riestra",
+   "n": "Deportivo Riestra"
+  },
+  {
+   "s": "el-gouna",
+   "n": "El Gouna FC"
+  },
+  {
+   "s": "fc-viktoria-1889-berlin",
+   "n": "FC Viktoria 1889 Berlin"
+  },
+  {
+   "s": "oliveirense",
+   "n": "U.D. Oliveirense"
+  },
+  {
+   "s": "kalamata",
+   "n": "Kalamata F.C."
+  },
+  {
+   "s": "raal-la-louviere",
+   "n": "RAAL La Louvière"
+  },
+  {
+   "s": "suwon-bluewings",
+   "n": "Suwon Samsung Bluewings"
+  },
+  {
+   "s": "independiente-santa-fe",
+   "n": "Independiente Santa Fe"
+  },
+  {
+   "s": "albion",
+   "n": "Albion F.C."
+  },
+  {
+   "s": "stromsgodset",
+   "n": "Strømsgodset Toppfotball"
+  },
+  {
+   "s": "alfreton-town",
+   "n": "Alfreton Town F.C."
+  },
+  {
+   "s": "grenoble-foot-38",
+   "n": "Grenoble Foot 38"
+  },
+  {
+   "s": "altona-93",
+   "n": "Altonaer FC von 1893"
+  },
+  {
+   "s": "annan-athletic",
+   "n": "Annan Athletic F.C."
+  },
+  {
+   "s": "campomaiorense",
+   "n": "S.C. Campomaiorense"
+  },
+  {
+   "s": "charleston-battery",
+   "n": "Charleston Battery"
+  },
+  {
+   "s": "charlotte-independence",
+   "n": "Charlotte Independence"
+  },
+  {
+   "s": "independiente-medellin",
+   "n": "Independiente Medellin"
+  },
+  {
+   "s": "chindia-targoviste",
+   "n": "AFC Chindia Târgoviște"
+  },
+  {
+   "s": "chorley",
+   "n": "Chorley F.C."
+  },
+  {
+   "s": "radcliffe",
+   "n": "Radcliffe F.C."
+  },
+  {
+   "s": "elgin",
+   "n": "Elgin City F.C."
+  },
+  {
+   "s": "fc-anyang",
+   "n": "FC Anyang"
+  },
+  {
+   "s": "weston-super-mare",
+   "n": "Weston Super Mare"
+  },
+  {
+   "s": "hampton-and-richmond",
+   "n": "Hampton & Richmond Borough F.C."
+  },
+  {
+   "s": "rhode-island",
+   "n": "Rhode Island"
+  },
+  {
+   "s": "la-nucia",
+   "n": "CF La Nucía"
+  },
+  {
+   "s": "gimcheon-sangmu-fc",
+   "n": "Gimcheon Sangmu FC"
+  },
+  {
+   "s": "akritas-chlorakas",
+   "n": "Akritas Chlorakas"
+  },
+  {
+   "s": "sv-elversberg",
+   "n": "SV Elversberg"
+  },
+  {
+   "s": "edinburgh-city",
+   "n": "Edinburgh City F.C."
+  },
+  {
+   "s": "farnborough",
+   "n": "Farnborough F.C."
+  },
+  {
+   "s": "tigre",
+   "n": "Club Atlético Tigre"
+  },
+  {
+   "s": "fc-gutersloh",
+   "n": "FC Gutersloh"
+  },
+  {
+   "s": "pss-sleman",
+   "n": "Pss Sleman"
+  },
+  {
+   "s": "flint-town-united",
+   "n": "Flint Town United F.C."
+  },
+  {
+   "s": "randers",
+   "n": "Randers"
+  },
+  {
+   "s": "kfum",
+   "n": "KFUM-Kameratene Oslo"
+  },
+  {
+   "s": "genclerbirligi",
+   "n": "Gençlerbirliği S.K."
+  },
+  {
+   "s": "unirea-slobozia",
+   "n": "Unirea Slobozia"
+  },
+  {
+   "s": "bandirmaspor",
+   "n": "Bandırmaspor"
+  },
+  {
+   "s": "ostersund",
+   "n": "Östersunds FK"
+  },
+  {
+   "s": "barito-putera",
+   "n": "PS Barito Putera"
+  },
+  {
+   "s": "salamanca-cf-uds-b",
+   "n": "Salamanca CF Uds B"
+  },
+  {
+   "s": "cobh-ramblers",
+   "n": "Cobh Ramblers"
+  },
+  {
+   "s": "colorado-springs-switchbacks-fc",
+   "n": "Colorado Springs Switchbacks FC"
+  },
+  {
+   "s": "confianca",
+   "n": "Associação Desportiva Confiança"
+  },
+  {
+   "s": "universidad-catolica",
+   "n": "Universidad Catolica"
+  },
+  {
+   "s": "cove-rangers",
+   "n": "Cove Rangers"
+  },
+  {
+   "s": "pau",
+   "n": "Pau FC"
+  },
+  {
+   "s": "hebar",
+   "n": "FC Hebar Pazardzhik"
+  },
+  {
+   "s": "versailles",
+   "n": "Versailles"
+  },
+  {
+   "s": "juve-stabia",
+   "n": "Juve Stabia"
+  },
+  {
+   "s": "virtus-verona",
+   "n": "Virtus Verona"
+  },
+  {
+   "s": "scarborough-athletic",
+   "n": "Scarborough Athletic F.C."
+  },
+  {
+   "s": "ypiranga",
+   "n": "Ypiranga Futebol Clube"
+  },
+  {
+   "s": "aez",
+   "n": "AEZ Zakakiou"
+  },
+  {
+   "s": "amazonas",
+   "n": "Amazonas"
+  },
+  {
+   "s": "ansan-greeners",
+   "n": "Ansan Greeners"
+  },
+  {
+   "s": "istanbulspor",
+   "n": "Istanbulspor"
+  },
+  {
+   "s": "billericay-town",
+   "n": "Billericay Town F.C."
+  },
+  {
+   "s": "louisville-city-fc",
+   "n": "Louisville City FC"
+  },
+  {
+   "s": "campobasso",
+   "n": "Campobasso"
+  },
+  {
+   "s": "csikszereda",
+   "n": "FK Csíkszereda Miercurea Ciuc"
+  },
+  {
+   "s": "lecco",
+   "n": "Calcio Lecco 1912"
+  },
+  {
+   "s": "fc-tulsa",
+   "n": "FC Tulsa"
+  },
+  {
+   "s": "pogon",
+   "n": "Pogoń Szczecin"
+  },
+  {
+   "s": "ferroviario-ce",
+   "n": "Ferroviário Atlético Clube (CE)"
+  },
+  {
+   "s": "neom",
+   "n": "Neom SC"
+  },
+  {
+   "s": "hillerod-fodbold",
+   "n": "Hillerød Fodbold"
+  },
+  {
+   "s": "hapoel-beer-sheva",
+   "n": "Hapoel Be'er Sheva F.C."
+  },
+  {
+   "s": "manisa",
+   "n": "Manisa F.K."
+  },
+  {
+   "s": "modern-sport",
+   "n": "Modern Sport FC"
+  },
+  {
+   "s": "tonbridge-angels",
+   "n": "Tonbridge Angels"
+  },
+  {
+   "s": "shimizu-s-pulse",
+   "n": "Shimizu S Pulse"
+  },
+  {
+   "s": "us-avranches",
+   "n": "US Avranches"
+  },
+  {
+   "s": "koninklijke-hfc",
+   "n": "Koninklijke HFC"
+  },
+  {
+   "s": "amora",
+   "n": "Amora F.C."
+  },
+  {
+   "s": "amstetten",
+   "n": "Amstetten"
+  },
+  {
+   "s": "asane-fotball",
+   "n": "Asane Fotball"
+  },
+  {
+   "s": "birmingham-legion-fc",
+   "n": "Birmingham Legion FC"
+  },
+  {
+   "s": "sd-compostela",
+   "n": "Sd Compostela"
+  },
+  {
+   "s": "brusque",
+   "n": "Brusque Futebol Clube"
+  },
+  {
+   "s": "ceramica-cleopatra",
+   "n": "Ceramica Cleopatra FC"
+  },
+  {
+   "s": "chungnam-asan",
+   "n": "Chungnam Asan"
+  },
+  {
+   "s": "fc-osaka",
+   "n": "FC Osaka"
+  },
+  {
+   "s": "krasava-ypsonas",
+   "n": "Krasava ENY Ypsonas FC"
+  },
+  {
+   "s": "helsingborgs",
+   "n": "Helsingborgs"
+  },
+  {
+   "s": "lumezzane",
+   "n": "FC Lumezzane"
+  },
+  {
+   "s": "wieczysta-krakow",
+   "n": "Wieczysta Krakow"
+  },
+  {
+   "s": "agua-santa",
+   "n": "Agua Santa"
+  },
+  {
+   "s": "bsg-chemie-leipzig",
+   "n": "BSG Chemie Leipzig (1997)"
+  },
+  {
+   "s": "santa-cruz",
+   "n": "Santa Cruz Futebol Clube"
+  },
+  {
+   "s": "cheonan-city",
+   "n": "Cheonan City FC"
+  },
+  {
+   "s": "chippenham-town",
+   "n": "Chippenham Town F.C."
+  },
+  {
+   "s": "correcaminos-uat",
+   "n": "Correcaminos Uat"
+  },
+  {
+   "s": "maccabi-bnei-reineh",
+   "n": "Maccabi Bnei Reineh F.C."
+  },
+  {
+   "s": "seongnam",
+   "n": "Seongnam FC"
+  },
+  {
+   "s": "national-bank",
+   "n": "National Bank of Egypt SC"
+  },
+  {
+   "s": "psim-yogyakarta",
+   "n": "PSIM Yogyakarta"
+  },
+  {
+   "s": "vis-pesaro",
+   "n": "Vis Pesaro dal 1898"
+  },
+  {
+   "s": "psis-semarang",
+   "n": "Psis Semarang"
+  },
+  {
+   "s": "worksop-town",
+   "n": "Worksop Town"
+  },
+  {
+   "s": "deportiva-minera",
+   "n": "CD Minera"
+  },
+  {
+   "s": "afc-totton",
+   "n": "A.F.C. Totton"
+  },
+  {
+   "s": "ofk-beograd",
+   "n": "Ofk Beograd"
+  },
+  {
+   "s": "briton-ferry-llansawel",
+   "n": "Briton Ferry Llansawel"
+  },
+  {
+   "s": "carshalton-athletic",
+   "n": "Carshalton Athletic F.C."
+  },
+  {
+   "s": "rodez-af",
+   "n": "Rodez Af"
+  },
+  {
+   "s": "chungbuk-cheongju",
+   "n": "Chungbuk Cheongju FC"
+  },
+  {
+   "s": "norrkoping",
+   "n": "IFK Norrköping"
+  },
+  {
+   "s": "el-paso-locomotive-fc",
+   "n": "El Paso Locomotive FC"
+  },
+  {
+   "s": "enfield-town",
+   "n": "Enfield Town F.C."
+  },
+  {
+   "s": "san-antonio-fc",
+   "n": "San Antonio FC"
+  },
+  {
+   "s": "gimpo",
+   "n": "Gimpo FC"
+  },
+  {
+   "s": "livyi-bereh",
+   "n": "FC Livyi Bereh Kyiv"
+  },
+  {
+   "s": "gangwon-fc",
+   "n": "Gangwon FC"
+  },
+  {
+   "s": "villefranche-beaujolais",
+   "n": "FC Villefranche Beaujolais"
+  },
+  {
+   "s": "persita-tangerang",
+   "n": "Persita Tangerang"
+  },
+  {
+   "s": "whitehawk",
+   "n": "Whitehawk F.C."
+  },
+  {
+   "s": "zed-fc",
+   "n": "Zed FC"
+  },
+  {
+   "s": "alebrijes-de-oaxaca",
+   "n": "Alebrijes De Oaxaca"
+  },
+  {
+   "s": "pro-vercelli",
+   "n": "FC Pro Vercelli 1892"
+  },
+  {
+   "s": "barwell",
+   "n": "Barwell F.C."
+  },
+  {
+   "s": "bedford-town",
+   "n": "Bedford Town F.C."
+  },
+  {
+   "s": "chesham",
+   "n": "Chesham United F.C."
+  },
+  {
+   "s": "bucheon-fc-1995",
+   "n": "Bucheon FC 1995"
+  },
+  {
+   "s": "racing-club-de-france",
+   "n": "Racing Club de France Football"
+  },
+  {
+   "s": "buxton",
+   "n": "Buxton F.C."
+  },
+  {
+   "s": "cancun-fc",
+   "n": "Cancún F.C."
+  },
+  {
+   "s": "persik-kediri",
+   "n": "Persik Kediri"
+  },
+  {
+   "s": "north-carolina-fc",
+   "n": "North Carolina FC"
+  },
+  {
+   "s": "deltras-sidoarjo",
+   "n": "Deltras Sidoarjo"
+  },
+  {
+   "s": "forward-madison",
+   "n": "Forward Madison"
+  },
+  {
+   "s": "leamington",
+   "n": "Leamington F.C."
+  },
+  {
+   "s": "union-omaha",
+   "n": "Union Omaha"
+  },
+  {
+   "s": "sarpsborg",
+   "n": "Sarpsborg 08 FF"
+  },
+  {
+   "s": "venados-fc",
+   "n": "Venados FC"
+  },
+  {
+   "s": "new-mexico-united",
+   "n": "New Mexico United"
+  },
+  {
+   "s": "virtus-francavilla",
+   "n": "Virtus Francavilla"
+  },
+  {
+   "s": "pendikspor",
+   "n": "Pendikspor"
+  },
+  {
+   "s": "bonnyrigg-rose",
+   "n": "Bonnyrigg Rose"
+  },
+  {
+   "s": "uta",
+   "n": "FC UTA Arad"
+  },
+  {
+   "s": "chattanooga-red-wolves",
+   "n": "Chattanooga Red Wolves"
+  },
+  {
+   "s": "sant-andreu",
+   "n": "Sant Andreu"
+  },
+  {
+   "s": "curzon-ashton",
+   "n": "Curzon Ashton"
+  },
+  {
+   "s": "harborough-town",
+   "n": "Harborough Town F.C."
+  },
+  {
+   "s": "esenler-erokspor",
+   "n": "Esenler Erokspor"
+  },
+  {
+   "s": "petrolul-ploiesti",
+   "n": "FC Petrolul Ploiești"
+  },
+  {
+   "s": "folkestone-invicta",
+   "n": "Folkestone Invicta"
+  },
+  {
+   "s": "treaty-united",
+   "n": "Treaty United F.C."
+  },
+  {
+   "s": "1-fc-phonix-lubeck",
+   "n": "1. FC Phönix Lübeck"
+  },
+  {
+   "s": "ituano",
+   "n": "Ituano FC"
+  },
+  {
+   "s": "al-ula",
+   "n": "Al-Ula FC"
+  },
+  {
+   "s": "ammanford-afc",
+   "n": "Ammanford A.F.C."
+  },
+  {
+   "s": "chatham-town",
+   "n": "Chatham Town F.C."
+  },
+  {
+   "s": "buckie-thistle",
+   "n": "Buckie Thistle"
+  },
+  {
+   "s": "east-kilbride",
+   "n": "East Kilbride F.C."
+  },
+  {
+   "s": "spvgg-unterhaching",
+   "n": "SPVGG Unterhaching"
+  },
+  {
+   "s": "greifswalder",
+   "n": "Greifswalder"
+  },
+  {
+   "s": "walton-hersham",
+   "n": "Walton & Hersham F.C."
+  },
+  {
+   "s": "independiente-rivadavia",
+   "n": "Independiente Rivadavia"
+  },
+  {
+   "s": "brora-rangers",
+   "n": "Brora Rangers"
+  },
+  {
+   "s": "orenburg",
+   "n": "FC Orenburg"
+  },
+  {
+   "s": "trastevere-calcio",
+   "n": "Trastevere Calcio"
+  },
+  {
+   "s": "gainsborough-trinity",
+   "n": "Gainsborough Trinity"
+  },
+  {
+   "s": "atletico-la-paz",
+   "n": "Atletico LA Paz"
+  },
+  {
+   "s": "fort-william",
+   "n": "Fort William F.C."
+  },
+  {
+   "s": "stade-lavallois",
+   "n": "Stade Lavallois"
+  },
+  {
+   "s": "farnham-town",
+   "n": "Farnham Town F.C."
+  },
+  {
+   "s": "gala-fairydean",
+   "n": "Gala Fairydean Rovers F.C."
+  },
+  {
+   "s": "galway-united",
+   "n": "Galway United F.C."
+  },
+  {
+   "s": "osnabruck",
+   "n": "Osnabruck"
+  },
+  {
+   "s": "south-shields",
+   "n": "South Shields"
+  },
+  {
+   "s": "ghazl-el-mahalla",
+   "n": "Ghazl El Mahalla SC"
+  },
+  {
+   "s": "gnistan",
+   "n": "IF Gnistan"
+  },
+  {
+   "s": "ruch-chorzow",
+   "n": "Ruch Chorzow"
+  },
+  {
+   "s": "goal-fc",
+   "n": "Goal FC"
+  },
+  {
+   "s": "kozakken-boys",
+   "n": "Kozakken Boys"
+  },
+  {
+   "s": "greenville-triumph",
+   "n": "Greenville Triumph SC"
+  },
+  {
+   "s": "once-caldas",
+   "n": "Once Caldas"
+  },
+  {
+   "s": "sepsi",
+   "n": "Sepsi OSK Sfântu Gheorghe"
+  },
+  {
+   "s": "ural",
+   "n": "FC Ural Yekaterinburg"
+  },
+  {
+   "s": "gretna-2008",
+   "n": "Gretna F.C. 2008"
+  },
+  {
+   "s": "stenhousemuir",
+   "n": "Stenhousemuir"
+  },
+  {
+   "s": "pittsburgh-riverhounds-sc",
+   "n": "Pittsburgh Riverhounds SC"
+  },
+  {
+   "s": "st-albans-city",
+   "n": "St Albans City"
+  },
+  {
+   "s": "hapoel-hadera",
+   "n": "Hapoel Hadera F.C."
+  },
+  {
+   "s": "hapoel-haifa",
+   "n": "Hapoel Haifa F.C."
+  },
+  {
+   "s": "hartford-athletic",
+   "n": "Hartford Athletic"
+  },
+  {
+   "s": "hapoel-petah-tikva",
+   "n": "Hapoel Petah Tikva F.C."
+  },
+  {
+   "s": "hednesford-town",
+   "n": "Hednesford Town"
+  },
+  {
+   "s": "haverfordwest-county",
+   "n": "Haverfordwest County"
+  },
+  {
+   "s": "terrassa",
+   "n": "Terrassa"
+  },
+  {
+   "s": "hebburn-town",
+   "n": "Hebburn Town F.C."
+  },
+  {
+   "s": "levadiakos",
+   "n": "Levadiakos"
+  },
+  {
+   "s": "sv-waldhof-mannheim",
+   "n": "SV Waldhof Mannheim"
+  },
+  {
+   "s": "hemel-hempstead-town",
+   "n": "Hemel Hempstead Town"
+  },
+  {
+   "s": "stuttgarter-kickers",
+   "n": "Stuttgarter Kickers"
+  },
+  {
+   "s": "tirol",
+   "n": "WSG Tirol"
+  },
+  {
+   "s": "hobro-ik",
+   "n": "Hobro IK"
+  },
+  {
+   "s": "honka",
+   "n": "FC Honka"
+  },
+  {
+   "s": "hornchurch",
+   "n": "Hornchurch F.C."
+  },
+  {
+   "s": "horsens",
+   "n": "AC Horsens"
+  },
+  {
+   "s": "u-1948",
+   "n": "FC U Craiova 1948"
+  },
+  {
+   "s": "hradec-kralove",
+   "n": "FC Hradec Králové"
+  },
+  {
+   "s": "hvidovre-if",
+   "n": "Hvidovre IF"
+  },
+  {
+   "s": "hyeres-fc",
+   "n": "Hyeres FC"
+  },
+  {
+   "s": "ik-oddevold",
+   "n": "IK Oddevold"
+  },
+  {
+   "s": "ilves",
+   "n": "Ilves"
+  },
+  {
+   "s": "piast",
+   "n": "Piast Gliwice"
+  },
+  {
+   "s": "incheon-united",
+   "n": "Incheon United FC"
+  },
+  {
+   "s": "jef-united-chiba",
+   "n": "Jef United Chiba"
+  },
+  {
+   "s": "kelty-hearts",
+   "n": "Kelty Hearts"
+  },
+  {
+   "s": "northwich-victoria",
+   "n": "Northwich Victoria F.C."
+  },
+  {
+   "s": "sv-austria-salzburg",
+   "n": "SV Austria Salzburg"
+  },
+  {
+   "s": "radnicki-1923",
+   "n": "FK Radnički 1923"
+  },
+  {
+   "s": "inhulets-petrove",
+   "n": "Inhulets Petrove"
+  },
+  {
+   "s": "sv-sandhausen",
+   "n": "SV Sandhausen"
+  },
+  {
+   "s": "inter-turku",
+   "n": "FC Inter Turku"
+  },
+  {
+   "s": "maccabi-petah-tikva",
+   "n": "Maccabi Petah Tikva F.C."
+  },
+  {
+   "s": "radomiak",
+   "n": "Radomiak Radom"
+  },
+  {
+   "s": "ionikos",
+   "n": "Ionikos"
+  },
+  {
+   "s": "lks-lodz",
+   "n": "ŁKS Łódź"
+  },
+  {
+   "s": "irapuato",
+   "n": "C.D. Irapuato"
+  },
+  {
+   "s": "sirius",
+   "n": "Sirius"
+  },
+  {
+   "s": "ironi-tiberias",
+   "n": "Ironi Tiberias"
+  },
+  {
+   "s": "isloch",
+   "n": "FC Isloch Minsk Raion"
+  },
+  {
+   "s": "ismaily",
+   "n": "Ismaily SC"
+  },
+  {
+   "s": "vasas",
+   "n": "Vasas SC"
+  },
+  {
+   "s": "kings-lynn-town",
+   "n": "King's Lynn Town F.C."
+  },
+  {
+   "s": "iwaki-fc",
+   "n": "Iwaki FC"
+  },
+  {
+   "s": "lokomotiv-plovdiv",
+   "n": "PFC Lokomotiv Plovdiv"
+  },
+  {
+   "s": "jablonec",
+   "n": "FK Jablonec"
+  },
+  {
+   "s": "rouen",
+   "n": "FC Rouen"
+  },
+  {
+   "s": "jaguares-de-cordoba",
+   "n": "Jaguares De Cordoba"
+  },
+  {
+   "s": "jaro",
+   "n": "FF Jaro"
+  },
+  {
+   "s": "lokomotiva-zagreb",
+   "n": "NK Lokomotiva Zagreb"
+  },
+  {
+   "s": "javor",
+   "n": "FK Javor Ivanjica"
+  },
+  {
+   "s": "jeonnam-dragons",
+   "n": "Jeonnam Dragons"
+  },
+  {
+   "s": "lexington-sc",
+   "n": "Lexington SC"
+  },
+  {
+   "s": "jjk",
+   "n": "JJK Jyväskylä"
+  },
+  {
+   "s": "joinville",
+   "n": "Joinville Esporte Clube"
+  },
+  {
+   "s": "nancy",
+   "n": "AS Nancy Lorraine"
+  },
+  {
+   "s": "perugia",
+   "n": "AC Perugia Calcio"
+  },
+  {
+   "s": "odd",
+   "n": "Odds BK"
+  },
+  {
+   "s": "kagoshima-united",
+   "n": "Kagoshima United"
+  },
+  {
+   "s": "novi-pazar",
+   "n": "FK Novi Pazar"
+  },
+  {
+   "s": "uniao-futebol-comercio-e-industria",
+   "n": "Uniao Futebol Comercio E Industria"
+  },
+  {
+   "s": "radnicki-nis",
+   "n": "FK Radnički Niš"
+  },
+  {
+   "s": "kickers-offenbach",
+   "n": "Kickers Offenbach"
+  },
+  {
+   "s": "tondela",
+   "n": "C.D. Tondela"
+  },
+  {
+   "s": "semen-padang",
+   "n": "Semen Padang F.C."
+  },
+  {
+   "s": "kisvarda",
+   "n": "Kisvárda FC"
+  },
+  {
+   "s": "kocaelispor",
+   "n": "Kocaelispor"
+  },
+  {
+   "s": "kolos-kovalivka",
+   "n": "Kolos Kovalivka"
+  },
+  {
+   "s": "korona-kielce",
+   "n": "Korona Kielce"
+  },
+  {
+   "s": "st-polten",
+   "n": "SKN St. Pölten"
+  },
+  {
+   "s": "polonia-warszawa",
+   "n": "Polonia Warszawa"
+  },
+  {
+   "s": "richmond-kickers",
+   "n": "Richmond Kickers"
+  },
+  {
+   "s": "paysandu",
+   "n": "Paysandu Sport Club"
+  },
+  {
+   "s": "ljungskile-sk",
+   "n": "Ljungskile SK"
+  },
+  {
+   "s": "pontevedra-cf",
+   "n": "Pontevedra CF"
+  },
+  {
+   "s": "lnz-cherkasy",
+   "n": "FC LNZ Cherkasy"
+  },
+  {
+   "s": "otelul",
+   "n": "ASC Oțelul Galați"
+  },
+  {
+   "s": "lokomotiv-sofia",
+   "n": "Lokomotiv Sofia"
+  },
+  {
+   "s": "maccabi-netanya",
+   "n": "Maccabi Netanya F.C."
+  },
+  {
+   "s": "sestao-river",
+   "n": "Sestao River Club"
+  },
+  {
+   "s": "slavia-sofia",
+   "n": "Slavia Sofia"
+  },
+  {
+   "s": "mantova-1911",
+   "n": "Mantova 1911"
+  },
+  {
+   "s": "ponte-preta",
+   "n": "Associação Atlética Ponte Preta"
+  },
+  {
+   "s": "matsumoto-yamaga",
+   "n": "Matsumoto Yamaga FC"
+  },
+  {
+   "s": "merthyr-town",
+   "n": "Merthyr Town F.C."
+  },
+  {
+   "s": "tapatio",
+   "n": "C.D. Tapatío"
+  },
+  {
+   "s": "slovacko",
+   "n": "Slovacko"
+  },
+  {
+   "s": "motor-lublin",
+   "n": "Motor Lublin"
+  },
+  {
+   "s": "mineros-de-zacatecas",
+   "n": "Mineros De Zacatecas"
+  },
+  {
+   "s": "mito-hollyhock",
+   "n": "Mito Hollyhock"
+  },
+  {
+   "s": "mladost-lucani",
+   "n": "Mladost Lucani"
+  },
+  {
+   "s": "mold-alexandra",
+   "n": "Mold Alexandra F.C."
+  },
+  {
+   "s": "montedio-yamagata",
+   "n": "Montedio Yamagata"
+  },
+  {
+   "s": "monterey-bay-fc",
+   "n": "Monterey Bay FC"
+  },
+  {
+   "s": "stal-mielec",
+   "n": "Stal Mielec"
+  },
+  {
+   "s": "poli-iasi",
+   "n": "FC Politehnica Iași (2010)"
+  },
+  {
+   "s": "montrose",
+   "n": "Montrose"
+  },
+  {
+   "s": "moss",
+   "n": "Moss FK"
+  },
+  {
+   "s": "portugalete",
+   "n": "Club Portugalete"
+  },
+  {
+   "s": "naestved",
+   "n": "Næstved Boldklub"
+  },
+  {
+   "s": "naftan",
+   "n": "FC Naftan Novopolotsk"
+  },
+  {
+   "s": "ufa",
+   "n": "FC Ufa"
+  },
+  {
+   "s": "nea-salamis",
+   "n": "Nea Salamis"
+  },
+  {
+   "s": "persipura-jayapura",
+   "n": "Persipura Jayapura"
+  },
+  {
+   "s": "rukh-lviv",
+   "n": "FC Rukh Lviv"
+  },
+  {
+   "s": "napredak",
+   "n": "FK Napredak Kruševac"
+  },
+  {
+   "s": "nara-club",
+   "n": "Nara Club"
+  },
+  {
+   "s": "nautico",
+   "n": "Clube Náutico Capibaribe"
+  },
+  {
+   "s": "neman",
+   "n": "FC Neman Grodno"
+  },
+  {
+   "s": "slough-town",
+   "n": "Slough Town F.C."
+  },
+  {
+   "s": "stirling-albion",
+   "n": "Stirling Albion F.C."
+  },
+  {
+   "s": "newtown-afc",
+   "n": "Newtown A.F.C."
+  },
+  {
+   "s": "nk-zagreb",
+   "n": "NK Zagreb"
+  },
+  {
+   "s": "nordic-united-fc",
+   "n": "Nordic United FC"
+  },
+  {
+   "s": "spartak-subotica",
+   "n": "Spartak Subotica"
+  },
+  {
+   "s": "quevilly-rouen-metropole",
+   "n": "US Quevilly-Rouen Métropole"
+  },
+  {
+   "s": "tours",
+   "n": "Tours"
+  },
+  {
+   "s": "novara",
+   "n": "Novara FC"
+  },
+  {
+   "s": "novorizontino",
+   "n": "Grêmio Novorizontino"
+  },
+  {
+   "s": "nueva-chicago",
+   "n": "Club Atlético Nueva Chicago"
+  },
+  {
+   "s": "rfc-liege",
+   "n": "Rfc Liege"
+  },
+  {
+   "s": "nyiregyhaza-spartacus",
+   "n": "Nyiregyhaza Spartacus"
+  },
+  {
+   "s": "olhanense",
+   "n": "S.C. Olhanense"
+  },
+  {
+   "s": "obolon",
+   "n": "FC Obolon Kyiv"
+  },
+  {
+   "s": "oita-trinita",
+   "n": "Oita Trinita"
+  },
+  {
+   "s": "olbia-calcio-1905",
+   "n": "Olbia Calcio 1905"
+  },
+  {
+   "s": "rbc-roosendaal",
+   "n": "Rbc Roosendaal"
+  },
+  {
+   "s": "sandefjord",
+   "n": "Sandefjord Fotball"
+  },
+  {
+   "s": "orgryte",
+   "n": "Örgryte IS"
+  },
+  {
+   "s": "olot",
+   "n": "UE Olot"
+  },
+  {
+   "s": "start",
+   "n": "Start"
+  },
+  {
+   "s": "olympiakos",
+   "n": "Olympiakos"
+  },
+  {
+   "s": "omonia-29m",
+   "n": "PAC Omonia 29M"
+  },
+  {
+   "s": "omonia-aradippou",
+   "n": "Omonia Aradippou"
+  },
+  {
+   "s": "red-star-fc",
+   "n": "Red Star FC"
+  },
+  {
+   "s": "one-knoxville",
+   "n": "One Knoxville SC"
+  },
+  {
+   "s": "operario-ferroviario",
+   "n": "Operário Ferroviário Esporte Clube"
+  },
+  {
+   "s": "orebro",
+   "n": "Örebro SK"
+  },
+  {
+   "s": "varnamo",
+   "n": "IFK Värnamo"
+  },
+  {
+   "s": "teplice",
+   "n": "FK Teplice"
+  },
+  {
+   "s": "oster",
+   "n": "Östers IF"
+  },
+  {
+   "s": "peterhead",
+   "n": "Peterhead F.C."
+  },
+  {
+   "s": "othellos",
+   "n": "Othellos"
+  },
+  {
+   "s": "peterborough-sports",
+   "n": "Peterborough Sports"
+  },
+  {
+   "s": "oulu",
+   "n": "AC Oulu"
+  },
+  {
+   "s": "shakhtyor",
+   "n": "FC Shakhtyor Soligorsk"
+  },
+  {
+   "s": "spennymoor-town",
+   "n": "Spennymoor Town F.C."
+  },
+  {
+   "s": "puszcza-niepolomice",
+   "n": "Puszcza Niepołomice"
+  },
+  {
+   "s": "pardubice",
+   "n": "FK Pardubice"
+  },
+  {
+   "s": "siena",
+   "n": "Siena FC SSD"
+  },
+  {
+   "s": "paris-13-atletico",
+   "n": "Paris 13 Atletico"
+  },
+  {
+   "s": "rennes",
+   "n": "Stade Rennais FC"
+  },
+  {
+   "s": "tarazona",
+   "n": "SD Tarazona"
+  },
+  {
+   "s": "sc-verl",
+   "n": "SC Verl"
+  },
+  {
+   "s": "penafiel",
+   "n": "F.C. Penafiel"
+  },
+  {
+   "s": "penybont",
+   "n": "Penybont F.C."
+  },
+  {
+   "s": "spokane-velocity",
+   "n": "Spokane Velocity"
+  },
+  {
+   "s": "persela-lamongan",
+   "n": "Persela Lamongan"
+  },
+  {
+   "s": "v-varen-nagasaki",
+   "n": "V Varen Nagasaki"
+  },
+  {
+   "s": "persiraja-banda-aceh",
+   "n": "Persiraja Banda Aceh"
+  },
+  {
+   "s": "sakaryaspor",
+   "n": "Sakaryaspor"
+  },
+  {
+   "s": "sriwijaya-fc",
+   "n": "Sriwijaya F.C."
+  },
+  {
+   "s": "pharco",
+   "n": "Pharco FC"
+  },
+  {
+   "s": "sanliurfaspor",
+   "n": "Şanlıurfaspor"
+  },
+  {
+   "s": "pirin",
+   "n": "OFC Pirin Blagoevgrad"
+  },
+  {
+   "s": "podbeskidzie",
+   "n": "Podbeskidzie"
+  },
+  {
+   "s": "polonia-bytom",
+   "n": "Polonia Bytom"
+  },
+  {
+   "s": "portland-hearts-of-pine",
+   "n": "Portland Hearts Of Pine"
+  },
+  {
+   "s": "portuguesa",
+   "n": "Portuguesa"
+  },
+  {
+   "s": "sonderjyske",
+   "n": "Sønderjyske Fodbold"
+  },
+  {
+   "s": "potenza",
+   "n": "Potenza Calcio"
+  },
+  {
+   "s": "pro-patria",
+   "n": "Aurora Pro Patria 1919"
+  },
+  {
+   "s": "psms-medan",
+   "n": "Psms Medan"
+  },
+  {
+   "s": "seoul-e-land",
+   "n": "Seoul E-Land FC"
+  },
+  {
+   "s": "ranheim-fotball",
+   "n": "Ranheim Fotball"
+  },
+  {
+   "s": "radnik-surdulica",
+   "n": "Radnik Surdulica"
+  },
+  {
+   "s": "rakoczi",
+   "n": "Kaposvári Rákóczi FC"
+  },
+  {
+   "s": "rot-weiss-erfurt",
+   "n": "FC Rot-Weiß Erfurt"
+  },
+  {
+   "s": "rodina-moscow",
+   "n": "FC Rodina Moscow"
+  },
+  {
+   "s": "spartak-varna",
+   "n": "Spartak Varna"
+  },
+  {
+   "s": "reggina",
+   "n": "AS Reggina 1914"
+  },
+  {
+   "s": "renofa-yamaguchi",
+   "n": "Renofa Yamaguchi FC"
+  },
+  {
+   "s": "sogndal-fotball",
+   "n": "Sogndal Fotball"
+  },
+  {
+   "s": "rnk-split",
+   "n": "Rnk Split"
+  },
+  {
+   "s": "roasso-kumamoto",
+   "n": "Roasso Kumamoto"
+  },
+  {
+   "s": "spalding-united",
+   "n": "Spalding United F.C."
+  },
+  {
+   "s": "sampaio-correa",
+   "n": "Sampaio Corrêa Futebol Clube"
+  },
+  {
+   "s": "rot-weiss-oberhausen",
+   "n": "Rot-Weiß Oberhausen"
+  },
+  {
+   "s": "sporting-jax",
+   "n": "Sporting Club Jacksonville"
+  },
+  {
+   "s": "salgueiros",
+   "n": "Salgueiros"
+  },
+  {
+   "s": "san-marino-calcio",
+   "n": "San Marino Calcio"
+  },
+  {
+   "s": "san-martin-san-juan",
+   "n": "San Martin San Juan"
+  },
+  {
+   "s": "sandnes-ulf",
+   "n": "Sandnes Ulf"
+  },
+  {
+   "s": "sangiuliano-city-nova",
+   "n": "FC Sangiuliano City"
+  },
+  {
+   "s": "sao-jose-rs",
+   "n": "Sao Jose Rs"
+  },
+  {
+   "s": "ska-khabarovsk",
+   "n": "Ska Khabarovsk"
+  },
+  {
+   "s": "sas-epinal",
+   "n": "Sas Epinal"
+  },
+  {
+   "s": "sc-espinho",
+   "n": "SC Espinho"
+  },
+  {
+   "s": "talaea-el-gaish",
+   "n": "Tala'ea El Gaish SC"
+  },
+  {
+   "s": "septemvri",
+   "n": "PFC Septemvri Sofia"
+  },
+  {
+   "s": "sv-babelsberg-03",
+   "n": "SV Babelsberg 03"
+  },
+  {
+   "s": "skeid",
+   "n": "Skeid Fotball"
+  },
+  {
+   "s": "slavia-mozyr",
+   "n": "Slavia Mozyr"
+  },
+  {
+   "s": "slutsk",
+   "n": "FC Slutsk"
+  },
+  {
+   "s": "sorrento",
+   "n": "Sorrento Calcio 1945"
+  },
+  {
+   "s": "talleres-remedios-de-escalada",
+   "n": "Talleres Remedios De Escalada"
+  },
+  {
+   "s": "sv-stripfing",
+   "n": "SV Stripfing"
+  },
+  {
+   "s": "varbergs-bois",
+   "n": "Varbergs Bois"
+  },
+  {
+   "s": "sporting-club-toulon",
+   "n": "SC Toulon"
+  },
+  {
+   "s": "tlaxcala-fc",
+   "n": "Tlaxcala F.C."
+  },
+  {
+   "s": "st-helens-town",
+   "n": "St Helens Town"
+  },
+  {
+   "s": "stal-rzeszow",
+   "n": "Stal Rzeszow"
+  },
+  {
+   "s": "tepatitlan-fc",
+   "n": "Tepatitlán F.C."
+  },
+  {
+   "s": "tasmania-berlin",
+   "n": "Tasmania Berlin"
+  },
+  {
+   "s": "trento",
+   "n": "AC Trento 1921"
+  },
+  {
+   "s": "sw-bregenz",
+   "n": "Schwarz-Weiß Bregenz"
+  },
+  {
+   "s": "trelleborg",
+   "n": "Trelleborg"
+  }
+ ]
+}

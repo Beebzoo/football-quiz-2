@@ -1,0 +1,3432 @@
+[
+ {
+  "tier": "easy",
+  "q": "How many assistant referees does a referee normally have alongside them?",
+  "a": "Two",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "From how far out is a penalty kick taken?",
+  "a": "Twelve yards, about 11 metres",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "How far back must defenders stand at a free kick?",
+  "a": "Ten yards, about 9.15 metres",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What protective equipment must players wear on their shins?",
+  "a": "Shin pads",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What does a team captain wear to show the role?",
+  "a": "An armband",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "From which spot on the pitch is a match kicked off?",
+  "a": "The centre spot",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What is a shot struck before the ball touches the ground called?",
+  "a": "A volley",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What is it called when you play the ball through an opponent's legs?",
+  "a": "A nutmeg",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "The penalty area is commonly called the box of how many yards?",
+  "a": "18",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What is the line of players lined up to block a free kick called?",
+  "a": "The wall",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What settles a knockout tie that is still level after extra time?",
+  "a": "A penalty shoot-out",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "How long is the half-time break in a normal match?",
+  "a": "15 minutes",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which trophy goes to the top scorer of a World Cup?",
+  "a": "The Golden Boot",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which prize is given to the outstanding player of a World Cup?",
+  "a": "The Golden Ball",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which prize is given to the best goalkeeper of a World Cup?",
+  "a": "The Golden Glove",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "At the 2022 World Cup, how many teams were drawn into each group?",
+  "a": "Four",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "How many matches does a side play in the World Cup group stage?",
+  "a": "Three",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "How many teams took part in the 2018 World Cup finals in Russia?",
+  "a": "32",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What shirt number does a goalkeeper traditionally wear?",
+  "a": "1",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which trophy do the Champions League and Europa League winners meet to contest?",
+  "a": "The UEFA Super Cup",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What is the name for winning the league, the domestic cup and the Champions League in one season?",
+  "a": "The treble",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What do the letters UEFA stand for?",
+  "a": "Union of European Football Associations",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which match official raises a flag to signal offside?",
+  "a": "The assistant referee, or linesman",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What is the marking around the kick-off spot in the middle of the pitch called?",
+  "a": "The centre circle",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which national team is nicknamed 'the Red Devils'?",
+  "a": "Belgium",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which national team is nicknamed 'the Socceroos'?",
+  "a": "Australia",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which national team is nicknamed 'the Super Eagles'?",
+  "a": "Nigeria",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which national team is nicknamed 'the Pharaohs'?",
+  "a": "Egypt",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which national team is nicknamed 'Bafana Bafana'?",
+  "a": "South Africa",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which national team is nicknamed 'the Samurai Blue'?",
+  "a": "Japan",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which national team is nicknamed 'the Atlas Lions'?",
+  "a": "Morocco",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which national team is nicknamed 'the Indomitable Lions'?",
+  "a": "Cameroon",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What colour shirts does the Belgium national team traditionally wear at home?",
+  "a": "Red",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Italy's national team plays at home in which colour?",
+  "a": "Blue",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Germany's national team plays at home in which colour shirt?",
+  "a": "White",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Argentina's home shirt has stripes of white and which other colour?",
+  "a": "Light blue",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What is the capital of Belgium, home of the club Anderlecht?",
+  "a": "Brussels",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "In which Belgian city does Club Brugge play?",
+  "a": "Bruges, Brugge in Dutch",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country do the clubs Anderlecht and Club Brugge come from?",
+  "a": "Belgium",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which London club did Eden Hazard star for from 2012 to 2019?",
+  "a": "Chelsea",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the goalkeeper Thibaut Courtois from?",
+  "a": "Belgium",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Belgium finished third at which World Cup, their best result at the tournament?",
+  "a": "2018",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Maastricht, home of MVV, lies in which Dutch province?",
+  "a": "Limburg",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What is the Dutch word for the national team's head coach?",
+  "a": "Bondscoach",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Ajax are named after a hero from which ancient mythology?",
+  "a": "Greek mythology",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Feyenoord's nickname 'de club aan de Maas' refers to which river?",
+  "a": "The Maas, the Meuse",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "The Netherlands women won the 2017 European Championship on home soil. Who was their coach?",
+  "a": "Sarina Wiegman",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country does the record-breaking striker Vivianne Miedema play for?",
+  "a": "The Netherlands",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which position did Virgil van Dijk make his name in?",
+  "a": "Centre-back, defender",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which position does Frenkie de Jong play?",
+  "a": "Midfielder",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which position did Arjen Robben play?",
+  "a": "Winger",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which position did Patrick Kluivert play?",
+  "a": "Striker",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country does the winger Xavi Simons represent at senior level?",
+  "a": "The Netherlands",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which two colours make up FC Twente's home kit?",
+  "a": "Red and white",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "AZ from Alkmaar play at home in red and which other colour?",
+  "a": "White",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Dutch city gives its name to the club FC Utrecht?",
+  "a": "Utrecht",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Dutch club is based in the fishing town of Volendam?",
+  "a": "FC Volendam",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Dutch club is based in the Overijssel city of Zwolle?",
+  "a": "PEC Zwolle",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Dutch club is based in the Limburg city of Venlo?",
+  "a": "VVV-Venlo",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "In which Dutch city do Go Ahead Eagles play their home games?",
+  "a": "Deventer",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which two colours does the Go Ahead Eagles home shirt combine?",
+  "a": "Red and yellow",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Dutch club's name is short for Nijmegen Eendracht Combinatie?",
+  "a": "NEC",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Dutch coach led the Netherlands at Euro 2024?",
+  "a": "Ronald Koeman",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "How many times have the Netherlands men reached a World Cup final?",
+  "a": "Three, in 1974, 1978 and 2010",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Dutch club did Ruud Gullit play for before joining PSV in 1985?",
+  "a": "Feyenoord",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Dutch city staged the Euro 2000 final?",
+  "a": "Rotterdam",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "In which Belgian city do Standard play their home games?",
+  "a": "Liège",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "KAA Gent are based in which Belgian city?",
+  "a": "Ghent, Gent in Dutch",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Belgian club is based in the port city of Antwerp?",
+  "a": "Royal Antwerp",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Racing Genk come from which Belgian province?",
+  "a": "Limburg",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country did Belgium beat 2-0 to finish third at the 2018 World Cup?",
+  "a": "England",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Club Brugge play at home in black and which other colour?",
+  "a": "Blue",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Anderlecht's traditional home shirt is white and which unusual colour?",
+  "a": "Purple",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country does the striker Romelu Lukaku captain the attack for, alongside De Bruyne?",
+  "a": "Belgium",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the forward Dries Mertens from?",
+  "a": "Belgium",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Italian club did Dries Mertens score more than 100 goals for?",
+  "a": "Napoli",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which English club did Vincent Kompany captain to Premier League titles?",
+  "a": "Manchester City",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country did Belgium beat 2-1 in the 2018 World Cup quarter-final?",
+  "a": "Brazil",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Belgium and which neighbour jointly staged Euro 2000?",
+  "a": "The Netherlands",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Belgian club did Vincent Kompany come through as a teenager?",
+  "a": "Anderlecht",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Belgium trailed 2-0 at the 2018 World Cup before winning 3-2 in the last minute. Against whom?",
+  "a": "Japan",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Spanish coach managed Belgium's national team from 2016 to 2022?",
+  "a": "Roberto Martínez",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which position did Jan Vertonghen play for Belgium?",
+  "a": "Centre-back, defender",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which English club did Toby Alderweireld and Jan Vertonghen defend for together?",
+  "a": "Tottenham Hotspur",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Spanish club did Raúl score more than 200 La Liga goals for?",
+  "a": "Real Madrid",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which English club did Fernando Torres join from Atlético Madrid in 2007?",
+  "a": "Liverpool",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which English club did Cesc Fàbregas captain before returning to Barcelona in 2011?",
+  "a": "Arsenal",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which English club did David Silva play for from 2010 to 2020?",
+  "a": "Manchester City",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Spanish club did Carles Puyol captain for years as a centre-back?",
+  "a": "Barcelona",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Spanish club did Gerard Piqué sign for in 2008 on leaving Manchester United?",
+  "a": "Barcelona",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Athletic Club of Bilbao come from which region of Spain?",
+  "a": "The Basque Country",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "UD Las Palmas are based on which Canary island?",
+  "a": "Gran Canaria",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "RCD Mallorca play on which Balearic island?",
+  "a": "Mallorca",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Celta Vigo and Deportivo La Coruña both come from which Spanish region?",
+  "a": "Galicia",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Atlético Madrid's home shirt has white stripes and which other colour?",
+  "a": "Red",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Valencia's traditional home shirt is which colour?",
+  "a": "White",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "How many clubs are relegated from La Liga each season?",
+  "a": "Three",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What is the second tier of Spanish football called?",
+  "a": "The Segunda División",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Spanish club did Luis Suárez join in 2020 and win La Liga with?",
+  "a": "Atlético Madrid",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Spanish club did Zinedine Zidane both play for and later manage?",
+  "a": "Real Madrid",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Diego Simeone played for which Spanish club before returning to manage it?",
+  "a": "Atlético Madrid",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What do the letters UD stand for in UD Las Palmas?",
+  "a": "Unión Deportiva",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What does the name of Barcelona's ground, Camp Nou, mean?",
+  "a": "New ground, new field",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Barcelona's motto 'Més que un club' is written in which language?",
+  "a": "Catalan",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Rayo Vallecano are a club from which Spanish city?",
+  "a": "Madrid",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Spanish club did Vinícius Júnior join in 2018?",
+  "a": "Real Madrid",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Spanish club did Thibaut Courtois join from Chelsea in 2018?",
+  "a": "Real Madrid",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which position did Iker Casillas play?",
+  "a": "Goalkeeper",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which position did Andrés Iniesta play?",
+  "a": "Midfielder",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which position did Sergio Ramos play?",
+  "a": "Centre-back, defender",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Spanish club did Jesús Navas spend most of his career at?",
+  "a": "Sevilla",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Real Sociedad's home city of San Sebastián sits close to the border with which country?",
+  "a": "France",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Spanish club did Álvaro Morata come through as a youth player?",
+  "a": "Real Madrid",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Spanish club did Toni Kroos finish his playing career at in 2024?",
+  "a": "Real Madrid",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Spanish club did Antoine Griezmann rejoin in 2021?",
+  "a": "Atlético Madrid",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Spanish club did the Brazilian Ronaldo play for in the 1996-97 season?",
+  "a": "Barcelona",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Spanish club did Pep Guardiola manage before he took over Bayern Munich?",
+  "a": "Barcelona",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which club did Barcelona sign Luis Suárez from in 2014?",
+  "a": "Liverpool",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Spanish club did Xabi Alonso begin his professional career at?",
+  "a": "Real Sociedad",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which club did David Villa leave Valencia for in 2010?",
+  "a": "Barcelona",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Spanish club did the Brazilian playmaker Rivaldo star for from 1997 to 2002?",
+  "a": "Barcelona",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which club did Real Madrid beat in the 2022 Champions League final?",
+  "a": "Liverpool",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country beat Spain in their opening game of the 2010 World Cup?",
+  "a": "Switzerland",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Spanish club won the Europa League in 2014, 2015 and 2016?",
+  "a": "Sevilla",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which English club did Real Madrid sign Michael Owen from in 2004?",
+  "a": "Liverpool",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Spanish club did Diego Forlán win the Europa League with in 2010?",
+  "a": "Atlético Madrid",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Thierry Henry won the 1998 World Cup with which country?",
+  "a": "France",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the striker Didier Drogba from?",
+  "a": "Ivory Coast",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the winger Sadio Mané from?",
+  "a": "Senegal",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Wayne Rooney scored a record number of goals for which national team?",
+  "a": "England",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which American club did David Beckham join in 2007?",
+  "a": "LA Galaxy",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country does the winger Gareth Bale come from?",
+  "a": "Wales",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country did the goalkeeper Gianluigi Buffon play for?",
+  "a": "Italy",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the playmaker Kaká from?",
+  "a": "Brazil",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Galatasaray and Fenerbahçe both play in which city?",
+  "a": "Istanbul",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "In which country is the club Olympiacos based?",
+  "a": "Greece",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Brazilian city is home to the club Flamengo?",
+  "a": "Rio de Janeiro",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "In which country is the club Sporting CP based?",
+  "a": "Portugal",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Benfica and Sporting both play in which city?",
+  "a": "Lisbon",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country hosted the 1970 World Cup?",
+  "a": "Mexico",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country hosted the 1974 World Cup?",
+  "a": "West Germany",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "How often is the European Championship held?",
+  "a": "Every four years",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What was the Champions League called before it was renamed in 1992?",
+  "a": "The European Cup",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country won the 1990 World Cup?",
+  "a": "West Germany",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country won the 1958 World Cup with a 17-year-old Pelé in the side?",
+  "a": "Brazil",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What is the second tier of English football called?",
+  "a": "The Championship",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "How many clubs play in the Bundesliga?",
+  "a": "18",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "How many clubs play in Serie A?",
+  "a": "20",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the manager Jürgen Klopp from?",
+  "a": "Germany",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the manager José Mourinho from?",
+  "a": "Portugal",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is Sir Alex Ferguson from?",
+  "a": "Scotland",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the manager Arsène Wenger from?",
+  "a": "France",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the manager Diego Simeone from?",
+  "a": "Argentina",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Goodison Park was for more than a century the home of which English club?",
+  "a": "Everton",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which position did Franco Baresi and Paolo Maldini both play?",
+  "a": "Defender",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country did the striker Ruud van Nistelrooy score most of his international goals for?",
+  "a": "The Netherlands",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country is the striker George Weah from, the only African to win the Ballon d'Or?",
+  "a": "Liberia",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country is the striker Samuel Eto'o from?",
+  "a": "Cameroon",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country is the striker Andriy Shevchenko from?",
+  "a": "Ukraine",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country co-hosted Euro 2008 with Switzerland?",
+  "a": "Austria",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country hosted Euro 1992, the tournament Denmark won?",
+  "a": "Sweden",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "The UEFA Cup was rebranded in 2009 under which name?",
+  "a": "The Europa League",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country hosted the 1958 World Cup?",
+  "a": "Sweden",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country won the 2016 Copa América?",
+  "a": "Chile",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country knocked the holders Brazil out in the quarter-final of the 2006 World Cup?",
+  "a": "France",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country beat Germany 2-0 to knock them out of the 2018 World Cup group stage?",
+  "a": "South Korea",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which English trophy is played for by the league champions and FA Cup winners before the season?",
+  "a": "The Community Shield",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which German city is home to the club Schalke 04?",
+  "a": "Gelsenkirchen",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "In which country was Euro 1988 held, the tournament the Netherlands won?",
+  "a": "West Germany",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which position did Frank de Boer play for Ajax and the Netherlands?",
+  "a": "Defender",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which club did Steven Gerrard spend his whole Premier League career at?",
+  "a": "Liverpool",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which club did Paul Scholes spend his entire playing career at?",
+  "a": "Manchester United",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country did the winger Ryan Giggs represent?",
+  "a": "Wales",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which club did Roy Keane captain through the late 1990s?",
+  "a": "Manchester United",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which club did John Terry captain for more than a decade?",
+  "a": "Chelsea",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "In which city is the Maracanã stadium?",
+  "a": "Rio de Janeiro",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "In which country is the Azteca Stadium?",
+  "a": "Mexico",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which London stadium staged the 1966 World Cup final?",
+  "a": "Wembley",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What is the top division in Scotland called?",
+  "a": "The Scottish Premiership",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What is the top division in Argentina called?",
+  "a": "The Primera División",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "How many players are left on the pitch for a team that has had two players sent off?",
+  "a": "Nine",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What happens to a player shown a second yellow card in the same match?",
+  "a": "They are sent off",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What is a free kick called if a goal cannot be scored straight from it?",
+  "a": "An indirect free kick",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which restart is given when an attacker puts the ball out over the goal line?",
+  "a": "A goal kick",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country did the Netherlands beat in the 2010 World Cup semi-final?",
+  "a": "Uruguay",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "In which Dutch city is the Johan Cruyff Arena?",
+  "a": "Amsterdam",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which English club did Ruud Gullit manage to the FA Cup in 1997?",
+  "a": "Chelsea",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which English club did the Dutch defender Jaap Stam win the 1999 treble with?",
+  "a": "Manchester United",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Italian club did Zlatan Ibrahimović return to in 2020?",
+  "a": "AC Milan",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Italian club did Andrea Pirlo join from AC Milan in 2011?",
+  "a": "Juventus",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country did Roy Keane play international football for?",
+  "a": "The Republic of Ireland",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Dutch club did Marc Overmars win three Eredivisie titles with in the 1990s?",
+  "a": "Ajax",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the midfielder Xavi from?",
+  "a": "Spain",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the forward Antoine Griezmann's team-mate Olivier Giroud from?",
+  "a": "France",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which German club did Robert Lewandowski leave to join Barcelona in 2022?",
+  "a": "Bayern Munich",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the defender Sergio Ramos from?",
+  "a": "Spain",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which club did Sergio Agüero play for from 2011 to 2021?",
+  "a": "Manchester City",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the striker Sergio Agüero from?",
+  "a": "Argentina",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which goalkeeper came on just for the shoot-out against Costa Rica at the 2014 World Cup?",
+  "a": "Tim Krul",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "What is the Dutch super cup, played before the season, called?",
+  "a": "The Johan Cruijff Schaal",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which German club did Mark van Bommel captain in the 2010 Champions League final?",
+  "a": "Bayern Munich",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which club did Alan Shearer join for a world-record fee in 1996?",
+  "a": "Newcastle United",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "How wide is a full-size goal?",
+  "a": "Eight yards, 7.32 metres",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "How tall is a full-size goal?",
+  "a": "Eight feet, 2.44 metres",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which body writes and maintains the Laws of the Game?",
+  "a": "IFAB, the International Football Association Board",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "In which Portuguese city is the Estádio da Luz?",
+  "a": "Lisbon",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "In which country is the J1 League played?",
+  "a": "Japan",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Dutch club's most fanatical supporters stand on the F-Side?",
+  "a": "Ajax",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which English club did Georginio Wijnaldum leave to join Paris Saint-Germain in 2021?",
+  "a": "Liverpool",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Italian club did Wesley Sneijder join Galatasaray from in 2013?",
+  "a": "Inter Milan",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Dutch club won the Eredivisie in 2006-07 on goal difference from Ajax?",
+  "a": "PSV",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Eredivisie club did Ruud van Nistelrooy coach in the 2022-23 season?",
+  "a": "PSV",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which English club did Louis van Gaal manage from 2014 to 2016?",
+  "a": "Manchester United",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which English club did Ronald Koeman manage in the 2016-17 season?",
+  "a": "Everton",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which English club did Ronald Koeman manage from 2014 to 2016?",
+  "a": "Southampton",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Who took over as Netherlands coach after Louis van Gaal left following the 2022 World Cup?",
+  "a": "Ronald Koeman",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Dutch coach led PSV to the Champions League semi-final in 2005?",
+  "a": "Guus Hiddink",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Italian club knocked PSV out of the 2005 Champions League semi-final?",
+  "a": "AC Milan",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Willem II are nicknamed 'de Tricolores' because their shirt carries how many colours?",
+  "a": "Three",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Dutch club did Wesley Sneijder leave to join Real Madrid in 2007?",
+  "a": "Ajax",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Dutch club did Ruud Krol and Johan Neeskens win European Cups with?",
+  "a": "Ajax",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Dutch club did Bert van Marwijk coach to the UEFA Cup in 2002?",
+  "a": "Feyenoord",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Belgian club won the European Cup Winners' Cup in both 1976 and 1978?",
+  "a": "Anderlecht",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Belgian club did Kevin De Bruyne come through as a youngster?",
+  "a": "Genk",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Belgian club did Romelu Lukaku start his senior career at?",
+  "a": "Anderlecht",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which French club did Chelsea sign Eden Hazard from in 2012?",
+  "a": "Lille",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Who captained Belgium at the 2018 World Cup?",
+  "a": "Eden Hazard",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country beat Belgium 1-0 in the quarter-final of the 2014 World Cup?",
+  "a": "Argentina",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country knocked Belgium out at the quarter-final stage of Euro 2016?",
+  "a": "Wales",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country beat Belgium 2-1 in the Euro 2020 quarter-final?",
+  "a": "Italy",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Belgium lost the final of which European Championship to West Germany?",
+  "a": "Euro 1980",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which English club did the Belgian midfielder Youri Tielemans sign for permanently in 2019?",
+  "a": "Leicester City",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Belgian club did Jan Vertonghen join in 2022?",
+  "a": "Anderlecht",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Belgian club shares the Jan Breydel Stadium with Cercle Brugge?",
+  "a": "Club Brugge",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country did Belgium beat 2-1 after extra time in the last 16 of the 2014 World Cup?",
+  "a": "The United States",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Belgian city is home to the club KV Mechelen?",
+  "a": "Mechelen",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Italian club did Romelu Lukaku win Serie A with in 2021?",
+  "a": "Inter Milan",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which English club sold Romelu Lukaku to Inter Milan in 2019?",
+  "a": "Manchester United",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Belgian defender captained Manchester City to the 2019 domestic treble?",
+  "a": "Vincent Kompany",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which German club did Vincent Kompany manage from 2024?",
+  "a": "Bayern Munich",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which English club did Vincent Kompany manage before moving to Germany?",
+  "a": "Burnley",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Belgian club is based in the university city of Leuven?",
+  "a": "OH Leuven",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country beat Belgium 2-0 in the group stage of the 2022 World Cup?",
+  "a": "Morocco",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Belgian goalkeeper won the Golden Glove at the 2018 World Cup?",
+  "a": "Thibaut Courtois",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Belgian winger scored a stoppage-time winner against Japan at the 2018 World Cup?",
+  "a": "Nacer Chadli",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Dutch club did Wim Kieft and Ruud Gullit both play for in the 1980s?",
+  "a": "PSV",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Dutch club did Frank Rijkaard rejoin in 1993 after spells at Zaragoza and Milan?",
+  "a": "Ajax",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Dutch club did Ruud van Nistelrooy leave to join PSV in 1998?",
+  "a": "Heerenveen",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Dutch club plays its home games in the city of Almelo?",
+  "a": "Heracles Almelo",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Dutch club is based in the Brabant town of Waalwijk?",
+  "a": "RKC Waalwijk",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which two colours does the Heracles Almelo home shirt use?",
+  "a": "Black and white",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Dutch club wears green and white and comes from the north of the country?",
+  "a": "FC Groningen",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "How many European Championships have Spain won?",
+  "a": "Four, in 1964, 2008, 2012 and 2024",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Spanish club did Marcelo and Roberto Carlos both play left-back for?",
+  "a": "Real Madrid",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the left-back Marcelo from?",
+  "a": "Brazil",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Spanish club used to play at the Vicente Calderón?",
+  "a": "Atlético Madrid",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What does 'La Liga' mean in English?",
+  "a": "The League",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which club did Fernando Torres win the Champions League with in 2012?",
+  "a": "Chelsea",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the midfielder Sergio Busquets from?",
+  "a": "Spain",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which American club did Zlatan Ibrahimović join in 2018?",
+  "a": "LA Galaxy",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the striker Luis Suárez from?",
+  "a": "Uruguay",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the manager Antonio Conte from?",
+  "a": "Italy",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the midfielder N'Golo Kanté from?",
+  "a": "France",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which club did Riyad Mahrez win the Premier League with in 2016?",
+  "a": "Leicester City",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the defender Gerard Piqué from?",
+  "a": "Spain",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Spanish club did Ronaldinho leave to join AC Milan in 2008?",
+  "a": "Barcelona",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the striker Karim Benzema from?",
+  "a": "France",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Spanish club did Karim Benzema play for from 2009 to 2023?",
+  "a": "Real Madrid",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Spanish club did Gareth Bale win Champions Leagues with?",
+  "a": "Real Madrid",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the midfielder Toni Kroos from?",
+  "a": "Germany",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the defender Dani Alves from?",
+  "a": "Brazil",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Spanish club did Dani Alves win the 2009 and 2015 trebles with?",
+  "a": "Barcelona",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which club did Real Madrid beat in the all-Spanish 2000 Champions League final?",
+  "a": "Valencia",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Spanish club lost the Champions League finals of both 2000 and 2001?",
+  "a": "Valencia",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Spanish club won La Liga in 2004 with Rafa Benítez in charge?",
+  "a": "Valencia",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which English club did Rafa Benítez join from Valencia in 2004?",
+  "a": "Liverpool",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Spanish club won their only La Liga title in the 1999-2000 season?",
+  "a": "Deportivo La Coruña",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Spanish club did the league and cup double in 1996 under Radomir Antić?",
+  "a": "Atlético Madrid",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which coach won three Europa Leagues in a row with Sevilla?",
+  "a": "Unai Emery",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which English club did Unai Emery manage in the 2018-19 season?",
+  "a": "Arsenal",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Italian club did Real Madrid sign Zinedine Zidane from in 2001?",
+  "a": "Juventus",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Spanish club is based in Pamplona?",
+  "a": "Osasuna",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "The club name Osasuna comes from the Basque word for what?",
+  "a": "Health",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Spanish club did Atlético Madrid sign Antoine Griezmann from in 2014?",
+  "a": "Real Sociedad",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which trophy do the La Liga champions and the Copa del Rey winners contest?",
+  "a": "The Supercopa de España",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country has staged the Supercopa de España finals since 2020?",
+  "a": "Saudi Arabia",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which club did Xavi manage from 2021 to 2024?",
+  "a": "Barcelona",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Qatari club did Xavi play for after leaving Barcelona in 2015?",
+  "a": "Al Sadd",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Spanish club did Jordi Alba join Barcelona from in 2012?",
+  "a": "Valencia",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country did Spain beat in the Euro 2008 final?",
+  "a": "Germany",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Spanish club did Vicente del Bosque manage before he took the national team job?",
+  "a": "Real Madrid",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Japanese club did Andrés Iniesta join in 2018?",
+  "a": "Vissel Kobe",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Spanish striker won the Golden Boot at Euro 2012 without starting a game?",
+  "a": "Fernando Torres",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which English club did Sevilla beat in the 2006 UEFA Cup final?",
+  "a": "Middlesbrough",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which club did Cristiano Ronaldo win his first Champions League with, in 2008?",
+  "a": "Manchester United",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which two English clubs met in the 2008 Champions League final in Moscow?",
+  "a": "Manchester United and Chelsea",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the forward Thomas Müller from?",
+  "a": "Germany",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which German club did Thomas Müller spend his whole club career at?",
+  "a": "Bayern Munich",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which position does Manuel Neuer play?",
+  "a": "Goalkeeper",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which club did Sadio Mané and Roberto Firmino win the 2019 Champions League with?",
+  "a": "Liverpool",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the forward Roberto Firmino from?",
+  "a": "Brazil",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which English club did Gabriel Jesus join in 2022?",
+  "a": "Arsenal",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which coach led France to the 2018 World Cup title?",
+  "a": "Didier Deschamps",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "How many players from both teams combined start a football match?",
+  "a": "22",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which club did Manchester United sign Cristiano Ronaldo from in 2021?",
+  "a": "Juventus",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which German club did Bayern Munich sign Robert Lewandowski from in 2014?",
+  "a": "Borussia Dortmund",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Italian club did Liverpool sign the goalkeeper Alisson from in 2018?",
+  "a": "Roma",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which English club did Chelsea sign N'Golo Kanté from in 2016?",
+  "a": "Leicester City",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Spanish club did Manchester City sign Rodri from in 2019?",
+  "a": "Atlético Madrid",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Spanish club did Arsenal sign Mesut Özil from in 2013?",
+  "a": "Real Madrid",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which German club did Real Madrid sign Mesut Özil from in 2010?",
+  "a": "Werder Bremen",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Italian club did Barcelona sign Zlatan Ibrahimović from in 2009?",
+  "a": "Inter Milan",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Portuguese club did Liverpool sign Luis Díaz from in 2022?",
+  "a": "Porto",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country won the 2017 Confederations Cup in Russia?",
+  "a": "Germany",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country won the Africa Cup of Nations held in early 2022?",
+  "a": "Senegal",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country hosted the Africa Cup of Nations held in early 2022?",
+  "a": "Cameroon",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country won the 2019 Africa Cup of Nations?",
+  "a": "Algeria",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which confederation governs football in South America?",
+  "a": "CONMEBOL",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which confederation governs football in Africa?",
+  "a": "CAF",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "In which Swiss city does FIFA have its headquarters?",
+  "a": "Zurich",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Johannesburg stadium staged the 2010 World Cup final?",
+  "a": "Soccer City, the FNB Stadium",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country did Croatia beat to finish third at the 2022 World Cup?",
+  "a": "Morocco",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country finished third at the 2022 World Cup?",
+  "a": "Croatia",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country did Argentina beat 3-0 in the 2022 World Cup semi-final?",
+  "a": "Croatia",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country did France beat 2-0 in the 2022 World Cup semi-final?",
+  "a": "Morocco",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country did Morocco beat 1-0 in the 2022 World Cup quarter-final?",
+  "a": "Portugal",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Who coached Morocco to the semi-finals of the 2022 World Cup?",
+  "a": "Walid Regragui",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country did Japan beat 2-1 in their opening game of the 2022 World Cup?",
+  "a": "Germany",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which two English clubs contested the 2019 Europa League final in Baku?",
+  "a": "Chelsea and Arsenal",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which English club did Marcelo Bielsa lead back to the Premier League in 2020?",
+  "a": "Leeds United",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which German coach won the 2021 Champions League with Chelsea?",
+  "a": "Thomas Tuchel",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which coach won the 2020 Champions League with Bayern Munich?",
+  "a": "Hansi Flick",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which club did Bayern Munich beat 8-2 in the 2020 Champions League quarter-final?",
+  "a": "Barcelona",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which club did Bayern Munich beat 1-0 in the 2020 Champions League final?",
+  "a": "Paris Saint-Germain",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which French club did Carlo Ancelotti manage between Chelsea and Real Madrid?",
+  "a": "Paris Saint-Germain",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which English club did Erik ten Hag win the FA Cup with in 2024?",
+  "a": "Manchester United",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Italian club is based in Naples?",
+  "a": "Napoli",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Italian club shares the city of Turin with Juventus?",
+  "a": "Torino",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Italian club comes from the city of Florence?",
+  "a": "Fiorentina",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Milan club is known as the Rossoneri, the red and blacks?",
+  "a": "AC Milan",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the goalkeeper Gianluigi Donnarumma from?",
+  "a": "Italy",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "How many World Cups did Diego Maradona win as a player?",
+  "a": "One, in 1986",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which shirt number did Diego Maradona make famous?",
+  "a": "10",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which English club did George Best star for in the 1960s?",
+  "a": "Manchester United",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country did George Best play international football for?",
+  "a": "Northern Ireland",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Who captained England to the 1966 World Cup title?",
+  "a": "Bobby Moore",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is Franz Beckenbauer from?",
+  "a": "Germany",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the great midfielder Michel Platini from?",
+  "a": "France",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the manager Mikel Arteta from?",
+  "a": "Spain",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which English club did Mikel Arteta take charge of in December 2019?",
+  "a": "Arsenal",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the manager Unai Emery from?",
+  "a": "Spain",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which English club did David de Gea keep goal for from 2011 to 2023?",
+  "a": "Manchester United",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the goalkeeper David de Gea from?",
+  "a": "Spain",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Spanish club did the forward Ansu Fati come through?",
+  "a": "Barcelona",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Spanish region is the club Girona from?",
+  "a": "Catalonia",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What is the Spanish word for a goalkeeper?",
+  "a": "Portero",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "The KNVB Cup final is traditionally played at which Rotterdam ground?",
+  "a": "De Kuip",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Dutch club did Davy Klaassen captain?",
+  "a": "Ajax",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the manager Ronald Koeman from?",
+  "a": "The Netherlands",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Spanish club did Frank Rijkaard manage from 2003 to 2008?",
+  "a": "Barcelona",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the manager Xabi Alonso from?",
+  "a": "Spain",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Italian club did Andriy Shevchenko win the 2003 Champions League with?",
+  "a": "AC Milan",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Italian club did Kaká win the 2007 Champions League with?",
+  "a": "AC Milan",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which club did Ronaldo Nazário sign for in 2002 after winning the World Cup?",
+  "a": "Real Madrid",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country did Diego Maradona coach at the 2010 World Cup?",
+  "a": "Argentina",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which German club did Franz Beckenbauer spend most of his playing career at?",
+  "a": "Bayern Munich",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country did the Netherlands beat 6-1 in the Euro 2000 quarter-final?",
+  "a": "Yugoslavia",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Dutch coach led the Netherlands at the 1998 World Cup?",
+  "a": "Guus Hiddink",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Franz Beckenbauer won the World Cup as a player and then in which other role?",
+  "a": "As manager, in 1990",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Italian club did Michel Platini win three Ballon d'Ors while playing for?",
+  "a": "Juventus",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country is the striker Ferenc Puskás from?",
+  "a": "Hungary",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which English club did Bobby Moore captain for most of his career?",
+  "a": "West Ham United",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which English club won the UEFA Cup in 2001?",
+  "a": "Liverpool",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Italian club won the Europa League in 2024?",
+  "a": "Atalanta",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Italian city is the club Atalanta from?",
+  "a": "Bergamo",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Spanish club did David de Gea come through before Manchester United?",
+  "a": "Atlético Madrid",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Dutch club did Justin Kluivert begin his senior career at?",
+  "a": "Ajax",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which club was Michael Owen playing for when he won the 2001 Ballon d'Or?",
+  "a": "Liverpool",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What is the horizontal bar across the top of the goal called?",
+  "a": "The crossbar",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "How many corner arcs does a football pitch have?",
+  "a": "Four",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What is it called when a club finishes near the bottom and drops to a lower division?",
+  "a": "Relegation",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What is it called when a club goes up to a higher division?",
+  "a": "Promotion",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What is the period in which clubs are allowed to buy and sell players called?",
+  "a": "The transfer window",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What is it called when a player joins another club temporarily for a season?",
+  "a": "A loan",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What is a player called who leaves at the end of a contract with no fee owed?",
+  "a": "A free agent",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which European competition do the top Premier League clubs qualify for?",
+  "a": "The Champions League",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What do the letters GD stand for in a league table?",
+  "a": "Goal difference",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which two clubs contest the Merseyside derby?",
+  "a": "Liverpool and Everton",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which two clubs contest the North London derby?",
+  "a": "Arsenal and Tottenham Hotspur",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which two clubs contest the Manchester derby?",
+  "a": "Manchester United and Manchester City",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which English club did Robin van Persie win the Premier League with in 2013?",
+  "a": "Manchester United",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which English club did Nemanja Vidić and Rio Ferdinand defend for together?",
+  "a": "Manchester United",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which London club did Petr Čech keep goal for from 2004 to 2015?",
+  "a": "Chelsea",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the goalkeeper Petr Čech from?",
+  "a": "The Czech Republic",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which English club did Yaya Touré win Premier League titles with?",
+  "a": "Manchester City",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the midfielder Bruno Fernandes from?",
+  "a": "Portugal",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which English club does Bruno Fernandes wear the captain's armband for?",
+  "a": "Manchester United",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the goalkeeper Ederson from?",
+  "a": "Brazil",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country did the Benfica great Eusébio play international football for?",
+  "a": "Portugal",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country won the 1962 World Cup?",
+  "a": "Brazil",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "How many World Cups had Germany won by 2014?",
+  "a": "Four",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "How many World Cups had France won by 2018?",
+  "a": "Two",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Real Madrid, Atlético and Rayo Vallecano all play in which city?",
+  "a": "Madrid",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the Barcelona goalkeeper Marc-André ter Stegen from?",
+  "a": "Germany",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which colour shirt has a referee traditionally worn?",
+  "a": "Black",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What is the first match of a two-match knockout tie called?",
+  "a": "The first leg",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "What is the area beside the pitch where the manager and substitutes sit called?",
+  "a": "The dugout",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which English knockout competition, first played in 1871-72, is the oldest in football?",
+  "a": "The FA Cup",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which English club did Memphis Depay leave to join Lyon in 2017?",
+  "a": "Manchester United",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which French club did Memphis Depay play for from 2017 to 2021?",
+  "a": "Lyon",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which English club did the Dutch defender Nathan Aké join in 2020?",
+  "a": "Manchester City",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which German club did Matthijs de Ligt join from Juventus in 2022?",
+  "a": "Bayern Munich",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which English club did Matthijs de Ligt sign for in 2024?",
+  "a": "Manchester United",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which English club did Kevin De Bruyne join in 2015?",
+  "a": "Manchester City",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which position does Erling Haaland play?",
+  "a": "Striker",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Marco van Basten's famous 1988 volley was scored against which country?",
+  "a": "The Soviet Union",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which club shares the city of Birmingham with Aston Villa?",
+  "a": "Birmingham City",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "easy",
+  "q": "Which country is the manager Erik ten Hag from?",
+  "a": "The Netherlands",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Dutch club did Dirk Kuyt score a final-day hat-trick for to win the 2017 title?",
+  "a": "Feyenoord",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which French club did Newcastle sign the Dutch defender Sven Botman from in 2022?",
+  "a": "Lille",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which German club did Tottenham sign Micky van de Ven from in 2023?",
+  "a": "Wolfsburg",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Dutch club did Xavi Simons play for in the 2022-23 season?",
+  "a": "PSV",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which German club did Xavi Simons join on loan in 2023?",
+  "a": "RB Leipzig",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Belgian club did PSV sign the winger Noa Lang from in 2023?",
+  "a": "Club Brugge",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country did the Netherlands beat 3-1 in the last 16 of the 2022 World Cup?",
+  "a": "The United States",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country did the Netherlands beat 3-0 in the last 16 of Euro 2024?",
+  "a": "Romania",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Dutch province is the club SC Heerenveen based in?",
+  "a": "Friesland",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which two colours does the Vitesse home shirt use?",
+  "a": "Yellow and black",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which two colours does MVV Maastricht play in at home?",
+  "a": "Red and white",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Dutch club did Steven Bergwijn join in 2022 after leaving Tottenham?",
+  "a": "Ajax",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Spanish club did Real Madrid beat in the 2014 Copa del Rey final, settled by a Gareth Bale run?",
+  "a": "Barcelona",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which French club did Barcelona beat 6-1 in 2017 to overturn a 4-0 first-leg deficit?",
+  "a": "Paris Saint-Germain",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Who scored Barcelona's sixth goal deep in stoppage time in that 6-1 comeback?",
+  "a": "Sergi Roberto",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which English club did Real Madrid sign Luka Modrić from in 2012?",
+  "a": "Tottenham Hotspur",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which English club did Barcelona sign Philippe Coutinho from in 2018?",
+  "a": "Liverpool",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Spanish club did Chelsea sign Diego Costa from in 2014?",
+  "a": "Atlético Madrid",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Spanish club did Chelsea sign Kepa Arrizabalaga from in 2018?",
+  "a": "Athletic Club",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Spanish club won the 2018 Europa League final in Lyon?",
+  "a": "Atlético Madrid",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which English club did Real Madrid beat 3-1 in the 2018 Champions League final?",
+  "a": "Liverpool",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Spanish club did Santi Cazorla return to in 2018 after his years at Arsenal?",
+  "a": "Villarreal",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Brazilian club did Real Madrid sign Vinícius Júnior from?",
+  "a": "Flamengo",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which UD Las Palmas academy product won the Golden Boy award in 2021?",
+  "a": "Pedri",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "In which Spanish city was the 1982 World Cup final played?",
+  "a": "Madrid",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which English club did Barcelona beat 3-1 in the 2011 Champions League final at Wembley?",
+  "a": "Manchester United",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Argentine club did Manchester City sign Julián Álvarez from in 2022?",
+  "a": "River Plate",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "What was the men's World Cup trophy called before the current one was introduced in 1974?",
+  "a": "The Jules Rimet Trophy",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country was allowed to keep the Jules Rimet Trophy after winning it a third time in 1970?",
+  "a": "Brazil",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Scottish club did Alex Ferguson win the Cup Winners' Cup with in 1983?",
+  "a": "Aberdeen",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which German club did Kevin Keegan win two European Footballer of the Year awards at?",
+  "a": "Hamburg",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which English club won the European Cup four times between 1977 and 1984?",
+  "a": "Liverpool",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country did the Republic of Ireland beat 1-0 at Euro 1988?",
+  "a": "England",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "The Heysel Stadium, scene of the 1985 disaster, is in which country?",
+  "a": "Belgium",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country did Italy beat in the semi-final of the 1982 World Cup?",
+  "a": "Poland",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Italian midfielder's screaming celebration after scoring in the 1982 World Cup final became iconic?",
+  "a": "Marco Tardelli",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country won the 1976 European Championship?",
+  "a": "Czechoslovakia",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country won Euro 1984 on home soil?",
+  "a": "France",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country won the European Championship in both 1972 and 1980?",
+  "a": "West Germany",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which African nation reached the last 16 of the 2022 World Cup alongside Morocco?",
+  "a": "Senegal",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country did Spain beat 1-0 in the last 16 of the 2010 World Cup?",
+  "a": "Portugal",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Uruguayan striker handled on the goal line against Ghana in 2010 and was sent off?",
+  "a": "Luis Suárez",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "At which club did Lionel Messi, Neymar and Kylian Mbappé all play together?",
+  "a": "Paris Saint-Germain",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Brazilian club won the Copa Libertadores in 2019?",
+  "a": "Flamengo",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which competition is South America's equivalent of the Europa League?",
+  "a": "The Copa Sudamericana",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country won the men's Olympic football gold at the Tokyo Games?",
+  "a": "Brazil",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country won the women's Olympic football gold at the 2024 Paris Games?",
+  "a": "The United States",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country did England beat in the Euro 2020 semi-final at Wembley?",
+  "a": "Denmark",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which substitute scored England's 90th-minute winner in the Euro 2024 semi-final?",
+  "a": "Ollie Watkins",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which two German clubs contest the Revierderby?",
+  "a": "Schalke 04 and Borussia Dortmund",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which two clubs contest the Derby della Capitale in Rome?",
+  "a": "Roma and Lazio",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "What was the golden goal rule, used in the 1990s and scrapped in 2004?",
+  "a": "The first goal in extra time ended the match at once",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "In a two-legged tie, what does 'on aggregate' mean?",
+  "a": "The two legs' goals added together",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which official on the touchline signals substitutions and the amount of added time?",
+  "a": "The fourth official",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "What is a goal scored straight from a corner kick commonly called?",
+  "a": "An Olympic goal",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "What is the second tier of German football called?",
+  "a": "The 2. Bundesliga",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which continent's confederation is CONCACAF?",
+  "a": "North and Central America and the Caribbean",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "In which country does UEFA have its headquarters?",
+  "a": "Switzerland",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country won the 2011 Women's World Cup?",
+  "a": "Japan",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country hosted the 1962 World Cup?",
+  "a": "Chile",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "The 'Miracle of Bern' describes which country's World Cup final win?",
+  "a": "West Germany, in 1954",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country lost the 1954 World Cup final despite being unbeaten for four years?",
+  "a": "Hungary",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which American club did Pelé join in 1975?",
+  "a": "New York Cosmos",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Dutch midfielder joined Pelé's old club New York Cosmos in 1979?",
+  "a": "Johan Neeskens",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which London club did Jürgen Klinsmann play for in the 1990s?",
+  "a": "Tottenham Hotspur",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country did Jürgen Klinsmann manage at the 2006 World Cup?",
+  "a": "Germany",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country did Marcelo Bielsa manage at the 2010 World Cup?",
+  "a": "Chile",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Portuguese club did José Mourinho win the UEFA Cup with in 2003?",
+  "a": "Porto",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Italian club did José Mourinho take charge of in 2021?",
+  "a": "Roma",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which trophy did Roma win in 2022, the first season it was played for?",
+  "a": "The Europa Conference League",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which country did Roberto Mancini manage to the Euro 2020 title?",
+  "a": "Italy",
+  "src": "general knowledge",
+  "conf": "confident"
+ },
+ {
+  "tier": "normal",
+  "q": "Which national team did Fabio Capello manage from 2008 to 2012?",
+  "a": "England",
+  "src": "general knowledge",
+  "conf": "confident"
+ }
+]

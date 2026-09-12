@@ -1,0 +1,3255 @@
+[
+ {
+  "n": "Eredivisie",
+  "season": "2026–27",
+  "flag": "nl",
+  "clubs": [
+   {
+    "n": "ADO Den Haag",
+    "s": "ado-den-haag",
+    "a": [
+     "ado den haag"
+    ]
+   },
+   {
+    "n": "AFC Ajax",
+    "s": "ajax",
+    "a": [
+     "afc ajax",
+     "ajax",
+     "ajax amsterdam",
+     "amsterdamsche football club ajax"
+    ]
+   },
+   {
+    "n": "AZ Alkmaar",
+    "s": "az-alkmaar",
+    "a": [
+     "alkmaar zaanstreek",
+     "az",
+     "az 67",
+     "az alkmaar",
+     "cheese farmers",
+     "the cheese farmers"
+    ]
+   },
+   {
+    "n": "SC Cambuur",
+    "s": "sc-cambuur",
+    "a": [
+     "cambuur",
+     "sc cambuur",
+     "sc cambuur leeuwarden"
+    ]
+   },
+   {
+    "n": "Excelsior Rotterdam",
+    "s": "excelsior-rotterdam",
+    "a": [
+     "excelsior rotterdam",
+     "sbv excelsior",
+     "sbv excelsior rotterdam"
+    ]
+   },
+   {
+    "n": "Feyenoord",
+    "s": "feyenoord",
+    "a": [
+     "feyenoord",
+     "feyenoord rotterdam",
+     "feyenoordrotterdam"
+    ]
+   },
+   {
+    "n": "Go Ahead Eagles",
+    "s": "go-ahead-eagles",
+    "a": [
+     "ga eagles",
+     "gae",
+     "go ahead eagles"
+    ]
+   },
+   {
+    "n": "FC Groningen",
+    "s": "fc-groningen",
+    "a": [
+     "fc groningen",
+     "football club groningen",
+     "groningen"
+    ]
+   },
+   {
+    "n": "SC Heerenveen",
+    "s": "sc-heerenveen",
+    "a": [
+     "heerenveen",
+     "sc heerenveen",
+     "sportclub heerenveen"
+    ]
+   },
+   {
+    "n": "NEC Nijmegen",
+    "s": "nec-nijmegen",
+    "a": [
+     "n e c",
+     "nec",
+     "nec nijmegen",
+     "nijmegen eendracht combinatie"
+    ]
+   },
+   {
+    "n": "PSV Eindhoven",
+    "s": "psv",
+    "a": [
+     "eindhoven football club",
+     "philips sport vereniging",
+     "psv",
+     "psv eindhoven"
+    ]
+   },
+   {
+    "n": "Sparta Rotterdam",
+    "s": "sparta-rotterdam",
+    "a": [
+     "sparta",
+     "sparta rotterdam"
+    ]
+   },
+   {
+    "n": "FC Twente",
+    "s": "twente",
+    "a": [
+     "fc twente",
+     "football club twente",
+     "twente",
+     "twente enschede"
+    ]
+   },
+   {
+    "n": "FC Utrecht",
+    "s": "fc-utrecht",
+    "a": [
+     "fc utrecht",
+     "football club utrecht",
+     "utr",
+     "utrecht"
+    ]
+   },
+   {
+    "n": "PEC Zwolle",
+    "s": "pec-zwolle",
+    "a": [
+     "fc zwolle",
+     "pec",
+     "pec zwolle",
+     "pec zwolle 82",
+     "prins hendrik ende desespereert nimmer combinatie zwolle"
+    ]
+   },
+   {
+    "n": "Fortuna Sittard",
+    "s": "fortuna-sittard",
+    "a": [
+     "fortuna geleen",
+     "fortuna sittard"
+    ]
+   },
+   {
+    "n": "SC Telstar",
+    "s": "telstar",
+    "a": [
+     "sc telstar",
+     "sct",
+     "sportclub telstar",
+     "telstar",
+     "telstar vrouwen",
+     "witte leeuwen"
+    ]
+   },
+   {
+    "n": "Willem II (undefined)",
+    "s": "willem-ii",
+    "a": [
+     "willem ii",
+     "willem ii tilburg",
+     "willem ii undefined"
+    ]
+   }
+  ]
+ },
+ {
+  "n": "Eerste Divisie",
+  "season": "2026–27",
+  "flag": "nl",
+  "clubs": [
+   {
+    "n": "Almere City FC",
+    "s": "almere-city-fc",
+    "a": [
+     "almere city",
+     "almere city fc",
+     "almere city football club"
+    ]
+   },
+   {
+    "n": "FC Den Bosch",
+    "s": "fc-den-bosch",
+    "a": [
+     "dbo",
+     "den bosch",
+     "fc den bosch",
+     "football club den bosch"
+    ]
+   },
+   {
+    "n": "FC Dordrecht",
+    "s": "fc-dordrecht",
+    "a": [
+     "dordrecht",
+     "fc dordrecht",
+     "football club dordrecht"
+    ]
+   },
+   {
+    "n": "FC Eindhoven",
+    "s": "fc-eindhoven",
+    "a": [
+     "eindhoven",
+     "fc eindhoven",
+     "football club eindhoven"
+    ]
+   },
+   {
+    "n": "FC Emmen",
+    "s": "fc-emmen",
+    "a": [
+     "emmen",
+     "fc emmen",
+     "football club emmen"
+    ]
+   },
+   {
+    "n": "De Graafschap",
+    "s": "de-graafschap",
+    "a": [
+     "bv de graafschap",
+     "de graafschap",
+     "gra",
+     "graafschap",
+     "vereniging betaald voetbal de graafschap"
+    ]
+   },
+   {
+    "n": "Helmond Sport",
+    "s": "helmond-sport",
+    "a": [
+     "helmond sport"
+    ]
+   },
+   {
+    "n": "Heracles Almelo",
+    "s": "heracles-almelo",
+    "a": [
+     "heracles",
+     "heracles almelo"
+    ]
+   },
+   {
+    "n": "Jong Ajax",
+    "s": null,
+    "a": [
+     "jong ajax"
+    ]
+   },
+   {
+    "n": "Jong AZ",
+    "s": null,
+    "a": [
+     "jong az"
+    ]
+   },
+   {
+    "n": "Jong PSV",
+    "s": null,
+    "a": [
+     "jong psv"
+    ]
+   },
+   {
+    "n": "Jong FC Utrecht",
+    "s": null,
+    "a": [
+     "jong fc utrecht",
+     "jong utrecht",
+     "jut"
+    ]
+   },
+   {
+    "n": "MVV Maastricht",
+    "s": "mvv-maastricht",
+    "a": [
+     "maastrichtse voetbal vereniging",
+     "maatschappelijke voetbal vereniging maastricht",
+     "mvv",
+     "mvv maastricht"
+    ]
+   },
+   {
+    "n": "NAC Breda",
+    "s": "nac-breda",
+    "a": [
+     "nac",
+     "nac breda",
+     "nacb",
+     "noad advendo combinatie",
+     "nooit opgeven altijd doorzetten aangenaam door vermaak en nuttig door ontspanning combinatie breda"
+    ]
+   },
+   {
+    "n": "RKC Waalwijk",
+    "s": "rkc-waalwijk",
+    "a": [
+     "rkc waalwijk",
+     "rooms katholieke combinatie waalwijk"
+    ]
+   },
+   {
+    "n": "Roda JC Kerkrade",
+    "s": "roda-jc-kerkrade",
+    "a": [
+     "rjc",
+     "roda jc kerkrade",
+     "sportvereniging roda juliana combinatie kerkrade"
+    ]
+   },
+   {
+    "n": "TOP Oss",
+    "s": "top-oss",
+    "a": [
+     "fc oss",
+     "oss",
+     "top",
+     "top oss"
+    ]
+   },
+   {
+    "n": "SBV Vitesse",
+    "s": "vitesse",
+    "a": [
+     "sbv vitesse",
+     "sbv vitesse arnhem",
+     "stichting betaald voetbal vitesse",
+     "vitesse",
+     "vitesse arnhem"
+    ]
+   },
+   {
+    "n": "FC Volendam",
+    "s": "volendam",
+    "a": [
+     "fc volendam",
+     "football club volendam",
+     "vol",
+     "volendam"
+    ]
+   },
+   {
+    "n": "VVV-Venlo",
+    "s": "vvv-venlo",
+    "a": [
+     "venlose voetbal vereniging venlo",
+     "vvv",
+     "vvv venlo"
+    ]
+   }
+  ]
+ },
+ {
+  "n": "Premier League",
+  "season": "2026–27",
+  "flag": "gb",
+  "clubs": [
+   {
+    "n": "Arsenal F.C.",
+    "s": "arsenal",
+    "a": [
+     "ars",
+     "arsenal",
+     "arsenal f c",
+     "arsenal fc",
+     "arsenal football club",
+     "arsenal london",
+     "the ars",
+     "the arsenal",
+     "the arsenal f c",
+     "the arsenal fc"
+    ]
+   },
+   {
+    "n": "Aston Villa F.C.",
+    "s": "aston-villa",
+    "a": [
+     "aston villa",
+     "aston villa f c",
+     "aston villa fc",
+     "aston villa football club",
+     "avfc",
+     "the villa",
+     "the villans",
+     "villa",
+     "villans"
+    ]
+   },
+   {
+    "n": "AFC Bournemouth",
+    "s": "bournemouth",
+    "a": [
+     "a f c bournemouth",
+     "afc bournemouth",
+     "afcb",
+     "boscombe",
+     "boscombe f c",
+     "boscombe fc",
+     "boscombe football club",
+     "bournemouth",
+     "bournemouth and boscombe athletic",
+     "bournemouth and boscombe athletic f c",
+     "bournemouth and boscombe athletic fc",
+     "bournemouth and boscombe athletic football club",
+     "cherries",
+     "the cherries"
+    ]
+   },
+   {
+    "n": "Brentford F.C.",
+    "s": "brentford",
+    "a": [
+     "bees",
+     "bfc",
+     "brentford",
+     "brentford f c",
+     "brentford fc",
+     "brentford football club",
+     "the bees"
+    ]
+   },
+   {
+    "n": "Brighton & Hove Albion F.C.",
+    "s": "albion",
+    "a": [
+     "albion",
+     "bha",
+     "bhafc",
+     "brighton",
+     "brighton and hove",
+     "brighton and hove albion",
+     "brighton and hove albion f c",
+     "brighton and hove albion fc",
+     "brighton and hove albion football club",
+     "brighton f c",
+     "brighton fc",
+     "seagulls",
+     "the seagulls"
+    ]
+   },
+   {
+    "n": "Chelsea F.C.",
+    "s": "chelsea",
+    "a": [
+     "chelsea",
+     "chelsea f c",
+     "chelsea fc",
+     "chelsea football club",
+     "pensioners",
+     "the pensioners"
+    ]
+   },
+   {
+    "n": "Coventry City F.C.",
+    "s": "coventry-city",
+    "a": [
+     "ccfc",
+     "cov",
+     "coventry",
+     "coventry city",
+     "coventry city f c",
+     "coventry city fc",
+     "coventry city football club"
+    ]
+   },
+   {
+    "n": "Crystal Palace F.C.",
+    "s": "crystal-palace",
+    "a": [
+     "cpfc",
+     "crystal palace",
+     "crystal palace f c",
+     "crystal palace fc",
+     "crystal palace football club",
+     "eagles",
+     "glaziers",
+     "palace",
+     "the eagles",
+     "the glaziers"
+    ]
+   },
+   {
+    "n": "Everton F.C.",
+    "s": "everton",
+    "a": [
+     "efc",
+     "everton",
+     "everton f c",
+     "everton fc",
+     "everton football club",
+     "the toffees",
+     "toffees"
+    ]
+   },
+   {
+    "n": "Fulham F.C.",
+    "s": "fulham",
+    "a": [
+     "cottagers",
+     "fulham",
+     "fulham f c",
+     "fulham fc",
+     "fulham football club",
+     "the cottagers"
+    ]
+   },
+   {
+    "n": "Hull City A.F.C.",
+    "s": "hull-city",
+    "a": [
+     "hcafc",
+     "hull",
+     "hull city",
+     "hull city a f c",
+     "hull city afc",
+     "hull city association football club",
+     "the tigers",
+     "tigers"
+    ]
+   },
+   {
+    "n": "Ipswich Town F.C.",
+    "s": "ipswich",
+    "a": [
+     "ips",
+     "ipswich",
+     "ipswich town",
+     "ipswich town f c",
+     "ipswich town fc",
+     "ipswich town football club",
+     "itfc",
+     "the tractor boys",
+     "town",
+     "tractor boys"
+    ]
+   },
+   {
+    "n": "Leeds United F.C.",
+    "s": "leeds-united",
+    "a": [
+     "l u f c",
+     "leeds",
+     "leeds united",
+     "leeds united a f c",
+     "leeds united afc",
+     "leeds united association football club",
+     "leeds united f c",
+     "leeds united fc",
+     "leeds united football club",
+     "leeds utd",
+     "leedsunited",
+     "lufc",
+     "peacocks",
+     "the peacocks"
+    ]
+   },
+   {
+    "n": "Liverpool F.C.",
+    "s": "liverpool",
+    "a": [
+     "liverpool",
+     "liverpool f c",
+     "liverpoolf c",
+     "liverpoolfc"
+    ]
+   },
+   {
+    "n": "Manchester City F.C.",
+    "s": "manchester-city",
+    "a": [
+     "citizens",
+     "man city",
+     "manchester city",
+     "manchester city f c",
+     "manchester city f c soccer",
+     "manchester city fc",
+     "manchester city football club",
+     "mcfc",
+     "the citizens",
+     "the sky blues"
+    ]
+   },
+   {
+    "n": "Manchester United F.C.",
+    "s": "manchester-united",
+    "a": [
+     "man u",
+     "man united",
+     "man utd",
+     "manchester united",
+     "manchester united f c",
+     "manchester united fc",
+     "manchester united football club",
+     "mufc",
+     "red devils"
+    ]
+   },
+   {
+    "n": "Newcastle United F.C.",
+    "s": "newcastle",
+    "a": [
+     "magpies",
+     "newcastle",
+     "newcastle united",
+     "newcastle united f c",
+     "newcastle united fc",
+     "newcastle united football club",
+     "nufc",
+     "the magpies"
+    ]
+   },
+   {
+    "n": "Nottingham Forest F.C.",
+    "s": "nottingham-forest",
+    "a": [
+     "forest",
+     "nffc",
+     "nfo",
+     "nottingham forest",
+     "nottingham forest f c",
+     "nottingham forest fc",
+     "nottingham forest football club",
+     "nottm forest",
+     "reds",
+     "the reds",
+     "tricky trees"
+    ]
+   },
+   {
+    "n": "Sunderland A.F.C.",
+    "s": "sunderland",
+    "a": [
+     "black cats",
+     "safc",
+     "sunderland",
+     "sunderland a f c",
+     "sunderland afc",
+     "sunderland association football club",
+     "the black cats"
+    ]
+   },
+   {
+    "n": "Tottenham Hotspur F.C.",
+    "s": "tottenham",
+    "a": [
+     "hotspur",
+     "lilywhites",
+     "spurs",
+     "the lilywhites",
+     "thfc",
+     "tottenham",
+     "tottenham hotspur",
+     "tottenham hotspur f c",
+     "tottenham hotspur fc",
+     "tottenham hotspur football club"
+    ]
+   }
+  ]
+ },
+ {
+  "n": "Championship",
+  "season": "2026–27",
+  "flag": "gb",
+  "clubs": [
+   {
+    "n": "Birmingham City F.C.",
+    "s": "birmingham",
+    "a": [
+     "birmingham",
+     "birmingham city",
+     "birmingham city f c",
+     "birmingham city fc",
+     "birmingham city football club",
+     "blues"
+    ]
+   },
+   {
+    "n": "Blackburn Rovers F.C.",
+    "s": "blackburn-rovers",
+    "a": [
+     "blackburn",
+     "blackburn rovers",
+     "blackburn rovers f c",
+     "blackburn rovers fc",
+     "blackburn rovers football club",
+     "brfc",
+     "rovers"
+    ]
+   },
+   {
+    "n": "Bolton Wanderers F.C.",
+    "s": "bolton",
+    "a": [
+     "bolton",
+     "bolton wanderers",
+     "bolton wanderers f c",
+     "bolton wanderers fc",
+     "bolton wanderers football club",
+     "bwfc",
+     "the trotters",
+     "trotters"
+    ]
+   },
+   {
+    "n": "Bristol City F.C.",
+    "s": "bristol-city",
+    "a": [
+     "bristol city",
+     "bristol city f c",
+     "bristol city fc",
+     "bristol city football club",
+     "robins",
+     "the robins"
+    ]
+   },
+   {
+    "n": "Burnley F.C.",
+    "s": "burnley",
+    "a": [
+     "bfc",
+     "burnley",
+     "burnley f c",
+     "burnley fc",
+     "burnley football club",
+     "clarets",
+     "the clarets"
+    ]
+   },
+   {
+    "n": "Cardiff City F.C.",
+    "s": "cardiff-city",
+    "a": [
+     "bluebirds",
+     "cardiff",
+     "cardiff city",
+     "cardiff city f c",
+     "cardiff city fc",
+     "cardiff city football club",
+     "ccfc",
+     "the bluebirds"
+    ]
+   },
+   {
+    "n": "Charlton Athletic F.C.",
+    "s": "athletic",
+    "a": [
+     "addicks",
+     "athletic",
+     "charlton",
+     "charlton athletic",
+     "charlton athletic f c",
+     "charlton athletic fc",
+     "charlton athletic football club",
+     "the addicks"
+    ]
+   },
+   {
+    "n": "Derby County F.C.",
+    "s": "derby-county",
+    "a": [
+     "county",
+     "dcfc",
+     "derby",
+     "derby county",
+     "derby county f c",
+     "derby county fc",
+     "rams",
+     "the rams"
+    ]
+   },
+   {
+    "n": "Lincoln City F.C.",
+    "s": "lincoln-city",
+    "a": [
+     "imps",
+     "l c f c",
+     "lcfc",
+     "lincoln",
+     "lincoln city",
+     "lincoln city f c",
+     "lincoln city fc",
+     "lincoln city football club",
+     "the imps"
+    ]
+   },
+   {
+    "n": "Middlesbrough F.C.",
+    "s": "middlesbrough",
+    "a": [
+     "boro",
+     "middlesbrough",
+     "middlesbrough f c",
+     "middlesbrough fc",
+     "middlesbrough football club",
+     "the boro"
+    ]
+   },
+   {
+    "n": "Millwall F.C.",
+    "s": "millwall",
+    "a": [
+     "lions",
+     "millwall",
+     "millwall f c",
+     "millwall fc",
+     "millwall football club",
+     "the lions"
+    ]
+   },
+   {
+    "n": "Norwich City F.C.",
+    "s": "norwich-city",
+    "a": [
+     "canaries",
+     "ncfc",
+     "norwich",
+     "norwich city",
+     "norwich city f c",
+     "norwich city fc",
+     "norwich city football club",
+     "the canaries"
+    ]
+   },
+   {
+    "n": "Portsmouth F.C.",
+    "s": "portsmouth",
+    "a": [
+     "pfc",
+     "pompey",
+     "portsmouth",
+     "portsmouth f c",
+     "portsmouth fc",
+     "portsmouth football club"
+    ]
+   },
+   {
+    "n": "Preston North End F.C.",
+    "s": "preston-north-end",
+    "a": [
+     "lilywhites",
+     "pnefc",
+     "preston",
+     "preston north end",
+     "preston north end f c",
+     "preston north end fc",
+     "preston north end football club",
+     "the lilywhites"
+    ]
+   },
+   {
+    "n": "Queens Park Rangers F.C.",
+    "s": "queens-park-rangers",
+    "a": [
+     "hoops",
+     "qprfc",
+     "queens park rangers",
+     "queens park rangers f c",
+     "queens park rangers fc",
+     "queens park rangers football club",
+     "the hoops",
+     "the rs"
+    ]
+   },
+   {
+    "n": "Sheffield United F.C.",
+    "s": "sheffield-united",
+    "a": [
+     "blades",
+     "sheff utd",
+     "sheffield united",
+     "sheffield united f c",
+     "sheffield united fc",
+     "sheffield united football club",
+     "sufc",
+     "the blades"
+    ]
+   },
+   {
+    "n": "Southampton F.C.",
+    "s": "southampton",
+    "a": [
+     "sfc",
+     "southampton",
+     "southampton f c",
+     "southampton fc",
+     "southampton football club",
+     "southamptonfc"
+    ]
+   },
+   {
+    "n": "Stoke City F.C.",
+    "s": "stoke-city",
+    "a": [
+     "potters",
+     "scfc",
+     "stoke",
+     "stoke city",
+     "stoke city f c",
+     "stoke city fc",
+     "stoke city football club",
+     "the potters"
+    ]
+   },
+   {
+    "n": "Swansea City F.C.",
+    "s": "swansea-city",
+    "a": [
+     "jacks",
+     "scafc",
+     "swans",
+     "swansea",
+     "swansea city",
+     "swansea city a f c",
+     "swansea city afc",
+     "swansea city association football club",
+     "swansea city f c",
+     "the jacks",
+     "the swans"
+    ]
+   },
+   {
+    "n": "Watford F.C.",
+    "s": "watford",
+    "a": [
+     "hornets",
+     "the hornets",
+     "w f c",
+     "watford",
+     "watford f c",
+     "watford fc",
+     "watford football club",
+     "watfordfc",
+     "watfordfootballclub"
+    ]
+   },
+   {
+    "n": "West Bromwich Albion F.C.",
+    "s": "west-bromwich-albion",
+    "a": [
+     "albion",
+     "baggies",
+     "the albion",
+     "the baggies",
+     "the throstles",
+     "throstles",
+     "wbafc",
+     "west brom",
+     "west bromwich albion",
+     "west bromwich albion f c",
+     "west bromwich albion fc",
+     "west bromwich albion football club"
+    ]
+   },
+   {
+    "n": "West Ham United F.C.",
+    "s": "west-ham",
+    "a": [
+     "hammers",
+     "irons",
+     "the hammers",
+     "the irons",
+     "west ham",
+     "west ham united",
+     "west ham united f c",
+     "west ham united fc",
+     "west ham united football club",
+     "whu",
+     "whufc"
+    ]
+   },
+   {
+    "n": "Wolverhampton Wanderers F.C.",
+    "s": "wolves",
+    "a": [
+     "wolverhampton",
+     "wolverhampton fc wolves",
+     "wolverhampton wanderers",
+     "wolverhampton wanderers f c",
+     "wolverhampton wanderers fc",
+     "wolverhampton wanderers football club",
+     "wolverhampton wolves",
+     "wolverhampton wolves fc",
+     "wolves",
+     "wwfc"
+    ]
+   },
+   {
+    "n": "Wrexham A.F.C.",
+    "s": "wrexham",
+    "a": [
+     "dragons",
+     "the dragons",
+     "wafc",
+     "wrexham",
+     "wrexham a f c",
+     "wrexham afc",
+     "wrexham association football club",
+     "wrexham fc",
+     "wrexham football club"
+    ]
+   }
+  ]
+ },
+ {
+  "n": "La Liga",
+  "season": "2026–27",
+  "flag": "es",
+  "clubs": [
+   {
+    "n": "Deportivo Alavés",
+    "s": null,
+    "a": [
+     "alaves",
+     "alaves football",
+     "alaves soccer",
+     "deportivo alaves",
+     "deportivo alaves soccer"
+    ]
+   },
+   {
+    "n": "Athletic Bilbao",
+    "s": "athletic",
+    "a": [
+     "athletic",
+     "athletic bilbao",
+     "athletic club",
+     "athletic club de bilbao"
+    ]
+   },
+   {
+    "n": "Atlético Madrid",
+    "s": "atletico-madrid",
+    "a": [
+     "atl de madrid",
+     "atleti",
+     "atleti de madrid",
+     "atletico de madrid",
+     "atletico madrid",
+     "atletico of madrid",
+     "atleticodemadrid",
+     "atm",
+     "atm football club",
+     "club atletico de madrid",
+     "club atletico de madrid sad",
+     "el atleti",
+     "the atletico"
+    ]
+   },
+   {
+    "n": "FC Barcelona",
+    "s": "barcelona",
+    "a": [
+     "barca",
+     "barcelona",
+     "barcelona fc",
+     "barcelona football club",
+     "f c b",
+     "f c barcelona",
+     "fc barcelona",
+     "fc barcelona football",
+     "fcb",
+     "fcbarcelona",
+     "football club barcelona",
+     "football club of barcelona",
+     "futbol club barcelona"
+    ]
+   },
+   {
+    "n": "RC Celta de Vigo",
+    "s": "celta",
+    "a": [
+     "celta",
+     "celta vigo",
+     "r c celta de vigo",
+     "rc celta",
+     "rc celta de vigo",
+     "rccv",
+     "real club celta",
+     "real club celta s a d"
+    ]
+   },
+   {
+    "n": "Deportivo de A Coruña",
+    "s": "deportivo",
+    "a": [
+     "club deportivo de la sala calvet turcos",
+     "deportivo de a coruna",
+     "r c deportivo de la coruna",
+     "real club deportivo de a coruna",
+     "real club deportivo de la coruna",
+     "real club deportivo de la coruna s a d"
+    ]
+   },
+   {
+    "n": "Elche CF",
+    "s": "elche",
+    "a": [
+     "elche",
+     "elche cf",
+     "elche club de futbol s a d"
+    ]
+   },
+   {
+    "n": "RCD Espanyol",
+    "s": "espanyol",
+    "a": [
+     "espanyol",
+     "espanyol barcelona",
+     "espanyol of barcelona",
+     "r c d espanyol",
+     "r c d espanyol de barcelona",
+     "r c d espanyol of barcelona",
+     "rcd espanyol",
+     "rcd espanyol de barcelona",
+     "rcd espanyol of barcelona",
+     "rcde",
+     "reial club deportiu espanyol de barcelona"
+    ]
+   },
+   {
+    "n": "Getafe CF",
+    "s": "getafe",
+    "a": [
+     "getafe",
+     "getafe c f",
+     "getafe cf",
+     "getafe club de futbol",
+     "getafe club de futbol team",
+     "getafe club of football",
+     "getafe football club"
+    ]
+   },
+   {
+    "n": "Levante UD",
+    "s": "levante",
+    "a": [
+     "levante",
+     "levante fc",
+     "levante football club",
+     "levante sports union",
+     "levante u d",
+     "levante ud",
+     "levante ud football",
+     "levante union deportiva"
+    ]
+   },
+   {
+    "n": "Málaga CF",
+    "s": "malaga",
+    "a": [
+     "m c f",
+     "malaga",
+     "malaga c f",
+     "malaga cf",
+     "malaga club of football",
+     "malaga football club",
+     "malagacf"
+    ]
+   },
+   {
+    "n": "CA Osasuna",
+    "s": null,
+    "a": [
+     "ca osasuna",
+     "club atletico osasuna"
+    ]
+   },
+   {
+    "n": "Racing de Santander",
+    "s": "racing-santander",
+    "a": [
+     "racing club de santander",
+     "racing de santander",
+     "racing santander",
+     "real racing club",
+     "real racing club de santander",
+     "real racing club de santander s a d",
+     "real santander sd"
+    ]
+   },
+   {
+    "n": "Rayo Vallecano",
+    "s": "rayo-vallecano",
+    "a": [
+     "rayo",
+     "rayo football",
+     "rayo vallecano",
+     "rayo vallecano de madrid",
+     "rayo vellecano football",
+     "rayo vellecano soccer club",
+     "vallecano"
+    ]
+   },
+   {
+    "n": "Real Betis",
+    "s": "real-betis",
+    "a": [
+     "balompedicos",
+     "beticos verdiblancos",
+     "betis",
+     "real betis",
+     "real betis balompie",
+     "real betis balompie s a d",
+     "real betis football",
+     "real betis soccer"
+    ]
+   },
+   {
+    "n": "Real Madrid CF",
+    "s": "real-madrid",
+    "a": [
+     "madrid fc",
+     "madrid football club",
+     "real fc",
+     "real football club",
+     "real madrid",
+     "real madrid c f",
+     "real madrid cf",
+     "real madrid club de futbol",
+     "real madrid club of football",
+     "real madrid football club",
+     "rmcf",
+     "royal madrid",
+     "royal madrid football club"
+    ]
+   },
+   {
+    "n": "Real Sociedad",
+    "s": "real-sociedad",
+    "a": [
+     "donostia football club",
+     "real sociedad",
+     "real sociedad de futbol",
+     "real sociedad de futbol s a d",
+     "san sebastian foot ball club"
+    ]
+   },
+   {
+    "n": "Sevilla FC",
+    "s": "sevilla",
+    "a": [
+     "s f c",
+     "sevilla",
+     "sevilla f c",
+     "sevilla fc",
+     "sevilla football club",
+     "sevilla futbol club",
+     "sevillaf c",
+     "sevillafc",
+     "sfc"
+    ]
+   },
+   {
+    "n": "Valencia CF",
+    "s": "valencia",
+    "a": [
+     "v c f",
+     "valencia",
+     "valencia c f",
+     "valencia cf",
+     "valencia club de futbol",
+     "valencia club de futbol team",
+     "valencia club of football",
+     "valencia football club",
+     "valenciac f",
+     "valenciacf"
+    ]
+   },
+   {
+    "n": "Villarreal CF",
+    "s": "villarreal",
+    "a": [
+     "villarreal",
+     "villarreal 1923",
+     "villarreal c f",
+     "villarreal cf",
+     "villarreal cf 1923",
+     "villarreal club de futbol",
+     "villarreal club de futbol 1923",
+     "villarreal club de futbol s a d",
+     "villarreal club football",
+     "villarreal club of football"
+    ]
+   }
+  ]
+ },
+ {
+  "n": "Segunda División",
+  "season": "2026–27",
+  "flag": "es",
+  "clubs": [
+   {
+    "n": "Albacete Balompié",
+    "s": null,
+    "a": [
+     "albacete balompie",
+     "albacete balompie s a d"
+    ]
+   },
+   {
+    "n": "UD Almería",
+    "s": "almeria",
+    "a": [
+     "u d almeria",
+     "ud almeria",
+     "union deportiva almeria"
+    ]
+   },
+   {
+    "n": "FC Andorra",
+    "s": "fc-andorra",
+    "a": [
+     "andorra",
+     "andorra fc",
+     "andorra football club",
+     "fc andorra",
+     "football club andorra",
+     "president ferran vilaseca"
+    ]
+   },
+   {
+    "n": "Burgos CF",
+    "s": "burgos",
+    "a": [
+     "burgos",
+     "burgos cf"
+    ]
+   },
+   {
+    "n": "Cádiz CF",
+    "s": "cadiz",
+    "a": [
+     "cadiz",
+     "cadiz cf",
+     "cadiz club de futbol"
+    ]
+   },
+   {
+    "n": "CD Castellón",
+    "s": "castellon",
+    "a": [
+     "c d castellon",
+     "cd castellon"
+    ]
+   },
+   {
+    "n": "RC Celta Fortuna",
+    "s": null,
+    "a": [
+     "celta b",
+     "celta de vigo b",
+     "celta turista",
+     "panda team",
+     "rc celta b",
+     "rc celta fortuna",
+     "real club celta de vigo b"
+    ]
+   },
+   {
+    "n": "AD Ceuta FC",
+    "s": null,
+    "a": [
+     "ad ceuta",
+     "ad ceuta fc",
+     "club atletico de ceuta"
+    ]
+   },
+   {
+    "n": "Córdoba CF",
+    "s": "cordoba",
+    "a": [
+     "cordoba",
+     "cordoba cf",
+     "cordoba club de futbol",
+     "cordoba club de futbol s a d"
+    ]
+   },
+   {
+    "n": "SD Eibar",
+    "s": null,
+    "a": [
+     "eibar football club",
+     "eibar soccer team",
+     "sd eibar",
+     "sd eibar club",
+     "sd eibar soccer",
+     "sociedad deportiva eibar s a d"
+    ]
+   },
+   {
+    "n": "CD Eldense",
+    "s": "eldense",
+    "a": [
+     "cd eldense",
+     "club deportivo eldense"
+    ]
+   },
+   {
+    "n": "Girona FC",
+    "s": "girona",
+    "a": [
+     "girona",
+     "girona fc",
+     "girona fc club",
+     "girona futbol club",
+     "girona futbol club s a d",
+     "girona soccer team"
+    ]
+   },
+   {
+    "n": "Granada CF",
+    "s": "granada",
+    "a": [
+     "granada",
+     "granada c f",
+     "granada cf",
+     "granada club de futbol"
+    ]
+   },
+   {
+    "n": "UD Las Palmas",
+    "s": "las-palmas",
+    "a": [
+     "las palmas",
+     "ud las palmas",
+     "union deportiva las palmas"
+    ]
+   },
+   {
+    "n": "CD Leganés",
+    "s": "leganes",
+    "a": [
+     "cd leganes",
+     "cd leganes football",
+     "cd leganes soccer",
+     "club deportivo leganes s a d",
+     "leganes football",
+     "leganes soccer club"
+    ]
+   },
+   {
+    "n": "RCD Mallorca",
+    "s": "mallorca",
+    "a": [
+     "mallorca",
+     "r c d mallorca",
+     "rcd mallorca",
+     "real club deportivo mallorca"
+    ]
+   },
+   {
+    "n": "Real Oviedo",
+    "s": null,
+    "a": [
+     "real oviedo",
+     "real oviedo s a d"
+    ]
+   },
+   {
+    "n": "Real Sociedad B",
+    "s": null,
+    "a": [
+     "real sociedad b",
+     "sanse"
+    ]
+   },
+   {
+    "n": "CE Sabadell FC",
+    "s": "sabadell",
+    "a": [
+     "ce sabadell",
+     "ce sabadell fc",
+     "centre d esports sabadell futbol club",
+     "centre d esports sabadell futbol club s a d",
+     "sabadell fc"
+    ]
+   },
+   {
+    "n": "Sporting de Gijón",
+    "s": "sporting-gijon",
+    "a": [
+     "real sporting de gijon",
+     "real sporting de gijon s a d",
+     "sporting de gijon",
+     "sporting gijon"
+    ]
+   },
+   {
+    "n": "CD Tenerife",
+    "s": "tenerife",
+    "a": [
+     "c d tenerife",
+     "cd tenerife",
+     "club deportivo tenerife s a d"
+    ]
+   },
+   {
+    "n": "Real Valladolid",
+    "s": "valladolid",
+    "a": [
+     "real valladolid",
+     "real valladolid club",
+     "real valladolid club de futbol s a d",
+     "real valladolid football",
+     "real valladolid soccer",
+     "valladolid"
+    ]
+   }
+  ]
+ },
+ {
+  "n": "Serie A",
+  "season": "2026–27",
+  "flag": "it",
+  "clubs": [
+   {
+    "n": "Atalanta BC",
+    "s": "atalanta",
+    "a": [
+     "atalanta",
+     "atalanta b c",
+     "atalanta bc",
+     "atalanta bergamasca calcio",
+     "atalanta bergamo",
+     "atalantab c",
+     "atalantabc"
+    ]
+   },
+   {
+    "n": "Bologna FC 1909",
+    "s": "bologna",
+    "a": [
+     "bfc1909",
+     "bologna",
+     "bologna 1909",
+     "bologna f c 1909",
+     "bologna fc 1909",
+     "bologna football club",
+     "bologna football club 1909",
+     "bolognafc1909"
+    ]
+   },
+   {
+    "n": "Cagliari Calcio",
+    "s": "cagliari",
+    "a": [
+     "cagliari",
+     "cagliari calcio"
+    ]
+   },
+   {
+    "n": "Como 1907",
+    "s": "como-1907",
+    "a": [
+     "calcio como",
+     "como",
+     "como 1907",
+     "como calcio",
+     "f c como"
+    ]
+   },
+   {
+    "n": "ACF Fiorentina",
+    "s": "fiorentina",
+    "a": [
+     "a c f fiorentina",
+     "a c fiorentina",
+     "ac fiorentina",
+     "acf fiorentina",
+     "associazione calcio fiorentina",
+     "fiorentina",
+     "florentia viola"
+    ]
+   },
+   {
+    "n": "Frosinone Calcio",
+    "s": "frosinone",
+    "a": [
+     "frosinone 1928",
+     "frosinone calcio",
+     "frosinone fc",
+     "frosinone football club"
+    ]
+   },
+   {
+    "n": "Genoa CFC",
+    "s": "genoa",
+    "a": [
+     "genoa",
+     "genoa c f c",
+     "genoa cfc",
+     "genoa cricket and football club s p a"
+    ]
+   },
+   {
+    "n": "Inter Milan",
+    "s": "inter",
+    "a": [
+     "f c i m",
+     "f c inter",
+     "f c inter milan",
+     "fc inter",
+     "fc internazionale milano",
+     "fcim",
+     "fcinter",
+     "football club inter",
+     "football club inter milan",
+     "football club internazionale milano",
+     "i m",
+     "inter",
+     "inter club",
+     "inter fc",
+     "inter football club",
+     "inter milan",
+     "inter milano",
+     "inter of milan",
+     "inter soccer club",
+     "internazionale",
+     "internazionale milano",
+     "the inter"
+    ]
+   },
+   {
+    "n": "Juventus FC",
+    "s": "juventus",
+    "a": [
+     "j f c",
+     "juventus",
+     "juventus f c",
+     "juventus fc",
+     "juventus of turin",
+     "juventus turin",
+     "juventusf c",
+     "juventusfc",
+     "juventusfootballclub"
+    ]
+   },
+   {
+    "n": "SS Lazio",
+    "s": "lazio",
+    "a": [
+     "lazio calcio",
+     "lazio sport society",
+     "lazio sports society",
+     "s s l",
+     "s s lazio",
+     "societa sportiva lazio",
+     "sport society lazio",
+     "sports society lazio",
+     "ss lazio",
+     "ssl",
+     "sslazio"
+    ]
+   },
+   {
+    "n": "US Lecce",
+    "s": "lecce",
+    "a": [
+     "lecce",
+     "lecce sports union",
+     "u s l",
+     "u s lecce",
+     "unione sportiva lecce",
+     "us lecce",
+     "uslecce"
+    ]
+   },
+   {
+    "n": "AC Milan",
+    "s": "milan",
+    "a": [
+     "a c milan",
+     "ac milan",
+     "acmilan",
+     "association football milan",
+     "associazione calcio milan"
+    ]
+   },
+   {
+    "n": "AC Monza",
+    "s": "monza",
+    "a": [
+     "a c monza",
+     "a c monza brianza",
+     "a c monza brianza 1912",
+     "ac monza",
+     "ac monza brianza 1912",
+     "acmonza",
+     "associazione calcio monza",
+     "associazione calcio monza brianza 1912",
+     "biancorossi",
+     "monza",
+     "monza calcio",
+     "s s monza",
+     "s s monza 1912 srl",
+     "societa sportiva monza 1912",
+     "societa sportiva monza 1912 srl"
+    ]
+   },
+   {
+    "n": "SSC Napoli",
+    "s": "napoli",
+    "a": [
+     "napoli",
+     "s s c n",
+     "s s c napoli",
+     "societa sportiva calcio napoli",
+     "ssc naples",
+     "ssc napoli",
+     "sscn"
+    ]
+   },
+   {
+    "n": "Parma Calcio 1913",
+    "s": "parma",
+    "a": [
+     "ac parma",
+     "crociati",
+     "parma",
+     "parma a c",
+     "parma associazione calcio",
+     "parma associazione sportiva",
+     "parma calcio 1913",
+     "parma f c",
+     "parma fc",
+     "parma foot ball club",
+     "parma football club"
+    ]
+   },
+   {
+    "n": "AS Roma",
+    "s": "roma",
+    "a": [
+     "a s r",
+     "a s r 1927",
+     "a s roma",
+     "a s rome",
+     "as roma",
+     "asr",
+     "asr 1927",
+     "asroma",
+     "associazione sportiva roma",
+     "la roma",
+     "roma",
+     "rome sport association",
+     "the wolfs",
+     "wolfs"
+    ]
+   },
+   {
+    "n": "US Sassuolo Calcio",
+    "s": "sassuolo",
+    "a": [
+     "sassuolo",
+     "sassuolo calcio",
+     "u s sassuolo calcio",
+     "unione sportiva sassuolo calcio",
+     "us sassuolo calcio"
+    ]
+   },
+   {
+    "n": "Torino FC",
+    "s": "torino",
+    "a": [
+     "torino",
+     "torino f c",
+     "torino fc",
+     "torino football club",
+     "torinof c",
+     "torinofc",
+     "turin f c",
+     "turin fc",
+     "turin football club"
+    ]
+   },
+   {
+    "n": "Udinese Calcio",
+    "s": "udinese",
+    "a": [
+     "first bianconeri of italy",
+     "udinese calcio",
+     "udinese fc",
+     "udinese football",
+     "udinese football club"
+    ]
+   },
+   {
+    "n": "Venezia FC",
+    "s": "venezia",
+    "a": [
+     "arancioneroverdi",
+     "venezia",
+     "venezia f c",
+     "venezia fc",
+     "venezia football club",
+     "veneziamestre",
+     "veneziamestre fc",
+     "venice fc",
+     "venice football club",
+     "vfc"
+    ]
+   }
+  ]
+ },
+ {
+  "n": "Bundesliga",
+  "season": "2026–27",
+  "flag": "de",
+  "clubs": [
+   {
+    "n": "FC Augsburg",
+    "s": "augsburg",
+    "a": [
+     "augsburg",
+     "die fuggerstadter",
+     "fc augsburg",
+     "fc augsburg football team",
+     "fc augsburg soccer team",
+     "fu ball club augsburg",
+     "fu ball club augsburg 1907 e v"
+    ]
+   },
+   {
+    "n": "1. FC Union Berlin",
+    "s": "union-berlin",
+    "a": [
+     "1 fc union berlin",
+     "1 fu ballclub union berlin",
+     "1 union berlin",
+     "berlin fc",
+     "die eisernen",
+     "fc berlin",
+     "fc union berlin",
+     "iron ones",
+     "the iron ones",
+     "union berlin"
+    ]
+   },
+   {
+    "n": "SV Werder Bremen",
+    "s": "werder-bremen",
+    "a": [
+     "die grun wei en",
+     "die werderaner",
+     "green whites",
+     "sv werder bremen",
+     "the green whites",
+     "werder",
+     "werder bremen"
+    ]
+   },
+   {
+    "n": "Borussia Dortmund",
+    "s": "borussia-dortmund",
+    "a": [
+     "ballspielverein borussia 09 e v dortmund",
+     "black and yellows",
+     "borussia dortmund",
+     "bvb",
+     "die borussen",
+     "die schwarzgelben",
+     "dortmund",
+     "the black and yellows"
+    ]
+   },
+   {
+    "n": "SV Elversberg",
+    "s": "sv-elversberg",
+    "a": [
+     "elversberg",
+     "sv 07 elversberg",
+     "sv elversberg"
+    ]
+   },
+   {
+    "n": "Eintracht Frankfurt",
+    "s": "eintracht-frankfurt",
+    "a": [
+     "die adler",
+     "eagles",
+     "eintracht",
+     "eintracht frankfurt",
+     "eintracht frankfurt e v",
+     "frankfurt",
+     "the eagles"
+    ]
+   },
+   {
+    "n": "SC Freiburg",
+    "s": "freiburg",
+    "a": [
+     "breisgau brazilians",
+     "die breisgau brasilianer",
+     "freiburg",
+     "s c freiburg",
+     "sc freiburg",
+     "sport club freiburg",
+     "sport club freiburg e v",
+     "the breisgau brazilians"
+    ]
+   },
+   {
+    "n": "Hamburger SV",
+    "s": "hamburger-sv",
+    "a": [
+     "h s v",
+     "hamburg",
+     "hamburg sport club",
+     "hamburg sv",
+     "hamburger",
+     "hamburger s v",
+     "hamburger sport verein",
+     "hamburger sv",
+     "hamburgersv",
+     "hsv"
+    ]
+   },
+   {
+    "n": "TSG 1899 Hoffenheim",
+    "s": "hoffenheim",
+    "a": [
+     "1899 hoffenheim",
+     "1899 hoffenheim ii",
+     "die kraichgauer",
+     "hoffenheim",
+     "tsg 1899 hoffenheim",
+     "tsg hoffenheim",
+     "tsg hoffenheim ii",
+     "turn und sportgemeinschaft 1899 hoffenheim e v"
+    ]
+   },
+   {
+    "n": "1. FC Köln",
+    "s": "koln",
+    "a": [
+     "1 fc cologne",
+     "1 fc koln",
+     "1 fu ball club koln 01 07 e v",
+     "1 koln",
+     "f c koln",
+     "fc koln",
+     "fckoln"
+    ]
+   },
+   {
+    "n": "RB Leipzig",
+    "s": "rb-leipzig",
+    "a": [
+     "die roten bullen",
+     "rasenballsport leipzig e v",
+     "rb leipzig",
+     "red bulls",
+     "the red bulls"
+    ]
+   },
+   {
+    "n": "Bayer 04 Leverkusen",
+    "s": "bayer-leverkusen",
+    "a": [
+     "bayer 04 football",
+     "bayer 04 leverkusen",
+     "bayer 04 leverkusen fu ball gmbh",
+     "bayer 04 leverkusen fu ball gmbh soccer",
+     "bayer leverkusen",
+     "company xi",
+     "die werkself",
+     "leverkusen",
+     "the company xi"
+    ]
+   },
+   {
+    "n": "1. FSV Mainz 05",
+    "s": "mainz-05",
+    "a": [
+     "1 fsv mainz 05",
+     "1 fu ball und sportverein mainz 05 e v",
+     "die nullfunfer",
+     "fsv mainz",
+     "mainz",
+     "mainz 05",
+     "the zero fivers",
+     "zero fivers"
+    ]
+   },
+   {
+    "n": "Borussia Mönchengladbach",
+    "s": "borussia-monchengladbach",
+    "a": [
+     "borussia monchengladbach"
+    ]
+   },
+   {
+    "n": "FC Bayern Munich",
+    "s": "bayern-munchen",
+    "a": [
+     "bavaria munich",
+     "bayern",
+     "bayern muenchen",
+     "bayern munchen",
+     "bayern munich",
+     "bayern of munich",
+     "die bayernf",
+     "f c bayern munich",
+     "fc bavaria munich",
+     "fc bayern muenchen",
+     "fc bayern munchen",
+     "fc bayern munich",
+     "fc hollywood",
+     "fcb munich",
+     "fcbm",
+     "fcbm 1900",
+     "munich"
+    ]
+   },
+   {
+    "n": "SC Paderborn 07",
+    "s": null,
+    "a": [
+     "die ostwestfalen",
+     "paderborn 07",
+     "sc paderborn 07",
+     "scp 07",
+     "sport club paderborn 07 e v"
+    ]
+   },
+   {
+    "n": "FC Schalke 04",
+    "s": "schalke-04",
+    "a": [
+     "f c schalke 04",
+     "fc gelsenkirchen schalke 04",
+     "fc schalke 04",
+     "s04",
+     "schalke 0",
+     "schalke 04",
+     "schalke04"
+    ]
+   },
+   {
+    "n": "VfB Stuttgart",
+    "s": "vfb-stuttgart",
+    "a": [
+     "die schwaben",
+     "swabians",
+     "the swabians",
+     "verein fur bewegungsspiele stuttgart 1893 e v",
+     "vfb stuttgart"
+    ]
+   }
+  ]
+ },
+ {
+  "n": "Ligue 1",
+  "season": "2026–27",
+  "flag": "fr",
+  "clubs": [
+   {
+    "n": "Angers SCO",
+    "s": "angers",
+    "a": [
+     "angers",
+     "angers sco",
+     "angers sporting club de l ouest",
+     "sco",
+     "sco of angers"
+    ]
+   },
+   {
+    "n": "AJ Auxerre",
+    "s": "auxerre",
+    "a": [
+     "aj auxerre",
+     "aja",
+     "association de la jeunesse auxerroise",
+     "auxerre",
+     "icaunais",
+     "les icaunais"
+    ]
+   },
+   {
+    "n": "Stade Brestois 29",
+    "s": null,
+    "a": [
+     "stade brestois 29"
+    ]
+   },
+   {
+    "n": "Le Havre AC",
+    "s": "le-havre-ac",
+    "a": [
+     "ciel et marine",
+     "hac",
+     "havre",
+     "havre ac",
+     "havre athletic club",
+     "le havre",
+     "le havre ac",
+     "le havre athletic club",
+     "les ciel et marine",
+     "lhv"
+    ]
+   },
+   {
+    "n": "Le Mans FC",
+    "s": "le-mans",
+    "a": [
+     "le mans",
+     "le mans f c",
+     "le mans fc",
+     "le mans football club",
+     "le mans u c 72",
+     "le muc",
+     "mans",
+     "mans f c",
+     "mans fc",
+     "mans football club",
+     "mans u c 72",
+     "muc"
+    ]
+   },
+   {
+    "n": "RC Lens",
+    "s": "rc-lens",
+    "a": [
+     "lens",
+     "r c lens",
+     "racing club de lens",
+     "rc lens"
+    ]
+   },
+   {
+    "n": "Lille OSC",
+    "s": "lille",
+    "a": [
+     "lille",
+     "lille olympique sporting club",
+     "lille osc",
+     "losc"
+    ]
+   },
+   {
+    "n": "FC Lorient",
+    "s": "lorient",
+    "a": [
+     "f c lorient",
+     "fc lorient",
+     "football club lorient bretagne sud",
+     "lorient"
+    ]
+   },
+   {
+    "n": "Olympique Lyonnais",
+    "s": "lyon",
+    "a": [
+     "lyon",
+     "o l",
+     "o lyon",
+     "o lyonnais",
+     "ol",
+     "olympique lyonnais"
+    ]
+   },
+   {
+    "n": "Olympique de Marseille",
+    "s": "marseille",
+    "a": [
+     "marseille",
+     "o marseille",
+     "olympic marseille",
+     "olympic of marseille",
+     "olympique de marseille",
+     "olympique marseille",
+     "om"
+    ]
+   },
+   {
+    "n": "AS Monaco FC",
+    "s": "as-monaco",
+    "a": [
+     "a s m f c",
+     "a s monaco",
+     "a s monaco f c",
+     "as monaco",
+     "as monaco f c",
+     "as monaco fc",
+     "as monaco football club",
+     "asmfc",
+     "asmonaco",
+     "association sportive de monaco football club",
+     "monaco"
+    ]
+   },
+   {
+    "n": "OGC Nice",
+    "s": null,
+    "a": [
+     "ogc nice",
+     "olympique gymnaste club nice cote d azur"
+    ]
+   },
+   {
+    "n": "Paris FC",
+    "s": "paris-fc",
+    "a": [
+     "paris f c",
+     "paris fc",
+     "paris football club",
+     "pfc"
+    ]
+   },
+   {
+    "n": "Paris Saint-Germain FC",
+    "s": "paris-saint-germain",
+    "a": [
+     "paris saint germain",
+     "paris saint germain fc",
+     "psg",
+     "psgfc"
+    ]
+   },
+   {
+    "n": "Stade Rennais FC",
+    "s": "rennes",
+    "a": [
+     "rennais",
+     "rennes",
+     "srfc",
+     "stade rennais",
+     "stade rennais f c",
+     "stade rennais fc",
+     "stade rennais football club"
+    ]
+   },
+   {
+    "n": "RC Strasbourg Alsace",
+    "s": "rc-strasbourg-alsace",
+    "a": [
+     "racing club de strasbourg",
+     "racing club de strasbourg alsace",
+     "racing strasbourg",
+     "rc strasbourg alsace",
+     "rcsa",
+     "strasbourg"
+    ]
+   },
+   {
+    "n": "Toulouse FC",
+    "s": "toulouse",
+    "a": [
+     "tfc",
+     "toulouse",
+     "toulouse f c",
+     "toulouse fc",
+     "toulouse football club"
+    ]
+   },
+   {
+    "n": "ES Troyes AC",
+    "s": "troyes",
+    "a": [
+     "es troyes",
+     "es troyes ac",
+     "estac",
+     "troyes ac"
+    ]
+   }
+  ]
+ },
+ {
+  "n": "Primeira Liga",
+  "season": "2026–27",
+  "flag": "pt",
+  "clubs": [
+   {
+    "n": "Académico de Viseu F.C.",
+    "s": "academico-de-viseu",
+    "a": [
+     "academico de viseu",
+     "academico de viseu f c",
+     "academico de viseu fc"
+    ]
+   },
+   {
+    "n": "F.C. Alverca",
+    "s": "alverca",
+    "a": [
+     "alverca",
+     "f c alverca"
+    ]
+   },
+   {
+    "n": "F.C. Arouca",
+    "s": "arouca",
+    "a": [
+     "arouca",
+     "f c arouca",
+     "fc arouca",
+     "futebol clube de arouca"
+    ]
+   },
+   {
+    "n": "S.L. Benfica",
+    "s": "benfica",
+    "a": [
+     "benfica",
+     "eagles",
+     "s l benfica",
+     "sl benfica",
+     "slb",
+     "sport lisboa e benfica",
+     "the eagles"
+    ]
+   },
+   {
+    "n": "S.C. Braga",
+    "s": "sc-braga",
+    "a": [
+     "braga",
+     "braga fc",
+     "s c braga",
+     "sc braga",
+     "sp braga",
+     "sporting braga",
+     "sporting clube de braga",
+     "sporting de braga"
+    ]
+   },
+   {
+    "n": "Casa Pia A.C.",
+    "s": "casa-pia-ac",
+    "a": [
+     "casa pia a c",
+     "casa pia ac"
+    ]
+   },
+   {
+    "n": "G.D. Estoril Praia",
+    "s": "estoril",
+    "a": [
+     "estoril",
+     "estoril praia",
+     "g d estoril praia",
+     "grupo desportivo estoril praia"
+    ]
+   },
+   {
+    "n": "C.F. Estrela da Amadora",
+    "s": "estrela-da-amadora",
+    "a": [
+     "c f estrela da amadora",
+     "cf estrela amadora",
+     "cf estrela da amadora",
+     "club football estrela da amadora",
+     "estrela",
+     "estrela amadora",
+     "estrela da amadora"
+    ]
+   },
+   {
+    "n": "F.C. Famalicão",
+    "s": "famalicao",
+    "a": [
+     "f c famalicao",
+     "famalicao",
+     "fc famalicao"
+    ]
+   },
+   {
+    "n": "Gil Vicente F.C.",
+    "s": "gil-vicente",
+    "a": [
+     "gil vicente",
+     "gil vicente f c",
+     "gil vicente fc",
+     "gil vicente futebol clube"
+    ]
+   },
+   {
+    "n": "C.S. Marítimo",
+    "s": "maritimo",
+    "a": [
+     "c s maritimo",
+     "cs maritimo",
+     "maritimo"
+    ]
+   },
+   {
+    "n": "Moreirense F.C.",
+    "s": "moreirense",
+    "a": [
+     "moreirense",
+     "moreirense f c",
+     "moreirense fc",
+     "moreirense futebol clube"
+    ]
+   },
+   {
+    "n": "C.D. Nacional",
+    "s": "nacional-da-madeira",
+    "a": [
+     "c d nacional",
+     "cd nacional",
+     "clube desportivo nacional",
+     "nacional",
+     "nacional da madeira"
+    ]
+   },
+   {
+    "n": "FC Porto",
+    "s": "fc-porto",
+    "a": [
+     "f c p",
+     "f c porto",
+     "fc porto",
+     "fcp",
+     "fcporto",
+     "football club of porto",
+     "futebol clube do porto",
+     "porto"
+    ]
+   },
+   {
+    "n": "Rio Ave F.C.",
+    "s": "rio-ave",
+    "a": [
+     "rio ave",
+     "rio ave f c",
+     "rio ave fc"
+    ]
+   },
+   {
+    "n": "C.D. Santa Clara",
+    "s": "santa-clara",
+    "a": [
+     "c d santa clara",
+     "cd santa clara",
+     "santa clara azores"
+    ]
+   },
+   {
+    "n": "Sporting CP",
+    "s": "sporting-cp",
+    "a": [
+     "scp",
+     "sporting club portugal",
+     "sporting cp",
+     "sporting lisbon",
+     "sporting portugal"
+    ]
+   },
+   {
+    "n": "Vitória S.C.",
+    "s": "vitoria",
+    "a": [
+     "vitoria",
+     "vitoria de guimaraes",
+     "vitoria guimaraes sc",
+     "vitoria s c",
+     "vitoria sc"
+    ]
+   }
+  ]
+ },
+ {
+  "n": "Belgian Pro League",
+  "season": "2026–27",
+  "flag": "be",
+  "clubs": [
+   {
+    "n": "RSC Anderlecht",
+    "s": "anderlecht",
+    "a": [
+     "anderlecht",
+     "r s c anderlecht",
+     "royal sporting club anderlecht",
+     "rsc anderlecht",
+     "rsca"
+    ]
+   },
+   {
+    "n": "Royal Antwerp FC",
+    "s": "antwerp",
+    "a": [
+     "antwerp f c",
+     "antwerp fc",
+     "royal antwerp",
+     "royal antwerp f c",
+     "royal antwerp fc"
+    ]
+   },
+   {
+    "n": "SK Beveren",
+    "s": null,
+    "a": [
+     "s k beveren",
+     "sk beveren",
+     "sportkring beveren",
+     "waa"
+    ]
+   },
+   {
+    "n": "Cercle Brugge KSV",
+    "s": "cercle-brugge",
+    "a": [
+     "cercle brugge",
+     "cercle brugge k s v",
+     "cercle brugge ksv"
+    ]
+   },
+   {
+    "n": "Royal Charleroi SC",
+    "s": null,
+    "a": [
+     "r charleroi s c",
+     "royal charleroi",
+     "royal charleroi s c",
+     "royal charleroi sc"
+    ]
+   },
+   {
+    "n": "Club Brugge KV",
+    "s": "club-brugge",
+    "a": [
+     "club bruges",
+     "club bruges kv",
+     "club brugge",
+     "club brugge k v",
+     "club brugge kv"
+    ]
+   },
+   {
+    "n": "KRC Genk",
+    "s": null,
+    "a": [
+     "k r c genk",
+     "koninklijke racing club genk",
+     "krc genk"
+    ]
+   },
+   {
+    "n": "KAA Gent",
+    "s": "gent",
+    "a": [
+     "gent",
+     "ghent",
+     "k a a gent",
+     "kaa gent",
+     "koninklijke atletiek associatie gent"
+    ]
+   },
+   {
+    "n": "KV Kortrijk",
+    "s": null,
+    "a": [
+     "k v kortrijk",
+     "koninklijke voetbalclub kortrijk",
+     "kv kortrijk"
+    ]
+   },
+   {
+    "n": "RAAL La Louvière",
+    "s": "raal-la-louviere",
+    "a": [
+     "fc charleroi",
+     "raal la louviere",
+     "racing charleroi",
+     "racing charleroi couillet fleurus"
+    ]
+   },
+   {
+    "n": "Lommel SK",
+    "s": null,
+    "a": [
+     "lommel sk",
+     "lommel united"
+    ]
+   },
+   {
+    "n": "KV Mechelen",
+    "s": null,
+    "a": [
+     "k v mechelen",
+     "kv mechelen",
+     "y r k v mechelen",
+     "yr kv mechelen"
+    ]
+   },
+   {
+    "n": "Oud-Heverlee Leuven",
+    "s": "oud-heverlee-leuven",
+    "a": [
+     "oh leuven",
+     "oud heverlee leuven"
+    ]
+   },
+   {
+    "n": "Sint-Truidense VV",
+    "s": null,
+    "a": [
+     "k sint truidense v v",
+     "k sint truidense vv",
+     "sint truidense v v",
+     "sint truidense vv"
+    ]
+   },
+   {
+    "n": "Standard Liège",
+    "s": "standard-liege",
+    "a": [
+     "royal standard club de liege",
+     "standard liege"
+    ]
+   },
+   {
+    "n": "Royale Union Saint-Gilloise",
+    "s": "union-saint-gilloise",
+    "a": [
+     "r union saint gilloise",
+     "r union st gilloise",
+     "royale union saint gilloise",
+     "royale union st gilloise",
+     "union saint gilloise",
+     "union st gilloise"
+    ]
+   },
+   {
+    "n": "KVC Westerlo",
+    "s": "westerlo",
+    "a": [
+     "k v c westerlo",
+     "koninklijke voetbal club westerlo",
+     "kvc westerlo",
+     "westerlo"
+    ]
+   },
+   {
+    "n": "SV Zulte Waregem",
+    "s": "zulte-waregem",
+    "a": [
+     "essevee",
+     "s v zulte waregem",
+     "sportvereniging zulte waregem",
+     "sv zulte waregem",
+     "zulte waregem"
+    ]
+   }
+  ]
+ },
+ {
+  "n": "Süper Lig",
+  "season": "2026–27",
+  "flag": "tr",
+  "clubs": [
+   {
+    "n": "Alanyaspor",
+    "s": "alanyaspor",
+    "a": [
+     "alanyaspor"
+    ]
+   },
+   {
+    "n": "Amed S.F.K.",
+    "s": null,
+    "a": [
+     "amed s f k",
+     "diyarbak r buyuksehir belediyespor"
+    ]
+   },
+   {
+    "n": "İstanbul Başakşehir F.K.",
+    "s": null,
+    "a": [
+     "basaksehir f k",
+     "ibfk",
+     "istanbul basaksehir",
+     "istanbul basaksehir f k"
+    ]
+   },
+   {
+    "n": "Beşiktaş J.K.",
+    "s": "besiktas",
+    "a": [
+     "b j k",
+     "besiktas",
+     "besiktas j k",
+     "besiktas j k football",
+     "besiktas jimnastik kulubu",
+     "besiktas jk",
+     "bjk"
+    ]
+   },
+   {
+    "n": "Çorum F.K.",
+    "s": "corum",
+    "a": [
+     "corum f k",
+     "corum fk"
+    ]
+   },
+   {
+    "n": "Erzurumspor F.K.",
+    "s": null,
+    "a": [
+     "erzurumspor f k"
+    ]
+   },
+   {
+    "n": "Eyüpspor",
+    "s": "eyupspor",
+    "a": [
+     "eyupspor"
+    ]
+   },
+   {
+    "n": "Fenerbahçe S.K. (undefined)",
+    "s": "fenerbahce",
+    "a": [
+     "fener",
+     "fenerbahce",
+     "fenerbahce istanbul",
+     "fenerbahce s k",
+     "fenerbahce s k undefined",
+     "fenerbahce sk",
+     "fenerbahce sk football",
+     "fenerbahce spor kulubu",
+     "fenerbahce sports club"
+    ]
+   },
+   {
+    "n": "Galatasaray S.K. (undefined)",
+    "s": "galatasaray",
+    "a": [
+     "galatasaray",
+     "galatasaray as",
+     "galatasaray s k",
+     "galatasaray s k undefined",
+     "galatasaray spor kulubu",
+     "galatasaray sports club"
+    ]
+   },
+   {
+    "n": "Gaziantep F.K.",
+    "s": null,
+    "a": [
+     "gaziantep f k"
+    ]
+   },
+   {
+    "n": "Gençlerbirliği S.K.",
+    "s": "genclerbirligi",
+    "a": [
+     "genclerbirligi",
+     "genclerbirligi s k",
+     "genclerbirligi spor kulubu"
+    ]
+   },
+   {
+    "n": "Göztepe S.K.",
+    "s": "goztepe-izmir",
+    "a": [
+     "goztepe izmir",
+     "goztepe s k"
+    ]
+   },
+   {
+    "n": "Kasımpaşa S.K.",
+    "s": null,
+    "a": [
+     "kas mpasa s k",
+     "kas mpasa sk",
+     "kas mpasa spor kulubu"
+    ]
+   },
+   {
+    "n": "Kocaelispor",
+    "s": "kocaelispor",
+    "a": [
+     "kocaelispor"
+    ]
+   },
+   {
+    "n": "Konyaspor",
+    "s": "konyaspor",
+    "a": [
+     "konyaspor"
+    ]
+   },
+   {
+    "n": "Çaykur Rizespor",
+    "s": "rizespor",
+    "a": [
+     "caykur rizespor",
+     "rizespor"
+    ]
+   },
+   {
+    "n": "Samsunspor",
+    "s": "samsunspor",
+    "a": [
+     "samsunspor",
+     "samsunspor fc"
+    ]
+   },
+   {
+    "n": "Trabzonspor",
+    "s": "trabzonspor",
+    "a": [
+     "trabzonspor"
+    ]
+   }
+  ]
+ },
+ {
+  "n": "Major League Soccer",
+  "season": "2026",
+  "flag": "us",
+  "clubs": [
+   {
+    "n": "Atlanta United FC",
+    "s": "atlanta-united",
+    "a": [
+     "atl united",
+     "atl united fc",
+     "atl utd",
+     "atl utd fc",
+     "atlanta united",
+     "atlanta united fc"
+    ]
+   },
+   {
+    "n": "Charlotte FC",
+    "s": "charlotte-fc",
+    "a": [
+     "charlotte",
+     "charlotte f c",
+     "charlotte fc",
+     "charlotte football club",
+     "charlotte mls"
+    ]
+   },
+   {
+    "n": "Chicago Fire FC",
+    "s": "chicago-fire-fc",
+    "a": [
+     "cf97",
+     "chi",
+     "chicago fire",
+     "chicago fire f c",
+     "chicago fire fc",
+     "chicago fire football club",
+     "chicago fire s c",
+     "chicago fire sc",
+     "chicago fire soccer club",
+     "fire",
+     "men in red",
+     "the fire"
+    ]
+   },
+   {
+    "n": "FC Cincinnati",
+    "s": "fc-cincinnati",
+    "a": [
+     "cin",
+     "cincinnati",
+     "fc cincinnati",
+     "fc cincinnati holdings llc",
+     "fc cincy",
+     "fcc",
+     "football club cincinnati",
+     "fussball club cincinnati llc",
+     "futbol club cincinnati",
+     "knifey lions",
+     "orange and blue"
+    ]
+   },
+   {
+    "n": "Columbus Crew",
+    "s": "columbus-crew",
+    "a": [
+     "columbus crew",
+     "columbus crew sc",
+     "columbus crew soccer club",
+     "columbus sc",
+     "columbus soccer club",
+     "crew",
+     "crew sc",
+     "crew soccer club",
+     "massive",
+     "the crew",
+     "the massive"
+    ]
+   },
+   {
+    "n": "D.C. United",
+    "s": "dc-united",
+    "a": [
+     "black and red",
+     "d c united",
+     "dc united",
+     "dcu",
+     "united d c"
+    ]
+   },
+   {
+    "n": "Inter Miami CF",
+    "s": "inter-miami-cf",
+    "a": [
+     "herons",
+     "inter miami",
+     "inter miami cf",
+     "inter miami fc",
+     "intermiami",
+     "internacional de miami",
+     "internacional of miami",
+     "miami fc",
+     "miami football club",
+     "miami soccer club",
+     "the herons",
+     "vice city"
+    ]
+   },
+   {
+    "n": "CF Montréal",
+    "s": "cf-montreal",
+    "a": [
+     "cf montreal",
+     "cf of montreal",
+     "cfm",
+     "cfm montreal",
+     "cfmtl",
+     "club de foot montreal",
+     "club of football montreal",
+     "imfc",
+     "impact montreal",
+     "montreal",
+     "montreal football club",
+     "montreal impact"
+    ]
+   },
+   {
+    "n": "Nashville SC",
+    "s": "nashville-sc",
+    "a": [
+     "nashville",
+     "nashville s c",
+     "nashville sc",
+     "nashville soccer club"
+    ]
+   },
+   {
+    "n": "New England Revolution",
+    "s": "new-england-revolution",
+    "a": [
+     "ne revolution",
+     "ne revs",
+     "ner",
+     "new england revolution",
+     "new england revs",
+     "revolution",
+     "revolution soccer",
+     "revs",
+     "the revs"
+    ]
+   },
+   {
+    "n": "New York City FC",
+    "s": "new-york-city-fc",
+    "a": [
+     "new york city",
+     "new york city fc",
+     "new york city football club",
+     "nycfc"
+    ]
+   },
+   {
+    "n": "New York Red Bulls",
+    "s": "new-york-red-bulls",
+    "a": [
+     "metrostars",
+     "new york new jersey metrostars",
+     "new york red bulls",
+     "ny nj metrostars",
+     "ny red bulls",
+     "nyrb",
+     "rbny",
+     "red bull new york",
+     "red bull ny",
+     "red bulls"
+    ]
+   },
+   {
+    "n": "Orlando City SC",
+    "s": "orlando-city",
+    "a": [
+     "ocsc",
+     "orlando city",
+     "orlando city sc",
+     "orlando city soccer club"
+    ]
+   },
+   {
+    "n": "Philadelphia Union",
+    "s": "philadelphia-union",
+    "a": [
+     "philadelphia",
+     "philadelphia union",
+     "the u",
+     "union"
+    ]
+   },
+   {
+    "n": "Toronto FC",
+    "s": "toronto-fc",
+    "a": [
+     "football club of toronto",
+     "soccer club of toronto",
+     "toronto",
+     "toronto f c",
+     "toronto fc",
+     "toronto football club",
+     "toronto soccer",
+     "toronto soccer club",
+     "torontofc"
+    ]
+   },
+   {
+    "n": "Austin FC",
+    "s": null,
+    "a": [
+     "austin",
+     "austin fc",
+     "austin football club"
+    ]
+   },
+   {
+    "n": "Colorado Rapids",
+    "s": "colorado-rapids",
+    "a": [
+     "co rapids",
+     "co rapids fc",
+     "colorado rapids",
+     "colorado rapids fc",
+     "colorado rapids football club",
+     "colorado rapids soccer",
+     "colorado rapids soccer club"
+    ]
+   },
+   {
+    "n": "FC Dallas",
+    "s": "fc-dallas",
+    "a": [
+     "burn",
+     "dallas",
+     "dallas 96",
+     "dallas burn",
+     "dallas fc",
+     "dallas football club",
+     "dallas soccer club",
+     "f c dallas",
+     "fc dallas",
+     "fcd",
+     "football club dallas",
+     "hoops",
+     "red stripes",
+     "soccer club of dallas",
+     "toros"
+    ]
+   },
+   {
+    "n": "Houston Dynamo FC",
+    "s": "houston-dynamo",
+    "a": [
+     "die oranje",
+     "dynamo",
+     "dynamo fc",
+     "houston dynamo",
+     "houston dynamo fc",
+     "la naranja",
+     "men in orange",
+     "naranja",
+     "orange crush",
+     "the men in orange",
+     "the orange"
+    ]
+   },
+   {
+    "n": "Sporting Kansas City",
+    "s": "sporting-kansas-city",
+    "a": [
+     "kansas city wiz",
+     "kansas city wizards",
+     "skc",
+     "sporting kansas city",
+     "sporting kansas city fc",
+     "sporting kansas city football club",
+     "sporting kansas city soccer",
+     "sporting kansas city soccer club",
+     "sporting kc",
+     "sporting kc fc",
+     "sporting kc football club",
+     "sporting kc soccer",
+     "sporting kc soccer club"
+    ]
+   },
+   {
+    "n": "LA Galaxy",
+    "s": "la-galaxy",
+    "a": [
+     "angeles galaxy",
+     "galaxy",
+     "l a galaxy",
+     "la galaxy",
+     "los angeles galaxy"
+    ]
+   },
+   {
+    "n": "Los Angeles FC",
+    "s": "los-angeles-fc",
+    "a": [
+     "angeles fc",
+     "angeles football club",
+     "la fc",
+     "la football club",
+     "lafc",
+     "los angeles fc",
+     "los angeles football club"
+    ]
+   },
+   {
+    "n": "Minnesota United FC",
+    "s": "minnesota-united-fc",
+    "a": [
+     "loons",
+     "minnesota united",
+     "minnesota united fc",
+     "minnesota united football club",
+     "mn united fc",
+     "mnu",
+     "mnu fc",
+     "mnufc",
+     "the loons"
+    ]
+   },
+   {
+    "n": "Portland Timbers",
+    "s": "portland-timbers",
+    "a": [
+     "fc portland timbers",
+     "football club portland timbers",
+     "portland timbers",
+     "portland timbers fc",
+     "portland timbers football club",
+     "portland timbers soccer",
+     "portland timbers soccer club",
+     "soccer club of portland timbers",
+     "soccer club portland timbers",
+     "the timbers",
+     "timbers"
+    ]
+   },
+   {
+    "n": "Real Salt Lake",
+    "s": "real-salt-lake",
+    "a": [
+     "claret and cobalt",
+     "real salt lake",
+     "real salt lake city",
+     "rsl"
+    ]
+   },
+   {
+    "n": "San Diego FC",
+    "s": "san-diego-fc",
+    "a": [
+     "san diego",
+     "san diego f c",
+     "san diego fc",
+     "san diego football club",
+     "san diego mls team",
+     "sdfc"
+    ]
+   },
+   {
+    "n": "St. Louis City SC",
+    "s": "st-louis-city-sc",
+    "a": [
+     "mls4thelou",
+     "saint louis city sc",
+     "saint louis city soccer club",
+     "saint louis mls team",
+     "st louis city",
+     "st louis city sc",
+     "st louis city soccer club",
+     "st louis mls team",
+     "tkfc lc"
+    ]
+   },
+   {
+    "n": "San Jose Earthquakes",
+    "s": "san-jose-earthquakes",
+    "a": [
+     "clash",
+     "earthquakes",
+     "golden bay earthquakes",
+     "quakes",
+     "san jose clash",
+     "san jose earthquakes",
+     "san jose quakes",
+     "sj clash",
+     "sj earthquakes"
+    ]
+   },
+   {
+    "n": "Seattle Sounders FC",
+    "s": "seattle-sounders-fc",
+    "a": [
+     "seattle sounders",
+     "seattle sounders fc",
+     "seattle sounders football club",
+     "sounders fc",
+     "sounders football club"
+    ]
+   },
+   {
+    "n": "Vancouver Whitecaps FC",
+    "s": "vancouver-whitecaps-fc",
+    "a": [
+     "caps",
+     "vancouver caps",
+     "vancouver caps fc",
+     "vancouver whitecaps",
+     "vancouver whitecaps fc",
+     "vancouver whitecaps football club",
+     "whitecaps",
+     "whitecaps fc",
+     "whitecaps football club"
+    ]
+   }
+  ]
+ }
+]

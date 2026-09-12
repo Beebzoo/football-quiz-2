@@ -1,0 +1,1276 @@
+[
+ {
+  "tier": "easy",
+  "q": "Which Amsterdam club did PEC Zwolle beat 5-1 in the 2014 KNVB Cup final?",
+  "a": "Ajax",
+  "sub": "Zwolle were already 4-1 up at half time at De Kuip.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2013/14_(mannen)",
+  "conf": "sure",
+  "topic": "finals"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Feyenoord striker scored their second goal in the 3-0 win over AZ in the 2018 KNVB Cup final?",
+  "a": "Robin van Persie",
+  "sub": "He had rejoined Feyenoord from Fenerbahce three months earlier.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2017/18_(mannen)",
+  "conf": "sure",
+  "topic": "final scorers"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Tilburg club did Ajax beat 4-0 in the 2019 KNVB Cup final?",
+  "a": "Willem II",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "finals"
+ },
+ {
+  "tier": "easy",
+  "q": "By the end of 2025, which Eindhoven club had won the Johan Cruijff Schaal more often than any other?",
+  "a": "PSV",
+  "sub": "Fifteen wins by then, well clear of Ajax.",
+  "src": "https://nl.wikipedia.org/wiki/Johan_Cruijff_Schaal",
+  "conf": "sure",
+  "topic": "schaal"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Uruguayan was the top scorer of the 2009-10 KNVB Cup with eight goals for Ajax?",
+  "a": "Luis Suarez",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2009/10_(mannen)",
+  "conf": "sure",
+  "topic": "cup scorers"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Alkmaar club did Ajax beat on penalties in the 2007 KNVB Cup final?",
+  "a": "AZ",
+  "sub": "It finished 1-1, and Ajax won the shootout 8-7.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2006/07_(mannen)",
+  "conf": "sure",
+  "topic": "shootouts"
+ },
+ {
+  "tier": "easy",
+  "q": "Which club did Ajax beat 2-1 in the 2006 KNVB Cup final?",
+  "a": "PSV",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "finals"
+ },
+ {
+  "tier": "easy",
+  "q": "Which club did PSV beat 2-1 in the 2022 KNVB Cup final?",
+  "a": "Ajax",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "finals"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Nijmegen club did Feyenoord beat 1-0 in the 2024 KNVB Cup final?",
+  "a": "NEC",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "finals"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Arnhem club did Ajax beat 2-1 in the 2021 KNVB Cup final?",
+  "a": "Vitesse",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "finals"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Amsterdam club won the KNVB Cup three years running from 1970 to 1972?",
+  "a": "Ajax",
+  "sub": "Only Quick Den Haag and PSV have also won three in a row.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "history"
+ },
+ {
+  "tier": "easy",
+  "q": "Which northern club did PSV beat 3-0 in the 2015 Johan Cruijff Schaal?",
+  "a": "FC Groningen",
+  "sub": "Luuk de Jong scored twice.",
+  "src": "https://nl.wikipedia.org/wiki/Johan_Cruijff_Schaal_2015",
+  "conf": "sure",
+  "topic": "schaal"
+ },
+ {
+  "tier": "easy",
+  "q": "Which club did Ajax beat 5-0 in the 1998 KNVB Cup final?",
+  "a": "PSV",
+  "sub": "It sealed Ajax's league and cup double that season.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "finals"
+ },
+ {
+  "tier": "easy",
+  "q": "By the end of 2024-25, which Rotterdam club had won the KNVB Cup fourteen times?",
+  "a": "Feyenoord",
+  "sub": "Ajax led the list on twenty, PSV had eleven.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "records"
+ },
+ {
+  "tier": "easy",
+  "q": "Which Kerkrade club won the KNVB Cup in both 1997 and 2000?",
+  "a": "Roda JC",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "finals"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Kerkrade club did Feyenoord beat 3-0 in the 1992 KNVB Cup final?",
+  "a": "Roda JC",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "finals"
+ },
+ {
+  "tier": "normal",
+  "q": "Which northern club did PSV beat 4-1 in the 1989 KNVB Cup final?",
+  "a": "FC Groningen",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "finals"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Arnhem club did PSV beat 1-0 in the 1990 KNVB Cup final?",
+  "a": "Vitesse",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "finals"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Frisian club did Ajax beat 6-2 in the 1993 KNVB Cup final?",
+  "a": "sc Heerenveen",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "finals"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Nijmegen club did Feyenoord beat 2-1 in the 1994 KNVB Cup final?",
+  "a": "NEC",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "finals"
+ },
+ {
+  "tier": "normal",
+  "q": "Which fishing-town club did Feyenoord beat 2-1 in the 1995 KNVB Cup final?",
+  "a": "FC Volendam",
+  "sub": "The first final played for the Amstel Cup.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "finals"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Rotterdam club did PSV beat 5-2 in the 1996 KNVB Cup final?",
+  "a": "Sparta Rotterdam",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "finals"
+ },
+ {
+  "tier": "normal",
+  "q": "Which club did Ajax beat 3-2 after extra time in the 2002 KNVB Cup final?",
+  "a": "FC Utrecht",
+  "sub": "Part of Ajax's league and cup double under Ronald Koeman.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "finals"
+ },
+ {
+  "tier": "normal",
+  "q": "Which club did FC Utrecht beat 1-0 in the 2004 KNVB Cup final, their second cup in a row?",
+  "a": "FC Twente",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "finals"
+ },
+ {
+  "tier": "normal",
+  "q": "Which club knocked holders Ajax out of the 2007-08 KNVB Cup, winning 4-2 in the last 16?",
+  "a": "NAC Breda",
+  "sub": "Luis Suarez scored both Ajax goals in Breda.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2007/08_(mannen)",
+  "conf": "sure",
+  "topic": "upsets"
+ },
+ {
+  "tier": "normal",
+  "q": "Which club beat Ajax 4-0 in Amsterdam in the last 16 of the 2014-15 KNVB Cup?",
+  "a": "Vitesse",
+  "sub": "Bertrand Traore scored twice.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2014/15_(mannen)",
+  "conf": "sure",
+  "topic": "upsets"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Frisian club beat Ajax 2-1 in the last 16 of the 2016-17 KNVB Cup?",
+  "a": "SC Cambuur",
+  "sub": "Martijn Barto scored both Cambuur goals.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2016/17_(mannen)",
+  "conf": "sure",
+  "topic": "upsets"
+ },
+ {
+  "tier": "normal",
+  "q": "Which club did Feyenoord beat 2-0 in the quarter-finals of the 2017-18 KNVB Cup?",
+  "a": "PSV",
+  "sub": "Larsson and Vilhena scored inside the first half hour.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2017/18_(mannen)",
+  "conf": "sure",
+  "topic": "cup runs"
+ },
+ {
+  "tier": "normal",
+  "q": "Which club knocked holders Feyenoord out in the 2016-17 KNVB Cup quarter-finals and went on to win it?",
+  "a": "Vitesse",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2016/17_(mannen)",
+  "conf": "sure",
+  "topic": "cup runs"
+ },
+ {
+  "tier": "normal",
+  "q": "Which club beat Ajax 3-0 in Amsterdam in the semi-finals of the 2012-13 KNVB Cup?",
+  "a": "AZ",
+  "sub": "Jozy Altidore scored twice in the last quarter of an hour.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2012/13_(mannen)",
+  "conf": "sure",
+  "topic": "cup runs"
+ },
+ {
+  "tier": "normal",
+  "q": "Ajax and Feyenoord met in the semi-finals of the 2013-14 KNVB Cup. Which club won 3-1?",
+  "a": "Ajax",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2013/14_(mannen)",
+  "conf": "sure",
+  "topic": "cup runs"
+ },
+ {
+  "tier": "normal",
+  "q": "Which AZ striker was the top scorer of the 2017-18 KNVB Cup with nine goals?",
+  "a": "Wout Weghorst",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2017/18_(mannen)",
+  "conf": "sure",
+  "topic": "cup scorers"
+ },
+ {
+  "tier": "normal",
+  "q": "Which striker was the top scorer of the 2007-08 KNVB Cup with seven goals for Feyenoord?",
+  "a": "Roy Makaay",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2007/08_(mannen)",
+  "conf": "sure",
+  "topic": "cup scorers"
+ },
+ {
+  "tier": "normal",
+  "q": "In which year did the Dutch season-opening match take the name Johan Cruijff Schaal?",
+  "a": "1996",
+  "sub": "Before that it was the Dutch Super Cup and the PTT Telecom Cup.",
+  "src": "https://nl.wikipedia.org/wiki/Johan_Cruijff_Schaal",
+  "conf": "sure",
+  "topic": "schaal"
+ },
+ {
+  "tier": "normal",
+  "q": "Which stadium staged the Johan Cruijff Schaal every year from 1996 to 2016?",
+  "a": "The Amsterdam ArenA",
+  "src": "https://nl.wikipedia.org/wiki/Johan_Cruijff_Schaal",
+  "conf": "sure",
+  "topic": "schaal"
+ },
+ {
+  "tier": "normal",
+  "q": "Since 2017 the Johan Cruijff Schaal has been played at whose ground?",
+  "a": "The Eredivisie champions'",
+  "src": "https://nl.wikipedia.org/wiki/Johan_Cruijff_Schaal",
+  "conf": "sure",
+  "topic": "schaal"
+ },
+ {
+  "tier": "normal",
+  "q": "Which club did FC Utrecht beat 4-2 to win the 2004 Johan Cruijff Schaal?",
+  "a": "Ajax",
+  "src": "https://nl.wikipedia.org/wiki/Johan_Cruijff_Schaal",
+  "conf": "sure",
+  "topic": "schaal"
+ },
+ {
+  "tier": "normal",
+  "q": "Which club did PSV beat 3-1 in the 2003 Johan Cruijff Schaal?",
+  "a": "FC Utrecht",
+  "src": "https://nl.wikipedia.org/wiki/Johan_Cruijff_Schaal",
+  "conf": "sure",
+  "topic": "schaal"
+ },
+ {
+  "tier": "normal",
+  "q": "Which club did Ajax beat 3-1 in the 2002 Johan Cruijff Schaal?",
+  "a": "PSV",
+  "src": "https://nl.wikipedia.org/wiki/Johan_Cruijff_Schaal",
+  "conf": "sure",
+  "topic": "schaal"
+ },
+ {
+  "tier": "normal",
+  "q": "If the Eredivisie champions have also won the cup, which club is invited to the Johan Cruijff Schaal?",
+  "a": "The league runners-up",
+  "sub": "It happened in 1998, 2002, 2005, 2019 and 2021.",
+  "src": "https://nl.wikipedia.org/wiki/Johan_Cruijff_Schaal",
+  "conf": "sure",
+  "topic": "schaal"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Belgian coach won the 2010 Johan Cruijff Schaal and the 2011 KNVB Cup with FC Twente?",
+  "a": "Michel Preud'homme",
+  "src": "https://nl.wikipedia.org/wiki/FC_Twente",
+  "conf": "sure",
+  "topic": "managers"
+ },
+ {
+  "tier": "normal",
+  "q": "Which coach won the 2001 KNVB Cup with FC Twente, the first trophy of his first spell there?",
+  "a": "Fred Rutten",
+  "src": "https://nl.wikipedia.org/wiki/FC_Twente",
+  "conf": "sure",
+  "topic": "managers"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Breda club did PSV beat 6-0 in the 1974 KNVB Cup final?",
+  "a": "NAC Breda",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "finals"
+ },
+ {
+  "tier": "normal",
+  "q": "Which club did Ajax beat 2-0 in the 1970 KNVB Cup final?",
+  "a": "PSV",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "finals"
+ },
+ {
+  "tier": "normal",
+  "q": "Which club did Feyenoord beat 3-1 in the 1980 KNVB Cup final?",
+  "a": "Ajax",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "finals"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Alkmaar club beat Ajax 3-1 in the 1981 KNVB Cup final?",
+  "a": "AZ '67",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "finals"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Nijmegen club did Ajax beat over two legs in the 1983 KNVB Cup final?",
+  "a": "NEC",
+  "sub": "Both matches finished 3-1 to Ajax.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "finals"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Enschede club lost the 1979 KNVB Cup final to Ajax after a replay?",
+  "a": "FC Twente",
+  "sub": "The first game was 1-1, the replay 3-0.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "replays"
+ },
+ {
+  "tier": "normal",
+  "q": "Which club did Feyenoord beat over two matches in the 1969 KNVB Cup final?",
+  "a": "PSV",
+  "sub": "It finished 1-1 after extra time, then 2-0 in the replay.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "replays"
+ },
+ {
+  "tier": "normal",
+  "q": "Which Rotterdam club won the KNVB Cup in 1958, 1962 and 1966?",
+  "a": "Sparta Rotterdam",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "history"
+ },
+ {
+  "tier": "hard",
+  "q": "Who scored FC Twente's extra-time winner in the 2011 KNVB Cup final against Ajax?",
+  "a": "Marc Janko",
+  "sub": "He got it in the 117th minute.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2010/11_(mannen)",
+  "conf": "sure",
+  "topic": "final scorers"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Slovak scored both goals as FC Groningen beat PEC Zwolle in the 2015 KNVB Cup final?",
+  "a": "Albert Rusnak",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2014/15_(mannen)",
+  "conf": "sure",
+  "topic": "final scorers"
+ },
+ {
+  "tier": "hard",
+  "q": "Which two Feyenoord players scored in the 2-0 win over Roda JC in the 2008 KNVB Cup final?",
+  "a": "Denny Landzaat and Jonathan de Guzman",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2007/08_(mannen)",
+  "conf": "sure",
+  "topic": "final scorers"
+ },
+ {
+  "tier": "hard",
+  "q": "Which PSV midfielder scored the only goal of the 2016 Johan Cruijff Schaal against Feyenoord?",
+  "a": "Davy Propper",
+  "src": "https://nl.wikipedia.org/wiki/Johan_Cruijff_Schaal_2016",
+  "conf": "sure",
+  "topic": "schaal"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Swede opened the scoring in PSV's 3-0 win over Heracles Almelo in the 2012 KNVB Cup final?",
+  "a": "Ola Toivonen",
+  "sub": "Mertens and Lens added the others.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2011/12_(mannen)",
+  "conf": "sure",
+  "topic": "final scorers"
+ },
+ {
+  "tier": "hard",
+  "q": "Which two AZ players scored in their 2-1 win over PSV in the 2013 KNVB Cup final?",
+  "a": "Adam Maher and Jozy Altidore",
+  "sub": "Both goals came inside the first quarter of an hour.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2012/13_(mannen)",
+  "conf": "sure",
+  "topic": "final scorers"
+ },
+ {
+  "tier": "hard",
+  "q": "Which PEC Zwolle winger scored twice inside the first twelve minutes of the 2014 KNVB Cup final?",
+  "a": "Ryan Thomas",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2013/14_(mannen)",
+  "conf": "sure",
+  "topic": "final scorers"
+ },
+ {
+  "tier": "hard",
+  "q": "Which PEC Zwolle striker scored twice in the first half of the 2014 KNVB Cup final against Ajax?",
+  "a": "Guyon Fernandez",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2013/14_(mannen)",
+  "conf": "sure",
+  "topic": "final scorers"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Ajax defender scored after three minutes of the 2014 KNVB Cup final, then watched Zwolle score five?",
+  "a": "Ricardo van Rhijn",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2013/14_(mannen)",
+  "conf": "sure",
+  "topic": "final scorers"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Feyenoord striker opened the scoring in the 2-1 win over FC Utrecht in the 2016 KNVB Cup final?",
+  "a": "Michiel Kramer",
+  "sub": "An own goal by Filip Bednarek made it 2-0.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2015/16_(mannen)",
+  "conf": "sure",
+  "topic": "final scorers"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Dane opened the scoring in Feyenoord's 3-0 win over AZ in the 2018 KNVB Cup final?",
+  "a": "Nicolai Jorgensen",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2017/18_(mannen)",
+  "conf": "sure",
+  "topic": "final scorers"
+ },
+ {
+  "tier": "hard",
+  "q": "Who scored Feyenoord's third goal deep in stoppage time of the 2018 KNVB Cup final?",
+  "a": "Jens Toornstra",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2017/18_(mannen)",
+  "conf": "sure",
+  "topic": "final scorers"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Ajax midfielder scored twice inside the first seven minutes of the 2010 KNVB Cup final in Amsterdam?",
+  "a": "Siem de Jong",
+  "sub": "He scored twice more in the second leg at De Kuip.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2009/10_(mannen)",
+  "conf": "sure",
+  "topic": "final scorers"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Belgian scored AZ's goal in the 2007 KNVB Cup final against Ajax?",
+  "a": "Mousa Dembele",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2006/07_(mannen)",
+  "conf": "sure",
+  "topic": "final scorers"
+ },
+ {
+  "tier": "hard",
+  "q": "Who scored Ajax's equaliser in the 2007 KNVB Cup final against AZ?",
+  "a": "Klaas-Jan Huntelaar",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2006/07_(mannen)",
+  "conf": "sure",
+  "topic": "final scorers"
+ },
+ {
+  "tier": "hard",
+  "q": "Which two sc Heerenveen players scored in the 2-2 draw with FC Twente in the 2009 KNVB Cup final?",
+  "a": "Goran Popov and Bonaventure Kalou",
+  "sub": "Kalou's came in the 112th minute.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2008/09_(mannen)",
+  "conf": "sure",
+  "topic": "final scorers"
+ },
+ {
+  "tier": "hard",
+  "q": "Which FC Twente winger scored their 118th-minute equaliser in the 2009 KNVB Cup final?",
+  "a": "Youssouf Hersi",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2008/09_(mannen)",
+  "conf": "sure",
+  "topic": "final scorers"
+ },
+ {
+  "tier": "hard",
+  "q": "Which club did FC Twente beat on penalties in the quarter-finals of the 2010-11 KNVB Cup?",
+  "a": "PSV",
+  "sub": "It was 1-1 after extra time in Enschede.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2010/11_(mannen)",
+  "conf": "sure",
+  "topic": "shootouts"
+ },
+ {
+  "tier": "hard",
+  "q": "Which club did AZ beat 4-0 in the semi-finals of the 2017-18 KNVB Cup?",
+  "a": "FC Twente",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2017/18_(mannen)",
+  "conf": "sure",
+  "topic": "cup runs"
+ },
+ {
+  "tier": "hard",
+  "q": "FC Twente knocked Ajax out of the 2017-18 KNVB Cup in the last 16. How was the tie settled?",
+  "a": "On penalties, 6-5, after a 1-1 draw",
+  "sub": "Assaidi equalised in stoppage time of normal time.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2017/18_(mannen)",
+  "conf": "sure",
+  "topic": "shootouts"
+ },
+ {
+  "tier": "hard",
+  "q": "Which second-tier club beat PSV 3-2 after extra time in the last 16 of the 2014-15 KNVB Cup?",
+  "a": "Roda JC",
+  "sub": "PSV went on to win the league that season.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2014/15_(mannen)",
+  "conf": "sure",
+  "topic": "upsets"
+ },
+ {
+  "tier": "hard",
+  "q": "Which small Rotterdam club reached the semi-finals of the 2014-15 KNVB Cup, beating NAC Breda 6-0 on the way?",
+  "a": "Excelsior",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2014/15_(mannen)",
+  "conf": "sure",
+  "topic": "cup runs"
+ },
+ {
+  "tier": "hard",
+  "q": "Which club did Feyenoord beat 3-1 in the semi-finals of the 2015-16 KNVB Cup?",
+  "a": "AZ",
+  "sub": "Kuyt scored the third from the spot.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2015/16_(mannen)",
+  "conf": "sure",
+  "topic": "cup runs"
+ },
+ {
+  "tier": "hard",
+  "q": "Which club did Ajax beat 4-1 in the quarter-finals of the 2010-11 KNVB Cup?",
+  "a": "NAC Breda",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2010/11_(mannen)",
+  "conf": "sure",
+  "topic": "cup runs"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Costa Rican scored FC Twente's second goal in their 2011 Johan Cruijff Schaal win over Ajax?",
+  "a": "Bryan Ruiz",
+  "src": "https://nl.wikipedia.org/wiki/Johan_Cruijff_Schaal_2011",
+  "conf": "sure",
+  "topic": "schaal"
+ },
+ {
+  "tier": "hard",
+  "q": "Who scored the only goal as FC Twente beat Ajax in the 2010 Johan Cruijff Schaal?",
+  "a": "Luuk de Jong",
+  "sub": "He got it after eight minutes.",
+  "src": "https://nl.wikipedia.org/wiki/Johan_Cruijff_Schaal_2010",
+  "conf": "sure",
+  "topic": "schaal"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Ajax midfielder scored the extra-time winner in the 2013 Johan Cruijff Schaal against AZ?",
+  "a": "Siem de Jong",
+  "src": "https://nl.wikipedia.org/wiki/Johan_Cruijff_Schaal_2013",
+  "conf": "sure",
+  "topic": "schaal"
+ },
+ {
+  "tier": "hard",
+  "q": "Which PSV midfielder scored deep in stoppage time of the 2012 Johan Cruijff Schaal against Ajax?",
+  "a": "Georginio Wijnaldum",
+  "sub": "It made the final score 4-2.",
+  "src": "https://nl.wikipedia.org/wiki/Johan_Cruijff_Schaal_2012",
+  "conf": "sure",
+  "topic": "schaal"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Kerkrade club lost KNVB Cup finals to PSV in both 1976 and 1988?",
+  "a": "Roda JC",
+  "sub": "Both went to extra time.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "finals"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Hague club did Ajax beat 4-2 after extra time in the 1987 KNVB Cup final?",
+  "a": "FC Den Haag",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "finals"
+ },
+ {
+  "tier": "hard",
+  "q": "Which second-tier club from Roosendaal lost the 1986 KNVB Cup final 3-0 to Ajax?",
+  "a": "RBC",
+  "sub": "They were an Eerste Divisie side at the time.",
+  "src": "https://nl.wikipedia.org/wiki/RBC_(voetbalclub)",
+  "conf": "sure",
+  "topic": "small clubs"
+ },
+ {
+  "tier": "hard",
+  "q": "Which second-tier club reached the 1977 KNVB Cup final and lost 3-0 to FC Twente after extra time?",
+  "a": "PEC Zwolle",
+  "sub": "The final was played in Nijmegen.",
+  "src": "https://nl.wikipedia.org/wiki/PEC_Zwolle",
+  "conf": "sure",
+  "topic": "small clubs"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Breda club did Ajax beat 3-0 in the 1961 KNVB Cup final?",
+  "a": "NAC",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "finals"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Almelo club beat AZ 4-2 after extra time to reach the 2012 KNVB Cup final?",
+  "a": "Heracles Almelo",
+  "sub": "Ninos Gouriye scored in the 120th minute.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2011/12_(mannen)",
+  "conf": "sure",
+  "topic": "cup runs"
+ },
+ {
+  "tier": "hard",
+  "q": "Which amateur club from Katwijk reached the quarter-finals of the 2007-08 KNVB Cup?",
+  "a": "Quick Boys",
+  "sub": "NAC Breda beat them 3-0 in the last eight.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2007/08_(mannen)",
+  "conf": "sure",
+  "topic": "amateurs"
+ },
+ {
+  "tier": "hard",
+  "q": "Which amateur club from Veenendaal reached the quarter-finals of the 2011-12 KNVB Cup?",
+  "a": "GVVV",
+  "sub": "They knocked out Sparta Rotterdam on penalties on the way.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2011/12_(mannen)",
+  "conf": "sure",
+  "topic": "amateurs"
+ },
+ {
+  "tier": "hard",
+  "q": "Which amateur club knocked NEC out of the 2015-16 KNVB Cup and reached the quarter-finals?",
+  "a": "HHC Hardenberg",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2015/16_(mannen)",
+  "conf": "sure",
+  "topic": "amateurs"
+ },
+ {
+  "tier": "hard",
+  "q": "Which amateur club from Noordwijkerhout reached the semi-finals of the 2015-16 KNVB Cup?",
+  "a": "VVSB",
+  "sub": "FC Utrecht beat them 3-0 in the last four.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2015/16_(mannen)",
+  "conf": "sure",
+  "topic": "amateurs"
+ },
+ {
+  "tier": "hard",
+  "q": "Which second-tier club reached the semi-finals of the 2016-17 KNVB Cup, going out to AZ on penalties?",
+  "a": "SC Cambuur",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2016/17_(mannen)",
+  "conf": "sure",
+  "topic": "cup runs"
+ },
+ {
+  "tier": "hard",
+  "q": "Which club won the KNVB Cup in 2003 and again in 2004?",
+  "a": "FC Utrecht",
+  "sub": "They also won it in 1985.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "finals"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Hague club did Ajax beat 3-2 in the 1972 KNVB Cup final, sealing a league and cup double?",
+  "a": "FC Den Haag",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "doubles"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Rotterdam club lost the 1971 KNVB Cup final to Ajax after a replay?",
+  "a": "Sparta Rotterdam",
+  "sub": "It was 2-2 after extra time, then 2-1.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "replays"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Nijmegen club did NAC Breda beat 2-0 in the 1973 KNVB Cup final?",
+  "a": "NEC",
+  "sub": "It was NAC's only KNVB Cup win.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "finals"
+ },
+ {
+  "tier": "hard",
+  "q": "Which club did Feyenoord beat 3-0 in the semi-finals of the 2017-18 KNVB Cup?",
+  "a": "Willem II",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2017/18_(mannen)",
+  "conf": "sure",
+  "topic": "cup runs"
+ },
+ {
+  "tier": "hard",
+  "q": "Which Kerkrade club lost the Johan Cruijff Schaal to PSV in both 1997 and 2000?",
+  "a": "Roda JC",
+  "src": "https://nl.wikipedia.org/wiki/Johan_Cruijff_Schaal",
+  "conf": "sure",
+  "topic": "schaal"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Amsterdam amateur club knocked holders Vitesse out of the 2017-18 KNVB Cup in the first round?",
+  "a": "AVV Swift",
+  "sub": "It finished 0-0 and Swift won 5-3 on penalties.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2017/18_(mannen)",
+  "conf": "sure",
+  "topic": "upsets"
+ },
+ {
+  "tier": "extreme",
+  "q": "Ajax won 14-1 away at an amateur side in the 2009-10 KNVB Cup. Which club did they beat?",
+  "a": "WHC, from Wezep",
+  "sub": "The tie was played at the FC Zwolle Stadion.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2009/10_(mannen)",
+  "conf": "sure",
+  "topic": "thrashings"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which club did sc Heerenveen beat 11-1 in the last 16 of the 2011-12 KNVB Cup?",
+  "a": "FC Oss",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2011/12_(mannen)",
+  "conf": "sure",
+  "topic": "thrashings"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which club did Vitesse beat 10-1 in the 2012-13 KNVB Cup?",
+  "a": "ADO '20",
+  "sub": "Wilfried Bony and Renato Ibarra scored twice each.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2012/13_(mannen)",
+  "conf": "sure",
+  "topic": "thrashings"
+ },
+ {
+  "tier": "extreme",
+  "q": "Who scored the only goal as PEC Zwolle beat Ajax in the 2014 Johan Cruijff Schaal?",
+  "a": "Stefan Nijland",
+  "src": "https://nl.wikipedia.org/wiki/Johan_Cruijff_Schaal_2014",
+  "conf": "sure",
+  "topic": "schaal"
+ },
+ {
+  "tier": "extreme",
+  "q": "Who scored FC Utrecht's late winner against Helmond Sport in the 1985 KNVB Cup final?",
+  "a": "John van Loen",
+  "src": "https://nl.wikipedia.org/wiki/Helmond_Sport",
+  "conf": "sure",
+  "topic": "final scorers"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which AZ defender missed the decisive penalty in the 2007 KNVB Cup final shootout against Ajax?",
+  "a": "Ryan Donk",
+  "sub": "It was the sixteenth kick of the shootout.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2006/07_(mannen)",
+  "conf": "sure",
+  "topic": "shootouts"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Ajax veteran scored the winning penalty in the 8-7 shootout that decided the 2007 KNVB Cup final?",
+  "a": "Edgar Davids",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2006/07_(mannen)",
+  "conf": "sure",
+  "topic": "shootouts"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Dane scored Feyenoord's only goal in the second leg of the 2010 KNVB Cup final?",
+  "a": "Jon Dahl Tomasson",
+  "sub": "Ajax still won the leg 4-1.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2009/10_(mannen)",
+  "conf": "sure",
+  "topic": "final scorers"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which FC Twente player missed in the shootout as sc Heerenveen won the 2009 KNVB Cup final?",
+  "a": "Youssouf Hersi",
+  "sub": "He had scored the equaliser in the 118th minute.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2008/09_(mannen)",
+  "conf": "sure",
+  "topic": "shootouts"
+ },
+ {
+  "tier": "extreme",
+  "q": "Whose stoppage-time own goal knocked Ajax out of the 2015-16 KNVB Cup at Feyenoord?",
+  "a": "Joel Veltman",
+  "sub": "Feyenoord won 1-0 and went on to lift the cup.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2015/16_(mannen)",
+  "conf": "sure",
+  "topic": "upsets"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Kerkrade club did Willem II beat on penalties in the quarter-finals of the 2017-18 KNVB Cup?",
+  "a": "Roda JC",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2017/18_(mannen)",
+  "conf": "sure",
+  "topic": "shootouts"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Delft club lost the 1962 KNVB Cup final 1-0 to Sparta Rotterdam after extra time?",
+  "a": "DHC",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "small clubs"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which second-city club did Feyenoord beat 1-0 in the 1991 KNVB Cup final?",
+  "a": "BVV Den Bosch",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "finals"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which club did Sparta Rotterdam beat 4-3 in the 1958 KNVB Cup final?",
+  "a": "FC Volendam",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "finals"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Dordrecht club lost the 1943 KNVB Cup final 3-2 to Ajax?",
+  "a": "DFC",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "history"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Amsterdam club won the very first KNVB Cup, in 1899?",
+  "a": "RAP",
+  "sub": "They won the national championship in the same season.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "early history"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Hague club did RAP beat 1-0 after extra time in the first KNVB Cup final, in 1899?",
+  "a": "HVV",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "early history"
+ },
+ {
+  "tier": "extreme",
+  "q": "Under what name did the Dutch cup run from 1899 to 1920, after the man who put up the trophy?",
+  "a": "The Holdertbeker",
+  "sub": "Hak Holdert was a newspaper publisher.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "early history"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Hague club won the KNVB Cup three years running from 1909 to 1911?",
+  "a": "Quick",
+  "sub": "Their second team played the first two of those finals.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "early history"
+ },
+ {
+  "tier": "extreme",
+  "q": "The biggest KNVB Cup final win was 9-2 in 1944. Which Tilburg club scored the nine?",
+  "a": "Willem II",
+  "sub": "Groene Ster from Heerlerheide were the beaten finalists.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "records"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Breda club beat VV Dongen 18-1 in the 1958-59 KNVB Cup, a record for the professional era?",
+  "a": "NAC",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "records"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which PSV striker scored the fastest goal in a KNVB Cup final, in the second minute in 1989?",
+  "a": "Romario",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "records"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Feyenoord player scored four goals in the 1935 KNVB Cup final against HVV Helmond?",
+  "a": "Wim Groenendijk",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "records"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Schiedam club won the first Dutch super cup match, in 1949 at the Goffertstadion?",
+  "a": "SVV",
+  "sub": "They were the reigning national champions.",
+  "src": "https://nl.wikipedia.org/wiki/Johan_Cruijff_Schaal",
+  "conf": "sure",
+  "topic": "schaal history"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Nijmegen club did SVV beat 2-0 in that 1949 Dutch super cup match?",
+  "a": "Quick",
+  "src": "https://nl.wikipedia.org/wiki/Johan_Cruijff_Schaal",
+  "conf": "sure",
+  "topic": "schaal history"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which club won the 1991 PTT Telecom Cup, the match that restarted the Dutch super cup?",
+  "a": "Feyenoord",
+  "sub": "They beat champions PSV 1-0 at De Kuip.",
+  "src": "https://nl.wikipedia.org/wiki/Johan_Cruijff_Schaal",
+  "conf": "sure",
+  "topic": "schaal history"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Romanian scored the only goal of the 1991 PTT Telecom Cup for Feyenoord?",
+  "a": "Marian Damaschin",
+  "src": "https://nl.wikipedia.org/wiki/Johan_Cruijff_Schaal",
+  "conf": "sure",
+  "topic": "schaal history"
+ },
+ {
+  "tier": "extreme",
+  "q": "From 2014 the Johan Cruijff Schaal stopped using which part of a drawn match?",
+  "a": "Extra time, it goes straight to penalties",
+  "sub": "The KNVB did not want players tired so early in the season.",
+  "src": "https://nl.wikipedia.org/wiki/Johan_Cruijff_Schaal",
+  "conf": "sure",
+  "topic": "schaal"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which club did Ajax beat 4-0 in the 1993 PTT Telecom Cup?",
+  "a": "Feyenoord",
+  "src": "https://nl.wikipedia.org/wiki/Johan_Cruijff_Schaal",
+  "conf": "sure",
+  "topic": "schaal history"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Alkmaar club completed the Dutch league and cup double in 1980-81?",
+  "a": "AZ '67",
+  "sub": "The only club outside Ajax, PSV and Feyenoord to do it in the professional era.",
+  "src": "https://nl.wikipedia.org/wiki/Dubbel_(voetbal)",
+  "conf": "sure",
+  "topic": "doubles"
+ },
+ {
+  "tier": "extreme",
+  "q": "Ajax had nine league and cup doubles by 2020-21. Which club was second on the list with four?",
+  "a": "PSV",
+  "sub": "Feyenoord had three.",
+  "src": "https://nl.wikipedia.org/wiki/Dubbel_(voetbal)",
+  "conf": "sure",
+  "topic": "doubles"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which club did AZ beat 5-0 in the quarter-finals of the 2012-13 KNVB Cup?",
+  "a": "FC Den Bosch",
+  "sub": "Den Bosch had two men sent off.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2012/13_(mannen)",
+  "conf": "sure",
+  "topic": "cup runs"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which PSV striker scored a hat-trick in the 3-0 semi-final win at PEC Zwolle in the 2012-13 KNVB Cup?",
+  "a": "Jurgen Locadia",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2012/13_(mannen)",
+  "conf": "sure",
+  "topic": "cup runs"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which Feyenoord captain scored a hat-trick in a 5-1 KNVB Cup win over ADO Den Haag in 2016-17?",
+  "a": "Dirk Kuyt",
+  "sub": "Two of them were penalties.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2016/17_(mannen)",
+  "conf": "sure",
+  "topic": "cup runs"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which club did Sparta Rotterdam beat on penalties to reach the semi-finals of the 2016-17 KNVB Cup?",
+  "a": "FC Volendam",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2016/17_(mannen)",
+  "conf": "sure",
+  "topic": "shootouts"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which amateur club beat MVV to reach the quarter-finals of the 2013-14 KNVB Cup?",
+  "a": "JVC Cuijk",
+  "sub": "PEC Zwolle then beat them 5-1.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2013/14_(mannen)",
+  "conf": "sure",
+  "topic": "amateurs"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which club knocked holders FC Groningen out of the 2015-16 KNVB Cup in the third round?",
+  "a": "FC Utrecht",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2015/16_(mannen)",
+  "conf": "sure",
+  "topic": "cup runs"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which two Feyenoord players scored in the 2-0 semi-final win over NAC Breda in the 2007-08 KNVB Cup?",
+  "a": "Michael Mols and Denny Landzaat",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2007/08_(mannen)",
+  "conf": "sure",
+  "topic": "cup runs"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which second-tier club reached the semi-finals of the 2008-09 KNVB Cup, beating Roda JC 3-2 after extra time?",
+  "a": "FC Volendam",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2008/09_(mannen)",
+  "conf": "sure",
+  "topic": "cup runs"
+ },
+ {
+  "tier": "extreme",
+  "q": "sc Heerenveen won 3-0 away at which club in the fourth round of the 2008-09 KNVB Cup?",
+  "a": "Feyenoord",
+  "sub": "Viktor Elm scored twice at De Kuip.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2008/09_(mannen)",
+  "conf": "sure",
+  "topic": "upsets"
+ },
+ {
+  "tier": "extreme",
+  "q": "Feyenoord won 3-0 away in the quarter-finals of the 2009-10 KNVB Cup at which club?",
+  "a": "PSV",
+  "sub": "Karim El Ahmadi scored twice.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2009/10_(mannen)",
+  "conf": "sure",
+  "topic": "cup runs"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which second-tier Deventer club reached the semi-finals of the 2009-10 KNVB Cup?",
+  "a": "Go Ahead Eagles",
+  "sub": "Ajax then beat them 6-0.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2009/10_(mannen)",
+  "conf": "sure",
+  "topic": "cup runs"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which club did Ajax beat 3-0 away in the last 16 of the 2012-13 KNVB Cup?",
+  "a": "FC Groningen",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2012/13_(mannen)",
+  "conf": "sure",
+  "topic": "cup runs"
+ },
+ {
+  "tier": "extreme",
+  "q": "Which club did Ajax beat 5-1 in the semi-finals of the 2010-11 KNVB Cup?",
+  "a": "RKC Waalwijk",
+  "sub": "Siem de Jong scored twice.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2010/11_(mannen)",
+  "conf": "sure",
+  "topic": "cup runs"
+ },
+ {
+  "tier": "ball",
+  "q": "What is the KNVB Cup trophy's nickname in Dutch?",
+  "a": "De dennenappel, the pine cone",
+  "sub": "It is shaped like one.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "the trophy"
+ },
+ {
+  "tier": "ball",
+  "q": "Which AZ goalkeeper was sent off at Ajax in December 2011 for kicking a supporter who ran on and attacked him?",
+  "a": "Esteban Alvarado",
+  "sub": "AZ's coach walked his team off, and the tie was replayed in full behind closed doors.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2011/12_(mannen)",
+  "conf": "sure",
+  "topic": "incidents"
+ },
+ {
+  "tier": "ball",
+  "q": "Why was the 2010 KNVB Cup final between Ajax and Feyenoord played over two matches?",
+  "a": "For crowd safety, so each set of fans got a final at home",
+  "sub": "No away supporters were allowed at either leg.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2009/10_(mannen)",
+  "conf": "sure",
+  "topic": "incidents"
+ },
+ {
+  "tier": "ball",
+  "q": "A Dutch super cup was arranged for August 1989 and never played. What stopped it?",
+  "a": "Two mayors refused permission on safety grounds",
+  "sub": "Eindhoven said no first, then Amsterdam.",
+  "src": "https://nl.wikipedia.org/wiki/Johan_Cruijff_Schaal",
+  "conf": "sure",
+  "topic": "schaal history"
+ },
+ {
+  "tier": "ball",
+  "q": "The record cup score is HFC 25-0 in 1903-04. How many did Eddy Holdert score in that one game?",
+  "a": "Thirteen",
+  "sub": "Both are still Dutch cup records.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "records"
+ },
+ {
+  "tier": "ball",
+  "q": "Helmond Sport agreed to play the 1985 KNVB Cup final at their opponents' ground. Why?",
+  "a": "To make some money out of the tie",
+  "sub": "FC Utrecht won it 1-0 with a goal in the last minute.",
+  "src": "https://nl.wikipedia.org/wiki/Helmond_Sport",
+  "conf": "sure",
+  "topic": "small clubs"
+ },
+ {
+  "tier": "ball",
+  "q": "The Johan Cruijff Schaal trophy has had fourteen corners since 2017. What is the fourteen for?",
+  "a": "Cruyff's shirt number",
+  "src": "https://nl.wikipedia.org/wiki/Johan_Cruijff_Schaal",
+  "conf": "sure",
+  "topic": "the trophy"
+ },
+ {
+  "tier": "ball",
+  "q": "Ajax scored fourteen against an amateur side in the 2009-10 KNVB Cup. Who scored six of them?",
+  "a": "Luis Suarez",
+  "sub": "The final score at WHC was 14-1.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker_2009/10_(mannen)",
+  "conf": "sure",
+  "topic": "thrashings"
+ },
+ {
+  "tier": "ball",
+  "q": "From 2025-26 the best amateur side in the KNVB Cup gets its own trophy. What colour is it?",
+  "a": "Blue, a blue dennenappel",
+  "sub": "De Treffers won the first one.",
+  "src": "https://nl.wikipedia.org/wiki/KNVB_Beker",
+  "conf": "sure",
+  "topic": "the trophy"
+ },
+ {
+  "tier": "ball",
+  "q": "Up to 2025 no Dutch club had won league, cup and Johan Cruijff Schaal in one season. Who did all three inside one calendar year, twice?",
+  "a": "Ajax",
+  "sub": "In 2002 and again in 2019.",
+  "src": "https://nl.wikipedia.org/wiki/Dubbel_(voetbal)",
+  "conf": "sure",
+  "topic": "doubles"
+ }
+]
