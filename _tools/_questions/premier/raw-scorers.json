@@ -1,0 +1,31 @@
+[
+{"tier":"easy","cat":"scorers","q":"Which striker scored thirty-four goals in 1994-95 and won the title with Blackburn Rovers?","a":"Alan Shearer","src":"https://en.wikipedia.org/wiki/Alan_Shearer","conf":"sure"},
+{"tier":"easy","cat":"scorers","q":"Which Norwegian striker scored thirty-six league goals in his first Premier League season with Manchester City?","a":"Erling Haaland","sub":"2022-23, and a treble with it.","src":"https://en.wikipedia.org/wiki/2022%E2%80%9323_Premier_League","conf":"sure"},
+{"tier":"easy","cat":"scorers","q":"Which Egyptian forward scored thirty-two league goals for Liverpool in 2017-18?","a":"Mohamed Salah","src":"https://en.wikipedia.org/wiki/2017%E2%80%9318_Premier_League","conf":"sure"},
+{"tier":"easy","cat":"scorers","q":"Which Frenchman won the Premier League Golden Boot four times with Arsenal?","a":"Thierry Henry","src":"https://en.wikipedia.org/wiki/Thierry_Henry","conf":"sure"},
+{"tier":"easy","cat":"scorers","q":"Which England striker won the Premier League Golden Boot three times while at Tottenham?","a":"Harry Kane","src":"https://en.wikipedia.org/wiki/Harry_Kane","conf":"sure"},
+{"tier":"easy","cat":"scorers","q":"Which Manchester United winger scored thirty-one league goals in 2007-08 before leaving for Real Madrid?","a":"Cristiano Ronaldo","src":"https://en.wikipedia.org/wiki/2007%E2%80%9308_Premier_League","conf":"sure"},
+
+{"tier":"normal","cat":"scorers","q":"Which Sunderland striker scored thirty league goals in 1999-2000?","a":"Kevin Phillips","sub":"He took the European Golden Shoe that year.","src":"https://en.wikipedia.org/wiki/Kevin_Phillips_(footballer)","conf":"sure"},
+{"tier":"normal","cat":"scorers","q":"Which Dutchman scored thirty league goals for Arsenal in 2011-12 and then joined Manchester United?","a":"Robin van Persie","src":"https://en.wikipedia.org/wiki/Robin_van_Persie","conf":"sure"},
+{"tier":"normal","cat":"scorers","q":"Which Uruguayan scored thirty-one league goals for Liverpool in 2013-14?","a":"Luis Suarez","src":"https://en.wikipedia.org/wiki/2013%E2%80%9314_Premier_League","conf":"sure"},
+{"tier":"normal","cat":"scorers","q":"Which Ivorian striker won the Golden Boot at Chelsea in 2006-07 and again in 2009-10?","a":"Didier Drogba","src":"https://en.wikipedia.org/wiki/Didier_Drogba","conf":"sure"},
+{"tier":"normal","cat":"scorers","q":"Which Leicester City striker top scored in the Premier League in 2019-20?","a":"Jamie Vardy","src":"https://en.wikipedia.org/wiki/2019%E2%80%9320_Premier_League","conf":"sure"},
+{"tier":"normal","cat":"scorers","q":"Which Newcastle striker scored thirty-four league goals in 1993-94 before joining Manchester United?","a":"Andy Cole","src":"https://en.wikipedia.org/wiki/Andy_Cole","conf":"sure"},
+{"tier":"normal","cat":"scorers","q":"Which Dutch striker top scored in the Premier League in 2002-03, playing for Manchester United?","a":"Ruud van Nistelrooy","src":"https://en.wikipedia.org/wiki/2002%E2%80%9303_FA_Premier_League","conf":"sure"},
+
+{"tier":"hard","cat":"scorers","q":"Three players shared the 1997-98 Golden Boot on eighteen goals. Name any one of them.","a":"Dion Dublin, Michael Owen or Chris Sutton","src":"https://en.wikipedia.org/wiki/1997%E2%80%9398_FA_Premier_League","conf":"sure"},
+{"tier":"hard","cat":"scorers","q":"Which two players shared the 2021-22 Golden Boot on twenty-three goals?","a":"Mohamed Salah and Son Heung-min","sub":"Son did it without taking a penalty.","src":"https://en.wikipedia.org/wiki/2021%E2%80%9322_Premier_League","conf":"sure"},
+{"tier":"hard","cat":"scorers","q":"Which Frenchman top scored for Chelsea in 2008-09 with nineteen league goals?","a":"Nicolas Anelka","src":"https://en.wikipedia.org/wiki/2008%E2%80%9309_Premier_League","conf":"sure"},
+{"tier":"hard","cat":"scorers","q":"Which two players shared the 2010-11 Golden Boot on twenty goals?","a":"Carlos Tevez and Dimitar Berbatov","src":"https://en.wikipedia.org/wiki/2010%E2%80%9311_Premier_League","conf":"sure"},
+{"tier":"hard","cat":"scorers","q":"Which Dutch striker won the Golden Boot in 2000-01 while at Chelsea?","a":"Jimmy Floyd Hasselbaink","src":"https://en.wikipedia.org/wiki/Jimmy_Floyd_Hasselbaink","conf":"sure"},
+{"tier":"hard","cat":"scorers","q":"Which Argentine scored the goal that won Manchester City the 2011-12 title?","a":"Sergio Aguero","src":"https://en.wikipedia.org/wiki/Sergio_Ag%C3%BCero","conf":"sure"},
+
+{"tier":"extreme","cat":"scorers","q":"How many league goals did Andy Cole score for Newcastle in 1993-94?","a":"Thirty-four","src":"https://en.wikipedia.org/wiki/1993%E2%80%9394_FA_Premier_League","conf":"sure"},
+{"tier":"extreme","cat":"scorers","q":"Alan Shearer won three Golden Boots in a row. Which three seasons were they?","a":"1994-95, 1995-96 and 1996-97","src":"https://en.wikipedia.org/wiki/Alan_Shearer","conf":"sure"},
+{"tier":"extreme","cat":"scorers","q":"Which three players shared the 2018-19 Golden Boot on twenty-two goals?","a":"Mohamed Salah, Sadio Mane and Pierre-Emerick Aubameyang","src":"https://en.wikipedia.org/wiki/2018%E2%80%9319_Premier_League","conf":"sure"},
+{"tier":"extreme","cat":"scorers","q":"Which Coventry City striker shared the 1997-98 Golden Boot?","a":"Dion Dublin","src":"https://en.wikipedia.org/wiki/Dion_Dublin","conf":"sure"},
+
+{"tier":"ball","cat":"scorers","q":"Which Manchester United substitute scored four goals in the last twenty minutes at Nottingham Forest in 1999?","a":"Ole Gunnar Solskjaer","sub":"United won it 8-1. He came on in the seventy-second minute.","src":"https://en.wikipedia.org/wiki/Ole_Gunnar_Solskj%C3%A6r","conf":"sure"},
+{"tier":"ball","cat":"scorers","q":"Which Everton goalkeeper scored from his own half against Bolton Wanderers in January 2012?","a":"Tim Howard","sub":"He refused to celebrate. Everton lost the game anyway.","src":"https://en.wikipedia.org/wiki/Tim_Howard","conf":"sure"}
+]

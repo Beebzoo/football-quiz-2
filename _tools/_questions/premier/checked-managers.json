@@ -1,0 +1,223 @@
+[
+ {
+  "tier": "easy",
+  "cat": "managers",
+  "q": "Which Frenchman managed Arsenal from 1996 to 2018?",
+  "a": "Arsene Wenger",
+  "src": "https://en.wikipedia.org/wiki/Ars%C3%A8ne_Wenger",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "managers",
+  "q": "Which manager called himself the Special One on arriving at Chelsea in 2004?",
+  "a": "Jose Mourinho",
+  "src": "https://en.wikipedia.org/wiki/Jos%C3%A9_Mourinho",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "managers",
+  "q": "Which Spaniard took over at Manchester City in 2016?",
+  "a": "Pep Guardiola",
+  "src": "https://en.wikipedia.org/wiki/Pep_Guardiola",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "managers",
+  "q": "Which German managed Liverpool from 2015 to 2024?",
+  "a": "Jurgen Klopp",
+  "src": "https://en.wikipedia.org/wiki/J%C3%BCrgen_Klopp",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "managers",
+  "q": "Which manager retired in 2013 after twenty-six years at Manchester United?",
+  "a": "Sir Alex Ferguson",
+  "src": "https://en.wikipedia.org/wiki/Alex_Ferguson",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "managers",
+  "q": "Who succeeded Sir Alex Ferguson as Manchester United manager in 2013?",
+  "a": "David Moyes",
+  "sub": "He lasted until the following April.",
+  "src": "https://en.wikipedia.org/wiki/David_Moyes",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "managers",
+  "q": "Which manager won the Premier League with Chelsea in 2014-15 and 2016-17 under different owners of the dugout?",
+  "a": "Jose Mourinho in 2014-15 and Antonio Conte in 2016-17",
+  "src": "https://en.wikipedia.org/wiki/Chelsea_F.C.",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "managers",
+  "q": "Which Italian managed Chelsea to the double in 2009-10?",
+  "a": "Carlo Ancelotti",
+  "src": "https://en.wikipedia.org/wiki/Carlo_Ancelotti",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "managers",
+  "q": "Which manager took Tottenham to the 2019 Champions League final?",
+  "a": "Mauricio Pochettino",
+  "src": "https://en.wikipedia.org/wiki/Mauricio_Pochettino",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "managers",
+  "q": "Which Spaniard managed Liverpool to the 2005 Champions League title?",
+  "a": "Rafael Benitez",
+  "src": "https://en.wikipedia.org/wiki/Rafael_Ben%C3%ADtez",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "managers",
+  "q": "Which former Arsenal midfielder became the club's manager in 2019?",
+  "a": "Mikel Arteta",
+  "src": "https://en.wikipedia.org/wiki/Mikel_Arteta",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "managers",
+  "q": "Which manager led Everton for eleven seasons before joining Manchester United?",
+  "a": "David Moyes",
+  "src": "https://en.wikipedia.org/wiki/David_Moyes",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "managers",
+  "q": "Which Dutchman managed Manchester United from 2014 to 2016?",
+  "a": "Louis van Gaal",
+  "sub": "He won the FA Cup and was sacked days later.",
+  "src": "https://en.wikipedia.org/wiki/Louis_van_Gaal",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "managers",
+  "q": "Which manager took Wigan Athletic to the 2013 FA Cup and down in the same season?",
+  "a": "Roberto Martinez",
+  "src": "https://en.wikipedia.org/wiki/Roberto_Mart%C3%ADnez",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "managers",
+  "q": "Which manager won the Premier League with Manchester United in 2012-13, Ferguson's last season, as his assistant?",
+  "a": "Mike Phelan was his assistant",
+  "src": "https://en.wikipedia.org/wiki/Mike_Phelan",
+  "conf": "likely",
+  "verdict": "review",
+  "note": "season 2012-13 not in source"
+ },
+ {
+  "tier": "hard",
+  "cat": "managers",
+  "q": "Which Portuguese manager took Wolverhampton Wanderers into Europe after promotion in 2018?",
+  "a": "Nuno Espirito Santo",
+  "src": "https://en.wikipedia.org/wiki/Nuno_Esp%C3%ADrito_Santo",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "managers",
+  "q": "Which manager kept Leicester City up in 2014-15 after they had been bottom at Christmas?",
+  "a": "Nigel Pearson",
+  "sub": "He was sacked that summer, and Ranieri won the league.",
+  "src": "https://en.wikipedia.org/wiki/Nigel_Pearson",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "extreme",
+  "cat": "managers",
+  "q": "Which manager took charge of Chelsea on an interim basis and won the Europa League in 2013?",
+  "a": "Rafael Benitez",
+  "src": "https://en.wikipedia.org/wiki/Rafael_Ben%C3%ADtez",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "extreme",
+  "cat": "managers",
+  "q": "Which Frenchman managed Newcastle United between 2010 and 2015?",
+  "a": "Alan Pardew",
+  "src": "https://en.wikipedia.org/wiki/Alan_Pardew",
+  "conf": "likely",
+  "verdict": "ok"
+ },
+ {
+  "tier": "extreme",
+  "cat": "managers",
+  "q": "Which manager led Blackburn Rovers to the 1994-95 title and later managed Liverpool again?",
+  "a": "Kenny Dalglish",
+  "src": "https://en.wikipedia.org/wiki/Kenny_Dalglish",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "extreme",
+  "cat": "managers",
+  "q": "Which Swansea City manager left for Liverpool in 2012?",
+  "a": "Brendan Rodgers",
+  "src": "https://en.wikipedia.org/wiki/Brendan_Rodgers",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "managers",
+  "q": "Which Manchester United manager was pelted with a flying boot in the dressing room, catching David Beckham above the eye?",
+  "a": "Sir Alex Ferguson",
+  "sub": "Beckham wore an Alice band to the next press call.",
+  "src": "https://en.wikipedia.org/wiki/David_Beckham",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "managers",
+  "q": "Which Newcastle manager resigned in 1997 after failing to catch Manchester United?",
+  "a": "Kevin Keegan",
+  "src": "https://en.wikipedia.org/wiki/Kevin_Keegan",
+  "conf": "likely",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "managers",
+  "q": "Which Crystal Palace manager was filmed sprinting down the touchline in celebration and became a meme for it?",
+  "a": "Alan Pardew",
+  "src": "https://en.wikipedia.org/wiki/Alan_Pardew",
+  "conf": "likely",
+  "verdict": "ok"
+ }
+]

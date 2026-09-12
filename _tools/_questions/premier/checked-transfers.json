@@ -1,0 +1,239 @@
+[
+ {
+  "tier": "easy",
+  "cat": "transfers",
+  "q": "Which club did Cristiano Ronaldo join from Manchester United in 2009?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/Cristiano_Ronaldo",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "transfers",
+  "q": "From which club did Liverpool sign Virgil van Dijk in January 2018?",
+  "a": "Southampton",
+  "src": "https://en.wikipedia.org/wiki/Virgil_van_Dijk",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "transfers",
+  "q": "From which club did Manchester City sign Erling Haaland in 2022?",
+  "a": "Borussia Dortmund",
+  "src": "https://en.wikipedia.org/wiki/Erling_Haaland",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "transfers",
+  "q": "From which club did Liverpool sign Mohamed Salah in 2017?",
+  "a": "Roma",
+  "src": "https://en.wikipedia.org/wiki/Mohamed_Salah",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "transfers",
+  "q": "Which Frenchman did Manchester United re-sign from Juventus in 2016?",
+  "a": "Paul Pogba",
+  "sub": "They had let him go for nothing four years earlier.",
+  "src": "https://en.wikipedia.org/wiki/Paul_Pogba",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "transfers",
+  "q": "Which striker did Manchester United sign from Newcastle United in January 1995?",
+  "a": "Andy Cole",
+  "src": "https://en.wikipedia.org/wiki/Andy_Cole",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "transfers",
+  "q": "From which club did Chelsea sign Didier Drogba in 2004?",
+  "a": "Marseille",
+  "src": "https://en.wikipedia.org/wiki/Didier_Drogba",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "transfers",
+  "q": "Which club did Robin van Persie leave Arsenal for in 2012?",
+  "a": "Manchester United",
+  "src": "https://en.wikipedia.org/wiki/Robin_van_Persie",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "transfers",
+  "q": "From which club did Arsenal sign Thierry Henry in 1999?",
+  "a": "Juventus",
+  "src": "https://en.wikipedia.org/wiki/Thierry_Henry",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "transfers",
+  "q": "Which club sold Luis Suarez to Barcelona in 2014?",
+  "a": "Liverpool",
+  "src": "https://en.wikipedia.org/wiki/Luis_Su%C3%A1rez",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "transfers",
+  "q": "From which club did Manchester City sign Sergio Aguero in 2011?",
+  "a": "Atletico Madrid",
+  "src": "https://en.wikipedia.org/wiki/Sergio_Ag%C3%BCero",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "transfers",
+  "q": "Which club did Gareth Bale join from Tottenham Hotspur in 2013?",
+  "a": "Real Madrid",
+  "src": "https://en.wikipedia.org/wiki/Gareth_Bale",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "transfers",
+  "q": "Which club did Liverpool sign Fernando Torres from in 2007?",
+  "a": "Atletico Madrid",
+  "src": "https://en.wikipedia.org/wiki/Fernando_Torres",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "transfers",
+  "q": "Liverpool sold Fernando Torres to Chelsea in January 2011 and signed a replacement the same day. Who was it?",
+  "a": "Andy Carroll",
+  "src": "https://en.wikipedia.org/wiki/Andy_Carroll",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "transfers",
+  "q": "From which club did Tottenham Hotspur sign Son Heung-min in 2015?",
+  "a": "Bayer Leverkusen",
+  "src": "https://en.wikipedia.org/wiki/Son_Heung-min",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "transfers",
+  "q": "Which club did Manchester United sign Bruno Fernandes from in January 2020?",
+  "a": "Sporting CP",
+  "src": "https://en.wikipedia.org/wiki/Bruno_Fernandes",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "transfers",
+  "q": "From which club did Arsenal sign Dennis Bergkamp in 1995?",
+  "a": "Inter Milan",
+  "src": "https://en.wikipedia.org/wiki/Dennis_Bergkamp",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "transfers",
+  "q": "Which club sold Kevin De Bruyne to Manchester City in 2015?",
+  "a": "VfL Wolfsburg",
+  "src": "https://en.wikipedia.org/wiki/Kevin_De_Bruyne",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "transfers",
+  "q": "From which club did Chelsea sign Eden Hazard in 2012?",
+  "a": "Lille",
+  "src": "https://en.wikipedia.org/wiki/Eden_Hazard",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "extreme",
+  "cat": "transfers",
+  "q": "Which club did Manchester United sign Dimitar Berbatov from in 2008?",
+  "a": "Tottenham Hotspur",
+  "src": "https://en.wikipedia.org/wiki/Dimitar_Berbatov",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "extreme",
+  "cat": "transfers",
+  "q": "From which club did Newcastle United sign Alan Shearer in 1996?",
+  "a": "Blackburn Rovers",
+  "sub": "A world record fee at the time.",
+  "src": "https://en.wikipedia.org/wiki/Alan_Shearer",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "extreme",
+  "cat": "transfers",
+  "q": "Which club did Arsenal sign Nicolas Anelka from as a teenager in 1997?",
+  "a": "Paris Saint-Germain",
+  "src": "https://en.wikipedia.org/wiki/Nicolas_Anelka",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "extreme",
+  "cat": "transfers",
+  "q": "From which club did Manchester City sign Rodri in 2019?",
+  "a": "Atletico Madrid",
+  "src": "https://en.wikipedia.org/wiki/Rodri",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "extreme",
+  "cat": "transfers",
+  "q": "Which club did Chelsea buy Nemanja Matic back from in 2014, having sold him three years earlier?",
+  "a": "Benfica",
+  "src": "https://en.wikipedia.org/wiki/Nemanja_Mati%C4%87",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "transfers",
+  "q": "Which Argentine crossed Manchester in 2009, and was advertised on a blue billboard reading Welcome to Manchester?",
+  "a": "Carlos Tevez",
+  "sub": "United to City. Ferguson called it arrogant.",
+  "src": "https://en.wikipedia.org/wiki/Carlos_Tevez",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "transfers",
+  "q": "Which striker scored the winner in Chelsea's 2012 Champions League final, left that summer, and came back two years later?",
+  "a": "Didier Drogba",
+  "src": "https://en.wikipedia.org/wiki/Didier_Drogba",
+  "conf": "sure",
+  "verdict": "ok"
+ }
+]
