@@ -33,7 +33,20 @@ const https = require("https");
 const REPO = path.join(__dirname, "..");
 const OUT = path.join(REPO, "assets", "wc2006", "index.json");
 const DRY = process.argv.includes("--dry");
-const UA = "BALL-quiz-build/1.0 (personal project; contact via repo owner)";
+/* THE USER AGENT IS NOT DECORATION, it is the difference between a build that
+   works and one that 429s on every single call.
+
+   This started as "BALL-quiz-build/1.0 (personal project; contact via repo
+   owner)" and Wikimedia throttled it into uselessness: every request came back
+   429 with retry-after 35, the retries fell through to the fallbacks, and the
+   build cheerfully reported eleven clubs out of eighteen as though that were a
+   result. The same URL with a User-Agent naming a real, reachable project
+   returned 200 on the first try and 174KB of wikitext.
+
+   Wikimedia's policy asks for something that identifies the client and gives a
+   way to contact whoever is running it. A vague phrase does not; a public repo
+   URL does. Nothing else about the requests changed. */
+const UA = "BALL2-quiz-build/1.0 (https://github.com/Beebzoo/football-quiz-2; personal hobby project)";
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 

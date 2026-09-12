@@ -2062,7 +2062,11 @@
 
   /* the scoreline */
   /* ---------- the scorebug ---------- */
+  /* The scorebug is a DARK panel on a light page, so it has to state its own
+     ink. Without this it inherited the page's near-black and the three letter
+     codes vanished into the bar they were printed on. */
   .sb{display:flex;align-items:stretch;justify-content:center;margin:2px auto 3px;
+    color:#eef5ef;
     width:100%;max-width:400px;border-radius:11px;overflow:hidden;
     background:linear-gradient(180deg,rgba(10,26,16,.96),rgba(6,18,11,.98));
     border:1px solid rgba(255,255,255,.14);
@@ -4720,23 +4724,58 @@ const SPEC_META = {
    not offer it: Career Path has no tiers to price a pass with, and Badge Zoom
    has no Extreme tier at all, so a raking ball would have nothing to ask. */
 const QUIZZES = {
-  classic: {label:"Let's Ball", ic:"ball", ac:"#e9b84c",
+  classic: {label:"Let's Ball", ic:"trophy", ac:"#e9b84c",
             spoken:null, mc:"assets/mc/index.json",
             teams:"assets/wc2006/index.json", flags:"assets/natflags/", ext:".png",
             blurb:"The whole bank, 6,984 questions, and on the pitch you play it as a country from the 2006 World Cup."},
+  /* THE LEAGUES all wear the same icon on purpose. They are the same KIND of
+     thing, so they read as a family and tell themselves apart by their accent
+     colour, the way a shelf of league badges does. */
   ere:     {label:"Eredivisie", ic:"stripes", ac:"#f5a35c",
             spoken:"assets/eredivisie/index.json", mc:"assets/eredivisie/mc.json",
             teams:"assets/eredivisie/clubs.json", flags:"assets/logos/", ext:".png",
             blurb:"The Dutch top flight, with 2007-08 to 2017-18 at its heart."},
+  premier: {label:"Premier League", ic:"stripes", ac:"#6f4fc4",
+            spoken:"assets/premier/index.json", mc:"assets/premier/mc.json",
+            teams:"assets/premier/clubs.json", flags:"assets/logos/", ext:".png",
+            blurb:"England's top flight, from the 1992 breakaway to last season."},
+  laliga:  {label:"La Liga", ic:"stripes", ac:"#e0574f",
+            spoken:"assets/laliga/index.json", mc:"assets/laliga/mc.json",
+            teams:"assets/laliga/clubs.json", flags:"assets/logos/", ext:".png",
+            blurb:"Spain, and not only the two of them."},
+  bundesliga:{label:"Bundesliga", ic:"stripes", ac:"#3d4450",
+            spoken:"assets/bundesliga/index.json", mc:"assets/bundesliga/mc.json",
+            teams:"assets/bundesliga/clubs.json", flags:"assets/logos/", ext:".png",
+            blurb:"Germany: the Meisterschale, the Ruhr, and the ones who broke the run."},
+  seriea:  {label:"Serie A", ic:"stripes", ac:"#3f7fd0",
+            spoken:"assets/seriea/index.json", mc:"assets/seriea/mc.json",
+            teams:"assets/seriea/clubs.json", flags:"assets/logos/", ext:".png",
+            blurb:"Italy, from catenaccio to Calciopoli and out the other side."},
+  belgian: {label:"Pro League", ic:"stripes", ac:"#e8b21c",
+            spoken:"assets/belgian/index.json", mc:"assets/belgian/mc.json",
+            teams:"assets/belgian/clubs.json", flags:"assets/logos/", ext:".png",
+            blurb:"Belgium, which Limburg can see from the window."},
 };
 /* The five quizzes that are decks of written questions AND have an XI to put
    on a pitch. Career Path and Badge Zoom are neither, so they live outside it
    and the menu treats them as board-only. */
 const PICTURE_MODES = {
-  career: {label:"Career Path", ic:"route", ac:"#e9b84c"},
+  /* Career Path used to wear the BALL gold, which belongs to Let's Ball and to
+     the BALL tier and to nothing else. Its own colour now, so the drawer has
+     nine modes and nine accents. */
+  career: {label:"Career Path", ic:"route", ac:"#2fa07c"},
   badge:  {label:"Badge Zoom",  ic:"zoom",  ac:"#b9a0e8"},
 };
 const MODE_ROW = id => QUIZZES[id] || PICTURE_MODES[id] || null;
+/* What the team picker calls the thing you are choosing. Let's Ball is played
+   as a nation from 2006; a league is played as one of its clubs, this season.
+   Both go through the same screen, so the screen has to ask the right question
+   rather than asking everybody about the World Cup. */
+const h2Kind = id => id === "classic"
+  ? {one:"country", many:"country",
+     blurb:"Both of you pick a side from the 2006 World Cup. You get that country's kit and the eleven who actually went that summer."}
+  : {one:"club", many:"club",
+     blurb:"Both of you pick a club. You get its crest and its first eleven by shirt number, this season, and you cannot both have the same one."};
 const isQuiz   = id => !!QUIZZES[id];
 const canPitch = id => !!(QUIZZES[id] && QUIZZES[id].teams);
 
@@ -6972,12 +7011,12 @@ function h2Render(st){
     const pool = h2Pool() || {};
     const names = Object.keys(pool).sort();
     st.innerHTML =
-      '<div class="kick">' + ico('users') + 'One on One · pick your country</div>' +
+      '<div class="kick">' + ico('users') + 'One on One · pick your ' + h2Kind(S.mode).one + '</div>' +
       '<div class="h2big">' + esc(turn.name) + ', who are you?</div>' +
       (picked.length
         ? '<div class="h2hintline">' + esc(S.players[0].name) + ' has ' + esc(H.teams[0]) +
           '. <button class="h2view" style="display:inline;margin:0" onclick="h2ClearTeams()">start again</button></div>'
-        : '<div class="h2hintline">Both of you pick a side from the 2006 World Cup. You get that country\'s kit and the eleven who actually went that summer.</div>') +
+        : '<div class="h2hintline">' + h2Kind(S.mode).blurb + '</div>') +
       '<div class="h2teams">' + names.map(c =>
         '<button class="h2teambtn" style="--kc:' + pool[c].kit + '" onclick="h2PickTeam(' +
         JSON.stringify(c).replace(/"/g, "&quot;") + ')"' + (H.teams.includes(c) ? " disabled" : "") + '>' +

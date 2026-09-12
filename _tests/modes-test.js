@@ -37,14 +37,21 @@ const load = f => JSON.parse(fs.readFileSync(path.join(REPO, f), "utf8"));
      per QUIZ plus the two picture modes, and how a match is played is two
      toggles rather than two more ids. */
   check("every mode is a quiz or a picture mode",
-    ev(app, "Object.keys(MODE_META).sort().join(',')") === "badge,career,classic,ere",
+    ev(app, "Object.keys(MODE_META).sort().join(',')") ===
+      "badge,belgian,bundesliga,career,classic,ere,laliga,premier,seriea",
     ev(app, "Object.keys(MODE_META).sort().join(',')"));
+  check("six leagues plus the classic bank",
+    ev(app, "Object.keys(QUIZZES).length") === 7, ev(app, "Object.keys(QUIZZES).length"));
+  check("and every quiz names both of its decks",
+    ev(app, "Object.values(QUIZZES).every(r=>r.mc && (r.spoken || r.label===\"Let's Ball\"))"),
+    "a quiz is missing a deck path");
   check("Let's Ball is the classic quiz, not a label of its own",
     ev(app, "matchLabel({mode:'classic'})") === "Let's Ball", ev(app, "matchLabel({mode:'classic'})"));
   check("every mode has a label", ev(app, "Object.keys(MODE_META).every(m=>!!matchLabel({mode:m}))"),
     "a mode is missing its label");
-  check("the pitch is offered where there are teams, and only there",
-    ev(app, "Object.keys(MODE_META).filter(canPitch).sort().join(',')") === "classic,ere",
+  check("the pitch is offered for every quiz and for neither picture mode",
+    ev(app, "Object.keys(MODE_META).filter(canPitch).sort().join(',')") ===
+      "belgian,bundesliga,classic,ere,laliga,premier,seriea",
     ev(app, "Object.keys(MODE_META).filter(canPitch).sort().join(',')"));
   check("One on One reads back as the classic quiz on the pitch",
     ev(app, "matchLabel({mode:'classic',play:'pitch'}) + ' / ' + playLabel({mode:'classic',play:'pitch'})") === "Let's Ball / One on One",

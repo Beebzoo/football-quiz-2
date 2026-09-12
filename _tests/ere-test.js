@@ -108,7 +108,18 @@ const TIERS = ["easy", "normal", "hard", "extreme", "ball"];
   check("named in the mode drawer", ev(app, "MODE_META.ere && MODE_META.ere[1]") === "Eredivisie", ev(app, "MODE_META.ere && MODE_META.ere[1]"));
   check("named in the record book", ev(app, "matchLabel({mode:'ere'})") === "Eredivisie", ev(app, "matchLabel({mode:'ere'})"));
   check("its icon exists", !!ev(app, "IPATHS[MODE_META.ere[0]]"), ev(app, "MODE_META.ere[0]"));
-  check("no other mode wears that icon", ev(app, "Object.entries(MODE_META).filter(([k,v])=>v[0]===MODE_META.ere[0]).length") === 1);
+  /* It used to be the only league, so it owned its icon. Now there are six of
+     them and they deliberately SHARE one: they are the same kind of thing and
+     read as a family, told apart by their accent colour the way a shelf of
+     league badges is. What has to stay unique is the colour. */
+  check("the leagues share the family icon",
+    ev(app, "Object.keys(QUIZZES).filter(k=>k!=='classic').every(k=>MODE_META[k][0]==='stripes')"),
+    ev(app, "Object.keys(QUIZZES).map(k=>k+':'+MODE_META[k][0]).join(' ')"));
+  check("and no two modes share an accent colour",
+    ev(app, "new Set(Object.values(MODE_META).map(v=>v[2])).size") === ev(app, "Object.keys(MODE_META).length"),
+    ev(app, "Object.values(MODE_META).map(v=>v[2]).join(' ')"));
+  check("the picture modes do not wear it",
+    ev(app, "Object.keys(PICTURE_MODES).every(k=>MODE_META[k][0]!=='stripes')"), "a picture mode looks like a league");
   check("in the Rainbow Road pool", ev(app, "RR_POOL.includes('ere')"));
   check("and Rainbow Road can tell when it is ready", ev(app, "RR_READY.ere()") === true);
   check("the deck is in the install", sw.includes("assets/eredivisie/index.json"), "not precached");
