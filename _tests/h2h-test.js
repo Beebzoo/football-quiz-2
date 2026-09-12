@@ -199,6 +199,93 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
     check("a wide man keeps it infield", m && +m[1] < squad()[10].x, m && m[1]);
   }
 
+  console.log("\n--- knocking it about ---");
+  {
+    /* The hole this rule exists to close: short balls alone walked the length
+       of the pitch for free, and Easy mixed with Normal was the FASTEST route
+       there is. So the streak counts both, and the threshold has to be low
+       enough to fire on a four pass route. */
+    const SQ = squad();
+    const cheap = t => ev(app, "H2_SAFE").includes(t);
+    let at = 0, hops = 0, guard = 0;
+    while (SQ[at].line < 6 && guard++ < 20) {
+      let best = null;
+      for (let i = 0; i < 11; i++) {
+        if (SQ[i].y >= SQ[at].y) continue;
+        if (!cheap(tier(at, i))) continue;
+        if (best === null || SQ[i].y < SQ[best].y) best = i;
+      }
+      if (best === null) break;
+      at = best; hops++;
+    }
+    check("the fastest route on short balls alone is four passes",
+      SQ[at].line === 6 && hops === 4, "reached line " + SQ[at].line + " in " + hops);
+    check("so the tackle fires before it can finish",
+      ev(app, "H2_TACKLE_AT") < hops, "threshold " + ev(app, "H2_TACKLE_AT") + " vs " + hops + " passes");
+    check("and it counts Normal too, or you would just alternate",
+      ev(app, "H2_SAFE.join(',')") === "easy,normal", ev(app, "H2_SAFE.join(',')"));
+  }
+
+  const safePass = async (i) => {
+    run(app, "h2Select(" + i + ")"); await tick(140);
+    run(app, "h2Play()"); await tick(150);
+    if (phase() === "h_q") {
+      run(app, "h2Reveal()"); await tick(120);
+      run(app, "h2Judge(true)"); await tick(200);
+    }
+  };
+
+  await start();
+  await place(0, GK);
+  check("nobody is on him yet", ev(app, "S.h2h.safe") === 0, ev(app, "S.h2h.safe"));
+  await safePass(LCB);
+  await safePass(LWB);
+  await safePass(SIX);
+  check("three short balls counted", ev(app, "S.h2h.safe") === 3, ev(app, "S.h2h.safe"));
+  check("and the screen says he is on him", stage(app).includes("is on him"), "no warning");
+  run(app, "h2Select(" + EIGHT + ")"); await tick(150);
+  check("the ball you are about to play is marked contested",
+    stage(app).includes("Contested"), "no contested marking");
+  run(app, "h2Play()"); await tick(180);
+  check("the fourth short ball brings him in", phase() === "h_tackle", phase());
+  check("at the level a tackle costs", ev(app, "S.tier") === ev(app, "H2_TACKLE_TIER"), ev(app, "S.tier"));
+  check("and it is named as his", stage(app).includes("comes in for it"), "not named");
+
+  console.log("\n--- he wins it ---");
+  run(app, "h2TackleReveal()"); await tick(130);
+  run(app, "h2TackleJudge(true)"); await tick(240);
+  check("possession flips", who() === 1, who());
+  check("the streak dies with it", ev(app, "S.h2h.safe") === 0, ev(app, "S.h2h.safe"));
+  check("and play is live again", phase() === "h_pick", phase());
+
+  console.log("\n--- he misses, and is left on the floor ---");
+  await start();
+  await place(0, GK);
+  await safePass(LCB); await safePass(LWB); await safePass(SIX);
+  run(app, "h2Select(" + EIGHT + ")"); await tick(140);
+  run(app, "h2Play()"); await tick(170);
+  run(app, "h2TackleReveal()"); await tick(130);
+  run(app, "h2TackleJudge(false)"); await tick(240);
+  check("the pass goes straight through, no question asked",
+    pos() === EIGHT && who() === 0, pos() + "/" + who());
+  check("and he is still on him, so it does not buy a free run",
+    ev(app, "S.h2h.safe") >= ev(app, "H2_TACKLE_AT"), ev(app, "S.h2h.safe"));
+
+  console.log("\n--- committing to a real ball clears it ---");
+  await start();
+  await place(0, GK);
+  await safePass(LCB); await safePass(LWB); await safePass(SIX);
+  check("three short balls again", ev(app, "S.h2h.safe") === 3, ev(app, "S.h2h.safe"));
+  check("a ball into the front three is not a short one", tier(SIX, ST) !== "easy", tier(SIX, ST));
+  run(app, "h2Select(" + ST + ")"); await tick(140);
+  run(app, "h2Play()"); await tick(160);
+  check("so nobody comes in for it", phase() === "h_q", phase());
+  run(app, "h2Reveal()"); await tick(120);
+  run(app, "h2Judge(true)"); await tick(200);
+  check("and the streak is cleared by committing", ev(app, "S.h2h.safe") === 0, ev(app, "S.h2h.safe"));
+
+  await start();
+
   console.log("\n--- the scorebug ---");
   await place(0, GK);
   check("it shows the country codes, not the country names",
