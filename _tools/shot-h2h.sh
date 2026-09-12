@@ -7,7 +7,8 @@
 #             falls below the fold at a high scale
 #
 #   scale   1.0 to inspect detail, .6 to see a whole phone screen
-#   state   teams | toss | flip | landed | pick | sel | nl | it | flat
+#   state   menu | modes | board | qcard
+#           teams | toss | flip | landed | pick | sel | nl | it | flat
 #           att | shot | strike | save | goal | mcq
 #
 # WHY THIS EXISTS. One on One is the only thing in the repo that cannot be
@@ -46,6 +47,13 @@ const base=`S=freshState(["Martijn","Bram"],false,"h2h",0); h2Start();`;
 const picked=`${base} h2PickTeam("Netherlands"); h2PickTeam("Italy");`;
 const nl=`${picked} S.h2h.tossed=true;`;
 const setups={
+  /* the front door and the classic board: not One on One at all, but this is
+     the only rendering harness in the repo and a menu that has gone unreadable
+     is exactly as invisible in the code as a collapsed pitch was */
+  menu:  `S=null; render();`,
+  modes: `S=null; modesOpen=true; setupMode="classic"; render();`,
+  board: `S=freshState(["Martijn","Bram","Ale"],false,"classic",100); S.phase="pick"; render();`,
+  qcard: `S=freshState(["Martijn","Bram","Ale"],false,"classic",100); S.phase="pick"; render(); pickTier("hard");`,
   teams: `${base} render();`,
   toss:  `${picked} render();`,
   flip:  `${picked} render(); h2Call("heads");`,

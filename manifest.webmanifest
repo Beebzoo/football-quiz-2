@@ -1,13 +1,13 @@
 {
-  "name": "BALL · Gran Canaria MVV Ultras",
-  "short_name": "BALL",
-  "description": "Three-player football quiz: pick a difficulty, beat the clock, steal what your mates drop.",
+  "name": "BALL 2",
+  "short_name": "BALL 2",
+  "description": "A football quiz you play as a match: pass the ball by answering, and the further it travels the harder the question.",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#0d2013",
-  "theme_color": "#0b8250",
+  "background_color": "#f4f9f4",
+  "theme_color": "#1f9d55",
   "icons": [
     {
       "src": "icons/icon-192.png",

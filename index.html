@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b8250">
-<title>BALL · Gran Canaria MVV Ultras</title>
+<title>BALL</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="assets/ball.png">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
@@ -38,7 +38,12 @@
     --radius:16px;
     /* polished gold, the BALL wordmark's own metal. Anything that wears it is
        claiming to be the gold thing on the screen, so there are only two. */
-    --gold-metal:linear-gradient(105deg,#b8860b 10%,#e9b84c 28%,#ffefad 45%,#e9b84c 60%,#b8860b 88%);
+    /* Polished gold, mixed for a LIGHT ground. The night version ran its
+       highlight up to #ffefad, which is within a whisker of white: on the old
+       black pitch that read as a gleam, on this one it punched a hole through
+       the middle of the wordmark. Same metal, same shimmer, every stop taken
+       down so the letters survive the paper behind them. */
+    --gold-metal:linear-gradient(105deg,#8a6512 10%,#c9932e 28%,#f0d385 45%,#c9932e 60%,#8a6512 88%);
     --shadow:0 1px 2px rgba(16,24,40,.06),0 4px 14px rgba(16,24,40,.06);
   }
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -272,25 +277,33 @@
   .alumrow.pop{animation:cardpop .5s cubic-bezier(.2,1.7,.4,1) both}
   @media (prefers-reduced-motion: reduce){ .alumrow.pop{animation:none} }
 
-  /* the floodlit night look, now the whole app's home kit */
-  html{background:#0d2013}
-  body.careermode{color:#eef5ef;border-color:rgba(255,255,255,.12)}
-  body.careermode .clock .digits{color:#eef5ef}
+  /* ---------- THE DAY MATCH ----------
+     This used to be a floodlit night: near-black chrome on a dark pitch. It
+     looked good and it was not inviting, which is the wrong trade for the
+     front door of a game you hand to a mate. So the ground is bright, the
+     chrome is white card on light grass, and the only things that stay dark
+     are the ones that should be: the question card and the picker board, which
+     read as a stadium scoreboard precisely BECAUSE everything round them is
+     light. Kept as body.careermode so the 38 rules that hang off it, and the
+     specificity they rely on, keep working exactly as they did. */
+  html{background:#eef6ef}
+  body.careermode{color:var(--ink);border-color:rgba(16,40,24,.10)}
+  body.careermode .clock .digits{color:var(--ink)}
   body.careermode .clock.hot .digits{color:#ff8a7a}
-  body.careermode .sub{color:#9fb8a6}
+  body.careermode .sub{color:var(--chalk-dim)}
   /* white cards keep dark ink even on the night pitch */
   body.careermode .sheet, body.careermode .frow{color:var(--ink)}
   body.careermode #pitchbg{
     background:
-      radial-gradient(95% 55% at 50% -5%, rgba(255,255,215,.12), transparent 60%),
-      repeating-linear-gradient(180deg,#122b1c 0 72px,#0d2315 72px 144px);
+      radial-gradient(95% 55% at 50% -5%, rgba(255,255,255,.55), transparent 62%),
+      repeating-linear-gradient(180deg,#e6f3e7 0 72px,#dcedde 72px 144px);
   }
-  body.careermode #pitchbg::before{border-color:rgba(255,255,255,.22)}
-  body.careermode #pitchbg::after{background:rgba(255,255,255,.22)}
-  body.careermode .cornerarc{border-color:rgba(255,255,255,.16)}
-  body.careermode .kick{color:#9fb8a6}
-  body.careermode .hint{color:#8fae99}
-  body.careermode h1.title{color:#eef5ef}
+  body.careermode #pitchbg::before{border-color:rgba(255,255,255,.9)}
+  body.careermode #pitchbg::after{background:rgba(255,255,255,.9)}
+  body.careermode .cornerarc{border-color:rgba(255,255,255,.8)}
+  body.careermode .kick{color:var(--chalk-dim)}
+  body.careermode .hint{color:var(--chalk-dim)}
+  body.careermode h1.title{color:var(--ink)}
   body.careermode .careername{color:#fff;text-shadow:0 2px 18px rgba(0,0,0,.5)}
   body.careermode .clubcard{
     border-color:rgba(255,255,255,.12);
@@ -301,7 +314,8 @@
     color:rgba(255,255,255,.55);box-shadow:none;
   }
   body.careermode .bigbtn.ghost{
-    background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.22);color:#cfe0d4;
+    background:var(--card);border-color:var(--line);color:#41564a;
+    box-shadow:0 1px 2px rgba(16,40,24,.05),0 2px 10px rgba(16,40,24,.05);
   }
   /* Picked, not shouting. The old version was a 2px gold border with a glow
      behind it, which read as heavy next to everything else on the page and
@@ -314,14 +328,16 @@
      stopped being painted slabs the four chosen buttons on the setup screen
      were the brightest thing on the menu, louder than the front door itself.
      Same gold, lit instead of filled. */
+  /* Picked, on a light ground. Same idea as the night version: gold arriving
+     as a wash and a hairline rather than a painted slab, so the chosen button
+     is unmistakable without being the loudest thing on the page. The ink goes
+     dark gold because #f3d982 on white is a rumour, not a colour. */
   body.careermode .bigbtn.ghost.sel{
-    background:
-      radial-gradient(120% 90% at 50% -20%, rgba(255,252,215,.10), transparent 64%),
-      linear-gradient(180deg, rgba(233,184,76,.20), rgba(233,184,76,.07));
-    border:1px solid rgba(233,184,76,.55);color:#f3d982;
+    background:linear-gradient(180deg,#fdf7e6,#f8edd3);
+    border:1px solid rgba(201,147,46,.55);color:#7d5b12;
     font-weight:700;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.12), 0 0 18px rgba(233,184,76,.18);
-    text-shadow:0 0 14px rgba(233,184,76,.4);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.9), 0 2px 12px rgba(201,147,46,.16);
+    text-shadow:none;
   }
   /* the tile keeps its own accent now that chosen is lit rather than painted */
   body.careermode .bigbtn.ghost.sel .mico{
@@ -329,7 +345,7 @@
     background:color-mix(in srgb, var(--ac,#e9b84c) 18%, transparent);
   }
   body.careermode .bigbtn.ghost.sel .chev,
-  body.careermode .bigbtn.ghost.sel .lcount{color:#e9b84c;opacity:.8}
+  body.careermode .bigbtn.ghost.sel .lcount{color:#a8801f;opacity:.85}
   /* Let's Ball owns the front of the menu: one full width slab of gold above
      the drawer that holds every other mode. It has to be declared inside
      body.careermode or the ghost rule above outranks it and the button comes
@@ -342,25 +358,22 @@
      thing on the menu, which is what made it the front door in the first place. */
   body.careermode .bigbtn.ghost.lbbtn{
     background:
-      radial-gradient(120% 90% at 50% -20%, rgba(255,252,215,.10), transparent 64%),
-      linear-gradient(90deg, rgba(233,184,76,.22), rgba(233,184,76,.07) 62%, rgba(233,184,76,.15)),
-      linear-gradient(180deg, rgba(13,34,21,.90), rgba(6,17,10,.94));
-    border-color:rgba(233,184,76,.5);color:#f3d982;font-weight:800;font-size:1.12rem;
+      radial-gradient(120% 90% at 50% -20%, rgba(255,255,255,.85), transparent 66%),
+      linear-gradient(180deg,#fbefcf,#f3e0a9);
+    border-color:rgba(201,147,46,.62);color:#6f5010;font-weight:800;font-size:1.12rem;
     padding:17px 16px;letter-spacing:.01em;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.10), 0 10px 26px rgba(0,0,0,.45),
-               0 0 22px rgba(233,184,76,.18);
-    text-shadow:0 0 16px rgba(233,184,76,.4);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.95), 0 6px 18px rgba(201,147,46,.22);
+    text-shadow:none;
   }
   body.careermode .bigbtn.ghost.lbbtn .ballic{width:1.25em;height:1.25em}
   /* picked: the same lamp turned up, not a different material */
   body.careermode .bigbtn.ghost.lbbtn.sel{
     background:
-      radial-gradient(120% 90% at 50% -20%, rgba(255,252,215,.15), transparent 64%),
-      linear-gradient(90deg, rgba(233,184,76,.36), rgba(233,184,76,.13) 62%, rgba(233,184,76,.26)),
-      linear-gradient(180deg, rgba(13,34,21,.90), rgba(6,17,10,.94));
-    border-color:#e9b84c;color:#fff3cf;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.16), 0 0 28px rgba(233,184,76,.3);
-    text-shadow:0 0 18px rgba(233,184,76,.55);
+      radial-gradient(120% 90% at 50% -20%, rgba(255,255,255,.9), transparent 66%),
+      linear-gradient(180deg,#f9e7ba,#eed79a);
+    border-color:#c9932e;color:#5c4109;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.95), 0 6px 20px rgba(201,147,46,.34);
+    text-shadow:none;
   }
   /* The install line is housekeeping, not a thing to play, so it stops looking
      like a button at all: no card, no border, just a quiet line at the foot of
@@ -369,18 +382,18 @@
     display:block;width:auto;margin:6px auto 0;padding:6px 8px;
     background:none;border:none;box-shadow:none;
     font:500 .74rem/1.3 var(--ui);letter-spacing:.01em;
-    color:rgba(207,224,212,.5);
+    color:rgba(65,86,74,.62);
   }
-  body.careermode .bigbtn.ghost.tinybtn:active{transform:none;filter:none;color:rgba(207,224,212,.8)}
+  body.careermode .bigbtn.ghost.tinybtn:active{transform:none;filter:none;color:rgba(65,86,74,.95)}
   .rules{margin-top:4px}
   .rules summary{
     list-style:none;cursor:pointer;text-align:center;
-    font:700 .9rem var(--ui);color:#cfe0d4;
+    font:700 .9rem var(--ui);color:#41564a;
     padding:12px;border-radius:14px;
-    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);
+    background:var(--card);border:1px solid var(--line);
   }
   .rules summary::-webkit-details-marker{display:none}
-  .rules[open] summary{border-color:#3fd685;color:#8df0b8}
+  .rules[open] summary{border-color:var(--turf);color:var(--turf-deep)}
   .rules .hint{padding:10px 4px 2px}
   /* league rush */
   .leaguelist{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 4px}
@@ -431,7 +444,7 @@
   img.ballic{width:1.05em;height:1.05em;vertical-align:-.18em;margin-right:.3em;border-radius:50%}
   body.careermode .bigbtn.warn{box-shadow:0 0 22px rgba(240,196,25,.35)}
   body.careermode .stealbtn{background:#10251a;color:#8db8ff;border-color:#4a7fd9}
-  body.careermode kbd{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);color:#9fb8a6}
+  body.careermode kbd{background:#eef3ef;border-color:var(--line);color:var(--chalk-dim)}
 
   /* bigger cards on the night pitch */
   body.careermode .clubcard{width:min(108px,27vw);height:min(108px,27vw)}
@@ -766,8 +779,9 @@
     position:relative;text-transform:uppercase;
     display:flex;align-items:center;justify-content:center;gap:.14em;
     font-size:clamp(3.4rem,21vw,5.2rem);letter-spacing:.08em;
-    color:#e9b84c;
-    filter:drop-shadow(0 0 26px rgba(233,184,76,.45)) drop-shadow(0 4px 12px rgba(0,0,0,.5));
+    margin-top:6px;
+    color:#c9932e;
+    filter:drop-shadow(0 2px 10px rgba(201,147,46,.30)) drop-shadow(0 1px 2px rgba(16,40,24,.18));
   }
   .ballhero .ballimg{width:.84em;height:.84em;flex:0 0 auto}
   h1.title.ballhero{cursor:pointer;-webkit-tap-highlight-color:transparent}
@@ -812,12 +826,11 @@
   .bigbtn.ghost{background:var(--card);border:1px solid var(--line);color:var(--chalk-dim);font-weight:600;box-shadow:none}
   .bigbtn.gold{
     background:
-      radial-gradient(120% 90% at 50% -20%, rgba(255,252,215,.08), transparent 64%),
-      linear-gradient(90deg, rgba(233,184,76,.16), rgba(233,184,76,.05) 62%, rgba(233,184,76,.11)),
-      linear-gradient(180deg, rgba(13,34,21,.90), rgba(6,17,10,.94));
-    border-color:rgba(233,184,76,.4);color:#f3d982;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 8px 22px rgba(0,0,0,.4);
-    text-shadow:0 0 14px rgba(233,184,76,.35);
+      radial-gradient(120% 90% at 50% -20%, rgba(255,255,255,.8), transparent 66%),
+      linear-gradient(180deg,#fbf2da,#f4e4b6);
+    border-color:rgba(201,147,46,.5);color:#6f5010;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.9), 0 4px 14px rgba(201,147,46,.18);
+    text-shadow:none;
   }
   .bigbtn.sel{background:#effaf4;border-color:var(--turf);color:var(--turf-deep);font-weight:700}
   .bigbtn.warn{background:var(--card-y);border-color:#ca9a06;color:#3d2f02}
@@ -1244,42 +1257,41 @@
   .modestoggle .mlab{flex:none}
   .modestoggle .chev{opacity:.45;font-size:.66em;position:absolute;right:15px}
   body.careermode .bigbtn.ghost.modestoggle{
-    background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.025));
-    border-color:rgba(255,255,255,.14);
+    background:linear-gradient(180deg,#ffffff,#f6faf6);
+    border-color:var(--line);
     padding:13px 16px;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.07);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 1px 3px rgba(16,40,24,.05);
   }
   body.careermode .bigbtn.ghost.modestoggle:active{
-    background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(255,255,255,.04));
+    background:linear-gradient(180deg,#f6faf6,#eef4ee);
   }
   /* the lid's own gradient would otherwise outrank the parchment every chosen
      thing in the app wears, purely by sitting further down the file */
   body.careermode .bigbtn.ghost.modestoggle.sel{
-    --lit:color-mix(in srgb, var(--ac,#e9b84c) 70%, #fff);
+    --lit:color-mix(in srgb, var(--ac,#e9b84c) 62%, #2a3d31);
     background:
-      radial-gradient(120% 90% at 50% -20%, rgba(255,252,215,.08), transparent 64%),
-      linear-gradient(180deg, color-mix(in srgb, var(--ac,#e9b84c) 20%, transparent),
-                              color-mix(in srgb, var(--ac,#e9b84c) 7%, transparent));
-    border-color:color-mix(in srgb, var(--ac,#e9b84c) 55%, transparent);
+      linear-gradient(180deg, #ffffff,
+                              color-mix(in srgb, var(--ac,#e9b84c) 13%, #ffffff));
+    border-color:color-mix(in srgb, var(--ac,#e9b84c) 58%, #ffffff);
     color:var(--lit);
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.10),
-               0 0 18px color-mix(in srgb, var(--ac,#e9b84c) 20%, transparent);
-    text-shadow:0 0 14px color-mix(in srgb, var(--ac,#e9b84c) 45%, transparent);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.95),
+               0 2px 12px color-mix(in srgb, var(--ac,#e9b84c) 26%, transparent);
+    text-shadow:none;
   }
   /* only the unchosen state: once a mode is picked the button wears that mode's
      own colour and name, and the caption treatment would fight it */
   .modestoggle:not(.sel) .mlab{
-    font:700 .78rem/1 var(--ui);letter-spacing:.15em;text-transform:uppercase;color:#c2d6c8;
+    font:700 .78rem/1 var(--ui);letter-spacing:.15em;text-transform:uppercase;color:#6b8275;
   }
   .modestoggle:not(.sel) .mico{background:none;width:auto;height:auto}
-  .modestoggle:not(.sel) .mico .ic{width:14px;height:14px;opacity:.5}
+  .modestoggle:not(.sel) .mico .ic{width:14px;height:14px;opacity:.62}
   .modestoggle:not(.sel)::before,
   .modestoggle:not(.sel)::after{
     content:"";height:1px;flex:1;max-width:52px;
-    background:linear-gradient(90deg,transparent,rgba(255,255,255,.22));
+    background:linear-gradient(90deg,transparent,rgba(60,90,70,.28));
   }
   .modestoggle:not(.sel)::after{transform:scaleX(-1)}
-  .hint.lastline{text-align:center;color:#c8d8cc;margin-top:4px}
+  .hint.lastline{text-align:center;color:#6b8275;margin-top:4px}
   /* play together */
   #mpbar{position:fixed;left:0;right:0;bottom:12px;display:flex;gap:10px;justify-content:center;align-items:center;z-index:40;pointer-events:none}
   #mpbar[hidden]{display:none}
@@ -1552,16 +1564,25 @@
     position:absolute;left:0;right:0;top:50%;aspect-ratio:10/13;
     --base:translateY(-50%);
     transform:var(--base);transform-origin:50% 50%;
+    /* SUNDAY AFTERNOON, NOT A TUESDAY UNDER LIGHTS.
+       The four corner pools used to be floodlights bleeding onto a near-black
+       pitch, and the vignette that tied them together was doing most of the
+       darkening: transparent in the middle, 34% black at the edge. Turned up
+       to a day match the lights stop being the light source, so they drop to a
+       hint of sun and the vignette drops with them, to a fifth of what it was.
+       The mow stripes go the other way: on dark grass a 3% white stripe was
+       all you could afford before it glared, on bright grass it barely shows,
+       so it doubles. Same four layers, same geometry, different weather. */
     background:
-      radial-gradient(ellipse 46% 26% at 16% 10%,rgba(228,248,228,.13),transparent 72%),
-      radial-gradient(ellipse 46% 26% at 84% 10%,rgba(228,248,228,.13),transparent 72%),
-      radial-gradient(ellipse 46% 26% at 16% 90%,rgba(228,248,228,.13),transparent 72%),
-      radial-gradient(ellipse 46% 26% at 84% 90%,rgba(228,248,228,.13),transparent 72%),
-      radial-gradient(ellipse 78% 58% at 50% 50%,transparent 48%,rgba(0,0,0,.34) 100%),
-      repeating-linear-gradient(180deg,rgba(255,255,255,.032) 0 7.6%,transparent 7.6% 15.2%),
-      linear-gradient(180deg,#0d3a1c 0%,#17552c 50%,#0d3a1c 100%);
+      radial-gradient(ellipse 46% 26% at 16% 10%,rgba(255,255,235,.16),transparent 72%),
+      radial-gradient(ellipse 46% 26% at 84% 10%,rgba(255,255,235,.16),transparent 72%),
+      radial-gradient(ellipse 46% 26% at 16% 90%,rgba(255,255,235,.10),transparent 72%),
+      radial-gradient(ellipse 46% 26% at 84% 90%,rgba(255,255,235,.10),transparent 72%),
+      radial-gradient(ellipse 78% 58% at 50% 50%,transparent 52%,rgba(12,52,26,.16) 100%),
+      repeating-linear-gradient(180deg,rgba(255,255,255,.075) 0 7.6%,transparent 7.6% 15.2%),
+      linear-gradient(180deg,#3f9c56 0%,#58b26c 50%,#3f9c56 100%);
     border-radius:12px;user-select:none;
-    box-shadow:0 18px 38px rgba(0,0,0,.55);
+    box-shadow:0 10px 26px rgba(16,60,30,.26);
     transition:transform .45s ease;
   }
   .h2pitch.tilt{--base:translateY(-50%) rotateX(46deg) scale(1.04);transform-style:preserve-3d}
@@ -1582,18 +1603,21 @@
   .h2pitch.tilt .h2man:not(.them){transform:translate(-50%,-50%) translateZ(9px)}
   .h2pitch.tilt .h2ballwrap{transform:translate(-50%,-50%) translateZ(14px)}
   /* markings */
-  .h2pitch::before{content:"";position:absolute;inset:2% 2.5%;border:2px solid rgba(255,255,255,.34);border-radius:3px;pointer-events:none}
-  .h2pitch::after{content:"";position:absolute;left:2.5%;right:2.5%;top:50%;border-top:2px solid rgba(255,255,255,.28);pointer-events:none}
-  .h2box{position:absolute;left:26%;right:26%;height:9%;border:2px solid rgba(255,255,255,.28);pointer-events:none}
+  /* Lines have to work HARDER on bright grass, not less hard: white at 34%
+     over #17552c was a clear chalk line, the same white over #58b26c is a
+     smudge. Every marking goes up by roughly half. */
+  .h2pitch::before{content:"";position:absolute;inset:2% 2.5%;border:2px solid rgba(255,255,255,.72);border-radius:3px;pointer-events:none}
+  .h2pitch::after{content:"";position:absolute;left:2.5%;right:2.5%;top:50%;border-top:2px solid rgba(255,255,255,.62);pointer-events:none}
+  .h2box{position:absolute;left:26%;right:26%;height:9%;border:2px solid rgba(255,255,255,.62);pointer-events:none}
   .h2box.t{top:2%;border-top-color:transparent}
   .h2box.b{bottom:2%;border-bottom-color:transparent}
-  .h2six{position:absolute;left:38%;right:38%;height:4%;border:2px solid rgba(255,255,255,.2);pointer-events:none}
+  .h2six{position:absolute;left:38%;right:38%;height:4%;border:2px solid rgba(255,255,255,.5);pointer-events:none}
   .h2six.t{top:2%;border-top-color:transparent}
   .h2six.b{bottom:2%;border-bottom-color:transparent}
   .h2circle{position:absolute;left:50%;top:50%;width:24%;aspect-ratio:1;transform:translate(-50%,-50%);
-    border:2px solid rgba(255,255,255,.26);border-radius:50%;pointer-events:none}
+    border:2px solid rgba(255,255,255,.58);border-radius:50%;pointer-events:none}
   .h2spot{position:absolute;left:50%;top:50%;width:4px;height:4px;transform:translate(-50%,-50%);
-    background:rgba(255,255,255,.5);border-radius:50%;pointer-events:none}
+    background:rgba(255,255,255,.85);border-radius:50%;pointer-events:none}
 
   /* a man: shadow flat on the grass, figure standing on top of it */
   .h2man{position:absolute;width:110px;transform:translate(-50%,-100%);z-index:2;
@@ -2060,10 +2084,10 @@
   .sb-t b{font:800 1.24rem var(--ui);letter-spacing:.06em;white-space:nowrap}
   .sb-names{display:flex;justify-content:space-between;width:100%;max-width:400px;margin:0 auto 5px;
     padding:0 12px;font:700 .64rem var(--ui);letter-spacing:.09em;text-transform:uppercase}
-  .sb-names span{opacity:.42;transition:opacity .3s,color .3s}
+  .sb-names span{opacity:.5;transition:opacity .3s,color .3s}
   .sb-names em{font-style:normal;opacity:.34;font-size:.58rem;letter-spacing:.14em;
     align-self:center}
-  .sb-names span.on{opacity:1;color:#f7e3a6}
+  .sb-names span.on{opacity:1;color:#8a6512}
   .sb-mid{flex:none;display:flex;align-items:center;gap:8px;padding:0 11px;
     background:rgba(0,0,0,.42);box-shadow:inset 1px 0 0 rgba(255,255,255,.08), inset -1px 0 0 rgba(255,255,255,.08)}
   .sb-mid b{font:800 1.72rem var(--ui);font-variant-numeric:tabular-nums;color:#f7e3a6;
@@ -2072,30 +2096,30 @@
   .h2where{position:relative;z-index:6;text-align:center;font-size:.88rem;opacity:.85;margin:10px 0 5px;font-style:italic}
   .h2toggles{display:flex;justify-content:center;gap:18px;margin:0 0 2px;position:relative;z-index:6}
   .h2view{display:block;margin:0 auto 2px;position:relative;z-index:6;background:none;border:0;cursor:pointer;
-    font:600 .76rem var(--ui);color:rgba(255,255,255,.5);letter-spacing:.04em;
+    font:600 .76rem var(--ui);color:rgba(50,74,58,.72);letter-spacing:.04em;
     text-decoration:underline;text-underline-offset:3px}
 
   /* how close the other man is to coming in for it */
   .h2heat{display:flex;align-items:center;justify-content:center;gap:8px;
     font:600 .78rem var(--ui);font-style:italic;opacity:.6;margin:2px 0 4px;
     position:relative;z-index:6}
-  .h2heat.warm{opacity:.9;color:#f0c98a}
-  .h2heat.hot{opacity:1;color:#ff8f78;font-weight:700;font-style:normal}
+  .h2heat.warm{opacity:1;color:#a4700f}
+  .h2heat.hot{opacity:1;color:#c3341c;font-weight:700;font-style:normal}
   .h2pips{display:inline-flex;gap:4px}
-  .h2pips i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.16);
-    box-shadow:0 0 0 1px rgba(0,0,0,.4) inset}
-  .h2heat.warm .h2pips i.on{background:#f0c98a}
-  .h2heat.hot .h2pips i.on{background:#ff8f78;box-shadow:0 0 8px #ff8f78}
-  .h2heat .h2pips i.on{background:rgba(255,255,255,.55)}
+  .h2pips i{width:7px;height:7px;border-radius:50%;background:rgba(30,60,42,.14);
+    box-shadow:0 0 0 1px rgba(30,60,42,.18) inset}
+  .h2heat.warm .h2pips i.on{background:#d9a13a}
+  .h2heat.hot .h2pips i.on{background:#d6402a;box-shadow:0 0 8px rgba(214,64,42,.6)}
+  .h2heat .h2pips i.on{background:rgba(30,60,42,.5)}
   .h2confirm.contested{animation:h2contest 1.6s ease-in-out infinite}
   @keyframes h2contest{0%,100%{box-shadow:0 0 0 1px #e04a34 inset, 0 0 18px -6px #e04a34}
     50%{box-shadow:0 0 0 1px #e04a34 inset, 0 0 26px -4px #e04a34}}
-  .h2big.tackle{color:#ff8f78;font-size:clamp(1.15rem,5.5vw,1.5rem)}
+  .h2big.tackle{color:#c3341c;font-size:clamp(1.15rem,5.5vw,1.5rem)}
 
   /* pick a man, see what the ball costs, play it */
   .h2confirm{margin-top:8px;padding:10px 12px;border-radius:12px;
-    border:1px solid var(--dc);background:rgba(255,255,255,.05);
-    box-shadow:0 0 0 1px var(--dc) inset, 0 0 18px -6px var(--dc)}
+    border:1px solid var(--dc);background:var(--card);
+    box-shadow:0 0 0 1px var(--dc) inset, 0 4px 16px -8px var(--dc)}
   .h2cline{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
   .h2cwhat{font-weight:700;font-size:1rem}
   .h2ctier{font-weight:800;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;
@@ -7655,12 +7679,6 @@ function renderBoard(st){
 function renderSetup(st){
   const saved = (()=>{ try{ const s=JSON.parse(localStorage.getItem(SAVE_KEY)); return s && s.phase!=="setup" && s.phase!=="results" ? s : null; }catch(e){ return null; }})();
   st.innerHTML = `
-    <div class="flagrow" style="justify-content:center">
-      <img src="assets/flags/nl.webp" alt="Netherlands">
-      <img src="assets/flags/gran-canaria.webp" alt="Gran Canaria">
-      <img src="assets/flags/morocco.webp" alt="Morocco">
-    </div>
-    <div class="kick" style="text-align:center">Gran Canaria MVV Ultras</div>
     <h1 class="title ballhero" onclick="goHome()" title="Back to the start"><span class="goldtext">BALL</span><img class="ballimg" src="assets/ball.png" alt=""></h1>
     ${logoTicker()}
     ${saved?`<button class="bigbtn gold" onclick="resumeGame()">Resume match in progress</button>
