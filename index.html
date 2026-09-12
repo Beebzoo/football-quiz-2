@@ -2126,6 +2126,61 @@
     padding:3px 9px;border-radius:999px;border:1px solid var(--dc);color:var(--dc);white-space:nowrap}
   .h2hintline{text-align:center;font-size:.85rem;opacity:.72;font-style:italic;margin-top:7px}
 
+  /* ---------- the phone crossing the table ----------
+     The whole screen in his kit colour, because the one thing that must never
+     happen is the wrong man picking it up. After two turns nobody reads the
+     words, they see the colour. */
+  .h2hand{
+    position:relative;min-height:62vh;margin:6px 0 0;padding:26px 18px 22px;
+    border-radius:18px;background:var(--hk,#2b6b46);color:var(--hi,#fff);
+    display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+    text-align:center;
+    box-shadow:0 10px 30px rgba(16,60,30,.3), inset 0 1px 0 rgba(255,255,255,.25);
+  }
+  .h2handbadge{
+    width:clamp(84px,26vw,124px);height:clamp(84px,26vw,124px);object-fit:contain;
+    border-radius:12px;background:rgba(255,255,255,.92);padding:8px;
+    box-shadow:0 6px 18px rgba(0,0,0,.22);
+  }
+  .h2handwho{font:800 clamp(2rem,11vw,3rem)/1 var(--ui);letter-spacing:.02em;text-transform:uppercase}
+  .h2handsub{font:600 .95rem/1.4 var(--ui);opacity:.85;max-width:22ch}
+  .h2handbtn{
+    width:auto;min-width:min(280px,72vw);margin-top:6px;
+    background:rgba(255,255,255,.94);color:#17301f;border-color:rgba(255,255,255,.6);
+    font-weight:800;
+  }
+
+  /* ---------- picking the man you are marking ---------- */
+  .h2marks{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:8px 0 10px}
+  .h2markbtn{
+    display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0;
+    padding:9px 4px;border-radius:12px;
+    background:var(--card);border:1px solid var(--line);color:var(--ink);
+    box-shadow:0 1px 3px rgba(16,40,24,.06);
+  }
+  .h2markbtn:active{transform:scale(.97)}
+  .h2markbtn.on{border-color:#c3341c;background:#fdeeeb;box-shadow:0 0 0 1px #c3341c inset}
+  .h2mno{font:800 .95rem/1 var(--ui);color:var(--chalk-dim);font-variant-numeric:tabular-nums}
+  .h2mnm{font:700 .74rem/1.15 var(--ui);text-align:center;word-break:break-word}
+  .h2mps{font:600 .6rem/1 var(--ui);letter-spacing:.1em;text-transform:uppercase;color:var(--chalk-dim)}
+
+  /* a booking, worn on the shirt for the rest of the match */
+  .h2card{
+    position:absolute;left:50%;bottom:100%;margin-left:9px;margin-bottom:-6px;z-index:6;
+    width:6px;height:8px;border-radius:1px;background:#eab308;
+    box-shadow:0 1px 2px rgba(0,0,0,.5);transform:rotate(8deg);
+  }
+  .h2card.red{background:#dc2626}
+  /* where he was waiting, shown once the pass has resolved */
+  .h2markring{
+    position:absolute;left:50%;bottom:2px;width:34px;height:34px;
+    transform:translate(-50%,50%);border-radius:50%;
+    border:2px dashed rgba(195,52,28,.9);
+    animation:h2markpop .5s ease-out both;pointer-events:none;
+  }
+  @keyframes h2markpop{from{opacity:0;transform:translate(-50%,50%) scale(.4)}to{opacity:1;transform:translate(-50%,50%) scale(1)}}
+  @media (prefers-reduced-motion: reduce){ .h2markring{animation:none} }
+
   /* the country under a player's name on the scoreline */
   .h2ctry{display:block;font:600 .64rem var(--ui);font-style:normal;opacity:.6;
     letter-spacing:.03em;margin-top:-1px}
@@ -6000,7 +6055,7 @@ const H2_SAVE   = "hard";                  // what a keeper always faces
      -> the striker (Normal). Four passes, nothing above Normal, on the ball.
 
    So a safe pass is only safe for so long. Keep it on the floor and the other
-   man starts snapping at it: after H2_TACKLE_AT short balls in a row, the next
+   man starts snapping at it: after H2_PRESS_AT short balls in a row, the next
    one is contested, and he gets one question to take it off you.
 
    It counts Easy AND Normal deliberately. Counting only Easy would be a rule
@@ -6013,8 +6068,8 @@ const H2_SAVE   = "hard";                  // what a keeper always faces
    question asked. The streak does NOT reset, so if you keep knocking it about
    he keeps coming. The way out is to stop being safe and commit to a real ball,
    which is exactly the decision the mode was always meant to be about. */
-const H2_TACKLE_AT = 3;                    // short balls before the next is contested
-const H2_TACKLE_TIER = "hard";             // what the man coming in has to answer
+const H2_PRESS_AT = 3;                    // short balls before the next is contested
+const H2_PRESS_TIER = "hard";             // what the man coming in has to answer
 const H2_SAFE = ["easy", "normal"];        // what counts as knocking it about
 
 /* The shape, as it stands on player 0's half: y counts DOWN the screen, so 94
@@ -6049,6 +6104,86 @@ const H2_LADDER = [
 ];
 /* what a shot costs from each man who is allowed to have one */
 const H2_SHOT = {7:"extreme", 8:"extreme", 9:"hard", 10:"extreme"};
+
+/* ============================== THE TACKLE ==============================
+
+   THE PROBLEM IT SOLVES. The man without the ball was a spectator. He touched
+   the game twice: after three short balls in a row, and when a shot came in.
+   Everything in between was the attacker playing the bank while his mate
+   watched him do it. The ladder is a good idea and the turnover rule is a
+   better one, but neither of them is a decision for the DEFENDER.
+
+   THE RULE. Before every pass the defender secretly marks one man in the
+   attacker's eleven. Then the attacker picks his pass, knowing nothing.
+
+     The mark HITS, he passed to the marked man: the defender answers one
+     question at H2_TACKLE_TIER. Right, and it is his ball, collected where the
+     pass was going. Wrong, and he has gone through the back of him: foul, free
+     kick, the pass goes through with no question at all, and he is booked.
+
+     The mark MISSES: he has pulled a man out of position, so the attacker's
+     question is H2_MISS_RELIEF tiers cheaper. Route one becomes Extreme, Hard
+     becomes Normal, Easy stays Easy.
+
+     Or "let him play", and nothing changes.
+
+   WHY MISSING HAS TO COST SOMETHING. If a wrong guess were free the defender
+   would mark on every single pass and it would stop being a decision: it would
+   be a chore, and a flat tax on the attacker. One tier of relief is what makes
+   "tackle or sit off" a real choice, and it is what lets the attacker BAIT.
+   Play the obvious ball when you think he is overthinking it.
+
+   WHAT IT COSTS IN TIME. The defender only answers when his guess lands, which
+   against anyone sensible is about a third of passes. A turn averages about
+   1.3 questions rather than 2, so a match stays roughly the length it was.
+
+   THE CARD GOES TO THE MAN, NOT THE HUMAN. The tackler is whoever in the
+   defender's shape is standing nearest the marked man, which h2NearestTo
+   already works out for turnovers. A failed tackle books him, and a second
+   yellow on the SAME man is a red. Per man rather than per team is what keeps
+   a red rare enough in a first-to-two to be worth talking about afterwards.
+
+   A red invents no new rules. The man comes out of the shape and everything
+   else follows from that: he cannot collect a turnover, nobody can pass to
+   him so the ladder has a hole in it, and if he was one of the four who can
+   shoot then that shot is gone. Lose the six and the middle route is gone;
+   lose the ten and it is wide or route one. Lose the keeper and an outfield
+   man goes in goal, so saves are H2_SAVE_NOGK instead of H2_SAVE.
+
+   A failed tackle on one of the front three is a PENALTY rather than a free
+   kick, which makes a last-ditch lunge at the striker exactly as frightening
+   as it should be. It is priced to go in: the taker gets an Easy and the
+   keeper an Extreme.
+
+   BEHIND A FLAG on purpose. The rule is unplayed, and the mode it changes is
+   the one the app is for, so both rule sets stay live and the toggle sits next
+   to the view and sound switches. If it plays badly the old game is one tap
+   away rather than one revert away. */
+let h2TackleOn = true;
+try{ h2TackleOn = localStorage.getItem("ball2-tackle") !== "0"; }catch(e){}
+function h2ToggleTackle(){
+  h2TackleOn = !h2TackleOn;
+  try{ localStorage.setItem("ball2-tackle", h2TackleOn ? "1" : "0"); }catch(e){}
+  render();
+}
+const H2_TACKLE_TIER = "normal";     // what the defender answers when he guesses right
+const H2_MISS_RELIEF = 1;            // tiers cheaper for the attacker when he guesses wrong
+const H2_BOOKED_TIER = null;         // a booked man tackles at this instead; null leaves it alone
+const H2_REDS        = 2;            // yellows on ONE man before he goes
+const H2_PEN_TAKER   = "easy";       // a penalty is meant to go in
+const H2_PEN_KEEPER  = "extreme";
+const H2_SAVE_NOGK   = "extreme";    // an outfield man in goal
+/* the ladder as a list, so a tier can be made cheaper without a lookup table */
+const H2_ORDER = ["easy", "normal", "hard", "extreme", "ball"];
+const h2Cheaper = (t, n) => H2_ORDER[Math.max(0, H2_ORDER.indexOf(t) - (n === undefined ? 1 : n))] || t;
+
+/* sent off, booked, and whether a side still has a keeper */
+const h2OffList = w => (S.h2h && S.h2h.off && S.h2h.off[w]) || [];
+const h2IsOff   = (w, i) => h2OffList(w).indexOf(i) !== -1;
+const h2Cards   = (w, i) => (((S.h2h && S.h2h.cards) || [])[w] || {})[i] || 0;
+const h2NoGk    = w => h2IsOff(w, 0);
+/* the men a side can actually use */
+const h2Live    = w => H2_SQUAD.map((_, i) => i).filter(i => !h2IsOff(w, i));
 
 /* Set for exactly one render and then cleared, the way Career Path's reveal
    flags work. It holds the ball's flight in pitch percentages, so it survives
@@ -6149,6 +6284,10 @@ function h2CrowdStop(){ try{ if(h2CrowdEl) h2CrowdEl.pause(); }catch(e){} }
 let h2Turn = false;            // set for one render when the camera should swing
 let h2Cele = false;            // ... and when the scoring side should celebrate
 let h2Lost = null;             // the man who just gave it away, for one render
+/* Where the defender was standing, shown once the pass has resolved. The
+   reveal is part of the rule rather than decoration: the attacker sees the
+   read, and the defender finds out whether he was baited. */
+let h2Showmark = null;
 const h2Abbr  = w => { const q = h2Squad(w); return (q && q.abbr) ||
   (S.players[w] ? S.players[w].name.slice(0, 3).toUpperCase() : "???"); };
 const h2Flag  = w => { const q = h2Squad(w); return q && q.flag ? h2Badge(q.flag) : null; };
@@ -6169,7 +6308,9 @@ const h2      = () => S.h2h;
 const h2Other = () => 1 - h2().who;
 const h2X     = (i, w) => w === 0 ? H2_SQUAD[i].x : 100 - H2_SQUAD[i].x;
 const h2Y     = (i, w) => w === 0 ? H2_SQUAD[i].y : 100 - H2_SQUAD[i].y;
-const h2CanShoot = i => !!H2_SHOT[i];
+/* A man who has been sent off does not get a shot, which is the whole point
+   of losing your ten. */
+const h2CanShoot = i => !!H2_SHOT[i] && !(S && S.h2h && h2IsOff(S.h2h.who, i));
 
 /* The pass, and therefore the question. */
 function h2TierFor(a, b){
@@ -6189,7 +6330,11 @@ function h2PassName(a, b){
 
 function h2Start(){
   S.h2h = {who:0, at:0, sel:null, call:null, coin:null, flipping:false,
-           shooting:false, tossed:false, teams:[null,null], safe:0};
+           shooting:false, tossed:false, teams:[null,null], safe:0,
+           /* the tackle: who is marked this pass, who has been booked, who has
+              gone, and the card that passes the phone across the table */
+           mark:null, shown:null, contest:null, pen:false,
+           cards:[{}, {}], off:[[], []], hand:null};
   S.phase = "h_teams";
 }
 /* Both men pick before a ball is kicked, and they cannot pick the same side:
@@ -6233,6 +6378,7 @@ function h2KickOff(){
   audio();
   h2CrowdStart();
   h2().safe = 0;
+  if(h2TackleOn) return h2Hand(h2Other(), "h_mark");
   S.phase = "h_pick";
   render();
 }
@@ -6242,6 +6388,7 @@ function h2Select(i){
   audio();
   const H = h2();
   if(S.phase !== "h_pick" || i === H.at) return;
+  if(h2IsOff(H.who, i)) return;      // he is off; there is nobody there to find
   H.sel = H.sel === i ? null : i;
   render();
 }
@@ -6256,11 +6403,32 @@ function h2Draw(t){
 function h2Play(){
   const H = h2();
   if(H.sel == null) return;
-  const t = h2TierFor(H.at, H.sel);
-  /* One short ball too many and he comes in for it. The intended pass is held
-     in H.sel and is played out either way: he wins it, or you go past him. */
-  if(H2_SAFE.includes(t) && H.safe >= H2_TACKLE_AT){
-    if(h2Draw(H2_TACKLE_TIER)){
+  let t = h2TierFor(H.at, H.sel);
+  /* THE TACKLE comes first, because it decides whether the attacker is asked
+     anything at all. A mark that lands is the DEFENDER's question; one that
+     misses is the attacker's, a tier cheaper for the space the lunge left. */
+  if(h2TackleOn && H.mark != null){
+    if(H.mark === H.sel){
+      if(h2Draw(h2TackleTier())){
+        H.contest = "tackle";
+        H.shooting = false;
+        S.timeUp = false; S.phase = "h_tackle";
+        render();
+        return;
+      }
+      // nothing left at that level: let it through rather than stall the game
+    } else {
+      t = h2Cheaper(t, H2_MISS_RELIEF);
+    }
+  }
+  /* THE PRESS. One short ball too many and he comes in for it anyway. This is
+     pressure that builds from knocking it about rather than anybody's
+     decision, which is why it is no longer called the tackle. The intended
+     pass is held in H.sel and is played out either way: he wins it, or you go
+     past him. */
+  if(H2_SAFE.includes(t) && H.safe >= H2_PRESS_AT){
+    if(h2Draw(H2_PRESS_TIER)){
+      H.contest = "press";
       H.shooting = false;
       S.timeUp = false; S.phase = "h_tackle";
       render();
@@ -6277,36 +6445,88 @@ function h2Play(){
 function h2TackleReveal(){ stopTimer(); S.phase = "h_tjudge"; render(); }
 function h2TackleTimeUp(){ if(S.phase === "h_tackle"){ if(h2IsMC()) h2().pick = null; h2TackleReveal(); } }
 
+/* Two different things arrive here and they end differently.
+
+   THE PRESS is pressure, so winning it takes the ball where the ball IS, and
+   losing it means he has gone to ground and been left there: the pass is on,
+   no question, no card, and the streak deliberately does not reset.
+
+   THE TACKLE is a decision, so winning it takes the ball where the pass was
+   GOING, which is the reward for reading him. Losing it is a foul: the pass
+   goes through untouched, the man who lunged is booked, and if he lunged at
+   one of the front three it is a penalty. */
 function h2TackleJudge(won){
   const H = h2();
   stopTimer();
   const target = H.sel;
-  H.sel = null;
+  const tackle = H.contest === "tackle";
+  const marked = H.mark;
+  H.sel = null; H.contest = null;
+  h2Showmark = (h2TackleOn && marked != null) ? {i: marked, mine: true} : null;
+  H.mark = null;
+
   if(won){
+    /* the press wins it where the ball was; the tackle wins it where the ball
+       was headed, which is the whole point of having guessed right */
+    const spot = tackle && target != null ? target : H.at;
     const lostAt = H.at, lostWho = H.who;
     H.who = h2Other();
-    H.at = h2NearestTo(lostAt, lostWho, H.who);
+    H.at = h2NearestTo(spot, lostWho, H.who);
     H.safe = 0;
     h2Fly(h2BX(lostAt, false), h2BY(lostAt, false), h2BX(H.at, true), h2BY(H.at, true), null, H.at);
     h2Turn = true;
     h2Lost = lostAt;
+    h2Showmark = null;              // the camera has swung; the mark belonged to the old view
     flashBad();
-    toast("TACKLED. " + S.players[H.who].name + " takes it off him.", true);
+    toast(tackle ? "TACKLED. " + S.players[H.who].name + " reads it and takes it."
+                 : "TACKLED. " + S.players[H.who].name + " takes it off him.", true);
     return h2Next();
   }
-  /* he went to ground and was left there: the pass is on, no question needed */
+
+  if(!tackle){
+    /* he went to ground and was left there: the pass is on, no question needed */
+    const from = H.at;
+    H.at = target == null ? H.at : target;
+    h2Fly(h2BX(from, true), h2BY(from, true), h2BX(H.at, true), h2BY(H.at, true), from, H.at);
+    ching();
+    toast("Goes past him, and finds " + h2Of(H.at, H.who) + ".");
+    return h2Next();
+  }
+
+  /* A FOUL. The card goes to the man who was standing nearest the one he was
+     marking, not to the human holding the phone. */
+  const other = h2Other();
+  const man = marked == null ? 0 : h2NearestTo(marked, H.who, other);
+  const card = h2Book(other, man);
+  const who = h2Who(man, other), on = marked == null ? "him" : h2Of(marked, H.who);
+  flashBad();
+
+  /* through the back of one of the front three is a penalty, and it is priced
+     to go in, which is what makes a last-ditch lunge at the striker frightening */
+  if(marked != null && H2_SQUAD[marked].line === 6){
+    toast(who + " brings " + on + " down. " +
+          (card === "red" ? "RED CARD. " : "Yellow card. ") + "PENALTY.", true);
+    H.pen = true; H.shooting = true;
+    if(!h2Draw(H2_PEN_TAKER)) h2Draw(S.tier);
+    S.timeUp = false; S.phase = "h_q";
+    return render();
+  }
+  toast(who + " goes through the back of " + on + ". " +
+        (card === "red" ? "RED CARD. " : "Yellow card. ") + "Free kick.", true);
   const from = H.at;
   H.at = target == null ? H.at : target;
   h2Fly(h2BX(from, true), h2BY(from, true), h2BX(H.at, true), h2BY(H.at, true), from, H.at);
-  ching();
-  toast("Goes past him, and finds " + h2Of(H.at, H.who) + ".");
   h2Next();
 }
 function h2Shoot(){
   audio();
   const H = h2();
   if(!h2CanShoot(H.at)) return;
-  const t = H2_SHOT[H.at];
+  /* A mark set on a man who then shoots instead of passing is a miss like any
+     other, so the chance comes a tier cheaper. Tackling somebody already in
+     range is a gamble, which is exactly right. */
+  let t = H2_SHOT[H.at];
+  if(h2TackleOn && H.mark != null) t = h2Cheaper(t, H2_MISS_RELIEF);
   if(!h2Draw(t)){ toast("No " + TIERS[t].label + " questions left", true); return; }
   H.shooting = true; H.sel = null;
   S.timeUp = false; S.phase = "h_q";
@@ -6347,20 +6567,64 @@ function h2McOptionsHTML(shown){
 function h2Reveal(){ stopTimer(); S.phase = "h_judge"; render(); }
 function h2TimeUp(){ if(S.phase === "h_q"){ if(h2IsMC()) h2().pick = null; h2Reveal(); } }
 
-/* whoever is nearest to the spot the ball was just lost on */
+/* Whoever is nearest to the spot the ball was just lost on.
+
+   THIS USED TO COMPARE y AND NOTHING ELSE, which made x decorative: both
+   wingers stand at y 75, so the loop kept whichever it reached first and a
+   ball lost on the right touchline was collected by the LEFT winger. It read
+   as harmless for as long as the only thing it decided was who picks up a
+   loose ball, and it stops being harmless the moment a card has to be given to
+   a named man: "Boulahrouz goes through the back of him" means nothing if the
+   app cannot tell which side of the pitch Boulahrouz is on.
+
+   So it is a real distance now. y is weighted the way the pitch is DRAWN,
+   taller than it is wide, which keeps the behaviour that made the rule good in
+   the first place: forward and back still dominates, so losing it on your own
+   goal line still puts their striker through on goal, and x now breaks the
+   ties. Lose it on your right wing and their left wing-back steps out for it,
+   which is what a left-back is for.
+
+   Sent-off men cannot collect anything, which is most of what a red card
+   means: the ball goes to a worse-placed man instead. */
 function h2NearestTo(lostAt, lostWho, newWho){
-  const y = h2Y(lostAt, lostWho);
-  let best = 0, bd = Infinity;
+  const x = h2X(lostAt, lostWho), y = h2Y(lostAt, lostWho);
+  let best = -1, bd = Infinity;
   H2_SQUAD.forEach((_, i) => {
-    const d = Math.abs(h2Y(i, newWho) - y);
+    if(h2IsOff(newWho, i)) return;
+    const dx = h2X(i, newWho) - x, dy = (h2Y(i, newWho) - y) * 1.3;
+    const d = Math.sqrt(dx * dx + dy * dy);
     if(d < bd){ bd = d; best = i; }
   });
-  return best;
+  /* a side with nobody left is not a state the match can reach, but a -1 index
+     would be a blank pitch rather than an error, so it falls back to the keeper */
+  return best < 0 ? 0 : best;
+}
+/* The man who goes into the book: whoever was closest to the man he was
+   marking. Same function, so the tackler and the collector are decided by one
+   idea rather than two that can disagree. */
+function h2Tackler(){ const H = h2(); return h2NearestTo(H.mark, H.who, h2Other()); }
+/* a booked man holds back, if that dial is turned on */
+function h2TackleTier(){
+  const w = h2Other();
+  return (H2_BOOKED_TIER && h2Cards(w, h2Tackler()) > 0) ? H2_BOOKED_TIER : H2_TACKLE_TIER;
+}
+/* Book him, and send him off if that was his second. Returns "red", "yellow"
+   or null so the caller can say what happened. */
+function h2Book(w, i){
+  const H = h2();
+  if(!H.cards) H.cards = [{}, {}];
+  if(!H.off) H.off = [[], []];
+  H.cards[w][i] = (H.cards[w][i] || 0) + 1;
+  if(H.cards[w][i] >= H2_REDS && H.off[w].indexOf(i) === -1){ H.off[w].push(i); return "red"; }
+  return "yellow";
 }
 
 function h2Judge(ok){
   const H = h2();
   stopTimer();
+  /* the mark is spent whatever happens next, and is shown on the way out */
+  if(h2TackleOn && H.mark != null) h2Showmark = {i: H.mark, mine: true};
+  H.mark = null;
   if(!ok){
     const lostAt = H.at, lostWho = H.who;
     H.who = h2Other();
@@ -6372,6 +6636,7 @@ function h2Judge(ok){
     h2Fly(h2BX(lostAt, false), h2BY(lostAt, false), h2BX(H.at, true), h2BY(H.at, true), null, H.at);
     h2Turn = true;
     h2Lost = lostAt;
+    h2Showmark = null;            // the camera has swung; the mark belonged to the old view
     flashBad();
     toast("Lost it. " + S.players[H.who].name + " picks it up on " + h2Of(H.at, H.who) + ".", true);
     return h2Next();
@@ -6392,7 +6657,12 @@ function h2Judge(ok){
 
 /* ---------- the shot ---------- */
 function h2ToSave(){
-  if(!h2Draw(H2_SAVE)) h2Draw(S.tier);   // if Hard is dry, whatever is loaded will do
+  const H = h2();
+  /* A penalty is meant to go in, so the keeper is asked something unfair. An
+     outfield man in goal is asked something unfair for the opposite reason:
+     he is not a keeper and it should show. */
+  const tier = H.pen ? H2_PEN_KEEPER : h2NoGk(h2Other()) ? H2_SAVE_NOGK : H2_SAVE;
+  if(!h2Draw(tier)) h2Draw(S.tier);      // if that level is dry, whatever is loaded will do
   S.timeUp = false; S.phase = "h_save";
   render();
 }
@@ -6449,9 +6719,57 @@ function h2KickOn(){
 }
 
 function h2Next(){
+  const H = h2();
   S.tier = null; S.qi = null; S.timeUp = false;
+  H.pen = false;
+  /* With the tackle on, a pass begins with the phone crossing the table. */
+  if(h2TackleOn) return h2Hand(h2Other(), "h_mark");
   S.phase = "h_pick";
   render();
+}
+
+/* ---------- PASSING THE PHONE ----------
+
+   Exactly one thing in a turn is secret, and it is the mark. The pass, the
+   question, the answer and the judging are all meant to be watched by both
+   men, so the phone does not change hands per action: it lies on the table
+   between them, screen up, and is picked up once per pass.
+
+   TWO THINGS WOULD LEAK THE SECRET and both are closed by making the screen
+   identical whatever he chose.
+
+     The pickup happens on EVERY pass, including the ones where he has no
+     intention of marking anybody, because a man who only reaches for the
+     phone when he is marking has already told you he is marking. "Let him
+     play" is therefore a button on the private screen, never a way to skip
+     the screen.
+
+     The put-it-down card is the same card with the same words and the same
+     length either way.
+
+   The signal is the whole screen rather than a line of text: his kit colour
+   behind it, his badge and his name big. After two turns nobody reads the
+   words, they see the colour. */
+function h2Hand(w, next, down){
+  const H = h2();
+  H.hand = {w: w, next: next, down: !!down};
+  S.phase = "h_hand";
+  render();
+}
+function h2HandGo(){
+  audio();
+  const H = h2();
+  const next = (H.hand && H.hand.next) || "h_pick";
+  H.hand = null;
+  S.phase = next;
+  render();
+}
+/* i is a man in the ATTACKER's eleven, or null for "let him play" */
+function h2Mark(i){
+  audio();
+  const H = h2();
+  H.mark = (i === null || i === undefined) ? null : i;
+  h2Hand(h2Other(), "h_pick", true);
 }
 
 /* ---------- the pitch ---------- */
@@ -6461,6 +6779,7 @@ function h2PitchHTML(tappable){
   const turn = h2Turn; h2Turn = false;
   const cele = h2Cele; h2Cele = false;
   const lost = h2Lost; h2Lost = null;
+  const shown = h2Showmark; h2Showmark = null;
   const tilt = h2Tilt ? " tilt" : "";
 
   let out = '<div class="h2stage' + tilt + '"><div class="h2pitch' + tilt + (turn ? " turned" : "") +
@@ -6482,9 +6801,10 @@ function h2PitchHTML(tappable){
   const man = (i, mine, o) => {
     const who = mine ? H.who : h2Other();
     const kit = h2Kit(who);
+    const yellows = h2Cards(who, i);
     const cls = (o.them ? "them" : "") + " " +
       [o.can && "can", o.sel && "sel", o.hold && "hold", o.from && "from", o.to && "to",
-       o.lost && "lost"].filter(Boolean).join(" ");
+       o.lost && "lost", o.mark && "marked", yellows && "booked"].filter(Boolean).join(" ");
     /* The goal scene had proper footballers and the pitch had little jerseys,
        and side by side the jerseys looked wrong. Same component, smaller. */
     return '<div class="h2man ' + cls + '" style="left:' + h2VX(i, mine) + '%;top:' + h2VY(i, mine) +
@@ -6494,19 +6814,31 @@ function h2PitchHTML(tappable){
       '<span class="h2fig">' +
         h2FigHTML("pm", kit, o.them ? 34 : 48, h2No(i, who)) +
       '</span>' +
+      (yellows ? '<span class="h2card' + (yellows > 1 ? " red" : "") + '"></span>' : "") +
+      (o.mark ? '<span class="h2markring"></span>' : "") +
       (o.them ? "" : '<span class="h2lb">' + esc(h2Who(i, who)) + '</span>') +
       (o.can ? '<span class="h2hit" onclick="h2Select(' + i + ')"></span>' : "") +
       '</div>';
   };
+  /* A sent-off man is not drawn, because he is not on the pitch. Everything a
+     red card does follows from the gap he leaves: nobody can pass to him,
+     nobody collects a turnover on his spot, and if he was one of the four who
+     could shoot then that shot is simply gone. */
+  const them = h2Other();
   // theirs first, so your own men sit on top of them where they overlap
-  H2_SQUAD.forEach((p, i) => { out += man(i, false, {them:true, lost: i === lost}); });
   H2_SQUAD.forEach((p, i) => {
+    if(h2IsOff(them, i)) return;
+    out += man(i, false, {them:true, lost: i === lost});
+  });
+  H2_SQUAD.forEach((p, i) => {
+    if(h2IsOff(H.who, i)) return;
     out += man(i, true, {
       can:  tappable && i !== H.at,
       sel:  i === H.sel,
       hold: i === H.at,
       from: !!A && i === A.from,
       to:   !!A && i === A.to,
+      mark: !!shown && shown.i === i,
     });
   });
 
@@ -6703,6 +7035,52 @@ function h2Render(st){
     return;
   }
 
+  /* ---------- the phone crossing the table ----------
+     Kit colour behind the whole screen, badge and name big, one button. It is
+     deliberately the loudest thing in the mode: the one moment where handing
+     the phone to the wrong man spoils the rule. */
+  if(S.phase === "h_hand"){
+    const hd = H.hand || {};
+    const w = hd.w == null ? h2Other() : hd.w;
+    const kit = h2Kit(w), badge = h2Flag(w);
+    st.innerHTML =
+      '<div class="h2hand" style="--hk:' + kit + ';--hi:' + kitInk(kit) + '">' +
+        (badge ? '<img class="h2handbadge" src="' + badge + '" alt="">' : '') +
+        '<div class="h2handwho">' + esc(S.players[w].name) + '</div>' +
+        '<div class="h2handsub">' + (hd.down
+          ? "Face down on the table, and let him play."
+          : "Pick it up. Nobody else looks.") + '</div>' +
+        '<button class="bigbtn h2handbtn" onclick="h2HandGo()">' +
+          (hd.down ? "Put it down" : "I have got it") + '</button>' +
+      '</div>';
+    return;
+  }
+
+  /* ---------- the private half-second ----------
+     The attacker's eleven, and one of them is about to be marked. Sent-off men
+     are not offered, because you cannot mark a man who is not on the pitch. */
+  if(S.phase === "h_mark"){
+    const att = H.who;
+    const tier = TIERS[h2TackleTier()];
+    st.innerHTML =
+      '<div class="kick">' + ico('users') + 'Your tackle · ' + esc(them.name) + '</div>' +
+      '<div class="h2big">Who are you marking?</div>' +
+      '<div class="h2hintline">If ' + esc(me.name) + ' passes to him you get one <b>' + tier.label +
+        '</b> question to take it off him. Miss the read and his pass comes a tier cheaper, ' +
+        'so marking every ball is not free.</div>' +
+      '<div class="h2marks">' +
+        h2Live(att).map(i =>
+          '<button class="h2markbtn' + (H.mark === i ? " on" : "") + '" onclick="h2Mark(' + i + ')">' +
+            '<span class="h2mno">' + h2No(i, att) + '</span>' +
+            '<span class="h2mnm">' + esc(h2Who(i, att)) + '</span>' +
+            '<span class="h2mps">' + H2_SQUAD[i].n + '</span>' +
+          '</button>').join("") +
+      '</div>' +
+      '<button class="bigbtn ghost" onclick="h2Mark(null)">Let him play</button>' +
+      '<div class="hint" style="text-align:center">Get it wrong in the wrong place and you give away a free kick, a booking, or a penalty.</div>';
+    return;
+  }
+
   if(S.phase === "h_goal"){
     const scorer = S.players[H.scorer];
     const won = scorer.score >= H2_TARGET;
@@ -6721,24 +7099,24 @@ function h2Render(st){
        before you choose, and again on the ball you are about to play. */
     const safe = H.safe || 0;
     const pips = '<span class="h2pips">' +
-      [0,1,2].map(i => '<i' + (i < Math.min(safe, H2_TACKLE_AT) ? ' class="on"' : '') + '></i>').join("") +
+      [0,1,2].map(i => '<i' + (i < Math.min(safe, H2_PRESS_AT) ? ' class="on"' : '') + '></i>').join("") +
       '</span>';
-    const heat = safe >= H2_TACKLE_AT
+    const heat = safe >= H2_PRESS_AT
       ? '<div class="h2heat hot">' + pips + esc(them.name) + ' is on him. The next short ball is contested.</div>'
-      : safe === H2_TACKLE_AT - 1
+      : safe === H2_PRESS_AT - 1
         ? '<div class="h2heat warm">' + pips + 'One more short ball and ' + esc(them.name) + ' can come for it.</div>'
         : safe > 0 ? '<div class="h2heat">' + pips + safe + ' short ' + (safe === 1 ? "ball" : "balls") + ' in a row</div>' : "";
 
     let bar = "";
     if(H.sel != null){
       const tk = h2TierFor(H.at, H.sel), tt = TIERS[tk];
-      const contested = H2_SAFE.includes(tk) && safe >= H2_TACKLE_AT;
+      const contested = H2_SAFE.includes(tk) && safe >= H2_PRESS_AT;
       bar = '<div class="h2confirm' + (contested ? " contested" : "") + '" style="--dc:' +
               (contested ? "#e04a34" : tt.color) + '">' +
               '<div class="h2cline"><span class="h2cwhat">' + h2PassName(H.at, H.sel) + '</span>' +
               '<span class="h2ctier">' + (contested ? "Contested" : tt.label) + '</span></div>' +
               (contested ? '<div class="h2hintline" style="margin:0 0 8px">' + esc(them.name) +
-                ' gets a ' + TIERS[H2_TACKLE_TIER].label + ' question to take it off you first.</div>' : "") +
+                ' gets a ' + TIERS[H2_PRESS_TIER].label + ' question to take it off you first.</div>' : "") +
               '<button class="bigbtn" onclick="h2Play()">Play it</button></div>';
     }
     st.innerHTML =
@@ -6746,6 +7124,7 @@ function h2Render(st){
       '<div class="h2toggles">' +
         '<button class="h2view" onclick="h2ToggleView()">' + (h2Tilt ? "Flat view" : "3D view") + '</button>' +
         '<button class="h2view" onclick="h2ToggleSound()">' + (h2Sound ? "Sound off" : "Sound on") + '</button>' +
+        '<button class="h2view" onclick="h2ToggleTackle()">' + (h2TackleOn ? "Tackles off" : "Tackles on") + '</button>' +
       '</div>' +
       h2PitchHTML(true) +
       '<div class="h2where">' + esc(me.name) + ' has it on ' + esc(h2Of(H.at, H.who)) + '</div>' +
@@ -6801,11 +7180,20 @@ function h2Render(st){
 
   if(S.phase === "h_tackle" || S.phase === "h_tjudge"){
     const shown = S.phase === "h_tjudge";
+    /* Two rules arrive on this screen and they pay out very differently, so
+       they must not read the same. The press is pressure and costs nothing to
+       lose; the tackle is a read, and losing it is a foul and a card. */
+    const isTackle = H.contest === "tackle";
+    const on = H.mark == null ? "" : h2Of(H.mark, H.who);
+    const pen = H.mark != null && H2_SQUAD[H.mark].line === 6;
     st.innerHTML =
       h2ScoreHTML() + h2PitchHTML(false) +
-      '<div class="h2big tackle">' + esc(them.name) + ' comes in for it</div>' +
+      '<div class="h2big tackle">' + (isTackle
+        ? esc(them.name) + ' read it'
+        : esc(them.name) + ' comes in for it') + '</div>' +
+      (isTackle ? '<div class="h2hintline" style="margin-top:0">He was marking ' + esc(on) + '.</div>' : "") +
       '<div class="qcard" style="--dc:' + t.color + '">' +
-        '<div class="kick">THE TACKLE · ' + esc(them.name) + ' · ' + t.label + '</div>' +
+        '<div class="kick">' + (isTackle ? "THE TACKLE" : "CLOSED DOWN") + ' · ' + esc(them.name) + ' · ' + t.label + '</div>' +
         '<div class="qtext">' + esc(q().q) + '</div>' +
         (shown && !h2IsMC() ? '<div class="atext"><span class="lbl">Answer</span>' + esc(q().a) + '</div>' : "") +
         (h2IsMC() ? h2McOptionsHTML(shown) : "") +
@@ -6814,14 +7202,20 @@ function h2Render(st){
         ? (shown
             ? '<button class="bigbtn" onclick="h2McPlayOn()">' +
                 (H.pick === q().k ? "In he goes" : "He is beaten") + '</button>'
-            : '<div class="h2hintline">' + esc(them.name) + ' has one tap to win it. Miss and the pass is on.</div>')
+            : '<div class="h2hintline">' + esc(them.name) + ' has one tap to win it. ' + (isTackle
+                ? "Miss and it is a foul" + (pen ? " in the box." : ".")
+                : "Miss and the pass is on.") + '</div>')
         : (shown
             ? '<div class="row2">' +
                 '<button class="bigbtn ok" onclick="h2TackleJudge(true)">He won it</button>' +
-                '<button class="bigbtn bad" onclick="h2TackleJudge(false)">He missed</button>' +
+                '<button class="bigbtn bad" onclick="h2TackleJudge(false)">' +
+                  (isTackle ? "He fouled him" : "He missed") + '</button>' +
               '</div>'
             : '<button class="bigbtn" onclick="h2TackleReveal()">Reveal the answer</button>' +
-              '<div class="h2hintline">Get it and the ball is yours. Miss it and he goes straight past you.</div>')) +
+              '<div class="h2hintline">' + (isTackle
+                ? "Get it and the ball is yours, collected where the pass was going. Miss it and it is a foul, a booking" +
+                  (pen ? " and a PENALTY." : " and a free kick.")
+                : "Get it and the ball is yours. Miss it and he goes straight past you.") + '</div>')) +
       foot;
     if(!shown && S.timed) startTimer(15, h2TackleTimeUp, clockKey());
     return;
@@ -7967,6 +8361,21 @@ function resumeGame(){
   if(["c_who","c_judge"].includes(S.phase)) S.phase="c_play";
   if(S.mode==="career" && !S.career) newCareer();
   if(S.play==="pitch" && !S.h2h) h2Start();   // a save from before the mode existed
+  if(S.h2h){
+    /* saves from before the tackle existed */
+    const H = S.h2h;
+    if(!H.cards) H.cards = [{}, {}];
+    if(!H.off) H.off = [[], []];
+    if(H.mark === undefined) H.mark = null;
+    if(H.hand === undefined) H.hand = null;
+    if(H.contest === undefined) H.contest = null;
+    if(H.pen === undefined) H.pen = false;
+    /* A match parked halfway through the handoff comes back on the pitch. The
+       secret was in somebody's head and the phone has been closed since, so
+       restoring the private screen would either show the mark to the wrong man
+       or ask him to remember what he picked last Friday. */
+    if(S.phase === "h_hand" || S.phase === "h_mark"){ H.mark = null; H.hand = null; S.phase = "h_pick"; }
+  }
   render();
 }
 /* Every function below that changes the score or the phase is host-only. On a

@@ -34,6 +34,11 @@ const GK = 0, LCB = 1, SIX = 5, EIGHT = 6, TEN = 7, ST = 9;
   const WC = JSON.parse(fs.readFileSync(path.join(REPO, "assets/wc2006/index.json"), "utf8"));
   run(app, "DECKS['classic-mc'] = " + JSON.stringify(MC));
   run(app, "TEAMS.classic = " + JSON.stringify(WC));
+  /* These checks are the ORIGINAL rules: the ladder, the turnover and the
+     press. The tackle changes the shape of a turn (the phone crosses the table
+     before every pass), so it is switched off here and driven on its own in
+     _tests/tackle-test.js. Both rule sets ship, so both are tested. */
+  run(app, "h2TackleOn = false;");
 
   const phase = () => ev(app, "S.phase");
   const pos = () => ev(app, "S.h2h.at");

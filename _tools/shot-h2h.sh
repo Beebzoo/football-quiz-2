@@ -43,9 +43,10 @@ cd "$REPO"
 SHOT_STATE="$STATE" node -e '
 const fs=require("fs");
 const state=process.env.SHOT_STATE||"pick";
-const base=`S=freshState(["Martijn","Bram"],false,"h2h",0); h2Start();`;
+const base=`S=freshState(["Martijn","Bram"],false,"classic",0,"pitch",false); h2TackleOn=false; h2Start();`;
 const picked=`${base} h2PickTeam("Netherlands"); h2PickTeam("Italy");`;
 const nl=`${picked} S.h2h.tossed=true;`;
+const nl2=`${picked} S.h2h.tossed=true;`;
 const setups={
   /* the front door and the classic board: not One on One at all, but this is
      the only rendering harness in the repo and a menu that has gone unreadable
@@ -54,9 +55,13 @@ const setups={
   modes: `S=null; modesOpen=true; setupMode="classic"; render();`,
   setup: `S=null; setupMode="classic"; setupPlay="pitch"; render();`,
   setupb:`S=null; setupMode="classic"; setupPlay="board"; render();`,
-  board: `S=freshState(["Martijn","Bram","Ale"],false,"classic",100); S.phase="pick"; render();`,
-  qcard: `S=freshState(["Martijn","Bram","Ale"],false,"classic",100); S.phase="pick"; render(); pickTier("hard");`,
+  board: `S=freshState(["Martijn","Bram","Ale"],false,"classic",100,"board",false); S.phase="pick"; render();`,
+  qcard: `S=freshState(["Martijn","Bram","Ale"],false,"classic",100,"board",false); S.phase="pick"; render(); pickTier("hard");`,
   teams: `${base} render();`,
+  hand:  `${nl2} h2TackleOn=true; S.h2h.who=0; S.h2h.at=0; h2Hand(1,"h_mark");`,
+  mark:  `${nl2} h2TackleOn=true; S.h2h.who=0; S.h2h.at=0; S.h2h.hand=null; S.phase="h_mark"; render();`,
+  tack:  `${nl2} h2TackleOn=true; S.h2h.who=0; S.h2h.at=5; S.phase="h_pick"; S.h2h.mark=9; render(); h2Select(9); h2Play();`,
+  cards: `${nl2} h2TackleOn=false; S.h2h.who=0; S.h2h.at=5; S.h2h.cards=[{},{}]; S.h2h.cards[0][1]=1; S.h2h.cards[0][6]=2; S.h2h.off=[[6],[]]; S.phase="h_pick"; render();`,
   toss:  `${picked} render();`,
   flip:  `${picked} render(); h2Call("heads");`,
   landed:`${picked} render(); h2Call("heads"); h2Land();`,
@@ -73,7 +78,7 @@ const setups={
   strike:`${nl} S.h2h.who=0; S.h2h.at=9; S.phase="h_pick"; render(); h2Shoot(); h2Reveal(); h2Judge(true); h2SaveReveal(); setTimeout(()=>h2SaveJudge(false), 3700);`,
   save:  `${nl} S.h2h.who=0; S.h2h.at=9; S.phase="h_pick"; render(); h2Shoot(); h2Reveal(); h2Judge(true); h2SaveReveal(); setTimeout(()=>h2SaveJudge(true), 3800);`,
   goal:  `${nl} S.h2h.who=0; S.h2h.at=9; S.phase="h_pick"; render(); setTimeout(()=>{ h2Shoot(); h2Reveal(); h2Judge(true); h2SaveReveal(); h2SaveJudge(false); }, 3500);`,
-  mcq:   `S=freshState(["Martijn","Bram"],false,"h2mc",0); h2Start(); S.h2h.teams=["Netherlands","Italy"]; S.h2h.tossed=true; S.h2h.who=0; S.h2h.at=0; S.phase="h_pick"; render(); h2Select(5); h2Play();`,
+  mcq:   `S=freshState(["Martijn","Bram"],false,"classic",0,"pitch",true); h2TackleOn=false; h2Start(); S.h2h.teams=["Netherlands","Italy"]; S.h2h.tossed=true; S.h2h.who=0; S.h2h.at=0; S.phase="h_pick"; render(); h2Select(5); h2Play();`,
 };
 let h=fs.readFileSync("index.html","utf8");
 const drive=`

@@ -33,6 +33,11 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
      being driven is the shape that ships. */
   const WC = JSON.parse(fs.readFileSync(path.join(REPO, "assets/wc2006/index.json"), "utf8"));
   run(app, "TEAMS.classic = " + JSON.stringify(WC));
+  /* These checks are the ORIGINAL rules: the ladder, the turnover and the
+     press. The tackle changes the shape of a turn (the phone crosses the table
+     before every pass), so it is switched off here and driven on its own in
+     _tests/tackle-test.js. Both rule sets ship, so both are tested. */
+  run(app, "h2TackleOn = false;");
 
   const tier = (a, b) => ev(app, `h2TierFor(${a},${b})`);
   const pos = () => ev(app, "S.h2h.at");
@@ -226,7 +231,7 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
     check("the fastest route on short balls alone is four passes",
       SQ[at].line === 6 && hops === 4, "reached line " + SQ[at].line + " in " + hops);
     check("so the tackle fires before it can finish",
-      ev(app, "H2_TACKLE_AT") < hops, "threshold " + ev(app, "H2_TACKLE_AT") + " vs " + hops + " passes");
+      ev(app, "H2_PRESS_AT") < hops, "threshold " + ev(app, "H2_PRESS_AT") + " vs " + hops + " passes");
     check("and it counts Normal too, or you would just alternate",
       ev(app, "H2_SAFE.join(',')") === "easy,normal", ev(app, "H2_SAFE.join(',')"));
   }
@@ -253,7 +258,7 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
     stage(app).includes("Contested"), "no contested marking");
   run(app, "h2Play()"); await tick(180);
   check("the fourth short ball brings him in", phase() === "h_tackle", phase());
-  check("at the level a tackle costs", ev(app, "S.tier") === ev(app, "H2_TACKLE_TIER"), ev(app, "S.tier"));
+  check("at the level a tackle costs", ev(app, "S.tier") === ev(app, "H2_PRESS_TIER"), ev(app, "S.tier"));
   check("and it is named as his", stage(app).includes("comes in for it"), "not named");
 
   console.log("\n--- he wins it ---");
@@ -274,7 +279,7 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   check("the pass goes straight through, no question asked",
     pos() === EIGHT && who() === 0, pos() + "/" + who());
   check("and he is still on him, so it does not buy a free run",
-    ev(app, "S.h2h.safe") >= ev(app, "H2_TACKLE_AT"), ev(app, "S.h2h.safe"));
+    ev(app, "S.h2h.safe") >= ev(app, "H2_PRESS_AT"), ev(app, "S.h2h.safe"));
 
   console.log("\n--- committing to a real ball clears it ---");
   await start();
