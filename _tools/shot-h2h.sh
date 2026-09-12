@@ -1,7 +1,10 @@
 #!/bin/sh
 # Screenshot One on One at phone width, in whatever state you name.
 #
-#   sh _tools/shot-h2h.sh out.png [scale] [state]
+#   sh _tools/shot-h2h.sh out.png [scale] [state] [scrollpx]
+#
+#   scrollpx  shift the app up inside the frame, to inspect something that
+#             falls below the fold at a high scale
 #
 #   scale   1.0 to inspect detail, .6 to see a whole phone screen
 #   state   teams | toss | flip | landed | pick | sel | nl | it | flat
@@ -30,6 +33,7 @@ REPO=$(cd "$(dirname "$0")/.." && pwd)
 OUT="$1"
 SCALE="${2:-.62}"
 STATE="${3:-pick}"
+SCROLL="${4:-0}"
 PORT=8811
 EDGE="/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"
 
@@ -74,7 +78,7 @@ cat > _shot_frame.html <<HTML
 <style>
   html,body{margin:0;background:#0b1f14}
   #wrap{width:390px;height:1000px;transform:scale($SCALE);transform-origin:0 0}
-  iframe{width:390px;height:1000px;border:0;display:block}
+  iframe{width:390px;height:1000px;border:0;display:block;margin-top:-${SCROLL}px}
 </style>
 <div id="wrap"><iframe src="_shot_app.html"></iframe></div>
 HTML
@@ -88,4 +92,4 @@ sleep 1
   --screenshot="$OUT" --virtual-time-budget=5000 \
   "http://localhost:$PORT/_shot_frame.html" >/dev/null 2>&1
 
-echo "wrote $OUT  (state: $STATE, scale: $SCALE)"
+echo "wrote $OUT  (state: $STATE, scale: $SCALE, scroll: $SCROLL)"

@@ -1547,7 +1547,7 @@
   .h2stage{position:relative;width:100%;max-width:400px;margin:2px auto 0;
     perspective:820px;perspective-origin:50% 38%}
   .h2stage:not(.tilt){aspect-ratio:10/13}
-  .h2stage.tilt{aspect-ratio:10/11.6}
+  .h2stage.tilt{aspect-ratio:10/11}
   .h2pitch{
     position:absolute;left:0;right:0;top:50%;aspect-ratio:10/13;
     --base:translateY(-50%);
@@ -1560,7 +1560,7 @@
       radial-gradient(ellipse 78% 58% at 50% 50%,transparent 48%,rgba(0,0,0,.34) 100%),
       repeating-linear-gradient(180deg,rgba(255,255,255,.032) 0 7.6%,transparent 7.6% 15.2%),
       linear-gradient(180deg,#0d3a1c 0%,#17552c 50%,#0d3a1c 100%);
-    border-radius:4px;user-select:none;
+    border-radius:12px;user-select:none;
     box-shadow:0 18px 38px rgba(0,0,0,.55);
     transition:transform .45s ease;
   }
@@ -1584,40 +1584,6 @@
   /* markings */
   .h2pitch::before{content:"";position:absolute;inset:2% 2.5%;border:2px solid rgba(255,255,255,.34);border-radius:3px;pointer-events:none}
   .h2pitch::after{content:"";position:absolute;left:2.5%;right:2.5%;top:50%;border-top:2px solid rgba(255,255,255,.28);pointer-events:none}
-  /* ---------- THE GROUND ROUND THE PITCH ----------
-     The pitch is a plane in 3D, so a stand is just another plane hinged along
-     one of its edges and folded up. transform-origin does the hinging: the far
-     stand pivots on its bottom edge where it meets the goal line, the side
-     stands on the edge that meets the touchline.
-
-     The crowd is the same four-layer speckle the goal scene uses. It has to be
-     denser here because these stands are seen at a sharper angle and a sparse
-     dot pattern stretched across a steep plane looks like dirt. */
-  .h2bowl{position:absolute;pointer-events:none;
-    background-color:#16261d;
-    background-image:
-      radial-gradient(circle,rgba(244,238,226,.8) 0 1px,transparent 1.5px),
-      radial-gradient(circle,rgba(226,158,116,.7) 0 1px,transparent 1.5px),
-      radial-gradient(circle,rgba(146,184,234,.66) 0 1px,transparent 1.5px),
-      repeating-linear-gradient(180deg,rgba(0,0,0,.45) 0 2px,transparent 2px 6px);
-    background-size:6px 6px, 9px 7px, 11px 9px, 100% 6px;
-    background-position:0 0, 2px 3px, 5px 1px, 0 0;
-    box-shadow:inset 0 0 22px rgba(0,0,0,.7)}
-  .h2bowl.far{left:-20%;right:-20%;bottom:103%;height:82px;
-    transform-origin:50% 100%;transform:rotateX(-60deg)}
-  .h2bowl.left{right:104%;top:-14%;bottom:-14%;width:40px;
-    transform-origin:100% 50%;transform:rotateY(56deg)}
-  .h2bowl.right{left:104%;top:-14%;bottom:-14%;width:40px;
-    transform-origin:0 50%;transform:rotateY(-56deg)}
-  /* the perimeter itself: a dark apron the stands sit behind */
-  .h2pitch::before{box-shadow:0 0 0 14px rgba(6,16,10,.85)}
-  /* a lit roof edge, which is most of what makes a dark slab read as a stand */
-  .h2bowl::after{content:"";position:absolute;background:rgba(190,214,196,.3);
-    box-shadow:0 0 12px rgba(190,214,196,.28)}
-  .h2bowl.far::after{left:0;right:0;top:0;height:3px}
-  .h2bowl.left::after{left:0;top:0;bottom:0;width:3px}
-  .h2bowl.right::after{right:0;top:0;bottom:0;width:3px}
-
   .h2box{position:absolute;left:26%;right:26%;height:9%;border:2px solid rgba(255,255,255,.28);pointer-events:none}
   .h2box.t{top:2%;border-top-color:transparent}
   .h2box.b{bottom:2%;border-bottom-color:transparent}
@@ -1630,16 +1596,17 @@
     background:rgba(255,255,255,.5);border-radius:50%;pointer-events:none}
 
   /* a man: shadow flat on the grass, figure standing on top of it */
-  .h2man{position:absolute;width:110px;transform:translate(-50%,-50%);z-index:2;
+  .h2man{position:absolute;width:110px;transform:translate(-50%,-100%);z-index:2;
     text-align:center;pointer-events:none;-webkit-tap-highlight-color:transparent}
-  .h2hit{position:absolute;left:50%;top:50%;width:34px;height:40px;
-    transform:translate(-50%,-58%);pointer-events:auto;cursor:pointer;border-radius:8px}
-  .h2sh{display:block;position:absolute;left:50%;top:50%;width:22px;height:7px;transform:translate(-50%,18%);
+  .h2hit{position:absolute;left:50%;bottom:0;width:34px;height:46px;
+    transform:translateX(-50%);pointer-events:auto;cursor:pointer;border-radius:8px}
+  .h2sh{display:block;position:absolute;left:50%;bottom:0;width:22px;height:7px;transform:translate(-50%,50%);
     background:rgba(0,0,0,.42);border-radius:50%;filter:blur(1.6px)}
   .h2fig{display:block;position:relative;transform-origin:50% 92%}
   .h2man .fig.pm{margin:0 auto;transform-origin:50% 100%}
-  .h2man .h2fig{transform:translateY(-46%)}
-  .h2pitch.tilt .h2man .h2fig{transform:translateY(-46%) rotateX(-46deg)}
+  /* he pivots about his boots, because that is where a standing man pivots */
+  .h2man .h2fig{transform-origin:50% 100%}
+  .h2pitch.tilt .h2man .h2fig{transform:rotateX(-46deg)}
   .h2pitch.tilt .h2fig{transform:rotateX(-46deg)}
   /* No head: at this size it read as a blob on top of the shirt and stole the
      room the number needed. The shirt is the man. */
@@ -1664,7 +1631,8 @@
   .h2kit i{position:relative;top:1px;font:800 11px/1 var(--ui);font-style:normal;
     color:var(--ink,#fff);opacity:.95;letter-spacing:-.03em;
     text-shadow:0 1px 1px rgba(0,0,0,.3)}
-  .h2lb{display:block;width:100%;margin:1px 0 0;font:700 8.4px/1.2 var(--ui);
+  .h2lb{position:absolute;left:0;right:0;top:100%;margin-top:7px;
+    font:700 8.4px/1.2 var(--ui);
     letter-spacing:.01em;white-space:nowrap;
     color:rgba(255,255,255,.94);text-shadow:0 1px 3px rgba(0,0,0,.98),0 0 6px rgba(0,0,0,.8)}
 
@@ -1679,13 +1647,13 @@
   /* The man in possession stands in a lit ring on the grass. It is a direct
      child of the man and NOT of the figure, so it never gets the standing-up
      counter-rotation and stays lying flat on the pitch where a marker belongs. */
-  .h2ring{position:absolute;left:50%;top:50%;width:38px;height:15px;pointer-events:none;
+  .h2ring{position:absolute;left:50%;bottom:0;width:38px;height:15px;pointer-events:none;
     border-radius:50%;border:2px solid rgba(247,227,166,.95);
     box-shadow:0 0 14px rgba(245,221,150,.6), inset 0 0 9px rgba(245,221,150,.4);
     animation:h2ring 1.9s ease-in-out infinite}
   @keyframes h2ring{
-    0%,100%{transform:translate(-50%,24%) scale(1);opacity:.95}
-    50%{transform:translate(-50%,24%) scale(1.18);opacity:.55}
+    0%,100%{transform:translate(-50%,50%) scale(1);opacity:.95}
+    50%{transform:translate(-50%,50%) scale(1.18);opacity:.55}
   }
   .h2man.hold .fig.pm{filter:drop-shadow(0 0 9px #f5dd9a) drop-shadow(0 3px 4px rgba(0,0,0,.6))
     brightness(1.08)}
@@ -2169,23 +2137,50 @@
 
   /* the toss */
   .h2big{text-align:center;font-size:clamp(1.4rem,6.5vw,1.9rem);font-weight:800;font-style:italic;margin:6px 0}
-  .h2coinwrap{perspective:700px;margin:16px auto 10px;width:104px;height:104px}
-  .h2coin{width:104px;height:104px;border-radius:50%;display:grid;place-items:center;
-    font-size:2.5rem;font-weight:900;transform-style:preserve-3d;
+  .h2tossrow{display:flex;align-items:center;justify-content:center;gap:20px;
+    width:100%;margin:14px 0 8px}
+  .tflag{width:58px;height:39px;object-fit:cover;border-radius:4px;flex:none;
+    opacity:.42;transition:opacity .4s,transform .4s,box-shadow .4s;
+    box-shadow:0 0 0 1px rgba(0,0,0,.6), 0 4px 12px rgba(0,0,0,.6)}
+  .tflag.won{opacity:1;transform:scale(1.12);
+    box-shadow:0 0 0 2px #f7e3a6, 0 0 22px -2px rgba(247,227,166,.75), 0 4px 14px rgba(0,0,0,.6)}
+  .h2coinwrap{position:relative;perspective:760px;width:104px;height:126px;flex:none}
+  .h2coin{position:absolute;left:0;top:8px;width:104px;height:104px;
+    transform-style:preserve-3d;transform:rotateX(var(--end,0deg))}
+  /* both faces, so there is something to see for every half turn */
+  .cf{position:absolute;inset:0;border-radius:50%;display:grid;place-items:center;
+    font:900 2.5rem var(--ui);backface-visibility:hidden;
     background:radial-gradient(circle at 34% 28%,#f7e3a6,#c9932e 60%,#7d5a12);
-    box-shadow:0 10px 26px rgba(0,0,0,.6), 0 0 0 3px rgba(255,255,255,.2) inset;
+    box-shadow:0 0 0 3px rgba(255,255,255,.22) inset, 0 0 0 1px rgba(0,0,0,.35);
     color:#4a3408;text-shadow:0 1px 0 rgba(255,255,255,.35)}
-  .h2coin.flip{animation:h2toss 1.9s cubic-bezier(.28,.7,.3,1) forwards}
-  @keyframes h2toss{
-    0%{transform:translateY(0) rotateX(0) scale(1)}
-    28%{transform:translateY(-72px) rotateX(1080deg) scale(1.12)}
-    55%{transform:translateY(-96px) rotateX(1980deg) scale(1.15)}
-    82%{transform:translateY(0) rotateX(2880deg) scale(1)}
-    90%{transform:translateY(-9px) rotateX(3060deg) scale(1.02)}
-    100%{transform:translateY(0) rotateX(3240deg) scale(1)}
+  .cf.t{transform:rotateX(180deg)}
+  /* the spin is linear so it does not hesitate mid air; the arc is separate */
+  .h2coin.flip{animation:h2spin 2s linear forwards, h2arcup 2s cubic-bezier(.22,.62,.3,1) forwards}
+  @keyframes h2spin{
+    from{transform:rotateX(0deg)}
+    to{transform:rotateX(calc(2160deg + var(--end,0deg)))}
   }
-  .h2coin.landed{animation:h2land .5s cubic-bezier(.3,1.5,.5,1)}
-  @keyframes h2land{from{transform:scale(1.25)}to{transform:scale(1)}}
+  @keyframes h2arcup{
+    0%{top:8px}
+    42%{top:-56px}
+    84%{top:10px}
+    92%{top:2px}
+    100%{top:8px}
+  }
+  .h2coin.landed{animation:h2land .45s cubic-bezier(.3,1.6,.5,1)}
+  @keyframes h2land{
+    from{transform:rotateX(var(--end,0deg)) scale(1.22)}
+    to{transform:rotateX(var(--end,0deg)) scale(1)}}
+  /* it leaves the ground, so its shadow says so */
+  .cshadow{position:absolute;left:50%;bottom:0;width:76px;height:14px;
+    transform:translateX(-50%);border-radius:50%;background:rgba(0,0,0,.5);
+    filter:blur(4px)}
+  .cshadow.flip{animation:h2cshadow 2s cubic-bezier(.22,.62,.3,1) forwards}
+  @keyframes h2cshadow{
+    0%{transform:translateX(-50%) scale(1);opacity:.5}
+    42%{transform:translateX(-50%) scale(.52);opacity:.16}
+    84%{transform:translateX(-50%) scale(1);opacity:.5}
+    100%{transform:translateX(-50%) scale(1);opacity:.5}}
   .h2call{display:flex;gap:10px;margin-top:10px}
   .h2call .bigbtn{flex:1}
 
@@ -5974,8 +5969,8 @@ const H2_MOUTH = 4;            // the goal you are shooting at, in view space
    of him, so you can see both. It goes to his outside foot for men in the
    middle and tucks INFIELD for the wide men, which keeps it on the grass
    instead of hanging off the touchline. */
-const h2BX = (i, mine) => { const x = h2VX(i, mine); return x + (x > 60 ? -5.4 : 5.4); };
-const h2BY = (i, mine) => h2VY(i, mine) + 2.8;
+const h2BX = (i, mine) => { const x = h2VX(i, mine); return x + (x > 60 ? -4.2 : 4.2); };
+const h2BY = (i, mine) => h2VY(i, mine);
 const h2No = (i, w) => { const q = h2Squad(w); return (q && q.xi[i] && q.xi[i].no) || H2_SQUAD[i].no; };
 /* ---------- SOUND ----------
    The rest of the app synthesises its noises through the AudioContext. These
@@ -6083,14 +6078,18 @@ function h2Call(side){
   audio();
   const H = h2();
   if(H.flipping || H.tossed) return;
-  H.call = side; H.flipping = true; H.coin = null;
+  /* Decided here, shown later. The coin has to know which way up it is landing
+     before it starts, or the animation cannot end on the right face. */
+  H.call = side;
+  H.result = Math.random() < .5 ? "heads" : "tails";
+  H.flipping = true; H.coin = null;
   render();
-  setTimeout(h2Land, 1900);     // the length of the coin animation
+  setTimeout(h2Land, 2000);     // the length of the coin animation
 }
 function h2Land(){
   const H = h2();
   if(!H || !H.flipping) return;
-  H.coin = Math.random() < .5 ? "heads" : "tails";
+  H.coin = H.result || (Math.random() < .5 ? "heads" : "tails");
   H.flipping = false; H.tossed = true;
   /* player 0 is the one who calls it, so he wins the toss by being right */
   H.who = (H.coin === H.call) ? 0 : 1;
@@ -6334,10 +6333,6 @@ function h2PitchHTML(tappable){
 
   let out = '<div class="h2stage' + tilt + '"><div class="h2pitch' + tilt + (turn ? " turned" : "") +
     (cele ? " cele" : "") + '">' +
-    /* three stands, hinged along the far edge and the two touchlines and folded
-       up out of the pitch plane. They only exist in the 3D view: flat on, a
-       stand is a stripe of noise and reads as a mistake. */
-    (h2Tilt ? '<div class="h2bowl far"></div><div class="h2bowl left"></div><div class="h2bowl right"></div>' : "") +
     '<div class="h2box t"></div><div class="h2box b"></div>' +
     '<div class="h2six t"></div><div class="h2six b"></div>' +
     '<div class="h2circle"></div><div class="h2spot"></div>';
@@ -6548,8 +6543,17 @@ function h2Render(st){
           '<i>' + esc(S.players[1].name) + '</i>' +
         '</div>' +
       '</div>' +
-      '<div class="h2coinwrap"><div class="h2coin' + (H.flipping ? " flip" : H.tossed ? " landed" : "") + '">' +
-        face + '</div></div>' +
+      '<div class="h2tossrow">' +
+        (h2Flag(0) ? '<img class="tflag' + (H.tossed && H.who === 0 ? " won" : "") + '" src="' + h2Flag(0) + '" alt="">' : "") +
+        '<div class="h2coinwrap">' +
+          '<div class="h2coin' + (H.flipping ? " flip" : H.tossed ? " landed" : "") +
+            '" style="--end:' + (H.result === "tails" ? 180 : 0) + 'deg">' +
+            '<span class="cf h">H</span><span class="cf t">T</span>' +
+          '</div>' +
+          '<span class="cshadow' + (H.flipping ? " flip" : "") + '"></span>' +
+        '</div>' +
+        (h2Flag(1) ? '<img class="tflag' + (H.tossed && H.who === 1 ? " won" : "") + '" src="' + h2Flag(1) + '" alt="">' : "") +
+      '</div>' +
       (H.tossed
         ? '<div class="h2big" style="font-size:1.15rem;font-style:normal">' +
             'It is ' + H.coin + '. ' + esc(S.players[H.who].name) + ' kicks off.</div>' +

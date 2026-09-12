@@ -187,9 +187,14 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
     const manY = squad()[9].y;
     const m = stage(app).match(/class="h2ballwrap[^"]*" style="left:([\d.]+)%;top:([\d.]+)%/);
     const bx = m ? +m[1] : -1, by = m ? +m[2] : -1;
-    check("the ball is next to him, not on him",
-      Math.abs(bx - squad()[9].x) > 3 && by > manY,
-      "ball " + bx + "," + by + " vs man " + squad()[9].x + "," + manY);
+    /* The spot on the grass is his FEET, so the ball belongs at the same height
+       and just off to one side. It used to sit below him, which is what put it
+       nowhere near his boot. */
+    check("the ball is beside him, not on him",
+      Math.abs(bx - squad()[9].x) > 3 && Math.abs(bx - squad()[9].x) < 8,
+      "ball x " + bx + " vs man x " + squad()[9].x);
+    check("and at his feet, not under them",
+      by === manY, "ball y " + by + " vs his feet at " + manY);
     check("and still on the grass", bx > 2 && bx < 98, bx);
   }
   await place(0, RW);
