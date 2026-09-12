@@ -1,6 +1,6 @@
 /* BALL quiz service worker: network-first so updates land instantly,
    cache fallback so the pub's dead wifi can't stop the game. */
-const CACHE = "ball-quiz-2-v12";
+const CACHE = "ball-quiz-2-v13";
 const NATFLAGS = "ad,ae,af,ag,al,am,ao,ar,at,au,az,ba,be,bf,bg,bi,bj,bm,bn,bo,br,by,ca,cd,cf,cg,ch,ci,cl,cm,cn,co,cr,cu,cv,cy,cz,de,dk,do,dz,ec,ee,eg,es,et,fi,fr,ga,gb,gd,ge,gh,gm,gn,gq,gr,gt,gw,gy,hn,hr,ht,hu,id,ie,il,in,iq,ir,is,it,jm,jo,jp,ke,kn,kr,kw,kz,lb,lc,li,lk,lr,lt,lu,lv,ly,ma,md,me,mg,mk,ml,mr,mt,mu,mw,mx,my,mz,na,ne,ng,nl,no,nz,pa,pe,ph,pk,pl,pt,py,qa,ro,rs,ru,rw,sa,sc,sd,se,si,sk,sl,sm,sn,so,sr,st,sv,sy,sz,td,tg,th,tl,tm,tn,tr,tt,tz,ua,ug,us,uy,uz,ve,vn,ws,xk,za,zm,zw".split(",");
 /* These two lists are generated, by _tools/build-stickers.py and by the
    Eredivisie build-ere.js, and they are declared HERE, above EXTRA_ASSETS,
@@ -21,7 +21,7 @@ const ERECRESTS = ["assets/logos/ado-den-haag.png", "assets/logos/ajax.png", "as
 /* STICKERS:BEGIN */
 const STICKERS = ["assets/stickers/index.json", "assets/stickers/sticker-01.webp", "assets/stickers/sticker-02.webp", "assets/stickers/sticker-03.webp", "assets/stickers/sticker-04.webp", "assets/stickers/sticker-05.webp", "assets/stickers/sticker-06.webp", "assets/stickers/sticker-07.webp", "assets/stickers/sticker-08.webp", "assets/stickers/sticker-09.webp", "assets/stickers/sticker-10.webp", "assets/stickers/sticker-11.webp", "assets/stickers/sticker-12.webp", "assets/stickers/sticker-13.webp", "assets/stickers/sticker-14.webp", "assets/stickers/sticker-15.webp", "assets/stickers/sticker-16.webp", "assets/stickers/sticker-17.webp", "assets/stickers/sticker-18.webp", "assets/stickers/sticker-19.webp", "assets/stickers/sticker-20.webp", "assets/stickers/sticker-21.webp", "assets/stickers/sticker-22.webp", "assets/stickers/sticker-23.webp", "assets/stickers/sticker-24.webp", "assets/stickers/sticker-25.webp", "assets/stickers/sticker-26.webp", "assets/stickers/sticker-27.webp", "assets/stickers/sticker-28.webp", "assets/stickers/sticker-29.webp", "assets/stickers/sticker-30.webp", "assets/stickers/sticker-31.webp", "assets/stickers/sticker-32.webp", "assets/stickers/sticker-33.webp", "assets/stickers/sticker-34.webp", "assets/stickers/sticker-35.webp", "assets/stickers/sticker-36.webp", "assets/stickers/sticker-37.webp"];
 /* STICKERS:END */
-const EXTRA_ASSETS = ["assets/ball.png", "assets/facts/index.json", "assets/deep/index.json", "assets/nicknames/index.json", "assets/awards/index.json", "assets/extra/index.json", "assets/mc/index.json", "assets/wc2006/index.json", "assets/eredivisie/index.json", "assets/eredivisie/logo.png",
+const EXTRA_ASSETS = ["assets/ball.png", "assets/facts/index.json", "assets/deep/index.json", "assets/nicknames/index.json", "assets/awards/index.json", "assets/extra/index.json", "assets/sfx/crowd.wav", "assets/sfx/goal.wav", "assets/mc/index.json", "assets/wc2006/index.json", "assets/eredivisie/index.json", "assets/eredivisie/logo.png",
   "assets/badges/index.json",
   /* The 680 portraits are NOT precached: images you only see on a
      reveal should not sit in the install. The network-first fetch handler

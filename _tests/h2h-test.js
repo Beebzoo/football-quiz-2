@@ -199,6 +199,36 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
     check("a wide man keeps it infield", m && +m[1] < squad()[10].x, m && m[1]);
   }
 
+  console.log("\n--- sound ---");
+  await place(0, ST);
+  check("it is on by default", ev(app, "h2Sound") === true, ev(app, "h2Sound"));
+  check("and there is a switch for it", stage(app).includes("Sound off"), "no sound toggle");
+  run(app, "h2ToggleSound()"); await tick(160);
+  check("turning it off sticks", ev(app, "h2Sound") === false, ev(app, "h2Sound"));
+  check("and the switch says so", stage(app).includes("Sound on"), "the label did not flip");
+  check("it is remembered", ev(app, 'localStorage.getItem("ball2-mute")') === "1",
+    ev(app, 'localStorage.getItem("ball2-mute")'));
+  /* The harness has no Audio constructor, which is the point: every call is
+     wrapped, so a browser that refuses to play must never take the game down
+     with it. */
+  check("a muted goal roar is silent, not an exception",
+    ev(app, '(function(){ try{ h2Sfx("goal", 1); return "fine"; }catch(e){ return "threw: "+e.message; } })()') === "fine",
+    ev(app, '(function(){ try{ h2Sfx("goal", 1); return "fine"; }catch(e){ return "threw: "+e.message; } })()'));
+  run(app, "h2ToggleSound()"); await tick(160);
+  check("and back on again", ev(app, "h2Sound") === true, ev(app, "h2Sound"));
+  check("an unplayable one does not throw either",
+    ev(app, '(function(){ try{ h2Sfx("goal", 1); h2CrowdStart(); h2CrowdStop(); return "fine"; }catch(e){ return "threw: "+e.message; } })()') === "fine",
+    ev(app, '(function(){ try{ h2Sfx("goal", 1); h2CrowdStart(); h2CrowdStop(); return "fine"; }catch(e){ return "threw: "+e.message; } })()'));
+  {
+    const sfx = ["goal", "crowd"];
+    check("both files are actually there",
+      sfx.every(f => fs.existsSync(path.join(REPO, "assets/sfx", f + ".wav"))),
+      sfx.filter(f => !fs.existsSync(path.join(REPO, "assets/sfx", f + ".wav"))).join(","));
+    const kb = sfx.map(f => fs.statSync(path.join(REPO, "assets/sfx", f + ".wav")).size / 1024);
+    check("and small enough to precache (under 1MB together)",
+      kb.reduce((a, b) => a + b, 0) < 1024, kb.map(k => k.toFixed(0) + "KB").join(" + "));
+  }
+
   console.log("\n--- the men themselves ---");
   await place(0, GK);
   check("they wear a squad number", /<i>\d+<\/i>/.test(stage(app)), "no numbers on the shirts");

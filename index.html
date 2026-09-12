@@ -1868,6 +1868,7 @@
     box-shadow:0 0 0 1px var(--tc) inset, 0 0 14px -4px var(--tc)}
   .h2goals{font-size:1.65rem;font-weight:800;font-variant-numeric:tabular-nums}
   .h2where{position:relative;z-index:6;text-align:center;font-size:.88rem;opacity:.85;margin:10px 0 5px;font-style:italic}
+  .h2toggles{display:flex;justify-content:center;gap:18px;margin:0 0 2px;position:relative;z-index:6}
   .h2view{display:block;margin:0 auto 2px;position:relative;z-index:6;background:none;border:0;cursor:pointer;
     font:600 .76rem var(--ui);color:rgba(255,255,255,.5);letter-spacing:.04em;
     text-decoration:underline;text-underline-offset:3px}
@@ -5691,6 +5692,48 @@ const H2_MOUTH = 4;            // the goal you are shooting at, in view space
 const h2BX = (i, mine) => { const x = h2VX(i, mine); return x + (x > 60 ? -5.4 : 5.4); };
 const h2BY = (i, mine) => h2VY(i, mine) + 2.8;
 const h2No = (i, w) => { const q = h2Squad(w); return (q && q.xi[i] && q.xi[i].no) || H2_SQUAD[i].no; };
+/* ---------- SOUND ----------
+   The rest of the app synthesises its noises through the AudioContext. These
+   two are recordings, so they go through plain Audio elements instead: a bed
+   of crowd that loops under the whole match, and a roar that goes over the top
+   of a goal.
+
+   Two things a browser will not forgive. It will not start audio without a
+   user gesture, so the bed starts on the kick-off tap and every play() is
+   allowed to fail quietly rather than throwing. And render() runs constantly,
+   so starting the bed has to be idempotent: it checks whether it is already
+   going instead of stacking up a new one every frame. */
+let h2Sound = true;
+try{ h2Sound = localStorage.getItem("ball2-mute") !== "1"; }catch(e){}
+let h2CrowdEl = null;
+
+function h2ToggleSound(){
+  h2Sound = !h2Sound;
+  try{ localStorage.setItem("ball2-mute", h2Sound ? "0" : "1"); }catch(e){}
+  if(h2Sound) h2CrowdStart(); else h2CrowdStop();
+  render();
+}
+function h2Sfx(name, vol){
+  if(!h2Sound) return;
+  try{
+    const a = new Audio("assets/sfx/" + name + ".wav");
+    a.volume = vol;
+    a.play().catch(()=>{});
+  }catch(e){}
+}
+function h2CrowdStart(){
+  if(!h2Sound) return;
+  try{
+    if(!h2CrowdEl){
+      h2CrowdEl = new Audio("assets/sfx/crowd.wav");
+      h2CrowdEl.loop = true;
+      h2CrowdEl.volume = 0.26;   // a bed, not a feature
+    }
+    if(h2CrowdEl.paused) h2CrowdEl.play().catch(()=>{});
+  }catch(e){}
+}
+function h2CrowdStop(){ try{ if(h2CrowdEl) h2CrowdEl.pause(); }catch(e){} }
+
 let h2Turn = false;            // set for one render when the camera should swing
 let h2Cele = false;            // ... and when the scoring side should celebrate
 let h2Lost = null;             // the man who just gave it away, for one render
@@ -5770,6 +5813,7 @@ function h2Land(){
 }
 function h2KickOff(){
   audio();
+  h2CrowdStart();
   S.phase = "h_pick";
   render();
 }
@@ -5899,6 +5943,7 @@ function h2SaveJudge(saved){
   /* Neither outcome takes effect yet. The strike is watched first, from behind
      the striker, and the consequences land when it is over. */
   H.result = saved ? "saved" : "scored";
+  if(!saved) h2Sfx("goal", 0.95);
   S.phase = "h_strike";
   render();
   clearTimeout(h2StrikeHold);
@@ -6151,7 +6196,10 @@ function h2Render(st){
     }
     st.innerHTML =
       h2ScoreHTML() +
-      '<button class="h2view" onclick="h2ToggleView()">' + (h2Tilt ? "Flat view" : "3D view") + '</button>' +
+      '<div class="h2toggles">' +
+        '<button class="h2view" onclick="h2ToggleView()">' + (h2Tilt ? "Flat view" : "3D view") + '</button>' +
+        '<button class="h2view" onclick="h2ToggleSound()">' + (h2Sound ? "Sound off" : "Sound on") + '</button>' +
+      '</div>' +
       h2PitchHTML(true) +
       '<div class="h2where">' + esc(me.name) + ' has it on ' + esc(h2Of(H.at, H.who)) + '</div>' +
       bar +
@@ -6265,6 +6313,7 @@ function render(){
      it is dispatched before the shared phases rather than joining them. */
   const h2On = (S.mode==="h2h" || S.mode==="h2mc") && S.phase!=="results";
   document.body.classList[h2On?"add":"remove"]("h2hmode");
+  if(!h2On) h2CrowdStop();   // results, the menu, another mode
   if(h2On){ h2Render(st); return; }
 
   if(S.phase==="pick"){
