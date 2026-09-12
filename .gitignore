@@ -24,3 +24,7 @@ assets/stadiums/
 assets/kits/
 # the 7 source photos the assets/players cutouts were made from
 assets/originals/
+
+# the screenshot harness builds these on the fly
+_shot_app.html
+_shot_frame.html
