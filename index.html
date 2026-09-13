@@ -2627,6 +2627,13 @@
   .h2sheet-r i{display:block;font-style:normal;opacity:.52;letter-spacing:.06em;
                text-transform:uppercase;font-size:.62rem}
   .h2sheet-r b{font-weight:600}
+  /* the pool switcher: a quiet row of segments above the sides, because it is
+     a question about the question rather than the answer */
+  .h2poolrow{display:flex;gap:6px;flex-wrap:wrap;margin:2px 0 8px}
+  .h2poolb{flex:1 1 auto;background:var(--panel);border:1px solid var(--line);color:inherit;
+           border-radius:999px;padding:7px 12px;font:inherit;font-size:.8rem;cursor:pointer;opacity:.75}
+  .h2poolb.on{background:var(--green-fill);border-color:var(--on-line);color:var(--green-ink);
+              opacity:1;font-weight:700}
   .h2repbox{margin:14px 0 4px}
   .h2rep{background:var(--panel);border:1px solid var(--line);border-radius:12px;
          padding:10px 12px;margin:8px 0}
@@ -5540,37 +5547,77 @@ const SPEC_META = {
    A quiz with no `teams` file cannot be played on the pitch, and the menu will
    not offer it: Career Path has no tiers to price a pass with, and Badge Zoom
    has no Extreme tier at all, so a raking ball would have nothing to ask. */
+/* ---------- WHO YOU PLAY AS ----------
+   A pool is a set of sides with an eleven each, and it is separate from the
+   quiz on purpose: the questions and the men are two choices, not one. Every
+   file here is the same shape, which is what lets a harvester write one and
+   the app read it with no per-pool code at all:
+
+     { "<side>": { kit, abbr, flag, slug, squad, xi[11], bench[], xiWhen?,
+                   xiVs?, xiShape? } }
+
+   and every man is { n, full, no, pos, lg?, tr?, g?, y?, r?, app?, cap? }.
+
+   The group field is what the picker sorts by when there is more than one
+   of a kind. The of field is the quiz whose badges and labels this pool
+   borrows, which is how a
+   club pool gets crests and a national pool gets flags without a second
+   table. */
+const POOLS = {
+  wc2006: {label:"World Cup 2006", group:"World Cups", of:"classic",
+           file:"assets/wc2006/index.json", flags:"assets/natflags/", ext:".png",
+           blurb:"Thirty-two nations, and the eleven each of them actually started their last match with."},
+  /* FORTY REAL STARTING ELEVENS, from Brazil 1970 to Argentina 2022. No bench,
+     because a final's line-up is eleven men and some of these predate
+     substitutes; no careers, so every man asks the quiz's own bank, which is
+     exactly what a Costa Rican who never left home already does. */
+  finals: {label:"Famous finals", group:"Finals", of:"classic",
+           file:"assets/finals/index.json", flags:null, ext:"",
+           blurb:"Forty sides that actually took the field in a final. No bench: these are the eleven."},
+  "ere-clubs": {label:"Eredivisie clubs", group:"Leagues", of:"ere",
+           file:"assets/eredivisie/clubs.json", flags:"assets/logos/", ext:".png"},
+  "premier-clubs": {label:"Premier League clubs", group:"Leagues", of:"premier",
+           file:"assets/premier/clubs.json", flags:"assets/logos/", ext:".png"},
+  "laliga-clubs": {label:"La Liga clubs", group:"Leagues", of:"laliga",
+           file:"assets/laliga/clubs.json", flags:"assets/logos/", ext:".png"},
+  "bundesliga-clubs": {label:"Bundesliga clubs", group:"Leagues", of:"bundesliga",
+           file:"assets/bundesliga/clubs.json", flags:"assets/logos/", ext:".png"},
+  "seriea-clubs": {label:"Serie A clubs", group:"Leagues", of:"seriea",
+           file:"assets/seriea/clubs.json", flags:"assets/logos/", ext:".png"},
+  "belgian-clubs": {label:"Belgian clubs", group:"Leagues", of:"belgian",
+           file:"assets/belgian/clubs.json", flags:"assets/logos/", ext:".png"},
+};
 const QUIZZES = {
   classic: {label:"Let's Ball", ic:"trophy", ac:"#e9b84c",
             spoken:null, mc:"assets/mc/index.json",
-            teams:"assets/wc2006/index.json", flags:"assets/natflags/", ext:".png",
+            pool:"wc2006", flags:"assets/natflags/", ext:".png",
             blurb:"The whole bank, 6,984 questions, and on the pitch you play it as a country from the 2006 World Cup."},
   /* THE LEAGUES all wear the same icon on purpose. They are the same KIND of
      thing, so they read as a family and tell themselves apart by their accent
      colour, the way a shelf of league badges does. */
   ere:     {label:"Eredivisie", ic:"stripes", ac:"#f5a35c",
             spoken:"assets/eredivisie/index.json", mc:"assets/eredivisie/mc.json",
-            teams:"assets/eredivisie/clubs.json", flags:"assets/logos/", ext:".png",
+            pool:"ere-clubs", flags:"assets/logos/", ext:".png",
             blurb:"The Dutch top flight, with 2007-08 to 2017-18 at its heart."},
   premier: {label:"Premier League", ic:"stripes", ac:"#6f4fc4",
             spoken:"assets/premier/index.json", mc:"assets/premier/mc.json",
-            teams:"assets/premier/clubs.json", flags:"assets/logos/", ext:".png",
+            pool:"premier-clubs", flags:"assets/logos/", ext:".png",
             blurb:"England's top flight, from the 1992 breakaway to last season."},
   laliga:  {label:"La Liga", ic:"stripes", ac:"#e0574f",
             spoken:"assets/laliga/index.json", mc:"assets/laliga/mc.json",
-            teams:"assets/laliga/clubs.json", flags:"assets/logos/", ext:".png",
+            pool:"laliga-clubs", flags:"assets/logos/", ext:".png",
             blurb:"Spain, and not only the two of them."},
   bundesliga:{label:"Bundesliga", ic:"stripes", ac:"#3d4450",
             spoken:"assets/bundesliga/index.json", mc:"assets/bundesliga/mc.json",
-            teams:"assets/bundesliga/clubs.json", flags:"assets/logos/", ext:".png",
+            pool:"bundesliga-clubs", flags:"assets/logos/", ext:".png",
             blurb:"Germany: the Meisterschale, the Ruhr, and the ones who broke the run."},
   seriea:  {label:"Serie A", ic:"stripes", ac:"#3f7fd0",
             spoken:"assets/seriea/index.json", mc:"assets/seriea/mc.json",
-            teams:"assets/seriea/clubs.json", flags:"assets/logos/", ext:".png",
+            pool:"seriea-clubs", flags:"assets/logos/", ext:".png",
             blurb:"Italy, from catenaccio to Calciopoli and out the other side."},
   belgian: {label:"Pro League", ic:"stripes", ac:"#e8b21c",
             spoken:"assets/belgian/index.json", mc:"assets/belgian/mc.json",
-            teams:"assets/belgian/clubs.json", flags:"assets/logos/", ext:".png",
+            pool:"belgian-clubs", flags:"assets/logos/", ext:".png",
             blurb:"Belgium, which Limburg can see from the window."},
 };
 /* The five quizzes that are decks of written questions AND have an XI to put
@@ -5594,7 +5641,10 @@ const h2Kind = id => id === "classic"
   : {one:"club", many:"club",
      blurb:"Both of you pick a club. You get its crest and its first eleven by shirt number, this season, and you cannot both have the same one."};
 const isQuiz   = id => !!QUIZZES[id];
-const canPitch = id => !!(QUIZZES[id] && QUIZZES[id].teams);
+/* A QUIZ CAN GO ON A PITCH if it names a pool of sides to play as. It says
+   which pool to START with; since the pool became its own axis a player can
+   change it, but a quiz that names none has nobody to put on the grass. */
+const canPitch = id => !!(QUIZZES[id] && QUIZZES[id].pool && POOLS[QUIZZES[id].pool]);
 /* CAN THIS QUIZ BE PLAYED THE WAY THE TOGGLE SAYS? Two questions that look
    like one, and conflating them produced a toast telling somebody that
    Let's Ball has no eleven.
@@ -5625,7 +5675,7 @@ const canEver    = (id, play) =>
 const playableAs = (id, play) => canEver(id, play) && modeLive(id);
 
 /* DECKS[id] is the spoken deck, DECKS[id + "-mc"] the multiple choice one, and
-   TEAMS[id] the sides you can pick. All three arrive by fetch and all three
+   TEAMS[poolId] the sides you can pick. All three arrive by fetch and all three
    may never arrive, so every reader has to cope with null: a league whose
    files are not built yet simply shows up dimmed in the menu rather than
    taking the app down. */
@@ -5667,7 +5717,7 @@ function setTheme(t){
   applyTheme();
   render();
 }
-const BUILD = "14 Sep 2026 · 00:00";
+const BUILD = "14 Sep 2026 · 00:11";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five
@@ -5681,9 +5731,22 @@ function loadQuiz(id){
     fetch(url).then(r => r.ok ? r.json() : null).then(b => { if(b){ put(b); done(); } }).catch(()=>{}); };
   grab(row.spoken, b => DECKS[id] = b);
   grab(row.mc,     b => DECKS[id + "-mc"] = b);
-  grab(row.teams,  b => TEAMS[id] = b);
+}
+/* THE POOLS ARE LOADED BY POOL ID, not by quiz id, which is the whole point of
+   the split: two quizzes can want the same sides and one quiz can offer
+   several. TEAMS is keyed the same way it always was, just by a different
+   name. */
+function loadPool(id){
+  const row = POOLS[id];
+  if(!row || !row.file || TEAMS[id]) return;
+  fetch(row.file).then(r => r.ok ? r.json() : null).then(b => {
+    if(!b) return;
+    TEAMS[id] = b;
+    if(!S || S.phase === "setup") render();
+  }).catch(()=>{});
 }
 Object.keys(QUIZZES).forEach(loadQuiz);
+Object.keys(POOLS).forEach(loadPool);
 
 let STICK=null;
 fetch("assets/stickers/index.json").then(r=>r.json()).then(x=>{ STICK=x; }).catch(()=>{});
@@ -6075,6 +6138,7 @@ function freshState(names, timed=true, mode="classic", target=100, play="board",
     rr:false, rrTurn:0, rrLast:null,
     h2h:null, // one on one: the ball, who has it, and whether a shot is live
     used:{easy:[],normal:[],hard:[],extreme:[],ball:[]},
+    pool:null,   // who you play as, separate from what you answer; null is the quiz's own
     usedQ:{}, qd:null, qfall:null, qspec:null,   // The Dugout draws from league decks, which count their own
   };
 }
@@ -7605,7 +7669,46 @@ const h2Team  = w => (S.h2h.teams && S.h2h.teams[w]) || null;
 /* The sides come from whichever quiz is being played: the 2006 World Cup for
    Let's Ball, that league's clubs for a league. Same shape either way, which is
    why nothing below this line cares which it got. */
-const h2Pool  = () => (S && TEAMS[S.mode]) || null;
+/* WHICH POOL THIS MATCH IS PLAYED WITH. The state says so if a pool was
+   chosen; otherwise it is the quiz's default, which is how every match played
+   before this existed keeps meaning what it meant. */
+/* DOES THIS QUIZ OFFER THIS POOL? Its own default, or any pool that names it.
+   Asked on the way in AND on the way out, because a pool can arrive from a
+   parked match rather than from a tap. */
+const h2PoolOk = id => !!(S && POOLS[id] &&
+  (id === (QUIZZES[S.mode] || {}).pool || POOLS[id].of === S.mode));
+const h2PoolId = () => {
+  if(!S) return null;
+  /* a pool the quiz does not offer is ignored rather than obeyed: it can only
+     have come from a saved state, and honouring it would put forty famous
+     finals on a Premier League quiz */
+  if(S.pool && h2PoolOk(S.pool)) return S.pool;
+  return (QUIZZES[S.mode] && QUIZZES[S.mode].pool) || null;
+};
+/* WHICH POOLS THIS QUIZ CAN BE PLAYED WITH: its own default, plus any pool
+   that borrows the same quiz. That is what keeps the Premier League quiz from
+   offering Eredivisie clubs while letting Let's Ball offer both the 2006 World
+   Cup and the forty finals, which are both its own. Only pools that have
+   actually landed are offered, so a slow network never shows an empty grid. */
+function h2Pools(){
+  if(!S) return [];
+  const mine = (QUIZZES[S.mode] || {}).pool;
+  void mine;
+  return Object.keys(POOLS).filter(id => h2PoolOk(id) && TEAMS[id]);
+}
+function h2SetPool(id){
+  audio();
+  if(!POOLS[id] || !TEAMS[id] || !h2PoolOk(id)) return;
+  if(h2PoolId() === id) return;
+  S.pool = id;
+  /* BOTH PICKS GO. The sides are stored as names and a name from one pool
+     means nothing in another, so keeping them would be a side that does not
+     exist. */
+  const H = h2();
+  if(H) H.teams = [null, null];
+  render();
+}
+const h2Pool  = () => { const id = h2PoolId(); return (id && TEAMS[id]) || null; };
 /* THE ELEVEN IN THE ORDER THE SHAPES ASSUME. `from` indexes a 4-2-3-1, so
    slot 0 has to be a keeper and slots 8 to 10 have to be the front line, or a
    shape rearranges the wrong men. The deck is built that way and two squads in
@@ -7665,7 +7768,13 @@ function h2XiSays(w){
   return "The eleven that started against " + q.xiVs + (yr ? " in " + yr : "");
 }
 /* where this quiz keeps its badges, and what they are called */
-const h2Badge = code => { const r = S && QUIZZES[S.mode]; return r && code ? r.flags + code + r.ext : null; };
+/* THE BADGES BELONG TO THE POOL. A national pool wants flags and a club pool
+   wants crests, and once the pool is separable from the quiz the quiz can no
+   longer be asked. */
+const h2Badge = code => {
+  const r = POOLS[h2PoolId()] || (S && QUIZZES[S.mode]);
+  return r && code ? r.flags + code + r.ext : null;
+};
 /* TWO FRAMES, and keeping them apart is the whole trick.
 
    h2X / h2Y are the LOGICAL pitch: player 0 always defends the bottom. All the
@@ -9477,6 +9586,16 @@ function h2Render(st){
     st.innerHTML =
       '<div class="kick">' + ico('users') + h2Name() + ' · pick your ' + h2Kind(S.mode).one + '</div>' +
       '<div class="h2big">' + esc(turn.name) + ', who are you?</div>' +
+      /* WHICH SET OF SIDES, when there is more than one to choose from. It sits
+         above the grid because it is the same question one level up. */
+      ((h2Pools().length > 1 && !picked.length)
+        ? '<div class="h2poolrow">' + h2Pools().map(id =>
+            '<button class="h2poolb' + (h2PoolId() === id ? " on" : "") +
+            '" onclick="h2SetPool(' + JSON.stringify(id).replace(/"/g, "&quot;") + ')">' +
+            esc(POOLS[id].label) + '</button>').join("") + '</div>' +
+          (POOLS[h2PoolId()] && POOLS[h2PoolId()].blurb
+            ? '<div class="h2hintline" style="margin-top:0">' + esc(POOLS[h2PoolId()].blurb) + '</div>' : "")
+        : "") +
       (picked.length
         ? '<div class="h2hintline">' + esc(S.players[0].name) + ' has ' + esc(H.teams[0]) +
           '. <button class="h2view" style="display:inline;margin:0" onclick="h2ClearTeams()">start again</button></div>'
@@ -10917,7 +11036,10 @@ function modeReady(id, play, mc){
   if(id==="career") return true;
   if(id==="badge")  return !!BADGE;
   if(!DECKS[mc ? id + "-mc" : id]) return false;
-  if(isPitch(play) && !TEAMS[id]) return false;
+  /* a quiz can go on a pitch if its DEFAULT POOL has landed. It is the pool
+     that supplies the elevens, and the quiz only names which one to start
+     with. */
+  if(isPitch(play) && !TEAMS[(QUIZZES[id] || {}).pool]) return false;
   return true;
 }
 /* and is it playable in ANY combination, which is what greys out a tile */

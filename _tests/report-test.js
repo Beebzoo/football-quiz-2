@@ -34,7 +34,7 @@ const check = (n, c, x) => {
 (async () => {
   const app = makeInstance("report");
   await tick(340);
-  run(app, "TEAMS.classic = " + JSON.stringify(R("assets/wc2006/index.json")));
+  run(app, "TEAMS.wc2006 = " + JSON.stringify(R("assets/wc2006/index.json")));
   for (const [id, dir] of [["seriea", "seriea"], ["laliga", "laliga"], ["premier", "premier"],
                            ["ere", "eredivisie"], ["bundesliga", "bundesliga"]])
     run(app, "DECKS[" + JSON.stringify(id) + "] = " + JSON.stringify(R("assets/" + dir + "/index.json")));

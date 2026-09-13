@@ -39,7 +39,7 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
 (async () => {
   const app = makeInstance("dugout");
   await tick(340);
-  run(app, "TEAMS.classic = " + JSON.stringify(R("assets/wc2006/index.json")));
+  run(app, "TEAMS.wc2006 = " + JSON.stringify(R("assets/wc2006/index.json")));
   for (const [id, dir] of [["seriea", "seriea"], ["laliga", "laliga"], ["premier", "premier"],
                            ["ere", "eredivisie"], ["bundesliga", "bundesliga"]])
     run(app, "DECKS[" + JSON.stringify(id) + "] = " + JSON.stringify(R("assets/" + dir + "/index.json")));

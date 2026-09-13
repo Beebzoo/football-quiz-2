@@ -32,7 +32,7 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
      in by hand. It is the real file off disk, not a fixture, so the shape
      being driven is the shape that ships. */
   const WC = JSON.parse(fs.readFileSync(path.join(REPO, "assets/wc2006/index.json"), "utf8"));
-  run(app, "TEAMS.classic = " + JSON.stringify(WC));
+  run(app, "TEAMS.wc2006 = " + JSON.stringify(WC));
   /* These checks are the ORIGINAL rules: the ladder, the turnover and the
      press. The tackle changes the shape of a turn (the phone crosses the table
      before every pass), so it is switched off here and driven on its own in

@@ -66,7 +66,7 @@ const pct = (a, b) => b ? (100 * a / b).toFixed(1) + "%" : "-";
 (async () => {
   const app = makeInstance("sim");
   await tick(360);
-  run(app, "TEAMS.classic = " + JSON.stringify(
+  run(app, "TEAMS.wc2006 = " + JSON.stringify(
     JSON.parse(fs.readFileSync(path.join(REPO, "assets/wc2006/index.json"), "utf8"))));
   for (const [id, dir] of [["seriea", "seriea"], ["laliga", "laliga"], ["premier", "premier"],
                            ["ere", "eredivisie"], ["bundesliga", "bundesliga"], ["belgian", "belgian"]])

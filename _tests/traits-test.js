@@ -39,7 +39,7 @@ const check = (n, c, x) => {
 (async () => {
   const app = makeInstance("traits");
   await tick(340);
-  run(app, "TEAMS.classic = " + JSON.stringify(R("assets/wc2006/index.json")));
+  run(app, "TEAMS.wc2006 = " + JSON.stringify(R("assets/wc2006/index.json")));
 
   const start = (play, a, b) => run(app,
     'S = freshState(["Martijn","Bram"], false, "classic", 0, "' + play + '", false); h2Start(); ' +

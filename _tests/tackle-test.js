@@ -43,7 +43,7 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   const app = makeInstance("tackle");
   await tick(340);
   const WC = JSON.parse(fs.readFileSync(path.join(REPO, "assets/wc2006/index.json"), "utf8"));
-  run(app, "TEAMS.classic = " + JSON.stringify(WC));
+  run(app, "TEAMS.wc2006 = " + JSON.stringify(WC));
 
   const phase = () => ev(app, "S.phase");
   const H = k => ev(app, "S.h2h." + k);

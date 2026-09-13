@@ -121,7 +121,7 @@ const tick = (ms = 200) => new Promise(r => setTimeout(r, ms));
   /* IT MUST NOT TOUCH THE RULES. A skin that changed a price would not be a
      skin, and this is the one thing a screenshot could never tell you. */
   console.log("\n--- and it changes nothing about the game ---");
-  run(app, "TEAMS.classic = " + JSON.stringify(
+  run(app, "TEAMS.wc2006 = " + JSON.stringify(
     JSON.parse(fs.readFileSync(path.join(REPO, "assets/wc2006/index.json"), "utf8"))));
   run(app, 'S = freshState(["Martijn","Bram"], false, "classic", 0, "manager", false); h2Start(); ' +
     'h2PickTeam("Netherlands"); h2PickTeam("Italy"); S.h2h.tossed = true; S.h2h.who = 0;');
