@@ -518,6 +518,55 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   check("the match is over", phase() === "results", phase());
   check("it is in the record book", ev(app, "history().length") >= 1, ev(app, "history().length"));
 
+  /* ---------------------------------------------------------------- */
+  console.log("\n--- the scouting line ---");
+  /* The app always knew who would collect a turnover and never said it. The
+     only thing that can really go wrong here is the line and the rule
+     disagreeing, so the tests read the line off the screen and then actually
+     lose the ball to see whether it told the truth. */
+  const scout = () => { const m = stage(app).match(/class="h2scout">Lose it here and <b>([^<]+)<\/b>/); return m ? m[1] : null; };
+
+  await start();
+  await place(0, GK);
+  check("it says who picks it up", !!scout(), stage(app).slice(0, 200));
+  check("and it is the man the rule picks",
+    scout() === ev(app, "h2Of(h2NearestTo(0, 0, 1), 1)"), scout());
+  check("which on your own goal line is their striker, through on goal",
+    scout() === ev(app, "h2Of(9, 1)"), scout());
+  check("it is one of THEIRS, not one of ours", scout() !== ev(app, "h2Of(9, 0)"), scout());
+
+  /* per position, not per pass: the whole reason it sits on the caption */
+  const before = scout();
+  run(app, "h2Select(5)"); await tick(150);
+  check("picking a team mate does not change it", scout() === before, scout());
+  run(app, "h2Select(9)"); await tick(150);
+  check("nor does picking a different one", scout() === before, scout());
+
+  /* the strongest one: read the warning, then lose it */
+  await place(0, EIGHT);
+  const warned = scout();
+  await passTo(TEN, false);
+  check("lose it and the man it named is the man who has it",
+    ev(app, "h2Of(S.h2h.at, S.h2h.who)") === warned, warned + " v " + ev(app, "h2Of(S.h2h.at, S.h2h.who)"));
+
+  /* it moves when he moves, which since the hold went in happens mid-possession */
+  await start();
+  await place(0, TEN);
+  const standing = scout();
+  run(app, "h2Select(9); h2Play(); h2Reveal(); h2Judge(true);"); await tick(200);
+  check("a striker who has run in behind is watched by somebody else",
+    scout() !== standing, scout() + " v " + standing);
+  check("and up there it is their keeper", scout() === ev(app, "h2Of(0, 1)"), scout());
+
+  /* a man who is off cannot collect anything */
+  await start();
+  await place(0, GK);
+  run(app, "S.h2h.off = [[], [9]]; render();"); await tick(150);
+  check("their striker sent off, and somebody else is waiting",
+    scout() !== ev(app, "h2Of(9, 1)") && !!scout(), scout());
+  check("and he is a man still on the pitch",
+    ev(app, "!h2IsOff(1, h2NearestTo(0, 0, 1))") === true, "he is off");
+
   console.log(fails ? "\n" + fails + " FAILED" : "\nall green");
   process.exit(fails ? 1 : 0);
 })();

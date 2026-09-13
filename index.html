@@ -2218,6 +2218,12 @@
   .h2ctier{font-weight:800;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;
     padding:3px 9px;border-radius:999px;border:1px solid var(--dc);color:var(--dc);white-space:nowrap}
   .h2hintline{text-align:center;font-size:.85rem;opacity:.72;font-style:italic;margin-top:7px}
+  /* The scouting line. Quieter than the caption above it, because it is a
+     standing fact rather than news, and the man's name is the only part
+     anybody reads twice. */
+  .h2scout{position:relative;z-index:6;text-align:center;font-size:.76rem;
+    opacity:.62;margin:-3px 0 6px;letter-spacing:.01em}
+  .h2scout b{font-weight:700;color:#ffc9bd;opacity:.95}
 
   /* ---------- the phone crossing the table ----------
      The whole screen in his kit colour, because the one thing that must never
@@ -8230,6 +8236,15 @@ function h2Render(st){
 
   if(S.phase === "h_pick"){
     const canShoot = h2CanShoot(H.at);
+    /* WHO PICKS IT UP IF HE LOSES IT. Same function the turnover itself uses,
+       so the warning and the punishment can never disagree. It is read off the
+       man ON THE BALL rather than off the pass being considered, because that
+       is what the rule reads: choosing a different team mate does not change
+       who collects, and saying otherwise under the confirm bar would teach the
+       wrong rule. Since the hold went in it moves when he moves, so a striker
+       who has run in behind is watching a different man to the one who was
+       waiting for him thirty seconds ago. */
+    const collector = h2NearestTo(H.at, H.who, h2Other());
     /* A rule that springs on you is a bad rule, so the pressure is on screen
        before you choose, and again on the ball you are about to play. */
     const safe = H.safe || 0;
@@ -8263,6 +8278,8 @@ function h2Render(st){
       '</div>' +
       h2PitchHTML(true) +
       '<div class="h2where">' + esc(me.name) + ' has it on ' + esc(h2Of(H.at, H.who)) + '</div>' +
+      '<div class="h2scout">Lose it here and <b>' + esc(h2Of(collector, h2Other())) +
+        '</b> picks it up</div>' +
       heat + bar +
       (canShoot
         ? '<button class="bigbtn' + (H.sel != null ? " ghost" : "") + '" style="margin-top:8px" onclick="h2Shoot()">' +
@@ -8270,7 +8287,7 @@ function h2Render(st){
         : "") +
       '<div class="h2hintline">' + (H.sel == null
         ? "Tap a team mate to see what that ball costs you."
-        : "Miss it and " + esc(them.name) + " picks it up right there.") + '</div>' +
+        : "Get it and it is his. Miss it and it is theirs, where you stand.") + '</div>' +
       foot;
     return;
   }
