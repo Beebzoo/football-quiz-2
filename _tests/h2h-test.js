@@ -450,8 +450,8 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   check("the six cannot shoot", !stage(app).includes("Shoot ·"), "a shot was offered");
   await place(0, ST);
   check("the striker can", stage(app).includes("Shoot ·"), "no shot offered");
-  check("and it is a Hard chance", ev(app, "H2_SHOT[9]") === "hard", ev(app, "H2_SHOT[9]"));
-  check("a winger's angle is worse", ev(app, "H2_SHOT[8]") === "extreme", ev(app, "H2_SHOT[8]"));
+  check("and it is a Hard chance", ev(app, "H2_SHOT_AT(9, 0)") === "hard", ev(app, "H2_SHOT_AT(9, 0)"));
+  check("a winger's angle is worse", ev(app, "H2_SHOT_AT(8, 0)") === "extreme", ev(app, "H2_SHOT_AT(8, 0)"));
   run(app, "h2Shoot()"); await tick(170);
   check("the shot is on", ev(app, "S.h2h.shooting") === true, ev(app, "S.h2h.shooting"));
   run(app, "h2Reveal()"); await tick(130);

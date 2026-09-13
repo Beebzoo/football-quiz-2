@@ -2271,6 +2271,16 @@
   .h2marks{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:8px 0 10px}
   /* three ways to set up, same furniture as every other ghost row */
   .h2lines{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:8px 0 4px}
+  /* the five shapes, each drawn rather than named: a 5-3-2 explains itself in
+     a way the words never will */
+  .h2shapes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0 6px}
+  .h2shapeb{display:flex;flex-direction:column;align-items:center;gap:6px;padding:9px 6px}
+  .h2mini{position:relative;display:block;width:100%;aspect-ratio:3/4;border-radius:7px;
+    background:linear-gradient(180deg,#1d5c37,#0f3d26);
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)}
+  .h2mini i{position:absolute;width:13%;aspect-ratio:1;border-radius:50%;
+    transform:translate(-50%,-50%);box-shadow:0 1px 2px rgba(0,0,0,.6)}
+  .h2shapen{font:700 .78rem/1 var(--ui);letter-spacing:.02em}
   .h2lineb{padding:11px 6px;font-size:.86rem;line-height:1.15;--ac:#8fd8c4}
   .h2markbtn{
     display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0;
@@ -5137,7 +5147,7 @@ const playableAs = (id, play) => canEver(id, play) && modeLive(id);
    "am I on the new one?" is a question the phone can answer by itself:
    nearly everything built lately happens during a match, so a stale phone
    and a fresh one look identical on the menu. */
-const BUILD = "13 Sep 2026 · 18:41";
+const BUILD = "13 Sep 2026 · 18:56";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five
@@ -6498,6 +6508,9 @@ const H2_SAFE = ["easy", "normal"];        // what counts as knocking it about
    midfield actually looks like and what stops every pass through the middle
    being the same vertical line. Only y decides the difficulty, so moving a man
    sideways changes the picture and not the ladder. */
+/* The shape the whole game was tuned on, and still the default everywhere.
+   In The Dugout it is one of five, and everything positional reads h2Shape(w)
+   rather than this. */
 const H2_SQUAD = [
   {n:"GK",  no:1,  long:"the keeper",          line:0, x:50, y:94},
   {n:"CB",  no:4,  long:"the left centre-back", line:1, x:33, y:82},
@@ -6511,6 +6524,110 @@ const H2_SQUAD = [
   {n:"9",   no:9,  long:"the striker",          line:6, x:50, y:21},
   {n:"RW",  no:7,  long:"the right winger",     line:6, x:84, y:25},
 ];
+/* ---------- THE SHAPES ----------
+   Five ladders. Only y feeds h2TierFor, so moving a man up the page makes
+   every ball to him dearer and every ball from him cheaper, and that is the
+   whole mechanism: no new rules, a different board.
+
+   from  = which man of the XI stands here, indexing the 4-2-3-1 order the
+           deck is built in, so the same eleven are rearranged and never
+           replaced. Slot 0 is always the keeper because h2NoGk, h2Restart
+           and the save all assume it.
+   line  = 0 keeper, 1 centre-backs, 2 wide defenders, 3 to 5 midfield by how
+           far up he starts, 6 the front line. The route one rule reads it.
+   shot  = what a shot from here costs, and no shot at all if it is missing. */
+const H2_SHAPES = {
+  "4-2-3-1": {
+    label: "4-2-3-1", blurb: "Balanced. A ten behind a lone striker, and four who can shoot.",
+    slots: [
+      {from:0,  n:"GK",  no:1,  long:"the keeper",           line:0, x:50, y:94},
+      {from:1,  n:"CB",  no:4,  long:"the left centre-back", line:1, x:33, y:82},
+      {from:2,  n:"CB",  no:5,  long:"the right centre-back",line:1, x:67, y:82},
+      {from:3,  n:"LWB", no:3,  long:"the left wing-back",   line:2, x:12, y:73},
+      {from:4,  n:"RWB", no:2,  long:"the right wing-back",  line:2, x:88, y:73},
+      {from:5,  n:"6",   no:6,  long:"the six",              line:3, x:52, y:64},
+      {from:6,  n:"8",   no:8,  long:"the eight",            line:4, x:33, y:52},
+      {from:7,  n:"10",  no:10, long:"the ten",              line:5, x:64, y:40, shot:"extreme"},
+      {from:8,  n:"LW",  no:11, long:"the left winger",      line:6, x:16, y:25, shot:"extreme"},
+      {from:9,  n:"9",   no:9,  long:"the striker",          line:6, x:50, y:21, shot:"hard"},
+      {from:10, n:"RW",  no:7,  long:"the right winger",     line:6, x:84, y:25, shot:"extreme"},
+    ]},
+  "4-4-2": {
+    label: "4-4-2", blurb: "No ten. A flat four and two up, so the middle has fewer routes through it.",
+    slots: [
+      {from:0,  n:"GK", no:1,  long:"the keeper",            line:0, x:50, y:94},
+      {from:1,  n:"CB", no:4,  long:"the left centre-back",  line:1, x:34, y:82},
+      {from:2,  n:"CB", no:5,  long:"the right centre-back", line:1, x:66, y:82},
+      {from:3,  n:"LB", no:3,  long:"the left back",         line:2, x:12, y:78},
+      {from:4,  n:"RB", no:2,  long:"the right back",        line:2, x:88, y:78},
+      {from:5,  n:"CM", no:6,  long:"the holding midfielder",line:3, x:38, y:62},
+      {from:6,  n:"CM", no:8,  long:"the other midfielder",  line:3, x:62, y:62},
+      {from:8,  n:"LM", no:11, long:"the left midfielder",   line:3, x:12, y:60},
+      {from:10, n:"RM", no:7,  long:"the right midfielder",  line:3, x:88, y:60},
+      {from:7,  n:"ST", no:10, long:"the second striker",    line:6, x:38, y:22, shot:"hard"},
+      {from:9,  n:"ST", no:9,  long:"the striker",           line:6, x:62, y:22, shot:"hard"},
+    ]},
+  "4-3-3": {
+    label: "4-3-3", blurb: "Three forwards high. More route one targets, and a winger to collect his mistakes.",
+    slots: [
+      {from:0,  n:"GK", no:1,  long:"the keeper",            line:0, x:50, y:94},
+      {from:1,  n:"CB", no:4,  long:"the left centre-back",  line:1, x:34, y:82},
+      {from:2,  n:"CB", no:5,  long:"the right centre-back", line:1, x:66, y:82},
+      {from:3,  n:"LB", no:3,  long:"the left back",         line:2, x:12, y:76},
+      {from:4,  n:"RB", no:2,  long:"the right back",        line:2, x:88, y:76},
+      {from:5,  n:"CM", no:6,  long:"the holding midfielder",line:3, x:50, y:64},
+      {from:6,  n:"CM", no:8,  long:"the left of the three", line:4, x:32, y:54},
+      {from:7,  n:"CM", no:10, long:"the right of the three",line:4, x:68, y:54},
+      {from:8,  n:"LW", no:11, long:"the left winger",       line:6, x:14, y:26, shot:"extreme"},
+      {from:9,  n:"9",  no:9,  long:"the striker",           line:6, x:50, y:20, shot:"hard"},
+      {from:10, n:"RW", no:7,  long:"the right winger",      line:6, x:86, y:26, shot:"extreme"},
+    ]},
+  "3-5-2": {
+    label: "3-5-2", blurb: "Wing-backs high and wide, three in the middle, and only three at the back.",
+    slots: [
+      {from:0,  n:"GK",  no:1,  long:"the keeper",           line:0, x:50, y:94},
+      {from:1,  n:"CB",  no:4,  long:"the left centre-back", line:1, x:30, y:82},
+      {from:2,  n:"CB",  no:5,  long:"the middle centre-back",line:1, x:50, y:85},
+      {from:3,  n:"CB",  no:3,  long:"the right centre-back",line:1, x:70, y:82},
+      {from:4,  n:"LWB", no:2,  long:"the left wing-back",   line:2, x:8,  y:58},
+      {from:10, n:"RWB", no:7,  long:"the right wing-back",  line:2, x:92, y:58},
+      {from:5,  n:"CM",  no:6,  long:"the holding midfielder",line:3, x:50, y:66},
+      {from:6,  n:"CM",  no:8,  long:"the left of the three",line:4, x:34, y:56},
+      {from:7,  n:"CM",  no:10, long:"the right of the three",line:4, x:66, y:52},
+      {from:8,  n:"ST",  no:11, long:"the second striker",   line:6, x:40, y:22, shot:"hard"},
+      {from:9,  n:"ST",  no:9,  long:"the striker",          line:6, x:60, y:22, shot:"hard"},
+    ]},
+  "5-3-2": {
+    label: "5-3-2", blurb: "The bus. Everything at the back is a short ball, and a canyon to the front two.",
+    slots: [
+      {from:0,  n:"GK",  no:1,  long:"the keeper",           line:0, x:50, y:94},
+      {from:1,  n:"CB",  no:4,  long:"the left centre-back", line:1, x:26, y:84},
+      {from:2,  n:"CB",  no:5,  long:"the middle centre-back",line:1, x:50, y:86},
+      {from:3,  n:"CB",  no:3,  long:"the right centre-back",line:1, x:74, y:84},
+      {from:4,  n:"LWB", no:2,  long:"the left wing-back",   line:2, x:10, y:76},
+      {from:10, n:"RWB", no:7,  long:"the right wing-back",  line:2, x:90, y:76},
+      {from:5,  n:"CM",  no:6,  long:"the holding midfielder",line:3, x:50, y:70},
+      {from:6,  n:"CM",  no:8,  long:"the left of the three",line:3, x:32, y:66},
+      {from:7,  n:"CM",  no:10, long:"the right of the three",line:3, x:68, y:66},
+      {from:8,  n:"ST",  no:11, long:"the second striker",   line:6, x:40, y:26, shot:"hard"},
+      {from:9,  n:"ST",  no:9,  long:"the striker",          line:6, x:60, y:26, shot:"hard"},
+    ]},
+};
+const H2_SHAPE_DEFAULT = "4-2-3-1";
+/* which shape a side is in. One on One and the board never change it, so they
+   are always the 4-2-3-1 the whole game was tuned on. */
+function h2Shape(w){
+  const H = S && S.h2h;
+  const id = (h2Tactical() && H && H.form && H.form[w]) || H2_SHAPE_DEFAULT;
+  return (H2_SHAPES[id] || H2_SHAPES[H2_SHAPE_DEFAULT]).slots;
+}
+const h2ShapeId = w => {
+  const H = S && S.h2h;
+  return (h2Tactical() && H && H.form && H.form[w]) || H2_SHAPE_DEFAULT;
+};
+/* the shape of whoever "mine" means, which is how the drawing asks */
+const h2ShapeV = mine => h2Shape(h2Side(mine));
+
 /* how far up the pitch a ball has to travel to earn each level */
 const H2_LADDER = [
   {max:15,  t:"easy"},
@@ -6520,7 +6637,10 @@ const H2_LADDER = [
   {max:999, t:"ball"},
 ];
 /* what a shot costs from each man who is allowed to have one */
-const H2_SHOT = {7:"extreme", 8:"extreme", 9:"hard", 10:"extreme"};
+/* what a shot costs from each man who is allowed one. It lives on the shape
+   now, because a 4-4-2 has two shooters and a 4-2-3-1 has four, so it cannot
+   be a table of slot numbers any more. */
+const H2_SHOT_AT = (i, w) => { const p = h2Shape(w)[i]; return (p && p.shot) || null; };
 
 /* ============================== THE TACKLE ==============================
 
@@ -6704,7 +6824,7 @@ const h2NoGk    = w => h2IsOff(w, 0);
    with the keeper gone put the ball on a man who is not drawn. */
 const h2Restart = w => h2NoGk(w) ? h2NearestTo(0, w, w) : 0;
 /* the men a side can actually use */
-const h2Live    = w => H2_SQUAD.map((_, i) => i).filter(i => !h2IsOff(w, i));
+const h2Live    = w => h2Shape(w).map((_, i) => i).filter(i => !h2IsOff(w, i));
 
 /* Set for exactly one render and then cleared, the way Career Path's reveal
    flags work. It holds the ball's flight in pitch percentages, so it survives
@@ -6747,10 +6867,9 @@ let h2From = null;
 function h2FromPush(i, mine, vx, vy){ (h2From = h2From || []).push({i: i, mine: mine, vx: vx, vy: vy}); }
 const H2_RUN_MS = 1400;
 const H2_OUT_MS = 950;              // the run onto a ball, and the jog back
-/* Who goes, and therefore who stays: running and holding are the same
-   decision, so taking a man out of here takes away both. The front three and
-   the two midfielders; the six sits, and the back four hold the shape. */
-const H2_RUNNERS = {6: true, 7: true, 8: true, 9: true, 10: true};
+/* Who goes is now read off the shape by h2Runs, so that a 4-4-2 with no ten
+   and a 4-3-3 with three forwards each get the right runners without a second
+   table to keep in step. */
 const H2_PUSH    = 12;              // how far a midfielder drives off his man
 
 /* THE MAN OF THEIRS STANDING NEAREST ONE OF OURS. Both elevens are the same
@@ -6761,36 +6880,64 @@ const H2_PUSH    = 12;              // how far a midfielder drives off his man
    this mode, and a run that changed shape depending on whether he happened to
    be marked would announce it as loudly as a caption. This function cannot
    see them, which is the point of it being a function of H2_SQUAD alone. */
-function h2Shadow(i){
-  const me = H2_SQUAD[i];
+function h2Shadow(i, w){
+  const me = h2Shape(w)[i], theirs = h2Shape(1 - w);
   let best = 0, bd = Infinity;
-  H2_SQUAD.forEach((p, j) => {
+  theirs.forEach((p, j) => {
     const dx = (100 - p.x) - me.x, dy = ((100 - p.y) - me.y) * 1.3;
     const d = Math.hypot(dx, dy);
     if(d < bd){ bd = d; best = j; }
   });
   return best;
 }
+/* WHO RUNS, read off the shape instead of a list of slot numbers. The front
+   line goes into the space behind their defence; midfielders who start far
+   enough forward come off a shoulder; the holding man and the back line hold
+   the shape. In the 4-2-3-1 this picks out exactly the five it always did. */
+const h2Runs = (i, w) => { const p = h2Shape(w)[i]; return !!p && (p.line === 6 || p.line === 4 || p.line === 5); };
 /* the receiving spot for man i, in the view of a side drawn defending the
    bottom (mine) or the top (theirs) */
-function h2RunSpot(i, mine){
+/* Where he runs to, worked out against the shape he is running AT rather than
+   off fixed numbers, so it still means "past their centre-backs" and "outside
+   their wing-back" when either side changes formation. */
+function h2RunSpot(i, w, mine){
+  const shape = h2Shape(w), them = h2Shape(1 - w), me = shape[i];
+  if(!me) return null;
   let x, y;
-  if(i === 9){ x = 50; y = 100 - H2_SQUAD[1].y - 5; }
-  else if(i === 8){ x = 100 - H2_SQUAD[4].x - 6; y = 100 - H2_SQUAD[4].y - 5; }
-  else if(i === 10){ x = 100 - H2_SQUAD[3].x + 6; y = 100 - H2_SQUAD[3].y - 5; }
-  else if(i === 6 || i === 7){
-    /* Midfield does not run into a gap, it runs off a shoulder. The direction
-       is simply away from the man shadowing him, and because that man is the
-       one tucked in behind, away IS forward: the eight drives into the left
-       half-space and the ten into the right one, three or four yards off his
-       marker and about nine up the pitch. */
-    const me = H2_SQUAD[i], m = H2_SQUAD[h2Shadow(i)];
-    const ux = me.x - (100 - m.x), uy = (me.y - (100 - m.y)) * 1.3;
-    const L = Math.hypot(ux, uy) || 1;
-    x = Math.round(me.x + (ux / L) * H2_PUSH);
-    y = Math.round(me.y + (uy / L) * H2_PUSH / 1.3);
+  if(me.line === 6){
+    /* A forward runs into the space behind their back line. Wide means
+       genuinely on a flank: two strikers playing off each other are both
+       central, and sending them to opposite touchlines is not a run, it is a
+       stretcher. */
+    const backs = them.filter(p => p.line === 1).map(p => 100 - p.y);
+    const backY = backs.length ? Math.min(...backs) : 18;
+    const side = me.x < 25 ? -1 : me.x > 75 ? 1 : 0;
+    if(!side){
+      /* straight through, keeping his own channel so a front two do not end up
+         standing on each other */
+      x = me.x; y = backY - 5;
+    } else {
+      /* outside their widest defender on that side */
+      const wide = them.filter(p => p.line === 2);
+      const xs = wide.length ? wide.map(p => 100 - p.x) : [12, 88];
+      const ys = wide.length ? wide.map(p => 100 - p.y) : [backY];
+      x = (side < 0 ? Math.min(...xs) : Math.max(...xs)) + side * 6;
+      y = Math.min(...ys) - 5;
+    }
+  } else if(me.line === 4 || me.line === 5){
+    /* Off a shoulder, and FORWARD. Which shoulder is the only thing the man
+       shadowing him decides: he leans away from him. The forward part is not
+       negotiable, because in a 4-3-3 the nearest opponent is in front rather
+       than behind and a pure away vector turned the eights round to face their
+       own goal. */
+    const m = them[h2Shadow(i, w)];
+    const lean = me.x - (100 - m.x);
+    x = me.x + (Math.abs(lean) < 1 ? 0 : Math.sign(lean)) * 3.5;
+    y = me.y - H2_PUSH / 1.3;
   }
   else return null;
+  x = Math.max(4, Math.min(96, Math.round(x)));
+  y = Math.max(6, Math.min(94, Math.round(y)));
   return mine ? {x: x, y: y} : {x: 100 - x, y: 100 - y};
 }
 /* the ball drops just off his boot at the spot, the way it rests off it at home */
@@ -6844,7 +6991,7 @@ const h2Badge = code => { const r = S && QUIZZES[S.mode]; return r && code ? r.f
    from the halfway line, which is the kind of lie that is a bug six weeks
    later rather than an argument on the night. */
 const h2Held = (i, w) => { const a = S && S.h2h && S.h2h.adv; return (a && a.w === w && a.i === i) ? a : null; };
-const h2Spot = (i, w) => h2Held(i, w) || H2_SQUAD[i];
+const h2Spot = (i, w) => h2Held(i, w) || h2Shape(w)[i] || H2_SQUAD[i];
 /* which SIDE "mine" means: whoever is on the ball */
 const h2Side = mine => { const H = S && S.h2h; const w = H ? H.who : 0; return mine ? w : 1 - w; };
 const h2VX = (i, mine) => { const p = h2Spot(i, h2Side(mine)); return mine ? p.x : 100 - p.x; };
@@ -6859,14 +7006,18 @@ const h2BY = (i, mine) => h2VY(i, mine);
 /* The man in a slot: the sub who came on for it if one did, else the man who
    started. Every name and number on the pitch reads through this, so a sub is
    a sub everywhere at once, on the shirt, in the caption and on the card. */
+/* THE MAN IN THE SLOT. A shape says which of the XI stands in each of its
+   slots (`from`), so the same eleven rearrange rather than change: in a
+   4-4-2 the ten goes up alongside the striker and the wingers drop into
+   midfield, and they are still the same four men. */
 const h2Man = (i, w) => {
   const H = S && S.h2h;
   const sub = H && H.subbed && H.subbed[w] && H.subbed[w][i];
   if(sub) return sub;
-  const q = h2Squad(w);
-  return (q && q.xi[i]) || null;
+  const q = h2Squad(w), slot = h2Shape(w)[i];
+  return (q && slot && q.xi[slot.from]) || null;
 };
-const h2No = (i, w) => { const m = h2Man(i, w); return (m && m.no) || H2_SQUAD[i].no; };
+const h2No = (i, w) => { const m = h2Man(i, w); return (m && m.no) || h2Spot(i, w).no; };
 /* ---------- SOUND ----------
    The rest of the app synthesises its noises through the AudioContext. These
    two are recordings, so they go through plain Audio elements instead: a bed
@@ -6942,13 +7093,13 @@ const h2Kit   = w => { const q = h2Squad(w); return (q && q.kit) || H2_KITS[w]; 
 /* the name under the shirt: the man who wore it in 2006, or the position */
 function h2Who(i, w){
   const m = h2Man(i, w);
-  return (m && m.n) || H2_SQUAD[i].n;
+  return (m && m.n) || h2Spot(i, w).n;
 }
 /* how the pass is described: "to Cocu" once a country is picked, "to the six"
    before that */
 function h2Of(i, w){
   const m = h2Man(i, w);
-  return (m && m.n) || H2_SQUAD[i].long;
+  return (m && m.n) || h2Spot(i, w).long;
 }
 
 const h2      = () => S.h2h;
@@ -6957,7 +7108,7 @@ const h2X     = (i, w) => { const p = h2Spot(i, w); return w === 0 ? p.x : 100 -
 const h2Y     = (i, w) => { const p = h2Spot(i, w); return w === 0 ? p.y : 100 - p.y; };
 /* A man who has been sent off does not get a shot, which is the whole point
    of losing your ten. */
-const h2CanShoot = i => !!H2_SHOT[i] && !(S && S.h2h && h2IsOff(S.h2h.who, i));
+const h2CanShoot = i => !!(S && S.h2h) && !!H2_SHOT_AT(i, S.h2h.who) && !h2IsOff(S.h2h.who, i);
 
 /* The pass, and therefore the question. */
 function h2TierFor(a, b){
@@ -6996,6 +7147,8 @@ function h2Start(){
            subs:[H2_SUBS, H2_SUBS], subbed:[{}, {}], benchUsed:[[], []], sub:null, subQ:false,
            /* where each side's defence stands, in The Dugout */
            line:["mid", "mid"],
+           /* which shape each side is in, The Dugout only */
+           form:[H2_SHAPE_DEFAULT, H2_SHAPE_DEFAULT],
            /* the clock, and the shootout once it is running */
            min:0, so:null,
            /* the man holding a spot he ran to, if there is one: {w, i, x, y,
@@ -7011,7 +7164,9 @@ function h2PickTeam(country){
   const slot = H.teams[0] == null ? 0 : 1;
   if(H.teams.includes(country)) return;
   H.teams[slot] = country;
-  if(H.teams[1] != null) S.phase = "h_toss";
+  /* In The Dugout the shape is a choice, and it is made before a ball is
+     kicked because it decides the price of every one of them. */
+  if(H.teams[1] != null) S.phase = h2Tactical() ? "h_shape" : "h_toss";
   render();
 }
 function h2ClearTeams(){ audio(); h2().teams = [null,null]; render(); }
@@ -7255,7 +7410,7 @@ function h2TackleJudge(won){
 
   /* through the back of one of the front three is a penalty, and it is priced
      to go in, which is what makes a last-ditch lunge at the striker frightening */
-  if(marked != null && H2_SQUAD[marked].line === 6){
+  if(marked != null && h2Shape(H.who)[marked].line === 6){
     toast(who + " brings " + on + " down. " +
           (card === "red" ? "RED CARD. " : "Yellow card. ") + "PENALTY.", true);
     /* THE FOULED MAN GETS THE BALL FIRST, exactly as he does on a free kick a
@@ -7290,7 +7445,7 @@ function h2Shoot(){
      does not find one, so it takes the possession's one tier of relief if it
      is still going. Marking men while the ball is already in range is a
      gamble, which is exactly right. */
-  let t = H2_SHOT[H.at];
+  let t = H2_SHOT_AT(H.at, H.who);
   const relieved = !!(h2TackleOn && H.marks && H.marks.length && H.relief);
   if(relieved) t = h2Cheaper(t, H2_MISS_RELIEF);
   if(!h2Draw(t, H.at, H.who)){ toast("No " + TIERS[t].label + " questions left", true); return; }
@@ -7356,7 +7511,7 @@ function h2TimeUp(){ if(S.phase === "h_q"){ if(h2IsMC()) h2().pick = null; h2Rev
 function h2NearestTo(lostAt, lostWho, newWho){
   const x = h2X(lostAt, lostWho), y = h2Y(lostAt, lostWho);
   let best = -1, bd = Infinity;
-  H2_SQUAD.forEach((_, i) => {
+  h2Shape(newWho).forEach((_, i) => {
     if(h2IsOff(newWho, i)) return;
     const dx = h2X(i, newWho) - x, dy = (h2Y(i, newWho) - y) * 1.3;
     const d = Math.sqrt(dx * dx + dy * dy);
@@ -7527,7 +7682,7 @@ function h2Settle(ok){
        "theirs") and ends on the man who collected it. */
     /* the collection takes the tier of the pass it came from: a lost short ball
        is picked up along the grass, a lost raking one drops out of the air */
-    const run = meant != null && H2_RUNNERS[meant] && !h2IsOff(lostWho, meant) ? h2RunSpot(meant, false) : null;
+    const run = meant != null && h2Runs(meant, lostWho) && !h2IsOff(lostWho, meant) ? h2RunSpot(meant, lostWho, false) : null;
     h2Fly(h2BX(lostAt, false), h2BY(lostAt, false), h2BX(H.at, true), h2BY(H.at, true), null, H.at,
           run ? H2_RUN_MS : undefined, S.tier);
     if(run) h2Run = {x: run.x, y: run.y, rx: h2RunBX(run.x), ry: run.y, runner: meant, runnerMine: false, taker: H.at};
@@ -7569,10 +7724,10 @@ function h2Settle(ok){
      price of his next ball, and the man who picks it up if he loses it. He is
      back in the shape the moment the ball leaves him, which h2Next does for
      every way that can happen at once. */
-  const run = H2_RUNNERS[H.at] ? h2RunSpot(H.at, true) : null;
-  H.adv = run ? {w: H.who, i: H.at, x: run.x, y: run.y, line: H2_SQUAD[H.at].line} : null;
+  const run = h2Runs(H.at, H.who) ? h2RunSpot(H.at, H.who, true) : null;
+  H.adv = run ? {w: H.who, i: H.at, x: run.x, y: run.y, line: h2Shape(H.who)[H.at].line} : null;
   if(held) h2FromPush(from, true, held.x, held.y);                          // drops back as it goes
-  if(run)  h2FromPush(H.at, true, H2_SQUAD[H.at].x, H2_SQUAD[H.at].y);      // goes, and stays gone
+  if(run)  h2FromPush(H.at, true, h2Shape(H.who)[H.at].x, h2Shape(H.who)[H.at].y);   // goes, and stays gone
   h2Fly(fx, fy, h2BX(H.at, true), h2BY(H.at, true), from, H.at,
         run ? H2_OUT_MS : undefined, tier);
   ching();
@@ -7899,6 +8054,30 @@ function h2HandGo(){
    misplaced thumb costs nothing. */
 /* The defending side is the one NOT on the ball, which is whose screen this
    is. Stored against him, read against him when he is defending. */
+/* Each man picks his own, in turn, and sees what it does before he commits. */
+function h2SetShape(id){
+  audio();
+  const H = h2();
+  if(!H2_SHAPES[id] || !h2Tactical()) return;
+  H.form = H.form || [H2_SHAPE_DEFAULT, H2_SHAPE_DEFAULT];
+  H.form[H.shaping || 0] = id;
+  render();
+}
+function h2ShapeDone(){
+  audio();
+  const H = h2();
+  if((H.shaping || 0) === 0){ H.shaping = 1; render(); return; }
+  H.shaping = null;
+  S.phase = "h_toss";
+  render();
+}
+/* a shape drawn small: eleven dots where the men stand, which says more
+   about what a formation does than its name ever will */
+function h2MiniHTML(id, kit){
+  const sl = (H2_SHAPES[id] || H2_SHAPES[H2_SHAPE_DEFAULT]).slots;
+  return '<span class="h2mini">' + sl.map(p =>
+    '<i style="left:' + p.x + '%;top:' + p.y + '%;background:' + kit + '"></i>').join("") + '</span>';
+}
 function h2SetLine(k){
   audio();
   const H = h2();
@@ -8020,7 +8199,7 @@ function h2PitchHTML(tappable){
      could shoot then that shot is simply gone. */
   const them = h2Other();
   // theirs first, so your own men sit on top of them where they overlap
-  H2_SQUAD.forEach((p, i) => {
+  h2Shape(them).forEach((p, i) => {
     if(h2IsOff(them, i)) return;
     out += man(i, false, {them:true, lost: i === lost,
       down: !!C && C.by === i, mirr: !!C && C.mirr, going: going, key: !!C && C.by === i,
@@ -8028,7 +8207,7 @@ function h2PitchHTML(tappable){
       run: !!R && !R.runnerMine && R.runner === i,
       moved: movedFor(i, false)});
   });
-  H2_SQUAD.forEach((p, i) => {
+  h2Shape(H.who).forEach((p, i) => {
     if(h2IsOff(H.who, i)) return;
     out += man(i, true, {
       can:  tappable && i !== H.at,
@@ -8220,6 +8399,29 @@ function h2Render(st){
     return;
   }
 
+  if(S.phase === "h_shape"){
+    const w = H.shaping || 0;
+    const picker = S.players[w];
+    const mine = H.form && H.form[w] || H2_SHAPE_DEFAULT;
+    const kit = h2Kit(w);
+    st.innerHTML =
+      '<div class="kick">' + ico('clipboard') + 'The Dugout \u00b7 ' + esc(h2Team(w) || picker.name) + '</div>' +
+      '<div class="h2big">' + esc(picker.name) + ', how are you setting up?</div>' +
+      '<div class="h2hintline" style="margin-top:0">Only the distances matter. Push a man up and every ball to him ' +
+        'costs more and every ball from him costs less, so the shape IS the ladder.</div>' +
+      '<div class="h2shapes">' + Object.keys(H2_SHAPES).map(id =>
+        '<button class="bigbtn ghost h2shapeb' + (mine === id ? ' sel' : '') + '" style="--ac:' + kit +
+        '" onclick="h2SetShape(' + JSON.stringify(id).replace(/"/g, '&quot;') + ')">' +
+          h2MiniHTML(id, kit) +
+          '<span class="h2shapen">' + H2_SHAPES[id].label + '</span>' +
+        '</button>').join("") + '</div>' +
+      '<div class="h2hintline">' + esc(H2_SHAPES[mine].blurb) + '</div>' +
+      '<button class="bigbtn" onclick="h2ShapeDone()">' +
+        (w === 0 ? esc(S.players[1].name) + " next" : "To the toss") + '</button>' +
+      foot;
+    return;
+  }
+
   if(S.phase === "h_toss"){
     const caller = S.players[0].name;
     const face = H.coin ? (H.coin === "heads" ? "H" : "T") : "?";
@@ -8323,7 +8525,7 @@ function h2Render(st){
             '" onclick="h2Mark(' + i + ')">' +
             '<span class="h2mno">' + h2No(i, att) + '</span>' +
             '<span class="h2mnm">' + esc(h2Who(i, att)) + '</span>' +
-            '<span class="h2mps">' + H2_SQUAD[i].n + '</span>' +
+            '<span class="h2mps">' + h2Shape(att)[i].n + '</span>' +
           '</button>').join("") +
       '</div>' +
       lineRow +
@@ -8482,7 +8684,7 @@ function h2Render(st){
       lineBar + heat + bar +
       (canShoot
         ? '<button class="bigbtn' + (H.sel != null ? " ghost" : "") + '" style="margin-top:8px" onclick="h2Shoot()">' +
-          'Shoot · ' + TIERS[H2_SHOT[H.at]].label + '</button>'
+          'Shoot · ' + TIERS[H2_SHOT_AT(H.at, H.who)].label + '</button>'
         : "") +
       '<div class="h2hintline">' + (H.sel == null
         ? "Tap a team mate to see what that ball costs you."
@@ -8517,7 +8719,7 @@ function h2Render(st){
        A penalty and a contested ball keep their own label: both are announced
        out loud anyway, and a penalty priced off H2_SHOT would be a lie. */
     const priced = (H.pen || H.contest || !t) ? t
-      : (TIERS[H.shooting ? H2_SHOT[H.at] : h2Priced(H.at, H.sel == null ? H.at : H.sel)] || t);
+      : (TIERS[H.shooting ? H2_SHOT_AT(H.at, H.who) : h2Priced(H.at, H.sel == null ? H.at : H.sel)] || t);
     st.innerHTML =
       h2ScoreHTML() + (H.so ? h2GoalSceneHTML("set") : h2PitchHTML(false)) +
       '<div class="qcard" style="--dc:' + priced.color + '">' +
@@ -8559,7 +8761,7 @@ function h2Render(st){
        lose; the tackle is a read, and losing it is a foul and a card. */
     const isTackle = H.contest === "tackle";
     const on = H.caught == null ? "" : h2Of(H.caught, H.who);
-    const pen = H.caught != null && H2_SQUAD[H.caught].line === 6;
+    const pen = H.caught != null && h2Shape(H.who)[H.caught].line === 6;
     st.innerHTML =
       h2ScoreHTML() + h2PitchHTML(false) +
       '<div class="h2big tackle">' + (isTackle

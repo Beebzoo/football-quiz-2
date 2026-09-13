@@ -136,6 +136,103 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   run(app, 'DECKS.seriea = ' + JSON.stringify(R("assets/seriea/index.json")) + ";");
   run(app, 'DECKS.bundesliga = ' + JSON.stringify(R("assets/bundesliga/index.json")) + ";");
 
+  console.log("\n--- the five shapes are all legal elevens ---");
+  const shapes = ev(app, "Object.keys(H2_SHAPES)");
+  check("there are five of them", shapes.length === 5, JSON.stringify(shapes));
+  for (const id of shapes) {
+    const sl = ev(app, "H2_SHAPES[" + JSON.stringify(id) + "].slots");
+    const froms = sl.map(p => p.from).sort((x, y) => x - y);
+    check(id + ": eleven slots, every man once, keeper first",
+      sl.length === 11 && JSON.stringify(froms) === JSON.stringify([0,1,2,3,4,5,6,7,8,9,10]) &&
+      sl[0].from === 0 && sl[0].line === 0, JSON.stringify(froms));
+  }
+
+  console.log("\n--- a shape is a different ladder, which is the whole point ---");
+  const inShape = (id, a, b) => {
+    run(app, `S.h2h.form = [${JSON.stringify(id)}, ${JSON.stringify(id)}];`);
+    return ev(app, "h2TierFor(" + a + ", " + b + ")");
+  };
+  start("manager", "Netherlands", "Italy");
+  /* slot 5 is the holding midfielder in every one of them */
+  check("keeper to the holder is Hard in a 4-2-3-1", inShape("4-2-3-1", GK, 5) === "hard", inShape("4-2-3-1", GK, 5));
+  check("but Normal in the bus, where everything at the back is short",
+    inShape("5-3-2", GK, 5) === "normal", inShape("5-3-2", GK, 5));
+  check("a wing-back is Normal in a 4-2-3-1", inShape("4-2-3-1", GK, 3) === "normal", inShape("4-2-3-1", GK, 3));
+  check("and Extreme in a 3-5-2, where he starts up the pitch",
+    inShape("3-5-2", GK, 4) === "extreme", inShape("3-5-2", GK, 4));
+
+  console.log("\n--- and a different set of men who can shoot ---");
+  const shooters = id => { run(app, `S.h2h.form=[${JSON.stringify(id)},${JSON.stringify(id)}];`);
+    return ev(app, "h2Shape(0).filter(p => p.shot).length"); };
+  check("a 4-2-3-1 has four", shooters("4-2-3-1") === 4, shooters("4-2-3-1"));
+  check("a 4-4-2 has two", shooters("4-4-2") === 2, shooters("4-4-2"));
+  check("a 4-3-3 has three", shooters("4-3-3") === 3, shooters("4-3-3"));
+  run(app, 'S.h2h.form=["4-4-2","4-4-2"];');
+  check("and the ten cannot shoot in a 4-4-2, because there is no ten",
+    ev(app, "h2Shape(0)[7].shot") == null, ev(app, "h2Shape(0)[7].shot"));
+
+  console.log("\n--- the same eleven men, rearranged ---");
+  run(app, 'S.h2h.form=["4-2-3-1","4-2-3-1"];');
+  const asIs = ev(app, "h2Shape(0).map((_,i)=>h2Man(i,0).n)");
+  run(app, 'S.h2h.form=["4-4-2","4-4-2"];');
+  const flat = ev(app, "h2Shape(0).map((_,i)=>h2Man(i,0).n)");
+  check("nobody is added or dropped by changing shape",
+    JSON.stringify([...asIs].sort()) === JSON.stringify([...flat].sort()), JSON.stringify(flat));
+  check("but they are standing somewhere else", JSON.stringify(asIs) !== JSON.stringify(flat), "identical");
+  check("the keeper is still the keeper", asIs[0] === flat[0], asIs[0] + " / " + flat[0]);
+  check("and the ten has gone up front alongside the striker",
+    ev(app, "h2Shape(0)[9].line") === 6 && ev(app, "h2Man(9,0).n") === asIs[7],
+    ev(app, "h2Man(9,0).n") + " vs the old ten " + asIs[7]);
+
+  console.log("\n--- every run goes forward, in every shape ---");
+  for (const id of shapes) {
+    run(app, `S.h2h.form=[${JSON.stringify(id)},${JSON.stringify(id)}];`);
+    const sl = ev(app, "h2Shape(0)");
+    let runners = 0, back = 0;
+    sl.forEach((p, i) => {
+      if (!ev(app, "h2Runs(" + i + ",0)")) return;
+      runners++;
+      const sp = ev(app, "h2RunSpot(" + i + ",0,true)");
+      if (!sp || sp.y >= p.y) back++;
+    });
+    check(id + ": " + runners + " men run, none of them backwards", runners > 0 && back === 0, back + " ran backwards");
+  }
+
+  console.log("\n--- One on One is always the shape it was tuned on ---");
+  start("pitch", "Netherlands", "Italy");
+  run(app, 'S.h2h.form = ["5-3-2", "5-3-2"];');
+  check("even with a shape set on the state, the ladder does not move",
+    ev(app, "h2TierFor(0, 5)") === "hard", ev(app, "h2TierFor(0, 5)"));
+  check("and the four shooters are still there", ev(app, "h2Shape(0).filter(p=>p.shot).length") === 4,
+    ev(app, "h2Shape(0).filter(p=>p.shot).length"));
+
+  console.log("\n--- picking one, before a ball is kicked ---");
+  run(app, 'S = freshState(["Martijn","Bram"], false, "classic", 0, "manager", false); h2Start(); render();');
+  await tick(140);
+  run(app, 'h2PickTeam("Netherlands"); h2PickTeam("Italy");'); await tick(140);
+  check("both sides picked, and it asks for a shape", ev(app, "S.phase") === "h_shape", ev(app, "S.phase"));
+  check("the first man is up", (ev(app, "S.h2h.shaping") || 0) === 0, ev(app, "S.h2h.shaping"));
+  check("all five are offered, drawn rather than named",
+    (stage(app).match(/h2shapeb/g) || []).length === 5 && /h2mini/.test(stage(app)),
+    (stage(app).match(/h2shapeb/g) || []).length);
+  run(app, 'h2SetShape("4-3-3");'); await tick(120);
+  check("his pick sticks", ev(app, "S.h2h.form[0]") === "4-3-3", JSON.stringify(ev(app, "S.h2h.form")));
+  run(app, "h2ShapeDone();"); await tick(120);
+  check("then the other man", ev(app, "S.h2h.shaping") === 1, ev(app, "S.h2h.shaping"));
+  run(app, 'h2SetShape("5-3-2");'); await tick(120);
+  check("and his, without touching the first", ev(app, "S.h2h.form[1]") === "5-3-2" && ev(app, "S.h2h.form[0]") === "4-3-3",
+    JSON.stringify(ev(app, "S.h2h.form")));
+  run(app, "h2ShapeDone();"); await tick(120);
+  check("then the toss", ev(app, "S.phase") === "h_toss", ev(app, "S.phase"));
+  check("and the two sides are in different shapes",
+    ev(app, "h2Shape(0)[9].line") === 6 && ev(app, "h2Shape(1)[6].line") === 3,
+    ev(app, "h2Shape(0)[9].line") + "/" + ev(app, "h2Shape(1)[6].line"));
+
+  console.log("\n--- One on One never asks ---");
+  run(app, 'S = freshState(["Martijn","Bram"], false, "classic", 0, "pitch", false); h2Start(); h2PickTeam("Netherlands"); h2PickTeam("Italy");');
+  await tick(140);
+  check("it goes straight to the toss", ev(app, "S.phase") === "h_toss", ev(app, "S.phase"));
+
   console.log("\n--- line height ---");
   /* A short ball is one the press would count (Easy or Normal); everything
      above it is a long one. Pressing high squeezes the short ball and leaves

@@ -101,7 +101,7 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
     ev(app, "h2TierFor(9, 7)") === "easy", ev(app, "h2TierFor(9, 7)"));
   check("so is one to a winger", ev(app, "h2TierFor(9, 8)") === "easy", ev(app, "h2TierFor(9, 8)"));
   check("and his shot is priced by who he is, not where he stands",
-    ev(app, "H2_SHOT[9]") === "hard", ev(app, "H2_SHOT[9]"));
+    ev(app, "H2_SHOT_AT(9, 0)") === "hard", ev(app, "H2_SHOT_AT(9, 0)"));
   /* The one thing it does change, and it is the right way round. */
   check("lose it through on goal and their keeper smothers it",
     ev(app, "h2NearestTo(9, 0, 1)") === GK, ev(app, "h2NearestTo(9, 0, 1)"));
@@ -155,14 +155,14 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   check("the eight drives off the man shadowing him", me.includes("left:30%;top:43%"), me);
   check("out of his own spot", me.includes("--ox:33%;--oy:52%"), me);
   check("and he stays there", H("adv.i") === EIGHT && H("adv.x") === 30 && H("adv.y") === 43, JSON.stringify(H("adv")));
-  check("the man he came off is their ten", ev(app, "h2Shadow(" + EIGHT + ")") === TEN, ev(app, "h2Shadow(" + EIGHT + ")"));
+  check("the man he came off is their ten", ev(app, "h2Shadow(" + EIGHT + ", 0)") === TEN, ev(app, "h2Shadow(" + EIGHT + ", 0)"));
   /* THE RUN MUST NOT KNOW ABOUT THE MARKS. It is read off the shape, so a man
      who is being marked runs exactly as a man who is not; anything else would
      announce the one secret this mode has. */
   run(app, "S.h2h.marks = [" + EIGHT + ", " + TEN + "]; S.h2h.markedAgainst = 0;");
   check("and the shadow is the same whether he is marked or not",
-    ev(app, "h2Shadow(" + EIGHT + ")") === TEN && ev(app, "h2RunSpot(" + EIGHT + ", true).y") === 43,
-    ev(app, "h2Shadow(" + EIGHT + ")"));
+    ev(app, "h2Shadow(" + EIGHT + ", 0)") === TEN && ev(app, "h2RunSpot(" + EIGHT + ", 0, true).y") === 43,
+    ev(app, "h2Shadow(" + EIGHT + ", 0)"));
 
   await start();
   await place(0, SIX);
@@ -170,9 +170,9 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   me = manEl(TEN, true);
   check("the ten does the same the other way", me.includes("left:61%;top:31%"), me);
   check("out of his own spot", me.includes("--ox:64%;--oy:40%"), me);
-  check("off their eight", ev(app, "h2Shadow(" + TEN + ")") === EIGHT, ev(app, "h2Shadow(" + TEN + ")"));
-  check("the six does not run, he sits", ev(app, "h2RunSpot(" + SIX + ", true)") === null, "the six ran");
-  check("and neither does a centre-back", ev(app, "h2RunSpot(" + LCB + ", true)") === null, "a centre-back ran");
+  check("off their eight", ev(app, "h2Shadow(" + TEN + ", 0)") === EIGHT, ev(app, "h2Shadow(" + TEN + ", 0)"));
+  check("the six does not run, he sits", ev(app, "h2RunSpot(" + SIX + ", 0, true)") === null, "the six ran");
+  check("and neither does a centre-back", ev(app, "h2RunSpot(" + LCB + ", 0, true)") === null, "a centre-back ran");
 
   console.log("\n--- what the midfield hold is worth, which is NOT nothing ---");
   /* The front three hold is free: their ball is backwards or square from
