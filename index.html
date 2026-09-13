@@ -2269,6 +2269,9 @@
 
   /* ---------- picking the men you are marking ---------- */
   .h2marks{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:8px 0 10px}
+  /* three ways to set up, same furniture as every other ghost row */
+  .h2lines{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:8px 0 4px}
+  .h2lineb{padding:11px 6px;font-size:.86rem;line-height:1.15;--ac:#8fd8c4}
   .h2markbtn{
     display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0;
     padding:9px 4px;border-radius:12px;
@@ -5134,7 +5137,7 @@ const playableAs = (id, play) => canEver(id, play) && modeLive(id);
    "am I on the new one?" is a question the phone can answer by itself:
    nearly everything built lately happens during a match, so a stale phone
    and a fresh one look identical on the menu. */
-const BUILD = "13 Sep 2026 · 17:56";
+const BUILD = "13 Sep 2026 · 18:41";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five
@@ -6640,6 +6643,39 @@ const h2Cheaper = (t, n) => H2_ORDER[Math.max(0, H2_ORDER.indexOf(t) - (n === un
    costs him, not his bench. A shootout has no subs either: a miss is a miss. */
 const H2_SUBS = 3;
 
+/* ---------- LINE HEIGHT ----------
+   Where his defence stands, set once at the start of your possession and
+   shown to you, because a high line is visible from the stands.
+
+   short is what the press already counts as knocking it about (H2_SAFE);
+   long is everything above it. Pressing high squeezes the short ball and
+   leaves grass in behind; sitting deep does the exact opposite. */
+const H2_LINES = {
+  high: {label: "High press", short: -1, long: +1,
+         says: "pushed up. Short balls are harder, but there is grass in behind."},
+  mid:  {label: "Hold the line", short: 0, long: 0,
+         says: "holding a normal line."},
+  low:  {label: "Low block", short: +1, long: -1,
+         says: "sitting deep. Short balls are easier, but there is nothing to hit behind."},
+};
+/* A TIER MOVES BY ONE, EVER. The relief already shifts a ball, and a low
+   block on top of it would take a raking BALL question down to Normal and
+   make route one nearly free, which is the shape the ladder exists to stop.
+   Every modifier adds into one number and that number is clamped here. */
+const h2Shift = (t, n) => h2Cheaper(t, Math.max(-1, Math.min(1, n)));
+/* IS THERE ANYTHING TO DO IN PRIVATE at the start of his possession? Marks,
+   if tackling is on, and a line to set if this is The Dugout. Either one is
+   reason enough for the phone to cross the table. */
+const h2Private = () => h2TackleOn || h2Tactical();
+/* the price he is allowed to see: the ladder, moved by the line he can see,
+   and never by the relief he cannot */
+function h2Priced(a, b){
+  const t = h2TierFor(a, b);
+  const shape = H2_LINES[h2Line(h2Other())] || H2_LINES.mid;
+  return h2Shift(t, H2_SAFE.includes(t) ? shape.short : shape.long);
+}
+const h2Line  = w => (h2Tactical() && S.h2h && S.h2h.line && S.h2h.line[w]) || "mid";
+
 /* ---------- THE CLOCK ----------
    Every judged question is H2_PER_Q minutes off the clock, whoever answered
    it and whatever it was for, so a contest and a save burn time exactly like
@@ -6958,6 +6994,8 @@ function h2Start(){
               on the table, and whether the loaded question is a sub's one
               fresh go (so a second miss is not offered a second sub) */
            subs:[H2_SUBS, H2_SUBS], subbed:[{}, {}], benchUsed:[[], []], sub:null, subQ:false,
+           /* where each side's defence stands, in The Dugout */
+           line:["mid", "mid"],
            /* the clock, and the shootout once it is running */
            min:0, so:null,
            /* the man holding a spot he ran to, if there is one: {w, i, x, y,
@@ -7006,7 +7044,7 @@ function h2KickOff(){
   audio();
   h2CrowdStart();
   h2().safe = 0;
-  if(h2TackleOn && h2().markedAgainst !== h2().who) return h2Hand(h2Other(), "h_mark");
+  if(h2Private() && h2().markedAgainst !== h2().who) return h2Hand(h2Other(), "h_mark");
   S.phase = "h_pick";
   render();
 }
@@ -7092,7 +7130,6 @@ function h2Play(){
       }
       // nothing left at that level: let it through rather than stall the game
     } else if(H.relief){
-      t = h2Cheaper(t, H2_MISS_RELIEF);
       /* NOT SPENT YET. Every exit below this can still bail out on a dry bank
          and leave the ball where it was, and a relief burned on a pass that
          never happened is a relief the attacker never got. It is committed at
@@ -7100,6 +7137,13 @@ function h2Play(){
       relieved = true;
     }
   }
+  /* EVERY SHIFT ADDS UP AND THEN GETS CLAMPED, rather than each one moving the
+     tier in turn: the relief for finding space he left, and where his line is
+     standing. Two cheapenings in a row would make route one free. */
+  const shape = H2_LINES[h2Line(h2Other())] || H2_LINES.mid;
+  const shift = (relieved ? H2_MISS_RELIEF : 0) +
+                (H2_SAFE.includes(ladder) ? shape.short : shape.long);
+  t = h2Shift(ladder, shift);
   /* THE PRESS. One short ball too many and he comes in for it anyway. This is
      pressure that builds from knocking it about rather than anybody's
      decision, which is why it is no longer called the tackle. The intended
@@ -7440,7 +7484,10 @@ function h2Judge(ok){
   stopTimer();
   logOutcome(H.pen ? "penalty" : H.shooting ? "shot" : "pass", ok);
   h2Clock();
-  if(!ok && !H.subQ && h2CanSub(H.who, H.at)) return h2SubOffer("q");
+  /* ONLY ON A PASS. A change is a break in play and a shot is not one, so a
+     man who has just struck it at goal takes what he gets. H.shooting covers
+     the shot, the penalty and the shootout kick alike. */
+  if(!ok && !H.subQ && !H.shooting && h2CanSub(H.who, H.at)) return h2SubOffer("q");
   H.subQ = false;
   h2Settle(ok);
 }
@@ -7553,7 +7600,9 @@ function h2SaveJudge(saved){
   stopTimer();
   logOutcome("save", saved);
   h2Clock();
-  if(!saved && !H.subQ && h2CanSub(h2Other(), 0)) return h2SubOffer("save");
+  /* AND NEVER IN GOAL. This used to offer the beaten keeper's side its bench
+     so a fresh keeper could re-take the save, which is a man running on while
+     the ball is travelling past him. The save stands. */
   H.subQ = false;
   h2SaveSettle(saved);
 }
@@ -7619,6 +7668,11 @@ function h2Bench(w){
 /* Can this side bring a man on for slot i right now? Not for a man who has
    been sent off (you play with ten), not in a shootout, and not with nobody
    left to bring on. */
+/* Can this side bring a man on for slot i right now? Not for a man who has
+   been sent off (you play with ten), not in a shootout, and not with nobody
+   left to bring on. The other half of the rule lives at the two doors that
+   call this: only a missed PASS opens them, because a change is a break in
+   play and a ball struck at goal is not one. */
 const h2CanSub = (w, i) => h2SubsLeft(w) > 0 && h2Bench(w).length > 0 && !h2IsOff(w, i) && !h2().so;
 /* a match parked before the bench existed */
 function h2SubInit(H){
@@ -7789,7 +7843,7 @@ function h2Next(){
      has changed hands, because the marks were set against whoever is attacking
      and they stand until he loses it. Another pass in the same possession goes
      straight back to the pitch. */
-  if(h2TackleOn && H.markedAgainst !== H.who) return h2Hand(h2Other(), "h_mark");
+  if(h2Private() && H.markedAgainst !== H.who) return h2Hand(h2Other(), "h_mark");
   S.phase = "h_pick";
   render();
 }
@@ -7843,6 +7897,16 @@ function h2HandGo(){
 /* Tapping a man in the ATTACKER's eleven adds him to the marks or takes him
    off again, up to H2_MARKS. Nothing is committed until he taps done, so a
    misplaced thumb costs nothing. */
+/* The defending side is the one NOT on the ball, which is whose screen this
+   is. Stored against him, read against him when he is defending. */
+function h2SetLine(k){
+  audio();
+  const H = h2();
+  if(!H2_LINES[k] || !h2Tactical()) return;
+  H.line = H.line || ["mid", "mid"];
+  H.line[h2Other()] = k;
+  render();
+}
 function h2Mark(i){
   audio();
   const H = h2();
@@ -8231,13 +8295,27 @@ function h2Render(st){
     const picked = H.marks || [];
     const tier = TIERS[H2_TACKLE_TIER];
     const left = H2_MARKS - picked.length;
+    /* LINE HEIGHT rides on the same private screen as the marks, because it is
+       the same moment: the one time in his possession that you have the phone.
+       It is not a secret though, and the pitch says so as soon as he gets it
+       back. */
+    const lineRow = !h2Tactical() ? "" :
+      '<div class="kick" style="margin-top:2px">' + ico('shield') + 'Where your line stands</div>' +
+      '<div class="h2lines">' + Object.keys(H2_LINES).map(k =>
+        '<button class="bigbtn ghost h2lineb' + (h2Line(h2Other()) === k ? " sel" : "") +
+        '" onclick="h2SetLine(' + JSON.stringify(k) + ')">' + H2_LINES[k].label + '</button>').join("") +
+      '</div>' +
+      '<div class="h2hintline" style="margin:0 0 8px">' + esc(me.name) + ' is ' +
+        esc(H2_LINES[h2Line(h2Other())].says) + ' He can see it.</div>';
     st.innerHTML =
-      '<div class="kick">' + ico('users') + 'Your tackle · ' + esc(them.name) + '</div>' +
-      '<div class="h2big">Mark two of them.</div>' +
-      '<div class="h2hintline">They stay marked for the whole of ' + esc(me.name) +
-        "'s possession. Play the ball into one and you get a <b>" + tier.label +
-        '</b> question to take it off him.</div>' +
-      '<div class="h2marks">' +
+      '<div class="kick">' + ico('users') + (h2TackleOn ? 'Your tackle · ' : 'Your instructions · ') + esc(them.name) + '</div>' +
+      '<div class="h2big">' + (h2TackleOn ? "Mark two of them." : "Set your line.") + '</div>' +
+      (h2TackleOn
+        ? '<div class="h2hintline">They stay marked for the whole of ' + esc(me.name) +
+          "'s possession. Play the ball into one and you get a <b>" + tier.label +
+          '</b> question to take it off him.</div>'
+        : '') +
+      (h2TackleOn ? '<div class="h2marks">' : '<div style="display:none">') +
         /* not the man on the ball: he cannot be passed to, so a mark on him is
            a mark thrown away, and offering it is a trap for the tired */
         h2Live(att).filter(i => i !== H.at).map(i =>
@@ -8248,13 +8326,18 @@ function h2Render(st){
             '<span class="h2mps">' + H2_SQUAD[i].n + '</span>' +
           '</button>').join("") +
       '</div>' +
+      lineRow +
       (picked.length
         ? '<button class="bigbtn" onclick="h2MarksDone(false)">' +
             (left > 0 ? "Done, marking " + picked.length : "Done") + '</button>'
         : '') +
-      '<button class="bigbtn ghost" onclick="h2MarksDone(true)">Let him play</button>' +
-      '<div class="hint" style="text-align:center">He only finds out where you were when he loses it. ' +
-      'Get it wrong in the wrong place and you give away a free kick, a booking, or a penalty.</div>';
+      '<button class="bigbtn' + (h2TackleOn ? " ghost" : "") + '" onclick="h2MarksDone(true)">' +
+        (h2TackleOn ? "Let him play" : "Done") + '</button>' +
+      (h2TackleOn
+        ? '<div class="hint" style="text-align:center">He only finds out where you were when he loses it. ' +
+          'Get it wrong in the wrong place and you give away a free kick, a booking, or a penalty.</div>'
+        : '<div class="hint" style="text-align:center">He can see where your line is. What he cannot see is ' +
+          'whether it suits what he knows.</div>');
     return;
   }
 
@@ -8359,6 +8442,12 @@ function h2Render(st){
     const pips = '<span class="h2pips">' +
       [0,1,2].map(i => '<i' + (i < Math.min(safe, H2_PRESS_AT) ? ' class="on"' : '') + '></i>').join("") +
       '</span>';
+    /* HIS LINE IS PUBLIC. You can see a high line from the stands, and it is
+       half the point: one thing you know, one thing you do not. */
+    const theirLine = H2_LINES[h2Line(h2Other())];
+    const lineBar = (!h2Tactical() || h2Line(h2Other()) === "mid") ? "" :
+      '<div class="h2heat' + (h2Line(h2Other()) === "high" ? " hot" : "") + '">' +
+      esc(them.name) + ' is ' + esc(theirLine.says) + '</div>';
     const heat = safe >= H2_PRESS_AT
       ? '<div class="h2heat hot">' + pips + esc(them.name) + ' is on him. The next short ball is contested.</div>'
       : safe === H2_PRESS_AT - 1
@@ -8367,8 +8456,10 @@ function h2Render(st){
 
     let bar = "";
     if(H.sel != null){
-      const tk = h2TierFor(H.at, H.sel), tt = TIERS[tk];
-      const contested = H2_SAFE.includes(tk) && safe >= H2_PRESS_AT;
+      const tk = h2Priced(H.at, H.sel), tt = TIERS[tk];
+      /* the press counts LADDER balls, not priced ones: a short ball pushed to
+         Hard by a high press is still him knocking it about. */
+      const contested = H2_SAFE.includes(h2TierFor(H.at, H.sel)) && safe >= H2_PRESS_AT;
       bar = '<div class="h2confirm' + (contested ? " contested" : "") + '" style="--dc:' +
               (contested ? "#e04a34" : tt.color) + '">' +
               '<div class="h2cline"><span class="h2cwhat">' + h2PassName(H.at, H.sel) + '</span>' +
@@ -8388,7 +8479,7 @@ function h2Render(st){
       '<div class="h2where">' + esc(me.name) + ' has it on ' + esc(h2Of(H.at, H.who)) + '</div>' +
       '<div class="h2scout">Lose it here and <b>' + esc(h2Of(collector, h2Other())) +
         '</b> picks it up</div>' +
-      heat + bar +
+      lineBar + heat + bar +
       (canShoot
         ? '<button class="bigbtn' + (H.sel != null ? " ghost" : "") + '" style="margin-top:8px" onclick="h2Shoot()">' +
           'Shoot · ' + TIERS[H2_SHOT[H.at]].label + '</button>'
@@ -8426,7 +8517,7 @@ function h2Render(st){
        A penalty and a contested ball keep their own label: both are announced
        out loud anyway, and a penalty priced off H2_SHOT would be a lie. */
     const priced = (H.pen || H.contest || !t) ? t
-      : (TIERS[H.shooting ? H2_SHOT[H.at] : h2TierFor(H.at, H.sel == null ? H.at : H.sel)] || t);
+      : (TIERS[H.shooting ? H2_SHOT[H.at] : h2Priced(H.at, H.sel == null ? H.at : H.sel)] || t);
     st.innerHTML =
       h2ScoreHTML() + (H.so ? h2GoalSceneHTML("set") : h2PitchHTML(false)) +
       '<div class="qcard" style="--dc:' + priced.color + '">' +

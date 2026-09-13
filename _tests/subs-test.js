@@ -157,45 +157,53 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   check("which works once it is set up on the way in", phase() === "h_q" && H("subs[0]") === 2, phase() + "/" + H("subs[0]"));
 
   /* ---------------------------------------------------------------- */
-  console.log("\n--- the keeper can be pulled too ---");
+  console.log("\n--- nobody comes on once the ball is struck ---");
+  /* A change is a break in play and a shot is not one. This used to offer the
+     shooter his bench so he could take it again, and the beaten keeper his so a
+     fresh man could re-take the save, which is somebody running on while the
+     ball is travelling past him. */
+  await start();
+  await place(0, ST);
+  run(app, "h2Shoot()"); await tick(150);
+  check("a shot is on", phase() === "h_q" && H("shooting") === true, phase());
+  check("three changes still in hand", H("subs[0]") === 3, H("subs[0]"));
+  run(app, "h2Reveal(); h2Judge(false)"); await tick(200);
+  check("miss it and there is no bench offered", phase() !== "h_sub", phase());
+  check("it is simply lost, as it always was", H("who") === 1, H("who"));
+  check("and nothing was spent", H("subs[0]") === 3, H("subs[0]"));
+
   await start();
   await place(0, ST);
   run(app, "h2Shoot()"); await tick(150);
   run(app, "h2Reveal(); h2Judge(true)"); await tick(160);
-  check("the shot is on and the keeper is asked", phase() === "h_save", phase());
-  const st0 = tier(), sq0 = qi();
+  check("struck, and the keeper is asked", phase() === "h_save", phase());
   const gk0 = ev(app, "h2Who(0, 1)");
   run(app, "h2SaveReveal(); h2SaveJudge(false)"); await tick(160);
-  check("beaten, and it is Bram's bench that is offered", phase() === "h_sub" && H("sub.kind") === "save" && H("sub.w") === 1,
-    phase() + "/" + JSON.stringify(H("sub")));
-  check("for the man in goal", H("sub.slot") === GK, H("sub.slot"));
-  check("with the goal in view rather than the pitch", stage(app).includes("g3-keeper"), "no goal scene");
-  check("Italy's bench, not Holland's", stage(app).includes(WC["Italy"].bench[0].n), "wrong bench");
-  run(app, "h2SubOn(" + ev(app, "h2Bench(1)[0].i") + ")"); await tick(160);
-  check("a fresh save at the same tier", phase() === "h_save" && tier() === st0 && qi() !== sq0, phase() + "/" + tier() + "/" + qi());
-  check("a new man between the sticks", ev(app, "h2Who(0, 1)") !== gk0 && stage(app).includes(ev(app, "h2Who(0, 1)")),
-    ev(app, "h2Who(0, 1)"));
-  check("charged to Bram", H("subs[1]") === 2 && H("subs[0]") === 3, H("subs"));
-  run(app, "h2SaveReveal(); h2SaveJudge(true)"); await tick(160);
-  check("and he keeps it out", phase() === "h_strike" && H("result") === "saved", phase() + "/" + H("result"));
-
-  await start();
-  await place(0, ST);
-  run(app, "h2Shoot()"); await tick(150);
-  run(app, "h2Reveal(); h2Judge(true)"); await tick(160);
-  run(app, "h2SaveReveal(); h2SaveJudge(false)"); await tick(160);
-  run(app, "h2SubDecline()"); await tick(160);
-  check("declining the keeper change is the goal it always was", phase() === "h_strike" && H("result") === "scored",
+  check("beaten, and his bench is NOT offered", phase() !== "h_sub", phase());
+  check("it is a goal, watched before it counts", phase() === "h_strike" && H("result") === "scored",
     phase() + "/" + H("result"));
+  check("and the same man is still in goal", ev(app, "h2Who(0, 1)") === gk0, ev(app, "h2Who(0, 1)"));
+  check("with his side's changes untouched", H("subs[1]") === 3, H("subs[1]"));
 
+  console.log("\n--- nor at a penalty ---");
   await start();
-  run(app, "S.h2h.off = [[], [0]];");
-  await place(0, ST);
-  run(app, "h2Shoot()"); await tick(150);
-  run(app, "h2Reveal(); h2Judge(true)"); await tick(160);
-  run(app, "h2SaveReveal(); h2SaveJudge(false)"); await tick(160);
-  check("no keeper to replace once he has been sent off", phase() === "h_strike", phase());
+  run(app, "h2TackleOn = true;");
+  run(app, `S.h2h.who=0; S.h2h.at=${SIX}; S.h2h.marks=[${ST}]; S.h2h.markedAgainst=0; S.phase="h_pick"; render(); h2Select(${ST}); h2Play();`);
+  await tick(150);
+  run(app, "h2TackleReveal(); h2TackleJudge(false)"); await tick(200);
+  check("a foul on the striker is a penalty", H("pen") === true && phase() === "h_q", phase() + "/" + H("pen"));
+  run(app, "h2Reveal(); h2Judge(false)"); await tick(200);
+  check("miss it and there is no bench for the taker", phase() !== "h_sub", phase());
+  run(app, "h2TackleOn = false;");
 
+  console.log("\n--- but a pass still has one ---");
+  await start();
+  await place(0, SIX);
+  await pass(TEN);
+  run(app, "h2Judge(false)"); await tick(160);
+  check("the bench is there for a misplaced pass", phase() === "h_sub", phase());
+  check("which is the only door it has", H("sub.kind") === "q", JSON.stringify(H("sub")));
+  run(app, "h2SubDecline()"); await tick(160);
   /* ---------------------------------------------------------------- */
   console.log("\n--- the contests are not covered ---");
   await start();

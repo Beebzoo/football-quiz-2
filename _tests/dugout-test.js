@@ -136,6 +136,63 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   run(app, 'DECKS.seriea = ' + JSON.stringify(R("assets/seriea/index.json")) + ";");
   run(app, 'DECKS.bundesliga = ' + JSON.stringify(R("assets/bundesliga/index.json")) + ";");
 
+  console.log("\n--- line height ---");
+  /* A short ball is one the press would count (Easy or Normal); everything
+     above it is a long one. Pressing high squeezes the short ball and leaves
+     grass in behind, and sitting deep is the same trade the other way. */
+  const priceOf = (from, to, k) => {
+    run(app, `S.h2h.line=["mid","mid"]; S.h2h.line[1]=${JSON.stringify(k)}; S.h2h.who=0; S.h2h.at=${from}; ` +
+             `S.h2h.sel=null; S.h2h.marks=[]; S.h2h.markedAgainst=0; S.h2h.relief=false; S.phase="h_pick"; render(); h2Select(${to}); h2Play();`);
+    const t = ev(app, "S.tier"); run(app, "h2Next();"); return t;
+  };
+  start("manager", "Netherlands", "Italy");
+  check("a short ball is Normal against a normal line", priceOf(SIX, TEN, "mid") === "normal", priceOf(SIX, TEN, "mid"));
+  check("a high press makes it Hard", priceOf(SIX, TEN, "high") === "hard", priceOf(SIX, TEN, "high"));
+  check("a low block makes it Easy", priceOf(SIX, TEN, "low") === "easy", priceOf(SIX, TEN, "low"));
+  check("a long ball is Hard against a normal line", priceOf(EIGHT, ST, "mid") === "hard", priceOf(EIGHT, ST, "mid"));
+  check("a high press makes THAT one cheaper, for the grass behind",
+    priceOf(EIGHT, ST, "high") === "normal", priceOf(EIGHT, ST, "high"));
+  check("and a low block makes it dearer", priceOf(EIGHT, ST, "low") === "extreme", priceOf(EIGHT, ST, "low"));
+
+  /* the clamp: two cheapenings would make route one nearly free.
+     The relief only exists when tackling is on, so it has to be on here or
+     neither of these is testing anything. */
+  run(app, "h2TackleOn = true;");
+  run(app, `S.h2h.line=["mid","low"]; S.h2h.who=0; S.h2h.at=${GK}; S.h2h.sel=null; S.h2h.marks=[${TEN}]; ` +
+           `S.h2h.markedAgainst=0; S.h2h.relief=true; S.phase="h_pick"; render(); h2Select(${ST}); h2Play();`);
+  await tick(140);
+  check("relief and a low block cancel rather than stacking",
+    ev(app, "S.tier") === "ball", ev(app, "S.tier"));
+  run(app, "h2Next();");
+  run(app, `S.h2h.line=["mid","mid"]; S.h2h.who=0; S.h2h.at=${GK}; S.h2h.sel=null; S.h2h.marks=[${TEN}]; ` +
+           `S.h2h.markedAgainst=0; S.h2h.relief=true; S.phase="h_pick"; render(); h2Select(${ST}); h2Play();`);
+  await tick(140);
+  check("relief alone still moves it one", ev(app, "S.tier") === "extreme", ev(app, "S.tier"));
+  run(app, "h2Next(); h2TackleOn = false;");
+
+  console.log("\n--- and One on One never sees it ---");
+  start("pitch", "Netherlands", "Italy");
+  check("the same ball is priced off the ladder alone",
+    priceOf(SIX, TEN, "low") === "normal", priceOf(SIX, TEN, "low"));
+
+  console.log("\n--- the defender always gets his moment in The Dugout ---");
+  start("manager", "Netherlands", "Italy");
+  run(app, "h2TackleOn = false; S.h2h.who = 0; h2KickOff();"); await tick(140);
+  check("the phone crosses even with tackles off", ev(app, "S.phase") === "h_hand", ev(app, "S.phase"));
+  run(app, "h2HandGo();"); await tick(140);
+  check("and it asks for the line", /Where your line stands/.test(stage(app)), "not asked");
+  check("but not for marks", !/Mark two of them/.test(stage(app)), "marks offered");
+  run(app, 'h2SetLine("high");'); await tick(120);
+  check("which is stored against the defender", ev(app, "S.h2h.line[1]") === "high", JSON.stringify(ev(app, "S.h2h.line")));
+  run(app, "h2MarksDone(true); h2HandGo();"); await tick(140);
+  check("and the attacker is shown it, because a high line is visible",
+    /pushed up/.test(stage(app)), "not shown");
+
+  start("pitch", "Netherlands", "Italy");
+  run(app, "h2TackleOn = false; S.h2h.who = 0; h2KickOff();"); await tick(140);
+  check("One on One with tackles off still hands nothing over",
+    ev(app, "S.phase") === "h_pick", ev(app, "S.phase"));
+
   console.log("\n--- the menu only offers it where the eleven have careers ---");
   check("Let's Ball can be managed", ev(app, 'canEver("classic","manager")') === true, ev(app, 'canEver("classic","manager")'));
   check("a league quiz cannot, its squads have no careers yet",
