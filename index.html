@@ -30,6 +30,8 @@
   @font-face{font-family:'Barlow Semi Condensed';font-style:italic;font-weight:700;font-display:swap;src:url(assets/fonts/barlow-semicondensed-700i-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
   @font-face{font-family:'Lora';font-style:italic;font-weight:400;font-display:swap;src:url(assets/fonts/lora-400i-latin-ext.woff2) format('woff2');unicode-range:U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF}
   @font-face{font-family:'Lora';font-style:italic;font-weight:400;font-display:swap;src:url(assets/fonts/lora-400i-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
+  /* the pixel face, used only by the sixteen-bit pitch */
+  @font-face{font-family:'Silkscreen';font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/silkscreen-400-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
 
 
     /* one place for the interface face; everything else says var(--ui) */
@@ -1921,6 +1923,190 @@
   .h2man.hold .fig.pm{filter:drop-shadow(0 0 9px #f5dd9a) drop-shadow(0 3px 4px rgba(0,0,0,.6))
     brightness(1.08)}
   .h2man.hold .h2lb{color:#f7e3a6;text-shadow:0 1px 3px rgba(0,0,0,.98),0 0 8px rgba(245,221,150,.5)}
+
+  /* ================================================================
+     THE SIXTEEN-BIT SKIN
+     ================================================================
+     A second look for the match, behind a toggle next to view, sound and
+     tackles, exactly the way the tackle shipped behind a flag. Every rule
+     below is prefixed body.pixel and nothing outside that prefix changes, so
+     the night look cannot regress by accident: with the toggle off this whole
+     block is inert.
+
+     The tilt stays. The perspective is what makes the ladder readable and the
+     geometry IS the game, so this changes what the match looks like and not
+     one thing about how it is priced.
+
+     ---------------- the man ----------------
+     A real sprite grid. One unit is the man's height over 22, rounded to a
+     half pixel so every edge lands on a device pixel on a phone and nothing
+     blurs, and so 34px and 48px men stay different sizes. Ten units wide,
+     twenty-two tall, every part placed in units and never in per cent. The
+     outline is one unit, capped at 3px so a blown-up man is not all outline.
+
+     It applies to every .fig, not just the pitch men: the goal scene builds
+     the same seven parts at 96px and 168px and the grid is a fraction of --h,
+     so the celebration is the same sprite for free. */
+  body.pixel .fig{--px:calc(var(--h) / 22);--px:round(var(--h) / 22, 0.5px);
+    --ow:min(var(--px), 3px);--o:#0b0b0b;
+    width:calc(var(--px) * 10);height:calc(var(--px) * 22);filter:none}
+  /* NO transform:none HERE. The draft had it, which is right for a still and
+     fatal in the app: every limb animation targets these parts. */
+  body.pixel .fig > *, body.pixel .fig > *::before, body.pixel .fig > *::after{
+    border-radius:0 !important;background-image:none !important;
+    box-shadow:0 0 0 var(--ow) var(--o)}
+  /* head: four wide, rows 0-3, hair on the top two, eyes on row 2 */
+  body.pixel .fig .f-head{left:calc(var(--px) * 3);top:0;width:calc(var(--px) * 4);
+    height:calc(var(--px) * 4);background:#e3b58c}
+  body.pixel .fig .f-head::after{left:0;right:0;top:0;height:calc(var(--px) * 2);
+    background:#2a1c12;box-shadow:none}
+  body.pixel .fig .f-head::before{content:"";position:absolute;left:var(--px);
+    top:calc(var(--px) * 2);width:var(--px);height:var(--px);background:var(--o);
+    box-shadow:calc(var(--px) * 2) 0 0 0 var(--o)}
+  /* torso: six wide, rows 5-12, a darker column down the right for depth */
+  body.pixel .fig .f-torso{left:calc(var(--px) * 2);top:calc(var(--px) * 5);
+    width:calc(var(--px) * 6);height:calc(var(--px) * 8);background:var(--kit);
+    box-shadow:0 0 0 var(--ow) var(--o),inset calc(var(--px) * -1) 0 0 0 rgba(0,0,0,.28)}
+  body.pixel .fig .f-torso::before{left:calc(var(--px) * 2);width:calc(var(--px) * 2);
+    height:var(--px);top:calc(var(--px) * -1);background:#e3b58c;box-shadow:none}
+  body.pixel .fig .f-torso i{font-size:calc(var(--px) * 3.2);opacity:1;letter-spacing:0;
+    margin-top:0;text-shadow:none;font-family:"Silkscreen","Courier New",monospace;font-weight:400}
+  /* arms: two wide, sleeve rows 5-9, forearm 10-12 */
+  body.pixel .fig .f-arm{top:calc(var(--px) * 5);width:calc(var(--px) * 2);
+    height:calc(var(--px) * 8);background:color-mix(in srgb,var(--kit) 80%,#000)}
+  body.pixel .fig .f-arm.l{left:0}
+  body.pixel .fig .f-arm.r{right:0}
+  body.pixel .fig .f-arm::after{height:calc(var(--px) * 3);background:#e3b58c;box-shadow:none}
+  /* shorts: rows 13-15, with the gap between the legs on the last two */
+  body.pixel .fig .f-shorts{left:calc(var(--px) * 2);top:calc(var(--px) * 13);
+    width:calc(var(--px) * 6);height:calc(var(--px) * 3);background:#f4f1ea}
+  body.pixel .fig .f-shorts::after{left:calc(var(--px) * 2.5);right:calc(var(--px) * 2.5);
+    top:var(--px);bottom:0;background:var(--o);box-shadow:none}
+  /* legs: two wide, rows 16-21, socks 18-20 with a turnover, boot on row 21 */
+  body.pixel .fig .f-leg{top:calc(var(--px) * 16);width:calc(var(--px) * 2);
+    height:calc(var(--px) * 6);background:#e3b58c}
+  body.pixel .fig .f-leg.l{left:calc(var(--px) * 2)}
+  body.pixel .fig .f-leg.r{right:calc(var(--px) * 2)}
+  body.pixel .fig .f-leg::before{top:calc(var(--px) * 2);bottom:var(--px);left:0;right:0;
+    background:var(--kit);box-shadow:none;
+    background-image:linear-gradient(180deg,#f4f1ea 0 var(--px),transparent var(--px)) !important}
+  body.pixel .fig .f-leg::after{left:calc(var(--px) * -1);right:0;bottom:0;height:var(--px);
+    background:#2b2b2b;box-shadow:0 0 0 var(--ow) var(--o)}
+  body.pixel .fig .f-leg.r::after{left:0;right:calc(var(--px) * -1)}
+  /* the soft lifts the night look puts on a selected or holding man are drop
+     shadows and glows, which have no meaning on a sprite. Scale and a hard
+     outline do the same job in this language. */
+  body.pixel .h2man .fig.pm{filter:none;transition:transform .18s}
+  body.pixel .h2man.sel .fig.pm{transform:scale(1.26);filter:none}
+  body.pixel .h2man.hold .fig.pm{filter:none}
+  body.pixel .h2man.can .fig.pm .f-torso{box-shadow:0 0 0 var(--ow) var(--o),
+    inset calc(var(--px) * -1) 0 0 0 rgba(0,0,0,.28), 0 0 0 calc(var(--ow) * 2) rgba(255,255,255,.5)}
+
+  /* ---------------- SPRITES STEP ----------------
+     The keyframes are untouched. Only the timing changes, and only here: a
+     smooth bob is right for a drawn man and wrong for a sprite, and steps(2)
+     on the same keyframes is a two-frame walk for nothing. The fall and the
+     slide rotate the whole figure, which costs a sprite its edges, so they
+     snap through four angles instead of sweeping. */
+  body.pixel .h2man.run .fig.pm,
+  body.pixel .h2man.step .fig.pm,
+  body.pixel .h2man.moved .fig.pm,
+  body.pixel .h2man.run .fig.pm .f-leg,
+  body.pixel .h2man.step .fig.pm .f-leg,
+  body.pixel .h2man.moved .fig.pm .f-leg,
+  body.pixel .h2man.run .fig.pm .f-arm,
+  body.pixel .h2man.step .fig.pm .f-arm{animation-timing-function:steps(2)}
+  body.pixel .h2man.fall .fig.pm,
+  body.pixel .h2man.slide .fig.pm,
+  body.pixel .h2man.felled .fig.pm{animation-timing-function:steps(4)}
+
+  /* ---------------- the ground ----------------
+     Flat two-tone grass in hard bands, solid chalk with no softness, no
+     floodlight pools, no vignette, no rounded corners anywhere. */
+  body.pixel .h2pitch{
+    background:repeating-linear-gradient(180deg,#3aa04a 0 7.6%,#2f8a3f 7.6% 15.2%);
+    border-radius:0;box-shadow:6px 6px 0 #061a0c}
+  body.pixel .h2pitch::before{border:3px solid #f2f6ee;border-radius:0;inset:2% 2.5%}
+  body.pixel .h2pitch::after{border-top:3px solid #f2f6ee}
+  body.pixel .h2box, body.pixel .h2six{border:3px solid #f2f6ee;border-radius:0}
+  body.pixel .h2box.t, body.pixel .h2six.t{border-top-color:transparent}
+  body.pixel .h2box.b, body.pixel .h2six.b{border-bottom-color:transparent}
+  body.pixel .h2circle{border:3px solid #f2f6ee;border-radius:50%;box-shadow:none;background:none}
+  body.pixel .h2spot{width:6px;height:6px;background:#f2f6ee;border-radius:0;box-shadow:none}
+  body.pixel .h2net{image-rendering:pixelated;opacity:.9}
+  body.pixel .h2dline{border-top-style:solid;border-top-width:3px}
+  /* the flags are PNGs and pixelating them is the whole treatment they need */
+  body.pixel .sb-flag, body.pixel .h2flag, body.pixel .tflag,
+  body.pixel .h2handbadge{image-rendering:pixelated}
+  /* shadows: a flat dark slab, no blur */
+  body.pixel .h2man .h2sh{filter:none;border-radius:0;background:rgba(0,0,0,.38);height:3px;width:18px}
+  body.pixel .h2bsh{filter:none;border-radius:0;background:rgba(0,0,0,.38);height:3px;width:12px}
+  /* the ball: the Teamgeist goes away and an eight-pixel ball is drawn on the
+     wrap, so it flies and lifts with every existing animation and does not
+     spin, which is correct for a sprite */
+  body.pixel .h2ballwrap .h2ball{visibility:hidden}
+  body.pixel .h2ballwrap::before{content:"";position:absolute;left:50%;top:50%;
+    width:8px;height:8px;margin:-4px 0 0 -4px;background:#ffffff;
+    box-shadow:0 0 0 2px #0b0b0b, 2px 0 0 0 #0b0b0b inset, 0 2px 0 0 #0b0b0b inset;
+    image-rendering:pixelated}
+  body.pixel .h2ballwrap::after{content:"";position:absolute;left:50%;top:50%;
+    width:2px;height:2px;margin:-1px 0 0 1px;background:#0b0b0b;
+    box-shadow:-4px 2px 0 0 #0b0b0b,2px -4px 0 0 #0b0b0b}
+  /* the ring under the man on the ball: a hard slab, and it does not breathe */
+  body.pixel .h2ring{filter:none;border-radius:0;border:2px solid #f5dd9a;
+    background:none;box-shadow:none;height:8px;width:30px;animation:none}
+  /* names in a pixel face */
+  body.pixel .h2man .h2lb{font:400 7px/1 "Silkscreen","Courier New",monospace;
+    letter-spacing:0;text-shadow:1px 1px 0 #0b0b0b;color:#f2f6ee}
+  body.pixel .h2man.sel .h2lb, body.pixel .h2man.hold .h2lb{color:#ffe540;text-shadow:1px 1px 0 #0b0b0b}
+  body.pixel .h2pitch svg line, body.pixel .h2pitch svg path{stroke:#f2f6ee;
+    stroke-dasharray:none;shape-rendering:crispEdges}
+
+  /* ---------------- the chrome round it ----------------
+     Square corners and hard shadows, because one soft rounded panel against a
+     pixel pitch is the tell. The QUESTION CARD is deliberately left alone: it
+     is the reading surface, it carries paragraphs, and pixel type at that
+     length is unreadable. */
+  body.pixel .h2scorebug, body.pixel .h2confirm, body.pixel .toast,
+  body.pixel .h2heat, body.pixel .h2where, body.pixel .h2scout{border-radius:0}
+  body.pixel .h2confirm{box-shadow:4px 4px 0 rgba(0,0,0,.5)}
+  body.pixel .h2ctier{border-radius:0}
+
+  /* ---------------- the ground the pitch sits on ----------------
+     Flat mid-dark rather than the night look's soft near-black. A gradient
+     behind a hard-edged pitch is the tell, and the grass wants something to
+     sit ON rather than to fade into. */
+  body.pixel #pitchbg{background:#0b2a14 !important;background-image:none !important}
+  body.pixel .h2stage{background:none;box-shadow:none;border-radius:0}
+
+  /* ---------------- the goal scene ----------------
+     The one screen in the app that is nothing but atmosphere, so it is where
+     this look is earned or not. Everything soft becomes a band: the radial sky
+     is a flat strip, the blurred stand is two rows of blocks, the floodlight
+     pools go entirely, the wash goes, and the net is a hard grid. The flashes
+     stay as hard white pixels, because a crowd taking photographs is the one
+     soft thing here that reads as deliberate rather than as leftover. */
+  body.pixel .g3{border-radius:0;box-shadow:6px 6px 0 #061a0c}
+  body.pixel .g3-sky{background:#1b3350;background-image:none}
+  body.pixel .g3-stand{background:#24201c;background-image:none;filter:none}
+  body.pixel .g3-stand::before{background:#2e2822;background-image:none}
+  /* the crowd, as two rows of blocks rather than a blur */
+  body.pixel .g3-stand::after{content:"";position:absolute;left:0;right:0;bottom:0;height:52%;
+    background-image:
+      repeating-linear-gradient(90deg,#3d3630 0 6px,#4a4239 6px 12px,#332d28 12px 18px,#443c34 18px 24px);
+    background-size:24px 50%;background-repeat:repeat;opacity:.9}
+  body.pixel .g3-flood{display:none}
+  body.pixel .g3-wash{display:none}
+  body.pixel .g3-ads{border-radius:0;filter:none}
+  body.pixel .g3-ads::after{background-image:none;background:rgba(0,0,0,.18)}
+  body.pixel .g3-flash i{border-radius:0;width:2px;height:2px;box-shadow:none;filter:none}
+  /* the net: a hard grid, no blur, no softness at the seams */
+  body.pixel .g3-net{border-radius:0;filter:none;
+    background-image:
+      repeating-linear-gradient(90deg,rgba(255,255,255,.5) 0 1px,transparent 1px 7px),
+      repeating-linear-gradient(180deg,rgba(255,255,255,.5) 0 1px,transparent 1px 7px);
+    background-size:7px 7px}
+  body.pixel .g3-keeper .fig, body.pixel .g3-striker .fig{filter:none}
   /* the boot going through it, and the man who collects it */
   /* the man playing it */
   .h2man.from .fig.pm{animation:h2lean .5s cubic-bezier(.3,1.1,.4,1)}
@@ -5481,7 +5667,7 @@ function setTheme(t){
   applyTheme();
   render();
 }
-const BUILD = "13 Sep 2026 · 23:39";
+const BUILD = "13 Sep 2026 · 23:44";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five
@@ -7248,6 +7434,23 @@ const h2Live    = w => h2Shape(w).map((_, i) => i).filter(i => !h2IsOff(w, i));
    flags work. It holds the ball's flight in pitch percentages, so it survives
    possession changing hands mid-move. */
 let h2Anim = null;
+/* THE SECOND SKIN. Remembered the way the other three toggles are, and read
+   at boot rather than on first render so the first frame is already right. */
+let h2Pixel = false;
+try{ h2Pixel = localStorage.getItem("ball2-pixel") === "1"; }catch(e){}
+function h2ApplyPixel(){
+  try{ document.body.classList.toggle("pixel", !!h2Pixel); }catch(e){}
+}
+/* on before the first frame, so a resumed match does not draw once in the
+   wrong look and then snap into the right one */
+try{ h2ApplyPixel(); }catch(e){}
+function h2TogglePixel(){
+  audio();
+  h2Pixel = !h2Pixel;
+  try{ localStorage.setItem("ball2-pixel", h2Pixel ? "1" : "0"); }catch(e){}
+  h2ApplyPixel();
+  render();
+}
 let h2Tilt = true;
 try{ h2Tilt = localStorage.getItem("ball2-h2h-flat") !== "1"; }catch(e){}
 function h2ToggleView(){
@@ -9736,6 +9939,7 @@ function h2Render(st){
         '<button class="h2view" onclick="h2ToggleView()">' + (h2Tilt ? "Flat view" : "3D view") + '</button>' +
         '<button class="h2view" onclick="h2ToggleSound()">' + (h2Sound ? "Sound off" : "Sound on") + '</button>' +
         '<button class="h2view" onclick="h2ToggleTackle()">' + (h2TackleOn ? "Tackles off" : "Tackles on") + '</button>' +
+        '<button class="h2view" onclick="h2TogglePixel()">' + (h2Pixel ? "Night look" : "16-bit") + '</button>' +
       '</div>' +
       h2PitchHTML(true) +
       '<div class="h2where">' + esc(me.name) + ' has it on ' + esc(h2Of(H.at, H.who)) + '</div>' +

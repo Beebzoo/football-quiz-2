@@ -72,7 +72,7 @@ cd "$REPO"
 
 SHOT_STATE="$STATE" SHOT_SCRUB="$SCRUB" node -e '
 const fs=require("fs");
-const state=process.env.SHOT_STATE||"pick";
+let state =process.env.SHOT_STATE||"pick";
 const scrub=parseInt(process.env.SHOT_SCRUB||"",10)||0;
 const base=`S=freshState(["Martijn","Bram"],false,"classic",0,"pitch",false); h2TackleOn=false; h2Start();`;
 const picked=`${base} h2PickTeam("Netherlands"); h2PickTeam("Italy");`;
@@ -198,6 +198,16 @@ for (const k of SHOT_LINES)
 for (const k of SHOT_LINES)
   setups["shotline" + k] = dug +
     ` S.h2h.line=["mid","${k}"]; S.h2h.who=0; S.h2h.at=9; S.h2h.markedAgainst=0; S.phase="h_pick"; render();`;
+/* PIXEL: ON ANY STATE. "pixel:nl" is the nl state in the sixteen-bit look,
+   which means every state ever written can be photographed in both without
+   a second copy of any of them. The class goes on before the state runs, so
+   the first frame is already right. */
+const pixel = /^pixel:/.test(state);
+const st16 = pixel ? state.slice(6) : state;
+setups[st16] = (pixel ? `document.body.classList.add("pixel");` : "") +
+  (setups[st16] || setups.pick);
+state = st16;
+
 let h=fs.readFileSync("index.html","utf8");
 const drive=`
 <script>

@@ -96,6 +96,26 @@ const get = async (url, bin) => {
     console.log("  serif " + file);
   }
 
+  /* THE PIXEL FACE, for the sixteen-bit pitch and nothing else. One weight and
+     latin only: a pixel font has one size it was drawn for and no accents
+     worth having, and this one only ever draws a surname and a shirt number.
+     Anything outside latin falls through to Courier, which on a pixel pitch is
+     a perfectly honest failure. */
+  const surl16 = "https://fonts.googleapis.com/css2?family=Silkscreen&display=swap";
+  for (const b of (await get(surl16)).split("/*").slice(1).map(x => "/*" + x)) {
+    const subset = (b.match(/^\/\*\s*([a-z-]+)\s*\*\//) || [])[1];
+    const src = (b.match(/url\((https:[^)]+\.woff2)\)/) || [])[1];
+    const range = (b.match(/unicode-range:\s*([^;]+);/) || [])[1];
+    if (!subset || !src || !range || subset !== "latin") continue;
+    const file = "silkscreen-400-latin.woff2";
+    const dest = path.join(OUT, file);
+    if (FORCE || !fs.existsSync(dest)) fs.writeFileSync(dest, await get(src, true));
+    rules.push("@font-face{font-family:'Silkscreen';font-style:normal;font-weight:400;"
+      + "font-display:swap;src:url(assets/fonts/" + file + ") format('woff2');unicode-range:"
+      + range.trim() + "}");
+    console.log("  pixel " + file + "  (" + (fs.statSync(dest).size / 1024).toFixed(1) + " KB)");
+  }
+
   fs.writeFileSync(path.join(OUT, "font-face.css"), rules.join("\n") + "\n");
   const bytes = wanted.reduce((a, w) => a + fs.statSync(path.join(OUT, w.file)).size, 0);
   console.log(`downloaded ${got}, ${(bytes / 1024).toFixed(0)} KB total`);
