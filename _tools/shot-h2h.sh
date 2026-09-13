@@ -115,6 +115,10 @@ const setups={
   /* the runs (1400ms): scrub to 450 for the run out, 840 for the take, 1300 for the trot home */
   run:    `${nl} S.h2h.who=0; S.h2h.at=7; S.phase="h_pick"; render(); setTimeout(()=>{ h2Select(9); h2Play(); h2Reveal(); h2Judge(true); }, 2500);`,
   runw:   `${nl} S.h2h.who=0; S.h2h.at=6; S.phase="h_pick"; render(); setTimeout(()=>{ h2Select(8); h2Play(); h2Reveal(); h2Judge(true); }, 2500);`,
+  /* he is still up there a beat later, with the ball, rather than back in the shape */
+  held:  `${nl} S.h2h.who=0; S.h2h.at=7; S.phase="h_pick"; render(); setTimeout(()=>{ h2Select(9); h2Play(); h2Reveal(); h2Judge(true); }, 1200);`,
+  /* and drops back into it when he plays it away */
+  back:  `${nl} S.h2h.who=0; S.h2h.at=7; S.phase="h_pick"; render(); setTimeout(()=>{ h2Select(9); h2Play(); h2Reveal(); h2Judge(true); setTimeout(()=>{ h2Select(7); h2Play(); h2Reveal(); h2Judge(true); }, 1300); }, 1200);`,
   runlost:`${nl} S.h2h.subs=[0,0]; S.h2h.who=0; S.h2h.at=7; S.phase="h_pick"; render(); setTimeout(()=>{ h2Select(9); h2Play(); h2Reveal(); h2Judge(false); }, 2500);`,
   /* the bench, the whistle and the shootout */
   sub:   `${nl} S.h2h.who=0; S.h2h.at=5; S.phase="h_pick"; render(); h2Select(7); h2Play(); h2Reveal(); h2Judge(false);`,

@@ -1802,6 +1802,22 @@
     .h2man.run,.h2man.step,.h2man.run .fig.pm,.h2man.run .fig.pm .f-leg.l,.h2man.run .fig.pm .f-leg.r,
     .h2man.step .fig.pm .f-leg.l,.h2man.step .fig.pm .f-leg.r{animation:none}
   }
+  /* OUT OF SHAPE, AND BACK INTO IT. One class for both halves of the same
+     idea. Going out, it is a striker running onto a ball played into space,
+     and he STAYS there while it is his. Coming back, it is the same man
+     dropping into the shape as the ball leaves him. The 100% keyframe is
+     deliberately left out: an implicit one lands on whatever left/top the
+     pitch has just given him, so where he is drawn and where he animates to
+     cannot drift apart. */
+  .h2man.moved{animation:h2moved var(--dur,.95s) cubic-bezier(.4,.05,.3,1) both;z-index:3}
+  @keyframes h2moved{from{left:var(--ox);top:var(--oy)}}
+  .h2man.moved .fig.pm{animation:h2bob .27s ease-in-out 3}
+  .h2man.moved .fig.pm .f-leg.l{animation:h2stepl .27s ease-in-out 3}
+  .h2man.moved .fig.pm .f-leg.r{animation:h2stepr .27s ease-in-out 3}
+  @media (prefers-reduced-motion: reduce){
+    .h2man.moved,.h2man.moved .fig.pm,
+    .h2man.moved .fig.pm .f-leg.l,.h2man.moved .fig.pm .f-leg.r{animation:none}
+  }
 
   /* the man who just gave it away flashes as the ball is taken off him */
   .h2man.lost .fig.pm{animation:h2lost .65s ease-out both}
@@ -6621,7 +6637,15 @@ function h2Fly(fx, fy, tx, ty, from, to, dur, tier){
    there, and comes back to his own spot with it. The animation and the rule
    agree about who has the ball because the rule is the only one deciding. */
 let h2Run = null;
+/* Men standing somewhere other than where they were a moment ago: the one
+   running out onto a ball played into space, and the one dropping back into
+   the shape behind it. Both are the same idea, so both are one flag and one
+   class: the pitch draws him where he is NOW and the CSS walks him here from
+   where he was. Spent on one render, like the flight. */
+let h2From = null;
+function h2FromPush(i, mine, vx, vy){ (h2From = h2From || []).push({i: i, mine: mine, vx: vx, vy: vy}); }
 const H2_RUN_MS = 1400;
+const H2_OUT_MS = 950;              // the run onto a ball, and the jog back
 const H2_RUNNERS = {8: true, 9: true, 10: true};
 /* the receiving spot for man i, in the view of a side drawn defending the
    bottom (mine) or the top (theirs) */
@@ -6665,8 +6689,23 @@ const h2Badge = code => { const r = S && QUIZZES[S.mode]; return r && code ? r.f
    h2VX / h2VY are the VIEW: whoever is on the ball is always drawn attacking
    UP the screen, from behind his own keeper. So the pitch swings through 180
    degrees when possession changes, and each man plays the same way round. */
-const h2VX = (i, mine) => mine ? H2_SQUAD[i].x : 100 - H2_SQUAD[i].x;
-const h2VY = (i, mine) => mine ? H2_SQUAD[i].y : 100 - H2_SQUAD[i].y;
+/* ---------- WHERE A MAN IS STANDING ----------
+   His spot in the shape, unless he has run out of it and the ball is still on
+   him. At most ONE man is ever out of shape, the one on the ball, and he is
+   back in it the moment the ball leaves him.
+
+   Everything that needs a position goes through h2Spot: the drawing, the ball
+   on his boot, the ladder that prices his next pass, the man who picks it up
+   when he loses it, and the challenge geometry. A hold that only the drawing
+   knew about would be a pitch that shows him through on goal and prices him
+   from the halfway line, which is the kind of lie that is a bug six weeks
+   later rather than an argument on the night. */
+const h2Held = (i, w) => { const a = S && S.h2h && S.h2h.adv; return (a && a.w === w && a.i === i) ? a : null; };
+const h2Spot = (i, w) => h2Held(i, w) || H2_SQUAD[i];
+/* which SIDE "mine" means: whoever is on the ball */
+const h2Side = mine => { const H = S && S.h2h; const w = H ? H.who : 0; return mine ? w : 1 - w; };
+const h2VX = (i, mine) => { const p = h2Spot(i, h2Side(mine)); return mine ? p.x : 100 - p.x; };
+const h2VY = (i, mine) => { const p = h2Spot(i, h2Side(mine)); return mine ? p.y : 100 - p.y; };
 const H2_MOUTH = 4;            // the goal you are shooting at, in view space
 /* Where the ball rests when a man has it: just off his boot rather than on top
    of him, so you can see both. It goes to his outside foot for men in the
@@ -6771,15 +6810,18 @@ function h2Of(i, w){
 
 const h2      = () => S.h2h;
 const h2Other = () => 1 - h2().who;
-const h2X     = (i, w) => w === 0 ? H2_SQUAD[i].x : 100 - H2_SQUAD[i].x;
-const h2Y     = (i, w) => w === 0 ? H2_SQUAD[i].y : 100 - H2_SQUAD[i].y;
+const h2X     = (i, w) => { const p = h2Spot(i, w); return w === 0 ? p.x : 100 - p.x; };
+const h2Y     = (i, w) => { const p = h2Spot(i, w); return w === 0 ? p.y : 100 - p.y; };
 /* A man who has been sent off does not get a shot, which is the whole point
    of losing your ten. */
 const h2CanShoot = i => !!H2_SHOT[i] && !(S && S.h2h && h2IsOff(S.h2h.who, i));
 
 /* The pass, and therefore the question. */
 function h2TierFor(a, b){
-  const A = H2_SQUAD[a], B = H2_SQUAD[b];
+  /* read from the side in possession, which is the only side that passes to
+     itself; a man held out of shape is one of theirs to nobody */
+  const w = S && S.h2h ? S.h2h.who : 0;
+  const A = h2Spot(a, w), B = h2Spot(b, w);
   if(A.line <= 2 && B.line === 6) return "ball";   // route one, whatever the gap
   const d = A.y - B.y;                             // positive is forward
   if(d <= 0) return "easy";                        // square or backwards is a safe ball
@@ -6810,7 +6852,10 @@ function h2Start(){
               fresh go (so a second miss is not offered a second sub) */
            subs:[H2_SUBS, H2_SUBS], subbed:[{}, {}], benchUsed:[[], []], sub:null, subQ:false,
            /* the clock, and the shootout once it is running */
-           min:0, so:null};
+           min:0, so:null,
+           /* the man holding a spot he ran to, if there is one: {w, i, x, y,
+              line}, in his own attacking frame like H2_SQUAD */
+           adv:null};
   S.phase = "h_teams";
 }
 /* Both men pick before a ball is kicked, and they cannot pick the same side:
@@ -7321,14 +7366,26 @@ function h2Settle(ok){
      fed the press streak. That is the wrong way round twice over: the relief
      is meant to reward committing to a real ball, not to have it counted as a
      safe one and draw a contested question three passes later. */
-  H.safe = H2_SAFE.includes(h2TierFor(from, H.sel)) ? (H.safe || 0) + 1 : 0;
+  const tier = h2TierFor(from, H.sel);
+  H.safe = H2_SAFE.includes(tier) ? (H.safe || 0) + 1 : 0;
+  /* WHERE IT LEAVES FROM, read before the hold changes hands: a man who is
+     holding a spot he ran to plays it from there, not from the shape he left
+     two questions ago. */
+  const fx = h2BX(from, true), fy = h2BY(from, true);
+  const held = h2Held(from, H.who);
   H.at = H.sel; H.sel = null;
-  /* a ball to the front three is played to where he is going, and he brings
-     it back: the flight still ends on his boot at home, by way of the spot */
+  /* A BALL TO THE FRONT THREE IS PLAYED INTO SPACE AND HE STAYS THERE. The
+     flight ends at the receiving spot instead of coming back with him, and
+     from here everything reads him there: the ball on his boot, the ring, the
+     price of his next ball, and the man who picks it up if he loses it. He is
+     back in the shape the moment the ball leaves him, which h2Next does for
+     every way that can happen at once. */
   const run = H2_RUNNERS[H.at] ? h2RunSpot(H.at, true) : null;
-  h2Fly(h2BX(from, true), h2BY(from, true), h2BX(H.at, true), h2BY(H.at, true), from, H.at,
-        run ? H2_RUN_MS : undefined, h2TierFor(from, H.at));
-  if(run) h2Run = {x: run.x, y: run.y, rx: h2RunBX(run.x), ry: run.y, runner: H.at, runnerMine: true, taker: null};
+  H.adv = run ? {w: H.who, i: H.at, x: run.x, y: run.y, line: H2_SQUAD[H.at].line} : null;
+  if(held) h2FromPush(from, true, held.x, held.y);                          // drops back as it goes
+  if(run)  h2FromPush(H.at, true, H2_SQUAD[H.at].x, H2_SQUAD[H.at].y);      // goes, and stays gone
+  h2Fly(fx, fy, h2BX(H.at, true), h2BY(H.at, true), from, H.at,
+        run ? H2_OUT_MS : undefined, tier);
   ching();
   toast("Found " + h2Of(H.at, H.who) + ".");
   h2Next();
@@ -7489,6 +7546,7 @@ function h2Whistle(){
   const H = h2();
   stopTimer();
   H.sel = null; H.shooting = false; H.pen = false; H.contest = null; H.caught = null; H.hand = null;
+  H.adv = null;                      // the shape re-forms for the handshake
   S.phase = "h_ft";
   render();
 }
@@ -7563,6 +7621,16 @@ function h2Next(){
   const H = h2();
   S.tier = null; S.qi = null; S.timeUp = false;
   H.pen = false; H.subQ = false;
+  /* THE HOLD BELONGS TO WHOEVER IS ON THE BALL, so anything that moved the
+     ball puts him back in the shape, and he jogs there rather than being
+     teleported. One rule covering the turnover, the tackle, the foul, the free
+     kick, the penalty and the restart, instead of six places each remembering
+     to tidy up after themselves. */
+  if(H.adv && !(H.adv.w === H.who && H.adv.i === H.at)){
+    const mine = H.adv.w === H.who;
+    h2FromPush(H.adv.i, mine, mine ? H.adv.x : 100 - H.adv.x, mine ? H.adv.y : 100 - H.adv.y);
+    H.adv = null;
+  }
   /* THE WHISTLE GOES AT A DEAD BALL, which is what every road into here is:
      the pass has landed, the loss has been collected, the save is held, the
      goal is in. The shot in the air and the penalty never come this way until
@@ -7655,6 +7723,8 @@ function h2PitchHTML(tappable){
   const cele = h2Cele; h2Cele = false;
   const lost = h2Lost; h2Lost = null;
   const R = h2Run; h2Run = null;              // the run, one render like the flight
+  const F = h2From; h2From = null;            // and the men who are not where they were
+  const movedFor = (i, mine) => F ? (F.filter(e => e.i === i && e.mine === mine)[0] || null) : null;
   const shown = h2Showmark; h2Showmark = null;
   const tilt = h2Tilt ? " tilt" : "";
   /* THE CHALLENGE. going is the one-render entry beat, spent here; C is the
@@ -7696,7 +7766,7 @@ function h2PitchHTML(tappable){
        o.down && o.thru && "thru", o.down && o.thru && o.stay && "stay",
        o.caught && "caught", o.caught && o.going && "brace", o.caught && o.felled && "felled",
        /* the run: the man going for the ball, and the man stepping across to take it */
-       o.run && "run", o.step && "step",
+       o.run && "run", o.step && "step", o.moved && "moved",
        o.key && "key"].filter(Boolean).join(" ");
     /* The goal scene had proper footballers and the pitch had little jerseys,
        and side by side the jerseys looked wrong. Same component, smaller. */
@@ -7712,6 +7782,8 @@ function h2PitchHTML(tappable){
       /* where he starts, where he is going, and how long the ball takes */
       : o.run && R ? ';--ox:' + px + '%;--oy:' + py + '%;--rx:' + R.x + '%;--ry:' + R.y + '%;--dur:' + H2_RUN_MS + 'ms'
       : o.step && R ? ';--ox:' + px + '%;--oy:' + py + '%;--rx:' + R.rx + '%;--ry:' + R.ry + '%;--dur:' + H2_RUN_MS + 'ms'
+      /* he is drawn where he is now; this is where he is coming from */
+      : o.moved ? ';--ox:' + o.moved.vx + '%;--oy:' + o.moved.vy + '%;--dur:' + H2_OUT_MS + 'ms'
       : "";
     return '<div class="h2man ' + cls + '" style="left:' + px + '%;top:' + py +
       '%;--i:' + i + vars + '">' +
@@ -7740,7 +7812,8 @@ function h2PitchHTML(tappable){
     out += man(i, false, {them:true, lost: i === lost,
       down: !!C && C.by === i, mirr: !!C && C.mirr, going: going, key: !!C && C.by === i,
       thru: !!foul, stay: !!foul && foul.stay,
-      run: !!R && !R.runnerMine && R.runner === i});
+      run: !!R && !R.runnerMine && R.runner === i,
+      moved: movedFor(i, false)});
   });
   H2_SQUAD.forEach((p, i) => {
     if(h2IsOff(H.who, i)) return;
@@ -7759,6 +7832,7 @@ function h2PitchHTML(tappable){
       key: !!C && (C.on === i || i === H.at),
       run: !!R && R.runnerMine && R.runner === i,
       step: !!R && R.taker === i,
+      moved: movedFor(i, true),
     });
   });
 
