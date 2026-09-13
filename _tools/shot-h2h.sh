@@ -1,16 +1,27 @@
 #!/bin/sh
 # Screenshot One on One at phone width, in whatever state you name.
 #
-#   sh _tools/shot-h2h.sh out.png [scale] [state] [scrollpx]
+#   sh _tools/shot-h2h.sh out.png [scale] [state] [scrollpx] [scrubms]
 #
 #   scrollpx  shift the app up inside the frame, to inspect something that
 #             falls below the fold at a high scale
+#   scrubms   pause every animation on the page and set it to this millisecond.
+#             The only reliable way to frame a moving thing: headless virtual
+#             time renders a mid-animation frame from a clock the main thread
+#             does not share, so the late-firing states below land wherever
+#             they land. Scrubbed is exact. The scrub happens 2800ms after the
+#             state is set up and everything has to be over well inside the
+#             5000ms budget or the scrubbed frame is never drawn, so the states
+#             built for it (inflight chalgo run runw runlost) fire at 2500. The
+#             older late states (strike save goal foul) still fire at 3500 and
+#             up and are caught by luck, as they always were.
 #
 #   scale   1.0 to inspect detail, .6 to see a whole phone screen
 #   state   menu | modes | board | qcard
 #           teams | toss | flip | landed | pick | sel | nl | it | flat
 #           att | shot | strike | save | goal | mcq
 #           sub | subgk | ft | pens | penq | over | pensend
+#           run | runw | runlost
 #
 # WHY THIS EXISTS. One on One is the only thing in the repo that cannot be
 # checked by reading it. Four separate bugs in this mode were invisible in the
@@ -36,14 +47,16 @@ OUT="$1"
 SCALE="${2:-.62}"
 STATE="${3:-pick}"
 SCROLL="${4:-0}"
+SCRUB="${5:-}"
 PORT=8811
 EDGE="/c/Program Files (x86)/Microsoft/Edge/Application/msedge.exe"
 
 cd "$REPO"
 
-SHOT_STATE="$STATE" node -e '
+SHOT_STATE="$STATE" SHOT_SCRUB="$SCRUB" node -e '
 const fs=require("fs");
 const state=process.env.SHOT_STATE||"pick";
+const scrub=parseInt(process.env.SHOT_SCRUB||"",10)||0;
 const base=`S=freshState(["Martijn","Bram"],false,"classic",0,"pitch",false); h2TackleOn=false; h2Start();`;
 const picked=`${base} h2PickTeam("Netherlands"); h2PickTeam("Italy");`;
 const nl=`${picked} S.h2h.tossed=true;`;
@@ -67,7 +80,7 @@ const setups={
      the FROZEN pose the question is asked over; chalgo fires late so the shot
      lands mid-slide, the same trick strike and save use. */
   chal:  `${nl2} h2TackleOn=true; S.h2h.who=0; S.h2h.at=5; S.h2h.marks=[9]; S.h2h.markedAgainst=0; S.phase="h_pick"; render(); h2Select(9); h2Play();`,
-  chalgo:`${nl2} h2TackleOn=true; S.h2h.who=0; S.h2h.at=5; S.h2h.marks=[9]; S.h2h.markedAgainst=0; S.phase="h_pick"; render(); setTimeout(()=>{ h2Select(9); h2Play(); }, 4150);`,
+  chalgo:`${nl2} h2TackleOn=true; S.h2h.who=0; S.h2h.at=5; S.h2h.marks=[9]; S.h2h.markedAgainst=0; S.phase="h_pick"; render(); setTimeout(()=>{ h2Select(9); h2Play(); }, 2500);`,
   chalfar:`${nl2} h2TackleOn=true; S.h2h.who=0; S.h2h.at=0; S.h2h.marks=[9]; S.h2h.markedAgainst=0; S.phase="h_pick"; render(); h2Select(9); h2Play();`,
   foul:  `${nl2} h2TackleOn=true; S.h2h.who=0; S.h2h.at=5; S.h2h.marks=[9]; S.h2h.markedAgainst=0; S.phase="h_pick"; render(); h2Select(9); h2Play(); setTimeout(()=>{ h2TackleReveal(); h2TackleJudge(false); }, 4000);`,
   chalflat:`h2Tilt=false; ${nl2} h2TackleOn=true; S.h2h.who=0; S.h2h.at=5; S.h2h.marks=[9]; S.h2h.markedAgainst=0; S.phase="h_pick"; render(); h2Select(9); h2Play();`,
@@ -83,11 +96,15 @@ const setups={
   it:    `${nl} S.h2h.who=1; S.h2h.at=0; S.phase="h_pick"; render(); h2Select(7);`,
   heat:  `${nl} S.h2h.who=0; S.h2h.at=5; S.h2h.safe=3; S.phase="h_pick"; render(); h2Select(6);`,
   tackle:`${nl} S.h2h.who=0; S.h2h.at=5; S.h2h.safe=3; S.phase="h_pick"; render(); h2Select(6); h2Play();`,
-  inflight:`${nl} S.h2h.who=0; S.h2h.at=0; S.phase="h_pick"; render(); setTimeout(()=>{ h2Select(5); h2Play(); h2Reveal(); h2Judge(true); }, 4450);`,
+  inflight:`${nl} S.h2h.who=0; S.h2h.at=0; S.phase="h_pick"; render(); setTimeout(()=>{ h2Select(5); h2Play(); h2Reveal(); h2Judge(true); }, 2500);`,
   shot:  `${nl} S.h2h.who=0; S.h2h.at=9; S.phase="h_pick"; render(); h2Shoot(); h2Reveal(); h2Judge(true);`,
   strike:`${nl} S.h2h.who=0; S.h2h.at=9; S.phase="h_pick"; render(); h2Shoot(); h2Reveal(); h2Judge(true); h2SaveReveal(); setTimeout(()=>h2SaveJudge(false), 3700);`,
   save:  `${nl} S.h2h.who=0; S.h2h.at=9; S.phase="h_pick"; render(); h2Shoot(); h2Reveal(); h2Judge(true); h2SaveReveal(); setTimeout(()=>h2SaveJudge(true), 3800);`,
   goal:  `${nl} S.h2h.who=0; S.h2h.at=9; S.phase="h_pick"; render(); setTimeout(()=>{ h2Shoot(); h2Reveal(); h2Judge(true); h2SaveReveal(); h2SaveJudge(false); }, 3500);`,
+  /* the runs (1400ms): scrub to 450 for the run out, 840 for the take, 1300 for the trot home */
+  run:    `${nl} S.h2h.who=0; S.h2h.at=7; S.phase="h_pick"; render(); setTimeout(()=>{ h2Select(9); h2Play(); h2Reveal(); h2Judge(true); }, 2500);`,
+  runw:   `${nl} S.h2h.who=0; S.h2h.at=6; S.phase="h_pick"; render(); setTimeout(()=>{ h2Select(8); h2Play(); h2Reveal(); h2Judge(true); }, 2500);`,
+  runlost:`${nl} S.h2h.subs=[0,0]; S.h2h.who=0; S.h2h.at=7; S.phase="h_pick"; render(); setTimeout(()=>{ h2Select(9); h2Play(); h2Reveal(); h2Judge(false); }, 2500);`,
   /* the bench, the whistle and the shootout */
   sub:   `${nl} S.h2h.who=0; S.h2h.at=5; S.phase="h_pick"; render(); h2Select(7); h2Play(); h2Reveal(); h2Judge(false);`,
   subgk: `${nl} S.h2h.who=0; S.h2h.at=9; S.phase="h_pick"; render(); h2Shoot(); h2Reveal(); h2Judge(true); h2SaveReveal(); h2SaveJudge(false);`,
@@ -101,7 +118,7 @@ const setups={
 let h=fs.readFileSync("index.html","utf8");
 const drive=`
 <script>
-window.addEventListener("load",()=>{ setTimeout(()=>{ try{ ${setups[state]||setups.pick} }catch(e){ document.body.innerHTML="<pre style=color:red>"+e+"</pre>"; } }, 700); });
+window.addEventListener("load",()=>{ setTimeout(()=>{ try{ ${setups[state]||setups.pick} }catch(e){ document.body.innerHTML="<pre style=color:red>"+e+"</pre>"; } ${scrub ? `setTimeout(()=>{ document.getAnimations().forEach(a=>{ try{ a.pause(); a.currentTime=${scrub}; }catch(e){} }); }, 2800);` : ""} }, 700); });
 <\/script>`;
 fs.writeFileSync("_shot_app.html", h.replace("</body>", drive + "</body>"), "utf8");
 '
@@ -125,4 +142,4 @@ sleep 1
   --screenshot="$OUT" --virtual-time-budget=5000 \
   "http://localhost:$PORT/_shot_frame.html" >/dev/null 2>&1
 
-echo "wrote $OUT  (state: $STATE, scale: $SCALE, scroll: $SCROLL)"
+echo "wrote $OUT  (state: $STATE, scale: $SCALE, scroll: $SCROLL${SCRUB:+, scrubbed to ${SCRUB}ms})"

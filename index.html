@@ -1746,6 +1746,63 @@
   @keyframes h2roll{from{transform:rotate(0)}to{transform:rotate(620deg)}}
   @media (prefers-reduced-motion: reduce){ .h2ballwrap.pass.ground .h2ball{animation:none} }
 
+  /* THE RUN. Two legs on one clock: out to the receiving spot (--rx/--ry) by
+     58%, a beat while he takes it, then back to the boot at home (--tx/--ty).
+     The lob, the hop, the roll and the shadow all belong to the first leg;
+     the second is a ball being carried back along the floor. */
+  .h2ballwrap.pass.run{animation:h2flyrun var(--dur,1.4s) cubic-bezier(.42,.05,.35,1) both}
+  @keyframes h2flyrun{
+    0%{left:var(--fx);top:var(--fy)}
+    58%,74%{left:var(--rx);top:var(--ry)}
+    100%{left:var(--tx);top:var(--ty)}}
+  .h2ballwrap.pass.run .h2lift{animation:h2arcrun var(--dur,1.4s) cubic-bezier(.33,0,.67,1) both}
+  @keyframes h2arcrun{
+    0%{transform:translateY(0)}
+    29%{transform:translateY(calc(-1 * var(--lift,20px)))}
+    58%,100%{transform:translateY(0)}}
+  .h2ballwrap.pass.run .h2bsh{animation:h2bshrun var(--dur,1.4s) cubic-bezier(.33,0,.67,1) both}
+  @keyframes h2bshrun{
+    0%,58%,100%{transform:translate(-50%,-50%) scale(1);opacity:.5}
+    29%{transform:translate(-50%,-50%) scale(.5);opacity:.18}}
+  .h2ballwrap.pass.run .h2ball{animation:h2hoprun var(--dur,1.4s) ease-in-out both}
+  @keyframes h2hoprun{
+    0%{transform:scale(.92) rotate(0)}
+    29%{transform:scale(1.16) rotate(400deg)}
+    58%,74%{transform:scale(1) rotate(760deg)}
+    100%{transform:scale(1) rotate(980deg)}}
+  .h2ballwrap.pass.run.ground .h2lift,.h2ballwrap.pass.run.ground .h2bsh{animation:none}
+  .h2ballwrap.pass.run.ground .h2ball{animation:h2rollrun var(--dur,1.4s) cubic-bezier(.42,.05,.35,1) both}
+  @keyframes h2rollrun{0%{transform:rotate(0)}58%,74%{transform:rotate(620deg)}100%{transform:rotate(840deg)}}
+  /* The man making it: out from his own spot (--ox/--oy) to the receiving
+     spot on the same clock as the ball, the beat, and the trot back. The
+     legs pump for the run out and again for the trot back and rest in the
+     beat between, and the standing receive (h2settle, h2touch) is off, since
+     he is not standing. */
+  .h2man.run{animation:h2run var(--dur,1.4s) cubic-bezier(.4,.05,.3,1) both;z-index:3}
+  @keyframes h2run{
+    0%{left:var(--ox);top:var(--oy)}
+    58%,74%{left:var(--rx);top:var(--ry)}
+    100%{left:var(--ox);top:var(--oy)}}
+  .h2man.run .fig.pm{animation:h2bob .27s ease-in-out 3, h2bob .27s ease-in-out calc(var(--dur,1.4s) * .74) 2}
+  @keyframes h2bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-1.5px)}}
+  .h2man.run .fig.pm .f-leg.l{animation:h2stepl .27s ease-in-out 3, h2stepl .27s ease-in-out calc(var(--dur,1.4s) * .74) 2}
+  .h2man.run .fig.pm .f-leg.r{animation:h2stepr .27s ease-in-out 3, h2stepr .27s ease-in-out calc(var(--dur,1.4s) * .74) 2}
+  @keyframes h2stepl{0%,100%{transform:rotate(0)}25%{transform:rotate(24deg)}75%{transform:rotate(-24deg)}}
+  @keyframes h2stepr{0%,100%{transform:rotate(0)}25%{transform:rotate(-24deg)}75%{transform:rotate(24deg)}}
+  /* the man who steps across for a lost ball: he waits until it is in the air,
+     gets to the spot as it lands, and comes home with it */
+  .h2man.step{animation:h2step var(--dur,1.4s) cubic-bezier(.4,.05,.3,1) both;z-index:3}
+  @keyframes h2step{
+    0%,30%{left:var(--ox);top:var(--oy)}
+    58%,74%{left:var(--rx);top:var(--ry)}
+    100%{left:var(--ox);top:var(--oy)}}
+  .h2man.step .fig.pm .f-leg.l{animation:h2stepl .27s ease-in-out calc(var(--dur,1.4s) * .3) 2, h2stepl .27s ease-in-out calc(var(--dur,1.4s) * .74) 2}
+  .h2man.step .fig.pm .f-leg.r{animation:h2stepr .27s ease-in-out calc(var(--dur,1.4s) * .3) 2, h2stepr .27s ease-in-out calc(var(--dur,1.4s) * .74) 2}
+  @media (prefers-reduced-motion: reduce){
+    .h2man.run,.h2man.step,.h2man.run .fig.pm,.h2man.run .fig.pm .f-leg.l,.h2man.run .fig.pm .f-leg.r,
+    .h2man.step .fig.pm .f-leg.l,.h2man.step .fig.pm .f-leg.r{animation:none}
+  }
+
   /* the man who just gave it away flashes as the ball is taken off him */
   .h2man.lost .fig.pm{animation:h2lost .65s ease-out both}
   @keyframes h2lost{
@@ -6552,6 +6609,32 @@ function h2ToggleView(){
 function h2Fly(fx, fy, tx, ty, from, to, dur, tier){
   h2Anim = {fx, fy, tx, ty, from, to, dur, tier};
 }
+/* THE RUN. A ball to one of the front three is not played to a man standing
+   still: he goes, the ball is played to where he is going, and the pair of
+   them come back to his spot together, so the rules never see the spot. The
+   striker goes between and just past their two centre-backs; a winger goes
+   outside the wing-back on his side. Set for one render next to h2Anim, and
+   the pitch draws the flight in two legs on one clock.
+
+   Lost, the same run is made and the ball goes the same way, and whoever the
+   rule hands it to (h2NearestTo, unchanged) steps across to the spot, takes it
+   there, and comes back to his own spot with it. The animation and the rule
+   agree about who has the ball because the rule is the only one deciding. */
+let h2Run = null;
+const H2_RUN_MS = 1400;
+const H2_RUNNERS = {8: true, 9: true, 10: true};
+/* the receiving spot for man i, in the view of a side drawn defending the
+   bottom (mine) or the top (theirs) */
+function h2RunSpot(i, mine){
+  let x, y;
+  if(i === 9){ x = 50; y = 100 - H2_SQUAD[1].y - 5; }
+  else if(i === 8){ x = 100 - H2_SQUAD[4].x - 6; y = 100 - H2_SQUAD[4].y - 5; }
+  else if(i === 10){ x = 100 - H2_SQUAD[3].x + 6; y = 100 - H2_SQUAD[3].y - 5; }
+  else return null;
+  return mine ? {x: x, y: y} : {x: 100 - x, y: 100 - y};
+}
+/* the ball drops just off his boot at the spot, the way it rests off it at home */
+const h2RunBX = (x) => x + (x > 60 ? -4.2 : 4.2);
 const h2GoalY = w => w === 0 ? 5 : 95;   // the mouth this player is shooting at
 
 /* Which country each man is playing as, and what that gets him. Everything
@@ -7199,6 +7282,9 @@ function h2Settle(ok){
     ? H.marks.map(i => h2Of(i, H.who)).join(" and ") : null;
   if(!ok){
     const lostAt = H.at, lostWho = H.who;
+    /* the man the ball was meant for, before that is forgotten: if he was one
+       of the front three he still makes his run, as one of "theirs" now */
+    const meant = H.shooting ? null : H.sel;
     H.who = h2Other();
     H.at = h2NearestTo(lostAt, lostWho, H.who);
     H.sel = null; H.shooting = false; H.safe = 0;
@@ -7207,8 +7293,10 @@ function h2Settle(ok){
        "theirs") and ends on the man who collected it. */
     /* the collection takes the tier of the pass it came from: a lost short ball
        is picked up along the grass, a lost raking one drops out of the air */
+    const run = meant != null && H2_RUNNERS[meant] && !h2IsOff(lostWho, meant) ? h2RunSpot(meant, false) : null;
     h2Fly(h2BX(lostAt, false), h2BY(lostAt, false), h2BX(H.at, true), h2BY(H.at, true), null, H.at,
-          undefined, S.tier);
+          run ? H2_RUN_MS : undefined, S.tier);
+    if(run) h2Run = {x: run.x, y: run.y, rx: h2RunBX(run.x), ry: run.y, runner: meant, runnerMine: false, taker: H.at};
     h2Turn = true;
     h2Lost = lostAt;
     h2Showmark = null;            // the camera has swung; the marks belonged to the old view
@@ -7235,8 +7323,12 @@ function h2Settle(ok){
      safe one and draw a contested question three passes later. */
   H.safe = H2_SAFE.includes(h2TierFor(from, H.sel)) ? (H.safe || 0) + 1 : 0;
   H.at = H.sel; H.sel = null;
+  /* a ball to the front three is played to where he is going, and he brings
+     it back: the flight still ends on his boot at home, by way of the spot */
+  const run = H2_RUNNERS[H.at] ? h2RunSpot(H.at, true) : null;
   h2Fly(h2BX(from, true), h2BY(from, true), h2BX(H.at, true), h2BY(H.at, true), from, H.at,
-        undefined, h2TierFor(from, H.at));
+        run ? H2_RUN_MS : undefined, h2TierFor(from, H.at));
+  if(run) h2Run = {x: run.x, y: run.y, rx: h2RunBX(run.x), ry: run.y, runner: H.at, runnerMine: true, taker: null};
   ching();
   toast("Found " + h2Of(H.at, H.who) + ".");
   h2Next();
@@ -7562,6 +7654,7 @@ function h2PitchHTML(tappable){
   const turn = h2Turn; h2Turn = false;
   const cele = h2Cele; h2Cele = false;
   const lost = h2Lost; h2Lost = null;
+  const R = h2Run; h2Run = null;              // the run, one render like the flight
   const shown = h2Showmark; h2Showmark = null;
   const tilt = h2Tilt ? " tilt" : "";
   /* THE CHALLENGE. going is the one-render entry beat, spent here; C is the
@@ -7602,6 +7695,8 @@ function h2PitchHTML(tappable){
        o.down && "down", o.down && o.mirr && "mirr", o.down && o.going && "slide",
        o.down && o.thru && "thru", o.down && o.thru && o.stay && "stay",
        o.caught && "caught", o.caught && o.going && "brace", o.caught && o.felled && "felled",
+       /* the run: the man going for the ball, and the man stepping across to take it */
+       o.run && "run", o.step && "step",
        o.key && "key"].filter(Boolean).join(" ");
     /* The goal scene had proper footballers and the pitch had little jerseys,
        and side by side the jerseys looked wrong. Same component, smaller. */
@@ -7613,7 +7708,11 @@ function h2PitchHTML(tappable){
       ? ';--fall:' + C.fall.toFixed(1) + 'deg;--sx:' + C.sx.toFixed(1) + '%;--sy:' + C.sy.toFixed(1) +
         '%;--lx:' + C.lx.toFixed(1) + '%;--ly:' + C.ly.toFixed(1) + '%;--sd:' + C.sd +
         'ms;--skid:' + C.skid + 'px'
-      : o.caught && C ? ';--brace:' + C.brace + 'deg' : "";
+      : o.caught && C ? ';--brace:' + C.brace + 'deg'
+      /* where he starts, where he is going, and how long the ball takes */
+      : o.run && R ? ';--ox:' + px + '%;--oy:' + py + '%;--rx:' + R.x + '%;--ry:' + R.y + '%;--dur:' + H2_RUN_MS + 'ms'
+      : o.step && R ? ';--ox:' + px + '%;--oy:' + py + '%;--rx:' + R.rx + '%;--ry:' + R.ry + '%;--dur:' + H2_RUN_MS + 'ms'
+      : "";
     return '<div class="h2man ' + cls + '" style="left:' + px + '%;top:' + py +
       '%;--i:' + i + vars + '">' +
       '<span class="h2sh"></span>' +
@@ -7640,7 +7739,8 @@ function h2PitchHTML(tappable){
     if(h2IsOff(them, i)) return;
     out += man(i, false, {them:true, lost: i === lost,
       down: !!C && C.by === i, mirr: !!C && C.mirr, going: going, key: !!C && C.by === i,
-      thru: !!foul, stay: !!foul && foul.stay});
+      thru: !!foul, stay: !!foul && foul.stay,
+      run: !!R && !R.runnerMine && R.runner === i});
   });
   H2_SQUAD.forEach((p, i) => {
     if(h2IsOff(H.who, i)) return;
@@ -7657,6 +7757,8 @@ function h2PitchHTML(tappable){
       /* the passer, the man he found and the man who went through him: the
          three the eye needs. Everyone else dims out of the way. */
       key: !!C && (C.on === i || i === H.at),
+      run: !!R && R.runnerMine && R.runner === i,
+      step: !!R && R.taker === i,
     });
   });
 
@@ -7679,13 +7781,15 @@ function h2PitchHTML(tappable){
      than it was, because by then it only ever means a real long ball. A flight
      with no tier (a shot, the challenge, a restart) is a lob. */
   const ground = !!A && !!A.tier && H2_SAFE.includes(A.tier);
-  const dist = A ? Math.hypot(A.tx - A.fx, (A.ty - A.fy) * 1.3) : 0;
+  /* on a run the lob is the first leg, to the spot; the trot back is on the floor */
+  const dist = !A ? 0 : R ? Math.hypot(R.rx - A.fx, (R.ry - A.fy) * 1.3) : Math.hypot(A.tx - A.fx, (A.ty - A.fy) * 1.3);
   const lift = !A || ground ? 0 : Math.min(64, 14 + dist * 0.6);
   const flight = A ? ';--fx:' + A.fx + '%;--fy:' + A.fy + '%;--tx:' + A.tx + '%;--ty:' + A.ty +
                      '%;--lift:' + lift.toFixed(0) + 'px' +
-                     (A.dur ? ';--dur:' + A.dur + 'ms' : "") : "";
+                     (A.dur ? ';--dur:' + A.dur + 'ms' : "") +
+                     (R ? ';--rx:' + R.rx + '%;--ry:' + R.ry + '%' : "") : "";
   const ball = (cls, extra) =>
-    '<div class="h2ballwrap' + (A ? (ground ? " pass ground" : " pass lob") : "") + cls +
+    '<div class="h2ballwrap' + (A ? (ground ? " pass ground" : " pass lob") + (R ? " run" : "") : "") + cls +
     '" style="left:' + bx + '%;top:' + by + '%' +
     flight + extra + '"><span class="h2bsh"></span>' +
     '<span class="h2lift"><img class="h2ball" src="assets/ball.png" alt=""></span></div>';
@@ -8911,10 +9015,13 @@ function render(){
     const losers=order.filter(p=>p.score<0);
     const champ=order[0];
     const hitTarget = S.target && champ.score>=S.target;
-    /* a pitch match is timed in minutes, not rounds, and a shootout says so */
+    /* a pitch match is timed in minutes, not rounds; a shootout says so, and so
+       does a match that ended early on the mercy rule */
+    const h2min = S.h2h ? Math.min(H2_MINUTES, S.h2h.min||0) : 0;
     const ftLine = S.play==="pitch" && S.h2h
       ? (S.pens ? `Full time · level, ${S.pens[0]}-${S.pens[1]} on penalties`
-                : `Full time · ${Math.min(H2_MINUTES, S.h2h.min||0)} minutes`)
+        : champ.score>=H2_TARGET && h2min<H2_MINUTES ? `First to ${H2_TARGET} · ${h2min} minutes`
+        : `Full time · ${h2min} minutes`)
       : `Full time · ${S.round} round${S.round>1?"s":""}`;
     st.innerHTML = `
       <div class="kick">${hitTarget?`${ico('flag')}First to ${S.target}`:ftLine}</div>
