@@ -38,32 +38,33 @@ const https = require("https");
 const crypto = require("crypto");
 
 const REPO = path.join(__dirname, "..");
-const OUT = path.join(REPO, "assets", "wc2006", "index.json");
+/* WHICH TOURNAMENT. Wikipedia has used the same squad and match templates for
+   every World Cup back to 1930, so the year is the only thing that changes.
+   2006 is the default because it is the one whose data has been checked by
+   hand, man by man, and it stays the default until another one has been. */
+const YEAR = (i => (i > -1 && /^\d{4}$/.test(process.argv[i + 1] || "")) ? process.argv[i + 1] : "2006")(process.argv.indexOf("--year"));
+const POOL = "wc" + YEAR;
+const OUT = path.join(REPO, "assets", POOL, "index.json");
 const CACHE = path.join(__dirname, "_models");
 const UA = "ball2-xi/1.0 (personal quiz project)";
 const WRITE = process.argv.includes("--write");
 const WHO = (i => i > -1 ? process.argv[i + 1] : null)(process.argv.indexOf("--who"));
 
-const PAGES = [
-  "2006 FIFA World Cup Group A", "2006 FIFA World Cup Group B",
-  "2006 FIFA World Cup Group C", "2006 FIFA World Cup Group D",
-  "2006 FIFA World Cup Group E", "2006 FIFA World Cup Group F",
-  "2006 FIFA World Cup Group G", "2006 FIFA World Cup Group H",
-  "2006 FIFA World Cup knockout stage",
-  /* THE FINAL HAS ITS OWN ARTICLE, and the knockout page does not carry it.
-     Without this Italy's last match is the semi-final against Germany, which
-     is the one team in the tournament where being a match out is most
-     obvious: no Materazzi sending-off, no Grosso penalty, the wrong eleven
-     for the side that won it. */
-  "2006 FIFA World Cup final",
-  /* AND THE BATTLE OF NUREMBERG, for the same reason: Portugal against the
-     Netherlands produced sixteen yellow cards and four red ones and so has an
-     article of its own, which means the knockout page does not carry its
-     line-up. Without it the Dutch last match is the group game against
-     Argentina and van Bronckhorst, Boulahrouz and Deco are all missing from
-     the side that actually went out. */
-  "Battle of Nuremberg (2006 FIFA World Cup)",
-];
+/* THE FINAL ALWAYS HAS ITS OWN ARTICLE and the knockout page never carries it.
+   Without it Italy's last match in 2006 is the semi-final against Germany,
+   which is the one side in that tournament where being a game out is most
+   obvious: no Materazzi sending-off, no Grosso penalty, the wrong eleven for
+   the team that won it.
+
+   EXTRAS are the matches famous enough to have been given their own page too,
+   which likewise leaves them off the knockout article. One per tournament at
+   most, and a missing one shows up as a side whose last match is too early. */
+const EXTRAS = {
+  "2006": ["Battle of Nuremberg (2006 FIFA World Cup)"],
+};
+const PAGES = "ABCDEFGH".split("").map(g => YEAR + " FIFA World Cup Group " + g)
+  .concat([YEAR + " FIFA World Cup knockout stage", YEAR + " FIFA World Cup final"])
+  .concat(EXTRAS[YEAR] || []);
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const norm = x => String(x || "").normalize("NFD").replace(/[̀-ͯ]/g, "")
@@ -75,6 +76,9 @@ const norm = x => String(x || "").normalize("NFD").replace(/[̀-ͯ]/g, "")
    reverse. */
 const tidy = x => String(x || "")
   .split(/<ref/)[0]
+  /* AND ANY OTHER TAG. 2022 wraps every kit title in a nowrap span, which is
+     invisible on the page and is six unknown teams to a parser. */
+  .replace(/<[^>]*>/g, "")
   .replace(/\{\{\s*nowrap\s*\|/gi, "")
   .replace(/\[\[[^\]|]*\|([^\]]*)\]\]/g, "$1")
   .replace(/\[\[|\]\]|\}\}|'''/g, "")
@@ -185,7 +189,7 @@ function shapeOf(lineup) {
 }
 
 (async () => {
-  console.log("reading the nine match pages...");
+  console.log("reading " + PAGES.length + " match pages for " + YEAR + "...");
   let text = "";
   for (const p of PAGES) text += "\n" + await wikitext(p);
   console.log("  " + Math.round(text.length / 1024) + "KB\n");

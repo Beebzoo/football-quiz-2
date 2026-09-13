@@ -1,6 +1,10 @@
 #!/usr/bin/env node
 /* WHAT EACH MAN ACTUALLY DID IN GERMANY.
  *
+ * RUN IT AFTER THE ELEVENS. The pipeline is squads, then the real elevens,
+ * then this, then the careers: build-wc2006-xi.js rewrites every position to
+ * the one the man actually played, and the traits below read positions.
+ *
  *     node _tools/build-wc2006-tournament.js            dry run, read the table
  *     node _tools/build-wc2006-tournament.js --write    stamp it onto the deck
  *     node _tools/build-wc2006-tournament.js --who "Klose"
@@ -37,24 +41,41 @@ const https = require("https");
 const crypto = require("crypto");
 
 const REPO = path.join(__dirname, "..");
-const OUT = path.join(REPO, "assets", "wc2006", "index.json");
+/* WHICH TOURNAMENT. Wikipedia has used the same squad and match templates for
+   every World Cup back to 1930, so the year is the only thing that changes.
+   2006 is the default because it is the one whose data has been checked by
+   hand, man by man, and it stays the default until another one has been. */
+const YEAR = (i => (i > -1 && /^\d{4}$/.test(process.argv[i + 1] || "")) ? process.argv[i + 1] : "2006")(process.argv.indexOf("--year"));
+const POOL = "wc" + YEAR;
+const OUT = path.join(REPO, "assets", POOL, "index.json");
 const CACHE = path.join(__dirname, "_models");
 const UA = "ball2-tournament/1.0 (personal quiz project)";
 const WRITE = process.argv.includes("--write");
 const WHO = (i => i > -1 ? process.argv[i + 1] : null)(process.argv.indexOf("--who"));
 
-const PAGES = [
-  "2006 FIFA World Cup Group A", "2006 FIFA World Cup Group B",
-  "2006 FIFA World Cup Group C", "2006 FIFA World Cup Group D",
-  "2006 FIFA World Cup Group E", "2006 FIFA World Cup Group F",
-  "2006 FIFA World Cup Group G", "2006 FIFA World Cup Group H",
-  "2006 FIFA World Cup knockout stage",
-];
-const SQUADS = "2006 FIFA World Cup squads";
+/* THE FINAL IS ALWAYS ITS OWN ARTICLE and the knockout page never carries it,
+   so a harvest that stops at the knockout stage is missing the goals from the
+   one match everybody remembers. EXTRAS are the other matches famous enough to
+   have been given a page of their own. */
+const EXTRAS = {
+  "2006": ["Battle of Nuremberg (2006 FIFA World Cup)"],
+};
+const PAGES = "ABCDEFGH".split("").map(g => YEAR + " FIFA World Cup Group " + g)
+  .concat([YEAR + " FIFA World Cup knockout stage", YEAR + " FIFA World Cup final"])
+  .concat(EXTRAS[YEAR] || []);
+const SQUADS = YEAR + " FIFA World Cup squads";
 
 /* what the published tournament totals were, so the harvest can be checked
    against something rather than against itself */
-const PUBLISHED = { goals: 147, yellows: 345, reds: 28 };
+/* WHAT EACH TOURNAMENT ACTUALLY PRODUCED, so the harvest is checked against
+   something outside itself rather than against its own arithmetic. A year
+   with no row here simply prints its counts and claims nothing, which is
+   better than comparing 2022 to 2006 and calling the difference a bug. */
+const PUBLISHED_BY_YEAR = {
+  "2006": { goals: 147, yellows: 345, reds: 28 },
+  "2022": { goals: 172, yellows: 227, reds: 4 },
+};
+const PUBLISHED = PUBLISHED_BY_YEAR[YEAR] || null;
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const norm = x => String(x || "").normalize("NFD").replace(/[̀-ͯ]/g, "")
@@ -175,7 +196,7 @@ function goalsIn(tpl) {
 }
 
 (async () => {
-  console.log("reading the nine match pages...");
+  console.log("reading " + PAGES.length + " match pages for " + YEAR + "...");
   let text = "";
   for (const p of PAGES) { text += "\n" + await wikitext(p); }
   console.log("  " + Math.round(text.length / 1024) + "KB of wikitext");
@@ -190,7 +211,7 @@ function goalsIn(tpl) {
     if (man) { man.g += n; man.og += own; }
   }
   console.log("goals: " + goalEvents + " credited, " + ownEvents + " own goals" +
-    "   (the tournament had " + PUBLISHED.goals + " in all)");
+    (PUBLISHED ? "   (the tournament had " + PUBLISHED.goals + " in all)" : ""));
 
   /* ---------- cards and appearances, off the line-up tables ---------- */
   /* a line-up row:  |CM ||'''6''' ||[[Danny Fonseca]] || || {{yel|30}}  */
@@ -206,15 +227,25 @@ function goalsIn(tpl) {
     man.y += ys; man.r += rs; yel += ys; red += rs;
   }
   console.log("line-up rows: " + rows + ", yellows " + yel + ", reds " + red +
-    "   (the tournament had " + PUBLISHED.yellows + " and " + PUBLISHED.reds + ")");
+    (PUBLISHED ? "   (the tournament had " + PUBLISHED.yellows + " and " + PUBLISHED.reds + ")" : ""));
 
   /* ---------- the armband, off the squads page ---------- */
   const sq = await wikitext(SQUADS);
   let caps = 0;
-  for (const m of sq.matchAll(/name\s*=\s*\[\[([^\]|]+)(?:\|[^\]]*)?\]\]\s*\(\s*\[\[Captain/g)) {
-    const man = find(m[1]);
-    if (man) { man.cap = true; caps++; }
-  }
+  /* TWO SPELLINGS OF THE ARMBAND. 2006 puts the link after the name and 2022
+     gives it a field of its own, and both articles carry exactly thirty-two,
+     so finding none is a parser problem rather than a tournament without
+     captains. */
+  const capRx = [
+    /name\s*=\s*\[\[([^\]|]+)(?:\|[^\]]*)?\]\]\s*\(\s*\[\[Captain/g,
+    /name\s*=\s*\[\[([^\]|]+)(?:\|[^\]]*)?\]\][^\n}]*?\bother\s*=\s*\[\[Captain/g,
+  ];
+  const seenCap = new Set();
+  for (const rx of capRx)
+    for (const m of sq.matchAll(rx)) {
+      const man = find(m[1]);
+      if (man && !seenCap.has(man)) { man.cap = true; seenCap.add(man); caps++; }
+    }
   console.log("captains: " + caps + "/32");
 
   if (missed.length) {
@@ -238,16 +269,21 @@ function goalsIn(tpl) {
      squad in the tournament, Trinidad and Tobago, has no scorer at all across
      all twenty-three, and that is why Enforcer exists: every single side has
      somebody who was booked. */
+  /* EVERY SPELLING OF A FORWARD. A squad list says FW and a match report says
+     CF, ST, LW, RW, SS, LF or RF, and after the real elevens landed the second
+     kind is what most of these men carry. */
+  const UP_TOP = ["FW", "CF", "ST", "SS", "LW", "RW", "LF", "RF"];
+  const isFwd = m => UP_TOP.indexOf(m.p.pos) > -1;
   const TRAITS = {
     finisher:  {cost: 2, eligible: m => m.g >= 2,
                 says: "His shot comes off a tier cheaper."},
-    poacher:   {cost: 2, eligible: m => m.p.pos === "FW" && m.g >= 1,
+    poacher:   {cost: 2, eligible: m => isFwd(m) && m.g >= 1,
                 says: "Route one to him is Extreme, not BALL."},
     captain:   {cost: 2, eligible: m => m.cap,
                 says: "Every ball he plays is a tier cheaper."},
     enforcer:  {cost: 1, eligible: m => m.y >= 2 || m.r >= 1,
                 says: "His tackle is a tier cheaper, until he is booked."},
-    keeper:    {cost: 1, eligible: m => m.p.pos === "GK" && m.app >= 1,
+    keeper:    {cost: 1, eligible: m => m.p.pos === "GK" && m.app >= 1,   // GK is GK everywhere
                 says: "His save is a tier cheaper."},
   };
   for (const m of men) {

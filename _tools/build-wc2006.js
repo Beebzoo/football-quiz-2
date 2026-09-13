@@ -31,7 +31,13 @@ const path = require("path");
 const https = require("https");
 
 const REPO = path.join(__dirname, "..");
-const OUT = path.join(REPO, "assets", "wc2006", "index.json");
+/* WHICH TOURNAMENT. Wikipedia has used the same squad and match templates for
+   every World Cup back to 1930, so the year is the only thing that changes.
+   2006 is the default because it is the one whose data has been checked by
+   hand, man by man, and it stays the default until another one has been. */
+const YEAR = (i => (i > -1 && /^\d{4}$/.test(process.argv[i + 1] || "")) ? process.argv[i + 1] : "2006")(process.argv.indexOf("--year"));
+const POOL = "wc" + YEAR;
+const OUT = path.join(REPO, "assets", POOL, "index.json");
 const DRY = process.argv.includes("--dry");
 /* THE USER AGENT IS NOT DECORATION, it is the difference between a build that
    works and one that 429s on every single call.
@@ -141,7 +147,13 @@ function parseSquads(wikitext) {
   heads.forEach((h, i) => {
     const body = wikitext.slice(h.at, i + 1 < heads.length ? heads[i + 1].at : wikitext.length);
     const players = [];
-    for (const inside of templates(body, "National football squad player")) {
+    /* BOTH NAMES. 2006 says National football squad player and 2022 says
+       nat fs g player, with identical fields, so a tool that knows only the
+       first returns zero men for the second and blames the headings. */
+    const rows = [];
+    for (const name of ["National football squad player", "nat fs g player", "nat fs player"])
+      for (const inside of templates(body, name)) rows.push(inside);
+    for (const inside of rows) {
       const f = {};
       /* Split on | at depth zero. BOTH kinds of bracket have to be counted:
          the nested {{birth date}} is the obvious one, but a captain is written
@@ -200,7 +212,12 @@ function pickXI(players) {
      "Sneijder replaces Landzaat" needs a Sneijder to name, and until this the
      deck stored only squad: 23 and threw the other twelve away. Same shape
      build-clubs.js writes, so the app reads both decks the same way. */
-  const bench = players.filter(p => !used.has(p)).sort((a, b) => a.no - b.no).slice(0, 12)
+  /* THE REST OF THE SQUAD, however many that is. It was capped at twelve,
+     which is exactly right for the twenty-three men a 2006 squad had and wrong
+     for the twenty-six a 2022 one has: Caicedo, Molina, Laporte and Frankowski
+     all started matches in Qatar and none of them was in the deck, because they
+     wore high numbers. A squad is a squad. */
+  const bench = players.filter(p => !used.has(p)).sort((a, b) => a.no - b.no)
     .map(p => ({ n: shortName(p.name), full: p.name, no: p.no, pos: p.pos }));
   return { xi, bench };
 }
@@ -208,7 +225,7 @@ function pickXI(players) {
 (async () => {
   console.log("fetching the squads...");
   const raw = await get("https://en.wikipedia.org/w/api.php?action=parse" +
-    "&page=2006%20FIFA%20World%20Cup%20squads&prop=wikitext&format=json&formatversion=2");
+    "&page=" + encodeURIComponent(YEAR + " FIFA World Cup squads") + "&prop=wikitext&format=json&formatversion=2");
   const wikitext = JSON.parse(raw).parse.wikitext;
 
   const teams = parseSquads(wikitext);
@@ -432,6 +449,12 @@ function pickXI(players) {
     if (!v.flag) problems.push(c + ": no flag");
     if (!/^[A-Z]{3}$/.test(v.abbr || "")) problems.push(c + ": '" + v.abbr + "' is not a country code");
     if (!v.xi || v.xi.length !== 11) problems.push(c + ": not eleven men");
+  }
+  /* AN EMPTY POOL IS WORSE THAN NO POOL. It ships a quiz that offers a pitch
+     with nobody on it, and it looks like a successful run. */
+  if (!Object.keys(out).length) {
+    console.error("\nnothing was parsed, so nothing is written. Check the article's template names.");
+    process.exit(1);
   }
   if (problems.length && !process.argv.includes("--force")) {
     console.log("\nNOT WRITING. " + problems.length + " problem(s):");

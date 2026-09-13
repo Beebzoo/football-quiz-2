@@ -33,7 +33,12 @@ const fs = require("fs");
 const path = require("path");
 
 const REPO = path.join(__dirname, "..");
-const DECK = path.join(REPO, "assets", "wc2006", "index.json");
+/* WHICH POOL. The harvest is identical for every one of them: resolve each man
+   to a Wikidata item through the article his own squad page links him from,
+   ask for his club spells, map each club's country to a deck. Only the file
+   and the squad page change. */
+const POOL = (i => (i > -1 && process.argv[i + 1]) ? process.argv[i + 1] : "wc2006")(process.argv.indexOf("--pool"));
+const DECK = path.join(REPO, "assets", POOL, "index.json");
 const MODELS = path.join(__dirname, "_models");
 const UA = "BALL2-quiz-build/1.0 (https://github.com/Beebzoo/football-quiz-2; personal hobby project)";
 const WD = "https://www.wikidata.org/w/api.php";
@@ -137,9 +142,12 @@ for (const side of Object.keys(sides)) {
 console.log(men.length + " men across " + Object.keys(sides).length + " sides");
 
 /* ---------- 1b. the squad lists, which link every man to his own article ---------- */
+/* THE SQUAD PAGE FOR THIS POOL. Resolution goes through the article the squad
+   page links each man from, which is the whole reason this harvest is exact
+   rather than a name search, so it has to be that tournament's own page. */
 const SQUAD_PAGES = [
-  "2006 FIFA World Cup squads",
-];
+  /^wc\d{4}$/.test(POOL) ? POOL.slice(2) + " FIFA World Cup squads" : null,
+].filter(Boolean);
 async function wikitext(title){
   const key = "mlw-" + require("crypto").createHash("sha1").update(title).digest("hex").slice(0, 16) + ".json";
   const hit = cacheRead(key);
@@ -455,7 +463,11 @@ async function entities(ids) {
   /* A STRIKE THAT FIRES AT NOTHING IS FOLKLORE. Either Wikidata fixed the
      claim or we fixed the resolver, and either way the entry should go rather
      than sit there teaching the next reader something untrue. */
-  const idle = Object.keys(STRIKE).filter(n => !struck[n]);
+  /* ONLY THE MEN IN THIS POOL. A strike written for a 2006 man matches
+     nothing in a 2022 harvest, which is not staleness, it is a different
+     tournament. Saying so would train the next reader to ignore the warning. */
+  const here = new Set(men.map(m => m.full));
+  const idle = Object.keys(STRIKE).filter(n => here.has(n) && !struck[n]);
   if (Object.keys(struck).length)
     console.log("\nstruck: " + Object.entries(struck).map(([n, ids]) => n + " (" + ids.join(", ") + ")").join(", "));
   if (idle.length)
