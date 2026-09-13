@@ -6646,7 +6646,30 @@ let h2From = null;
 function h2FromPush(i, mine, vx, vy){ (h2From = h2From || []).push({i: i, mine: mine, vx: vx, vy: vy}); }
 const H2_RUN_MS = 1400;
 const H2_OUT_MS = 950;              // the run onto a ball, and the jog back
-const H2_RUNNERS = {8: true, 9: true, 10: true};
+/* Who goes, and therefore who stays: running and holding are the same
+   decision, so taking a man out of here takes away both. The front three and
+   the two midfielders; the six sits, and the back four hold the shape. */
+const H2_RUNNERS = {6: true, 7: true, 8: true, 9: true, 10: true};
+const H2_PUSH    = 12;              // how far a midfielder drives off his man
+
+/* THE MAN OF THEIRS STANDING NEAREST ONE OF OURS. Both elevens are the same
+   shape, so this is a fact about the formation rather than about the match:
+   the eight is shadowed by their ten and the ten by their eight, always.
+
+   READ OFF THE SHAPE, NEVER OFF THE MARKS. The marks are the one secret in
+   this mode, and a run that changed shape depending on whether he happened to
+   be marked would announce it as loudly as a caption. This function cannot
+   see them, which is the point of it being a function of H2_SQUAD alone. */
+function h2Shadow(i){
+  const me = H2_SQUAD[i];
+  let best = 0, bd = Infinity;
+  H2_SQUAD.forEach((p, j) => {
+    const dx = (100 - p.x) - me.x, dy = ((100 - p.y) - me.y) * 1.3;
+    const d = Math.hypot(dx, dy);
+    if(d < bd){ bd = d; best = j; }
+  });
+  return best;
+}
 /* the receiving spot for man i, in the view of a side drawn defending the
    bottom (mine) or the top (theirs) */
 function h2RunSpot(i, mine){
@@ -6654,6 +6677,18 @@ function h2RunSpot(i, mine){
   if(i === 9){ x = 50; y = 100 - H2_SQUAD[1].y - 5; }
   else if(i === 8){ x = 100 - H2_SQUAD[4].x - 6; y = 100 - H2_SQUAD[4].y - 5; }
   else if(i === 10){ x = 100 - H2_SQUAD[3].x + 6; y = 100 - H2_SQUAD[3].y - 5; }
+  else if(i === 6 || i === 7){
+    /* Midfield does not run into a gap, it runs off a shoulder. The direction
+       is simply away from the man shadowing him, and because that man is the
+       one tucked in behind, away IS forward: the eight drives into the left
+       half-space and the ten into the right one, three or four yards off his
+       marker and about nine up the pitch. */
+    const me = H2_SQUAD[i], m = H2_SQUAD[h2Shadow(i)];
+    const ux = me.x - (100 - m.x), uy = (me.y - (100 - m.y)) * 1.3;
+    const L = Math.hypot(ux, uy) || 1;
+    x = Math.round(me.x + (ux / L) * H2_PUSH);
+    y = Math.round(me.y + (uy / L) * H2_PUSH / 1.3);
+  }
   else return null;
   return mine ? {x: x, y: y} : {x: 100 - x, y: 100 - y};
 }

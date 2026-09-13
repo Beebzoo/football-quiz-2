@@ -114,13 +114,25 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   await place(0, TEN);
   await play(ST, true);
   await tick(60);
-  run(app, "h2Select(" + TEN + "); h2Play(); h2Reveal(); h2Judge(true);"); await tick(60);
-  check("the ball goes back to the ten", H("at") === TEN && H("who") === 0, H("at"));
-  check("the hold is dropped", H("adv") === null, JSON.stringify(H("adv")));
+  run(app, "h2Select(" + SIX + "); h2Play(); h2Reveal(); h2Judge(true);"); await tick(60);
+  check("the ball goes back to the six", H("at") === SIX && H("who") === 0, H("at"));
+  check("the hold is dropped, because the six stands still", H("adv") === null, JSON.stringify(H("adv")));
   let back = manEl(ST, true);
   check("and he jogs back into the shape", / moved[ "]/.test(back) && back.includes("left:50%;top:21%"), back);
   check("from where he was standing", back.includes("--ox:50%;--oy:13%"), back);
   check("the ball left from up there, not from his spot", ballEl().includes("--fx:54.2%;--fy:13%"), ballEl());
+
+  console.log("\n--- or hands it to the next man who runs ---");
+  await start();
+  await place(0, TEN);
+  await play(ST, true);
+  await tick(60);
+  run(app, "h2Select(" + TEN + "); h2Play(); h2Reveal(); h2Judge(true);"); await tick(60);
+  check("the striker's hold is gone", H("adv.i") !== ST, JSON.stringify(H("adv")));
+  check("and the ten has one of his own", H("adv.i") === TEN && H("adv.y") === 31, JSON.stringify(H("adv")));
+  check("the striker drops back", / moved[ "]/.test(manEl(ST, true)) && manEl(ST, true).includes("left:50%;top:21%"), manEl(ST, true));
+  check("as the ten comes off his man", / moved[ "]/.test(manEl(TEN, true)) && manEl(TEN, true).includes("left:61%;top:31%"), manEl(TEN, true));
+  check("only one man is ever holding", ev(app, "typeof S.h2h.adv") === "object", ev(app, "typeof S.h2h.adv"));
 
   console.log("\n--- or when he loses it up there ---");
   await start();
@@ -134,6 +146,54 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   check("and he jogs back as one of theirs now, mirrored",
     / moved[ "]/.test(back) && back.includes("--ox:50%;--oy:87%"), back);
   check("into his spot the same way round", back.includes("left:50%;top:79%"), back);
+
+  console.log("\n--- the eight and the ten come off their man ---");
+  await start();
+  await place(0, SIX);
+  await play(EIGHT, true);
+  me = manEl(EIGHT, true);
+  check("the eight drives off the man shadowing him", me.includes("left:30%;top:43%"), me);
+  check("out of his own spot", me.includes("--ox:33%;--oy:52%"), me);
+  check("and he stays there", H("adv.i") === EIGHT && H("adv.x") === 30 && H("adv.y") === 43, JSON.stringify(H("adv")));
+  check("the man he came off is their ten", ev(app, "h2Shadow(" + EIGHT + ")") === TEN, ev(app, "h2Shadow(" + EIGHT + ")"));
+  /* THE RUN MUST NOT KNOW ABOUT THE MARKS. It is read off the shape, so a man
+     who is being marked runs exactly as a man who is not; anything else would
+     announce the one secret this mode has. */
+  run(app, "S.h2h.marks = [" + EIGHT + ", " + TEN + "]; S.h2h.markedAgainst = 0;");
+  check("and the shadow is the same whether he is marked or not",
+    ev(app, "h2Shadow(" + EIGHT + ")") === TEN && ev(app, "h2RunSpot(" + EIGHT + ", true).y") === 43,
+    ev(app, "h2Shadow(" + EIGHT + ")"));
+
+  await start();
+  await place(0, SIX);
+  await play(TEN, true);
+  me = manEl(TEN, true);
+  check("the ten does the same the other way", me.includes("left:61%;top:31%"), me);
+  check("out of his own spot", me.includes("--ox:64%;--oy:40%"), me);
+  check("off their eight", ev(app, "h2Shadow(" + TEN + ")") === EIGHT, ev(app, "h2Shadow(" + TEN + ")"));
+  check("the six does not run, he sits", ev(app, "h2RunSpot(" + SIX + ", true)") === null, "the six ran");
+  check("and neither does a centre-back", ev(app, "h2RunSpot(" + LCB + ", true)") === null, "a centre-back ran");
+
+  console.log("\n--- what the midfield hold is worth, which is NOT nothing ---");
+  /* The front three hold is free: their ball is backwards or square from
+     anywhere. These two carry the ball INTO the ladder, so the next ball is
+     genuinely shorter and the ladder says so. Pinned here because it is a
+     balance decision rather than an accident. H2_PUSH is the dial. */
+  check("the ten's ball to the striker is Easy from up there",
+    ev(app, "h2TierFor(" + TEN + ", " + ST + ")") === "easy", ev(app, "h2TierFor(" + TEN + ", " + ST + ")"));
+  run(app, "S.h2h.adv = null;");
+  check("and Normal from his spot, as it always was",
+    ev(app, "h2TierFor(" + TEN + ", " + ST + ")") === "normal", ev(app, "h2TierFor(" + TEN + ", " + ST + ")"));
+  run(app, "S.h2h.adv = {w:0, i:" + EIGHT + ", x:30, y:43, line:4};");
+  check("the eight's ball into the front three is Normal from up there",
+    ev(app, "h2TierFor(" + EIGHT + ", " + ST + ")") === "normal" &&
+    ev(app, "h2TierFor(" + EIGHT + ", " + LW + ")") === "normal", ev(app, "h2TierFor(" + EIGHT + ", " + ST + ")"));
+  run(app, "S.h2h.adv = null;");
+  check("and Hard from his spot, as it always was",
+    ev(app, "h2TierFor(" + EIGHT + ", " + ST + ")") === "hard", ev(app, "h2TierFor(" + EIGHT + ", " + ST + ")"));
+  /* and the thing that stops it running away with the game */
+  check("every one of those cheaper balls is one the press counts",
+    ev(app, "H2_SAFE.includes('easy') && H2_SAFE.includes('normal')") === true, "the press would not see them");
 
   console.log("\n--- the wingers' runs ---");
   await start();
