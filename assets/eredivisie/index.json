@@ -7,7 +7,8 @@
   },
   {
    "q": "The Ajax club museum is housed inside which building?",
-   "a": "The Johan Cruyff Arena, Ajax's own stadium"
+   "a": "The Johan Cruyff Arena, Ajax's own stadium",
+   "cat": "grounds"
   },
   {
    "q": "Which African country does the former Ajax goalkeeper Andre Onana play for?",
@@ -23,7 +24,8 @@
    "q": "Ajax lost the 2017 Europa League final. In which Scandinavian capital was it played?",
    "a": "Stockholm",
    "sub": "At the Friends Arena in Solna, just outside the city.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "europe"
   },
   {
    "q": "What is the name of PSV's reserve team, which joined the Eerste Divisie in 2013?",
@@ -32,7 +34,8 @@
   {
    "q": "PSV's training ground and academy is called De Herdgang. In which city is it?",
    "a": "Eindhoven",
-   "club": "psv"
+   "club": "psv",
+   "cat": "grounds"
   },
   {
    "q": "PSV keep the number 12 shirt out of use. Who is it reserved for?",
@@ -42,22 +45,26 @@
   {
    "q": "PSV's home city of Eindhoven lies in which Dutch province?",
    "a": "North Brabant",
-   "club": "psv"
+   "club": "psv",
+   "cat": "grounds"
   },
   {
    "q": "Which English club did Feyenoord beat 1-0 at De Kuip in the Europa League in September 2016?",
    "a": "Manchester United",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "europe"
   },
   {
    "q": "Feyenoord are named after the Rotterdam district they were founded in. What is the district called?",
    "a": "Feijenoord",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "records"
   },
   {
    "q": "Which country was Ernst Happel, the coach who won Feyenoord the 1970 European Cup, from?",
    "a": "Austria",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "managers"
   },
   {
    "q": "Feyenoord's supporters call themselves Het Legioen. What does that mean in English?",
@@ -73,99 +80,119 @@
   {
    "q": "Which club won the 2007-08 Eredivisie, a fourth straight title for the Eindhoven side?",
    "a": "PSV",
-   "sub": "Sef Vergoossen finished the job after Ronald Koeman walked out for Valencia in October."
+   "sub": "Sef Vergoossen finished the job after Ronald Koeman walked out for Valencia in October.",
+   "cat": "champions"
   },
   {
    "q": "Which Amsterdam club finished one point behind FC Twente as runners-up in 2009-10?",
    "a": "Ajax",
-   "club": "twente"
+   "club": "twente",
+   "cat": "champions"
   },
   {
    "q": "Which Rotterdam club finished second to Ajax in 2011-12, Ronald Koeman's first season as their coach?",
    "a": "Feyenoord",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "champions"
   },
   {
    "q": "Who captained Feyenoord to the 2016-17 title in his final season as a player?",
    "a": "Dirk Kuyt",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "champions"
   },
   {
    "q": "Feyenoord clinched the 2016-17 title with a 3-1 home win over which club from Almelo?",
    "a": "Heracles Almelo",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "champions"
   },
   {
    "q": "Which Frisian club won the 2009 KNVB Cup, beating FC Twente on penalties after a 2-2 draw?",
    "a": "sc Heerenveen",
-   "club": "twente"
+   "club": "twente",
+   "cat": "cups"
   },
   {
    "q": "Feyenoord won the KNVB Cup in 2016 and again in 2018. Who was their head coach both times?",
    "a": "Giovanni van Bronckhorst",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "managers"
   },
   {
    "q": "Which club won the Johan Cruijff Schaal in both 2015 and 2016 under Phillip Cocu?",
-   "a": "PSV"
+   "a": "PSV",
+   "cat": "cups"
   },
   {
    "q": "Which Dutch legend, a three-time Ballon d'Or winner, coached Ajax in 2008-09 and resigned at the end of the season?",
    "a": "Marco van Basten",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "managers"
   },
   {
    "q": "Peter Bosz left Ajax in the summer of 2017 for which German club?",
    "a": "Borussia Dortmund",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "managers"
   },
   {
    "q": "Bert van Marwijk left Feyenoord in 2008 to take which job?",
    "a": "Netherlands national team coach",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "managers"
   },
   {
    "q": "Which Spanish giant signed Klaas-Jan Huntelaar from Ajax in January 2009?",
    "a": "Real Madrid",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Which Belgian defender left Ajax for Tottenham in 2012?",
    "a": "Jan Vertonghen",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Who captained PSV to the 2014-15 title, their first since 2008?",
    "a": "Georginio Wijnaldum",
-   "club": "psv"
+   "club": "psv",
+   "cat": "champions"
   },
   {
    "q": "Which Ajax goalkeeper joined Barcelona in 2016?",
    "a": "Jasper Cillessen",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Robin van Persie rejoined Feyenoord in January 2018 from which Turkish club?",
    "a": "Fenerbahçe",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "transfers"
   },
   {
    "q": "Which Hungarian winger starred for PSV from 2008 to 2011?",
    "a": "Balázs Dzsudzsák",
-   "club": "psv"
+   "club": "psv",
+   "cat": "imports"
   },
   {
    "q": "Which Dutch club plays its home games in The Hague?",
-   "a": "ADO Den Haag"
+   "a": "ADO Den Haag",
+   "cat": "grounds"
   },
   {
    "q": "What was the Johan Cruijff ArenA called before it was renamed in 2018?",
-   "a": "The Amsterdam ArenA"
+   "a": "The Amsterdam ArenA",
+   "cat": "grounds"
   },
   {
    "q": "Which brewery gives its name to FC Twente's stadium, De Grolsch Veste?",
    "a": "Grolsch",
-   "club": "twente"
+   "club": "twente",
+   "cat": "grounds"
   },
   {
    "q": "Which three colours make up the Willem II shirt, earning them the nickname the Tricolores?",
@@ -185,7 +212,8 @@
   {
    "q": "Which bird gives ADO Den Haag their nickname De Ooievaars, taken from the city's coat of arms?",
    "a": "The stork",
-   "club": "ado-den-haag"
+   "club": "ado-den-haag",
+   "cat": "records"
   },
   {
    "q": "Which two colours do NAC Breda wear at home?",
@@ -201,139 +229,166 @@
    "q": "Which Ajax striker was Eredivisie top scorer four seasons running from 1983-84 to 1986-87?",
    "a": "Marco van Basten",
    "sub": "37 goals in 1985-86 alone.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "scorers"
   },
   {
    "q": "Which Brazilian was Eredivisie top scorer with PSV in both 1988-89 and 1989-90?",
    "a": "Romário",
    "sub": "He shared the 1990-91 prize with Dennis Bergkamp too, both on 25.",
-   "club": "psv"
+   "club": "psv",
+   "cat": "scorers"
   },
   {
    "q": "Dennis Bergkamp was Eredivisie top scorer in 1991-92 and 1992-93 with which club?",
-   "a": "Ajax"
+   "a": "Ajax",
+   "cat": "scorers"
   },
   {
    "q": "Ruud van Nistelrooy was Eredivisie top scorer in 1998-99 and 1999-2000 with which club?",
-   "a": "PSV"
+   "a": "PSV",
+   "cat": "scorers"
   },
   {
    "q": "Which club won the 2001-02 Eredivisie and KNVB Cup double under Ronald Koeman?",
-   "a": "Ajax"
+   "a": "Ajax",
+   "cat": "champions"
   },
   {
    "q": "Which club won the Eredivisie in 1999-2000 and 2000-01 under the Belgian coach Eric Gerets?",
-   "a": "PSV"
+   "a": "PSV",
+   "cat": "champions"
   },
   {
    "q": "Which club won the 2005-06 Eredivisie, Guus Hiddink's last season in charge?",
-   "a": "PSV"
+   "a": "PSV",
+   "cat": "champions"
   },
   {
    "q": "Which club won the 1989-90 Eredivisie under Leo Beenhakker?",
-   "a": "Ajax"
+   "a": "Ajax",
+   "cat": "champions"
   },
   {
    "q": "Which club won the 1992-93 Eredivisie, their first title since Cruyff's 1984 double?",
-   "a": "Feyenoord"
+   "a": "Feyenoord",
+   "cat": "champions"
   },
   {
    "q": "Which future three-time Ballon d'Or winner was Eredivisie top scorer in 1966-67 with 33 goals for Ajax?",
    "a": "Johan Cruyff",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "scorers"
   },
   {
    "q": "Which club won the 1997-98 Eredivisie and KNVB Cup double?",
-   "a": "Ajax"
+   "a": "Ajax",
+   "cat": "champions"
   },
   {
    "q": "Johan Neeskens left Ajax in 1974 to join Cruyff and Michels at which club?",
    "a": "Barcelona",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Which Uruguayan scored twice for Ajax at De Kuip in the second leg of the 2010 KNVB Cup final?",
    "a": "Luis Suárez",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "cups"
   },
   {
    "q": "Which Ajax striker was Eredivisie top scorer in 2007-08 with 33 goals?",
    "a": "Klaas-Jan Huntelaar",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "scorers"
   },
   {
    "q": "Which of these won the Eredivisie between 2007-08 and 2017-18: Heerenveen, AZ or Vitesse?",
    "a": "AZ",
-   "club": "sc-heerenveen"
+   "club": "sc-heerenveen",
+   "cat": "champions"
   },
   {
    "q": "Which of these won the KNVB Cup between 2008 and 2018: NEC, PEC Zwolle or Roda JC?",
    "a": "PEC Zwolle",
-   "club": "nec-nijmegen"
+   "club": "nec-nijmegen",
+   "cat": "cups"
   },
   {
    "q": "Ajax finished second four seasons running from 2014-15 to 2017-18. Which club won three of those four titles?",
    "a": "PSV",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "champions"
   },
   {
    "q": "Which club finished as runners-up to Ajax in the 2018-19 Eredivisie?",
    "a": "PSV",
    "sub": "Ajax finished on 86 points, PSV on 83.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "champions"
   },
   {
    "q": "Feyenoord clinched the 2022-23 title at De Kuip with a 3-0 win over which Deventer club?",
    "a": "Go Ahead Eagles",
    "sub": "It was Feyenoord's first title since 2017.",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "champions"
   },
   {
    "q": "Which club won the 2023-24 Eredivisie with a then record 91 points?",
    "a": "PSV",
-   "sub": "It was PSV's 25th league title."
+   "sub": "It was PSV's 25th league title.",
+   "cat": "champions"
   },
   {
    "q": "Which Rotterdam club finished second to PSV in the 2025-26 Eredivisie?",
    "a": "Feyenoord",
    "sub": "PSV won it by 19 points.",
-   "club": "psv"
+   "club": "psv",
+   "cat": "champions"
   },
   {
    "q": "Which club finished one point behind PSV in the 2024-25 Eredivisie?",
    "a": "Ajax",
    "sub": "79 points to 78.",
-   "club": "psv"
+   "club": "psv",
+   "cat": "champions"
   },
   {
    "q": "Which Italian club signed Santiago Gimenez from Feyenoord in February 2025?",
    "a": "AC Milan",
    "sub": "The fee was reported at 32 million euros.",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "transfers"
   },
   {
    "q": "Which English club signed Mohammed Kudus from Ajax in 2023?",
    "a": "West Ham United",
    "sub": "44.5 million euros plus add-ons.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Which English club did Ajax sign Steven Bergwijn from in 2022?",
    "a": "Tottenham Hotspur",
    "sub": "He had left PSV for Spurs two and a half years earlier.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Which Italian club signed Noa Lang from PSV in 2025?",
    "a": "Napoli",
    "sub": "A reported 25 million euros.",
-   "club": "psv"
+   "club": "psv",
+   "cat": "transfers"
   },
   {
    "q": "Which club did Feyenoord sign Sem Steijn from in 2025?",
    "a": "FC Twente",
    "sub": "He had just been the league's top scorer.",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "transfers"
   },
   {
    "q": "In which month does the Eredivisie normally take its winter break?",
@@ -359,11 +414,13 @@
   },
   {
    "q": "A crowd of 65,150 watched an Eredivisie match in 1969-70, the biggest the league had seen. Which two clubs were playing?",
-   "a": "Feyenoord and Ajax"
+   "a": "Feyenoord and Ajax",
+   "cat": "records"
   },
   {
    "q": "Which club led the Eredivisie table from the first round to the last in 2016-17?",
-   "a": "Feyenoord"
+   "a": "Feyenoord",
+   "cat": "records"
   },
   {
    "q": "What is the Dutch name for the play-offs held after the regular Eredivisie season?",
@@ -372,7 +429,8 @@
   {
    "q": "Which club won 30 of its 34 matches in 1971-72, losing only once?",
    "a": "Ajax",
-   "sub": "They also conceded just 20 goals all season."
+   "sub": "They also conceded just 20 goals all season.",
+   "cat": "records"
   },
   {
    "q": "From which season was the video assistant referee used in every Eredivisie match?",
@@ -389,11 +447,13 @@
   {
    "q": "Which club scored 112 league goals in 1997-98?",
    "a": "Ajax",
-   "sub": "They conceded just 22 goals in the same season."
+   "sub": "They conceded just 22 goals in the same season.",
+   "cat": "records"
   },
   {
    "q": "Which club was Luis Suárez playing for when he scored 35 Eredivisie goals in 2009-10?",
-   "a": "Ajax"
+   "a": "Ajax",
+   "cat": "scorers"
   },
   {
    "q": "Which club had André Onana in goal when he was voted the least beaten keeper of both 2016-17 and 2017-18?",
@@ -422,27 +482,32 @@
   },
   {
    "q": "Which club is nicknamed Het Andere Oranje, the other orange, because of its shirt?",
-   "a": "FC Volendam"
+   "a": "FC Volendam",
+   "cat": "records"
   },
   {
    "q": "Vitesse's name is the French word for what?",
    "a": "Speed",
-   "club": "vitesse"
+   "club": "vitesse",
+   "cat": "records"
   },
   {
    "q": "Feyenoord take their name from what?",
    "a": "The Rotterdam district of Feijenoord",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "records"
   },
   {
    "q": "Excelsior Rotterdam's name is a Latin word meaning what?",
    "a": "Higher",
-   "club": "excelsior-rotterdam"
+   "club": "excelsior-rotterdam",
+   "cat": "records"
   },
   {
    "q": "Excelsior's fans and players are known as the Kralingers. Why?",
    "a": "The club is based in the Kralingen district of Rotterdam",
-   "club": "excelsior-rotterdam"
+   "club": "excelsior-rotterdam",
+   "cat": "records"
   },
   {
    "q": "Which fishing town produced the Ajax brothers Gerrie and Arnold Mühren?",
@@ -452,22 +517,26 @@
   {
    "q": "Which striker was Ajax's leading Eredivisie scorer in the 2010-11 title season, with 13 goals?",
    "a": "Mounir El Hamdaoui",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "champions"
   },
   {
    "q": "Ajax sealed the 2012-13 title on 5 May 2013 with a 5-0 home win over which Tilburg club?",
    "a": "Willem II",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "champions"
   },
   {
    "q": "Who officially opened the Amsterdam ArenA, Ajax's new home, in August 1996?",
    "a": "Queen Beatrix",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "grounds"
   },
   {
    "q": "Ajax played the first match at their new Amsterdam ArenA in 1996 against which Italian club?",
    "a": "AC Milan, who won 3-0",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "grounds"
   },
   {
    "q": "Which Uruguayan wore the Ajax captain's armband from 2009 until his move to Liverpool in 2011?",
@@ -477,44 +546,52 @@
   {
    "q": "Which Ajax coach resigned in May 2016 after two straight runner-up finishes behind PSV?",
    "a": "Frank de Boer",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "managers"
   },
   {
    "q": "Which former Ajax goalkeeper became the club's chief executive in late 2016?",
    "a": "Edwin van der Sar",
    "sub": "He had joined the Ajax board as marketing director in 2012.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "stories"
   },
   {
    "q": "Ajax's 2013-14 championship was a first in the club's long history. Why?",
    "a": "It was their fourth Eredivisie title in a row",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "champions"
   },
   {
    "q": "Which two former Ajax players were put on the board after Johan Cruyff won the 2011 power struggle?",
    "a": "Edwin van der Sar and Marc Overmars",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "stories"
   },
   {
    "q": "Which Danish playmaker, a former Barcelona and Real Madrid star, joined Ajax in 1997?",
    "a": "Michael Laudrup",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "In which year did Ajax open their training and academy complex De Toekomst?",
    "a": "1996",
    "sub": "The same year the club moved into the Amsterdam ArenA.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "grounds"
   },
   {
    "q": "Which Italian club beat Ajax 6-1 in Amsterdam in 2022, the club's heaviest European defeat?",
    "a": "Napoli",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "europe"
   },
   {
    "q": "Which goalkeeper saved the decisive penalty as PSV won the 1988 European Cup shoot-out?",
    "a": "Hans van Breukelen",
-   "club": "psv"
+   "club": "psv",
+   "cat": "europe"
   },
   {
    "q": "Which Belgian defender captained PSV in the 1988 European Cup final?",
@@ -534,7 +611,8 @@
   {
    "q": "Short of money in 2011, PSV sold the land under the Philips Stadion. Who bought it?",
    "a": "The city of Eindhoven",
-   "club": "psv"
+   "club": "psv",
+   "cat": "stories"
   },
   {
    "q": "Philips gave up the PSV shirt sponsorship in 2016. Which Dutch energy company took over?",
@@ -549,7 +627,8 @@
   {
    "q": "Which PSV forward played 528 league matches and scored 308 league goals between 1964 and 1981?",
    "a": "Willy van der Kuijlen",
-   "club": "psv"
+   "club": "psv",
+   "cat": "records"
   },
   {
    "q": "Which PSV midfielder wore the captain's armband in 2010, the year he left for Barcelona?",
@@ -564,31 +643,37 @@
   {
    "q": "Which Italian striker scored 27 goals in 29 matches on loan at Feyenoord in 2012-13?",
    "a": "Graziano Pelle",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "transfers"
   },
   {
    "q": "Which former Netherlands coach was Feyenoord's technical director from 2009 until he resigned in January 2011?",
    "a": "Leo Beenhakker",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "stories"
   },
   {
    "q": "Which Italian club did Feyenoord sign the striker Graziano Pelle from?",
    "a": "Parma",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "transfers"
   },
   {
    "q": "Which manager turned Feyenoord down in 2011 before Ronald Koeman took the job?",
    "a": "Louis van Gaal",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "managers"
   },
   {
    "q": "Taking the Feyenoord job in 2011 made Ronald Koeman unique in Dutch football. Why?",
-   "a": "He had now played for and managed all three of Ajax, PSV and Feyenoord"
+   "a": "He had now played for and managed all three of Ajax, PSV and Feyenoord",
+   "cat": "managers"
   },
   {
    "q": "Feyenoord made the worst start in their history in 2013-14, losing the first three. Name any of the three winners.",
    "a": "PEC Zwolle, FC Twente or Ajax",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "records"
   },
   {
    "q": "Feyenoord played their 2016-17 European home matches in a half empty De Kuip. Why?",
@@ -598,17 +683,20 @@
   {
    "q": "In 2016-17 Feyenoord became only the second club ever to do what in the Eredivisie?",
    "a": "Lead the table from the first day to the last",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "champions"
   },
   {
    "q": "Which Feyenoord coach resigned in October 2019 straight after a 4-0 defeat at Ajax?",
    "a": "Jaap Stam",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "managers"
   },
   {
    "q": "Which club ended PSV's run of thirteen straight wins at the start of the 2018-19 Eredivisie?",
    "a": "Feyenoord",
-   "club": "psv"
+   "club": "psv",
+   "cat": "records"
   },
   {
    "q": "Ajax ran a feeder club in South Africa for many years. What was it called?",
@@ -622,646 +710,772 @@
   {
    "q": "Steve McClaren's FC Twente clinched the 2009-10 title on the final day with a 2-0 win away at which club?",
    "a": "NAC Breda",
-   "club": "twente"
+   "club": "twente",
+   "cat": "champions"
   },
   {
    "q": "Which club finished as runners-up to AZ in 2008-09, a year before winning the title themselves?",
    "a": "FC Twente",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "champions"
   },
   {
    "q": "On the final day of 2010-11, Ajax beat which club 3-1 in a straight shoot-out for the title?",
    "a": "FC Twente",
    "sub": "Ajax's 30th title, the first of Frank de Boer's four in a row.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "champions"
   },
   {
    "q": "Which club finished second in 2016-17, a single point behind champions Feyenoord?",
    "a": "Ajax",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "champions"
   },
   {
    "q": "Which club finished as runners-up to PSV in 2017-18?",
    "a": "Ajax",
-   "club": "psv"
+   "club": "psv",
+   "cat": "champions"
   },
   {
    "q": "Which club did Ajax beat 6-1 on aggregate in the two-legged 2010 KNVB Cup final?",
    "a": "Feyenoord",
    "sub": "Two legs because away fans were banned from the Klassieker at the time.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "cups"
   },
   {
    "q": "Which club won the 2008 KNVB Cup, beating Roda JC 2-0 in the final at their own De Kuip?",
    "a": "Feyenoord",
-   "club": "roda-jc-kerkrade"
+   "club": "roda-jc-kerkrade",
+   "cat": "cups"
   },
   {
    "q": "Which club won the 2012 KNVB Cup final 3-0 against Heracles Almelo?",
    "a": "PSV",
-   "club": "heracles-almelo"
+   "club": "heracles-almelo",
+   "cat": "cups"
   },
   {
    "q": "Which club won the 2007 Johan Cruijff Schaal, beating champions PSV 1-0?",
    "a": "Ajax",
-   "club": "psv"
+   "club": "psv",
+   "cat": "cups"
   },
   {
    "q": "Which club won the 2010 Johan Cruijff Schaal, beating Ajax 1-0 in their first outing as champions?",
    "a": "FC Twente",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "cups"
   },
   {
    "q": "Which club won the 2018 Johan Cruijff Schaal on penalties against PSV, in Eindhoven?",
    "a": "Feyenoord",
-   "club": "psv"
+   "club": "psv",
+   "cat": "cups"
   },
   {
    "q": "Which manager did Frank de Boer replace at Ajax in December 2010?",
    "a": "Martin Jol",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "managers"
   },
   {
    "q": "Steve McClaren left FC Twente straight after the 2010 title to manage which German club?",
    "a": "VfL Wolfsburg",
-   "club": "twente"
+   "club": "twente",
+   "cat": "managers"
   },
   {
    "q": "Ronald Koeman walked out on PSV in October 2007 to coach which Spanish club?",
    "a": "Valencia",
-   "club": "psv"
+   "club": "psv",
+   "cat": "managers"
   },
   {
    "q": "Which club sacked Ronald Koeman in December 2009, months after he had replaced Louis van Gaal?",
    "a": "AZ",
-   "sub": "Seven defeats in his first sixteen league games as champions."
+   "sub": "Seven defeats in his first sixteen league games as champions.",
+   "cat": "managers"
   },
   {
    "q": "Which veteran coach took charge of PSV for the 2012-13 season, before Phillip Cocu took over?",
    "a": "Dick Advocaat",
-   "club": "psv"
+   "club": "psv",
+   "cat": "managers"
   },
   {
    "q": "Phillip Cocu left PSV after the 2017-18 title to coach which Turkish club?",
    "a": "Fenerbahçe",
    "sub": "He lasted four months there.",
-   "club": "psv"
+   "club": "psv",
+   "cat": "managers"
   },
   {
    "q": "Toby Alderweireld left Ajax in 2013 for which Spanish club?",
    "a": "Atlético Madrid",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Kevin Strootman left PSV in 2013 for which Italian club?",
    "a": "Roma",
-   "club": "psv"
+   "club": "psv",
+   "cat": "transfers"
   },
   {
    "q": "Stefan de Vrij left Feyenoord in 2014 for which Italian club?",
    "a": "Lazio",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "transfers"
   },
   {
    "q": "Bruno Martins Indi left Feyenoord in 2014 for which Portuguese club?",
    "a": "Porto",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "transfers"
   },
   {
    "q": "Arkadiusz Milik left Ajax in 2016 for which Italian club?",
    "a": "Napoli",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Davy Klaassen left Ajax in 2017 for which English club?",
    "a": "Everton",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Which club won the 1996-97 Eredivisie under Dick Advocaat?",
-   "a": "PSV"
+   "a": "PSV",
+   "cat": "champions"
   },
   {
    "q": "Which club won the 1974-75 Eredivisie, the first of three titles under Kees Rijvers?",
-   "a": "PSV"
+   "a": "PSV",
+   "cat": "champions"
   },
   {
    "q": "Which club finished second to Ajax in 2012-13 under Dick Advocaat?",
    "a": "PSV",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "champions"
   },
   {
    "q": "Which club finished second to Ajax in 2013-14, the last of the four straight Ajax titles?",
    "a": "Feyenoord",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "champions"
   },
   {
    "q": "Which Iranian winger was Eredivisie top scorer in 2017-18 with 21 goals for AZ?",
    "a": "Alireza Jahanbakhsh",
    "sub": "The first Asian player to finish top scorer in a top-level European league.",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "scorers"
   },
   {
    "q": "Alireza Jahanbakhsh joined AZ in 2015 from which club, after a season with them in the Eerste Divisie?",
    "a": "NEC",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "transfers"
   },
   {
    "q": "Which Dane was Eredivisie top scorer in 2016-17 with 21 goals for champions Feyenoord?",
    "a": "Nicolai Jørgensen",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "scorers"
   },
   {
    "q": "Nicolai Jørgensen joined Feyenoord in 2016 from which Danish club?",
    "a": "FC Copenhagen",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "transfers"
   },
   {
    "q": "Which striker was Eredivisie top scorer in 2008-09 with 23 goals for champions AZ?",
    "a": "Mounir El Hamdaoui",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "scorers"
   },
   {
    "q": "Mounir El Hamdaoui left AZ in 2010 to join which club?",
    "a": "Ajax",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "transfers"
   },
   {
    "q": "Which striker was Eredivisie top scorer in 2011-12 with 32 goals for Heerenveen, then joined Wolfsburg?",
    "a": "Bas Dost",
-   "club": "sc-heerenveen"
+   "club": "sc-heerenveen",
+   "cat": "scorers"
   },
   {
    "q": "Which Ivorian striker was Eredivisie top scorer in 2012-13 with 31 goals for Vitesse?",
    "a": "Wilfried Bony",
-   "club": "vitesse"
+   "club": "vitesse",
+   "cat": "scorers"
   },
   {
    "q": "Wilfried Bony left Vitesse in 2013 for which Welsh club?",
    "a": "Swansea City",
-   "club": "vitesse"
+   "club": "vitesse",
+   "cat": "transfers"
   },
   {
    "q": "Which Icelandic striker was Eredivisie top scorer in 2013-14 with 29 goals for Heerenveen?",
    "a": "Alfreð Finnbogason",
-   "club": "sc-heerenveen"
+   "club": "sc-heerenveen",
+   "cat": "scorers"
   },
   {
    "q": "Klaas-Jan Huntelaar spent 2009-10 at which Italian club, between Real Madrid and Schalke?",
-   "a": "AC Milan"
+   "a": "AC Milan",
+   "cat": "transfers"
   },
   {
    "q": "Christian Eriksen joined Ajax as a 16-year-old in 2008 from which Danish club?",
    "a": "OB, Odense",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Kevin Strootman and Dries Mertens joined PSV together in 2011 from which club?",
    "a": "FC Utrecht",
-   "club": "psv"
+   "club": "psv",
+   "cat": "transfers"
   },
   {
    "q": "Balázs Dzsudzsák left PSV in 2011 for which Russian club?",
    "a": "Anzhi Makhachkala",
-   "club": "psv"
+   "club": "psv",
+   "cat": "transfers"
   },
   {
    "q": "Which Serbian winger did Ajax sign from Heerenveen in 2008 for a then Dutch record 16.25 million euros?",
    "a": "Miralem Sulejmani",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Luuk de Jong left FC Twente in 2012 for which German club?",
    "a": "Borussia Mönchengladbach",
-   "club": "twente"
+   "club": "twente",
+   "cat": "transfers"
   },
   {
    "q": "Bryan Ruiz left FC Twente in 2011 for which English club?",
    "a": "Fulham",
-   "club": "twente"
+   "club": "twente",
+   "cat": "transfers"
   },
   {
    "q": "Which American striker scored 23 Eredivisie goals for AZ in 2012-13?",
    "a": "Jozy Altidore",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "imports"
   },
   {
    "q": "Jozy Altidore left AZ in 2013 for which English club?",
    "a": "Sunderland",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "transfers"
   },
   {
    "q": "Maarten Stekelenburg left Ajax in 2011 for which Italian club?",
    "a": "Roma",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Hirving Lozano joined PSV in 2017 from which Mexican club?",
    "a": "Pachuca",
-   "club": "psv"
+   "club": "psv",
+   "cat": "transfers"
   },
   {
    "q": "Which Mexican midfielder played for PSV from 2014 to 2017, winning two titles?",
    "a": "Andrés Guardado",
-   "club": "psv"
+   "club": "psv",
+   "cat": "imports"
   },
   {
    "q": "Steven Berghuis joined Feyenoord on loan in 2016 from which English club?",
    "a": "Watford",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "transfers"
   },
   {
    "q": "Which Danish teenager broke through as Ajax's centre forward in 2016-17?",
    "a": "Kasper Dolberg",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "imports"
   },
   {
    "q": "Which club lost both the 2017 and the 2018 KNVB Cup finals?",
    "a": "AZ",
-   "sub": "2-0 to Vitesse, then 3-0 to Feyenoord."
+   "sub": "2-0 to Vitesse, then 3-0 to Feyenoord.",
+   "cat": "cups"
   },
   {
    "q": "Whom did Erik ten Hag replace as Ajax head coach at the turn of 2018?",
    "a": "Marcel Keizer",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "managers"
   },
   {
    "q": "Who was Ajax's head coach in 2009-10, when they finished a point behind Twente?",
    "a": "Martin Jol",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "managers"
   },
   {
    "q": "Who coached PEC Zwolle to their 2014 KNVB Cup win over Ajax?",
    "a": "Ron Jans",
-   "club": "pec-zwolle"
+   "club": "pec-zwolle",
+   "cat": "managers"
   },
   {
    "q": "Who was PSV's caretaker coach for their 2012 KNVB Cup win, after Fred Rutten was sacked in March?",
    "a": "Phillip Cocu",
-   "club": "psv"
+   "club": "psv",
+   "cat": "managers"
   },
   {
    "q": "Which coach won the 2008 KNVB Cup with Feyenoord, in his second spell at the club?",
    "a": "Bert van Marwijk",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "managers"
   },
   {
    "q": "Which club did Steve McClaren return to manage in January 2012, less than two years after leaving?",
-   "a": "FC Twente"
+   "a": "FC Twente",
+   "cat": "managers"
   },
   {
    "q": "Which Ajax coach left for Chelsea in October 2007 and was replaced by Adrie Koster?",
    "a": "Henk ten Cate",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "managers"
   },
   {
    "q": "Between 2007-08 and 2017-18, which was the only club outside Ajax, PSV and Feyenoord to finish as runners-up?",
    "a": "FC Twente",
    "sub": "Second in 2008-09 and 2010-11, champions in between.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "champions"
   },
   {
    "q": "Ajax won the 2013 Johan Cruijff Schaal 3-2 after extra time against which club?",
    "a": "AZ",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "cups"
   },
   {
    "q": "Which club beat Heerenveen 5-1 in the 2009 Johan Cruijff Schaal?",
    "a": "AZ",
-   "club": "sc-heerenveen"
+   "club": "sc-heerenveen",
+   "cat": "cups"
   },
   {
    "q": "Which club won the 2011 Johan Cruijff Schaal, beating champions Ajax 2-1?",
    "a": "FC Twente",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "cups"
   },
   {
    "q": "Which club won the 2014 Johan Cruijff Schaal, beating Ajax 1-0 as cup holders?",
    "a": "PEC Zwolle",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "cups"
   },
   {
    "q": "Which club beat Ajax 4-2 in the 2012 Johan Cruijff Schaal?",
    "a": "PSV",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "cups"
   },
   {
    "q": "Which club won the 2017 Johan Cruijff Schaal on penalties against Vitesse?",
    "a": "Feyenoord",
-   "club": "vitesse"
+   "club": "vitesse",
+   "cat": "cups"
   },
   {
    "q": "Which club did PSV beat 1-0 in the 2016 Johan Cruijff Schaal?",
    "a": "Feyenoord",
-   "club": "psv"
+   "club": "psv",
+   "cat": "cups"
   },
   {
    "q": "Which club did PSV beat 2-0 in the 2008 Johan Cruijff Schaal?",
    "a": "Feyenoord",
-   "club": "psv"
+   "club": "psv",
+   "cat": "cups"
   },
   {
    "q": "Which club did FC Groningen beat 2-0 in the 2015 KNVB Cup final?",
    "a": "PEC Zwolle",
-   "club": "fc-groningen"
+   "club": "fc-groningen",
+   "cat": "cups"
   },
   {
    "q": "Which club did Feyenoord beat 2-1 in the 2016 KNVB Cup final?",
    "a": "FC Utrecht",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "cups"
   },
   {
    "q": "Which club did AZ beat 2-1 in the 2013 KNVB Cup final?",
    "a": "PSV",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "cups"
   },
   {
    "q": "Which club did FC Twente beat 3-2 after extra time in the 2011 KNVB Cup final?",
    "a": "Ajax",
-   "club": "twente"
+   "club": "twente",
+   "cat": "cups"
   },
   {
    "q": "NEC play at which Nijmegen stadium, named after the park it stands in?",
    "a": "The Goffertstadion",
-   "club": "nec-nijmegen"
+   "club": "nec-nijmegen",
+   "cat": "grounds"
   },
   {
    "q": "AZ's stadium, opened in 2006, first carried the name of which bank, which collapsed in 2009?",
    "a": "DSB Bank",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "grounds"
   },
   {
    "q": "ADO Den Haag's stadium was named after which Japanese electronics company from 2010 to 2017?",
    "a": "Kyocera",
-   "club": "ado-den-haag"
+   "club": "ado-den-haag",
+   "cat": "grounds"
   },
   {
    "q": "FC Groningen moved into the Euroborg in 2006 from which old ground?",
    "a": "The Oosterpark, the Oosterparkstadion",
-   "club": "fc-groningen"
+   "club": "fc-groningen",
+   "cat": "grounds"
   },
   {
    "q": "ADO Den Haag left which old ground in 2007 for their new stadium?",
    "a": "The Zuiderpark, the Zuiderparkstadion",
-   "club": "ado-den-haag"
+   "club": "ado-den-haag",
+   "cat": "grounds"
   },
   {
    "q": "Which Ajax striker was Eredivisie top scorer four seasons running from 1974-75 to 1977-78?",
    "a": "Ruud Geels",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "scorers"
   },
   {
    "q": "Which Serbian striker was Eredivisie top scorer three times with PSV, in 2000-01, 2002-03 and 2003-04?",
    "a": "Mateja Kežman",
-   "club": "psv"
+   "club": "psv",
+   "cat": "scorers"
   },
   {
    "q": "Which future Liverpool forward was Eredivisie top scorer in 2004-05 with Feyenoord?",
    "a": "Dirk Kuyt",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "scorers"
   },
   {
    "q": "Which Danish coach led Ajax to the league and cup double in 1997-98?",
    "a": "Morten Olsen",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "managers"
   },
   {
    "q": "Feyenoord lost 3-0 at which Rotterdam neighbour a week before clinching the 2016-17 title?",
    "a": "Excelsior",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "champions"
   },
   {
    "q": "Which Costa Rican was FC Twente's top scorer with 24 league goals in the 2009-10 title season?",
    "a": "Bryan Ruiz",
-   "club": "twente"
+   "club": "twente",
+   "cat": "scorers"
   },
   {
    "q": "How many different clubs won the Eredivisie between 2007-08 and 2017-18? Name them.",
-   "a": "Five: PSV, AZ, FC Twente, Ajax and Feyenoord"
+   "a": "Five: PSV, AZ, FC Twente, Ajax and Feyenoord",
+   "cat": "champions"
   },
   {
    "q": "Which club won the 1984-85 Eredivisie, with Marco van Basten as the league's top scorer?",
-   "a": "Ajax"
+   "a": "Ajax",
+   "cat": "champions"
   },
   {
    "q": "Which club won the 1978-79 Eredivisie, the middle one of three titles in four seasons for the Amsterdam side?",
-   "a": "Ajax"
+   "a": "Ajax",
+   "cat": "champions"
   },
   {
    "q": "Which Feyenoord legend, nicknamed De Kromme, coached the club to the 1992-93 title?",
    "a": "Willem van Hanegem",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "champions"
   },
   {
    "q": "Alireza Jahanbakhsh left AZ in 2018 for which English club?",
    "a": "Brighton and Hove Albion",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "transfers"
   },
   {
    "q": "Which club did Ajax beat in the 2019 KNVB Cup final at De Kuip?",
    "a": "Willem II",
    "sub": "Ajax's 19th cup win, part of a domestic double.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "cups"
   },
   {
    "q": "Which club won the 2025-26 KNVB Cup, beating NEC 5-1 at De Kuip?",
    "a": "AZ",
    "sub": "Their fifth cup win.",
-   "club": "nec-nijmegen"
+   "club": "nec-nijmegen",
+   "cat": "cups"
   },
   {
    "q": "Which club did Feyenoord beat 1-0 in the 2024 KNVB Cup final?",
    "a": "NEC",
    "sub": "Feyenoord's 14th cup win.",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "cups"
   },
   {
    "q": "Which French club signed Igor Paixao from Feyenoord in 2025?",
    "a": "Marseille",
    "sub": "Reported at 35 million euros with add-ons.",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "transfers"
   },
   {
    "q": "Which English club signed Brian Brobbey from Ajax in 2025?",
    "a": "Sunderland",
    "sub": "20 million euros, rising to 25 million.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Who was PSV's head coach in 2018-19, when they finished three points behind Ajax?",
    "a": "Mark van Bommel",
    "sub": "He had taken over from Phillip Cocu that summer.",
-   "club": "psv"
+   "club": "psv",
+   "cat": "managers"
   },
   {
    "q": "Which club finished third in the 2020-21 Eredivisie, one point behind PSV?",
    "a": "AZ",
    "sub": "Ajax ran away with it on 88 points.",
-   "club": "psv"
+   "club": "psv",
+   "cat": "champions"
   },
   {
    "q": "Which striker was Eredivisie top scorer in 2021-22 with 21 goals for Ajax?",
    "a": "Sebastien Haller",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "scorers"
   },
   {
    "q": "Which two players shared the 2022-23 Eredivisie golden boot on 19 goals each?",
-   "a": "Anastasios Douvikas and Xavi Simons"
+   "a": "Anastasios Douvikas and Xavi Simons",
+   "cat": "scorers"
   },
   {
    "q": "Which Japanese striker was Eredivisie top scorer in 2025-26 with 25 goals for Feyenoord?",
    "a": "Ayase Ueda",
    "sub": "He managed it in 31 league games.",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "scorers"
   },
   {
    "q": "Which FC Twente midfielder was Eredivisie top scorer in 2024-25 with 24 goals?",
    "a": "Sem Steijn",
    "sub": "Only the second Twente man to do it, after Dick van Dijk.",
-   "club": "twente"
+   "club": "twente",
+   "cat": "scorers"
   },
   {
    "q": "Dusan Tadic of Ajax shared the 2018-19 golden boot on 28 goals. Which PSV striker shared it with him?",
    "a": "Luuk de Jong",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "scorers"
   },
   {
    "q": "Which German coach was in charge of PSV in the 2021-22 season?",
    "a": "Roger Schmidt",
    "sub": "PSV finished two points behind Ajax.",
-   "club": "psv"
+   "club": "psv",
+   "cat": "managers"
   },
   {
    "q": "Which club won promotion to the Eredivisie in 2025 after 47 years away?",
    "a": "Telstar",
-   "sub": "The IJmuiden club had been down since 1978."
+   "sub": "The IJmuiden club had been down since 1978.",
+   "cat": "relegation"
   },
   {
    "q": "Which Italian coach took charge of Ajax for the 2024-25 season?",
    "a": "Francesco Farioli",
    "sub": "He was appointed in June 2024.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "managers"
   },
   {
    "q": "Which coach did Robin van Persie replace at Feyenoord in February 2025?",
    "a": "Brian Priske",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "managers"
   },
   {
    "q": "Which Nijmegen club finished third in the 2025-26 Eredivisie?",
    "a": "NEC",
-   "sub": "They scored 77 goals, second only to PSV."
+   "sub": "They scored 77 goals, second only to PSV.",
+   "cat": "champions"
   },
   {
    "q": "Which club won the 2019 Johan Cruijff Schaal, beating PSV 2-0?",
    "a": "Ajax",
-   "club": "psv"
+   "club": "psv",
+   "cat": "cups"
   },
   {
    "q": "Which club beat Go Ahead Eagles 2-1 in the 2025 Johan Cruijff Schaal?",
    "a": "PSV",
-   "club": "go-ahead-eagles"
+   "club": "go-ahead-eagles",
+   "cat": "cups"
   },
   {
    "q": "Which club did PSV beat 2-1 in the 2022 KNVB Cup final?",
    "a": "Ajax",
-   "club": "psv"
+   "club": "psv",
+   "cat": "cups"
   },
   {
    "q": "Which Danish club did Ajax sign Mohammed Kudus from in 2020?",
    "a": "Nordsjaelland",
    "sub": "Nine million euros for the Ghanaian.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Which club did PSV sign Xavi Simons from in 2022?",
    "a": "Paris Saint-Germain",
-   "club": "psv"
+   "club": "psv",
+   "cat": "transfers"
   },
   {
    "q": "Which Italian club signed Teun Koopmeiners from AZ in 2021?",
    "a": "Atalanta",
    "sub": "A reported 12 million euros.",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "transfers"
   },
   {
    "q": "Which Portuguese club signed Vangelis Pavlidis from AZ in 2024?",
    "a": "Benfica",
    "sub": "18 million euros plus add-ons and a sell-on.",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "transfers"
   },
   {
    "q": "Which Dutch club did AZ sign Vangelis Pavlidis from in 2021?",
    "a": "Willem II",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "transfers"
   },
   {
    "q": "Which English club did Ajax sign Sebastien Haller from in January 2021?",
    "a": "West Ham United",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Which Italian club did PSV buy Hirving Lozano back from in 2023?",
    "a": "Napoli",
    "sub": "Four years after selling him to them.",
-   "club": "psv"
+   "club": "psv",
+   "cat": "transfers"
   },
   {
    "q": "Which German club did AZ sell Wout Weghorst to in 2018?",
    "a": "VfL Wolfsburg",
    "sub": "A reported 10.5 million euros.",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "transfers"
   },
   {
    "q": "Which Almelo club did AZ sign Wout Weghorst from in 2016?",
    "a": "Heracles Almelo",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "transfers"
   },
   {
    "q": "Wout Weghorst came back to the Eredivisie in August 2024 with which club?",
-   "a": "Ajax"
+   "a": "Ajax",
+   "cat": "transfers"
   },
   {
    "q": "Which German club did Ajax buy Davy Klaassen back from in 2020?",
    "a": "Werder Bremen",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Which Italian club did Davy Klaassen join on a free transfer from Ajax in 2023?",
    "a": "Inter Milan",
    "sub": "Ajax agreed to tear up his contract so he could go.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Which Spanish club did PSV re-sign Luuk de Jong from in 2022?",
    "a": "Sevilla",
    "sub": "He had spent the previous season on loan at Barcelona.",
-   "club": "psv"
+   "club": "psv",
+   "cat": "transfers"
   },
   {
    "q": "Ajax sold Ryan Gravenberch to Bayern Munich in 2022. Which English club bought him from Bayern a year later?",
    "a": "Liverpool",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Which Frisian club did FC Twente sign Hakim Ziyech from in 2014?",
    "a": "Heerenveen",
    "sub": "3.5 million euros, and he took the number 10.",
-   "club": "twente"
+   "club": "twente",
+   "cat": "transfers"
   },
   {
    "q": "Which English club signed Graziano Pellè from Feyenoord in 2014, reuniting him with Ronald Koeman?",
    "a": "Southampton",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "transfers"
   },
   {
    "q": "Which trophy did Dirk Kuyt win in his first season back at Feyenoord, 2015-16?",
    "a": "The KNVB Cup",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "scorers"
   },
   {
    "q": "Vincent Janssen was Eredivisie top scorer in 2015-16 with 27 goals. Which club was he playing for?",
-   "a": "AZ"
+   "a": "AZ",
+   "cat": "scorers"
   },
   {
    "q": "Ajax won 5-0 in the KNVB Cup in September 2016 in the first match anywhere with a live video referee. Who were the opponents?",
@@ -1291,12 +1505,14 @@
   },
   {
    "q": "Which club won 22 league matches in a row between May and December 1987?",
-   "a": "PSV"
+   "a": "PSV",
+   "cat": "records"
   },
   {
    "q": "Which club did Feyenoord beat 9-5 in 1960-61 on the way to their first Eredivisie title?",
    "a": "Ajax",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "records"
   },
   {
    "q": "Which Dutch referee took charge of the 2013 Europa League final between Chelsea and Benfica in Amsterdam?",
@@ -1304,7 +1520,8 @@
   },
   {
    "q": "Which Dutch coach had won the Eredivisie six times by the end of 2017-18, more than any other?",
-   "a": "Guus Hiddink"
+   "a": "Guus Hiddink",
+   "cat": "records"
   },
   {
    "q": "A video referee ruled out a late Stijn Wuytens header in the 2017 KNVB Cup semi-final. Which club did he play for?",
@@ -1324,13 +1541,15 @@
   {
    "q": "Which Feyenoord striker scored in the 99th minute against FC Utrecht in November 2016, the latest goal the league had seen?",
    "a": "Michiel Kramer",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "records"
   },
   {
    "q": "Which 17-year-old scored a hat-trick for PSV against NEC in August 2013?",
    "a": "Zakaria Bakkali",
    "sub": "He was 17 years and 196 days old, the youngest to do it at the time.",
-   "club": "psv"
+   "club": "psv",
+   "cat": "scorers"
   },
   {
    "q": "Which Dutch club did the goalkeeper Hans van Breukelen play for before Nottingham Forest?",
@@ -1339,175 +1558,209 @@
   {
    "q": "Which two clubs drew 6-6 in the Eredivisie in 1990-91?",
    "a": "RKC Waalwijk and FC Twente",
-   "sub": "No Eredivisie draw had produced more goals."
+   "sub": "No Eredivisie draw had produced more goals.",
+   "cat": "records"
   },
   {
    "q": "Which club was Klaas-Jan Huntelaar at when he started the 2005-06 season, before joining Ajax in January and taking the golden boot?",
    "a": "sc Heerenveen",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "scorers"
   },
   {
    "q": "Which Brazilian was Eredivisie top scorer in 2006-07 with 34 goals for Heerenveen?",
    "a": "Afonso Alves",
-   "club": "sc-heerenveen"
+   "club": "sc-heerenveen",
+   "cat": "scorers"
   },
   {
    "q": "Which Enschede club lost only three of 34 matches in 1971-72 but drew fourteen of them?",
    "a": "FC Twente",
-   "sub": "They finished third, fifteen points behind Ajax."
+   "sub": "They finished third, fifteen points behind Ajax.",
+   "cat": "records"
   },
   {
    "q": "Which Ajax forward scored six goals in one Eredivisie match, an 8-1 win over AZ '67 in 1970-71?",
    "a": "Johan Cruyff",
    "sub": "It happened on 29 November 1970.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "scorers"
   },
   {
    "q": "Which striker scored 33 Eredivisie goals for Ajax in 2007-08, far more than anyone else in the league that season?",
    "a": "Klaas-Jan Huntelaar",
    "sub": "Second in the chart was Twente's Blaise Nkufo with 22.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "scorers"
   },
   {
    "q": "Which coach walked out on champions PSV in the autumn of 2007 to take over Valencia?",
    "a": "Ronald Koeman",
    "sub": "PSV still won the title, under interim coach Sef Vergoossen.",
-   "club": "psv"
+   "club": "psv",
+   "cat": "managers"
   },
   {
    "q": "Which club finished second to PSV in 2007-08, three points behind, despite Huntelaar's goals?",
    "a": "Ajax",
-   "club": "psv"
+   "club": "psv",
+   "cat": "champions"
   },
   {
    "q": "Which Moroccan-Dutch striker was the Eredivisie top scorer in AZ's 2008-09 title season?",
    "a": "Mounir El Hamdaoui",
    "sub": "23 league goals. He was also named Footballer of the Year.",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "scorers"
   },
   {
    "q": "Which club finished second to AZ in 2008-09, eleven points behind?",
    "a": "FC Twente",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "champions"
   },
   {
    "q": "Ajax lost 6-2 away to which club on 19 April 2009, the result that made AZ champions that afternoon?",
    "a": "PSV",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "champions"
   },
   {
    "q": "Which club finished one point behind Twente in 2009-10 with 85 points, a total that would have won most seasons?",
    "a": "Ajax",
-   "club": "twente"
+   "club": "twente",
+   "cat": "champions"
   },
   {
    "q": "Which coach was in charge of the Ajax side that finished one point behind Twente in 2009-10?",
    "a": "Martin Jol",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "managers"
   },
   {
    "q": "Which Costa Rican scored 24 league goals for Twente in their 2009-10 title season?",
    "a": "Bryan Ruiz",
    "sub": "Second in the scoring chart behind Suarez's 35.",
-   "club": "twente"
+   "club": "twente",
+   "cat": "scorers"
   },
   {
    "q": "Ajax won the 2010-11 title on the final day by beating their only remaining rival 3-1 in Amsterdam. Which club?",
    "a": "FC Twente",
    "sub": "15 May 2011, Frank de Boer's 41st birthday.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "champions"
   },
   {
    "q": "Which club lost 10-0 away to PSV in October 2010, the heaviest defeat in its history?",
    "a": "Feyenoord",
-   "club": "psv"
+   "club": "psv",
+   "cat": "records"
   },
   {
    "q": "Which club did Twente beat 3-2 after extra time in the 2011 KNVB Cup final, a week before losing the league title to the same side?",
    "a": "Ajax",
-   "club": "twente"
+   "club": "twente",
+   "cat": "cups"
   },
   {
    "q": "Which club was Bas Dost playing for when he scored 32 Eredivisie goals in 2011-12?",
-   "a": "Heerenveen"
+   "a": "Heerenveen",
+   "cat": "scorers"
   },
   {
    "q": "Which club finished second in 2011-12, only a year after finishing tenth?",
-   "a": "Feyenoord"
+   "a": "Feyenoord",
+   "cat": "champions"
   },
   {
    "q": "Which club beat Ajax 6-4 in 2011-12, the highest-scoring match of that season?",
    "a": "FC Utrecht",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "records"
   },
   {
    "q": "Which PSV coach was sacked in March 2012, with Phillip Cocu stepping in as interim?",
    "a": "Fred Rutten",
-   "club": "psv"
+   "club": "psv",
+   "cat": "managers"
   },
   {
    "q": "Which Ivorian striker scored 31 league goals for Vitesse in 2012-13 to win the golden boot?",
    "a": "Wilfried Bony",
-   "club": "vitesse"
+   "club": "vitesse",
+   "cat": "scorers"
   },
   {
    "q": "Which Englishman resigned as Twente coach in February 2013, during his second spell at the club?",
    "a": "Steve McClaren",
-   "club": "twente"
+   "club": "twente",
+   "cat": "managers"
   },
   {
    "q": "Who captained PSV to the 2014-15 title before leaving for Newcastle?",
    "a": "Georginio Wijnaldum",
    "sub": "Also Footballer of the Year that season.",
-   "club": "psv"
+   "club": "psv",
+   "cat": "champions"
   },
   {
    "q": "Memphis Depay was top scorer in 2014-15. Which PSV team-mate was second in the chart with 20 goals?",
    "a": "Luuk de Jong",
-   "club": "psv"
+   "club": "psv",
+   "cat": "scorers"
   },
   {
    "q": "Ajax went into the last day of 2015-16 level on points with PSV and drew 1-1 away at which club to lose the title?",
    "a": "De Graafschap",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "champions"
   },
   {
    "q": "Which club finished sixth in 2015-16 and then qualified for Europe for the first time in its history?",
-   "a": "Frank de Boer"
+   "a": "Frank de Boer",
+   "cat": "managers"
   },
   {
    "q": "Which Almelo club finished sixth in 2015-16 and then qualified for Europe for the first time in its history?",
-   "a": "Heracles Almelo"
+   "a": "Heracles Almelo",
+   "cat": "champions"
   },
   {
    "q": "Feyenoord lost 3-0 to which Rotterdam neighbour on 7 May 2017, missing their first chance to clinch the title?",
    "a": "Excelsior",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "champions"
   },
   {
    "q": "Which club did Feyenoord beat 3-1 at De Kuip on the final day of 2016-17 to win the title?",
    "a": "Heracles Almelo",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "champions"
   },
   {
    "q": "Which Danish striker was the Eredivisie top scorer in Feyenoord's 2016-17 title season?",
    "a": "Nicolai Jorgensen",
    "sub": "21 goals.",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "scorers"
   },
   {
    "q": "Which club finished third in 2016-17, behind Feyenoord and Ajax, despite losing only two league matches all season?",
    "a": "PSV",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "champions"
   },
   {
    "q": "Which club did Vitesse beat 2-0 in the 2017 KNVB Cup final to win their first major trophy?",
    "a": "AZ",
-   "club": "vitesse"
+   "club": "vitesse",
+   "cat": "cups"
   },
   {
    "q": "Ricky van Wolfswinkel scored both goals in the 2017 KNVB Cup final. Which club was he playing for?",
-   "a": "Vitesse"
+   "a": "Vitesse",
+   "cat": "cups"
   },
   {
    "q": "Which Feyenoord captain announced his retirement three days after the 2017 title?",
@@ -1517,69 +1770,83 @@
   {
    "q": "PSV clinched the 2017-18 title on 15 April 2018 with a 3-0 home win over which rival?",
    "a": "Ajax",
-   "club": "psv"
+   "club": "psv",
+   "cat": "champions"
   },
   {
    "q": "Which club was relegated from the Eredivisie in 2018 for the first time since 1983?",
-   "a": "FC Twente"
+   "a": "FC Twente",
+   "cat": "relegation"
   },
   {
    "q": "Which club finished third in 2017-18, behind PSV and Ajax, with Jahanbakhsh and Weghorst up front?",
    "a": "AZ",
-   "club": "psv"
+   "club": "psv",
+   "cat": "champions"
   },
   {
    "q": "Which Ajax coach was sacked in December 2017 after half a season, with Erik ten Hag hired from Utrecht?",
    "a": "Marcel Keizer",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "managers"
   },
   {
    "q": "Dick Advocaat took over which Rotterdam club in December 2017 but could not keep them in the Eredivisie?",
    "a": "Sparta Rotterdam",
-   "sub": "Sparta lost the play-off final to Emmen."
+   "sub": "Sparta lost the play-off final to Emmen.",
+   "cat": "relegation"
   },
   {
    "q": "Which club won promotion to the Eredivisie in 2018 for the first time in its history, beating Sparta in the play-off final?",
    "a": "FC Emmen",
-   "club": "sparta-rotterdam"
+   "club": "sparta-rotterdam",
+   "cat": "relegation"
   },
   {
    "q": "Which club did Ajax beat 8-0 in November 2017?",
    "a": "NAC Breda",
    "sub": "Away in Breda, with a Donny van de Beek hat-trick.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "records"
   },
   {
    "q": "Which club did Feyenoord beat 8-0 in April 2017 on the way to the title?",
    "a": "Go Ahead Eagles",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "records"
   },
   {
    "q": "Which club did Groningen beat 2-0 in the 2015 KNVB Cup final to win their first major trophy?",
-   "a": "PEC Zwolle"
+   "a": "PEC Zwolle",
+   "cat": "cups"
   },
   {
    "q": "Which Dutch legend stepped down as AZ coach in September 2014, only a few weeks into the season?",
    "a": "Marco van Basten",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "managers"
   },
   {
    "q": "Which coach resigned from Ajax in May 2009 after a third-place finish behind AZ and Twente?",
    "a": "Marco van Basten",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "managers"
   },
   {
    "q": "Which former Barcelona defender took over AZ from Louis van Gaal in 2009 and was sacked that December?",
    "a": "Ronald Koeman",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "managers"
   },
   {
    "q": "Which two Dutch clubs played in the 2010-11 Champions League group stage after finishing first and second in 2009-10?",
-   "a": "FC Twente and Ajax"
+   "a": "FC Twente and Ajax",
+   "cat": "europe"
   },
   {
    "q": "Which Rotterdam club came up as second-tier champions in 2016 after six seasons away?",
-   "a": "Sparta Rotterdam"
+   "a": "Sparta Rotterdam",
+   "cat": "relegation"
   },
   {
    "q": "Which Ajax teenager was named Dutch Talent of the Year for 2017-18?",
@@ -1592,22 +1859,26 @@
    "q": "PSV were champions on 8 April 1978, the earliest date in the league's history at the time. Which club did they beat that day?",
    "a": "FC Twente",
    "sub": "Kees Rijvers' side also won the UEFA Cup that spring.",
-   "club": "psv"
+   "club": "psv",
+   "cat": "champions"
   },
   {
    "q": "FC Groningen was created in 1971 out of the professional section of which older Groningen club?",
    "a": "GVAV",
-   "club": "fc-groningen"
+   "club": "fc-groningen",
+   "cat": "records"
   },
   {
    "q": "AZ carried a number in their name until 1986. Which number, and why?",
    "a": "67, their founding year 1967",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "records"
   },
   {
    "q": "De Graafschap was founded in 1954, the year professional football arrived. What does the name mean?",
    "a": "The county, after the old county of Zutphen in the Achterhoek",
-   "club": "de-graafschap"
+   "club": "de-graafschap",
+   "cat": "records"
   },
   {
    "q": "Which Ajax defender took over the captaincy from Davy Klaassen in 2017?",
@@ -1638,12 +1909,14 @@
   {
    "q": "Which Spanish midfielder was the last player to wear the number 14 shirt for Ajax?",
    "a": "Roger, in the 2006-07 season",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "stories"
   },
   {
    "q": "Ajax retired the number 14 shirt on 25 April 2007. What was the occasion?",
    "a": "Johan Cruyff's 60th birthday",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "stories"
   },
   {
    "q": "The Ajax academy teaches a model called TIPS. What do the four letters stand for?",
@@ -1658,7 +1931,8 @@
   {
    "q": "Which Englishman won eight Dutch championships as Ajax coach, the last of them in 1946-47?",
    "a": "Jack Reynolds",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "managers"
   },
   {
    "q": "Jong Ajax won the 2017-18 Eerste Divisie. Which Moroccan international full-back played in that side?",
@@ -1668,17 +1942,20 @@
   {
    "q": "Which English club knocked Ajax out of the 2011-12 Europa League despite losing 2-1 at Old Trafford?",
    "a": "Manchester United",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "europe"
   },
   {
    "q": "Which Icelandic striker did Ajax sign in the summer of 2011, only for injury to cost him five months?",
    "a": "Kolbeinn Sigthorsson",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "The main stand at Ajax's De Toekomst is named after which long serving assistant coach?",
    "a": "Bobby Haarms",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "grounds"
   },
   {
    "q": "Ajax run an under-17 tournament named after their training complex. What is it called?",
@@ -1703,32 +1980,38 @@
   {
    "q": "How much did the city of Eindhoven pay PSV in 2011 for the land under the stadium and training ground?",
    "a": "48.4 million euros",
-   "club": "psv"
+   "club": "psv",
+   "cat": "stories"
   },
   {
    "q": "PSV switched on their new floodlights in 1958 with an exhibition match against which Belgian club?",
    "a": "Anderlecht",
-   "club": "psv"
+   "club": "psv",
+   "cat": "grounds"
   },
   {
    "q": "PSV opened their rebuilt main stand in 1988 with a friendly against which Italian club?",
    "a": "AC Milan",
-   "club": "psv"
+   "club": "psv",
+   "cat": "grounds"
   },
   {
    "q": "PSV's record home crowd of 35,200 came in November 2002 against which club?",
    "a": "Feyenoord",
-   "club": "psv"
+   "club": "psv",
+   "cat": "grounds"
   },
   {
    "q": "In which year was De Herdgang, PSV's training ground, built?",
    "a": "1952",
-   "club": "psv"
+   "club": "psv",
+   "cat": "grounds"
   },
   {
    "q": "Which PSV manager pushed through the rebuilding of the youth facilities at De Herdgang in 2003?",
    "a": "Guus Hiddink",
-   "club": "psv"
+   "club": "psv",
+   "cat": "grounds"
   },
   {
    "q": "PSV's oldest local rivalry, going back to the 1910s, is with which other club from their own city?",
@@ -1743,24 +2026,29 @@
   {
    "q": "Which architect designed De Kuip, Feyenoord's stadium?",
    "a": "Leendert van der Vlugt, of the firm Brinkman en Van der Vlugt",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "grounds"
   },
   {
    "q": "De Kuip opened on 27 March 1937 with a 5-2 Feyenoord win over which Belgian club?",
    "a": "Beerschot",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "grounds"
   },
   {
    "q": "Who scored the first goal at De Kuip, in the opening match of 1937?",
-   "a": "Leen Vente"
+   "a": "Leen Vente",
+   "cat": "grounds"
   },
   {
    "q": "What is the club museum inside De Kuip called?",
-   "a": "The Home of History"
+   "a": "The Home of History",
+   "cat": "grounds"
   },
   {
    "q": "Two stands at De Kuip carry the names of club figures. Name either of them.",
-   "a": "Gerard Meijer or Willem van Hanegem"
+   "a": "Gerard Meijer or Willem van Hanegem",
+   "cat": "grounds"
   },
   {
    "q": "Which former Feyenoord striker was the stadium announcer at De Kuip from 1998 to 2025?",
@@ -1770,21 +2058,25 @@
   {
    "q": "Feyenoord's first team left Varkenoord in the summer of 2018 for a new base. What is it called?",
    "a": "Trainingscomplex 1908",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "grounds"
   },
   {
    "q": "The main stand at the rebuilt Varkenoord is named after which former Feyenoord captain and coach?",
    "a": "Giovanni van Bronckhorst",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "grounds"
   },
   {
    "q": "Which group of wealthy supporters bought into Feyenoord in October 2010 to steady the club?",
-   "a": "The Vrienden van Feyenoord, the Friends of Feyenoord"
+   "a": "The Vrienden van Feyenoord, the Friends of Feyenoord",
+   "cat": "stories"
   },
   {
    "q": "How big was Feyenoord's debt in 2010, when the KNVB put them in its worst financial category?",
    "a": "About 40 million euros",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "stories"
   },
   {
    "q": "Which defender took the Feyenoord armband when Ron Vlaar left for Aston Villa in 2012?",
@@ -1794,7 +2086,8 @@
   {
    "q": "Which Dutch defender did Feyenoord sign from Malaga in August 2012?",
    "a": "Joris Mathijsen",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "transfers"
   },
   {
    "q": "Feyenoord's heaviest Klassieker defeat came in September 1983. What was the score?",
@@ -1809,127 +2102,151 @@
    "q": "Which Limburg club finished runners-up to Ajax in the very first Eredivisie season, 1956-57?",
    "a": "Fortuna '54",
    "sub": "Four points behind Ajax, with Sportclub Enschede third and MVV fourth.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "champions"
   },
   {
    "q": "Which Rotterdam club won the 1958-59 Eredivisie, and had not won another title by the end of 2006-07?",
    "a": "Sparta Rotterdam",
-   "sub": "Their sixth national title, coached by the Englishman Denis Neville."
+   "sub": "Their sixth national title, coached by the Englishman Denis Neville.",
+   "cat": "champions"
   },
   {
    "q": "Which Englishman coached Ajax to the 1959-60 title and later gave Johan Cruyff his debut?",
    "a": "Vic Buckingham",
    "sub": "He was replaced by Rinus Michels midway through the disastrous 1964-65 season.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "managers"
   },
   {
    "q": "At which Amsterdam ground did the 1964 champions DWS play their home matches?",
    "a": "The Olympisch Stadion",
-   "sub": "The title was sealed there with a 3-1 win over GVAV in front of 45,000."
+   "sub": "The title was sealed there with a 3-1 win over GVAV in front of 45,000.",
+   "cat": "grounds"
   },
   {
    "q": "Who in 1967-68 became the first non-Dutch player to finish as Eredivisie top scorer?",
    "a": "Ove Kindvall",
-   "sub": "The Swede did it three times in all for Feyenoord."
+   "sub": "The Swede did it three times in all for Feyenoord.",
+   "cat": "scorers"
   },
   {
    "q": "Which club became the first to win three Eredivisie titles in a row, completing the run in 1967-68?",
    "a": "Ajax",
-   "sub": "Under Rinus Michels, from 1965-66 to 1967-68."
+   "sub": "Under Rinus Michels, from 1965-66 to 1967-68.",
+   "cat": "champions"
   },
   {
    "q": "Which club became the first to win four Eredivisie titles in a row, completing the run in 1988-89?",
    "a": "PSV",
-   "sub": "Romário top-scored with 19 in the fourth of them."
+   "sub": "Romário top-scored with 19 in the fourth of them.",
+   "cat": "champions"
   },
   {
    "q": "Which Yugoslav coach led Ajax to the 1976-77 Eredivisie title?",
    "a": "Tomislav Ivić",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "managers"
   },
   {
    "q": "Ruud Geels was Eredivisie top scorer four seasons in a row from 1974-75. For which club?",
    "a": "Ajax",
-   "sub": "He scored 123 goals in 131 matches for Ajax."
+   "sub": "He scored 123 goals in 131 matches for Ajax.",
+   "cat": "scorers"
   },
   {
    "q": "Which 19-year-old Ajax striker scored 32 league goals in 1981-82 and became Europe's top scorer?",
    "a": "Wim Kieft",
    "sub": "The youngest ever European Golden Boot winner at the time.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "scorers"
   },
   {
    "q": "Who coached Feyenoord to the 1983-84 double, the season Cruyff and Gullit played together in Rotterdam?",
    "a": "Thijs Libregts",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "managers"
   },
   {
    "q": "Which Ajax forward shared the 1990-91 golden boot with Romário, both on 25 goals?",
    "a": "Dennis Bergkamp",
    "sub": "Bergkamp then won it outright in 1991-92 and 1992-93.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "scorers"
   },
   {
    "q": "Which club won the 1992-93 Eredivisie with Willem van Hanegem as coach?",
    "a": "Feyenoord",
-   "sub": "His first big success as a coach, two points ahead of PSV."
+   "sub": "His first big success as a coach, two points ahead of PSV.",
+   "cat": "champions"
   },
   {
    "q": "Which 18-year-old was Ajax's top league scorer, with 18 goals, in the unbeaten 1994-95 season?",
    "a": "Patrick Kluivert",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "scorers"
   },
   {
    "q": "Which Finn was Eredivisie top scorer in 1993-94 with 26 goals?",
-   "a": "Jari Litmanen"
+   "a": "Jari Litmanen",
+   "cat": "scorers"
   },
   {
    "q": "Which Belgian striker was Eredivisie top scorer for PSV in both 1995-96 and 1996-97?",
    "a": "Luc Nilis",
    "sub": "He arrived from Anderlecht in 1994 and partnered Ronaldo.",
-   "club": "psv"
+   "club": "psv",
+   "cat": "scorers"
   },
   {
    "q": "Who coached PSV to the 1996-97 title, ending Ajax's run of three in a row?",
    "a": "Dick Advocaat",
-   "club": "psv"
+   "club": "psv",
+   "cat": "managers"
   },
   {
    "q": "Which club finished third in 1997-98, its best finish up to then, with Nikos Machlas scoring 34?",
-   "a": "Vitesse"
+   "a": "Vitesse",
+   "cat": "champions"
   },
   {
    "q": "Which Tilburg club finished second to Feyenoord in 1998-99?",
    "a": "Willem II",
    "sub": "Co Adriaanse's side, 15 points behind the champions.",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "champions"
   },
   {
    "q": "Which Frisian club finished second to PSV in 1999-2000 under Foppe de Haan?",
    "a": "Heerenveen",
    "sub": "It earned them a Champions League group with Valencia, Lyon and Olympiakos.",
-   "club": "psv"
+   "club": "psv",
+   "cat": "champions"
   },
   {
    "q": "Which Belgian coached PSV to the Eredivisie titles of 1999-2000 and 2000-01?",
    "a": "Eric Gerets",
-   "club": "psv"
+   "club": "psv",
+   "cat": "managers"
   },
   {
    "q": "Which club was relegated from the Eredivisie for the first time in its history in 2001-02?",
    "a": "Sparta Rotterdam",
-   "sub": "They lost in the play-offs, leaving Ajax, PSV and Feyenoord as the only never-relegated clubs."
+   "sub": "They lost in the play-offs, leaving Ajax, PSV and Feyenoord as the only never-relegated clubs.",
+   "cat": "relegation"
   },
   {
    "q": "PSV won the 2002-03 title by a single point from Ajax. Who was top scorer with 35 goals?",
    "a": "Mateja Kežman",
-   "club": "psv"
+   "club": "psv",
+   "cat": "scorers"
   },
   {
    "q": "Which Feyenoord striker was Eredivisie top scorer in 2004-05 with 29 goals?",
    "a": "Dirk Kuyt",
    "sub": "He joined Liverpool in the summer of 2006.",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "scorers"
   },
   {
    "q": "Which club won the first ever Champions League play-off in 2005-06, beating FC Groningen in the final?",
@@ -1945,11 +2262,13 @@
   {
    "q": "Which club went down in 2006-07 after losing a relegation play-off to VVV-Venlo?",
    "a": "RKC Waalwijk",
-   "club": "vvv-venlo"
+   "club": "vvv-venlo",
+   "cat": "relegation"
   },
   {
    "q": "Which club collected only nine points in the whole of the 2005-06 Eredivisie?",
-   "a": "RBC Roosendaal"
+   "a": "RBC Roosendaal",
+   "cat": "relegation"
   },
   {
    "q": "Which Limburg club finished fourth in the first Eredivisie season, 1956-57?",
@@ -1976,80 +2295,96 @@
   {
    "q": "Which ground did FC Groningen leave for the Euroborg at the end of 2005?",
    "a": "The Oosterpark",
-   "club": "fc-groningen"
+   "club": "fc-groningen",
+   "cat": "grounds"
   },
   {
    "q": "Which Enschede stadium did FC Twente leave in 1998?",
    "a": "Het Diekman",
    "sub": "Opened in 1956 for Sportclub Enschede, demolished after a marathon in June 1998.",
-   "club": "twente"
+   "club": "twente",
+   "cat": "grounds"
   },
   {
    "q": "Which Kerkrade ground did Roda JC leave in 2000 for the Parkstad Limburg Stadion?",
    "a": "Kaalheide",
-   "club": "roda-jc-kerkrade"
+   "club": "roda-jc-kerkrade",
+   "cat": "grounds"
   },
   {
    "q": "Which Sittard ground did Fortuna Sittard leave in 1999?",
    "a": "De Baandert",
-   "club": "fortuna-sittard"
+   "club": "fortuna-sittard",
+   "cat": "grounds"
   },
   {
    "q": "Which club finished second in 1973-74, two points behind Feyenoord, under Spitz Kohn?",
    "a": "FC Twente",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "champions"
   },
   {
    "q": "Willem van Hanegem joined Feyenoord in 1968 from which Rotterdam club, which went bankrupt that same year?",
    "a": "Xerxes/DHC '66",
    "sub": "Xerxes alone is fine. They finished seventh in 1967-68 and still went under.",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "stories"
   },
   {
    "q": "Which club was relegated from the Eredivisie in 1996-97 with 25 points, twelve years before it won the title?",
-   "a": "AZ"
+   "a": "AZ",
+   "cat": "relegation"
   },
   {
    "q": "Which club finished fourth in 1981-82 with a teenage Ruud Gullit in the side?",
-   "a": "Haarlem"
+   "a": "Haarlem",
+   "cat": "champions"
   },
   {
    "q": "Which Ajax striker was Eredivisie top scorer in 1959-60 and 1960-61, scoring 41 in the second?",
    "a": "Henk Groot",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "scorers"
   },
   {
    "q": "Which NAC striker, nicknamed the Cannon, was Eredivisie top scorer in both 1957-58 and 1958-59?",
    "a": "Leo Canjels",
-   "club": "nac-breda"
+   "club": "nac-breda",
+   "cat": "scorers"
   },
   {
    "q": "Which Austrian coached Ajax to the first Eredivisie title in 1956-57?",
    "a": "Karl Humenberger",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "managers"
   },
   {
    "q": "ADO merged with Holland Sport in 1971. Under what name did the merged club play?",
    "a": "FC Den Haag",
-   "club": "ado-den-haag"
+   "club": "ado-den-haag",
+   "cat": "stories"
   },
   {
    "q": "Which club did the Groningen side GVAV turn into in 1971?",
-   "a": "FC Groningen"
+   "a": "FC Groningen",
+   "cat": "stories"
   },
   {
    "q": "Ajax scored 122 league goals in 1966-67. Who was top scorer that season with 33?",
    "a": "Johan Cruyff",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "scorers"
   },
   {
    "q": "Who coached Ajax to the league and cup double in 2001-02?",
    "a": "Ronald Koeman",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "managers"
   },
   {
    "q": "Which club finished bottom of the Eredivisie with 17 points in 2006-07, its last season at the Zuiderpark?",
-   "a": "ADO Den Haag"
+   "a": "ADO Den Haag",
+   "cat": "relegation"
   },
   {
    "q": "Willy van der Kuijlen left PSV in 1981 for one last Eredivisie season at which Limburg club?",
@@ -2069,182 +2404,219 @@
   {
    "q": "Which club beat PSV on penalties in the 2001 KNVB Cup final?",
    "a": "FC Twente",
-   "club": "psv"
+   "club": "psv",
+   "cat": "cups"
   },
   {
    "q": "Which club beat Feyenoord 4-1 in the 2003 KNVB Cup final?",
    "a": "FC Utrecht",
    "sub": "It put Utrecht in Europe despite an eighth-place finish.",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "cups"
   },
   {
    "q": "Which club beat Ajax 2-1 in the 1968 KNVB Cup final?",
    "a": "ADO Den Haag",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "cups"
   },
   {
    "q": "Which PSV striker was Eredivisie top scorer three seasons in a row from 1988-89?",
    "a": "Romário",
-   "club": "psv"
+   "club": "psv",
+   "cat": "scorers"
   },
   {
    "q": "Who was Eredivisie top scorer in 1998-99 with 31 goals in his first season at PSV?",
    "a": "Ruud van Nistelrooy",
-   "club": "psv"
+   "club": "psv",
+   "cat": "scorers"
   },
   {
    "q": "Which Feyenoord striker was Eredivisie top scorer in 2001-02, the season they won the UEFA Cup?",
    "a": "Pierre van Hooijdonk",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "scorers"
   },
   {
    "q": "Alfreð Finnbogason left Heerenveen in 2014 for which Spanish club?",
    "a": "Real Sociedad",
-   "club": "sc-heerenveen"
+   "club": "sc-heerenveen",
+   "cat": "transfers"
   },
   {
    "q": "Jeremain Lens left PSV in 2013 for which Ukrainian club?",
    "a": "Dynamo Kyiv",
-   "club": "psv"
+   "club": "psv",
+   "cat": "transfers"
   },
   {
    "q": "Jeremain Lens joined PSV in 2010 from which club?",
    "a": "AZ",
-   "club": "psv"
+   "club": "psv",
+   "cat": "transfers"
   },
   {
    "q": "Ola Toivonen left PSV in January 2014 for which French club?",
    "a": "Rennes",
-   "club": "psv"
+   "club": "psv",
+   "cat": "transfers"
   },
   {
    "q": "Ola Toivonen joined PSV in January 2009 from which Swedish club?",
    "a": "Malmö FF",
-   "club": "psv"
+   "club": "psv",
+   "cat": "transfers"
   },
   {
    "q": "Balázs Dzsudzsák joined PSV in January 2008 from which Hungarian club?",
    "a": "Debrecen",
-   "club": "psv"
+   "club": "psv",
+   "cat": "transfers"
   },
   {
    "q": "Jürgen Locadia left PSV in January 2018 for which English club?",
    "a": "Brighton and Hove Albion",
-   "club": "psv"
+   "club": "psv",
+   "cat": "transfers"
   },
   {
    "q": "Who was Vitesse's head coach when they won the 2017 KNVB Cup, the club's first major trophy?",
    "a": "Henk Fraser",
-   "club": "vitesse"
+   "club": "vitesse",
+   "cat": "cups"
   },
   {
    "q": "Which coach led AZ to the 2013 KNVB Cup, beating PSV in the final?",
    "a": "Gertjan Verbeek",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "managers"
   },
   {
    "q": "Who coached FC Groningen to the 2015 KNVB Cup, the club's first major trophy?",
    "a": "Erwin van de Looi",
-   "club": "fc-groningen"
+   "club": "fc-groningen",
+   "cat": "managers"
   },
   {
    "q": "Which Norwegian coach won the 2009 KNVB Cup with Heerenveen?",
    "a": "Trond Sollied",
-   "club": "sc-heerenveen"
+   "club": "sc-heerenveen",
+   "cat": "managers"
   },
   {
    "q": "Before it became De Grolsch Veste in 2008, FC Twente's stadium carried the name of which travel company?",
    "a": "Arke",
-   "club": "twente"
+   "club": "twente",
+   "cat": "grounds"
   },
   {
    "q": "The Diekman was the old home of which club until 1998?",
-   "a": "FC Twente"
+   "a": "FC Twente",
+   "cat": "grounds"
   },
   {
    "q": "Which Ajax striker won the 1982 European Golden Boot with 32 Eredivisie goals?",
    "a": "Wim Kieft",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "scorers"
   },
   {
    "q": "Level on points with Ajax before the final day of 2015-16, PSV won 3-1 away at which club to take the title?",
    "a": "PEC Zwolle",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "champions"
   },
   {
    "q": "Ajax drew 1-1 away at which club on the final day of 2015-16, handing the title to PSV?",
    "a": "De Graafschap",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "champions"
   },
   {
    "q": "Which coach led Feyenoord from January 2009 until resigning in July 2011, after a tenth-place finish?",
    "a": "Mario Been",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "managers"
   },
   {
    "q": "Which club finished 17th in the 2025-26 Eredivisie and went down?",
    "a": "NAC Breda",
-   "sub": "They took 29 points."
+   "sub": "They took 29 points.",
+   "cat": "relegation"
   },
   {
    "q": "Which Argentine club did Ajax sign Lisandro Martinez from in 2019?",
    "a": "Defensa y Justicia",
    "sub": "Seven million euros.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Which Belgian club did Feyenoord sign Ayase Ueda from in 2023?",
    "a": "Cercle Brugge",
    "sub": "Eight million euros, and he took the number 9.",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "transfers"
   },
   {
    "q": "Which club were relegated from the Eredivisie in 2024 after a points deduction for breaking licence rules?",
    "a": "Vitesse",
-   "sub": "The KNVB docked them 18 points."
+   "sub": "The KNVB docked them 18 points.",
+   "cat": "relegation"
   },
   {
    "q": "Which club did Ajax beat 2-1 in the 2021 KNVB Cup final at De Kuip?",
    "a": "Vitesse",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "cups"
   },
   {
    "q": "Which three clubs went down from the Eredivisie at the end of 2018-19?",
-   "a": "NAC Breda, De Graafschap and Excelsior"
+   "a": "NAC Breda, De Graafschap and Excelsior",
+   "cat": "relegation"
   },
   {
    "q": "Which three clubs came up into the 2019-20 Eredivisie?",
-   "a": "FC Twente, Sparta Rotterdam and RKC Waalwijk"
+   "a": "FC Twente, Sparta Rotterdam and RKC Waalwijk",
+   "cat": "relegation"
   },
   {
    "q": "When the 2019-20 Eredivisie was abandoned, which two clubs were handed the Champions League places?",
-   "a": "Ajax and AZ"
+   "a": "Ajax and AZ",
+   "cat": "champions"
   },
   {
    "q": "Ajax and AZ were level on 56 points when the 2019-20 season was frozen. What put Ajax on top?",
    "a": "Goal difference, plus 45 to AZ's plus 37",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "champions"
   },
   {
    "q": "Which Tilburg club sat fifth when the 2019-20 season was frozen, taking a Europa League place?",
-   "a": "Willem II"
+   "a": "Willem II",
+   "cat": "champions"
   },
   {
    "q": "Which three clubs went down from the Eredivisie at the end of 2020-21?",
-   "a": "FC Emmen, VVV-Venlo and ADO Den Haag"
+   "a": "FC Emmen, VVV-Venlo and ADO Den Haag",
+   "cat": "relegation"
   },
   {
    "q": "Which club won promotion in 2021 by beating NAC Breda 2-1 in the play-off final?",
    "a": "NEC",
-   "club": "nac-breda"
+   "club": "nac-breda",
+   "cat": "relegation"
   },
   {
    "q": "Which three clubs went down from the Eredivisie at the end of 2021-22?",
-   "a": "Heracles Almelo, Willem II and PEC Zwolle"
+   "a": "Heracles Almelo, Willem II and PEC Zwolle",
+   "cat": "relegation"
   },
   {
    "q": "Which three clubs went down from the Eredivisie at the end of 2022-23?",
-   "a": "FC Emmen, Cambuur and FC Groningen"
+   "a": "FC Emmen, Cambuur and FC Groningen",
+   "cat": "relegation"
   },
   {
    "q": "Which Rotterdam club finished sixth in 2022-23 and then lost the European play-off final to FC Twente?",
@@ -2253,31 +2625,37 @@
   },
   {
    "q": "Which club won promotion to the Eredivisie in 2023 for the first time in its history?",
-   "a": "Almere City"
+   "a": "Almere City",
+   "cat": "relegation"
   },
   {
    "q": "Which fishing town club returned to the Eredivisie in 2022 after thirteen years away?",
-   "a": "FC Volendam"
+   "a": "FC Volendam",
+   "cat": "relegation"
   },
   {
    "q": "PSV clinched the 2023-24 title at the Philips Stadion with a 4-2 win over which Rotterdam club?",
    "a": "Sparta Rotterdam",
    "sub": "5 May 2024, with two rounds to spare.",
-   "club": "psv"
+   "club": "psv",
+   "cat": "champions"
   },
   {
    "q": "Which Ajax head coach was sacked in October 2023 with the club sitting 17th in the table?",
    "a": "Maurice Steijn",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "managers"
   },
   {
    "q": "Which coach did Ajax appoint on 30 October 2023, replacing the caretaker Hedwiges Maduro?",
    "a": "John van 't Schip",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "managers"
   },
   {
    "q": "Which three clubs went down from the Eredivisie at the end of 2023-24?",
-   "a": "Excelsior, FC Volendam and Vitesse"
+   "a": "Excelsior, FC Volendam and Vitesse",
+   "cat": "relegation"
   },
   {
    "q": "Which club won the 2024 European play-off final, beating FC Utrecht 2-1 after extra time?",
@@ -2286,7 +2664,8 @@
   },
   {
    "q": "Which three clubs went down from the Eredivisie at the end of 2024-25?",
-   "a": "Willem II, Almere City and RKC Waalwijk"
+   "a": "Willem II, Almere City and RKC Waalwijk",
+   "cat": "relegation"
   },
   {
    "q": "Which club beat FC Twente 3-2 in the 2025 European play-off final?",
@@ -2297,12 +2676,14 @@
    "q": "PSV sealed the 2024-25 title on the last day with a 3-1 win over which Rotterdam club?",
    "a": "Sparta Rotterdam",
    "sub": "18 May 2025.",
-   "club": "psv"
+   "club": "psv",
+   "cat": "champions"
   },
   {
    "q": "Which club finished fourth in the 2024-25 Eredivisie under Ron Jans?",
    "a": "FC Utrecht",
-   "sub": "64 points, above AZ and Twente."
+   "sub": "64 points, above AZ and Twente.",
+   "cat": "champions"
   },
   {
    "q": "Which club won the 2026 European play-off final, beating FC Utrecht on penalties after a 1-1 draw?",
@@ -2312,165 +2693,197 @@
   {
    "q": "Which Spaniard was appointed Ajax head coach in March 2026?",
    "a": "Oscar Garcia",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "managers"
   },
   {
    "q": "Which Ajax head coach was sacked in November 2025?",
    "a": "John Heitinga",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "managers"
   },
   {
    "q": "Which club sacked Joseph Oosting in September 2025 and brought in John van den Brom?",
-   "a": "FC Twente"
+   "a": "FC Twente",
+   "cat": "managers"
   },
   {
    "q": "Antony's 95 million euro move from Ajax to Manchester United in 2022 set what record at the time?",
    "a": "The biggest fee ever received for a player leaving the Eredivisie.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Ajax paid 31.25 million euros for Steven Bergwijn in 2022. What record did that set?",
    "a": "The most expensive signing ever made by a Dutch club at that point.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Which club did Ajax sell Lisandro Martinez to in July 2022, a few weeks before Antony followed him there?",
    "a": "Manchester United",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Which club paid Ajax 75 million euros for Matthijs de Ligt in 2019?",
    "a": "Juventus",
    "sub": "Paid in five annual instalments.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Hirving Lozano's 2019 move from PSV to Napoli set which record at the time?",
    "a": "The highest fee ever paid for a Mexican player",
-   "club": "psv"
+   "club": "psv",
+   "cat": "transfers"
   },
   {
    "q": "PSV's record fee received was set by Lozano in 2019 and broken in January 2023. By which player?",
    "a": "Cody Gakpo",
    "sub": "Liverpool paid a reported 40 to 50 million euros.",
-   "club": "psv"
+   "club": "psv",
+   "cat": "transfers"
   },
   {
    "q": "Which club paid Ajax around 34 million pounds for Jurrien Timber in 2023?",
    "a": "Arsenal",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Jurrien Timber joined Ajax's academy in 2014 from which other Dutch club's youth set-up?",
    "a": "Feyenoord",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Which German club did Ajax pay 16.35 million euros to bring Brian Brobbey back in 2022?",
    "a": "RB Leipzig",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Which Italian club signed the goalkeeper Andre Onana from Ajax on a free transfer in 2022?",
    "a": "Inter Milan",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Chelsea paid PSV 18 million euros for Arjen Robben in 2004 after a 7 million bid was rejected. Whose bid?",
    "a": "Manchester United",
-   "club": "psv"
+   "club": "psv",
+   "cat": "transfers"
   },
   {
    "q": "Ajax paid FC Groningen 7.5 million euros in 2007 for which Uruguayan?",
    "a": "Luis Suarez",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Real Madrid paid Ajax 27 million euros in 2007 for which midfielder?",
    "a": "Wesley Sneijder",
    "sub": "The second biggest fee for a Dutch player at the time.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Ajax paid Heerenveen 9 million euros in January 2006 for which striker?",
    "a": "Klaas-Jan Huntelaar",
    "sub": "PSV took 15 per cent of the fee from an old sell-on.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Donyell Malen came through two academies before PSV signed him in 2017. Ajax and which English club?",
    "a": "Arsenal",
-   "club": "psv"
+   "club": "psv",
+   "cat": "transfers"
   },
   {
    "q": "Which Hungarian winger scored 16 Eredivisie goals for PSV in 2010-11 before leaving for Anzhi Makhachkala?",
    "a": "Balázs Dzsudzsák",
    "sub": "He also laid on 12 league assists that season.",
-   "club": "psv"
+   "club": "psv",
+   "cat": "imports"
   },
   {
    "q": "Which Swedish forward opened the scoring as PSV beat Heracles 3-0 in the 2012 KNVB Cup final?",
    "a": "Ola Toivonen",
-   "club": "psv"
+   "club": "psv",
+   "cat": "imports"
   },
   {
    "q": "Which Dutch winger left PSV for Dynamo Kyiv in 2013?",
    "a": "Jeremain Lens",
-   "club": "psv"
+   "club": "psv",
+   "cat": "transfers"
   },
   {
    "q": "Which Belgian club did FC Twente sign Bryan Ruiz from in 2009?",
    "a": "Gent",
-   "club": "twente"
+   "club": "twente",
+   "cat": "imports"
   },
   {
    "q": "Which Icelandic striker joined Ajax from AZ in 2011 and won three league titles in Amsterdam?",
    "a": "Kolbeinn Sigthorsson",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "imports"
   },
   {
    "q": "Which German striker scored 15 Eredivisie goals for Heerenveen in 2014-15 and then joined Hoffenheim?",
    "a": "Mark Uth",
-   "club": "sc-heerenveen"
+   "club": "sc-heerenveen",
+   "cat": "imports"
   },
   {
    "q": "Which Belgian winger joined FC Twente from AGOVV Apeldoorn in 2010 and left for Tottenham in 2013?",
    "a": "Nacer Chadli",
-   "club": "twente"
+   "club": "twente",
+   "cat": "imports"
   },
   {
    "q": "Which Dutch striker left FC Utrecht for Sporting Lisbon in 2011 after 15 league goals in 2010-11?",
    "a": "Ricky van Wolfswinkel",
-   "club": "fc-utrecht"
+   "club": "fc-utrecht",
+   "cat": "transfers"
   },
   {
    "q": "Which Slovenian striker scored 16 league goals for Groningen in 2010-11 and then joined PSV?",
    "a": "Tim Matavž",
-   "club": "psv"
+   "club": "psv",
+   "cat": "imports"
   },
   {
    "q": "Which striker joined PSV from AZ in 2007 for about 6 million euros and was handed the number 10 shirt?",
    "a": "Danny Koevermans",
-   "club": "psv"
+   "club": "psv",
+   "cat": "transfers"
   },
   {
    "q": "Which PSV academy winger won the 2009 KNVB Cup with Heerenveen and later played for Hertha Berlin and Reading?",
    "a": "Roy Beerens",
-   "club": "psv"
+   "club": "psv",
+   "cat": "transfers"
   },
   {
    "q": "Hakim Ziyech made his professional debut in 2012 for which club?",
-   "a": "Heerenveen"
+   "a": "Heerenveen",
+   "cat": "transfers"
   },
   {
    "q": "Which Czech club did Vitesse sign Wilfried Bony from in January 2011?",
    "a": "Sparta Prague",
-   "club": "vitesse"
+   "club": "vitesse",
+   "cat": "imports"
   },
   {
    "q": "Which Italian striker scored 27 Eredivisie goals for Feyenoord in 2012-13 while on loan from Parma?",
    "a": "Graziano Pellè",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "imports"
   },
   {
    "q": "Which AZ midfielder won the Johan Cruijff Prijs for 2011-12 and joined PSV for 6.5 million euros in 2013?",
@@ -2480,11 +2893,13 @@
   {
    "q": "Which Feyenoord midfielder, a crowd favourite, joined Southampton in 2015 for about 8 million pounds?",
    "a": "Jordy Clasie",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "transfers"
   },
   {
    "q": "Which club did Jordy Clasie spend 2010-11 on loan at, making his debut in a Rotterdam derby?",
-   "a": "Excelsior"
+   "a": "Excelsior",
+   "cat": "transfers"
   },
   {
    "q": "Which Ajax midfielder won the Johan Cruijff Prijs for 2010-11, the first Dane to win it since Jon Dahl Tomasson?",
@@ -2499,22 +2914,26 @@
   {
    "q": "Which Syrian-born striker scored 25 Eredivisie goals for Roda JC in 2011-12?",
    "a": "Sanharib Malki",
-   "club": "roda-jc-kerkrade"
+   "club": "roda-jc-kerkrade",
+   "cat": "imports"
   },
   {
    "q": "Which Brazilian striker became Heracles' record Eredivisie scorer during seven seasons in Almelo from 2006?",
    "a": "Everton",
    "sub": "Everton Ramos da Silva got there with a goal at Feyenoord in March 2010.",
-   "club": "heracles-almelo"
+   "club": "heracles-almelo",
+   "cat": "imports"
   },
   {
    "q": "Which Swedish striker joined Groningen in 2007 as Suárez's replacement and left for Hamburg in 2009?",
-   "a": "Marcus Berg"
+   "a": "Marcus Berg",
+   "cat": "imports"
   },
   {
    "q": "Which Serbian striker, signed on a free at 30, scored 16 league goals for Ajax in 2009-10?",
    "a": "Marko Pantelić",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "imports"
   },
   {
    "q": "Which goalkeeper moved directly from Ajax to Feyenoord in August 2014 for about 1 million euros?",
@@ -2529,70 +2948,83 @@
   {
    "q": "Which Chelsea loanee scored 9 league goals for Vitesse in 2017-18 and was voted their player of the year?",
    "a": "Mason Mount",
-   "club": "vitesse"
+   "club": "vitesse",
+   "cat": "imports"
   },
   {
    "q": "Which Slovak winger, on loan from Chelsea, scored in the 2-0 win at NAC that clinched Twente's 2010 title?",
    "a": "Miroslav Stoch",
-   "club": "nac-breda"
+   "club": "nac-breda",
+   "cat": "imports"
   },
   {
    "q": "Which Ivorian midfielder left FC Twente for Newcastle in 2010 after the title season?",
    "a": "Cheick Tioté",
-   "club": "twente"
+   "club": "twente",
+   "cat": "transfers"
   },
   {
    "q": "Which Austrian striker scored Twente's extra-time winner in the 2011 KNVB Cup final against Ajax?",
    "a": "Marc Janko",
    "sub": "117th minute, 3-2.",
-   "club": "twente"
+   "club": "twente",
+   "cat": "cups"
   },
   {
    "q": "Which Swiss striker scored 12 league goals in Twente's 2009-10 title season and then joined Seattle Sounders?",
    "a": "Blaise Nkufo",
    "sub": "He left Twente with 114 Eredivisie goals, a club record at the time.",
-   "club": "twente"
+   "club": "twente",
+   "cat": "imports"
   },
   {
    "q": "Which Belgian midfielder was AZ's playmaker in the 2009 title season and joined Fulham in 2010?",
    "a": "Mousa Dembélé",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "imports"
   },
   {
    "q": "Which Mexican defender won league titles with both AZ in 2009 and PSV in 2016?",
    "a": "Héctor Moreno",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "imports"
   },
   {
    "q": "Which second-tier club did AZ sign Vincent Janssen from in 2015?",
    "a": "Almere City",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "transfers"
   },
   {
    "q": "Which club conceded only 13 goals in 1971-72, the fewest in an Eredivisie season up to 2017-18?",
    "a": "FC Twente",
-   "sub": "Their keeper Piet Schrijvers won the least beaten goalkeeper trophy for it."
+   "sub": "Their keeper Piet Schrijvers won the least beaten goalkeeper trophy for it.",
+   "cat": "records"
   },
   {
    "q": "In which season did Ajax collect 89 points, the most in an Eredivisie season under three points for a win up to 2017-18?",
    "a": "1997-98",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "records"
   },
   {
    "q": "Which club did Ajax beat 8-1 away in 1997-98?",
    "a": "De Graafschap",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "records"
   },
   {
    "q": "NAC's Koos Waslander scored after 8 seconds in March 1982. Which club were the opponents?",
    "a": "PEC Zwolle",
-   "club": "nac-breda"
+   "club": "nac-breda",
+   "cat": "records"
   },
   {
    "q": "Which PSV defender was sent off after 29 seconds at NAC Breda in 2014-15?",
    "a": "Jetro Willems",
    "sub": "The fastest red card the Eredivisie had seen.",
-   "club": "psv"
+   "club": "psv",
+   "cat": "records"
   },
   {
    "q": "Which Dutch referee took charge of 541 Eredivisie matches before retiring in 2010?",
@@ -2634,16 +3066,19 @@
   },
   {
    "q": "Which Alkmaar club won the Eredivisie in 1980-81 with six rounds still to play?",
-   "a": "AZ '67"
+   "a": "AZ '67",
+   "cat": "records"
   },
   {
    "q": "Which Belgian striker was Eredivisie top scorer in 2010-11 with 23 goals for NEC?",
    "a": "Björn Vleminckx",
-   "club": "nec-nijmegen"
+   "club": "nec-nijmegen",
+   "cat": "scorers"
   },
   {
    "q": "Which Breda club did Pierre van Hooijdonk score for in eleven league matches in a row in 1993-94?",
-   "a": "NAC Breda"
+   "a": "NAC Breda",
+   "cat": "records"
   },
   {
    "q": "Which Ajax goalkeeper set an Eredivisie record in 1971 by going 1082 minutes without conceding?",
@@ -2656,29 +3091,35 @@
   },
   {
    "q": "Which Tilburg club lost fourteen league matches in a row between March and September 2010?",
-   "a": "Willem II"
+   "a": "Willem II",
+   "cat": "records"
   },
   {
    "q": "Which Utrecht club won the first of the two Dutch play-offs for a UEFA Cup place, in 1987?",
-   "a": "FC Utrecht"
+   "a": "FC Utrecht",
+   "cat": "relegation"
   },
   {
    "q": "Which northern club won the 1988 Dutch play-off for a UEFA Cup place after finishing only eleventh in the league?",
    "a": "FC Groningen",
-   "sub": "UEFA refused to let the winner in again, so the KNVB scrapped it."
+   "sub": "UEFA refused to let the winner in again, so the KNVB scrapped it.",
+   "cat": "relegation"
   },
   {
    "q": "Which club were the first winners of the Dutch promotion play-offs, in 1973?",
    "a": "De Graafschap",
-   "sub": "A young Guus Hiddink was in that side."
+   "sub": "A young Guus Hiddink was in that side.",
+   "cat": "relegation"
   },
   {
    "q": "Which club scored only 16 goals in the whole of 1971-72, the fewest in an Eredivisie season up to 2017-18?",
-   "a": "FC Volendam"
+   "a": "FC Volendam",
+   "cat": "records"
   },
   {
    "q": "Which club won just one of its 34 matches in 1970-71?",
-   "a": "Haarlem"
+   "a": "Haarlem",
+   "cat": "records"
   },
   {
    "q": "Which Dutch goalkeeper won the least beaten keeper trophy with PSV in both 1985-86 and 1986-87?",
@@ -2693,7 +3134,8 @@
   {
    "q": "How many points did Ajax take in 1971-72, the most in any Eredivisie season under two points for a win?",
    "a": "63",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "records"
   },
   {
    "q": "Which PSV defender was named Player of the Year at the first Eredivisie Awards, for 2017-18?",
@@ -2711,11 +3153,13 @@
   },
   {
    "q": "Which club was relegated from the Eredivisie in 1959-60 with 29 points, the biggest haul by a relegated club up to 2017-18?",
-   "a": "Blauw-Wit"
+   "a": "Blauw-Wit",
+   "cat": "records"
   },
   {
    "q": "Which club conceded 111 goals in 1958-59, the most in any Eredivisie season up to 2017-18?",
-   "a": "Holland Sport, the club known as SHS"
+   "a": "Holland Sport, the club known as SHS",
+   "cat": "records"
   },
   {
    "q": "Which Dutch referee made his Eredivisie debut in 2009-10 aged 24, the youngest debutant the league had had?",
@@ -2732,27 +3176,32 @@
   {
    "q": "Which Ajax teenager scored on his Eredivisie debut in 2013-14, aged 17 years and 104 days?",
    "a": "Jaïro Riedewald",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "records"
   },
   {
    "q": "Which club took four penalties in one Eredivisie match against RBC Roosendaal in February 2005?",
    "a": "PSV",
-   "club": "rbc-roosendaal"
+   "club": "rbc-roosendaal",
+   "cat": "records"
   },
   {
    "q": "Who scored the only goal at Vitesse on 20 April 2008, the final-day win that clinched PSV's fourth straight title?",
    "a": "Danko Lazovic",
-   "club": "vitesse"
+   "club": "vitesse",
+   "cat": "champions"
   },
   {
    "q": "Which club finished third in 2007-08, above Twente, Heerenveen and Feyenoord?",
    "a": "NAC Breda",
-   "club": "twente"
+   "club": "twente",
+   "cat": "champions"
   },
   {
    "q": "Which Ajax coach left for Chelsea in the autumn of 2007, leaving Adrie Koster in interim charge?",
    "a": "Henk ten Cate",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "managers"
   },
   {
    "q": "Which club beat Ajax over two legs in the 2008 play-off final for the Champions League qualifying ticket?",
@@ -2774,7 +3223,8 @@
   {
    "q": "Which Swiss striker was Twente's leading scorer in 2007-08 with 22 league goals, second only to Huntelaar?",
    "a": "Blaise Nkufo",
-   "club": "twente"
+   "club": "twente",
+   "cat": "scorers"
   },
   {
    "q": "Which Ajax defender was named Dutch Footballer of the Year for 2007-08 before joining Atletico Madrid?",
@@ -2784,7 +3234,8 @@
   {
    "q": "AZ lost their first two matches of the 2008-09 title season. Name either of the clubs that beat them.",
    "a": "NAC Breda or ADO Den Haag",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "champions"
   },
   {
    "q": "Which Argentine goalkeeper kept goal for AZ in the 2008-09 title season?",
@@ -2795,85 +3246,102 @@
   {
    "q": "Feyenoord finished seventh in 2008-09 and lost a European play-off semi-final 4-0 at De Kuip to which club?",
    "a": "NAC Breda",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "relegation"
   },
   {
    "q": "Which coach did Feyenoord dismiss in January 2009, with Leon Vlemmings taking over as interim?",
    "a": "Gertjan Verbeek",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "managers"
   },
   {
    "q": "Which club stayed up in 2009 by beating Cambuur on penalties after three drawn play-off matches?",
    "a": "Roda JC",
    "sub": "0-0, 1-1 and 2-2, then 5-3 on penalties.",
-   "club": "sc-cambuur"
+   "club": "sc-cambuur",
+   "cat": "relegation"
   },
   {
    "q": "Which club went down in 2009 after losing the play-off final to RKC Waalwijk, a year after surviving the same play-offs?",
    "a": "De Graafschap",
-   "club": "rkc-waalwijk"
+   "club": "rkc-waalwijk",
+   "cat": "relegation"
   },
   {
    "q": "Who took over AZ in December 2009 after Ronald Koeman was sacked?",
    "a": "Dick Advocaat",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "managers"
   },
   {
    "q": "Which Norwegian coach did Heerenveen sack at the end of August 2009, a few months after he won them the KNVB Cup?",
    "a": "Trond Sollied",
-   "club": "sc-heerenveen"
+   "club": "sc-heerenveen",
+   "cat": "managers"
   },
   {
    "q": "Which club finished bottom in 2009-10 with 15 points, losing 29 of its 34 matches?",
-   "a": "RKC Waalwijk"
+   "a": "RKC Waalwijk",
+   "cat": "relegation"
   },
   {
    "q": "Sparta went down in 2010 after a play-off final against which Rotterdam rival, decided on away goals after 0-0 and 1-1?",
    "a": "Excelsior",
-   "club": "sparta-rotterdam"
+   "club": "sparta-rotterdam",
+   "cat": "relegation"
   },
   {
    "q": "Which club won the 2010 play-offs for a Europa League place, beating Roda JC 6-1 on aggregate in the final?",
    "a": "FC Utrecht",
-   "club": "roda-jc-kerkrade"
+   "club": "roda-jc-kerkrade",
+   "cat": "relegation"
   },
   {
    "q": "Which Danish striker scored 21 league goals for Roda JC in 2009-10, third in the scoring chart?",
    "a": "Mads Junker",
-   "club": "roda-jc-kerkrade"
+   "club": "roda-jc-kerkrade",
+   "cat": "scorers"
   },
   {
    "q": "Which club finished third in 2009-10, losing only two matches but drawing nine?",
-   "a": "PSV"
+   "a": "PSV",
+   "cat": "champions"
   },
   {
    "q": "Which Ajax midfielder scored twice in the 3-1 win over Twente that decided the 2010-11 title?",
    "a": "Siem de Jong",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "champions"
   },
   {
    "q": "Ajax's 2011 championship was their 30th. What did it earn the club on its shirt?",
    "a": "A third star",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "champions"
   },
   {
    "q": "Which Russian striker scored 21 league goals for ADO Den Haag in 2010-11, second in the scoring chart?",
    "a": "Dmitri Bulykin",
-   "club": "ado-den-haag"
+   "club": "ado-den-haag",
+   "cat": "scorers"
   },
   {
    "q": "Which club finished bottom in 2010-11 with 15 points and a goal difference of minus 61?",
-   "a": "Willem II"
+   "a": "Willem II",
+   "cat": "relegation"
   },
   {
    "q": "Which Brazilian scored a hat-trick in PSV's 10-0 win over Feyenoord in October 2010?",
    "a": "Jonathan Reis",
-   "club": "psv"
+   "club": "psv",
+   "cat": "records"
   },
   {
    "q": "Who was Feyenoord's coach on the day of the 10-0 defeat at PSV?",
    "a": "Mario Been",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "managers"
   },
   {
    "q": "Which Twente midfielder was Dutch Footballer of the Year for 2010-11 and then joined Ajax?",
@@ -2883,22 +3351,26 @@
   {
    "q": "Which coach was sacked by Twente in January 2012, bringing Steve McClaren back to Enschede?",
    "a": "Co Adriaanse",
-   "club": "twente"
+   "club": "twente",
+   "cat": "managers"
   },
   {
    "q": "Which striker scored 25 league goals for Twente in 2011-12 and then joined Borussia Monchengladbach?",
    "a": "Luuk de Jong",
-   "club": "twente"
+   "club": "twente",
+   "cat": "scorers"
   },
   {
    "q": "Which Swedish striker scored 20 league goals for Feyenoord in 2011-12 while on loan from Manchester City?",
    "a": "John Guidetti",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "scorers"
   },
   {
    "q": "Which Belgian scored 21 league goals for PSV in 2011-12, his first season after arriving from Utrecht?",
    "a": "Dries Mertens",
-   "club": "psv"
+   "club": "psv",
+   "cat": "scorers"
   },
   {
    "q": "Which club won the 2012 play-offs for Europe, beating RKC Waalwijk in the final?",
@@ -2908,7 +3380,8 @@
   {
    "q": "Excelsior went straight down in 2012. Which club joined them after losing to FC Den Bosch in the play-offs?",
    "a": "De Graafschap",
-   "club": "excelsior-rotterdam"
+   "club": "excelsior-rotterdam",
+   "cat": "relegation"
   },
   {
    "q": "Which Limburg club survived the relegation play-offs in both 2011 and 2012?",
@@ -2922,12 +3395,14 @@
   {
    "q": "Who coached PSV in 2012-13, between Cocu's spell as interim and his permanent appointment?",
    "a": "Dick Advocaat",
-   "club": "psv"
+   "club": "psv",
+   "cat": "managers"
   },
   {
    "q": "PSV and Feyenoord both finished 2012-13 on 69 points. Which club took second on goal difference?",
    "a": "PSV",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "champions"
   },
   {
    "q": "Which Vitesse midfielder was Talent of the Year for 2012-13 before joining Chelsea?",
@@ -2937,47 +3412,56 @@
   {
    "q": "Which club won promotion in 2013 by beating VVV-Venlo and then Volendam in the play-offs?",
    "a": "Go Ahead Eagles",
-   "club": "vvv-venlo"
+   "club": "vvv-venlo",
+   "cat": "relegation"
   },
   {
    "q": "Which club did Roda JC beat in the 2013 play-off final to keep their Eredivisie place?",
    "a": "Sparta Rotterdam",
-   "club": "roda-jc-kerkrade"
+   "club": "roda-jc-kerkrade",
+   "cat": "relegation"
   },
   {
    "q": "Which club finished fourth in 2013-14, twelve points behind Ajax, a year before winning the title?",
    "a": "PSV",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "champions"
   },
   {
    "q": "Which club won 6-2 away at PSV in 2013-14, the highest-scoring match of that season?",
    "a": "Vitesse",
-   "club": "psv"
+   "club": "psv",
+   "cat": "records"
   },
   {
    "q": "Which two clubs went down through the 2014 play-offs, joining Roda JC in the second tier?",
    "a": "NEC and RKC Waalwijk",
-   "club": "roda-jc-kerkrade"
+   "club": "roda-jc-kerkrade",
+   "cat": "relegation"
   },
   {
    "q": "Which club beat Sparta Rotterdam 5-3 on aggregate in a 2014 play-off final to reach the Eredivisie?",
    "a": "FC Dordrecht",
-   "club": "sparta-rotterdam"
+   "club": "sparta-rotterdam",
+   "cat": "relegation"
   },
   {
    "q": "Which club beat RKC Waalwijk in the 2014 play-off final to go up?",
    "a": "Excelsior",
-   "club": "rkc-waalwijk"
+   "club": "rkc-waalwijk",
+   "cat": "relegation"
   },
   {
    "q": "Which club won the 2014 European play-offs, beating AZ 3-0 in the second leg of the final?",
    "a": "FC Groningen",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "relegation"
   },
   {
    "q": "Which coach was sacked by AZ in September 2013, months after winning them the KNVB Cup, with Dick Advocaat returning?",
    "a": "Gertjan Verbeek",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "managers"
   },
   {
    "q": "Which Ajax player was Dutch Footballer of the Year for 2013-14 before joining Manchester United?",
@@ -2987,22 +3471,26 @@
   {
    "q": "Which coach led PEC Zwolle to the 2014 KNVB Cup and the Johan Cruijff Schaal that followed?",
    "a": "Ron Jans",
-   "club": "pec-zwolle"
+   "club": "pec-zwolle",
+   "cat": "cups"
   },
   {
    "q": "PSV clinched the 2014-15 title on 18 April 2015 with a 4-1 home win over which club?",
    "a": "Heerenveen",
-   "club": "psv"
+   "club": "psv",
+   "cat": "champions"
   },
   {
    "q": "The 2014-15 Eredivisie was the first ever without a club from which province?",
    "a": "Limburg",
-   "sub": "Roda JC had gone down in 2014, MVV, Fortuna and VVV were all in the second tier."
+   "sub": "Roda JC had gone down in 2014, MVV, Fortuna and VVV were all in the second tier.",
+   "cat": "records"
   },
   {
    "q": "Which club finished third in 2014-15, behind PSV and Ajax and above Feyenoord?",
    "a": "AZ",
-   "club": "psv"
+   "club": "psv",
+   "cat": "champions"
   },
   {
    "q": "Which two clubs went down through the 2015 play-offs, losing to De Graafschap and Roda JC?",
@@ -3017,32 +3505,38 @@
   {
    "q": "Who replaced Marco van Basten as AZ coach in the autumn of 2014?",
    "a": "John van den Brom",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "managers"
   },
   {
    "q": "Which coach did Giovanni van Bronckhorst succeed at Feyenoord in the summer of 2015?",
    "a": "Fred Rutten",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "managers"
   },
   {
    "q": "The highest-scoring match of 2014-15 came on the final day, a 5-4 away win at NAC Breda. Who were the winners?",
    "a": "FC Groningen",
-   "club": "nac-breda"
+   "club": "nac-breda",
+   "cat": "records"
   },
   {
    "q": "Who scored twice in PSV's 3-1 win at PEC Zwolle on the final day of 2015-16 that sealed the title?",
    "a": "Luuk de Jong",
-   "club": "psv"
+   "club": "psv",
+   "cat": "champions"
   },
   {
    "q": "Which club went down in 2016 after losing the play-off final to Go Ahead Eagles?",
    "a": "De Graafschap",
-   "club": "go-ahead-eagles"
+   "club": "go-ahead-eagles",
+   "cat": "relegation"
   },
   {
    "q": "Which club stayed up in 2016 by beating NAC Breda in the play-off final?",
    "a": "Willem II",
-   "club": "nac-breda"
+   "club": "nac-breda",
+   "cat": "relegation"
   },
   {
    "q": "Which Ajax captain was Dutch Footballer of the Year for 2015-16?",
@@ -3052,12 +3546,14 @@
   {
    "q": "Which coach left Vitesse in January 2016 for Maccabi Tel Aviv, and took the Ajax job that summer?",
    "a": "Peter Bosz",
-   "club": "vitesse"
+   "club": "vitesse",
+   "cat": "managers"
   },
   {
    "q": "Which veteran coach returned to Heerenveen in October 2015 after Dwight Lodeweges resigned?",
    "a": "Foppe de Haan",
-   "club": "sc-heerenveen"
+   "club": "sc-heerenveen",
+   "cat": "managers"
   },
   {
    "q": "Which goalkeeper played for PSV in both the 2015 and 2016 title-winning seasons?",
@@ -3067,7 +3563,8 @@
   {
    "q": "Feyenoord's 2017 championship dish was a special one-off version. What was different about it?",
    "a": "It was inlaid with gold for the Eredivisie's 60th anniversary",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "champions"
   },
   {
    "q": "Which Australian goalkeeper played behind Feyenoord's defence in the 2016-17 title season?",
@@ -3091,7 +3588,8 @@
   },
   {
    "q": "Which club finished bottom in 2016-17 with 23 points, one season after winning promotion through the play-offs?",
-   "a": "Go Ahead Eagles"
+   "a": "Go Ahead Eagles",
+   "cat": "relegation"
   },
   {
    "q": "Which club went down in 2017 after losing the play-off final 5-1 on aggregate to NAC Breda?",
@@ -3110,30 +3608,36 @@
   {
    "q": "Who coached Vitesse to the 2017 KNVB Cup, the club's first major trophy in 125 years?",
    "a": "Henk Fraser",
-   "club": "vitesse"
+   "club": "vitesse",
+   "cat": "cups"
   },
   {
    "q": "Which on-loan Chelsea midfielder captained PSV to the 2017-18 title?",
    "a": "Marco van Ginkel",
-   "club": "psv"
+   "club": "psv",
+   "cat": "champions"
   },
   {
    "q": "Twente sacked two coaches during the 2017-18 relegation season. Name either of them.",
    "a": "Rene Hake or Gertjan Verbeek",
-   "club": "twente"
+   "club": "twente",
+   "cat": "managers"
   },
   {
    "q": "Which club went down in 2018 after losing both legs of a play-off tie to Almere City?",
    "a": "Roda JC",
-   "club": "almere-city"
+   "club": "almere-city",
+   "cat": "relegation"
   },
   {
    "q": "Which club won the 2018 European play-off final against Utrecht, 5-3 on aggregate?",
-   "a": "Vitesse"
+   "a": "Vitesse",
+   "cat": "relegation"
   },
   {
    "q": "Alireza Jahanbakhsh's 2017-18 golden boot was a first of its kind. What was the first?",
-   "a": "The first Asian player to be top scorer in a top European league"
+   "a": "The first Asian player to be top scorer in a top European league",
+   "cat": "scorers"
   },
   {
    "q": "Which Ajax winger was Dutch Footballer of the Year for 2017-18?",
@@ -3142,15 +3646,18 @@
   },
   {
    "q": "Which club won 7-1 away at Utrecht in September 2017?",
-   "a": "PSV"
+   "a": "PSV",
+   "cat": "records"
   },
   {
    "q": "Who coached Emmen to their first ever promotion in 2018?",
-   "a": "Dick Lukkien"
+   "a": "Dick Lukkien",
+   "cat": "relegation"
   },
   {
    "q": "Which club finished bottom in 2014-15 with 20 points, one season after coming up through the play-offs?",
-   "a": "FC Dordrecht"
+   "a": "FC Dordrecht",
+   "cat": "relegation"
   },
   {
    "q": "Which Russian club did Keisuke Honda leave VVV-Venlo for at the end of 2009?",
@@ -3192,7 +3699,8 @@
   {
    "q": "Alex Pastoor, sacked by NEC after three games in 2013, won promotion as champions in 2016 with which club?",
    "a": "Sparta Rotterdam",
-   "club": "nec-nijmegen"
+   "club": "nec-nijmegen",
+   "cat": "managers"
   },
   {
    "q": "How many matches did the KNVB ban Luis Suárez for after he bit Otman Bakkal in November 2010?",
@@ -3203,11 +3711,13 @@
    "q": "Heracles' Polman Stadion was named after what kind of business?",
    "a": "A real estate company",
    "sub": "Renamed Erve Asito in 2019 after a cleaning firm.",
-   "club": "heracles-almelo"
+   "club": "heracles-almelo",
+   "cat": "grounds"
   },
   {
    "q": "Which goalkeeper scored seven Eredivisie goals between 1964 and 1967, all from the penalty spot?",
-   "a": "Nico van Zoghel"
+   "a": "Nico van Zoghel",
+   "cat": "stories"
   },
   {
    "q": "Which striker won the Eredivisie golden boot five times, four with Ajax in the 1970s and once with Sparta in 1981?",
@@ -3217,37 +3727,44 @@
   {
    "q": "Which Ajax player scored the club's first goal in the Amsterdam ArenA, against NAC Breda in August 1996?",
    "a": "Kiki Musampa",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "grounds"
   },
   {
    "q": "Ajax beat which Luxembourg club 14-0 in the 1984-85 UEFA Cup, the biggest win in their history?",
    "a": "Red Boys Differdange",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "records"
   },
   {
    "q": "At the opening of Ajax's Amsterdam ArenA the queen unveiled the world's largest painting. What was it called?",
    "a": "De Zee, The Sea",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "grounds"
   },
   {
    "q": "A torch relay ended at the opening of Ajax's new stadium in 1996. Cruyff ran first. Who ran the last leg?",
    "a": "Frank Rijkaard",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "grounds"
   },
   {
    "q": "The grass under Ajax's retractable roof would not grow. How many times was it replaced in the first ten years?",
    "a": "45 times",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "grounds"
   },
   {
    "q": "Which Ajax winger wore the number 14 shirt in the 1978-79 season?",
    "a": "Tscheu La Ling",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "stories"
   },
   {
    "q": "Which Ajax shirt number has not been handed out since Abdelhak Nouri collapsed in a friendly in 2017?",
    "a": "34",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "stories"
   },
   {
    "q": "Which Ajax winger started the club's veterans charity side, Lucky Ajax, in the 1970s?",
@@ -3266,17 +3783,20 @@
   {
    "q": "In March 2011 an entire Ajax body quit rather than carry out Johan Cruyff's plans. Which one?",
    "a": "The board of directors",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "stories"
   },
   {
    "q": "Ajax were sixth and ten points off the top in February 2012, then won the title. How did they do it?",
    "a": "By winning their last 14 matches of the season",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "champions"
   },
   {
    "q": "Which Ajax defender scored a late winner at Old Trafford in the 2012 Europa League?",
    "a": "Toby Alderweireld",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "europe"
   },
   {
    "q": "Which reserve league did Jong Ajax leave in 2013, having won it a record eight times?",
@@ -3286,7 +3806,8 @@
   {
    "q": "Who scored the winning penalty for PSV in the 1988 European Cup shoot-out against Benfica?",
    "a": "Anton Janssen",
-   "club": "psv"
+   "club": "psv",
+   "cat": "europe"
   },
   {
    "q": "Jong PSV were only offered the last Eerste Divisie place in 2013 after which amateur club turned it down?",
@@ -3306,17 +3827,20 @@
   {
    "q": "Who chose PSV's red and white in 1913, inspired by his raspberry drink next to his white notepad?",
    "a": "Jan Willem Hofkes, the first chairman",
-   "club": "psv"
+   "club": "psv",
+   "cat": "records"
   },
   {
    "q": "PSV's forerunner, the Philips Elftal, played its first match in January 1911 against which club from Woensel?",
    "a": "Hollandia",
-   "club": "psv"
+   "club": "psv",
+   "cat": "records"
   },
   {
    "q": "The word herdgang, which names PSV's training ground, originally described what?",
    "a": "The open squares at the end of dirt roads where sheep were grazed",
-   "club": "psv"
+   "club": "psv",
+   "cat": "grounds"
   },
   {
    "q": "How much a year was Philips paying to sponsor the PSV shirt by the time the deal ended in 2016?",
@@ -3326,33 +3850,39 @@
   {
    "q": "PSV's first wooden stand went up in 1916, paid for by Philips to mark what?",
    "a": "The company's 25th anniversary",
-   "club": "psv"
+   "club": "psv",
+   "cat": "grounds"
   },
   {
    "q": "PSV celebrated the reopening of their rebuilt ground in 1977 with a match against which English club?",
    "a": "Leeds United",
-   "club": "psv"
+   "club": "psv",
+   "cat": "grounds"
   },
   {
    "q": "PSV briefly added a laurel wreath and a golden 100 to their crest. In which year?",
    "a": "2013",
    "sub": "The club's centenary season.",
-   "club": "psv"
+   "club": "psv",
+   "cat": "records"
   },
   {
    "q": "Which Feyenoord captain headed the equaliser in the 1970 European Cup final?",
    "a": "Rinus Israel",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "europe"
   },
   {
    "q": "Who kept goal for Feyenoord in the 1970 European Cup final?",
    "a": "Eddy Pieters Graafland",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "europe"
   },
   {
    "q": "Which Austrian completed Feyenoord's 1970 European Cup midfield alongside Van Hanegem and Wim Jansen?",
    "a": "Franz Hasil",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "europe"
   },
   {
    "q": "Feyenoord's centenary tournament in 2008 brought in their three European final opponents. Name any one.",
@@ -3377,37 +3907,44 @@
   {
    "q": "Ronald Koeman stopped Feyenoord's players walking to training. What was the problem?",
    "a": "They had to cross the busy Coen Moulijnweg, so he had them driven in vans",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "grounds"
   },
   {
    "q": "The square at Feyenoord's rebuilt Varkenoord is named after which 1970 European Cup winner?",
    "a": "Wim Jansen",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "grounds"
   },
   {
    "q": "In which year did Feyenoord finally drop both the new stadium and the big renovation of De Kuip?",
    "a": "2022",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "grounds"
   },
   {
    "q": "Which PSV goalkeeper put through his own net in a 2-1 Feyenoord win in 2016-17, given by goal-line technology?",
    "a": "Jeroen Zoet",
-   "club": "psv"
+   "club": "psv",
+   "cat": "champions"
   },
   {
    "q": "Which Sparta Rotterdam player scored inside a minute in March 2017 to give Feyenoord their first loss of the year?",
    "a": "Mathias Pogba",
-   "club": "sparta-rotterdam"
+   "club": "sparta-rotterdam",
+   "cat": "champions"
   },
   {
    "q": "Feyenoord beat which holders 2-0 at De Kuip in the 2014-15 Europa League group stage?",
    "a": "Sevilla",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "europe"
   },
   {
    "q": "Which Ukrainian club knocked Feyenoord out of Champions League qualifying in August 2012?",
    "a": "Dynamo Kyiv",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "europe"
   },
   {
    "q": "Ajax and PSV met for the first time in April 1931. What was the score?",
@@ -3425,46 +3962,55 @@
   {
    "q": "The 1957-58 title went to a play-off at the Goffert in Nijmegen. Which club lost it 1-0 to DOS after extra time?",
    "a": "Sportclub Enschede",
-   "sub": "Tonny van der Linden scored in the 109th minute in front of 38,000."
+   "sub": "Tonny van der Linden scored in the 109th minute in front of 38,000.",
+   "cat": "champions"
   },
   {
    "q": "Who coached Feyenoord to the 1968-69 league and cup double?",
    "a": "Ben Peeters",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "managers"
   },
   {
    "q": "Marco van Basten scored five on the final day of 1983-84 to take the golden boot. Which Dordrecht club lost that game 7-2?",
-   "a": "DS '79"
+   "a": "DS '79",
+   "cat": "scorers"
   },
   {
    "q": "Which German coach led Ajax to the 1981-82 title, the season Ajax scored 117 league goals?",
    "a": "Kurt Linder",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "managers"
   },
   {
    "q": "Who coached Ajax to the 1982-83 title, with Johan Cruyff back at the club as a player?",
    "a": "Aad de Mos",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "managers"
   },
   {
    "q": "Whom did Guus Hiddink replace as PSV coach in March 1987, on the way to his first title?",
    "a": "Hans Kraay",
-   "club": "psv"
+   "club": "psv",
+   "cat": "managers"
   },
   {
    "q": "Who coached PSV to the 1985-86 Eredivisie title, the season before Hiddink took over?",
    "a": "Jan Reker",
-   "club": "psv"
+   "club": "psv",
+   "cat": "managers"
   },
   {
    "q": "Which Arnhem ground did Vitesse leave for the GelreDome in 1998?",
    "a": "Nieuw-Monnikenhuize",
-   "club": "vitesse"
+   "club": "vitesse",
+   "cat": "grounds"
   },
   {
    "q": "Which Amsterdam club finished third in 1961-62, behind Feyenoord and PSV?",
    "a": "Blauw-Wit",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "stories"
   },
   {
    "q": "For four seasons from 1962-63 the Eredivisie was cut from eighteen clubs to how many?",
@@ -3474,19 +4020,23 @@
   {
    "q": "PSV clinched the 2002-03 title on the final day with a 0-0 draw away at which club?",
    "a": "FC Groningen",
-   "club": "psv"
+   "club": "psv",
+   "cat": "champions"
   },
   {
    "q": "Which club's first ever Eredivisie season, 2000-01, ended in relegation with just 14 points?",
-   "a": "RBC Roosendaal"
+   "a": "RBC Roosendaal",
+   "cat": "relegation"
   },
   {
    "q": "Which club finished bottom in 1985-86 with 12 points and a goal difference of minus 73?",
-   "a": "Heracles"
+   "a": "Heracles",
+   "cat": "relegation"
   },
   {
    "q": "Which Amsterdam club took just 8 points from 30 games in 1962-63?",
-   "a": "De Volewijckers"
+   "a": "De Volewijckers",
+   "cat": "stories"
   },
   {
    "q": "Which Limburg club finished bottom in 1991-92 with 12 points?",
@@ -3495,80 +4045,97 @@
   {
    "q": "Which Scheveningen club merged with ADO in 1971 to form FC Den Haag?",
    "a": "Holland Sport",
-   "club": "ado-den-haag"
+   "club": "ado-den-haag",
+   "cat": "stories"
   },
   {
    "q": "Which 1948 Dutch champion from 's-Hertogenbosch passed its professional licence to the new FC Den Bosch in 1965?",
    "a": "BVV",
    "sub": "Wilhelmina joined in 1967, hence the old name FC Den Bosch '67.",
-   "club": "fc-den-bosch"
+   "club": "fc-den-bosch",
+   "cat": "stories"
   },
   {
    "q": "Which club went bankrupt in 1992 after two single-season Eredivisie stays, in 1974-75 and 1980-81?",
-   "a": "FC Wageningen"
+   "a": "FC Wageningen",
+   "cat": "stories"
   },
   {
    "q": "FC Amsterdam reached the 1974-75 UEFA Cup quarter-final. Which German club knocked them out?",
-   "a": "1. FC Köln"
+   "a": "1. FC Köln",
+   "cat": "stories"
   },
   {
    "q": "DWS reached the 1964-65 European Cup quarter-final. Which Hungarian club beat them?",
-   "a": "Vasas Győr"
+   "a": "Vasas Győr",
+   "cat": "stories"
   },
   {
    "q": "Which Utrecht club won the 1964-65 Eerste Divisie, went down from the Eredivisie in 1967 and became part of FC Utrecht in 1970?",
    "a": "Elinkwijk",
-   "club": "fc-utrecht"
+   "club": "fc-utrecht",
+   "cat": "stories"
   },
   {
    "q": "What did the letters of the 1958 champions DOS stand for?",
-   "a": "Door Oefening Sterk"
+   "a": "Door Oefening Sterk",
+   "cat": "stories"
   },
   {
    "q": "What did the letters of the 1964 champions DWS stand for?",
-   "a": "Door Wilskracht Sterk"
+   "a": "Door Wilskracht Sterk",
+   "cat": "stories"
   },
   {
    "q": "Who scored the first ever Eredivisie goal, for DOS against Sparta on 2 September 1956?",
    "a": "Tonny van der Linden",
-   "club": "sparta-rotterdam"
+   "club": "sparta-rotterdam",
+   "cat": "champions"
   },
   {
    "q": "Which Austrian coached DOS to the 1957-58 title?",
-   "a": "Joseph Gruber"
+   "a": "Joseph Gruber",
+   "cat": "managers"
   },
   {
    "q": "Which Englishman coached Sparta Rotterdam to the 1958-59 title?",
    "a": "Denis Neville",
-   "club": "sparta-rotterdam"
+   "club": "sparta-rotterdam",
+   "cat": "managers"
   },
   {
    "q": "Which Czech coached Feyenoord to the 1960-61 title, their first of the Eredivisie era?",
    "a": "Jiří Sobotka",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "managers"
   },
   {
    "q": "Which Austrian coached Feyenoord to the 1964-65 league and cup double?",
    "a": "Willy Kment",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "managers"
   },
   {
    "q": "Who scored a hat-trick as Ajax beat Feyenoord 5-1 in the 1960 title play-off at the Olympisch Stadion?",
    "a": "Wim Bleijenberg",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "champions"
   },
   {
    "q": "Which two newly formed clubs, one from The Hague and one from Groningen, made their Eredivisie debuts in 1971-72?",
-   "a": "FC Den Haag and FC Groningen"
+   "a": "FC Den Haag and FC Groningen",
+   "cat": "stories"
   },
   {
    "q": "A three-way relegation play-off in 1969 involved DOS, AZ '67 and which club, the one that went down?",
    "a": "Volendam",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "relegation"
   },
   {
    "q": "Which future champion was relegated from the Eredivisie in 1970-71 with just 15 points?",
-   "a": "AZ '67"
+   "a": "AZ '67",
+   "cat": "relegation"
   },
   {
    "q": "A play-off in August 1975 decided the last UEFA Cup place after a KNVB row with UEFA. Which club won it?",
@@ -3576,42 +4143,51 @@
   },
   {
    "q": "Which Velsen club finished bottom of the Eredivisie in 1977-78 with 14 points?",
-   "a": "Telstar"
+   "a": "Telstar",
+   "cat": "relegation"
   },
   {
    "q": "Cor Brom won the 1978-79 double with Ajax and was sacked in September 1979. Who took over?",
    "a": "Leo Beenhakker",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "managers"
   },
   {
    "q": "Which club had the better goal difference but still finished second to Ajax in 1979-80?",
    "a": "AZ '67",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "champions"
   },
   {
    "q": "Which club was relegated in 1982-83 with 25 points and bounced straight back the next year?",
-   "a": "FC Twente"
+   "a": "FC Twente",
+   "cat": "relegation"
   },
   {
    "q": "Three clubs went down in 1981-82. Which two finished bottom with just 13 and 12 points?",
    "a": "FC Den Haag and De Graafschap",
-   "sub": "MVV went down with them on 23."
+   "sub": "MVV went down with them on 23.",
+   "cat": "relegation"
   },
   {
    "q": "Which club's unbroken run of 23 Eredivisie seasons ended with relegation in 1986-87?",
-   "a": "Go Ahead Eagles"
+   "a": "Go Ahead Eagles",
+   "cat": "relegation"
   },
   {
    "q": "Which merged club, formed from SVV and Dordrecht '90, finished bottom of the Eredivisie in 1992-93?",
-   "a": "SVV/Dordrecht '90"
+   "a": "SVV/Dordrecht '90",
+   "cat": "stories"
   },
   {
    "q": "Which two clubs went down through the 1993 relegation play-offs, one from Limburg and one from Brabant?",
-   "a": "Fortuna Sittard and FC Den Bosch"
+   "a": "Fortuna Sittard and FC Den Bosch",
+   "cat": "relegation"
   },
   {
    "q": "Which Leeuwarden club finished bottom of the Eredivisie in 1993-94 with 19 points?",
-   "a": "Cambuur"
+   "a": "Cambuur",
+   "cat": "relegation"
   },
   {
    "q": "Which Limburg club went down in 1994-95, the season a neighbour, Roda JC, finished second?",
@@ -3624,7 +4200,8 @@
   },
   {
    "q": "Which Deventer club finished bottom of the Eredivisie in 1995-96 with 22 points?",
-   "a": "Go Ahead Eagles"
+   "a": "Go Ahead Eagles",
+   "cat": "relegation"
   },
   {
    "q": "Which Limburg club finished bottom in 2001-02 with 17 points and had not returned by 2007?",
@@ -3646,7 +4223,8 @@
   {
    "q": "PSV paid a club record fee for Mateja Kežman in 2000. From which Belgrade club?",
    "a": "Partizan",
-   "club": "psv"
+   "club": "psv",
+   "cat": "transfers"
   },
   {
    "q": "Which PSV goalkeeper quit the national team in 1975 with Willy van der Kuijlen, over the favoured treatment of Cruyff and the Ajax players?",
@@ -3656,7 +4234,8 @@
   {
    "q": "Which goalkeeper held the Eredivisie appearance record, 687 games for Sparta and PSV, when he retired in 1987?",
    "a": "Pim Doesburg",
-   "club": "sparta-rotterdam"
+   "club": "sparta-rotterdam",
+   "cat": "records"
   },
   {
    "q": "Which PSV striker was nicknamed Skiete Willy for his shooting with both feet?",
@@ -3693,20 +4272,24 @@
    "q": "Which Luxembourg-born coach led FC Twente to the 1977 KNVB Cup?",
    "a": "Spitz Kohn",
    "sub": "He had played for Fortuna '54 and Sportclub Enschede before Twente.",
-   "club": "twente"
+   "club": "twente",
+   "cat": "managers"
   },
   {
    "q": "Piet Kruiver shared the 1965-66 golden boot with Willy van der Kuijlen. Which club was Kruiver playing for?",
-   "a": "Feyenoord"
+   "a": "Feyenoord",
+   "cat": "scorers"
   },
   {
    "q": "Faas Wilkes and Coen Moulijn both began at which Rotterdam club?",
-   "a": "Xerxes"
+   "a": "Xerxes",
+   "cat": "stories"
   },
   {
    "q": "Which club beat FC Twente 1-0 in the 1975 KNVB Cup final, four years after a merger created it?",
    "a": "FC Den Haag",
-   "club": "twente"
+   "club": "twente",
+   "cat": "cups"
   },
   {
    "q": "Which Italian club knocked Fortuna '54 out of the 1964-65 Cup Winners' Cup in the first round?",
@@ -3715,7 +4298,8 @@
   },
   {
    "q": "Which Portuguese club knocked DOS out of the 1958-59 European Cup?",
-   "a": "Sporting"
+   "a": "Sporting",
+   "cat": "stories"
   },
   {
    "q": "Rapid JC won the 1956 title by beating which club 3-0 in the championship play-off at De Vliert?",
@@ -3724,17 +4308,20 @@
   {
    "q": "What was the name of Fortuna '54's stadium in Geleen?",
    "a": "The Mauritsstadion",
-   "club": "fortuna-sittard"
+   "club": "fortuna-sittard",
+   "cat": "grounds"
   },
   {
    "q": "Which Eindhoven club, not PSV, was relegated in the very first Eredivisie season, 1956-57?",
    "a": "FC Eindhoven",
-   "club": "psv"
+   "club": "psv",
+   "cat": "champions"
   },
   {
    "q": "Which PSV striker was Eredivisie top scorer in the 1962-63 title season with 22 goals?",
    "a": "Pierre Kerkhoffs",
-   "club": "psv"
+   "club": "psv",
+   "cat": "scorers"
   },
   {
    "q": "Which Limburg club finished fourth in 2000-01, behind PSV, Feyenoord and Ajax?",
@@ -3744,31 +4331,37 @@
   {
    "q": "Which northern club finished third in 1990-91, behind PSV and Ajax?",
    "a": "FC Groningen",
-   "club": "psv"
+   "club": "psv",
+   "cat": "champions"
   },
   {
    "q": "Which club finished third in AZ's title season of 1980-81?",
    "a": "FC Utrecht",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "champions"
   },
   {
    "q": "Which Alkmaar club went down from the Eredivisie in 1960-61, six years before AZ '67 was formed?",
    "a": "Alkmaar '54",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "stories"
   },
   {
    "q": "Who in 1962-63 became the first Dutch coach to win the Eredivisie, after six foreign winners?",
-   "a": "Bram Appel"
+   "a": "Bram Appel",
+   "cat": "managers"
   },
   {
    "q": "The 1959-60 title was settled by a play-off between Ajax and Feyenoord. What was the score?",
    "a": "5-1 to Ajax",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "champions"
   },
   {
    "q": "Which Feyenoord striker was Eredivisie top scorer in 1982-83 with 30 goals?",
    "a": "Peter Houtman",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "scorers"
   },
   {
    "q": "Which Limburg club finished third in 1960-61, behind Feyenoord and Ajax?",
@@ -3782,11 +4375,13 @@
   },
   {
    "q": "Which club, playing at the Olympisch Stadion, beat Inter Milan in the 1974-75 UEFA Cup?",
-   "a": "FC Amsterdam"
+   "a": "FC Amsterdam",
+   "cat": "stories"
   },
   {
    "q": "Which Deventer club finished third in 1967-68, before the Eagles were added to its name?",
-   "a": "Go Ahead"
+   "a": "Go Ahead",
+   "cat": "champions"
   },
   {
    "q": "The Van de Kerkhof twins played for which club before Kees Rijvers took them to PSV?",
@@ -3796,20 +4391,24 @@
   {
    "q": "Romário joined PSV in 1988 from which Brazilian club?",
    "a": "Vasco da Gama",
-   "club": "psv"
+   "club": "psv",
+   "cat": "transfers"
   },
   {
    "q": "Which club finished second in 1964-65, a year after winning the title as a promoted side?",
-   "a": "DWS"
+   "a": "DWS",
+   "cat": "stories"
   },
   {
    "q": "Which two clubs were relegated through the 2000 play-offs, one from Maastricht and one from Leeuwarden?",
-   "a": "MVV and Cambuur"
+   "a": "MVV and Cambuur",
+   "cat": "relegation"
   },
   {
    "q": "Which club finished fourth in 2002-03, the best of the rest behind PSV, Ajax and Feyenoord?",
    "a": "NAC Breda",
-   "club": "psv"
+   "club": "psv",
+   "cat": "champions"
   },
   {
    "q": "FC Den Haag lost a 1992 relegation play-off to which Deventer club?",
@@ -3818,46 +4417,55 @@
   {
    "q": "Which Tilburg club, not Willem II, played in the early Eredivisie and went down in both 1959 and 1961?",
    "a": "NOAD",
-   "club": "willem-ii"
+   "club": "willem-ii",
+   "cat": "stories"
   },
   {
    "q": "Ajax won the 1989-90 title with 49 points, one ahead of which club that had the better goal difference?",
    "a": "PSV",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "champions"
   },
   {
    "q": "Which club scored 101 league goals in the 2025-26 Eredivisie?",
    "a": "PSV",
-   "sub": "They won the title by 19 points."
+   "sub": "They won the title by 19 points.",
+   "cat": "champions"
   },
   {
    "q": "Which Spaniard managed FC Twente in 2019-20, their first season back in the Eredivisie?",
    "a": "Gonzalo Garcia Garcia",
-   "club": "twente"
+   "club": "twente",
+   "cat": "managers"
   },
   {
    "q": "Which coach took RKC Waalwijk into the 2019-20 Eredivisie?",
    "a": "Fred Grim",
-   "club": "rkc-waalwijk"
+   "club": "rkc-waalwijk",
+   "cat": "managers"
   },
   {
    "q": "Which coach led Sparta Rotterdam back into the Eredivisie for 2019-20?",
    "a": "Henk Fraser",
-   "club": "sparta-rotterdam"
+   "club": "sparta-rotterdam",
+   "cat": "managers"
   },
   {
    "q": "Which club lost twelve Eredivisie matches in a row in 2020-21 and went down?",
-   "a": "VVV-Venlo"
+   "a": "VVV-Venlo",
+   "cat": "relegation"
   },
   {
    "q": "Which promoted club did Ajax beat 9-0 in September 2021, the biggest home win of that season?",
    "a": "Cambuur",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "records"
   },
   {
    "q": "Which club put together a 26-match unbeaten run on the way to the 2022-23 Eredivisie title?",
    "a": "Feyenoord",
-   "sub": "They also won thirteen in a row."
+   "sub": "They also won thirteen in a row.",
+   "cat": "records"
   },
   {
    "q": "Which club won the 2023 European play-offs, beating Sparta Rotterdam 2-1 on aggregate in the final?",
@@ -3867,164 +4475,197 @@
   {
    "q": "Which Frisian club did AZ beat 9-1 in September 2024, the biggest home win of that season?",
    "a": "Heerenveen",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "records"
   },
   {
    "q": "PSV won 7-1 away at which promoted club in August 2024?",
    "a": "Almere City",
-   "club": "psv"
+   "club": "psv",
+   "cat": "records"
   },
   {
    "q": "Who took charge of AZ in January 2026 after Maarten Martens left?",
    "a": "Lee-Roy Echteld",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "managers"
   },
   {
    "q": "Which coach replaced Bas Sibum at Heracles Almelo in December 2025?",
    "a": "Ernest Faber",
-   "club": "heracles-almelo"
+   "club": "heracles-almelo",
+   "cat": "managers"
   },
   {
    "q": "Which coach replaced John Heitinga at Ajax in November 2025?",
    "a": "Fred Grim",
    "sub": "He lasted until March 2026.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "managers"
   },
   {
    "q": "PSV took 91 points in 2023-24. Whose Eredivisie points record did that beat?",
    "a": "Ajax, who had 89 in 1997-98",
-   "club": "psv"
+   "club": "psv",
+   "cat": "records"
   },
   {
    "q": "Which coach resigned as Vitesse head coach in November 2023?",
    "a": "Phillip Cocu",
    "sub": "Edward Sturing took over.",
-   "club": "vitesse"
+   "club": "vitesse",
+   "cat": "managers"
   },
   {
    "q": "Which coach was sacked by FC Utrecht in August 2023 and replaced by Ron Jans?",
    "a": "Michael Silberbauer",
-   "club": "fc-utrecht"
+   "club": "fc-utrecht",
+   "cat": "managers"
   },
   {
    "q": "Which coach replaced Roger Schmidt at PSV in the summer of 2022?",
    "a": "Ruud van Nistelrooy",
-   "club": "psv"
+   "club": "psv",
+   "cat": "managers"
   },
   {
    "q": "Which Ajax coach was dismissed in January 2023, with John Heitinga taking over as interim?",
    "a": "Alfred Schreuder",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "managers"
   },
   {
    "q": "Which three clubs came up into the 2021-22 Eredivisie?",
-   "a": "Cambuur, Go Ahead Eagles and NEC"
+   "a": "Cambuur, Go Ahead Eagles and NEC",
+   "cat": "relegation"
   },
   {
    "q": "Which three clubs came up into the 2024-25 Eredivisie?",
-   "a": "Willem II, FC Groningen and NAC Breda"
+   "a": "Willem II, FC Groningen and NAC Breda",
+   "cat": "relegation"
   },
   {
    "q": "Which Brabant club came back up into the Eredivisie in 2024 after five seasons away?",
-   "a": "NAC Breda"
+   "a": "NAC Breda",
+   "cat": "relegation"
   },
   {
    "q": "Which Heracles Almelo striker was level with Steven Berghuis on 15 goals when 2019-20 was abandoned?",
    "a": "Cyriel Dessers",
-   "club": "heracles-almelo"
+   "club": "heracles-almelo",
+   "cat": "scorers"
   },
   {
    "q": "Which AZ teenager was third in the scoring chart on 14 goals when the 2019-20 season was frozen?",
    "a": "Myron Boadu",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "scorers"
   },
   {
    "q": "Which PSV forward was second in the 2020-21 Eredivisie scoring chart with 19 goals?",
    "a": "Donyell Malen",
-   "club": "psv"
+   "club": "psv",
+   "cat": "scorers"
   },
   {
    "q": "Which Spanish striker scored 19 league goals for Heracles Almelo in 2018-19, third in the chart?",
    "a": "Adrian Dalmau",
-   "club": "heracles-almelo"
+   "club": "heracles-almelo",
+   "cat": "scorers"
   },
   {
    "q": "PSV won 7-0 away in September 2018 at which club, the biggest away win of that season?",
    "a": "ADO Den Haag",
-   "club": "psv"
+   "club": "psv",
+   "cat": "records"
   },
   {
    "q": "Which club had the longest winning run of 2018-19, thirteen matches, and still finished second?",
-   "a": "PSV"
+   "a": "PSV",
+   "cat": "records"
   },
   {
    "q": "Sebastien Haller left FC Utrecht in 2017 for which German club?",
    "a": "Eintracht Frankfurt",
    "sub": "Seven million euros.",
-   "club": "fc-utrecht"
+   "club": "fc-utrecht",
+   "cat": "transfers"
   },
   {
    "q": "West Ham paid Ajax 44.5 million euros for Mohammed Kudus in 2023. Who paid 55 million pounds for him in 2025?",
    "a": "Tottenham Hotspur",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Which German club took Xavi Simons on loan straight after PSG bought him back from PSV in 2023?",
    "a": "RB Leipzig",
-   "club": "psv"
+   "club": "psv",
+   "cat": "transfers"
   },
   {
    "q": "RB Leipzig signed Xavi Simons permanently in January 2025 for 50 million euros. Which club got the money?",
    "a": "Paris Saint-Germain",
-   "sub": "They had bought him back from PSV for 6 million."
+   "sub": "They had bought him back from PSV for 6 million.",
+   "cat": "transfers"
   },
   {
    "q": "Which Mexican club did Feyenoord sign Santiago Gimenez from in 2022?",
    "a": "Cruz Azul",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "transfers"
   },
   {
    "q": "Which Italian club did PSV sell Mohamed Ihattaren to in August 2021?",
    "a": "Juventus",
    "sub": "He never played a competitive game for them.",
-   "club": "psv"
+   "club": "psv",
+   "cat": "transfers"
   },
   {
    "q": "Mohamed Ihattaren's move to which Turkish club collapsed within days in 2023?",
-   "a": "Samsunspor"
+   "a": "Samsunspor",
+   "cat": "transfers"
   },
   {
    "q": "Which Eredivisie club signed Mohamed Ihattaren in September 2024?",
-   "a": "RKC Waalwijk"
+   "a": "RKC Waalwijk",
+   "cat": "transfers"
   },
   {
    "q": "Which two Ajax players left for AC Milan on Bosman free transfers in 1996?",
    "a": "Edgar Davids and Michael Reiziger",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Which Belgian club did Ajax let Noa Lang go to in October 2020, first on loan?",
    "a": "Club Brugge",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Erik ten Hag came back to Dutch football in February 2026 as technical director at which club?",
-   "a": "FC Twente"
+   "a": "FC Twente",
+   "cat": "managers"
   },
   {
    "q": "Ajax signed the goalkeeper Andre Onana in 2015 from which club's academy?",
    "a": "Barcelona",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Which American club did Hirving Lozano leave PSV for at the start of 2025?",
    "a": "San Diego FC",
    "sub": "PSV had now sold him twice.",
-   "club": "psv"
+   "club": "psv",
+   "cat": "transfers"
   },
   {
    "q": "Luis Suárez scored six in a 14-1 KNVB Cup win in 2009-10, a club record margin. Who were the amateur victims?",
-   "a": "WHC Wezep"
+   "a": "WHC Wezep",
+   "cat": "records"
   },
   {
    "q": "Whose departure in 2009 made Luis Suárez the Ajax captain?",
@@ -4040,51 +4681,61 @@
   {
    "q": "Toby Alderweireld joined Ajax's academy in 2004 from which Belgian club?",
    "a": "Germinal Beerschot",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "imports"
   },
   {
    "q": "Ajax loaned Jan Vertonghen to which club for the second half of 2006-07, where he could not stop their relegation?",
    "a": "RKC Waalwijk",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Which Serbian club did Heerenveen sign Miralem Sulejmani from in 2006, after a dispute that got him suspended?",
    "a": "Partizan Belgrade",
-   "club": "sc-heerenveen"
+   "club": "sc-heerenveen",
+   "cat": "imports"
   },
   {
    "q": "Which Portuguese club did Miralem Sulejmani join on a free after leaving Ajax in 2013?",
    "a": "Benfica",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Kolbeinn Sigthórsson scored five goals in one Eredivisie match for AZ in January 2011. Against whom?",
    "a": "VVV-Venlo",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "records"
   },
   {
    "q": "Mark Uth scored a hat-trick against RKC Waalwijk in September 2013 while on loan from Heerenveen at which club?",
    "a": "Heracles Almelo",
-   "club": "rkc-waalwijk"
+   "club": "rkc-waalwijk",
+   "cat": "scorers"
   },
   {
    "q": "Jürgen Locadia's hat-trick as a sub on his Eredivisie debut in 2012 was the first on debut since which player in 1969?",
    "a": "Harald Berg",
-   "sub": "PSV beat VVV-Venlo 6-0 that day."
+   "sub": "PSV beat VVV-Venlo 6-0 that day.",
+   "cat": "scorers"
   },
   {
    "q": "Which Limburg club did FC Utrecht loan the Swedish winger Kristoffer Peterson to in 2015-16?",
    "a": "Roda JC",
-   "club": "fc-utrecht"
+   "club": "fc-utrecht",
+   "cat": "imports"
   },
   {
    "q": "Tim Matavž's first Eredivisie hat-trick, in February 2011 for Groningen, came against which club?",
-   "a": "Willem II"
+   "a": "Willem II",
+   "cat": "scorers"
   },
   {
    "q": "Alfreð Finnbogason scored twice on his home debut for Heerenveen in 2012 in a 2-2 draw with which club?",
    "a": "Ajax",
-   "club": "sc-heerenveen"
+   "club": "sc-heerenveen",
+   "cat": "imports"
   },
   {
    "q": "Hakim Ziyech lost the Twente captaincy in January 2016. What had he done?",
@@ -4093,49 +4744,58 @@
   },
   {
    "q": "Balázs Dzsudzsák left Anzhi in January 2012 for which club, in what was then a record fee for a Hungarian?",
-   "a": "Dynamo Moscow"
+   "a": "Dynamo Moscow",
+   "cat": "transfers"
   },
   {
    "q": "Which Ajax coach substituted Mounir El Hamdaoui at half-time in a 2011 cup semi-final, after which he was banished to the reserves?",
    "a": "Frank de Boer",
    "sub": "He spent all of 2011-12 with Jong Ajax.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "stories"
   },
   {
    "q": "Which English club signed Mounir El Hamdaoui from Excelsior in 2005 without ever giving him a Premier League game?",
    "a": "Tottenham Hotspur",
-   "club": "excelsior-rotterdam"
+   "club": "excelsior-rotterdam",
+   "cat": "transfers"
   },
   {
    "q": "Which defender went from PSV to AZ in the 2010 deal that took Jeremain Lens to Eindhoven?",
    "a": "Dirk Marcellis",
-   "club": "psv"
+   "club": "psv",
+   "cat": "transfers"
   },
   {
    "q": "Jeremain Lens spent 2007-08 on loan from AZ at which club?",
    "a": "NEC",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "transfers"
   },
   {
    "q": "Which Turkish club had Jozy Altidore been on loan at from Villarreal just before he joined AZ in 2011?",
    "a": "Bursaspor",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "imports"
   },
   {
    "q": "Nacer Chadli's first Eredivisie goal for Twente was a winner away at which title rival?",
    "a": "PSV",
-   "club": "twente"
+   "club": "twente",
+   "cat": "imports"
   },
   {
    "q": "Vincent Janssen scored four goals for AZ in a 5-1 win in April 2016 against which club?",
    "a": "PEC Zwolle",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "scorers"
   },
   {
    "q": "Matthijs de Ligt scored on his Ajax debut in a cup tie in September 2016 against which club?",
    "a": "Willem II",
    "sub": "Only Clarence Seedorf had scored for Ajax at a younger age.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Matthijs de Ligt became Ajax's youngest ever captain in March 2018 after an injury to which teammate?",
@@ -4145,47 +4805,56 @@
   {
    "q": "Frenkie de Jong's first Ajax appearance came as an 88th-minute substitute against which club?",
    "a": "Sparta Rotterdam",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Donny van de Beek made his Ajax debut in the Europa League in November 2015 against which club?",
    "a": "Celtic",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Memphis Depay made his PSV league debut in February 2012 against which club?",
    "a": "Feyenoord",
    "sub": "PSV won 3-2. His first goal came a month later against Heerenveen.",
-   "club": "psv"
+   "club": "psv",
+   "cat": "transfers"
   },
   {
    "q": "Why did Memphis Depay ask to be called Memphis rather than Depay?",
-   "a": "To cut ties with his father"
+   "a": "To cut ties with his father",
+   "cat": "stories"
   },
   {
    "q": "Georginio Wijnaldum was born with which surname before taking his mother's name?",
-   "a": "Boateng"
+   "a": "Boateng",
+   "cat": "stories"
   },
   {
    "q": "Kevin Strootman began his career at which Rotterdam club before Utrecht and PSV?",
    "a": "Sparta Rotterdam",
-   "club": "psv"
+   "club": "psv",
+   "cat": "transfers"
   },
   {
    "q": "Marco van Ginkel made his Vitesse debut at 17 in April 2010 against which club?",
    "a": "RKC Waalwijk",
-   "club": "vitesse"
+   "club": "vitesse",
+   "cat": "transfers"
   },
   {
    "q": "Robin van Persie's 300th career goal, in February 2018, came against which club?",
    "a": "Willem II",
-   "sub": "A 3-0 win that put Feyenoord into the cup final."
+   "sub": "A 3-0 win that put Feyenoord into the cup final.",
+   "cat": "scorers"
   },
   {
    "q": "Mark van Bommel was sent off in his final match as a player in May 2013. Who were PSV's opponents?",
    "a": "FC Twente, a 3-1 defeat",
    "sub": "Two yellow cards, and he announced his retirement straight after the game.",
-   "club": "psv"
+   "club": "psv",
+   "cat": "records"
   },
   {
    "q": "Jeroen Zoet started at which club in his home town before joining PSV's academy at 15?",
@@ -4200,7 +4869,8 @@
   {
    "q": "Which AZ goalkeeper was sent off in the 3-2 final-day defeat at Excelsior that cost them the 2007 title?",
    "a": "Boy Waterman",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "records"
   },
   {
    "q": "Which Polish keeper started 2012-13 as PSV's number one before Dick Advocaat promoted Boy Waterman after five games?",
@@ -4209,92 +4879,110 @@
   },
   {
    "q": "Bas Dost scored all five goals in a 5-0 away win in December 2011 against which club?",
-   "a": "Excelsior"
+   "a": "Excelsior",
+   "cat": "scorers"
   },
   {
    "q": "Dmitri Bulykin joined ADO Den Haag on loan in 2010 from which Belgian club?",
    "a": "Anderlecht",
-   "club": "ado-den-haag"
+   "club": "ado-den-haag",
+   "cat": "imports"
   },
   {
    "q": "Ajax signed Marko Pantelić on a free in 2009 from which German club?",
    "a": "Hertha Berlin",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "imports"
   },
   {
    "q": "Roy Makaay scored a hat-trick in his final match as a player in 2010. Who were Feyenoord's opponents?",
    "a": "Heerenveen",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "scorers"
   },
   {
    "q": "Which two Eredivisie clubs took Martin Ødegaard on loan from Real Madrid?",
-   "a": "Heerenveen and Vitesse"
+   "a": "Heerenveen and Vitesse",
+   "cat": "imports"
   },
   {
    "q": "Which Arsenal teenager, on loan at Feyenoord in early 2011, was nicknamed Ryodinho by the Dutch press?",
    "a": "Ryo Miyaichi",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "imports"
   },
   {
    "q": "Which VVV-Venlo defender's bicycle kick against PSV in September 2011 was voted Eredivisie goal of the season?",
    "a": "Maya Yoshida",
-   "club": "vvv-venlo"
+   "club": "vvv-venlo",
+   "cat": "imports"
   },
   {
    "q": "How did AZ keeper Sergio Romero break his hand in March 2009, costing him a chunk of the title run-in?",
    "a": "He punched a door after a cup defeat",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "stories"
   },
   {
    "q": "Which Utrecht left-back was paralysed after a training-ground collision with Alje Schut in May 2011?",
-   "a": "Mihai Neșu"
+   "a": "Mihai Neșu",
+   "cat": "stories"
   },
   {
    "q": "Who missed the only penalty in the 2009 KNVB Cup final shoot-out, handing Heerenveen the cup against Twente?",
    "a": "Youssouf Hersi",
-   "club": "sc-heerenveen"
+   "club": "sc-heerenveen",
+   "cat": "cups"
   },
   {
    "q": "Who scored the opening goal when PSV beat Ajax 3-0 to clinch the 2017-18 title?",
    "a": "Gastón Pereiro",
    "sub": "Steven Bergwijn got the third.",
-   "club": "psv"
+   "club": "psv",
+   "cat": "champions"
   },
   {
    "q": "Which Heracles winger scored four goals in one half at Cambuur in August 2015?",
    "a": "Oussama Tannane",
-   "club": "heracles-almelo"
+   "club": "heracles-almelo",
+   "cat": "scorers"
   },
   {
    "q": "Which future Spartak Moscow and Ajax winger scored 13 goals on loan at Go Ahead Eagles in their 2012-13 promotion season?",
    "a": "Quincy Promes",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Which Netherlands midfielder, a 2008 cup final scorer for Feyenoord, had won the 1996-97 Eerste Divisie with MVV?",
    "a": "Denny Landzaat",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "cups"
   },
   {
    "q": "Which Japan international with a Dutch-born father scored 16 league goals for ADO Den Haag in 2015-16?",
    "a": "Mike Havenaar",
-   "club": "ado-den-haag"
+   "club": "ado-den-haag",
+   "cat": "imports"
   },
   {
    "q": "Which Excelsior striker's injury-time equaliser at Sparta in May 2010 sent Excelsior up and Sparta down?",
    "a": "Guyon Fernandez",
    "sub": "He had missed a penalty earlier in the game.",
-   "club": "excelsior-rotterdam"
+   "club": "excelsior-rotterdam",
+   "cat": "imports"
   },
   {
    "q": "Which Nigerian teenager, signed by VVV in 2010 but unable to play until his 18th birthday, left for CSKA Moscow in 2012?",
    "a": "Ahmed Musa",
-   "club": "vvv-venlo"
+   "club": "vvv-venlo",
+   "cat": "imports"
   },
   {
    "q": "Which Vitesse left-back was sent off on his professional debut in 2008 and sold to Manchester United in 2012?",
    "a": "Alexander Büttner",
-   "club": "vitesse"
+   "club": "vitesse",
+   "cat": "records"
   },
   {
    "q": "Which Groningen keeper of the 2015 cup win had debuted for HFC Haarlem shortly before the club went bust in 2010?",
@@ -4303,62 +4991,74 @@
   {
    "q": "Which Brazilian PSV forward had his contract torn up in 2010 after a positive drugs test, then was re-signed that summer?",
    "a": "Jonathan Reis",
-   "club": "psv"
+   "club": "psv",
+   "cat": "stories"
   },
   {
    "q": "Which Twente midfielder's move to Everton collapsed on a failed medical in January 2013?",
    "a": "Leroy Fer",
    "sub": "Norwich signed him that summer instead.",
-   "club": "twente"
+   "club": "twente",
+   "cat": "transfers"
   },
   {
    "q": "Davy Klaassen scored 42 seconds into his Ajax debut in November 2011. Who were the opponents?",
    "a": "NEC",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Dušan Tadić's 22 assists for Groningen in 2010-11 put him third in Europe. Which two players were ahead of him?",
-   "a": "Mesut Özil and Lionel Messi"
+   "a": "Mesut Özil and Lionel Messi",
+   "cat": "records"
   },
   {
    "q": "Klaas-Jan Huntelaar scored four in an 8-1 win on the opening day of 2007-08. Against which newly promoted club?",
-   "a": "De Graafschap"
+   "a": "De Graafschap",
+   "cat": "scorers"
   },
   {
    "q": "VVV-Venlo fans gave Keisuke Honda which nickname?",
    "a": "Keizer Keisuke, Emperor Keisuke",
-   "club": "vvv-venlo"
+   "club": "vvv-venlo",
+   "cat": "imports"
   },
   {
    "q": "Which Heerenveen team-mate scored the other two goals in the 9-0 win over Heracles Almelo in October 2007?",
    "a": "Gerald Sibon",
-   "club": "sc-heerenveen"
+   "club": "sc-heerenveen",
+   "cat": "records"
   },
   {
    "q": "Which coach took Afonso Alves off near the end of the 9-0 against Heracles so he could be applauded?",
    "a": "Gertjan Verbeek",
    "sub": "Heerenveen finished with ten men because all three subs were used.",
-   "club": "heracles-almelo"
+   "club": "heracles-almelo",
+   "cat": "records"
   },
   {
    "q": "Which Ajax substitute was sent off 19 seconds after coming on in 1996-97?",
    "a": "Márcio Santos",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "records"
   },
   {
    "q": "Which NEC defender collected 84 Eredivisie yellow cards, more than any other player up to 2017-18?",
    "a": "Patrick Pothuizen",
-   "club": "nec-nijmegen"
+   "club": "nec-nijmegen",
+   "cat": "records"
   },
   {
    "q": "Which ADO Den Haag defender scored three own goals in the 2014-15 Eredivisie season?",
    "a": "Timothy Derijck",
-   "club": "ado-den-haag"
+   "club": "ado-den-haag",
+   "cat": "records"
   },
   {
    "q": "Which defender put eight own goals past his own keepers in the Eredivisie for Feyenoord, Willem II and Heerenveen?",
    "a": "Sven van Beek",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "records"
   },
   {
    "q": "Which referee gave a penalty after 8 seconds in Heerenveen against Cambuur in 2014?",
@@ -4368,62 +5068,75 @@
   {
    "q": "Which Feyenoord midfielder was booked after 3 seconds against Ajax in 2008, equalling the Eredivisie record?",
    "a": "Diego Biseswar",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "records"
   },
   {
    "q": "Which Dordrecht '90 player was booked after 3 seconds at Feyenoord in 1992?",
    "a": "Hans Kraay junior",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "records"
   },
   {
    "q": "Which Rotterdam club went eleven matches and 1045 minutes without scoring across 1970-71 and 1971-72?",
-   "a": "Excelsior"
+   "a": "Excelsior",
+   "cat": "records"
   },
   {
    "q": "Which Eredivisie season averaged 3.88 goals a match, more than any other up to 2017-18?",
-   "a": "1958-59"
+   "a": "1958-59",
+   "cat": "records"
   },
   {
    "q": "Which club went the whole of 1972-73 without drawing a single Eredivisie match?",
-   "a": "Ajax"
+   "a": "Ajax",
+   "cat": "records"
   },
   {
    "q": "Which Rotterdam club drew eighteen of its 34 matches in 1974-75?",
    "a": "Sparta Rotterdam",
-   "sub": "PEC Zwolle in 1978-79 and FC Twente in 1988-89 later matched it."
+   "sub": "PEC Zwolle in 1978-79 and FC Twente in 1988-89 later matched it.",
+   "cat": "records"
   },
   {
    "q": "Which club won its first seventeen matches of the 1987-88 Eredivisie?",
-   "a": "PSV"
+   "a": "PSV",
+   "cat": "records"
   },
   {
    "q": "Which club won nineteen Eredivisie matches in a row inside the 1971-72 season?",
-   "a": "Ajax"
+   "a": "Ajax",
+   "cat": "records"
   },
   {
    "q": "Which Brazilian was Eredivisie top scorer with PSV in 1994-95, aged just 18?",
    "a": "Ronaldo",
-   "club": "psv"
+   "club": "psv",
+   "cat": "scorers"
   },
   {
    "q": "Which 39-year-old scored an Eredivisie hat-trick for Sportclub Enschede in 1959-60?",
-   "a": "Abe Lenstra"
+   "a": "Abe Lenstra",
+   "cat": "scorers"
   },
   {
    "q": "Which VVV forward scored an Eredivisie goal in 1961-62 aged 40 years and 255 days?",
    "a": "Gijs Nass",
-   "club": "vvv-venlo"
+   "club": "vvv-venlo",
+   "cat": "records"
   },
   {
    "q": "Which Volendam player scored an Eredivisie goal in 1959-60 aged 16 years and 100 days?",
    "a": "Wim Kras",
-   "club": "volendam"
+   "club": "volendam",
+   "cat": "records"
   },
   {
    "q": "Which Iranian striker came off the bench on his PEC Zwolle debut in 2019 and scored four goals?",
    "a": "Reza Ghoochannejhad",
    "sub": "It was 15 September 2019, against RKC Waalwijk.",
-   "club": "pec-zwolle"
+   "club": "pec-zwolle",
+   "cat": "records"
   },
   {
    "q": "Dick Jol showed his 1000th Eredivisie yellow card in October 2007. A player of which club received it?",
@@ -4475,11 +5188,13 @@
   },
   {
    "q": "Which club won the Eredivisie play-offs for a European ticket in 2019?",
-   "a": "FC Utrecht"
+   "a": "FC Utrecht",
+   "cat": "relegation"
   },
   {
    "q": "Which club won the second edition of the Dutch promotion play-offs, in 1974?",
-   "a": "FC Wageningen"
+   "a": "FC Wageningen",
+   "cat": "relegation"
   },
   {
    "q": "How many clubs took part in the Eredivisie promotion and relegation play-offs each year between 2006 and 2019?",
@@ -4514,7 +5229,8 @@
   {
    "q": "Which interim coach, fetched back from Nagoya Grampus in Japan, guided PSV to the 2007-08 title after Koeman left?",
    "a": "Sef Vergoossen",
-   "club": "psv"
+   "club": "psv",
+   "cat": "managers"
   },
   {
    "q": "Which club, 16th in 2007-08, kept its Eredivisie place by beating FC Zwolle in the 2008 play-off final?",
@@ -4524,27 +5240,32 @@
   {
    "q": "Which club ended AZ's 28-match unbeaten run on 18 April 2009, the day before AZ were crowned champions anyway?",
    "a": "Vitesse",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "champions"
   },
   {
    "q": "Huub Stevens left PSV in January 2009. Which assistant took charge for the rest of the season?",
    "a": "Dwight Lodeweges",
-   "club": "psv"
+   "club": "psv",
+   "cat": "managers"
   },
   {
    "q": "Which club stayed up in 2010 by beating Go Ahead Eagles 3-0 after extra time in the second leg of the play-off final?",
    "a": "Willem II",
-   "club": "go-ahead-eagles"
+   "club": "go-ahead-eagles",
+   "cat": "relegation"
   },
   {
    "q": "Which club finished sixth in 2009-10, best of the rest behind Twente, Ajax, PSV, Feyenoord and AZ?",
    "a": "Heracles Almelo",
-   "club": "twente"
+   "club": "twente",
+   "cat": "champions"
   },
   {
    "q": "Who scored Twente's first goal in the 2-0 win at NAC Breda that clinched the 2010 title?",
    "a": "Bryan Ruiz",
-   "club": "twente"
+   "club": "twente",
+   "cat": "champions"
   },
   {
    "q": "ADO won the 2011 European play-off final on penalties after both legs against Groningen ended 5-1. Who was ADO's coach?",
@@ -4558,22 +5279,26 @@
   {
    "q": "Utrecht won the 2013 European play-offs, beating Twente in the final, then lost in July to which Luxembourg club?",
    "a": "Differdange",
-   "club": "twente"
+   "club": "twente",
+   "cat": "relegation"
   },
   {
    "q": "Who coached Heracles to sixth place and their first European ticket in 2015-16?",
    "a": "John Stegeman",
-   "club": "heracles-almelo"
+   "club": "heracles-almelo",
+   "cat": "managers"
   },
   {
    "q": "Heracles' first ever European tie, in 2016, ended on away goals against which Portuguese club?",
    "a": "Arouca",
-   "club": "heracles-almelo"
+   "club": "heracles-almelo",
+   "cat": "europe"
   },
   {
    "q": "Who opened the scoring for Excelsior in the 3-0 win over Feyenoord in May 2017 that delayed the title?",
    "a": "Nigel Hasselbaink",
-   "club": "excelsior-rotterdam"
+   "club": "excelsior-rotterdam",
+   "cat": "champions"
   },
   {
    "q": "Which club finished third in the 2007-08 Eredivisie, behind PSV and Ajax?",
@@ -4966,13 +5691,15 @@
    "q": "Nine months after the 10-0, Feyenoord's players held a vote on coach Mario Been. What was the outcome?",
    "a": "Thirteen of eighteen had no confidence in him, and he left in July 2011",
    "sub": "Captain Ron Vlaar called the meeting. Van Geel said Been felt betrayed.",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "managers"
   },
   {
    "q": "Which PSV left-back was sent off after 29 seconds at NAC in February 2015, the fastest Eredivisie red card from kick-off?",
    "a": "Jetro Willems",
    "sub": "He never touched Gill Swerts. The KNVB later dropped the case.",
-   "club": "psv"
+   "club": "psv",
+   "cat": "records"
   },
   {
    "q": "Philips came off the front of PSV's shirt in 2016 after 34 years. Which energy brand replaced it?",
@@ -4984,13 +5711,15 @@
    "q": "FC Twente, champions in 2010, finished bottom in 2018. Their relegation was sealed by a 5-0 defeat at which club?",
    "a": "Vitesse",
    "sub": "Five wins all season. Gertjan Verbeek was sacked and Marino Pusic could not save them.",
-   "club": "twente"
+   "club": "twente",
+   "cat": "relegation"
   },
   {
    "q": "A week after losing the 2011 cup final to Twente, Ajax hosted them in a title decider needing a win. What was the score?",
    "a": "3-1 to Ajax",
    "sub": "Siem de Jong twice and a Landzaat own goal. Ajax's 30th title and a third star.",
-   "club": "twente"
+   "club": "twente",
+   "cat": "champions"
   },
   {
    "q": "FC Twente's ground was called the Arke Stadion until 2008, after a travel company. Which brewer took over the name?",
@@ -5001,24 +5730,28 @@
    "q": "Which English manager gave a 2008 television interview in English with a thick Dutch accent, shortly after arriving at FC Twente?",
    "a": "Steve McClaren",
    "sub": "The clip has followed him around ever since, right up to the Jamaica job in 2024.",
-   "club": "twente"
+   "club": "twente",
+   "cat": "managers"
   },
   {
    "q": "In March 2008 Louis van Gaal announced he would leave AZ that summer. Why did he end up staying?",
    "a": "The players asked him to stay",
    "sub": "A year later he won them the title.",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "managers"
   },
   {
    "q": "AZ lost their first two league games of 2008-09, to NAC and at ADO. What happened next?",
    "a": "A 28-match unbeaten run and the title",
-   "club": "az-alkmaar"
+   "club": "az-alkmaar",
+   "cat": "champions"
   },
   {
    "q": "In November 2011 the Ajax supervisory board appointed which man as director general at a meeting Johan Cruyff was barely told about?",
    "a": "Louis van Gaal",
    "sub": "A judge suspended it in December 2011 and the appeal court upheld that ban in February 2012.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "stories"
   },
   {
    "q": "Feyenoord fans damaged which 17th-century fountain in Rome before a Europa League game in February 2015?",
@@ -5030,29 +5763,34 @@
    "q": "The 2010 cup final between Ajax and Feyenoord was played over two legs. Why?",
    "a": "Safety and police costs, so neither leg had away fans",
    "sub": "Ajax won 2-0 at home and 4-1 in De Kuip.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "cups"
   },
   {
    "q": "Feyenoord marked their centenary season in 2008 by winning the cup. Which Limburg club did they beat 2-0 in the final?",
    "a": "Roda JC",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "cups"
   },
   {
    "q": "Which Chelsea loanee was voted Vitesse's player of the year in 2017-18 as a teenager?",
    "a": "Mason Mount",
    "sub": "Fourteen goals and ten assists in 39 games.",
-   "club": "vitesse"
+   "club": "vitesse",
+   "cat": "transfers"
   },
   {
    "q": "Which future Manchester United midfielder spent 2010-11 on loan at Vitesse from Chelsea?",
    "a": "Nemanja Matić",
-   "club": "vitesse"
+   "club": "vitesse",
+   "cat": "transfers"
   },
   {
    "q": "In August 2010 Vitesse became the first Dutch professional club in foreign hands. Which country was the buyer from?",
    "a": "Georgia, Merab Jordania",
    "sub": "He promised the title within three years, then sold to a Russian in 2013.",
-   "club": "vitesse"
+   "club": "vitesse",
+   "cat": "transfers"
   },
   {
    "q": "Which bird flew a lap of the GelreDome before every Vitesse home game from January 2010?",
@@ -5064,51 +5802,60 @@
    "q": "Which former Nigeria coach did Fortuna Sittard suspend in February 2018, months before they won promotion?",
    "a": "Sunday Oliseh",
    "sub": "He said he refused to join illegal activities. The club said he bullied staff.",
-   "club": "fortuna-sittard"
+   "club": "fortuna-sittard",
+   "cat": "managers"
   },
   {
    "q": "Fortuna Sittard were bought in 2016 by a former Galatasaray official from which country?",
    "a": "Turkey, Işıtan Gün",
    "sub": "85 percent of the club for a reported 870,000 euros.",
-   "club": "fortuna-sittard"
+   "club": "fortuna-sittard",
+   "cat": "stories"
   },
   {
    "q": "Roda JC's new investor Aleksei Korotaev was arrested in February 2017, a week after arriving at the club. Where?",
    "a": "Dubai airport, over a bounced cheque",
    "sub": "17.7 million euros. He was cleared years later, the signature had been forged.",
-   "club": "roda-jc-kerkrade"
+   "club": "roda-jc-kerkrade",
+   "cat": "stories"
   },
   {
    "q": "In 2010 MVV were saved from bankruptcy when the city of Maastricht bought which asset for 1.85 million euros?",
    "a": "De Geusselt stadium",
    "sub": "The city also wrote off a debt of well over a million euros.",
-   "club": "mvv-maastricht"
+   "club": "mvv-maastricht",
+   "cat": "stories"
   },
   {
    "q": "Which Eredivisie club spent 2016 in court against its own Chinese owner over millions in promised money?",
    "a": "ADO Den Haag",
-   "sub": "Wang Hui of United Vansen was suspended as chairman of the supervisory board."
+   "sub": "Wang Hui of United Vansen was suspended as chairman of the supervisory board.",
+   "cat": "stories"
   },
   {
    "q": "Go Ahead Eagles ended seventeen years outside the top flight in 2013. Which club did they beat in the play-off final?",
    "a": "FC Volendam",
    "sub": "3-0 at home, then a 1-0 defeat in Volendam. Their coach was Erik ten Hag.",
-   "club": "go-ahead-eagles"
+   "club": "go-ahead-eagles",
+   "cat": "relegation"
   },
   {
    "q": "Which club went up in 2007, down in 2008, up in 2009, down in 2013 and up again in 2017?",
-   "a": "VVV-Venlo"
+   "a": "VVV-Venlo",
+   "cat": "relegation"
   },
   {
    "q": "Which Japanese defender at VVV-Venlo scored a bicycle kick in September 2011 that was named Eredivisie goal of the season?",
    "a": "Maya Yoshida",
    "sub": "Southampton signed him a year later.",
-   "club": "vvv-venlo"
+   "club": "vvv-venlo",
+   "cat": "scorers"
   },
   {
    "q": "Besides Ajax, PSV and Feyenoord, which club had never been relegated from the Eredivisie by the end of 2017-18?",
    "a": "FC Utrecht",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "records"
   },
   {
    "q": "Which top Dutch referee ran a Jumbo supermarket in Oldenzaal while taking charge of Eredivisie games?",
@@ -5142,18 +5889,21 @@
   },
   {
    "q": "Zwolle's club played as FC Zwolle from 1990 until 2012, when it went back to which name?",
-   "a": "PEC Zwolle"
+   "a": "PEC Zwolle",
+   "cat": "records"
   },
   {
    "q": "Deventer fans call Go Ahead Eagles 'Kowet'. Where does that come from?",
    "a": "A local mangling of the English words Go Ahead",
-   "club": "go-ahead-eagles"
+   "club": "go-ahead-eagles",
+   "cat": "records"
   },
   {
    "q": "SC Cambuur's badge carries which animal, taken from the coat of arms of the Cammingha family?",
    "a": "A deer",
    "sub": "Cambuur is a contraction of Camminghaburen, the Leeuwarden neighbourhood named after the family.",
-   "club": "sc-cambuur"
+   "club": "sc-cambuur",
+   "cat": "records"
   },
   {
    "q": "Heerenveen's shirt copies which flag, complete with its red water-lily leaves?",
@@ -5164,21 +5914,25 @@
    "q": "In August 2013 NEC sacked Alex Pastoor after how many league games of the new season?",
    "a": "Three",
    "sub": "At the time the quickest sacking in Eredivisie history.",
-   "club": "nec-nijmegen"
+   "club": "nec-nijmegen",
+   "cat": "managers"
   },
   {
    "q": "Which Brabant club, in the Eredivisie as recently as 2006, was declared bankrupt in June 2011?",
    "a": "RBC Roosendaal",
-   "sub": "A debt of 5.2 million euros. The town refused to guarantee a loan."
+   "sub": "A debt of 5.2 million euros. The town refused to guarantee a loan.",
+   "cat": "stories"
   },
   {
    "q": "Which Apeldoorn club went bankrupt in January 2013, two months before SC Veendam?",
-   "a": "AGOVV"
+   "a": "AGOVV",
+   "cat": "stories"
   },
   {
    "q": "Which club was the first Dutch professional side to play home games on artificial grass, from 2003?",
    "a": "Heracles Almelo",
-   "sub": "They took the plastic into the Eredivisie when they went up in 2005."
+   "sub": "They took the plastic into the Eredivisie when they went up in 2005.",
+   "cat": "grounds"
   },
   {
    "q": "From 2006 onwards, which Ajax fixture was played without away supporters after an attack on the opponents' clubhouse?",
@@ -5189,31 +5943,36 @@
    "q": "In November 2018 Feyenoord against VVV was abandoned after thirty seconds. Why?",
    "a": "The floodlights failed",
    "sub": "A broken transformer. The match was replayed in full on 6 December.",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "stories"
   },
   {
    "q": "In November 2005 which Heracles goalkeeper went up for a corner and headed a stoppage-time equaliser against AZ?",
    "a": "Martin Pieckenhagen",
    "sub": "He was the first goalkeeper to score in the Eredivisie since 1999.",
-   "club": "heracles-almelo"
+   "club": "heracles-almelo",
+   "cat": "stories"
   },
   {
    "q": "Which Ajax substitute was sent off nineteen seconds after coming on against PSV in December 1996?",
    "a": "Márcio Santos",
    "sub": "He brought down Luc Nilis. Referee Dick Jol did the rest.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "records"
   },
   {
    "q": "Edwin van der Sar scored his only career goal in May 1998, a penalty with Ajax already 7-0 up. Against whom?",
    "a": "De Graafschap",
    "sub": "He had missed a penalty for Ajax against Sparta a few years earlier.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "stories"
   },
   {
    "q": "Which FC Den Bosch goalkeeper scored the Eredivisie's first goalkeeper goal from open play, in 1985?",
    "a": "Jan van Grinsven",
    "sub": "It made it 2-2 against Roda JC in the last minute, and he celebrated with a cartwheel.",
-   "club": "fc-den-bosch"
+   "club": "fc-den-bosch",
+   "cat": "stories"
   },
   {
    "q": "In 1975 Guus Hiddink's shot for De Graafschap went wide, a team-mate kicked the ball into the net as a joke, and what did the referee do?",
@@ -5225,7 +5984,8 @@
    "q": "Johan Cruyff's first Klassieker in a Feyenoord shirt, in September 1983, ended with what score?",
    "a": "Ajax 8-2",
    "sub": "Feyenoord still won the double that season.",
-   "club": "feyenoord"
+   "club": "feyenoord",
+   "cat": "records"
   },
   {
    "q": "Marco van Basten's Ajax debut in April 1982 came as a substitute for which player?",
@@ -5237,98 +5997,117 @@
    "q": "The Amsterdam Arena opened in August 1996 with Ajax losing 0-3 to which club?",
    "a": "AC Milan",
    "sub": "Dejan Savićević scored the first goal in the stadium.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "grounds"
   },
   {
    "q": "De Kuip opened in March 1937 with a 5-2 friendly win over a club from which country?",
    "a": "Belgium, Beerschot",
-   "sub": "A friendly was chosen so the entrances and buffets could be tested first."
+   "sub": "A friendly was chosen so the entrances and buffets could be tested first.",
+   "cat": "grounds"
   },
   {
    "q": "Ajax's last match at De Meer, in April 1996, ended 5-1 against which club?",
    "a": "Willem II",
    "sub": "Finidi George scored a hat-trick. Willem II's Jack de Gier got the last goal at the ground.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "grounds"
   },
   {
    "q": "Before the Arena, Ajax played their big European nights at which Amsterdam ground rather than De Meer?",
    "a": "The Olympic Stadium",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "grounds"
   },
   {
    "q": "Ajax won the 1972 European Cup final against Inter in which Dutch stadium?",
    "a": "De Kuip in Rotterdam",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "grounds"
   },
   {
    "q": "Sparta's ground is called Het Kasteel. Why?",
    "a": "A small castle-like building with two towers, left from the 1916 ground",
-   "club": "sparta-rotterdam"
+   "club": "sparta-rotterdam",
+   "cat": "grounds"
   },
   {
    "q": "NEC's Goffert stadium was built in the 1930s as what kind of project?",
    "a": "A work-relief scheme for the unemployed",
    "sub": "It took 202,417 working days. NEC only moved in after the war.",
-   "club": "nec-nijmegen"
+   "club": "nec-nijmegen",
+   "cat": "grounds"
   },
   {
    "q": "FC Groningen's Euroborg, opened in 2006, was built with which extras inside the stadium?",
    "a": "A cinema, a casino and a supermarket",
-   "club": "fc-groningen"
+   "club": "fc-groningen",
+   "cat": "grounds"
   },
   {
    "q": "Who were the first champions of Dutch professional football, in 1955?",
    "a": "Willem II",
-   "sub": "Sealed on 20 July with a 3-2 win at Eindhoven."
+   "sub": "Sealed on 20 July with a 3-2 win at Eindhoven.",
+   "cat": "champions"
   },
   {
    "q": "Which Eindhoven club, not PSV, were Dutch champions in 1954, the last title of the amateur era?",
    "a": "EVV Eindhoven",
-   "club": "psv"
+   "club": "psv",
+   "cat": "champions"
   },
   {
    "q": "Which club, later famous for its plastic pitch, were Dutch champions in 1927 and 1941?",
-   "a": "Heracles"
+   "a": "Heracles",
+   "cat": "champions"
   },
   {
    "q": "Which club won back-to-back Dutch championships in 1942 and 1943, during the occupation?",
-   "a": "ADO Den Haag"
+   "a": "ADO Den Haag",
+   "cat": "champions"
   },
   {
    "q": "Which Hague club had won ten Dutch championships by 1914, at a time when Ajax had none?",
    "a": "HVV",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "champions"
   },
   {
    "q": "In 1969-70 Ajax lost 2-1 to AZ '67 in the cup and still went through to the quarter-final. How?",
    "a": "As a lucky loser, the best beaten team went through",
    "sub": "Rinus Michels called it a crazy business. Ajax went on to beat PSV 2-0 in the final.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "records"
   },
   {
    "q": "The phrase Lucky Ajax first appeared in De Telegraaf in 1958, copied from a nickname for which English club?",
    "a": "Arsenal, Lucky Arsenal",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "records"
   },
   {
    "q": "Which Amsterdam merger club knocked Inter out of the 1974-75 UEFA Cup and was dissolved seven years later?",
    "a": "FC Amsterdam",
-   "sub": "Blauw-Wit plus DWS. Cologne beat them in the quarter-final."
+   "sub": "Blauw-Wit plus DWS. Cologne beat them in the quarter-final.",
+   "cat": "stories"
   },
   {
    "q": "PEC Zwolle are 'de Blauwvingers'. According to legend, how did the people of Zwolle get blue fingers?",
    "a": "Counting the copper coins Kampen paid them for their church bells",
-   "club": "pec-zwolle"
+   "club": "pec-zwolle",
+   "cat": "records"
   },
   {
    "q": "PSV's Coen Dillen, 43 goals in 1956-57, was known by which nickname?",
    "a": "Het Kanon, the cannon",
-   "club": "psv"
+   "club": "psv",
+   "cat": "records"
   },
   {
    "q": "At Barcelona, Johan Neeskens was nicknamed after the more famous team-mate he had also played with at Ajax. What was it?",
    "a": "Johan Segundo, Johan the Second",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "records"
   },
   {
    "q": "De Graafschap's most fanatical fans stand on a terrace named after a famous Liverpool one. What is it called?",
@@ -5345,13 +6124,15 @@
    "q": "Sparta were relegated for the first time in their history in 2002. Which famous name was their coach?",
    "a": "Frank Rijkaard",
    "sub": "Within eighteen months he was managing Barcelona.",
-   "club": "sparta-rotterdam"
+   "club": "sparta-rotterdam",
+   "cat": "relegation"
   },
   {
    "q": "Which Dutch pop singer became chairman of FC Volendam in 2022 and was removed by the supervisory board in 2023?",
    "a": "Jan Smit",
    "sub": "The board he led was dismissed as a whole in November 2023.",
-   "club": "volendam"
+   "club": "volendam",
+   "cat": "stories"
   },
   {
    "q": "Which Ajax midfielder stood juggling the ball in the middle of a 1973 European Cup semi-final at the Bernabéu?",
@@ -5361,12 +6142,14 @@
   {
    "q": "What was Rinus Michels' day job when Ajax hired him in January 1965?",
    "a": "PE teacher at a school for deaf children",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "managers"
   },
   {
    "q": "Which Welsh coach gave a 16-year-old Ruud Gullit his debut at Haarlem in 1979?",
    "a": "Barry Hughes",
-   "sub": "The same man who added Eagles to Go Ahead's name."
+   "sub": "The same man who added Eagles to Go Ahead's name.",
+   "cat": "managers"
   },
   {
    "q": "Johan Cruyff came back to Ajax in December 1981, aged 34. What did the club win in 1982 and 1983?",
@@ -5378,17 +6161,20 @@
    "q": "In 2011 Johan Cruyff took Ajax, his own club, to court. What was he so angry about?",
    "a": "He had not been told the board was making Louis van Gaal chief executive",
    "sub": "The judge agreed and voided the appointment.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "stories"
   },
   {
    "q": "Which Ajax goalkeeper scored a penalty to complete an 8-1 win over De Graafschap in 1997-98?",
    "a": "Edwin van der Sar",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "stories"
   },
   {
    "q": "Ajax retired the number 14 in Johan Cruyff's honour in 2007. What did Cruyff himself say about it?",
    "a": "That the club should let its best player wear it",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "stories"
   },
   {
    "q": "PSV have retired two shirt numbers. The 12 belongs to the fans. Who has the 99?",
@@ -5398,7 +6184,8 @@
   {
    "q": "Which Brabant singer has filled PSV's Philips Stadion with concerts every summer since 2006?",
    "a": "Guus Meeuwis",
-   "club": "psv"
+   "club": "psv",
+   "cat": "grounds"
   },
   {
    "q": "For decades a playing contract at PSV came with something extra attached. What was it?",
@@ -5408,7 +6195,8 @@
   {
    "q": "An Eros Ramazzotti concert in 1994 put PSV's board off staging events for years. What had gone wrong?",
    "a": "The crowd trampled the pitch to ruin",
-   "club": "psv"
+   "club": "psv",
+   "cat": "grounds"
   },
   {
    "q": "A gorilla that escaped from Rotterdam zoo in 2007 became an unofficial Feyenoord mascot. What was he called?",
@@ -5429,103 +6217,122 @@
   {
    "q": "Which club won the 1963 KNVB Cup and was relegated from the Eredivisie in the same season?",
    "a": "Willem II",
-   "sub": "They beat ADO 3-0 in the final and finished 15th of 16 in the league."
+   "sub": "They beat ADO 3-0 in the final and finished 15th of 16 in the league.",
+   "cat": "relegation"
   },
   {
    "q": "ADO's farewell match at its ground of 80 years was abandoned after 50 minutes in April 2007. Name the ground.",
    "a": "The Zuiderpark",
    "sub": "Against Groningen, 0-3 down, stopped because of the crowd. ADO had played there since 1927.",
-   "club": "ado-den-haag"
+   "club": "ado-den-haag",
+   "cat": "grounds"
   },
   {
    "q": "Ruud Geels scored five in a 6-0 Ajax win in November 1975. Who were the opponents?",
    "a": "Feyenoord",
    "sub": "Geels finished the season as top scorer with 29 goals.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "records"
   },
   {
    "q": "Which Schiedam club played its 1990-91 home games at De Kuip because the KNVB rejected its own ground?",
    "a": "SVV",
-   "sub": "Sportpark Harga was not approved for Eredivisie football."
+   "sub": "Sportpark Harga was not approved for Eredivisie football.",
+   "cat": "grounds"
   },
   {
    "q": "Which Frisian legend lost the 1958 title decider with Sportclub Enschede and never won a national championship?",
    "a": "Abe Lenstra",
-   "sub": "Lost in the 109th minute of a sudden-death play-off, 1-0 to DOS at the Goffert."
+   "sub": "Lost in the 109th minute of a sudden-death play-off, 1-0 to DOS at the Goffert.",
+   "cat": "champions"
   },
   {
    "q": "Ajax left Sebastien Haller off a squad list in February 2021. What did the mistake cost him?",
    "a": "His place in the Europa League knockout rounds",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "stories"
   },
   {
    "q": "Telstar came up in 2025 after 47 years away and stayed up on the final day. Which fellow promoted club did they beat?",
    "a": "FC Volendam, 2-1 away",
-   "club": "telstar"
+   "club": "telstar",
+   "cat": "stories"
   },
   {
    "q": "A 6-0 Go Ahead Eagles win over NAC Breda in 2025-26 ended up in a Utrecht court. What was the row about?",
    "a": "Dean James turned out to have given up his Dutch citizenship",
    "sub": "The KNVB warned a replay could open more than 130 other matches to challenge.",
-   "club": "go-ahead-eagles"
+   "club": "go-ahead-eagles",
+   "cat": "stories"
   },
   {
    "q": "PSV were crowned champions on 5 April 2026 without kicking a ball. What handed them the title?",
    "a": "Feyenoord could only draw 0-0 with Volendam",
-   "club": "psv"
+   "club": "psv",
+   "cat": "stories"
   },
   {
    "q": "Ajax led the 2024-25 Eredivisie by nine points with five rounds left. How did the season end?",
    "a": "PSV caught them and won the title by one point",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "stories"
   },
   {
    "q": "Go Ahead Eagles reached the Europa League in 2025-26 and beat which English club 2-1 at home?",
    "a": "Aston Villa",
-   "club": "go-ahead-eagles"
+   "club": "go-ahead-eagles",
+   "cat": "stories"
   },
   {
    "q": "Inter got Andre Onana from Ajax for nothing in 2022. What did they sell him for a year later?",
    "a": "About 44 million pounds, to Manchester United",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "stories"
   },
   {
    "q": "Ajax signed Frenkie de Jong from Willem II in 2015 for a symbolic fee. How much was it?",
    "a": "One euro",
    "sub": "Willem II took a ten per cent sell-on instead, and cashed in four years later.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "stories"
   },
   {
    "q": "Vitesse lost their professional licence in the summer of 2025. How were they playing again by September?",
    "a": "They won an appeal in court and got the licence back",
-   "club": "vitesse"
+   "club": "vitesse",
+   "cat": "stories"
   },
   {
    "q": "Heracles Almelo finished bottom of the 2025-26 Eredivisie on 19 points, but won one match 8-2. Against whom?",
    "a": "PEC Zwolle",
-   "club": "heracles-almelo"
+   "club": "heracles-almelo",
+   "cat": "stories"
   },
   {
    "q": "Ajax paid Willem II a symbolic fee for Frenkie de Jong in 2015. How much?",
    "a": "One euro, plus a ten percent sell-on clause",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "transfers"
   },
   {
    "q": "Erik Pieters was sent off on his PSV comeback in January 2013 and then hurt his arm badly. How?",
    "a": "He punched a window",
-   "club": "psv"
+   "club": "psv",
+   "cat": "records"
   },
   {
    "q": "Which Heerenveen striker scored seven goals in one Eredivisie match in October 2007?",
    "a": "Afonso Alves",
    "sub": "It came in a 9-0 win over Heracles Almelo on 7 October 2007.",
-   "club": "sc-heerenveen"
+   "club": "sc-heerenveen",
+   "cat": "records"
   },
   {
    "q": "Luis Suárez was banned for seven matches in 2010 for biting an opponent in Ajax against PSV. Who did he bite?",
    "a": "Otman Bakkal",
    "sub": "The Dutch press christened him the Cannibal of Ajax.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "records"
   },
   {
    "q": "What did the Feyenoord goalkeeper Eddy Treijtel hit with a goal kick at Sparta in November 1970?",
@@ -5557,19 +6364,22 @@
    "q": "Which Vitesse defender scored his first Eredivisie goal in 2017, after 303 matches without one?",
    "a": "Arnold Kruiswijk",
    "sub": "It came against Sparta Rotterdam on 10 March 2017.",
-   "club": "vitesse"
+   "club": "vitesse",
+   "cat": "records"
   },
   {
    "q": "An FC Twente player set a grim Eredivisie record in 1987-88 by getting injured after how long?",
    "a": "15 seconds",
    "sub": "The unlucky man was Freddy ten Caat.",
-   "club": "twente"
+   "club": "twente",
+   "cat": "records"
   },
   {
    "q": "Which club scored three own goals in one match at PSV in October 1989?",
    "a": "MVV",
    "sub": "Hans Linders got two of them on his own.",
-   "club": "psv"
+   "club": "psv",
+   "cat": "records"
   },
   {
    "q": "Roelof Luinge's last professional match was a cup tie between Feyenoord and Ajax in May 2010. How did it end for him?",
@@ -5580,13 +6390,15 @@
    "q": "Ajax won 12-1 at home to Vitesse in 1972 and 13-0 away in October 2020. Which club shipped the 13-0?",
    "a": "VVV-Venlo",
    "sub": "It finished 0-13 in Venlo.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "records"
   },
   {
    "q": "Johan Cruyff, Johan Neeskens and Dick van Dijk all did the same thing in Ajax's 12-1 win over Vitesse in 1972. What?",
    "a": "They each scored a hat-trick",
    "sub": "Cruyff actually took four, in Dick van Dijk's farewell match.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "records"
   },
   {
    "q": "Which Dutch keeper was still turning out in the Eredivisie for Go Ahead Eagles at the age of 44, in 1985?",
@@ -5598,12 +6410,14 @@
    "q": "Which Ajax coach resigned in December 2010, making way for Frank de Boer?",
    "a": "Martin Jol",
    "sub": "Feyenoord had ten men from the 34th minute. Their previous worst was an 8-2 loss to Ajax in 1983.",
-   "club": "ajax"
+   "club": "ajax",
+   "cat": "managers"
   },
   {
    "q": "In May 2016 the KNVB licensing committee ordered which club relegated for financial mismanagement, a decision overturned on appeal?",
    "a": "FC Twente",
-   "sub": "The appeal committee overturned it on 17 June 2016. Twente went down on the pitch two years later anyway."
+   "sub": "The appeal committee overturned it on 17 June 2016. Twente went down on the pitch two years later anyway.",
+   "cat": "stories"
   },
   {
    "q": "Go Ahead Eagles are called Kowet. Where does the name come from?",

@@ -2429,6 +2429,7 @@
   .h2cwhy{display:block;margin:-2px 0 8px;font-size:.74rem;letter-spacing:.02em;opacity:.82}
   .h2cwhy.up{color:#8FD9A8}
   .h2cwhy.down{color:#E8A87C}
+  .h2cwhy.spec{color:var(--ink-soft)}
   /* the team sheet: two columns, four rows, nothing shouting. It is the last
      thing anybody reads before a ball is kicked and it should read like a
      programme rather than a dashboard. */
@@ -5480,7 +5481,7 @@ function setTheme(t){
   applyTheme();
   render();
 }
-const BUILD = "13 Sep 2026 · 23:31";
+const BUILD = "13 Sep 2026 · 23:39";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five
@@ -5888,7 +5889,7 @@ function freshState(names, timed=true, mode="classic", target=100, play="board",
     rr:false, rrTurn:0, rrLast:null,
     h2h:null, // one on one: the ball, who has it, and whether a shot is live
     used:{easy:[],normal:[],hard:[],extreme:[],ball:[]},
-    usedQ:{}, qd:null, qfall:null,   // The Dugout draws from league decks, which count their own
+    usedQ:{}, qd:null, qfall:null, qspec:null,   // The Dugout draws from league decks, which count their own
   };
 }
 // returns index of a player who has reached the win target, else -1 (highest wins ties)
@@ -7100,6 +7101,33 @@ const H2_BOOKED_TIER = null;         // a booked man tackles at this instead; nu
    from something that happened in Germany rather than from an opinion. Cost is
    in budget points and H2_TRAIT_BUDGET is what a manager has to spend, so a
    side can have one expensive man or two cheap ones and never everything. */
+/* ---------- SPECIALISMS ----------
+   Eleven slots, eleven categories, one each, in the 4-2-3-1 order every shape
+   indexes. Assigned by what the position feels like rather than at random: the
+   keeper is the odd-statistic man, the centre-backs get the grim end of the
+   table and the grounds, the wide men get the comings and goings, the six gets
+   the managers, and the front line gets the goals, the stories and the titles. */
+const H2_SPEC = [
+  "records",      /* 0  the keeper */
+  "relegation",   /* 1  left centre-back */
+  "grounds",      /* 2  right centre-back */
+  "transfers",    /* 3  the left of the two wide defenders */
+  "imports",      /* 4  and the right */
+  "managers",     /* 5  the six */
+  "cups",         /* 6  the eight */
+  "europe",       /* 7  the ten */
+  "stories",      /* 8  the left of the front line */
+  "scorers",      /* 9  the striker */
+  "champions",    /* 10 the right of the front line */
+];
+/* what this man asks about, in words a reader can say out loud */
+const H2_SPEC_SAYS = {
+  champions: "title races", scorers: "goalscorers", transfers: "transfers",
+  managers: "managers", grounds: "grounds", records: "records", europe: "European nights",
+  cups: "cup finals", relegation: "going down", imports: "imports", stories: "the stories",
+};
+const h2Spec = i => (h2Tactical() && i != null) ? (H2_SPEC[i] || null) : null;
+
 const H2_TRAIT_BUDGET = 3;
 const H2_TRAITS = {
   finisher: {cost: 2, label: "Finisher", from: "Scored twice or more in Germany",
@@ -7717,7 +7745,11 @@ function h2Decks(i, w){
    Cannavaro is a Serie A question is the whole reason you picked that side. */
 const h2League = () => {
   if(!S) return "";
-  if(S.qd && QUIZZES[S.qd]) return " \u00b7 " + QUIZZES[S.qd].label;
+  /* HIS SPECIALISM, when it actually landed. Saying it is most of the point:
+     the rule is invisible otherwise, and knowing the striker asks about goals
+     is a reason to put a man there rather than somewhere else. */
+  const sp = S.qspec ? " \u00b7 " + (H2_SPEC_SAYS[S.qspec] || S.qspec) : "";
+  if(S.qd && QUIZZES[S.qd]) return " \u00b7 " + QUIZZES[S.qd].label + sp;
   /* He has leagues and not one of them had a question left at this tier.
      Saying so is the difference between a rule and a glitch. */
   const f = S.qfall || [];
@@ -7750,14 +7782,21 @@ function h2Draw(t, i, w){
      the bank there is the classic one. It would fire on the first league quiz
      to get careers, so it is closed now rather than left as a trap. */
   const mine = h2Decks(i, w).filter(id => id !== S.mode);
+  const spec = h2Spec(i);
   const take = (id) => {
     const bank = h2Bank(id, t);
     if(!bank) return false;
     const used = h2Used(id, t);
     const avail = bank.map((_, n) => n).filter(n => !used.includes(n));
     if(!avail.length) return false;
+    /* HIS SPECIALISM FIRST, and only if the deck has enough of it left. A
+       preference rather than a requirement: insisting would either repeat the
+       same four questions all night or refuse a ball that was legally played. */
+    const his = spec ? avail.filter(n => bank[n] && bank[n].cat === spec) : [];
+    const pool = his.length ? his : avail;
     S.tier = t; S.qd = id;
-    S.qi = avail[Math.floor(Math.random() * avail.length)];
+    S.qi = pool[Math.floor(Math.random() * pool.length)];
+    S.qspec = his.length ? spec : null;
     used.push(S.qi);
     return true;
   };
@@ -8666,7 +8705,7 @@ function h2SoEnd(){
 
 function h2Next(){
   const H = h2();
-  S.tier = null; S.qi = null; S.qd = null; S.qfall = null; S.timeUp = false;
+  S.tier = null; S.qi = null; S.qd = null; S.qfall = null; S.qspec = null; S.timeUp = false;
   H.pen = false; H.subQ = false;
   /* THE HOLD BELONGS TO WHOEVER IS ON THE BALL, so anything that moved the
      ball puts him back in the shape, and he jogs there rather than being
@@ -9680,6 +9719,12 @@ function h2Render(st){
               (contested ? "#e04a34" : tt.color) + '">' +
               '<div class="h2cline"><span class="h2cwhat">' + h2PassName(H.at, H.sel) + '</span>' +
               '<span class="h2ctier">' + (contested ? "Contested" : tt.label) + '</span></div>' +
+              /* WHAT HE ASKS ABOUT, before the ball is played, because that is
+                 the whole reason to pick one man over another. */
+              (h2Spec(H.sel) && !contested
+                ? '<span class="h2cwhy spec">He asks about ' +
+                  esc(H2_SPEC_SAYS[h2Spec(H.sel)] || h2Spec(H.sel)) + '</span>'
+                : "") +
               (contested ? "" : why) +
               (contested ? '<div class="h2hintline" style="margin:0 0 8px">' + esc(them.name) +
                 ' gets a ' + TIERS[H2_PRESS_TIER].label + ' question to take it off you first.</div>' : "") +

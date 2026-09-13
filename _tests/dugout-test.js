@@ -45,6 +45,7 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
     run(app, "DECKS[" + JSON.stringify(id) + "] = " + JSON.stringify(R("assets/" + dir + "/index.json")));
 
   const qd = () => ev(app, "S.qd");
+  const qd2 = () => ev(app, "S.qd");
   const lg = (i, w) => ev(app, "h2Man(" + i + "," + w + ").lg") || null;
   /* WHICH SLOT IS HE IN. Never hardcode it: the shape decides, and so does
      the squad file, which changes when the harvest improves. */
@@ -422,6 +423,80 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
     !/Martijn is (holding|pushed|sitting)/.test(stage(app)), "still blames the attacker");
   check("it says the line is yours", /Your side is/.test(stage(app)), "no owner named");
   check("and that the other man can see it", /Martijn can see it/.test(stage(app)), "not told");
+
+  /* ================================================================
+     EVERY MAN ASKS ABOUT SOMETHING
+     ================================================================
+     Eleven slots, eleven categories, one each. The league rule made the eleven
+     a choice about nations; this makes it a choice about the eleven itself,
+     because where a man stands now decides what he asks as well as what it
+     costs to find him. */
+  console.log("\n--- every man asks about something ---");
+  start("manager", "Italy", "Netherlands");
+  check("there is one category per slot", ev(app, "H2_SPEC.length") === 11, ev(app, "H2_SPEC.length"));
+  check("and no two men ask the same thing",
+    ev(app, "new Set(H2_SPEC).size") === 11, ev(app, "new Set(H2_SPEC).size"));
+  check("the striker asks about goalscorers", ev(app, "h2Spec(9)") === "scorers", ev(app, "h2Spec(9)"));
+  check("the ten asks about Europe", ev(app, "h2Spec(7)") === "europe", ev(app, "h2Spec(7)"));
+  check("the keeper asks about records", ev(app, "h2Spec(0)") === "records", ev(app, "h2Spec(0)"));
+  /* IT FOLLOWS THE SLOT, not the formation. A shape rearranges the same eleven,
+     so the rule has to stay sayable when the ten goes up front. */
+  run(app, 'S.h2h.form = ["4-4-2","4-4-2"];');
+  check("and it is still the slot in a different shape", ev(app, "h2Spec(9)") === "scorers",
+    ev(app, "h2Spec(9)"));
+  run(app, 'S.h2h.form = ["4-2-3-1","4-2-3-1"];');
+
+  /* DRAWING IT. Italy's eleven all carry Serie A, which has categories on every
+     row, so a ball to the striker should land on a scorers question. */
+  const drew = [];
+  for(let k = 0; k < 12; k++){
+    run(app, "S.qd = null; S.qspec = null; h2Draw('normal', 9, 0);");
+    const qd = qd2(), sp = ev(app, "S.qspec");
+    drew.push(sp);
+  }
+  check("a ball to the striker keeps landing on goalscorers",
+    drew.filter(x => x === "scorers").length >= 8, JSON.stringify(drew));
+  const drew8 = [];
+  for(let k = 0; k < 12; k++){
+    run(app, "S.qd = null; S.qspec = null; h2Draw('normal', 6, 0);");
+    drew8.push(ev(app, "S.qspec"));
+  }
+  /* THREE, not twelve, and that is the rule working. Serie A's Normal tier
+     holds three cup questions, so the eight gets his specialism three times
+     and then the deck honestly runs out of them and hands him anything. A
+     requirement would have repeated those three all night. */
+  check("and a ball to the eight lands on cup finals while there are any",
+    drew8.filter(x => x === "cups").length >= 3, JSON.stringify(drew8));
+  check("and then stops claiming it rather than repeating them",
+    drew8.filter(x => x === null).length > 0, JSON.stringify(drew8));
+
+  /* A PREFERENCE, NEVER A REQUIREMENT. Empty his category and the ball is still
+     played: refusing it would break a rule the geometry already promised. */
+  run(app, "S.usedQ = {}; S.qd = null; S.qspec = null;");
+  run(app, "(() => { const b = DECKS.seriea.normal; const used = []; " +
+    "b.forEach((r,n) => { if(r.cat === 'scorers') used.push(n); }); " +
+    "S.usedQ.seriea = {normal: used}; })();");
+  run(app, "h2Draw('normal', 9, 0);");
+  check("with his category gone he still gets a question", ev(app, "S.qi") != null, ev(app, "S.qi"));
+  /* THE REAL INVARIANT, which holds however the fallback went. Emptying Serie A
+     does not empty La Liga, and an Italian defender carries both, so the draw
+     can honestly still find a scorers question somewhere. What must never
+     happen is the card claiming a specialism the question it drew does not
+     have. */
+  check("and the card never claims a specialism the question does not have",
+    ev(app, "S.qspec") === null || ev(app, "q().cat") === ev(app, "S.qspec"),
+    ev(app, "S.qspec") + " but the question is " + ev(app, "q().cat"));
+
+  /* the card says it when it lands */
+  run(app, "S.usedQ = {}; S.qd = null; S.qspec = null; h2Draw('normal', 9, 0);");
+  if(ev(app, "S.qspec") === "scorers")
+    check("and says it out loud when it does", /goalscorers/.test(ev(app, "h2League()")), ev(app, "h2League()"));
+  else
+    check("and says it out loud when it does", true, "no scorers question was left");
+
+  console.log("\n--- One on One asks nobody anything in particular ---");
+  start("pitch", "Italy", "Netherlands");
+  check("no slot has a specialism on the pitch", ev(app, "h2Spec(9)") === null, ev(app, "h2Spec(9)"));
 
   console.log("\n--- the menu only offers it where the eleven have careers ---");
   check("Let's Ball can be managed", ev(app, 'canEver("classic","manager")') === true, ev(app, 'canEver("classic","manager")'));

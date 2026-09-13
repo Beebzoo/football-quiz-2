@@ -103,6 +103,29 @@ for (const [label] of DECKS) {
   }
 }
 
+/* ---------- SPECIALISMS: eleven slots, eleven categories ----------
+   Every man on the pitch asks about one thing, so a deck needs some of each
+   category and not just enough rows overall. A missing category is not a
+   failure: the draw falls back to any question and the card stops claiming a
+   specialism. It is worth SEEING, though, because a deck with four empty
+   categories quietly turns four of the eleven back into ordinary slots. */
+console.log("\n--- what each deck can actually specialise in ---");
+const SPEC = ["records", "relegation", "grounds", "transfers", "imports", "managers",
+              "cups", "europe", "stories", "scorers", "champions"];
+for (const [label, dir] of DECKS) {
+  const r = rows[label];
+  if (!r) continue;
+  const c = {};
+  let tagged = 0, total = 0;
+  for (const t of TIERS) for (const q of (r.d[t] || [])) {
+    total++;
+    if (q.cat) { tagged++; c[q.cat] = (c[q.cat] || 0) + 1; }
+  }
+  const empty = SPEC.filter(k => !c[k]);
+  console.log("  " + pad(label, 20) + pad(tagged + "/" + total + " tagged", 16) +
+    (empty.length ? empty.length + " of eleven empty: " + empty.join(", ") : "all eleven covered"));
+}
+
 /* ---------- the classic bank, which every man without a career falls back to ---------- */
 console.log("\n--- the classic bank, which is the floor under all of them ---");
 const html = fs.readFileSync(path.join(REPO, "index.html"), "utf8");
