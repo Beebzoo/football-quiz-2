@@ -283,7 +283,22 @@
        .h2pitch is the surface a match is played on. The first follows the look
        and the second is green in both, which is why they are separate. */
   }
+  /* THE ELEVEN THE SWEEP FORGOT. These are 2019 names still declared on bare
+     :root above, and nothing redefined them when the two themes arrived, so
+     every screen still reading one was frozen at its light value in both:
+     white cards and navy ink on a near-black ground. Defined per theme here
+     rather than chased through the rules that use them.
+
+     --turf and the two card colours are NOT theme-aware on purpose. A yellow
+     card is yellow, a red card is red, and grass is grass. */
   :root, :root[data-theme="dark"]{
+    --card:#1C2116;                /* a surface on the night ground */
+    --chalk:#F8F1DD;               /* what is written on it */
+    --chalk-dim:#9C9478;
+    --blue:#7FA8F0;                /* links, lifted off the dark */
+    --ok:#5FBE86;
+    --bad:#E8705A;
+    --shadow:0 6px 18px rgba(0,0,0,.45);
     --bg:#14180F;                  /* near-black olive, warm not blue */
     --ink:#F8F1DD;                 /* cream, never pure white */
     --ink-soft:#C8C0A6;
@@ -311,6 +326,13 @@
     --head-rule:1px;
   }
   :root[data-theme="light"]{
+    --card:#FFFCF4;                /* paper, a shade above the ground */
+    --chalk:#2A2620;
+    --chalk-dim:#5C5344;
+    --blue:#2050B8;
+    --ok:#1E7A4C;
+    --bad:#B42B1B;
+    --shadow:0 6px 18px rgba(42,38,32,.14);
     --bg:#FDF6E2;                  /* warm paper, never white */
     --ink:#2A2620;                 /* charcoal, never black */
     --ink-soft:#5C5344;
@@ -1263,11 +1285,12 @@
   .xipitch{
     position:relative;width:100%;max-width:420px;margin:10px auto 0;aspect-ratio:10/12;
     background:linear-gradient(180deg,#175327 0%,#11431f 48%,#175327 52%,#0e3a1b 100%);
-    border:1px solid var(--edge);border-radius:16px;
+    border:1px solid rgba(255,255,255,.14);border-radius:16px;
     box-shadow:0 12px 28px rgba(0,0,0,.5);overflow:hidden;
   }
-  .xipitch::before{content:"";position:absolute;inset:3.5%;border:1.5px solid var(--edge-soft);border-radius:6px;pointer-events:none}
-  .xipitch::after{content:"";position:absolute;left:3.5%;right:3.5%;top:50%;border-top:1.5px solid var(--edge-soft);pointer-events:none}
+  /* the same rule as the match pitch: this one is green in both themes too */
+  .xipitch::before{content:"";position:absolute;inset:3.5%;border:1.5px solid rgba(255,255,255,.22);border-radius:6px;pointer-events:none}
+  .xipitch::after{content:"";position:absolute;left:3.5%;right:3.5%;top:50%;border-top:1.5px solid rgba(255,255,255,.22);pointer-events:none}
   .xspot{position:absolute;transform:translate(-50%,-50%);text-align:center;width:70px;cursor:pointer;-webkit-tap-highlight-color:transparent}
   .xshirt{
     width:40px;height:38px;margin:0 auto;background:var(--kit,#888);
@@ -1817,14 +1840,17 @@
   /* markings */
   .h2pitch::before{content:"";position:absolute;inset:2% 2.5%;border:2px solid rgba(255,255,255,.34);border-radius:3px;pointer-events:none}
   .h2pitch::after{content:"";position:absolute;left:2.5%;right:2.5%;top:50%;border-top:2px solid rgba(255,255,255,.28);pointer-events:none}
-  .h2box{position:absolute;left:26%;right:26%;height:9%;border:2px solid var(--edge);pointer-events:none}
+  /* CHALK, not a token. The markings belong to the pitch and the pitch is
+     green in both themes, so --edge here turned the box beige in daylight
+     while the touchline next to it stayed white. */
+  .h2box{position:absolute;left:26%;right:26%;height:9%;border:2px solid rgba(255,255,255,.26);pointer-events:none}
   .h2box.t{top:2%;border-top-color:transparent}
   .h2box.b{bottom:2%;border-bottom-color:transparent}
   .h2six{position:absolute;left:38%;right:38%;height:4%;border:2px solid rgba(255,255,255,.2);pointer-events:none}
   .h2six.t{top:2%;border-top-color:transparent}
   .h2six.b{bottom:2%;border-bottom-color:transparent}
   .h2circle{position:absolute;left:50%;top:50%;width:24%;aspect-ratio:1;transform:translate(-50%,-50%);
-    border:2px solid var(--edge);border-radius:50%;pointer-events:none}
+    border:2px solid rgba(255,255,255,.26);border-radius:50%;pointer-events:none}
   .h2spot{position:absolute;left:50%;top:50%;width:4px;height:4px;transform:translate(-50%,-50%);
     background:rgba(255,255,255,.5);border-radius:50%;pointer-events:none}
 
@@ -5435,7 +5461,17 @@ try{
   THEME = saved === "light" || saved === "dark" ? saved
         : (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
 }catch(e){}
-function applyTheme(){ try{ document.documentElement.setAttribute("data-theme", THEME); }catch(e){} }
+/* THE BROWSER CHROME follows the look too. It was a fixed broadcast green from
+   before there were two themes, so the bar above the app stayed green on paper. */
+function themeColor(){
+  try{
+    const m = document.querySelector('meta[name="theme-color"]');
+    if(!m) return;
+    const bg = getComputedStyle(document.documentElement).getPropertyValue("--bg").trim();
+    if(bg) m.setAttribute("content", bg);
+  }catch(e){}
+}
+function applyTheme(){ try{ document.documentElement.setAttribute("data-theme", THEME); themeColor(); }catch(e){} }
 applyTheme();
 function setTheme(t){
   audio();
@@ -5444,7 +5480,7 @@ function setTheme(t){
   applyTheme();
   render();
 }
-const BUILD = "13 Sep 2026 · 23:26";
+const BUILD = "13 Sep 2026 · 23:31";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five
@@ -7704,7 +7740,16 @@ function h2Used(id, t){
    one shooting, the one being marked. Left out, it is the quiz's own bank,
    which is every mode except this one. */
 function h2Draw(t, i, w){
-  const mine = h2Decks(i, w);
+  /* HIS OWN LEAGUE AND THE QUIZ'S OWN BANK CAN BE THE SAME ARRAY. A Premier
+     League man in a Premier League quiz routes to DECKS.premier, and bankFor
+     routes to DECKS.premier as well, but the used lists are keyed separately:
+     S.usedQ.premier against S.used. Two lists, one deck, and the same question
+     comes round twice in a match.
+
+     It cannot fire today, because The Dugout is only offered on Let's Ball and
+     the bank there is the classic one. It would fire on the first league quiz
+     to get careers, so it is closed now rather than left as a trap. */
+  const mine = h2Decks(i, w).filter(id => id !== S.mode);
   const take = (id) => {
     const bank = h2Bank(id, t);
     if(!bank) return false;
