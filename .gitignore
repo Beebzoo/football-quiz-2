@@ -32,3 +32,6 @@ _shot_frame.html
 # the question checker's copy of every source article it has fetched.
 # Rebuildable, and a few MB of Wikipedia nobody needs in git.
 _tools/_questions/_cache/
+
+# scratch files the review agents leave behind while probing the app
+_tests/_probe*.js
