@@ -5134,7 +5134,7 @@ const playableAs = (id, play) => canEver(id, play) && modeLive(id);
    "am I on the new one?" is a question the phone can answer by itself:
    nearly everything built lately happens during a match, so a stale phone
    and a fresh one look identical on the menu. */
-const BUILD = "13 Sep 2026 · 17:31";
+const BUILD = "13 Sep 2026 · 17:43";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five
@@ -5542,6 +5542,7 @@ function freshState(names, timed=true, mode="classic", target=100, play="board",
     rr:false, rrTurn:0, rrLast:null,
     h2h:null, // one on one: the ball, who has it, and whether a shot is live
     used:{easy:[],normal:[],hard:[],extreme:[],ball:[]},
+    usedQ:{}, qd:null,   // The Dugout draws from league decks, which count their own
   };
 }
 // returns index of a player who has reached the win target, else -1 (highest wins ties)
@@ -6373,7 +6374,12 @@ function deckFor(){
   return DECKS[S.mc ? S.mode + "-mc" : S.mode] || null;
 }
 function bankFor(t){ const d = deckFor(); return d ? d[t] : null; }
-function q(){ if(S.mode==="badge") return badgeQ(); const d = deckFor(); return d ? d[S.tier][S.qi] : null; }
+/* S.qd says which deck the loaded question came out of, and only The Dugout
+   ever sets it. Without this the index would be read back out of the quiz's
+   own bank and answer a different question entirely. */
+function q(){ if(S.mode==="badge") return badgeQ();
+  const d = S.qd ? DECKS[S.mc ? S.qd + "-mc" : S.qd] : deckFor();
+  return d && d[S.tier] ? d[S.tier][S.qi] : null; }
 function remaining(t){ return bankFor(t).length - S.used[t].length; }
 async function wakeLock(){ try{ if(navigator.wakeLock) await navigator.wakeLock.request("screen"); }catch(e){} }
 document.addEventListener("visibilitychange",()=>{ if(!document.hidden && S) wakeLock(); });
@@ -7014,12 +7020,47 @@ function h2Select(i){
   H.sel = H.sel === i ? null : i;
   render();
 }
-function h2Draw(t){
-  const avail = bankFor(t).map((_, i) => i).filter(i => !S.used[t].includes(i));
-  if(!avail.length) return false;
+/* WHICH DECK THIS MAN'S QUESTION COMES FROM. In The Dugout it is his career:
+   van Nistelrooy can be asked Eredivisie, Premier League, La Liga or
+   Bundesliga, Cannavaro Serie A or La Liga, and a Costa Rican who never left
+   home is the classic bank, which is null here and means "the quiz's own".
+
+   Only decks that have actually landed are offered, so a man whose leagues are
+   still downloading asks the bank rather than nothing. */
+function h2DeckFor(i, w){
+  if(!h2Tactical() || i == null) return null;
+  const m = h2Man(i, w);
+  const live = ((m && m.lg) || []).filter(id => DECKS[S.mc ? id + "-mc" : id]);
+  return live.length ? live[Math.floor(Math.random() * live.length)] : null;
+}
+/* WHICH LEAGUE IS BEING ASKED, for the card. Saying it out loud is most of
+   the point: the rule is invisible otherwise, and knowing that a ball to
+   Cannavaro is a Serie A question is the whole reason you picked that side. */
+const h2League = () => (S && S.qd && QUIZZES[S.qd]) ? " \u00b7 " + QUIZZES[S.qd].label : "";
+const h2Bank = (id, t) => id ? ((DECKS[S.mc ? id + "-mc" : id] || {})[t] || null) : bankFor(t);
+/* used is per deck, because the indexes are per deck: question 12 of Serie A
+   is not question 12 of the classic bank, and one shared list would cross them
+   over and start hiding questions nobody has seen. */
+function h2Used(id, t){
+  if(!id) return S.used[t];
+  S.usedQ = S.usedQ || {};
+  S.usedQ[id] = S.usedQ[id] || {};
+  return (S.usedQ[id][t] = S.usedQ[id][t] || []);
+}
+/* i and w are the man the question is ABOUT: the one receiving the ball, the
+   one shooting, the one being marked. Left out, it is the quiz's own bank,
+   which is every mode except this one. */
+function h2Draw(t, i, w){
+  const id = h2DeckFor(i, w);
+  const bank = h2Bank(id, t);
+  if(!bank) return id ? h2Draw(t) : false;        // his league is dry, the bank is not
+  const used = h2Used(id, t);
+  const avail = bank.map((_, n) => n).filter(n => !used.includes(n));
+  if(!avail.length) return id ? h2Draw(t) : false;
   S.tier = t;
+  S.qd = id;
   S.qi = avail[Math.floor(Math.random() * avail.length)];
-  S.used[t].push(S.qi);
+  used.push(S.qi);
   return true;
 }
 function h2Play(){
@@ -7035,7 +7076,7 @@ function h2Play(){
   const marks = (h2TackleOn && H.marks) || [];
   if(marks.length){
     if(marks.indexOf(H.sel) !== -1){
-      if(h2Draw(h2TackleTier(H.sel))){
+      if(h2Draw(h2TackleTier(H.sel), H.sel, H.who)){
         H.contest = "tackle";
         H.caught = H.sel;          // which mark landed, for the judge and the reveal
         H.shooting = false;
@@ -7069,7 +7110,7 @@ function h2Play(){
      does in h2Judge: a raking ball is a raking ball, and having been made
      cheaper for missing a mark should not turn it into knocking it about. */
   if(H2_SAFE.includes(ladder) && H.safe >= H2_PRESS_AT){
-    if(h2Draw(H2_PRESS_TIER)){
+    if(h2Draw(H2_PRESS_TIER, H.sel, H.who)){
       H.contest = "press";
       H.shooting = false;
       if(relieved) H.relief = false;
@@ -7079,7 +7120,7 @@ function h2Play(){
     }
     // no question left at that level: let the pass go rather than stall the game
   }
-  if(!h2Draw(t)){ toast("No " + TIERS[t].label + " questions left", true); return; }
+  if(!h2Draw(t, H.sel, H.who)){ toast("No " + TIERS[t].label + " questions left", true); return; }
   if(relieved) H.relief = false;    // once a possession, and only once it is played
   H.shooting = false;
   S.timeUp = false; S.phase = "h_q";
@@ -7183,7 +7224,7 @@ function h2TackleJudge(won){
     if(from !== H.at) h2Fly(h2BX(from, true), h2BY(from, true), h2BX(H.at, true), h2BY(H.at, true), from, H.at,
                             undefined, h2TierFor(from, H.at));
     H.pen = true; H.shooting = true;
-    if(!h2Draw(H2_PEN_TAKER)) h2Draw(S.tier);
+    if(!h2Draw(H2_PEN_TAKER, H.at, H.who)) h2Draw(S.tier, H.at, H.who);
     S.timeUp = false; S.phase = "h_q";
     return render();
   }
@@ -7208,7 +7249,7 @@ function h2Shoot(){
   let t = H2_SHOT[H.at];
   const relieved = !!(h2TackleOn && H.marks && H.marks.length && H.relief);
   if(relieved) t = h2Cheaper(t, H2_MISS_RELIEF);
-  if(!h2Draw(t)){ toast("No " + TIERS[t].label + " questions left", true); return; }
+  if(!h2Draw(t, H.at, H.who)){ toast("No " + TIERS[t].label + " questions left", true); return; }
   if(relieved) H.relief = false;   // spent on a shot that is actually taken
   H.shooting = true; H.sel = null;
   S.timeUp = false; S.phase = "h_q";
@@ -7499,7 +7540,7 @@ function h2ToSave(){
      outfield man in goal is asked something unfair for the opposite reason:
      he is not a keeper and it should show. */
   const tier = H.so ? H2_SO_KEEPER : H.pen ? H2_PEN_KEEPER : h2NoGk(h2Other()) ? H2_SAVE_NOGK : H2_SAVE;
-  if(!h2Draw(tier)) h2Draw(S.tier);      // if that level is dry, whatever is loaded will do
+  if(!h2Draw(tier, 0, h2Other())) h2Draw(S.tier, 0, h2Other());   // his keeper, and his keeper's career
   S.timeUp = false; S.phase = "h_save";
   render();
 }
@@ -7615,7 +7656,14 @@ function h2SubOn(bi){
   const b = h2Bench(sub.w).filter(x => x.i === bi)[0];
   if(!b) return;
   const t = S.tier;
-  if(!t || !h2Draw(t)){
+  /* HE IS ON THE PITCH BEFORE HE IS ASKED ANYTHING, because in The Dugout the
+     question comes from the career of the man facing it and that is now the
+     substitute, not the man he replaced. Put back if the bank is dry, so a
+     change is still never spent on a question that did not happen. */
+  const had = H.subbed && H.subbed[sub.w] ? H.subbed[sub.w][sub.slot] : undefined;
+  if(H.subbed && H.subbed[sub.w]) H.subbed[sub.w][sub.slot] = b.p;
+  if(!t || !h2Draw(t, sub.slot, sub.w)){
+    if(H.subbed && H.subbed[sub.w]){ if(had === undefined) delete H.subbed[sub.w][sub.slot]; else H.subbed[sub.w][sub.slot] = had; }
     toast("No " + (t ? TIERS[t].label + " " : "") + "questions left, so the miss stands.", true);
     H.sub = null; H.subQ = false;
     return sub.kind === "save" ? h2SaveSettle(false) : h2Settle(false);
@@ -7683,9 +7731,9 @@ function h2SoDecided(so){
   return null;
 }
 /* the tier wanted, else the nearest one that still has something in it */
-function h2DrawOr(t){
-  if(h2Draw(t)) return true;
-  for(const o of H2_ORDER) if(h2Draw(o)) return true;
+function h2DrawOr(t, i, w){
+  if(h2Draw(t, i, w)) return true;
+  for(const o of H2_ORDER) if(h2Draw(o, i, w)) return true;
   return false;
 }
 /* The next man steps up. Every kick is the striker's, or whoever is nearest
@@ -7698,7 +7746,7 @@ function h2SoKick(){
   const w = h2SoNext(so);
   H.who = w; H.at = h2IsOff(w, 9) ? h2NearestTo(9, w, w) : 9;
   H.pen = true; H.shooting = true; H.sel = null; H.pick = null; H.safe = 0;
-  if(!h2DrawOr(H2_SO_TAKER)){ toast("No questions left. It ends level.", true); return h2SoEnd(); }
+  if(!h2DrawOr(H2_SO_TAKER, H.at, H.who)){ toast("No questions left. It ends level.", true); return h2SoEnd(); }
   S.timeUp = false; S.phase = "h_q";
   render();
 }
@@ -7720,7 +7768,7 @@ function h2SoEnd(){
 
 function h2Next(){
   const H = h2();
-  S.tier = null; S.qi = null; S.timeUp = false;
+  S.tier = null; S.qi = null; S.qd = null; S.timeUp = false;
   H.pen = false; H.subQ = false;
   /* THE HOLD BELONGS TO WHOEVER IS ON THE BALL, so anything that moved the
      ball puts him back in the shape, and he jogs there rather than being
@@ -8382,7 +8430,7 @@ function h2Render(st){
     st.innerHTML =
       h2ScoreHTML() + (H.so ? h2GoalSceneHTML("set") : h2PitchHTML(false)) +
       '<div class="qcard" style="--dc:' + priced.color + '">' +
-        '<div class="kick">' + esc(head) + ' · ' + esc(me.name) + ' · ' + priced.label + '</div>' +
+        '<div class="kick">' + esc(head) + ' · ' + esc(me.name) + ' · ' + priced.label + h2League() + '</div>' +
         '<div class="qtext">' + esc(q().q) + '</div>' +
         (shown && !h2IsMC() ? '<div class="atext"><span class="lbl">Answer</span>' + esc(q().a) + '</div>' : "") +
         (h2IsMC() ? h2McOptionsHTML(shown) : "") +
@@ -8428,7 +8476,7 @@ function h2Render(st){
         : esc(them.name) + ' comes in for it') + '</div>' +
       (isTackle ? '<div class="h2hintline" style="margin-top:0">He was marking ' + esc(on) + '.</div>' : "") +
       '<div class="qcard" style="--dc:' + t.color + '">' +
-        '<div class="kick">' + (isTackle ? "THE TACKLE" : "CLOSED DOWN") + ' · ' + esc(them.name) + ' · ' + t.label + '</div>' +
+        '<div class="kick">' + (isTackle ? "THE TACKLE" : "CLOSED DOWN") + ' · ' + esc(them.name) + ' · ' + t.label + h2League() + '</div>' +
         '<div class="qtext">' + esc(q().q) + '</div>' +
         (shown && !h2IsMC() ? '<div class="atext"><span class="lbl">Answer</span>' + esc(q().a) + '</div>' : "") +
         (h2IsMC() ? h2McOptionsHTML(shown) : "") +
@@ -8462,7 +8510,7 @@ function h2Render(st){
       h2ScoreHTML() + h2GoalSceneHTML("set") +
       '<div class="h2big">' + esc(me.name) + ' shoots!</div>' +
       '<div class="qcard" style="--dc:' + t.color + '">' +
-        '<div class="kick">THE SAVE · ' + esc(them.name) + ' in goal · ' + t.label + '</div>' +
+        '<div class="kick">THE SAVE · ' + esc(them.name) + ' in goal · ' + t.label + h2League() + '</div>' +
         '<div class="qtext">' + esc(q().q) + '</div>' +
         (shown && !h2IsMC() ? '<div class="atext"><span class="lbl">Answer</span>' + esc(q().a) + '</div>' : "") +
         (h2IsMC() ? h2McOptionsHTML(shown) : "") +

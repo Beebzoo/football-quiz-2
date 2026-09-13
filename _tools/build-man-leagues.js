@@ -136,10 +136,13 @@ async function entities(ids) {
   let done = 0;
   for (const m of men) {
     const cands = await searchItems(m.full || m.n);
-    /* a footballer, by the description the search hands back: cheap, and it
-       keeps the entity fetch down to plausible people */
-    const likely = cands.filter(c => /footballer|football player|soccer/i.test(c.desc)).slice(0, 4);
-    m.cands = (likely.length ? likely : cands.slice(0, 3)).map(c => c.id);
+    /* EVERY candidate goes forward, and the description is not a gate.
+       Wikidata describes Ronaldinho as a "Brazilian associaton fooball
+       player", with two typos, so a filter requiring the word football threw
+       away the real one and left a samba musician who is also Brazilian and
+       has no clubs. Prose is a hint; claims are evidence. */
+    m.cands = cands.slice(0, 5).map(c => c.id);
+    m.desc = Object.fromEntries(cands.map(c => [c.id, c.desc || ""]));
     if (++done % 100 === 0) console.log("  " + done + "/" + men.length);
   }
   const allIds = [...new Set(men.flatMap(m => m.cands))];
@@ -155,20 +158,30 @@ async function entities(ids) {
   const countryEnts = await entities(countryIds);
   const labelOf = (id, pool) => { const e = (pool || ents)[id]; return (e && e.labels && e.labels.en && e.labels.en.value) || ""; };
 
-  let tied = 0;
+  /* SCORED ON WHAT THE ITEM CLAIMS, not on how it is described. Citizenship
+     matching the side he played for in 2006 is the strongest signal, having
+     played for ANY team at all is the next, and the description only breaks
+     ties. A man with the right passport and no teams is not our man. */
+  let tied = 0, sure = 0;
   for (const m of men) {
+    const sideish = norm(m.side);
+    let best = null, bestScore = -1;
     for (const id of m.cands) {
       const e = ents[id];
       if (!e) continue;
       const cits = claimIds(e, "P27").map(c => labelOf(c, countryEnts));
-      const sideish = norm(m.side);
-      const ok = cits.some(c => norm(c) === sideish || norm(c).includes(sideish) || sideish.includes(norm(c)));
-      if (ok) { m.qid = id; tied++; break; }
+      const nation = cits.some(c => norm(c) === sideish || norm(c).includes(sideish) || sideish.includes(norm(c)));
+      const teams = claimIds(e, "P54").length;
+      const prose = /footbal|fooball|soccer/i.test((m.desc && m.desc[id]) || "");
+      const score = (nation ? 4 : 0) + (teams ? 3 : 0) + (prose ? 1 : 0) + Math.min(teams, 2) * 0.1;
+      if (score > bestScore) { bestScore = score; best = id; }
     }
-    if (!m.qid && m.cands.length) m.qid = m.cands[0];   // best guess, flagged below
-    if (m.qid && !m.tiedByCitizenship) m.tiedByCitizenship = !!tied;
+    m.qid = best || m.cands[0];
+    if (bestScore >= 7) sure++;
+    if (bestScore >= 4) tied++;
   }
-  console.log("tied to their 2006 side by citizenship: " + tied + "/" + men.length);
+  console.log("tied to their 2006 side by passport AND club record: " + sure + "/" + men.length);
+  console.log("tied by at least one of the two: " + tied + "/" + men.length);
 
   /* ---------- 4. the clubs, and where they are ---------- */
   const qids = [...new Set(men.map(m => m.qid).filter(Boolean))];
@@ -176,7 +189,12 @@ async function entities(ids) {
   const clubsOf = {};
   const countries = {};
   for (const group of chunk(qids, 60)) {
-    const key = "mlc-" + group[0] + "-" + group.length + ".json";
+    /* the WHOLE group, hashed. Keyed on its first id and its length, a group
+       whose membership changed after a better resolver landed hit the stale
+       cache instead: twelve groups, twelve hits, and the corrected ids were
+       never asked about. A cache key has to name everything the answer
+       depends on. */
+    const key = "mlc-" + require("crypto").createHash("sha1").update(group.join(",")).digest("hex").slice(0, 16) + ".json";
     let rows = cacheRead(key);
     if (!rows) {
       const q = `SELECT ?p ?club ?clubLabel ?countryLabel WHERE {
