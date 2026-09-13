@@ -120,6 +120,13 @@ const setups={
   dugout: `S=freshState(["Martijn","Bram"],false,"classic",0,"manager",false); h2TackleOn=false; h2Start(); h2PickTeam("Italy"); h2PickTeam("Costa Rica"); S.h2h.tossed=true; setTimeout(()=>{ S.h2h.who=0; S.h2h.at=5; S.phase="h_pick"; render(); h2Select(2); h2Play(); }, 2200);`,
   /* the private screen in The Dugout: marks and the line, or just the line */
   /* picking a shape, and the pitch once a side is in a 5-3-2 */
+  /* the same screens in daylight */
+  dayq:   `setTheme("light"); S=freshState(["Martijn","Bram","Ale"],false,"classic",100,"board",false); S.phase="pick"; render(); pickTier("hard");`,
+  dayboard:`setTheme("light"); S=freshState(["Martijn","Bram","Ale"],false,"classic",100,"board",false); S.phase="pick"; render();`,
+  daymark:`setTheme("light"); ${nl2} h2TackleOn=true; S.h2h.who=0; S.h2h.at=0; S.h2h.hand=null; S.phase="h_mark"; render(); h2Mark(5); h2Mark(9);`,
+  day:    `setTheme("light"); S=null; setupMode="classic"; setupPlay="pitch"; render();`,
+  night:  `setTheme("dark"); S=null; setupMode="classic"; setupPlay="pitch"; render();`,
+  daypitch:`setTheme("light"); ${nl} S.h2h.who=0; S.h2h.at=0; S.phase="h_pick"; render(); h2Select(7);`,
   dugshape:`S=freshState(["Martijn","Bram"],false,"classic",0,"manager",false); h2TackleOn=false; h2Start(); h2PickTeam("Netherlands"); h2PickTeam("Italy"); render();`,
   dugbus:`S=freshState(["Martijn","Bram"],false,"classic",0,"manager",false); h2TackleOn=false; h2Start(); h2PickTeam("Netherlands"); h2PickTeam("Italy"); S.h2h.tossed=true; S.h2h.form=["4-3-3","5-3-2"]; S.h2h.who=0; S.h2h.at=0; S.h2h.markedAgainst=0; S.phase="h_pick"; render(); h2Select(9);`,
   dugline:`S=freshState(["Martijn","Bram"],false,"classic",0,"manager",false); h2TackleOn=false; h2Start(); h2PickTeam("Netherlands"); h2PickTeam("Italy"); S.h2h.tossed=true; S.h2h.who=0; h2KickOff(); h2HandGo();`,
