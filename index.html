@@ -1195,6 +1195,14 @@
   .modes{
     display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:8px;
   }
+  /* The two ways to play. Same furniture as every other ghost button, so the
+     selected state is the gold the app already uses, with room for a line
+     saying what each one actually is. */
+  .playpick{margin-top:6px}
+  .playcard{display:flex;flex-direction:column;align-items:center;gap:3px;
+    padding:14px 10px;line-height:1.15;text-align:center}
+  .playcard small{display:block;font:500 .7rem/1.2 var(--ui);opacity:.62;letter-spacing:0}
+  .playcard.sel small{opacity:.85}
   .modes .bigbtn{
     display:flex;align-items:center;gap:9px;text-align:left;
     padding:11px 10px;min-width:0;       /* or a long label pushes the grid wide */
@@ -5082,6 +5090,26 @@ const h2Kind = id => id === "classic"
      blurb:"Both of you pick a club. You get its crest and its first eleven by shirt number, this season, and you cannot both have the same one."};
 const isQuiz   = id => !!QUIZZES[id];
 const canPitch = id => !!(QUIZZES[id] && QUIZZES[id].teams);
+/* CAN THIS QUIZ BE PLAYED THE WAY THE TOGGLE SAYS? Two questions that look
+   like one, and conflating them produced a toast telling somebody that
+   Let's Ball has no eleven.
+
+   canEver is a fact about the registry: Career Path has no tiers to price a
+   pass with and Badge Zoom has no Extreme tier, so neither can ever be a
+   match. It does not change under you.
+
+   playableAs is whether it can be played this way RIGHT NOW, which also
+   wants the deck to have landed. It is what DIMS a tile, and it heals itself
+   on the render loadQuiz fires when a file arrives.
+
+   Note what it deliberately does NOT ask: whether the squads have arrived.
+   DECKS.classic is the inline bank and is there on the first frame, while
+   TEAMS.classic is a 42KB fetch, so asking would have greyed out the
+   flagship quiz of the mode the app opens on for as long as the download
+   took. startGame already refuses a kick off with "that deck is still
+   loading, give it a second", which is the honest place to say it. */
+const canEver    = (id, play) => play === "pitch" ? canPitch(id) : true;
+const playableAs = (id, play) => canEver(id, play) && modeLive(id);
 
 /* DECKS[id] is the spoken deck, DECKS[id + "-mc"] the multiple choice one, and
    TEAMS[id] the sides you can pick. All three arrive by fetch and all three
@@ -5093,7 +5121,7 @@ const canPitch = id => !!(QUIZZES[id] && QUIZZES[id].teams);
    "am I on the new one?" is a question the phone can answer by itself:
    nearly everything built lately happens during a match, so a stale phone
    and a fresh one look identical on the menu. */
-const BUILD = "13 Sep 2026 · 16:40";
+const BUILD = "13 Sep 2026 · 17:06";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five
@@ -9253,9 +9281,24 @@ function setMode(m){ snapshotNames(); setupMode=m;
   if(!isQuiz(m))   setupMc=false;
   if(setupPlay==="pitch"){ setupCount=2; setupRef=false; }   // two players, no referee
   modesOpen=false; extraOpen=false; render(); }
-function setPlay(v){ snapshotNames(); setupPlay=v;
+function setPlay(v){
+  snapshotNames(); setupPlay=v;
   if(v==="pitch"){ setupCount=2; setupRef=false; }
-  render(); }
+  /* The quiz is picked AFTER this now, so one that can NEVER be played this
+     way is let go of rather than left sitting there selected and unplayable,
+     and the drawer opens because choosing again is the next thing to do.
+
+     canEver, not playableAs, and the difference is the whole bug: a file
+     still in the air is not a reason to undo somebody's tap and tell him
+     something untrue about his quiz. A deck that has not landed keeps the
+     pick, dims, and comes back on its own. */
+  if(setupMode && !canEver(setupMode, v)){
+    const was = MODE_META[setupMode] ? MODE_META[setupMode][1] : "That one";
+    setupMode = null; modesOpen = true;
+    toast(was + " has no eleven to put on a pitch. Pick another.", true);
+  }
+  render();
+}
 function setMc(v){ snapshotNames(); setupMc=v; render(); }
 function goHome(){ snapshotNames(); setupMode=null; modesOpen=false; extraOpen=false; render(); window.scrollTo({top:0}); }
 function toggleModes(){
@@ -9274,8 +9317,11 @@ function modeDrawerHTML(){
   const chev = `<span class="chev">${modesOpen?"▲":"▼"}</span>`;
   const btn = m && !modesOpen
     ? `<button class="bigbtn ghost sel modestoggle" style="--ac:${m[2]}" onclick="toggleModes()"><span class="mico">${ico(m[0])}</span><span class="mlab">${m[1]}</span>${chev}</button>`
-    : `<button class="bigbtn ghost modestoggle" onclick="toggleModes()"><span class="mico">${ico('grid')}</span><span class="mlab">More game modes</span>${chev}</button>`;
-  const off = {}; Object.keys(MODE_META).forEach(k => off[k] = !modeLive(k));
+    : `<button class="bigbtn ghost modestoggle" onclick="toggleModes()"><span class="mico">${ico('grid')}</span><span class="mlab">More quizzes</span>${chev}</button>`;
+  /* dim on the CHOSEN way of playing, not merely on whether the deck exists:
+     with the football game selected, the two picture modes and any league
+     without squads are not on the table and should say so. */
+  const off = {}; Object.keys(MODE_META).forEach(k => off[k] = !playableAs(k, setupPlay));
   /* The accent rides on the button as --ac so the tile can light its edge and
      its icon from one value. A disabled mode dims the whole thing, lamp and
      all, exactly as an exhausted tier does on the picker board. */
@@ -9420,25 +9466,26 @@ function renderSetup(st){
     ${logoTicker()}
     ${saved?`<button class="bigbtn gold" onclick="resumeGame()">Resume match in progress</button>
     <button class="bigbtn ghost" style="padding:10px;font-size:.95rem" onclick="askCancelMatch()">Cancel match in progress</button>`:""}
-    <button class="bigbtn ghost lbbtn${setupMode==="classic"?" sel":""}" onclick="setMode('classic')"><img class="ballic" src="assets/ball.png" alt="">Let's Ball</button>
+    ${/* HOW YOU PLAY, FIRST AND BIGGEST. It decides what the night is, so it
+          goes above the thing it is played with. It used to sit under a
+          drawer labelled MORE GAME MODES, which put the word mode on the
+          quizzes and hid the two real ones beneath them. Both are always
+          offered: what dims now is the quiz that cannot take it. */""}
+    <div class="kick" style="margin-top:2px">${ico('ball')}How you play</div>
+    <div class="row2 playpick">
+      <button class="bigbtn ghost playcard${setupPlay==="pitch"?" sel":""}" style="--ac:#6fd39b" onclick="setPlay('pitch')">${ico('users')}Football game<small>A match, on a pitch</small></button>
+      <button class="bigbtn ghost playcard${setupPlay==="board"?" sel":""}" style="--ac:#8fd8c4" onclick="setPlay('board')">${ico('grid')}Normal mode<small>The quiz, pick a tier</small></button>
+    </div>
+    <div class="kick" style="margin-top:10px">${ico('trophy')}What you answer</div>
+    <button class="bigbtn ghost lbbtn${setupMode==="classic"?" sel":""}" onclick="setMode('classic')"${playableAs("classic", setupPlay)?"":" disabled style=opacity:.4"}><img class="ballic" src="assets/ball.png" alt="">Let's Ball</button>
     ${modeDrawerHTML()}
     ${MP?"":`<button class="bigbtn ghost" style="padding:10px;font-size:.95rem" onclick="askPlayTogether()">📡 Play together</button>`}
     ${setupMode==="stadium"?`<div class="hint" style="text-align:center">Name the ground for the full points, or take fewer for the city, fewer still for the country.</div>`:""}
     ${setupMode==="rr"?`<div class="hint" style="text-align:center">Every mode in one match. Nobody picks: each go the app rolls one and tells you what you are playing.</div>`:""}
-    ${!setupMode?`<div class="hint" style="text-align:center">Pick a game mode to set up the match</div>`:`
-    ${/* THE TWO AXES, offered wherever they mean anything.
-
-          How you play is only a question for a quiz that has an XI to put on a
-          pitch; Career Path and Badge Zoom skip it and the toggle is not drawn
-          rather than drawn and disabled, because a choice you cannot make is
-          noise. Multiple choice is offered for every deck of written questions,
-          including on the board, which is how a league gets its two versions.  */""}
-    ${canPitch(setupMode)?`
-    <div class="kick" style="margin-top:2px">${ico('ball')}How you play</div>
-    <div class="row2">
-      <button class="bigbtn ghost${setupPlay==="pitch"?" sel":""}" onclick="setPlay('pitch')" style="--ac:#6fd39b${TEAMS[setupMode]?"":";opacity:.4"}"${TEAMS[setupMode]?"":" disabled"}>${ico('users')}Football game</button>
-      <button class="bigbtn ghost${setupPlay==="board"?" sel":""}" onclick="setPlay('board')" style="--ac:#8fd8c4">${ico('grid')}Normal mode</button>
-    </div>`:""}
+    ${!setupMode?`<div class="hint" style="text-align:center">Pick a quiz to set up the match</div>`:`
+    ${/* The question style is the one axis still chosen after the quiz, and it
+          has to be: multiple choice exists per deck, so it is a fact about the
+          quiz rather than about the night. */""}
     ${isQuiz(setupMode)?`
     <div class="kick" style="margin-top:2px">${ico('card')}The questions</div>
     <div class="row2">
