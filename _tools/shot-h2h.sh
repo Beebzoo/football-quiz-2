@@ -61,7 +61,7 @@ const setups={
   qcard: `S=freshState(["Martijn","Bram","Ale"],false,"classic",100,"board",false); S.phase="pick"; render(); pickTier("hard");`,
   teams: `${base} render();`,
   hand:  `${nl2} h2TackleOn=true; S.h2h.who=0; S.h2h.at=0; h2Hand(1,"h_mark");`,
-  mark:  `${nl2} h2TackleOn=true; S.h2h.who=0; S.h2h.at=0; S.h2h.hand=null; S.phase="h_mark"; render();`,
+  mark:  `${nl2} h2TackleOn=true; S.h2h.who=0; S.h2h.at=0; S.h2h.hand=null; S.phase="h_mark"; render(); h2Mark(5); h2Mark(9);`,
   tack:  `${nl2} h2TackleOn=true; S.h2h.who=0; S.h2h.at=5; S.phase="h_pick"; S.h2h.mark=9; render(); h2Select(9); h2Play();`,
   cards: `${nl2} h2TackleOn=false; S.h2h.who=0; S.h2h.at=5; S.h2h.cards=[{},{}]; S.h2h.cards[0][1]=1; S.h2h.cards[0][6]=2; S.h2h.off=[[6],[]]; S.phase="h_pick"; render();`,
   toss:  `${picked} render();`,

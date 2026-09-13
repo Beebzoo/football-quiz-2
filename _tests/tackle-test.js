@@ -3,15 +3,19 @@
  *     node _tests/tackle-test.js
  *
  * The tackle is the first rule in this mode that gives the DEFENDER something
- * to do on every pass, and almost all of it is invisible in the code: whether
- * a card went to the right man, whether a red actually takes him out of the
- * shape, whether a foul in the box becomes a penalty. So it is driven end to
- * end rather than spot-checked.
+ * to do, and almost all of it is invisible in the code: whether a card went to
+ * the right man, whether a red actually takes him out of the shape, whether a
+ * foul in the box becomes a penalty.
  *
- * It opens with h2NearestTo, because that function used to compare y and
- * nothing else and everything here stands on it: a card that says "the left
- * wing-back brought him down" is worth nothing if the app cannot tell the left
- * wing-back from the right one.
+ * Since the marks became a POSSESSION decision rather than a per-pass one,
+ * most of what can go wrong is bookkeeping across passes: a mark that fires
+ * twice, relief handed out every ball instead of once, the phone asking to
+ * cross the table mid-possession, or last possession's men still ticked. Those
+ * are what the middle of this file is about.
+ *
+ * It opens with h2NearestTo, because everything here stands on it: a card that
+ * says "the left wing-back brought him down" is worth nothing if the app cannot
+ * tell the left wing-back from the right one.
  */
 const fs = require("fs");
 const path = require("path");
@@ -50,9 +54,11 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
              'h2PickTeam("Netherlands"); h2PickTeam("Italy"); S.h2h.tossed = true; render();');
     await tick(150);
   };
-  /* park the ball on a man with the pitch live, skipping the handoff */
-  const place = async (w, at) => {
-    run(app, `S.h2h.who=${w}; S.h2h.at=${at}; S.h2h.sel=null; S.h2h.mark=null; ` +
+  /* park the ball on a man with the pitch live and the marks already settled,
+     so a test can skip the handoff it is not about */
+  const place = async (w, at, marks) => {
+    run(app, `S.h2h.who=${w}; S.h2h.at=${at}; S.h2h.sel=null; S.h2h.caught=null; ` +
+             `S.h2h.marks=${JSON.stringify(marks || [])}; S.h2h.markedAgainst=${w}; S.h2h.relief=true; ` +
              `S.h2h.shooting=false; S.h2h.pen=false; S.phase="h_pick"; render();`);
     await tick(140);
   };
@@ -62,88 +68,116 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   await start();
   run(app, "h2TackleOn = false;");
   const collects = i => ev(app, `h2NearestTo(${i}, 0, 1)`);
-  const rightWing = collects(RW), leftWing = collects(LW);
   check("a ball lost on the right and one lost on the left go to different men",
-    rightWing !== leftWing, "both went to " + rightWing);
-  check("lost on the right wing, their left wing-back steps out for it",
-    rightWing === LWB, rightWing);
-  check("lost on the left wing, their right wing-back does",
-    leftWing === RWB, leftWing);
-  check("and the rule that made the mode good survives: lost on your own line, their striker is through",
-    collects(GK) === ST, collects(GK));
+    collects(RW) !== collects(LW), "both went to " + collects(RW));
+  check("lost on the right wing, their left wing-back steps out for it", collects(RW) === LWB, collects(RW));
+  check("lost on the left wing, their right wing-back does", collects(LW) === RWB, collects(LW));
+  check("lost on your own line, their striker is through", collects(GK) === ST, collects(GK));
   check("lost at their striker, a centre-back has to build from scratch",
     [LCB, RCB].indexOf(collects(ST)) !== -1, collects(ST));
 
   /* ---------------------------------------------------------------- */
-  console.log("\n--- the mark decides whose question it is ---");
+  console.log("\n--- two marks, set once, standing for the possession ---");
   run(app, "h2TackleOn = true;");
-  await place(0, GK);
-  run(app, "S.h2h.mark = " + ST + "; h2Select(" + ST + "); h2Play();");
-  await tick(150);
-  check("marking the man he passes to is the defender's question", phase() === "h_tackle", phase());
+  await start();
+  run(app, "S.h2h.who = 0; h2KickOff();");
+  await tick(160);
+  check("the possession opens with the phone crossing the table", phase() === "h_hand", phase());
+  check("and it is the defending man's card", H("hand.w") === 1, H("hand.w"));
+  run(app, "h2HandGo()"); await tick(140);
+  check("he gets the private screen", phase() === "h_mark", phase());
+  check("the attacker's eleven are on it", (stage(app).match(/h2markbtn/g) || []).length === 11,
+    (stage(app).match(/h2markbtn/g) || []).length);
+  run(app, `h2Mark(${SIX}); h2Mark(${ST});`); await tick(140);
+  check("he can mark two", JSON.stringify(H("marks")) === JSON.stringify([SIX, ST]), JSON.stringify(H("marks")));
+  run(app, `h2Mark(${TEN});`); await tick(140);
+  check("and not a third", H("marks").length === 2, JSON.stringify(H("marks")));
+  run(app, `h2Mark(${ST});`); await tick(120);
+  check("tapping one again takes him off", H("marks").indexOf(ST) === -1, JSON.stringify(H("marks")));
+  run(app, `h2Mark(${ST});`); await tick(120);
+  run(app, "h2MarksDone(false)"); await tick(140);
+  check("done hands the phone back", phase() === "h_hand" && H("hand.down") === true, phase());
+  run(app, "h2HandGo()"); await tick(140);
+  check("then the pitch", phase() === "h_pick", phase());
+  check("and the pitch does not say who is marked",
+    stage(app).indexOf("h2markring") === -1, "the marks leaked onto the pitch");
+
+  /* ---------------------------------------------------------------- */
+  console.log("\n--- the phone does NOT cross the table again mid-possession ---");
+  run(app, `S.h2h.at = ${GK}; h2Select(${LCB}); h2Play();`); await tick(160);
+  check("a pass to nobody marked is the attacker's question", phase() === "h_q", phase());
+  run(app, "h2Reveal(); h2Judge(true)"); await tick(220);
+  check("he keeps it and goes straight back to the pitch", phase() === "h_pick", phase());
+  check("the marks are still standing", H("marks").length === 2, JSON.stringify(H("marks")));
+  check("and they still belong to this possession", H("markedAgainst") === H("who"), H("markedAgainst"));
+
+  console.log("\n--- relief is once a possession, not once a pass ---");
+  await place(0, GK, [SIX, ST]);
+  run(app, `h2Select(${TEN}); h2Play();`); await tick(160);
+  const t1 = tier();
+  check("the first pass that misses comes a tier cheaper", t1 === "hard", t1 + " (ladder says extreme)");
+  check("and the relief is spent", H("relief") === false, H("relief"));
+  run(app, "h2Reveal(); h2Judge(true)"); await tick(200);
+  run(app, `h2Select(${LW}); h2Play();`); await tick(160);
+  check("the next one pays full price", tier() === ev(app, `h2TierFor(${TEN},${LW})`), tier());
+
+  console.log("\n--- a mark that lands is spent, and the other stands ---");
+  await place(0, GK, [SIX, ST]);
+  run(app, `h2Select(${SIX}); h2Play();`); await tick(160);
+  check("into a marked man is the defender's question", phase() === "h_tackle", phase());
+  check("at the tackle's own tier", tier() === ev(app, "H2_TACKLE_TIER"), tier());
   check("and it is the tackle, not the press", H("contest") === "tackle", H("contest"));
-  check("asked at the tackle's own tier", tier() === ev(app, "H2_TACKLE_TIER"), tier());
-
-  await place(0, GK);
-  run(app, "S.h2h.mark = " + SIX + "; h2Select(" + ST + "); h2Play();");
-  await tick(150);
-  check("marking the wrong man leaves the question with the attacker", phase() === "h_q", phase());
-  check("route one would have been a BALL question",
-    ev(app, `h2TierFor(${GK},${ST})`) === "ball", ev(app, `h2TierFor(${GK},${ST})`));
-  check("but the lunge left space, so it comes a tier cheaper", tier() === "extreme", tier());
-
-  await place(0, GK);
-  run(app, "S.h2h.mark = null; h2Select(" + ST + "); h2Play();");
-  await tick(150);
-  check("letting him play costs the attacker nothing", tier() === "ball", tier());
+  run(app, "h2TackleReveal(); h2TackleJudge(false)"); await tick(220);
+  check("he fouled him, so the pass goes through", H("at") === SIX, H("at"));
+  check("that mark is spent", H("marks").indexOf(SIX) === -1, JSON.stringify(H("marks")));
+  check("the other one is still on", H("marks").indexOf(ST) !== -1, JSON.stringify(H("marks")));
+  check("and the phone stays on the table", phase() === "h_pick", phase());
+  /* the ball is ON the six now, and you cannot pass a man to himself, so put it
+     back before trying to run into the spent mark again */
+  run(app, `S.h2h.at = ${GK}; render();`); await tick(120);
+  run(app, `h2Select(${SIX}); h2Play();`); await tick(160);
+  check("the spent mark does not fire twice", phase() === "h_q", phase());
 
   /* ---------------------------------------------------------------- */
   console.log("\n--- winning it, and where the ball ends up ---");
-  await place(0, GK);
-  run(app, "S.h2h.mark = " + ST + "; h2Select(" + ST + "); h2Play(); h2TackleJudge(true);");
-  await tick(160);
+  await place(0, GK, [ST]);
+  run(app, `h2Select(${ST}); h2Play(); h2TackleJudge(true);`); await tick(200);
   check("the ball changes hands", H("who") === 1, H("who"));
   check("collected where the pass was GOING, not where it came from",
     [LCB, RCB].indexOf(H("at")) !== -1, H("at"));
-  check("the mark is spent", H("mark") === null, H("mark"));
+  check("and the new man is asked to set his own marks", phase() === "h_hand", phase());
 
   /* the press wins it where the ball WAS, which is the difference */
-  await place(0, GK);
-  run(app, "S.h2h.safe = 99; S.h2h.mark = null; h2Select(" + LCB + "); h2Play();");
-  await tick(150);
+  await place(0, GK, []);
+  run(app, `S.h2h.safe = 99; h2Select(${LCB}); h2Play();`); await tick(160);
   check("the press still fires on a short ball", H("contest") === "press", H("contest"));
-  run(app, "h2TackleJudge(true)");
-  await tick(150);
-  check("and the press takes it where the ball was, so their striker is through",
-    H("at") === ST, H("at"));
+  run(app, "h2TackleJudge(true)"); await tick(180);
+  check("and takes it where the ball was, so their striker is through", H("at") === ST, H("at"));
 
   /* ---------------------------------------------------------------- */
   console.log("\n--- losing it is a foul, and the card goes to a man ---");
-  await place(0, SIX);
-  run(app, "S.h2h.mark = " + EIGHT + "; h2Select(" + EIGHT + "); h2Play(); h2TackleJudge(false);");
-  await tick(160);
+  /* cards survive a place(), so this starts from a clean book or it is testing
+     the bookings the section above handed out */
+  run(app, "S.h2h.cards = [{}, {}]; S.h2h.off = [[], []];");
+  await place(0, SIX, [EIGHT]);
+  run(app, `h2Select(${EIGHT}); h2Play(); h2TackleJudge(false);`); await tick(200);
   check("the attacker keeps the ball", H("who") === 0, H("who"));
-  check("and the pass goes through untouched, no question asked",
-    H("at") === EIGHT, H("at"));
-  const cards = ev(app, "JSON.stringify(S.h2h.cards[1])");
-  check("somebody in the defending side is booked", cards !== "{}", cards);
-  const booked = ev(app, "Object.keys(S.h2h.cards[1])[0]");
-  check("and it is a man near the one he was marking, not the whole team",
-    ev(app, "Object.keys(S.h2h.cards[1]).length") === 1, cards);
+  check("and the pass goes through untouched", H("at") === EIGHT, H("at"));
+  check("somebody in the defending side is booked",
+    ev(app, "JSON.stringify(S.h2h.cards[1])") !== "{}", ev(app, "JSON.stringify(S.h2h.cards[1])"));
+  check("one man, not the whole team", ev(app, "Object.keys(S.h2h.cards[1]).length") === 1,
+    ev(app, "JSON.stringify(S.h2h.cards[1])"));
   check("nobody is off for a first yellow", ev(app, "S.h2h.off[1].length") === 0, ev(app, "S.h2h.off[1].length"));
 
-  /* ---------------------------------------------------------------- */
   console.log("\n--- through the back of the front three is a penalty ---");
   await start();
   run(app, "h2TackleOn = true;");
-  await place(0, SIX);
-  run(app, "S.h2h.mark = " + ST + "; h2Select(" + ST + "); h2Play(); h2TackleJudge(false);");
-  await tick(170);
+  await place(0, SIX, [ST]);
+  run(app, `h2Select(${ST}); h2Play(); h2TackleJudge(false);`); await tick(220);
   check("it is a spot kick, not a free kick", H("pen") === true, H("pen"));
   check("the attacker is shooting", H("shooting") === true, H("shooting"));
   check("and it is priced to go in", tier() === ev(app, "H2_PEN_TAKER"), tier());
-  run(app, "h2Reveal(); h2Judge(true);");
-  await tick(170);
+  run(app, "h2Reveal(); h2Judge(true);"); await tick(200);
   check("put away, the keeper gets one to stop it", phase() === "h_save", phase());
   check("and his is the unfair one", tier() === ev(app, "H2_PEN_KEEPER"), tier());
 
@@ -152,9 +186,9 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   await start();
   run(app, "h2TackleOn = true; S.h2h.cards = [{}, {}]; S.h2h.off = [[], []];");
   const foul = async () => {
-    await place(0, SIX);
-    run(app, "S.h2h.mark = " + EIGHT + "; h2Select(" + EIGHT + "); h2Play(); h2TackleJudge(false);");
-    await tick(160);
+    await place(0, SIX, [EIGHT]);
+    run(app, `h2Select(${EIGHT}); h2Play(); h2TackleJudge(false);`);
+    await tick(200);
   };
   await foul();
   const man = +ev(app, "Object.keys(S.h2h.cards[1])[0]");
@@ -163,7 +197,8 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   check("and it is him", ev(app, "S.h2h.off[1][0]") === man, ev(app, "S.h2h.off[1][0]"));
 
   console.log("\n--- and a red card is a hole in the shape ---");
-  run(app, `S.h2h.who = 1; S.h2h.at = ${GK}; S.h2h.off[1] = [${TEN}]; S.phase = "h_pick"; render();`);
+  run(app, `S.h2h.who = 1; S.h2h.at = ${GK}; S.h2h.markedAgainst = 1; S.h2h.marks = []; ` +
+           `S.h2h.off[1] = [${TEN}]; S.phase = "h_pick"; render();`);
   await tick(160);
   check("nobody can pass to him", ev(app, `(h2Select(${TEN}), S.h2h.sel)`) === null, ev(app, "S.h2h.sel"));
   check("he cannot shoot either", ev(app, `h2CanShoot(${TEN})`) === false, ev(app, `h2CanShoot(${TEN})`));
@@ -171,38 +206,34 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   check("and he is not drawn on the pitch",
     (stage(app).match(/class="h2man [^"]*"/g) || []).length === 21,
     (stage(app).match(/class="h2man [^"]*"/g) || []).length);
+  run(app, `S.phase = "h_mark"; S.h2h.who = 0; S.h2h.off[0] = [${TEN}]; render();`);
+  await tick(140);
+  check("and he cannot be marked", (stage(app).match(/h2markbtn/g) || []).length === 10,
+    (stage(app).match(/h2markbtn/g) || []).length);
+  run(app, "S.h2h.off = [[], []];");
 
   console.log("\n--- a keeper sent off is an outfield man in goal ---");
   run(app, `S.h2h.who = 0; S.h2h.at = ${ST}; S.h2h.off[1] = [${GK}]; S.h2h.pen = false; ` +
-           `S.h2h.mark = null; S.phase = "h_pick"; render(); h2Shoot(); h2Reveal(); h2Judge(true);`);
-  await tick(180);
+           `S.h2h.marks = []; S.h2h.markedAgainst = 0; S.phase = "h_pick"; render(); ` +
+           `h2Shoot(); h2Reveal(); h2Judge(true);`);
+  await tick(200);
   check("the save is asked at the outfielder's tier", tier() === ev(app, "H2_SAVE_NOGK"), tier());
 
   /* ---------------------------------------------------------------- */
-  console.log("\n--- the phone crosses the table on every pass ---");
+  console.log("\n--- sitting off, and turning the whole thing off ---");
   await start();
-  run(app, "h2TackleOn = true; h2KickOff();");
+  run(app, "h2TackleOn = true; S.h2h.who = 0; h2KickOff();");
   await tick(160);
-  check("kick off hands it to the defender first", phase() === "h_hand", phase());
-  check("and it is the defending man's card", H("hand.w") === 1, H("hand.w"));
-  run(app, "h2HandGo()");
-  await tick(140);
-  check("he gets the private screen", phase() === "h_mark", phase());
-  check("the attacker's eleven are on it", (stage(app).match(/h2markbtn/g) || []).length === 11,
-    (stage(app).match(/h2markbtn/g) || []).length);
-  run(app, "h2Mark(null)");
-  await tick(140);
-  check("choosing to sit off still returns the phone the same way", phase() === "h_hand", phase());
+  run(app, "h2HandGo()"); await tick(140);
+  run(app, "h2MarksDone(true)"); await tick(140);
+  check("letting him play returns the phone the same way", phase() === "h_hand", phase());
   check("and that card says put it down", H("hand.down") === true, H("hand.down"));
-  run(app, "h2HandGo()");
-  await tick(140);
-  check("then the pitch comes back", phase() === "h_pick", phase());
-  check("with nobody marked", H("mark") === null, H("mark"));
-  check("and the pitch never says who was marked before the pass",
-    stage(app).indexOf("h2markring") === -1, "the mark leaked onto the pitch");
+  run(app, "h2HandGo()"); await tick(140);
+  check("with nobody marked", H("marks").length === 0, JSON.stringify(H("marks")));
+  run(app, `S.h2h.at = ${GK}; h2Select(${ST}); h2Play();`); await tick(160);
+  check("and a pass costs exactly what the ladder says", tier() === "ball", tier());
 
-  console.log("\n--- and it can be switched off, both rule sets ship ---");
-  run(app, "h2TackleOn = false; S.h2h.who = 0; S.h2h.at = 0; h2Next();");
+  run(app, "h2TackleOn = false; S.h2h.who = 0; S.h2h.at = 0; S.h2h.markedAgainst = null; h2Next();");
   await tick(150);
   check("with tackles off a turn goes straight to the pitch", phase() === "h_pick", phase());
 

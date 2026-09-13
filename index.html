@@ -38,12 +38,7 @@
     --radius:16px;
     /* polished gold, the BALL wordmark's own metal. Anything that wears it is
        claiming to be the gold thing on the screen, so there are only two. */
-    /* Polished gold, mixed for a LIGHT ground. The night version ran its
-       highlight up to #ffefad, which is within a whisker of white: on the old
-       black pitch that read as a gleam, on this one it punched a hole through
-       the middle of the wordmark. Same metal, same shimmer, every stop taken
-       down so the letters survive the paper behind them. */
-    --gold-metal:linear-gradient(105deg,#8a6512 10%,#c9932e 28%,#f0d385 45%,#c9932e 60%,#8a6512 88%);
+    --gold-metal:linear-gradient(105deg,#b8860b 10%,#e9b84c 28%,#ffefad 45%,#e9b84c 60%,#b8860b 88%);
     --shadow:0 1px 2px rgba(16,24,40,.06),0 4px 14px rgba(16,24,40,.06);
   }
   *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -277,33 +272,25 @@
   .alumrow.pop{animation:cardpop .5s cubic-bezier(.2,1.7,.4,1) both}
   @media (prefers-reduced-motion: reduce){ .alumrow.pop{animation:none} }
 
-  /* ---------- THE DAY MATCH ----------
-     This used to be a floodlit night: near-black chrome on a dark pitch. It
-     looked good and it was not inviting, which is the wrong trade for the
-     front door of a game you hand to a mate. So the ground is bright, the
-     chrome is white card on light grass, and the only things that stay dark
-     are the ones that should be: the question card and the picker board, which
-     read as a stadium scoreboard precisely BECAUSE everything round them is
-     light. Kept as body.careermode so the 38 rules that hang off it, and the
-     specificity they rely on, keep working exactly as they did. */
-  html{background:#eef6ef}
-  body.careermode{color:var(--ink);border-color:rgba(16,40,24,.10)}
-  body.careermode .clock .digits{color:var(--ink)}
+  /* the floodlit night look, now the whole app's home kit */
+  html{background:#0d2013}
+  body.careermode{color:#eef5ef;border-color:rgba(255,255,255,.12)}
+  body.careermode .clock .digits{color:#eef5ef}
   body.careermode .clock.hot .digits{color:#ff8a7a}
-  body.careermode .sub{color:var(--chalk-dim)}
+  body.careermode .sub{color:#9fb8a6}
   /* white cards keep dark ink even on the night pitch */
   body.careermode .sheet, body.careermode .frow{color:var(--ink)}
   body.careermode #pitchbg{
     background:
-      radial-gradient(95% 55% at 50% -5%, rgba(255,255,255,.55), transparent 62%),
-      repeating-linear-gradient(180deg,#e6f3e7 0 72px,#dcedde 72px 144px);
+      radial-gradient(95% 55% at 50% -5%, rgba(255,255,215,.12), transparent 60%),
+      repeating-linear-gradient(180deg,#122b1c 0 72px,#0d2315 72px 144px);
   }
-  body.careermode #pitchbg::before{border-color:rgba(255,255,255,.9)}
-  body.careermode #pitchbg::after{background:rgba(255,255,255,.9)}
-  body.careermode .cornerarc{border-color:rgba(255,255,255,.8)}
-  body.careermode .kick{color:var(--chalk-dim)}
-  body.careermode .hint{color:var(--chalk-dim)}
-  body.careermode h1.title{color:var(--ink)}
+  body.careermode #pitchbg::before{border-color:rgba(255,255,255,.22)}
+  body.careermode #pitchbg::after{background:rgba(255,255,255,.22)}
+  body.careermode .cornerarc{border-color:rgba(255,255,255,.16)}
+  body.careermode .kick{color:#9fb8a6}
+  body.careermode .hint{color:#8fae99}
+  body.careermode h1.title{color:#eef5ef}
   body.careermode .careername{color:#fff;text-shadow:0 2px 18px rgba(0,0,0,.5)}
   body.careermode .clubcard{
     border-color:rgba(255,255,255,.12);
@@ -314,8 +301,7 @@
     color:rgba(255,255,255,.55);box-shadow:none;
   }
   body.careermode .bigbtn.ghost{
-    background:var(--card);border-color:var(--line);color:#41564a;
-    box-shadow:0 1px 2px rgba(16,40,24,.05),0 2px 10px rgba(16,40,24,.05);
+    background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.22);color:#cfe0d4;
   }
   /* Picked, not shouting. The old version was a 2px gold border with a glow
      behind it, which read as heavy next to everything else on the page and
@@ -328,16 +314,14 @@
      stopped being painted slabs the four chosen buttons on the setup screen
      were the brightest thing on the menu, louder than the front door itself.
      Same gold, lit instead of filled. */
-  /* Picked, on a light ground. Same idea as the night version: gold arriving
-     as a wash and a hairline rather than a painted slab, so the chosen button
-     is unmistakable without being the loudest thing on the page. The ink goes
-     dark gold because #f3d982 on white is a rumour, not a colour. */
   body.careermode .bigbtn.ghost.sel{
-    background:linear-gradient(180deg,#fdf7e6,#f8edd3);
-    border:1px solid rgba(201,147,46,.55);color:#7d5b12;
+    background:
+      radial-gradient(120% 90% at 50% -20%, rgba(255,252,215,.10), transparent 64%),
+      linear-gradient(180deg, rgba(233,184,76,.20), rgba(233,184,76,.07));
+    border:1px solid rgba(233,184,76,.55);color:#f3d982;
     font-weight:700;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.9), 0 2px 12px rgba(201,147,46,.16);
-    text-shadow:none;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.12), 0 0 18px rgba(233,184,76,.18);
+    text-shadow:0 0 14px rgba(233,184,76,.4);
   }
   /* the tile keeps its own accent now that chosen is lit rather than painted */
   body.careermode .bigbtn.ghost.sel .mico{
@@ -345,7 +329,7 @@
     background:color-mix(in srgb, var(--ac,#e9b84c) 18%, transparent);
   }
   body.careermode .bigbtn.ghost.sel .chev,
-  body.careermode .bigbtn.ghost.sel .lcount{color:#a8801f;opacity:.85}
+  body.careermode .bigbtn.ghost.sel .lcount{color:#e9b84c;opacity:.8}
   /* Let's Ball owns the front of the menu: one full width slab of gold above
      the drawer that holds every other mode. It has to be declared inside
      body.careermode or the ghost rule above outranks it and the button comes
@@ -358,22 +342,25 @@
      thing on the menu, which is what made it the front door in the first place. */
   body.careermode .bigbtn.ghost.lbbtn{
     background:
-      radial-gradient(120% 90% at 50% -20%, rgba(255,255,255,.85), transparent 66%),
-      linear-gradient(180deg,#fbefcf,#f3e0a9);
-    border-color:rgba(201,147,46,.62);color:#6f5010;font-weight:800;font-size:1.12rem;
+      radial-gradient(120% 90% at 50% -20%, rgba(255,252,215,.10), transparent 64%),
+      linear-gradient(90deg, rgba(233,184,76,.22), rgba(233,184,76,.07) 62%, rgba(233,184,76,.15)),
+      linear-gradient(180deg, rgba(13,34,21,.90), rgba(6,17,10,.94));
+    border-color:rgba(233,184,76,.5);color:#f3d982;font-weight:800;font-size:1.12rem;
     padding:17px 16px;letter-spacing:.01em;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.95), 0 6px 18px rgba(201,147,46,.22);
-    text-shadow:none;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.10), 0 10px 26px rgba(0,0,0,.45),
+               0 0 22px rgba(233,184,76,.18);
+    text-shadow:0 0 16px rgba(233,184,76,.4);
   }
   body.careermode .bigbtn.ghost.lbbtn .ballic{width:1.25em;height:1.25em}
   /* picked: the same lamp turned up, not a different material */
   body.careermode .bigbtn.ghost.lbbtn.sel{
     background:
-      radial-gradient(120% 90% at 50% -20%, rgba(255,255,255,.9), transparent 66%),
-      linear-gradient(180deg,#f9e7ba,#eed79a);
-    border-color:#c9932e;color:#5c4109;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.95), 0 6px 20px rgba(201,147,46,.34);
-    text-shadow:none;
+      radial-gradient(120% 90% at 50% -20%, rgba(255,252,215,.15), transparent 64%),
+      linear-gradient(90deg, rgba(233,184,76,.36), rgba(233,184,76,.13) 62%, rgba(233,184,76,.26)),
+      linear-gradient(180deg, rgba(13,34,21,.90), rgba(6,17,10,.94));
+    border-color:#e9b84c;color:#fff3cf;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.16), 0 0 28px rgba(233,184,76,.3);
+    text-shadow:0 0 18px rgba(233,184,76,.55);
   }
   /* The install line is housekeeping, not a thing to play, so it stops looking
      like a button at all: no card, no border, just a quiet line at the foot of
@@ -382,18 +369,18 @@
     display:block;width:auto;margin:6px auto 0;padding:6px 8px;
     background:none;border:none;box-shadow:none;
     font:500 .74rem/1.3 var(--ui);letter-spacing:.01em;
-    color:rgba(65,86,74,.62);
+    color:rgba(207,224,212,.5);
   }
-  body.careermode .bigbtn.ghost.tinybtn:active{transform:none;filter:none;color:rgba(65,86,74,.95)}
+  body.careermode .bigbtn.ghost.tinybtn:active{transform:none;filter:none;color:rgba(207,224,212,.8)}
   .rules{margin-top:4px}
   .rules summary{
     list-style:none;cursor:pointer;text-align:center;
-    font:700 .9rem var(--ui);color:#41564a;
+    font:700 .9rem var(--ui);color:#cfe0d4;
     padding:12px;border-radius:14px;
-    background:var(--card);border:1px solid var(--line);
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.22);
   }
   .rules summary::-webkit-details-marker{display:none}
-  .rules[open] summary{border-color:var(--turf);color:var(--turf-deep)}
+  .rules[open] summary{border-color:#3fd685;color:#8df0b8}
   .rules .hint{padding:10px 4px 2px}
   /* league rush */
   .leaguelist{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 4px}
@@ -444,7 +431,7 @@
   img.ballic{width:1.05em;height:1.05em;vertical-align:-.18em;margin-right:.3em;border-radius:50%}
   body.careermode .bigbtn.warn{box-shadow:0 0 22px rgba(240,196,25,.35)}
   body.careermode .stealbtn{background:#10251a;color:#8db8ff;border-color:#4a7fd9}
-  body.careermode kbd{background:#eef3ef;border-color:var(--line);color:var(--chalk-dim)}
+  body.careermode kbd{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.2);color:#9fb8a6}
 
   /* bigger cards on the night pitch */
   body.careermode .clubcard{width:min(108px,27vw);height:min(108px,27vw)}
@@ -779,9 +766,8 @@
     position:relative;text-transform:uppercase;
     display:flex;align-items:center;justify-content:center;gap:.14em;
     font-size:clamp(3.4rem,21vw,5.2rem);letter-spacing:.08em;
-    margin-top:6px;
-    color:#c9932e;
-    filter:drop-shadow(0 2px 10px rgba(201,147,46,.30)) drop-shadow(0 1px 2px rgba(16,40,24,.18));
+    color:#e9b84c;
+    filter:drop-shadow(0 0 26px rgba(233,184,76,.45)) drop-shadow(0 4px 12px rgba(0,0,0,.5));
   }
   .ballhero .ballimg{width:.84em;height:.84em;flex:0 0 auto}
   h1.title.ballhero{cursor:pointer;-webkit-tap-highlight-color:transparent}
@@ -826,11 +812,12 @@
   .bigbtn.ghost{background:var(--card);border:1px solid var(--line);color:var(--chalk-dim);font-weight:600;box-shadow:none}
   .bigbtn.gold{
     background:
-      radial-gradient(120% 90% at 50% -20%, rgba(255,255,255,.8), transparent 66%),
-      linear-gradient(180deg,#fbf2da,#f4e4b6);
-    border-color:rgba(201,147,46,.5);color:#6f5010;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.9), 0 4px 14px rgba(201,147,46,.18);
-    text-shadow:none;
+      radial-gradient(120% 90% at 50% -20%, rgba(255,252,215,.08), transparent 64%),
+      linear-gradient(90deg, rgba(233,184,76,.16), rgba(233,184,76,.05) 62%, rgba(233,184,76,.11)),
+      linear-gradient(180deg, rgba(13,34,21,.90), rgba(6,17,10,.94));
+    border-color:rgba(233,184,76,.4);color:#f3d982;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.08), 0 8px 22px rgba(0,0,0,.4);
+    text-shadow:0 0 14px rgba(233,184,76,.35);
   }
   .bigbtn.sel{background:#effaf4;border-color:var(--turf);color:var(--turf-deep);font-weight:700}
   .bigbtn.warn{background:var(--card-y);border-color:#ca9a06;color:#3d2f02}
@@ -1257,41 +1244,42 @@
   .modestoggle .mlab{flex:none}
   .modestoggle .chev{opacity:.45;font-size:.66em;position:absolute;right:15px}
   body.careermode .bigbtn.ghost.modestoggle{
-    background:linear-gradient(180deg,#ffffff,#f6faf6);
-    border-color:var(--line);
+    background:linear-gradient(180deg,rgba(255,255,255,.075),rgba(255,255,255,.025));
+    border-color:rgba(255,255,255,.14);
     padding:13px 16px;
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 1px 3px rgba(16,40,24,.05);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.07);
   }
   body.careermode .bigbtn.ghost.modestoggle:active{
-    background:linear-gradient(180deg,#f6faf6,#eef4ee);
+    background:linear-gradient(180deg,rgba(255,255,255,.1),rgba(255,255,255,.04));
   }
   /* the lid's own gradient would otherwise outrank the parchment every chosen
      thing in the app wears, purely by sitting further down the file */
   body.careermode .bigbtn.ghost.modestoggle.sel{
-    --lit:color-mix(in srgb, var(--ac,#e9b84c) 62%, #2a3d31);
+    --lit:color-mix(in srgb, var(--ac,#e9b84c) 70%, #fff);
     background:
-      linear-gradient(180deg, #ffffff,
-                              color-mix(in srgb, var(--ac,#e9b84c) 13%, #ffffff));
-    border-color:color-mix(in srgb, var(--ac,#e9b84c) 58%, #ffffff);
+      radial-gradient(120% 90% at 50% -20%, rgba(255,252,215,.08), transparent 64%),
+      linear-gradient(180deg, color-mix(in srgb, var(--ac,#e9b84c) 20%, transparent),
+                              color-mix(in srgb, var(--ac,#e9b84c) 7%, transparent));
+    border-color:color-mix(in srgb, var(--ac,#e9b84c) 55%, transparent);
     color:var(--lit);
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.95),
-               0 2px 12px color-mix(in srgb, var(--ac,#e9b84c) 26%, transparent);
-    text-shadow:none;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.10),
+               0 0 18px color-mix(in srgb, var(--ac,#e9b84c) 20%, transparent);
+    text-shadow:0 0 14px color-mix(in srgb, var(--ac,#e9b84c) 45%, transparent);
   }
   /* only the unchosen state: once a mode is picked the button wears that mode's
      own colour and name, and the caption treatment would fight it */
   .modestoggle:not(.sel) .mlab{
-    font:700 .78rem/1 var(--ui);letter-spacing:.15em;text-transform:uppercase;color:#6b8275;
+    font:700 .78rem/1 var(--ui);letter-spacing:.15em;text-transform:uppercase;color:#c2d6c8;
   }
   .modestoggle:not(.sel) .mico{background:none;width:auto;height:auto}
-  .modestoggle:not(.sel) .mico .ic{width:14px;height:14px;opacity:.62}
+  .modestoggle:not(.sel) .mico .ic{width:14px;height:14px;opacity:.5}
   .modestoggle:not(.sel)::before,
   .modestoggle:not(.sel)::after{
     content:"";height:1px;flex:1;max-width:52px;
-    background:linear-gradient(90deg,transparent,rgba(60,90,70,.28));
+    background:linear-gradient(90deg,transparent,rgba(255,255,255,.22));
   }
   .modestoggle:not(.sel)::after{transform:scaleX(-1)}
-  .hint.lastline{text-align:center;color:#6b8275;margin-top:4px}
+  .hint.lastline{text-align:center;color:#c8d8cc;margin-top:4px}
   /* play together */
   #mpbar{position:fixed;left:0;right:0;bottom:12px;display:flex;gap:10px;justify-content:center;align-items:center;z-index:40;pointer-events:none}
   #mpbar[hidden]{display:none}
@@ -1564,25 +1552,16 @@
     position:absolute;left:0;right:0;top:50%;aspect-ratio:10/13;
     --base:translateY(-50%);
     transform:var(--base);transform-origin:50% 50%;
-    /* SUNDAY AFTERNOON, NOT A TUESDAY UNDER LIGHTS.
-       The four corner pools used to be floodlights bleeding onto a near-black
-       pitch, and the vignette that tied them together was doing most of the
-       darkening: transparent in the middle, 34% black at the edge. Turned up
-       to a day match the lights stop being the light source, so they drop to a
-       hint of sun and the vignette drops with them, to a fifth of what it was.
-       The mow stripes go the other way: on dark grass a 3% white stripe was
-       all you could afford before it glared, on bright grass it barely shows,
-       so it doubles. Same four layers, same geometry, different weather. */
     background:
-      radial-gradient(ellipse 46% 26% at 16% 10%,rgba(255,255,235,.16),transparent 72%),
-      radial-gradient(ellipse 46% 26% at 84% 10%,rgba(255,255,235,.16),transparent 72%),
-      radial-gradient(ellipse 46% 26% at 16% 90%,rgba(255,255,235,.10),transparent 72%),
-      radial-gradient(ellipse 46% 26% at 84% 90%,rgba(255,255,235,.10),transparent 72%),
-      radial-gradient(ellipse 78% 58% at 50% 50%,transparent 52%,rgba(12,52,26,.16) 100%),
-      repeating-linear-gradient(180deg,rgba(255,255,255,.075) 0 7.6%,transparent 7.6% 15.2%),
-      linear-gradient(180deg,#3f9c56 0%,#58b26c 50%,#3f9c56 100%);
+      radial-gradient(ellipse 46% 26% at 16% 10%,rgba(228,248,228,.13),transparent 72%),
+      radial-gradient(ellipse 46% 26% at 84% 10%,rgba(228,248,228,.13),transparent 72%),
+      radial-gradient(ellipse 46% 26% at 16% 90%,rgba(228,248,228,.13),transparent 72%),
+      radial-gradient(ellipse 46% 26% at 84% 90%,rgba(228,248,228,.13),transparent 72%),
+      radial-gradient(ellipse 78% 58% at 50% 50%,transparent 48%,rgba(0,0,0,.34) 100%),
+      repeating-linear-gradient(180deg,rgba(255,255,255,.032) 0 7.6%,transparent 7.6% 15.2%),
+      linear-gradient(180deg,#0d3a1c 0%,#17552c 50%,#0d3a1c 100%);
     border-radius:12px;user-select:none;
-    box-shadow:0 10px 26px rgba(16,60,30,.26);
+    box-shadow:0 18px 38px rgba(0,0,0,.55);
     transition:transform .45s ease;
   }
   .h2pitch.tilt{--base:translateY(-50%) rotateX(46deg) scale(1.04);transform-style:preserve-3d}
@@ -1603,21 +1582,18 @@
   .h2pitch.tilt .h2man:not(.them){transform:translate(-50%,-50%) translateZ(9px)}
   .h2pitch.tilt .h2ballwrap{transform:translate(-50%,-50%) translateZ(14px)}
   /* markings */
-  /* Lines have to work HARDER on bright grass, not less hard: white at 34%
-     over #17552c was a clear chalk line, the same white over #58b26c is a
-     smudge. Every marking goes up by roughly half. */
-  .h2pitch::before{content:"";position:absolute;inset:2% 2.5%;border:2px solid rgba(255,255,255,.72);border-radius:3px;pointer-events:none}
-  .h2pitch::after{content:"";position:absolute;left:2.5%;right:2.5%;top:50%;border-top:2px solid rgba(255,255,255,.62);pointer-events:none}
-  .h2box{position:absolute;left:26%;right:26%;height:9%;border:2px solid rgba(255,255,255,.62);pointer-events:none}
+  .h2pitch::before{content:"";position:absolute;inset:2% 2.5%;border:2px solid rgba(255,255,255,.34);border-radius:3px;pointer-events:none}
+  .h2pitch::after{content:"";position:absolute;left:2.5%;right:2.5%;top:50%;border-top:2px solid rgba(255,255,255,.28);pointer-events:none}
+  .h2box{position:absolute;left:26%;right:26%;height:9%;border:2px solid rgba(255,255,255,.28);pointer-events:none}
   .h2box.t{top:2%;border-top-color:transparent}
   .h2box.b{bottom:2%;border-bottom-color:transparent}
-  .h2six{position:absolute;left:38%;right:38%;height:4%;border:2px solid rgba(255,255,255,.5);pointer-events:none}
+  .h2six{position:absolute;left:38%;right:38%;height:4%;border:2px solid rgba(255,255,255,.2);pointer-events:none}
   .h2six.t{top:2%;border-top-color:transparent}
   .h2six.b{bottom:2%;border-bottom-color:transparent}
   .h2circle{position:absolute;left:50%;top:50%;width:24%;aspect-ratio:1;transform:translate(-50%,-50%);
-    border:2px solid rgba(255,255,255,.58);border-radius:50%;pointer-events:none}
+    border:2px solid rgba(255,255,255,.26);border-radius:50%;pointer-events:none}
   .h2spot{position:absolute;left:50%;top:50%;width:4px;height:4px;transform:translate(-50%,-50%);
-    background:rgba(255,255,255,.85);border-radius:50%;pointer-events:none}
+    background:rgba(255,255,255,.5);border-radius:50%;pointer-events:none}
 
   /* a man: shadow flat on the grass, figure standing on top of it */
   .h2man{position:absolute;width:110px;transform:translate(-50%,-100%);z-index:2;
@@ -2062,11 +2038,7 @@
 
   /* the scoreline */
   /* ---------- the scorebug ---------- */
-  /* The scorebug is a DARK panel on a light page, so it has to state its own
-     ink. Without this it inherited the page's near-black and the three letter
-     codes vanished into the bar they were printed on. */
   .sb{display:flex;align-items:stretch;justify-content:center;margin:2px auto 3px;
-    color:#eef5ef;
     width:100%;max-width:400px;border-radius:11px;overflow:hidden;
     background:linear-gradient(180deg,rgba(10,26,16,.96),rgba(6,18,11,.98));
     border:1px solid rgba(255,255,255,.14);
@@ -2088,10 +2060,10 @@
   .sb-t b{font:800 1.24rem var(--ui);letter-spacing:.06em;white-space:nowrap}
   .sb-names{display:flex;justify-content:space-between;width:100%;max-width:400px;margin:0 auto 5px;
     padding:0 12px;font:700 .64rem var(--ui);letter-spacing:.09em;text-transform:uppercase}
-  .sb-names span{opacity:.5;transition:opacity .3s,color .3s}
+  .sb-names span{opacity:.42;transition:opacity .3s,color .3s}
   .sb-names em{font-style:normal;opacity:.34;font-size:.58rem;letter-spacing:.14em;
     align-self:center}
-  .sb-names span.on{opacity:1;color:#8a6512}
+  .sb-names span.on{opacity:1;color:#f7e3a6}
   .sb-mid{flex:none;display:flex;align-items:center;gap:8px;padding:0 11px;
     background:rgba(0,0,0,.42);box-shadow:inset 1px 0 0 rgba(255,255,255,.08), inset -1px 0 0 rgba(255,255,255,.08)}
   .sb-mid b{font:800 1.72rem var(--ui);font-variant-numeric:tabular-nums;color:#f7e3a6;
@@ -2100,30 +2072,30 @@
   .h2where{position:relative;z-index:6;text-align:center;font-size:.88rem;opacity:.85;margin:10px 0 5px;font-style:italic}
   .h2toggles{display:flex;justify-content:center;gap:18px;margin:0 0 2px;position:relative;z-index:6}
   .h2view{display:block;margin:0 auto 2px;position:relative;z-index:6;background:none;border:0;cursor:pointer;
-    font:600 .76rem var(--ui);color:rgba(50,74,58,.72);letter-spacing:.04em;
+    font:600 .76rem var(--ui);color:rgba(255,255,255,.5);letter-spacing:.04em;
     text-decoration:underline;text-underline-offset:3px}
 
   /* how close the other man is to coming in for it */
   .h2heat{display:flex;align-items:center;justify-content:center;gap:8px;
     font:600 .78rem var(--ui);font-style:italic;opacity:.6;margin:2px 0 4px;
     position:relative;z-index:6}
-  .h2heat.warm{opacity:1;color:#a4700f}
-  .h2heat.hot{opacity:1;color:#c3341c;font-weight:700;font-style:normal}
+  .h2heat.warm{opacity:.9;color:#f0c98a}
+  .h2heat.hot{opacity:1;color:#ff8f78;font-weight:700;font-style:normal}
   .h2pips{display:inline-flex;gap:4px}
-  .h2pips i{width:7px;height:7px;border-radius:50%;background:rgba(30,60,42,.14);
-    box-shadow:0 0 0 1px rgba(30,60,42,.18) inset}
-  .h2heat.warm .h2pips i.on{background:#d9a13a}
-  .h2heat.hot .h2pips i.on{background:#d6402a;box-shadow:0 0 8px rgba(214,64,42,.6)}
-  .h2heat .h2pips i.on{background:rgba(30,60,42,.5)}
+  .h2pips i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.16);
+    box-shadow:0 0 0 1px rgba(0,0,0,.4) inset}
+  .h2heat.warm .h2pips i.on{background:#f0c98a}
+  .h2heat.hot .h2pips i.on{background:#ff8f78;box-shadow:0 0 8px #ff8f78}
+  .h2heat .h2pips i.on{background:rgba(255,255,255,.55)}
   .h2confirm.contested{animation:h2contest 1.6s ease-in-out infinite}
   @keyframes h2contest{0%,100%{box-shadow:0 0 0 1px #e04a34 inset, 0 0 18px -6px #e04a34}
     50%{box-shadow:0 0 0 1px #e04a34 inset, 0 0 26px -4px #e04a34}}
-  .h2big.tackle{color:#c3341c;font-size:clamp(1.15rem,5.5vw,1.5rem)}
+  .h2big.tackle{color:#ff8f78;font-size:clamp(1.15rem,5.5vw,1.5rem)}
 
   /* pick a man, see what the ball costs, play it */
   .h2confirm{margin-top:8px;padding:10px 12px;border-radius:12px;
-    border:1px solid var(--dc);background:var(--card);
-    box-shadow:0 0 0 1px var(--dc) inset, 0 4px 16px -8px var(--dc)}
+    border:1px solid var(--dc);background:rgba(255,255,255,.05);
+    box-shadow:0 0 0 1px var(--dc) inset, 0 0 18px -6px var(--dc)}
   .h2cline{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:8px}
   .h2cwhat{font-weight:700;font-size:1rem}
   .h2ctier{font-weight:800;font-size:.82rem;letter-spacing:.08em;text-transform:uppercase;
@@ -2139,12 +2111,12 @@
     border-radius:18px;background:var(--hk,#2b6b46);color:var(--hi,#fff);
     display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;
     text-align:center;
-    box-shadow:0 10px 30px rgba(16,60,30,.3), inset 0 1px 0 rgba(255,255,255,.25);
+    box-shadow:0 14px 40px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.22);
   }
   .h2handbadge{
     width:clamp(84px,26vw,124px);height:clamp(84px,26vw,124px);object-fit:contain;
     border-radius:12px;background:rgba(255,255,255,.92);padding:8px;
-    box-shadow:0 6px 18px rgba(0,0,0,.22);
+    box-shadow:0 6px 18px rgba(0,0,0,.45);
   }
   .h2handwho{font:800 clamp(2rem,11vw,3rem)/1 var(--ui);letter-spacing:.02em;text-transform:uppercase}
   .h2handsub{font:600 .95rem/1.4 var(--ui);opacity:.85;max-width:22ch}
@@ -2154,36 +2126,43 @@
     font-weight:800;
   }
 
-  /* ---------- picking the man you are marking ---------- */
+  /* ---------- picking the men you are marking ---------- */
   .h2marks{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:8px 0 10px}
   .h2markbtn{
     display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0;
     padding:9px 4px;border-radius:12px;
-    background:var(--card);border:1px solid var(--line);color:var(--ink);
-    box-shadow:0 1px 3px rgba(16,40,24,.06);
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#eef5ef;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
   }
   .h2markbtn:active{transform:scale(.97)}
-  .h2markbtn.on{border-color:#c3341c;background:#fdeeeb;box-shadow:0 0 0 1px #c3341c inset}
-  .h2mno{font:800 .95rem/1 var(--ui);color:var(--chalk-dim);font-variant-numeric:tabular-nums}
+  .h2markbtn.on{
+    border-color:#ff8f78;color:#ffd9d1;
+    background:linear-gradient(180deg,rgba(224,74,52,.34),rgba(224,74,52,.16));
+    box-shadow:0 0 0 1px rgba(255,143,120,.5) inset, 0 0 16px rgba(224,74,52,.28);
+  }
+  .h2mno{font:800 .95rem/1 var(--ui);color:#9fb8a6;font-variant-numeric:tabular-nums}
+  .h2markbtn.on .h2mno{color:#ffb6a6}
   .h2mnm{font:700 .74rem/1.15 var(--ui);text-align:center;word-break:break-word}
-  .h2mps{font:600 .6rem/1 var(--ui);letter-spacing:.1em;text-transform:uppercase;color:var(--chalk-dim)}
+  .h2mps{font:600 .6rem/1 var(--ui);letter-spacing:.1em;text-transform:uppercase;color:#9fb8a6}
 
   /* a booking, worn on the shirt for the rest of the match */
   .h2card{
     position:absolute;left:50%;bottom:100%;margin-left:9px;margin-bottom:-6px;z-index:6;
     width:6px;height:8px;border-radius:1px;background:#eab308;
-    box-shadow:0 1px 2px rgba(0,0,0,.5);transform:rotate(8deg);
+    box-shadow:0 1px 3px rgba(0,0,0,.8);transform:rotate(8deg);
   }
   .h2card.red{background:#dc2626}
   /* where he was waiting, shown once the pass has resolved */
   .h2markring{
     position:absolute;left:50%;bottom:2px;width:34px;height:34px;
     transform:translate(-50%,50%);border-radius:50%;
-    border:2px dashed rgba(195,52,28,.9);
+    border:2px dashed rgba(255,143,120,.95);
+    box-shadow:0 0 12px rgba(224,74,52,.4);
     animation:h2markpop .5s ease-out both;pointer-events:none;
   }
   @keyframes h2markpop{from{opacity:0;transform:translate(-50%,50%) scale(.4)}to{opacity:1;transform:translate(-50%,50%) scale(1)}}
   @media (prefers-reduced-motion: reduce){ .h2markring{animation:none} }
+
 
   /* the country under a player's name on the scoreline */
   .h2ctry{display:block;font:600 .64rem var(--ui);font-style:normal;opacity:.6;
@@ -6152,29 +6131,45 @@ const H2_SHOT = {7:"extreme", 8:"extreme", 9:"hard", 10:"extreme"};
    watched him do it. The ladder is a good idea and the turnover rule is a
    better one, but neither of them is a decision for the DEFENDER.
 
-   THE RULE. Before every pass the defender secretly marks one man in the
-   attacker's eleven. Then the attacker picks his pass, knowing nothing.
+   THE RULE. Once, at the start of the other man's possession, the defender
+   secretly marks TWO of the attacker's eleven. Those marks stand for the whole
+   possession. Then the attacker plays, knowing nothing.
 
-     The mark HITS, he passed to the marked man: the defender answers one
-     question at H2_TACKLE_TIER. Right, and it is his ball, collected where the
-     pass was going. Wrong, and he has gone through the back of him: foul, free
-     kick, the pass goes through with no question at all, and he is booked.
+     A pass to a MARKED man: the defender answers one question at
+     H2_TACKLE_TIER. Right, and it is his ball, collected where the pass was
+     going. Wrong, and he has gone through the back of him: foul, the pass goes
+     through with no question at all, and he is booked. Either way that mark is
+     SPENT, so two marks is at most two contests a possession.
 
-     The mark MISSES: he has pulled a man out of position, so the attacker's
-     question is H2_MISS_RELIEF tiers cheaper. Route one becomes Extreme, Hard
-     becomes Normal, Easy stays Easy.
+     A pass to anybody else: nothing, except the FIRST one, which comes a tier
+     cheaper because the defender committed and got pulled out of shape.
 
      Or "let him play", and nothing changes.
 
-   WHY MISSING HAS TO COST SOMETHING. If a wrong guess were free the defender
-   would mark on every single pass and it would stop being a decision: it would
-   be a chore, and a flat tax on the attacker. One tier of relief is what makes
-   "tackle or sit off" a real choice, and it is what lets the attacker BAIT.
-   Play the obvious ball when you think he is overthinking it.
+   WHY IT IS SET ONCE AND NOT EVERY PASS. It began as one mark chosen before
+   every single pass, and two things were wrong with that.
 
-   WHAT IT COSTS IN TIME. The defender only answers when his guess lands, which
-   against anyone sensible is about a third of passes. A turn averages about
-   1.3 questions rather than 2, so a match stays roughly the length it was.
+   The first is the table. Only the mark is secret, so the phone has to change
+   hands for it, and per pass that is two full-screen cards every time the ball
+   moves: six to twelve of them in a possession of ordinary length. The mode
+   would have died of ceremony. Set once, it is two cards a possession however
+   long the possession runs.
+
+   The second is better, and it is why this is the rule even where the handoff
+   is free. Guessing again every pass tells nobody anything: it is a fresh coin
+   toss in both directions, forever. Marks that STAND leak information as the
+   possession goes on. Play it into the six and nothing happens, and now you
+   know the six is not marked, and so does he. The attacker is probing a fixed
+   board and the defender has committed to a read of it. That is a game;
+   repeated blind guessing is not.
+
+   IT ALSO RESCUES THE PRESS. Once the attacker finds an unmarked route he
+   would happily shuttle along it all afternoon, and being punished for
+   knocking it about is exactly what the press is for. The two rules stopped
+   taxing the same behaviour twice and started needing each other.
+
+   WHAT IT COSTS IN TIME. At most two contests a possession, and against
+   anybody sensible fewer, so a match stays roughly the length it was.
 
    THE CARD GOES TO THE MAN, NOT THE HUMAN. The tackler is whoever in the
    defender's shape is standing nearest the marked man, which h2NearestTo
@@ -6205,8 +6200,15 @@ function h2ToggleTackle(){
   try{ localStorage.setItem("ball2-tackle", h2TackleOn ? "1" : "0"); }catch(e){}
   render();
 }
-const H2_TACKLE_TIER = "normal";     // what the defender answers when he guesses right
-const H2_MISS_RELIEF = 1;            // tiers cheaper for the attacker when he guesses wrong
+const H2_MARKS       = 2;            // men he may mark, once, for the whole possession
+const H2_TACKLE_TIER = "normal";     // what the defender answers when a mark lands
+/* Tiers cheaper for the attacker on the FIRST pass that misses every mark, and
+   only that one. Per pass it would make a whole possession cheap on the back of
+   one bad read, which is far too big a swing for a guess made once; not at all
+   and marking would be very nearly free, since sitting off would have no
+   upside. Once is the fiction too: he committed, and he was pulled out of
+   shape at the moment he committed. */
+const H2_MISS_RELIEF = 1;
 const H2_BOOKED_TIER = null;         // a booked man tackles at this instead; null leaves it alone
 const H2_REDS        = 2;            // yellows on ONE man before he goes
 const H2_PEN_TAKER   = "easy";       // a penalty is meant to go in
@@ -6370,9 +6372,13 @@ function h2PassName(a, b){
 function h2Start(){
   S.h2h = {who:0, at:0, sel:null, call:null, coin:null, flipping:false,
            shooting:false, tossed:false, teams:[null,null], safe:0,
-           /* the tackle: who is marked this pass, who has been booked, who has
-              gone, and the card that passes the phone across the table */
-           mark:null, shown:null, contest:null, pen:false,
+           /* The tackle. marks are the men being marked THIS POSSESSION, and
+              markedAgainst remembers who was attacking when they were set, so
+              h2Next can tell a new possession from another pass in the same
+              one. relief is the single tier of help the attacker gets on the
+              first pass that misses, and it is spent the moment it is used. */
+           marks:[], markedAgainst:null, relief:false,
+           contest:null, pen:false,
            cards:[{}, {}], off:[[], []], hand:null};
   S.phase = "h_teams";
 }
@@ -6417,7 +6423,7 @@ function h2KickOff(){
   audio();
   h2CrowdStart();
   h2().safe = 0;
-  if(h2TackleOn) return h2Hand(h2Other(), "h_mark");
+  if(h2TackleOn && h2().markedAgainst !== h2().who) return h2Hand(h2Other(), "h_mark");
   S.phase = "h_pick";
   render();
 }
@@ -6444,20 +6450,24 @@ function h2Play(){
   if(H.sel == null) return;
   let t = h2TierFor(H.at, H.sel);
   /* THE TACKLE comes first, because it decides whether the attacker is asked
-     anything at all. A mark that lands is the DEFENDER's question; one that
-     misses is the attacker's, a tier cheaper for the space the lunge left. */
-  if(h2TackleOn && H.mark != null){
-    if(H.mark === H.sel){
-      if(h2Draw(h2TackleTier())){
+     anything at all. A pass into a marked man is the DEFENDER's question. A
+     pass that misses every mark is the attacker's, and the first of those in a
+     possession comes a tier cheaper for the space the commitment left. */
+  const marks = (h2TackleOn && H.marks) || [];
+  if(marks.length){
+    if(marks.indexOf(H.sel) !== -1){
+      if(h2Draw(h2TackleTier(H.sel))){
         H.contest = "tackle";
+        H.caught = H.sel;          // which mark landed, for the judge and the reveal
         H.shooting = false;
         S.timeUp = false; S.phase = "h_tackle";
         render();
         return;
       }
       // nothing left at that level: let it through rather than stall the game
-    } else {
+    } else if(H.relief){
       t = h2Cheaper(t, H2_MISS_RELIEF);
+      H.relief = false;            // once a possession, not once a pass
     }
   }
   /* THE PRESS. One short ball too many and he comes in for it anyway. This is
@@ -6499,10 +6509,15 @@ function h2TackleJudge(won){
   stopTimer();
   const target = H.sel;
   const tackle = H.contest === "tackle";
-  const marked = H.mark;
-  H.sel = null; H.contest = null;
-  h2Showmark = (h2TackleOn && marked != null) ? {i: marked, mine: true} : null;
-  H.mark = null;
+  const marked = H.caught == null ? null : H.caught;
+  H.sel = null; H.contest = null; H.caught = null;
+  /* THE MARK THAT LANDED IS SPENT, and the others stand. Two marks is at most
+     two contests a possession, whichever way each of them goes. */
+  if(marked != null && H.marks){
+    const at = H.marks.indexOf(marked);
+    if(at !== -1) H.marks.splice(at, 1);
+  }
+  h2Showmark = (h2TackleOn && marked != null) ? [marked] : null;
 
   if(won){
     /* the press wins it where the ball was; the tackle wins it where the ball
@@ -6561,11 +6576,15 @@ function h2Shoot(){
   audio();
   const H = h2();
   if(!h2CanShoot(H.at)) return;
-  /* A mark set on a man who then shoots instead of passing is a miss like any
-     other, so the chance comes a tier cheaper. Tackling somebody already in
-     range is a gamble, which is exactly right. */
+  /* Shooting instead of passing misses every mark like any other ball that
+     does not find one, so it takes the possession's one tier of relief if it
+     is still going. Marking men while the ball is already in range is a
+     gamble, which is exactly right. */
   let t = H2_SHOT[H.at];
-  if(h2TackleOn && H.mark != null) t = h2Cheaper(t, H2_MISS_RELIEF);
+  if(h2TackleOn && H.marks && H.marks.length && H.relief){
+    t = h2Cheaper(t, H2_MISS_RELIEF);
+    H.relief = false;
+  }
   if(!h2Draw(t)){ toast("No " + TIERS[t].label + " questions left", true); return; }
   H.shooting = true; H.sel = null;
   S.timeUp = false; S.phase = "h_q";
@@ -6641,11 +6660,14 @@ function h2NearestTo(lostAt, lostWho, newWho){
 /* The man who goes into the book: whoever was closest to the man he was
    marking. Same function, so the tackler and the collector are decided by one
    idea rather than two that can disagree. */
-function h2Tackler(){ const H = h2(); return h2NearestTo(H.mark, H.who, h2Other()); }
+/* Whoever is standing nearest the man he was marking. Takes the marked man
+   rather than reading it off the state, because with two marks standing the
+   state no longer knows which of them a given pass ran into. */
+function h2Tackler(on){ const H = h2(); return h2NearestTo(on, H.who, h2Other()); }
 /* a booked man holds back, if that dial is turned on */
-function h2TackleTier(){
+function h2TackleTier(on){
   const w = h2Other();
-  return (H2_BOOKED_TIER && h2Cards(w, h2Tackler()) > 0) ? H2_BOOKED_TIER : H2_TACKLE_TIER;
+  return (H2_BOOKED_TIER && h2Cards(w, h2Tackler(on)) > 0) ? H2_BOOKED_TIER : H2_TACKLE_TIER;
 }
 /* Book him, and send him off if that was his second. Returns "red", "yellow"
    or null so the caller can say what happened. */
@@ -6661,9 +6683,13 @@ function h2Book(w, i){
 function h2Judge(ok){
   const H = h2();
   stopTimer();
-  /* the mark is spent whatever happens next, and is shown on the way out */
-  if(h2TackleOn && H.mark != null) h2Showmark = {i: H.mark, mine: true};
-  H.mark = null;
+  /* MARKS STAND THROUGH A POSSESSION, so nothing is revealed here. Showing
+     them after every pass would hand back the deduction the standing marks
+     exist to create: the attacker is supposed to work out where they are by
+     playing into them, not be told. What he legitimately learns is that the
+     man he just found was not one of them. */
+  const wasMarking = (h2TackleOn && H.marks && H.marks.length)
+    ? H.marks.map(i => h2Of(i, H.who)).join(" and ") : null;
   if(!ok){
     const lostAt = H.at, lostWho = H.who;
     H.who = h2Other();
@@ -6675,9 +6701,14 @@ function h2Judge(ok){
     h2Fly(h2BX(lostAt, false), h2BY(lostAt, false), h2BX(H.at, true), h2BY(H.at, true), null, H.at);
     h2Turn = true;
     h2Lost = lostAt;
-    h2Showmark = null;            // the camera has swung; the mark belonged to the old view
+    h2Showmark = null;            // the camera has swung; the marks belonged to the old view
     flashBad();
-    toast("Lost it. " + S.players[H.who].name + " picks it up on " + h2Of(H.at, H.who) + ".", true);
+    /* THE POSSESSION IS OVER, so the marks that were never found are told
+       rather than drawn: the camera has already swung and a ring on the new
+       view would be pointing at the wrong shape. Saying it is also the better
+       moment, because it settles the argument about whether he read it. */
+    toast("Lost it. " + S.players[H.who].name + " picks it up on " + h2Of(H.at, H.who) + "." +
+          (wasMarking ? " He was marking " + wasMarking + "." : ""), true);
     return h2Next();
   }
   if(H.shooting){
@@ -6761,8 +6792,11 @@ function h2Next(){
   const H = h2();
   S.tier = null; S.qi = null; S.timeUp = false;
   H.pen = false;
-  /* With the tackle on, a pass begins with the phone crossing the table. */
-  if(h2TackleOn) return h2Hand(h2Other(), "h_mark");
+  /* A POSSESSION, NOT A PASS. The phone only crosses the table when the ball
+     has changed hands, because the marks were set against whoever is attacking
+     and they stand until he loses it. Another pass in the same possession goes
+     straight back to the pitch. */
+  if(h2TackleOn && H.markedAgainst !== H.who) return h2Hand(h2Other(), "h_mark");
   S.phase = "h_pick";
   render();
 }
@@ -6791,6 +6825,9 @@ function h2Next(){
    words, they see the colour. */
 function h2Hand(w, next, down){
   const H = h2();
+  /* a fresh possession starts with a blank sheet, never with last time's men
+     still ticked */
+  if(next === "h_mark"){ H.marks = []; H.relief = false; H.caught = null; }
   H.hand = {w: w, next: next, down: !!down};
   S.phase = "h_hand";
   render();
@@ -6803,11 +6840,27 @@ function h2HandGo(){
   S.phase = next;
   render();
 }
-/* i is a man in the ATTACKER's eleven, or null for "let him play" */
+/* Tapping a man in the ATTACKER's eleven adds him to the marks or takes him
+   off again, up to H2_MARKS. Nothing is committed until he taps done, so a
+   misplaced thumb costs nothing. */
 function h2Mark(i){
   audio();
   const H = h2();
-  H.mark = (i === null || i === undefined) ? null : i;
+  if(!H.marks) H.marks = [];
+  const at = H.marks.indexOf(i);
+  if(at !== -1) H.marks.splice(at, 1);
+  else if(H.marks.length < H2_MARKS) H.marks.push(i);
+  else { toast("Two is all you get. Tap one off first."); return; }
+  render();
+}
+/* Done, or "let him play", which is the same thing with nobody marked: both go
+   through here so the screen the attacker sees next is identical either way. */
+function h2MarksDone(none){
+  audio();
+  const H = h2();
+  if(none) H.marks = [];
+  H.markedAgainst = H.who;     // these marks belong to THIS possession
+  H.relief = true;             // one tier of help is waiting on the first miss
   h2Hand(h2Other(), "h_pick", true);
 }
 
@@ -6877,7 +6930,7 @@ function h2PitchHTML(tappable){
       hold: i === H.at,
       from: !!A && i === A.from,
       to:   !!A && i === A.to,
-      mark: !!shown && shown.i === i,
+      mark: !!shown && shown.indexOf(i) !== -1,
     });
   });
 
@@ -7095,28 +7148,37 @@ function h2Render(st){
     return;
   }
 
-  /* ---------- the private half-second ----------
-     The attacker's eleven, and one of them is about to be marked. Sent-off men
-     are not offered, because you cannot mark a man who is not on the pitch. */
+  /* ---------- the private half-minute ----------
+     The attacker's eleven, and two of them are about to be marked for the
+     whole of his possession. Sent-off men are not offered, because you cannot
+     mark a man who is not on the pitch. */
   if(S.phase === "h_mark"){
     const att = H.who;
-    const tier = TIERS[h2TackleTier()];
+    const picked = H.marks || [];
+    const tier = TIERS[H2_TACKLE_TIER];
+    const left = H2_MARKS - picked.length;
     st.innerHTML =
       '<div class="kick">' + ico('users') + 'Your tackle · ' + esc(them.name) + '</div>' +
-      '<div class="h2big">Who are you marking?</div>' +
-      '<div class="h2hintline">If ' + esc(me.name) + ' passes to him you get one <b>' + tier.label +
-        '</b> question to take it off him. Miss the read and his pass comes a tier cheaper, ' +
-        'so marking every ball is not free.</div>' +
+      '<div class="h2big">Mark two of them.</div>' +
+      '<div class="h2hintline">They stay marked for the whole of ' + esc(me.name) +
+        "'s possession. Play the ball into one and you get a <b>" + tier.label +
+        '</b> question to take it off him.</div>' +
       '<div class="h2marks">' +
         h2Live(att).map(i =>
-          '<button class="h2markbtn' + (H.mark === i ? " on" : "") + '" onclick="h2Mark(' + i + ')">' +
+          '<button class="h2markbtn' + (picked.indexOf(i) !== -1 ? " on" : "") +
+            '" onclick="h2Mark(' + i + ')">' +
             '<span class="h2mno">' + h2No(i, att) + '</span>' +
             '<span class="h2mnm">' + esc(h2Who(i, att)) + '</span>' +
             '<span class="h2mps">' + H2_SQUAD[i].n + '</span>' +
           '</button>').join("") +
       '</div>' +
-      '<button class="bigbtn ghost" onclick="h2Mark(null)">Let him play</button>' +
-      '<div class="hint" style="text-align:center">Get it wrong in the wrong place and you give away a free kick, a booking, or a penalty.</div>';
+      (picked.length
+        ? '<button class="bigbtn" onclick="h2MarksDone(false)">' +
+            (left > 0 ? "Done, marking " + picked.length : "Done") + '</button>'
+        : '') +
+      '<button class="bigbtn ghost" onclick="h2MarksDone(true)">Let him play</button>' +
+      '<div class="hint" style="text-align:center">He only finds out where you were when he loses it. ' +
+      'Get it wrong in the wrong place and you give away a free kick, a booking, or a penalty.</div>';
     return;
   }
 
@@ -7223,8 +7285,8 @@ function h2Render(st){
        they must not read the same. The press is pressure and costs nothing to
        lose; the tackle is a read, and losing it is a foul and a card. */
     const isTackle = H.contest === "tackle";
-    const on = H.mark == null ? "" : h2Of(H.mark, H.who);
-    const pen = H.mark != null && H2_SQUAD[H.mark].line === 6;
+    const on = H.caught == null ? "" : h2Of(H.caught, H.who);
+    const pen = H.caught != null && H2_SQUAD[H.caught].line === 6;
     st.innerHTML =
       h2ScoreHTML() + h2PitchHTML(false) +
       '<div class="h2big tackle">' + (isTackle
@@ -8405,7 +8467,18 @@ function resumeGame(){
     const H = S.h2h;
     if(!H.cards) H.cards = [{}, {}];
     if(!H.off) H.off = [[], []];
-    if(H.mark === undefined) H.mark = null;
+    if(!H.marks) H.marks = [];
+    if(H.markedAgainst === undefined) H.markedAgainst = null;
+    if(H.relief === undefined) H.relief = false;
+    if(H.caught === undefined) H.caught = null;
+    /* A save from when one man was marked before every pass. His mark carries
+       over as the first of the new two, and markedAgainst has to be stamped
+       with whoever is on the ball: leaving it null makes h2Next read the
+       resumed possession as a brand new one and hand the phone over again
+       after every single pass, which is the exact behaviour this rule was
+       changed to stop. */
+    if(H.mark !== undefined){ if(H.mark != null) H.marks = [H.mark]; delete H.mark; }
+    if(H.markedAgainst == null && S.phase !== "h_teams" && S.phase !== "h_toss") H.markedAgainst = H.who;
     if(H.hand === undefined) H.hand = null;
     if(H.contest === undefined) H.contest = null;
     if(H.pen === undefined) H.pen = false;
@@ -8413,7 +8486,9 @@ function resumeGame(){
        secret was in somebody's head and the phone has been closed since, so
        restoring the private screen would either show the mark to the wrong man
        or ask him to remember what he picked last Friday. */
-    if(S.phase === "h_hand" || S.phase === "h_mark"){ H.mark = null; H.hand = null; S.phase = "h_pick"; }
+    if(S.phase === "h_hand" || S.phase === "h_mark"){
+      H.marks = []; H.markedAgainst = null; H.hand = null; S.phase = "h_pick";
+    }
   }
   render();
 }
