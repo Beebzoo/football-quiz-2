@@ -1280,6 +1280,11 @@
   }
   .modestoggle:not(.sel)::after{transform:scaleX(-1)}
   .hint.lastline{text-align:center;color:#c8d8cc;margin-top:4px}
+  /* the build stamp: findable, never in the way, and a tap reloads from the net */
+  .buildline{text-align:center;margin:14px 0 2px;padding:6px;cursor:pointer;
+    font:600 .66rem/1 var(--ui);letter-spacing:.12em;text-transform:uppercase;
+    color:var(--chalk-dim);opacity:.5}
+  .buildline:active{opacity:.9}
   /* play together */
   #mpbar{position:fixed;left:0;right:0;bottom:12px;display:flex;gap:10px;justify-content:center;align-items:center;z-index:40;pointer-events:none}
   #mpbar[hidden]{display:none}
@@ -5083,6 +5088,12 @@ const canPitch = id => !!(QUIZZES[id] && QUIZZES[id].teams);
    may never arrive, so every reader has to cope with null: a league whose
    files are not built yet simply shows up dimmed in the menu rather than
    taking the app down. */
+/* WHAT BUILD THIS IS. Written by _tools/stamp.js, the last thing you run
+   before pushing, and shown at the bottom of the menu. It exists so that
+   "am I on the new one?" is a question the phone can answer by itself:
+   nearly everything built lately happens during a match, so a stale phone
+   and a fresh one look identical on the menu. */
+const BUILD = "13 Sep 2026 · 16:40";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five
@@ -9470,7 +9481,28 @@ function renderSetup(st){
     ${/* Bottom of the page on purpose: you install an app you have already
          decided you like, so it belongs after the rules rather than above the
          mode you came to play. */""}
-    ${isStandalone()?"":`<button class="bigbtn ghost tinybtn" onclick="installApp()">📲 Get BALL on your home screen</button>`}`;
+    ${isStandalone()?"":`<button class="bigbtn ghost tinybtn" onclick="installApp()">📲 Get BALL on your home screen</button>`}
+    <div class="buildline" onclick="freshen()" title="Tap to fetch the newest one">${esc(BUILD)}</div>`;
+}
+
+/* THE ONE TAP THAT FIXES A STALE PHONE. The app is served network first, so
+   an online reload is normally enough, but a home screen PWA can sit on an
+   old service worker and "clear your site data" is not an answer on a Friday
+   night. This throws away every cache the app owns, prods the worker to
+   update, and reloads from the network. */
+async function freshen(){
+  toast("Fetching the newest one...");
+  try{
+    if(navigator.serviceWorker){
+      const regs = await navigator.serviceWorker.getRegistrations();
+      for(const r of regs){ try{ await r.update(); }catch(e){} }
+    }
+    if(window.caches){
+      const keys = await caches.keys();
+      await Promise.all(keys.map(k => caches.delete(k)));
+    }
+  }catch(e){}
+  location.reload();
 }
 
 /* ============================== GAME FLOW ============================== */
