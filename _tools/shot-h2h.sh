@@ -26,6 +26,16 @@
 #           the bench:   sub subgk
 #           the end:     ft pens penq over pensend
 #           pick one:    mcq
+#           the dugout:  dugmenu dugout dugshape dugline dugboth dugpress dugbus
+#           every shape: shape4231 shape442 shape433 shape352 shape532
+#           every line:  linehigh linemid linelow
+#           the shot at
+#           every line:  shotlinehigh shotlinemid shotlinelow
+#
+#           The shape and line states are generated from the app's own tables,
+#           so a new formation gets a state without anyone editing this list.
+#           A line state selects a long ball so the bar shows the moved price;
+#           a shotline state stands the striker up so the Shoot button does.
 #
 #           press is the three-short-balls contest; chal* is the mark-based
 #           tackle. Two different rules that both land on h_tackle.
@@ -151,6 +161,27 @@ const setups={
   pensend:`${nl} S.h2h.who=0; S.h2h.at=5; S.h2h.min=90; S.players[0].score=1; S.players[1].score=1; S.phase="h_pick"; h2Whistle(); h2AfterWhistle(); S.h2h.so.kicks=[[1,1,1],[0,0,0]]; S.h2h.so.n=6; h2SoEnd();`,
   mcq:   `S=freshState(["Martijn","Bram"],false,"classic",0,"pitch",true); h2TackleOn=false; h2Start(); S.h2h.teams=["Netherlands","Italy"]; S.h2h.tossed=true; S.h2h.who=0; S.h2h.at=0; S.phase="h_pick"; render(); h2Select(5); h2Play();`,
 };
+
+/* ONE STATE PER SHAPE AND PER LINE, generated rather than typed, so the sixth
+   formation gets its picture for free and nobody has to remember to add it.
+   The shape states put both sides in the same formation at kick-off, because
+   the thing being checked is whether the eleven draw where the table says.
+   The line states leave the attacker on a normal line, set the DEFENDER to
+   the one being looked at, and select a long ball, so the price the bar shows
+   is the price the line moved. */
+const SHOT_SHAPES = ["4-2-3-1", "4-4-2", "4-3-3", "3-5-2", "5-3-2"];
+const SHOT_LINES = ["high", "mid", "low"];
+const dug = `S=freshState(["Martijn","Bram"],false,"classic",0,"manager",false); h2TackleOn=false; h2Start(); h2PickTeam("Netherlands"); h2PickTeam("Italy"); S.h2h.tossed=true;`;
+for (const id of SHOT_SHAPES)
+  setups["shape" + id.replace(/-/g, "")] = dug +
+    ` S.h2h.form=["${id}","${id}"]; S.h2h.who=0; S.h2h.at=0; S.h2h.markedAgainst=0; S.phase="h_pick"; render();`;
+for (const k of SHOT_LINES)
+  setups["line" + k] = dug +
+    ` S.h2h.line=["mid","${k}"]; S.h2h.who=0; S.h2h.at=0; S.h2h.markedAgainst=0; S.phase="h_pick"; render(); h2Select(9);`;
+/* and the same three with the striker on the ball, because the shot takes the line too */
+for (const k of SHOT_LINES)
+  setups["shotline" + k] = dug +
+    ` S.h2h.line=["mid","${k}"]; S.h2h.who=0; S.h2h.at=9; S.h2h.markedAgainst=0; S.phase="h_pick"; render();`;
 let h=fs.readFileSync("index.html","utf8");
 const drive=`
 <script>

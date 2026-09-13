@@ -277,7 +277,7 @@
      touched a second time. */
   :root{
     --r2:6px;                      /* every corner in this direction */
-    --sage:#8FB79E;                /* the Football game rule */
+    --sage:#8FB79E;                /* the One on One rule */
     --terracotta:#C4714F;          /* the Dugout rule */
     /* NOT the grass. #pitchbg is the page backdrop behind the whole app, and
        .h2pitch is the surface a match is played on. The first follows the look
@@ -2361,6 +2361,12 @@
   .h2so-row em{font-style:normal;font-weight:800;font-variant-numeric:tabular-nums;min-width:1.4em;text-align:right}
   /* the bench is laid out like the marking grid: number, name, position */
   .h2bench{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:8px 0 10px}
+  /* twenty-three men rather than twelve, so they go four across and the whole
+     squad is on one screen. A squad list you have to scroll is a squad list
+     you do not read. */
+  .h2bench.h2squad{grid-template-columns:repeat(4,1fr);gap:5px}
+  .h2bench.h2squad .h2markbtn{padding:5px 3px}
+  .h2bench.h2squad .h2mnm{font-size:.72rem}
 
   /* Four options. Wide targets, because this gets tapped on a phone that is
      being passed across a table, and a clear right/wrong once it is called. */
@@ -5379,7 +5385,7 @@ function setTheme(t){
   applyTheme();
   render();
 }
-const BUILD = "13 Sep 2026 · 22:49";
+const BUILD = "13 Sep 2026 · 22:58";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five
@@ -7190,6 +7196,12 @@ const h2GoalY = w => w === 0 ? 5 : 95;   // the mouth this player is shooting at
 /* Which country each man is playing as, and what that gets him. Everything
    falls back to the plain red/blue shape if the deck has not landed, so the
    mode never renders blank. */
+/* WHAT THIS WAY OF PLAYING IS CALLED, so a screen never has to guess. The
+   pitch and The Dugout are the same machine, which is the point, but they are
+   not the same game to sit down to and the header should say which one you
+   are in. */
+const h2Name = () => h2Tactical() ? "The Dugout" : "One on One";
+
 /* Pick One is not a second copy of One on One, it is the same machine asked a
    different way: same pitch, same ladder, same shape, same shot. Only the
    question screens differ, so everything below branches on h2IsMC() rather
@@ -7225,6 +7237,22 @@ const h2Pool  = () => (S && TEAMS[S.mode]) || null;
 const H2_ROLE = ["GK", "DF", "DF", "DF", "DF", "MF", "MF", "MF", "FW", "FW", "FW"];
 const H2_NEAR = {GK: ["GK"], DF: ["DF", "MF", "FW"], MF: ["MF", "FW", "DF"], FW: ["FW", "MF", "DF"]};
 const h2Sorted = new WeakSet();
+/* ELEVEN MEN INTO THE 4-2-3-1 ORDER the shapes index. Its own function
+   because two callers need it now: the deck's own side, and an eleven a
+   manager picked himself, where the men arrive in whatever order he tapped
+   them and slot 0 still has to be a goalkeeper. */
+function h2Fit(men){
+  const pool = {GK: [], DF: [], MF: [], FW: []};
+  for(const m of men) (pool[m && m.pos] || pool.MF).push(m);
+  const out = [];
+  for(const want of H2_ROLE){
+    let man = null;
+    for(const p of H2_NEAR[want]) if(pool[p].length){ man = pool[p].shift(); break; }
+    if(!man) for(const p of ["MF", "DF", "FW", "GK"]) if(pool[p].length){ man = pool[p].shift(); break; }
+    out.push(man);
+  }
+  return out;
+}
 function h2Order(t){
   if(!t || h2Sorted.has(t) || !t.xi || t.xi.length !== 11) return t;
   h2Sorted.add(t);
@@ -7235,15 +7263,7 @@ function h2Order(t){
     xi[xi.indexOf(gk)] = bench[j];
     bench[j] = gk;
   }
-  const pool = {GK: [], DF: [], MF: [], FW: []};
-  for(const m of xi) (pool[m && m.pos] || pool.MF).push(m);
-  const out = [];
-  for(const want of H2_ROLE){
-    let man = null;
-    for(const p of H2_NEAR[want]) if(pool[p].length){ man = pool[p].shift(); break; }
-    if(!man) for(const p of ["MF", "DF", "FW", "GK"]) if(pool[p].length){ man = pool[p].shift(); break; }
-    out.push(man);
-  }
+  const out = h2Fit(xi);
   if(out.every(Boolean)){ t.xi = out; t.bench = bench; }
   return t;
 }
@@ -7295,7 +7315,16 @@ const h2Man = (i, w) => {
   const sub = H && H.subbed && H.subbed[w] && H.subbed[w][i];
   if(sub) return sub;
   const q = h2Squad(w), slot = h2Shape(w)[i];
-  return (q && slot && q.xi[slot.from]) || null;
+  /* THE ELEVEN HE NAMED, if he named one. Gated on h2Tactical exactly the way
+     the shape is, so One on One stays the game it was tuned on however much
+     Dugout state happens to be lying around in S. */
+  const xi = h2Lineup(w) ? h2Lineup(w).xi : (q && q.xi);
+  return (xi && slot && xi[slot.from]) || null;
+};
+/* the side he named, or nothing if this is not The Dugout or he never picked */
+const h2Lineup = w => {
+  const H = S && S.h2h;
+  return (h2Tactical() && H && H.lineup && H.lineup[w]) || null;
 };
 const h2No = (i, w) => { const m = h2Man(i, w); return (m && m.no) || h2Spot(i, w).no; };
 /* ---------- SOUND ----------
@@ -7431,6 +7460,13 @@ function h2Start(){
            form:[H2_SHAPE_DEFAULT, H2_SHAPE_DEFAULT],
            /* the clock, and the shootout once it is running */
            min:0, so:null,
+           /* THE ELEVEN EACH MANAGER NAMED, and the twelve he left out, as
+              whole player objects rather than indices into the deck. The deck
+              is refetched on every load and rebuilt whenever the harvest
+              improves, so an index would quietly point at a different man
+              after a park and a resume. picked is the draft while the screen
+              is open and stops being read the moment Done is tapped. */
+           lineup:[null, null], picked:[[], []], picking:null,
            /* the man holding a spot he ran to, if there is one: {w, i, x, y,
               line}, in his own attacking frame like H2_SQUAD */
            adv:null};
@@ -7444,9 +7480,11 @@ function h2PickTeam(country){
   const slot = H.teams[0] == null ? 0 : 1;
   if(H.teams.includes(country)) return;
   H.teams[slot] = country;
-  /* In The Dugout the shape is a choice, and it is made before a ball is
-     kicked because it decides the price of every one of them. */
-  if(H.teams[1] != null) S.phase = h2Tactical() ? "h_shape" : "h_toss";
+  /* IN THE DUGOUT YOU NAME THE SIDE, THEN SET IT OUT. Both happen before a
+     ball is kicked, because between them they decide the price of every one of
+     them and which deck it comes from. Squad first: a manager should see his
+     men before he is asked to choose distances between them. */
+  if(H.teams[1] != null) S.phase = h2Tactical() ? "h_squad" : "h_toss";
   render();
 }
 function h2ClearTeams(){ audio(); h2().teams = [null,null]; render(); }
@@ -8127,8 +8165,12 @@ const h2SubsLeft = w => { const H = S && S.h2h; return H && H.subs ? H.subs[w] :
 function h2Bench(w){
   const q = h2Squad(w), H = h2();
   if(!q || !q.bench) return [];
+  /* THE TWELVE HE LEFT OUT. Fixed at kick-off and never recomputed, which is
+     the property that makes a substitution safe: benchUsed stores indices into
+     this list, so the list has to mean the same men all match. */
+  const list = h2Lineup(w) ? h2Lineup(w).bench : q.bench;
   const used = (H.benchUsed && H.benchUsed[w]) || [];
-  return q.bench.map((p, i) => ({p: p, i: i})).filter(b => used.indexOf(b.i) === -1);
+  return list.map((p, i) => ({p: p, i: i})).filter(b => used.indexOf(b.i) === -1);
 }
 /* Can this side bring a man on for slot i right now? Not for a man who has
    been sent off (you play with ten), not in a shootout, and not with nobody
@@ -8371,6 +8413,58 @@ function h2SetShape(id){
   if(!H2_SHAPES[id] || !h2Tactical()) return;
   H.form = H.form || [H2_SHAPE_DEFAULT, H2_SHAPE_DEFAULT];
   H.form[H.shaping || 0] = id;
+  render();
+}
+/* THE TWENTY-THREE, in a fixed order both phones agree on. Not h2Pool, which
+   is already the deck of countries. Shirt number, which
+   is how a squad list is printed and how a manager thinks about it. */
+function h2TwentyThree(w){
+  const q = h2Squad(w);
+  if(!q) return [];
+  return q.xi.concat(q.bench || []).slice().sort((a, b) => (a.no || 99) - (b.no || 99));
+}
+/* the draft for this side, defaulting to the eleven the deck would have
+   picked, so Done is one tap away and the pick is opt-in rather than a chore */
+function h2Draft(w){
+  const H = h2();
+  H.picked = H.picked || [[], []];
+  if(!H.picked[w] || !H.picked[w].length){
+    const pool = h2TwentyThree(w), q = h2Squad(w);
+    H.picked[w] = (q ? q.xi : []).map(m => pool.indexOf(m)).filter(i => i >= 0);
+  }
+  return H.picked[w];
+}
+function h2SquadPick(i){
+  audio();
+  const H = h2(), w = H.picking || 0;
+  const sel = h2Draft(w);
+  const at = sel.indexOf(i);
+  if(at > -1) sel.splice(at, 1);
+  else if(sel.length < 11) sel.push(i);
+  render();
+}
+/* EXACTLY ONE KEEPER, and it is not a style rule. Slot 0 of every shape is the
+   goalkeeper and h2NoGk, the restart, the save tier and the shootout all say
+   so; with none picked, h2Fit puts an outfielder there and the save becomes
+   nonsense. With two, the second is standing on a wing. */
+const h2SquadGks = w => h2Draft(w).filter(i => (h2TwentyThree(w)[i] || {}).pos === "GK").length;
+const h2SquadOk = w => h2Draft(w).length === 11 && h2SquadGks(w) === 1;
+function h2SquadDone(){
+  audio();
+  const H = h2(), w = H.picking || 0;
+  if(!h2SquadOk(w)) return;
+  const pool = h2TwentyThree(w), sel = h2Draft(w);
+  /* CRYSTALLISE IT. From here the eleven and the twelve are fixed for the
+     match, which is what makes benchUsed safe: it stores indices into this
+     bench, so this bench has to mean the same men all the way to full time. */
+  H.lineup = H.lineup || [null, null];
+  H.lineup[w] = {
+    xi: h2Fit(sel.map(n => pool[n])),
+    bench: pool.filter((_, n) => sel.indexOf(n) === -1),
+  };
+  if(w === 0){ H.picking = 1; render(); return; }
+  H.picking = null;
+  S.phase = "h_shape";
   render();
 }
 function h2ShapeDone(){
@@ -8691,7 +8785,7 @@ function h2Render(st){
     const pool = h2Pool() || {};
     const names = Object.keys(pool).sort();
     st.innerHTML =
-      '<div class="kick">' + ico('users') + 'One on One · pick your ' + h2Kind(S.mode).one + '</div>' +
+      '<div class="kick">' + ico('users') + h2Name() + ' · pick your ' + h2Kind(S.mode).one + '</div>' +
       '<div class="h2big">' + esc(turn.name) + ', who are you?</div>' +
       (picked.length
         ? '<div class="h2hintline">' + esc(S.players[0].name) + ' has ' + esc(H.teams[0]) +
@@ -8706,6 +8800,56 @@ function h2Render(st){
           '<span>' + esc(c) + '</span>' +
         '</button>').join("") +
       '</div>' + foot;
+    return;
+  }
+
+  /* ---------- naming the eleven ----------
+     Twenty-three men, pick eleven, and one of them has to be a goalkeeper
+     because slot 0 of every shape is the keeper and the restart, the save and
+     the shootout all say so. The deck's own eleven is pre-selected, so a
+     manager who does not care taps straight through and gets exactly what he
+     got before this screen existed. */
+  if(S.phase === "h_squad"){
+    const w = H.picking || 0;
+    const picker = S.players[w];
+    const pool = h2TwentyThree(w), sel = h2Draft(w);
+    const kit = h2Kit(w);
+    const gks = h2SquadGks(w);
+    const left = 11 - sel.length;
+    /* WHICH LEAGUES THIS MAN BRINGS, which is the whole reason the pick is a
+       choice rather than a beauty contest: a ball to him draws from where he
+       actually played, so leaving out the only man who played in Italy takes
+       Serie A off your side of the pitch. */
+    const lgOf = m => ((m && m.lg) || []).map(id => (QUIZZES[id] || {}).label || id);
+    const carried = {};
+    for(const i of sel) for(const l of lgOf(pool[i])) carried[l] = (carried[l] || 0) + 1;
+    const carry = Object.entries(carried).sort((a, b) => b[1] - a[1]);
+    st.innerHTML =
+      '<div class="kick">' + ico('clipboard') + 'The Dugout \u00b7 ' + esc(h2Team(w) || picker.name) + '</div>' +
+      '<div class="h2big">' + esc(picker.name) + ', name your eleven.</div>' +
+      '<div class="h2hintline" style="margin-top:0">A ball to a man asks a question from a league he played in, ' +
+        'so this is you choosing the decks. One of them has to be a goalkeeper.</div>' +
+      '<div class="h2bench h2squad">' + pool.map((p, i) => {
+        const on = sel.indexOf(i) > -1;
+        const ls = lgOf(p);
+        return '<button class="h2markbtn' + (on ? ' on' : '') + '" style="--ac:' + kit +
+          '" onclick="h2SquadPick(' + i + ')"' +
+          (!on && left <= 0 ? ' disabled' : '') + '>' +
+          '<span class="h2mno">' + (p.no || "") + '</span>' +
+          '<span class="h2mnm">' + esc(p.n) + '</span>' +
+          '<span class="h2mps">' + esc(p.pos || "") + (ls.length ? ' \u00b7 ' + ls.length : '') + '</span>' +
+        '</button>';
+      }).join("") + '</div>' +
+      '<div class="h2hintline">' + (
+        left > 0 ? esc(left + " more to pick.")
+        : gks === 0 ? "Eleven, but no goalkeeper. Somebody has to go in goal."
+        : gks > 1 ? "Eleven, but " + gks + " goalkeepers. Only one of them can play there."
+        : carry.length ? "They bring " + esc(carry.map(c => c[0] + " (" + c[1] + ")").join(", ")) + "."
+        : "Nobody here played in a league we have a deck for, so they all ask the classic bank.") +
+      '</div>' +
+      '<button class="bigbtn" onclick="h2SquadDone()"' + (h2SquadOk(w) ? '' : ' disabled') + '>' +
+        (w === 0 ? esc(S.players[1].name) + " next" : "To the shape") + '</button>' +
+      foot;
     return;
   }
 
@@ -8736,7 +8880,7 @@ function h2Render(st){
     const caller = S.players[0].name;
     const face = H.coin ? (H.coin === "heads" ? "H" : "T") : "?";
     st.innerHTML =
-      '<div class="kick">' + ico('users') + 'One on One · first to ' + H2_TARGET + ' or ' + H2_MINUTES + ' minutes</div>' +
+      '<div class="kick">' + ico('users') + h2Name() + ' · first to ' + H2_TARGET + ' or ' + H2_MINUTES + ' minutes</div>' +
       '<div class="h2vs">' +
         '<div class="h2vs-s">' +
           (h2Flag(0) ? '<img src="' + h2Flag(0) + '" alt="">' : "") +
@@ -10158,9 +10302,9 @@ function renderSetup(st){
 
       <div class="mm-fixtures">
         <div class="mm-eyebrow">How you play</div>
-        ${fix("pitch","var(--sage)","Football game","A match, on a pitch")}
-        ${fix("board","var(--gold)","Normal mode","The quiz, pick a tier")}
-        ${fix("manager","var(--terracotta)","The Dugout","Your line-up picks your questions")}
+        ${fix("pitch","var(--sage)","One on One","Two of you, a ball, ninety minutes")}
+        ${fix("board","var(--gold)","The Board","The quiz. Pick a tier, take the points")}
+        ${fix("manager","var(--terracotta)","The Dugout","Pick an eleven and they carry the questions")}
       </div>
 
       <div class="mm-sect">
@@ -10342,7 +10486,10 @@ function resumeGame(){
        after every single pass, which is the exact behaviour this rule was
        changed to stop. */
     if(H.mark !== undefined){ if(H.mark != null) H.marks = [H.mark]; delete H.mark; }
-    if(H.markedAgainst == null && S.phase !== "h_teams" && S.phase !== "h_toss") H.markedAgainst = H.who;
+    /* A MATCH PARKED BEFORE KICK-OFF HAS NOBODY MARKED, and stamping it here
+       made the first possession skip the handover. h_squad and h_shape both
+       sit before the toss and both fell through this hole. */
+    if(H.markedAgainst == null && ["h_teams", "h_toss", "h_squad", "h_shape"].indexOf(S.phase) < 0) H.markedAgainst = H.who;
     if(H.hand === undefined) H.hand = null;
     if(H.contest === undefined) H.contest = null;
     if(H.pen === undefined) H.pen = false;

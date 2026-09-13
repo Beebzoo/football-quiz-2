@@ -221,7 +221,41 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   run(app, 'S = freshState(["Martijn","Bram"], false, "classic", 0, "manager", false); h2Start(); render();');
   await tick(140);
   run(app, 'h2PickTeam("Netherlands"); h2PickTeam("Italy");'); await tick(140);
-  check("both sides picked, and it asks for a shape", ev(app, "S.phase") === "h_shape", ev(app, "S.phase"));
+  check("both sides picked, and it asks for an eleven first", ev(app, "S.phase") === "h_squad", ev(app, "S.phase"));
+  check("all twenty-three are offered", (stage(app).match(/h2SquadPick/g) || []).length === 23,
+    (stage(app).match(/h2SquadPick/g) || []).length);
+  check("the deck's own eleven is already ticked, so Done is one tap",
+    ev(app, "S.h2h.picked[0].length") === 11 && ev(app, "h2SquadOk(0)") === true,
+    ev(app, "S.h2h.picked[0].length"));
+  /* a manager who leaves his keeper out cannot kick off, because slot 0 of
+     every shape IS the keeper and the save, the restart and the shootout all
+     assume it */
+  const gkAt = ev(app, "h2TwentyThree(0).findIndex(m => m.pos === 'GK')");
+  run(app, "h2SquadPick(" + gkAt + ");"); await tick(100);
+  check("dropping the only keeper blocks kick-off", ev(app, "h2SquadOk(0)") === false, "still ok");
+  check("and the screen says why", /goalkeeper/.test(stage(app)), "no reason given");
+  run(app, "h2SquadDone();"); await tick(100);
+  check("Done does nothing while it is wrong", ev(app, "S.h2h.picking") == null || ev(app, "S.h2h.picking") === 0,
+    ev(app, "S.h2h.picking"));
+  run(app, "h2SquadPick(" + gkAt + ");"); await tick(100);
+  /* now swap a starter for a man off the bench and check he actually plays */
+  const benchAt = ev(app, "(() => { const sel = S.h2h.picked[0]; " +
+    "for(let i=0;i<23;i++) if(sel.indexOf(i)<0 && h2TwentyThree(0)[i].pos !== 'GK') return i; return -1; })()");
+  const outAt = ev(app, "(() => { const sel = S.h2h.picked[0]; " +
+    "for(const i of sel) if(h2TwentyThree(0)[i].pos !== 'GK') return i; return -1; })()");
+  const inName = ev(app, "h2TwentyThree(0)[" + benchAt + "].full");
+  run(app, "h2SquadPick(" + outAt + "); h2SquadPick(" + benchAt + ");"); await tick(100);
+  check("eleven again after the swap", ev(app, "h2SquadOk(0)") === true, ev(app, "S.h2h.picked[0].length"));
+  run(app, "h2SquadDone();"); await tick(120);
+  check("then the other manager names his", ev(app, "S.h2h.picking") === 1, ev(app, "S.h2h.picking"));
+  check("the man he brought in is on the pitch",
+    [...Array(11).keys()].some(i => (ev(app, "h2Man(" + i + ",0)") || {}).full === inName), inName + " not found");
+  check("and slot 0 is still a goalkeeper",
+    (ev(app, "h2Man(0,0)") || {}).pos === "GK", JSON.stringify(ev(app, "h2Man(0,0)")));
+  check("the man he dropped is on the bench",
+    ev(app, "h2Bench(0).length") === 12, ev(app, "h2Bench(0).length"));
+  run(app, "h2SquadDone();"); await tick(120);
+  check("and then it asks for a shape", ev(app, "S.phase") === "h_shape", ev(app, "S.phase"));
   check("the first man is up", (ev(app, "S.h2h.shaping") || 0) === 0, ev(app, "S.h2h.shaping"));
   check("all five are offered, drawn rather than named",
     (stage(app).match(/h2shapeb/g) || []).length === 5 && /h2mini/.test(stage(app)),
@@ -243,6 +277,12 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   run(app, 'S = freshState(["Martijn","Bram"], false, "classic", 0, "pitch", false); h2Start(); h2PickTeam("Netherlands"); h2PickTeam("Italy");');
   await tick(140);
   check("it goes straight to the toss", ev(app, "S.phase") === "h_toss", ev(app, "S.phase"));
+  /* and a lineup left lying about in the state must not change who plays */
+  const before = ev(app, "h2Man(9,0).full");
+  run(app, "S.h2h.lineup = [{xi: h2Squad(0).bench.slice(0,11), bench: h2Squad(0).xi.slice()}, null];");
+  await tick(100);
+  check("a lineup on the state cannot reach One on One", ev(app, "h2Man(9,0).full") === before,
+    ev(app, "h2Man(9,0).full") + " was " + before);
 
   console.log("\n--- line height ---");
   /* A short ball is one the press would count (Easy or Normal); everything

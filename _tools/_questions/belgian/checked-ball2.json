@@ -1,0 +1,121 @@
+[
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which Standard Liège goalkeeper headed a 95th minute equaliser against AZ Alkmaar in the 2009 Champions League?",
+  "a": "Sinan Bolat",
+  "sub": "The first keeper to score from open play in the competition.",
+  "src": "https://en.wikipedia.org/wiki/Sinan_Bolat",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which Belgian club forfeited three games in a row in December 2009, went under, and had every result it had played wiped from the table?",
+  "a": "Excelsior Mouscron",
+  "sub": "The players had not been paid since November.",
+  "src": "https://en.wikipedia.org/wiki/R.E._Mouscron",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Royal Antwerp took a steady stream of young loan players from which English club from 1998 onwards?",
+  "a": "Manchester United",
+  "sub": "John O'Shea and Jonny Evans were among the thirty-odd sent over.",
+  "src": "https://www.manutd.com/en/news/detail/story-of-man-utd-relationship-with-senne-lammens-former-club-royal-antwerp",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which Belgian club did Qatar's Aspire academy buy in 2012, as a way of getting its graduates into European football?",
+  "a": "Eupen",
+  "sub": "Paris Saint-Germain's owners took the club on later.",
+  "src": "https://www.aljazeera.com/sports/2012/6/6/qatar-buy-belgian-football-club",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "UEFA threw the 2019 Belgian Cup winners out of the Europa League over match-fixing. Which club was it?",
+  "a": "Mechelen",
+  "sub": "They had been accused of buying a relegation game the year before.",
+  "src": "https://www.vrt.be/vrtnws/en/2019/07/10/kv-mechelen-off-the-hook-in-match-fixing-case-after-all/",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which club finished bottom when the 2019-20 Belgian season was abandoned, then stayed up because the league voted to grow to eighteen?",
+  "a": "Waasland-Beveren",
+  "src": "https://en.wikipedia.org/wiki/2019%E2%80%9320_Belgian_First_Division_A",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which Belgian club went bankrupt in 2013, was rebuilt by taking over a local amateur side, and was back in the top flight by 2020?",
+  "a": "Beerschot",
+  "sub": "They restarted in the fifth tier in front of twelve thousand.",
+  "src": "https://en.wikipedia.org/wiki/K_Beerschot_VA",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which American investor, also behind Crystal Palace and Lyon, bought RWD Molenbeek and took them up in 2023?",
+  "a": "John Textor",
+  "sub": "They went straight back down a year later.",
+  "src": "https://www.insideworldfootball.com/2023/05/15/textor-owned-molenbeek-repay-investor-confidence-return-belgian-top-flight/",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Union Saint-Gilloise could not host a European home game at their own ground. Whose stadium across Brussels did they borrow?",
+  "a": "Anderlecht",
+  "sub": "The Stade Joseph Marien does not meet UEFA's rules.",
+  "src": "https://www.rsca.be/en/news/union-will-play-its-european-game-lotto-park",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Belgium's top flight has carried the name Jupiler since 1993. What sort of thing is Jupiler?",
+  "a": "A beer",
+  "sub": "A pilsner brewed at Jupille, near Liege.",
+  "src": "https://en.wikipedia.org/wiki/Jupiler",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Standard Liège were 3-1 up in October 2022 when the game was abandoned. Whose fans had thrown flares and seats onto the pitch?",
+  "a": "Anderlecht",
+  "sub": "The same fixture had been called off the same way in 2019.",
+  "src": "https://www.sbs.com.au/news/article/standard-v-anderlecht-abandoned-due-to-flares-smoke/wkr90e3ga",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "ball",
+  "cat": "stories",
+  "q": "Which Belgian club led Real Madrid 2-0 at half time at the Bernabeu in 2019, both goals from Emmanuel Dennis?",
+  "a": "Club Brugge",
+  "sub": "Ramos and Casemiro rescued a 2-2 draw.",
+  "src": "https://www.espn.com/soccer/match/_/gameId/557144/club-brugge-real-madrid",
+  "conf": "sure",
+  "verdict": "ok"
+ }
+]

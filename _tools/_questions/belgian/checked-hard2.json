@@ -1,0 +1,375 @@
+[
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2018-19 Belgian season, two points behind Genk?",
+  "a": "Club Brugge",
+  "src": "https://en.wikipedia.org/wiki/2018%E2%80%9319_Belgian_First_Division_A",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second in the 2022-23 Belgian season, one point behind Antwerp?",
+  "a": "Genk",
+  "sub": "Union Saint-Gilloise were level on points in third.",
+  "src": "https://en.wikipedia.org/wiki/2022%E2%80%9323_Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Union Saint-Gilloise led the 2021-22 Belgian regular season by five points. Which club caught them once the points were halved?",
+  "a": "Club Brugge",
+  "src": "https://en.wikipedia.org/wiki/2021%E2%80%9322_Belgian_First_Division_A",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club finished second when the 2019-20 Belgian season was stopped early and Club Brugge were handed the title?",
+  "a": "Gent",
+  "src": "https://en.wikipedia.org/wiki/2019%E2%80%9320_Belgian_First_Division_A",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club won the 1988-89 Belgian title, twelve months after lifting the Cup Winners' Cup?",
+  "a": "Mechelen",
+  "src": "https://en.wikipedia.org/wiki/List_of_Belgian_football_champions",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club won the Belgian league title in 1978-79 and again in 1983-84?",
+  "a": "Beveren",
+  "src": "https://en.wikipedia.org/wiki/List_of_Belgian_football_champions",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "champions",
+  "q": "Which club did Standard Liège beat over two legs to decide the 2008-09 Belgian title?",
+  "a": "Anderlecht",
+  "sub": "Axel Witsel's penalty settled the second leg at Sclessin.",
+  "src": "https://en.wikipedia.org/wiki/2008%E2%80%9309_Belgian_First_Division",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "managers",
+  "q": "Which Norwegian coach won the Belgian title with Club Brugge in 2002-03 and again in 2004-05?",
+  "a": "Trond Sollied",
+  "sub": "He won two Belgian Cups there as well.",
+  "src": "https://en.wikipedia.org/wiki/Trond_Sollied",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "managers",
+  "q": "Which coach ended Standard Liège's twenty-five year wait for the Belgian title in 2007-08?",
+  "a": "Michel Preud'homme",
+  "src": "https://www.france24.com/en/20080421-standard-liege-clinch-first-league-title-25-years-football-belgium",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "managers",
+  "q": "Which club sacked Hein Vanhaezebrouck in December 2018, fourteen months after appointing him?",
+  "a": "Anderlecht",
+  "src": "https://en.wikipedia.org/wiki/Hein_Vanhaezebrouck",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "managers",
+  "q": "Which coach led newly promoted Union Saint-Gilloise in 2021-22 and then crossed Brussels to take the Anderlecht job?",
+  "a": "Felice Mazzu",
+  "src": "https://en.wikipedia.org/wiki/Felice_Mazz%C3%B9",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "managers",
+  "q": "Which coach won the 2024-25 Belgian title with Union Saint-Gilloise before leaving for Monaco?",
+  "a": "Sebastien Pocognoli",
+  "src": "https://www.asmonaco.com/en/news/sebastien-pocognoli-is-the-new-as-monaco-coach",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "scorers",
+  "q": "Which Genk striker was the Belgian top scorer in 1997-98 with twenty-two goals?",
+  "a": "Branko Strupar",
+  "src": "https://en.wikipedia.org/wiki/Belgian_Pro_League_top_scorers",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "scorers",
+  "q": "Which Mouscron striker scored twenty-eight goals to top the Belgian charts in 2003-04?",
+  "a": "Luigi Pieroni",
+  "src": "https://en.wikipedia.org/wiki/Belgian_Pro_League_top_scorers",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "scorers",
+  "q": "Which Charleroi striker was the top scorer in the 2007-08 Belgian season?",
+  "a": "Joseph Akpala",
+  "sub": "Eighteen goals, and Charleroi finished mid-table.",
+  "src": "https://en.wikipedia.org/wiki/Belgian_Pro_League_top_scorers",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "transfers",
+  "q": "Which French club did Genk sign Kalidou Koulibaly from in 2012?",
+  "a": "Metz",
+  "sub": "Two years later he was at Napoli.",
+  "src": "https://en.wikipedia.org/wiki/Kalidou_Koulibaly",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "transfers",
+  "q": "Which Danish club did Genk sign Paul Onuachu from in 2019?",
+  "a": "Midtjylland",
+  "src": "https://en.wikipedia.org/wiki/Paul_Onuachu",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "transfers",
+  "q": "Which Belgian club did Club Brugge sign Hans Vanaken from in 2015?",
+  "a": "Lokeren",
+  "src": "https://en.wikipedia.org/wiki/Hans_Vanaken",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "transfers",
+  "q": "Which Italian club signed Ardon Jashari from Club Brugge in 2025?",
+  "a": "AC Milan",
+  "sub": "They had bought Charles De Ketelaere from the same club in 2022.",
+  "src": "https://www.acmilan.com/en/news/articles/media/2025-08-06/official-statement-ardon-jashari",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "transfers",
+  "q": "Which Spanish club signed Arthur Vermeeren from Royal Antwerp in January 2024?",
+  "a": "Atletico Madrid",
+  "sub": "Eighteen million euros for an eighteen-year-old.",
+  "src": "https://en.wikipedia.org/wiki/Arthur_Vermeeren",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "transfers",
+  "q": "Which German club signed Antonio Nusa from Club Brugge in 2024?",
+  "a": "RB Leipzig",
+  "src": "https://en.wikipedia.org/wiki/Antonio_Nusa",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "transfers",
+  "q": "Which English club signed Aleksandar Mitrovic from Anderlecht in 2015?",
+  "a": "Newcastle United",
+  "src": "https://en.wikipedia.org/wiki/Aleksandar_Mitrovi%C4%87",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "transfers",
+  "q": "Which Belgian club did the goalkeeper Jean-Marie Pfaff leave for Bayern Munich in 1982?",
+  "a": "Beveren",
+  "src": "https://en.wikipedia.org/wiki/Jean-Marie_Pfaff",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "imports",
+  "q": "Which Belgian club signed Jonathan David from the Canadian amateur side Ottawa Internationals in 2018?",
+  "a": "Gent",
+  "sub": "Salzburg and Stuttgart had both turned him down.",
+  "src": "https://en.wikipedia.org/wiki/Jonathan_David",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "imports",
+  "q": "At which Belgian club did Thorgan Hazard win the 2013 Golden Shoe, on loan from Chelsea?",
+  "a": "Zulte Waregem",
+  "src": "https://en.wikipedia.org/wiki/Belgian_Golden_Shoe",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "europe",
+  "q": "Which Belgian club beat Manchester United 2-1 in the Champions League in October 2000?",
+  "a": "Anderlecht",
+  "src": "https://www.uefa.com/uefachampionsleague/match/65993--anderlecht-vs-man-united/",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "europe",
+  "q": "Club Brugge won 4-0 away at which Portuguese club in the 2022-23 Champions League?",
+  "a": "Porto",
+  "sub": "Antonio Nusa scored on his debut, aged seventeen.",
+  "src": "https://www.espn.co.uk/football/match/_/gameId/652606/club-brugge-fc-porto",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "europe",
+  "q": "Which Italian club beat Anderlecht 2-0 after extra time in the 1990 Cup Winners' Cup final?",
+  "a": "Sampdoria",
+  "sub": "Gianluca Vialli scored both, in Gothenburg.",
+  "src": "https://en.wikipedia.org/wiki/1990_European_Cup_Winners%27_Cup_final",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "europe",
+  "q": "Which Dutch club did Union Saint-Gilloise beat 3-1 away in their first Champions League league phase match in 2025?",
+  "a": "PSV",
+  "src": "https://www.espn.com/soccer/match/_/gameId/757654/union-st-gilloise-psv-eindhoven",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "grounds",
+  "q": "Which Belgian club plays at the Olympisch Stadion, the ground used for the 1920 Olympic Games?",
+  "a": "Beerschot",
+  "src": "https://en.wikipedia.org/wiki/Olympisch_Stadion_%28Antwerp%29",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "grounds",
+  "q": "Which Belgian club plays at the Guldensporenstadion?",
+  "a": "Kortrijk",
+  "src": "https://en.wikipedia.org/wiki/Guldensporenstadion",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which club finished bottom of the 2017-18 Belgian regular season and went down?",
+  "a": "Mechelen",
+  "src": "https://en.wikipedia.org/wiki/2017%E2%80%9318_Belgian_First_Division_A",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which club ended thirteen years in the second tier by winning promotion to the Belgian top flight in 2017?",
+  "a": "Royal Antwerp",
+  "src": "https://en.wikipedia.org/wiki/2016%E2%80%9317_Belgian_First_Division_B",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "relegation",
+  "q": "Which club, relegated from the Belgian top flight in 2023, was declared bankrupt by a Bruges court in June 2024?",
+  "a": "Oostende",
+  "sub": "What was left of them merged with a club from Diksmuide.",
+  "src": "https://en.wikipedia.org/wiki/K.V._Oostende",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "cups",
+  "q": "Which club won the 2003 Belgian Cup, beating Sint-Truiden 3-1 in the final?",
+  "a": "La Louvière",
+  "sub": "The only major trophy in the club's history.",
+  "src": "https://en.wikipedia.org/wiki/List_of_Belgian_Cup_finals",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "cups",
+  "q": "Which club beat Club Brugge 2-1 to win the 2016 Belgian Cup?",
+  "a": "Standard Liège",
+  "src": "https://en.wikipedia.org/wiki/List_of_Belgian_Cup_finals",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "cups",
+  "q": "Which club beat Mechelen 2-0 in the 2023 Belgian Cup final to complete a league and cup double?",
+  "a": "Antwerp",
+  "src": "https://en.wikipedia.org/wiki/List_of_Belgian_Cup_finals",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "records",
+  "q": "Which goalkeeper won the Belgian Golden Shoe in 2022 while playing for Club Brugge?",
+  "a": "Simon Mignolet",
+  "src": "https://en.wikipedia.org/wiki/Belgian_Golden_Shoe",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "records",
+  "q": "Which eighteen-year-old won the Belgian Golden Shoe in 2004 while playing for Anderlecht?",
+  "a": "Vincent Kompany",
+  "src": "https://en.wikipedia.org/wiki/Belgian_Golden_Shoe",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "hard",
+  "cat": "records",
+  "q": "Which Club Brugge striker died in a car crash in 2008, after which the club stopped handing out his number 23 shirt?",
+  "a": "Francois Sterchele",
+  "sub": "He had been the league's top scorer in 2006-07.",
+  "src": "https://en.wikipedia.org/wiki/Fran%C3%A7ois_Sterchele",
+  "conf": "likely",
+  "verdict": "ok"
+ }
+]
