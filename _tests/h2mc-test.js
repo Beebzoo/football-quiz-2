@@ -46,8 +46,10 @@ const GK = 0, LCB = 1, SIX = 5, EIGHT = 6, TEN = 7, ST = 9;
   const right = () => ev(app, "q().k");
   const opts = () => (stage(app).match(/class="h2opt/g) || []).length;
 
+  /* the bench is shut for this whole file (subs=[0,0]): a wrong answer here is
+   meant to be a turnover, and the bench has its own suite in subs-test.js */
   const start = async () => {
-    run(app, 'S = freshState(["Martijn","Bram"], false, "classic", 0, "pitch", true); h2Start(); ' +
+    run(app, 'S = freshState(["Martijn","Bram"], false, "classic", 0, "pitch", true); h2Start(); S.h2h.subs=[0,0]; ' +
              'h2PickTeam("Netherlands"); h2PickTeam("Italy"); render();');
     await tick(180);
   };
@@ -161,7 +163,7 @@ const GK = 0, LCB = 1, SIX = 5, EIGHT = 6, TEN = 7, ST = 9;
   check("and the keeper has it on his line", who() === 1 && pos() === GK, who() + "/" + pos());
 
   console.log("\n--- the spoken version is untouched ---");
-  run(app, 'S = freshState(["Martijn","Bram"], false, "classic", 0, "pitch", false); h2Start(); ' +
+  run(app, 'S = freshState(["Martijn","Bram"], false, "classic", 0, "pitch", false); h2Start(); S.h2h.subs=[0,0]; ' +
            'h2PickTeam("Netherlands"); h2PickTeam("Italy"); render();');
   await tick(180);
   await place(0, GK);

@@ -10,6 +10,7 @@
 #   state   menu | modes | board | qcard
 #           teams | toss | flip | landed | pick | sel | nl | it | flat
 #           att | shot | strike | save | goal | mcq
+#           sub | subgk | ft | pens | penq | over | pensend
 #
 # WHY THIS EXISTS. One on One is the only thing in the repo that cannot be
 # checked by reading it. Four separate bugs in this mode were invisible in the
@@ -87,6 +88,14 @@ const setups={
   strike:`${nl} S.h2h.who=0; S.h2h.at=9; S.phase="h_pick"; render(); h2Shoot(); h2Reveal(); h2Judge(true); h2SaveReveal(); setTimeout(()=>h2SaveJudge(false), 3700);`,
   save:  `${nl} S.h2h.who=0; S.h2h.at=9; S.phase="h_pick"; render(); h2Shoot(); h2Reveal(); h2Judge(true); h2SaveReveal(); setTimeout(()=>h2SaveJudge(true), 3800);`,
   goal:  `${nl} S.h2h.who=0; S.h2h.at=9; S.phase="h_pick"; render(); setTimeout(()=>{ h2Shoot(); h2Reveal(); h2Judge(true); h2SaveReveal(); h2SaveJudge(false); }, 3500);`,
+  /* the bench, the whistle and the shootout */
+  sub:   `${nl} S.h2h.who=0; S.h2h.at=5; S.phase="h_pick"; render(); h2Select(7); h2Play(); h2Reveal(); h2Judge(false);`,
+  subgk: `${nl} S.h2h.who=0; S.h2h.at=9; S.phase="h_pick"; render(); h2Shoot(); h2Reveal(); h2Judge(true); h2SaveReveal(); h2SaveJudge(false);`,
+  ft:    `${nl} S.h2h.who=0; S.h2h.at=5; S.h2h.min=85; S.players[0].score=1; S.phase="h_pick"; render(); h2Select(7); h2Play(); h2Reveal(); h2Judge(true);`,
+  pens:  `${nl} S.h2h.who=0; S.h2h.at=5; S.h2h.min=90; S.players[0].score=1; S.players[1].score=1; S.phase="h_pick"; h2Whistle(); h2AfterWhistle(); S.h2h.so.kicks=[[1,0],[1]]; S.h2h.so.n=3; render();`,
+  penq:  `${nl} S.h2h.who=0; S.h2h.at=5; S.h2h.min=90; S.players[0].score=1; S.players[1].score=1; S.phase="h_pick"; h2Whistle(); h2AfterWhistle(); h2SoKick();`,
+  over:  `${nl} S.h2h.who=0; S.h2h.at=5; S.h2h.min=90; S.players[0].score=1; S.players[1].score=1; S.phase="h_pick"; h2Whistle(); h2AfterWhistle(); h2SoKick(); h2Reveal(); setTimeout(()=>h2Judge(false), 3700);`,
+  pensend:`${nl} S.h2h.who=0; S.h2h.at=5; S.h2h.min=90; S.players[0].score=1; S.players[1].score=1; S.phase="h_pick"; h2Whistle(); h2AfterWhistle(); S.h2h.so.kicks=[[1,1,1],[0,0,0]]; S.h2h.so.n=6; h2SoEnd();`,
   mcq:   `S=freshState(["Martijn","Bram"],false,"classic",0,"pitch",true); h2TackleOn=false; h2Start(); S.h2h.teams=["Netherlands","Italy"]; S.h2h.tossed=true; S.h2h.who=0; S.h2h.at=0; S.phase="h_pick"; render(); h2Select(5); h2Play();`,
 };
 let h=fs.readFileSync("index.html","utf8");

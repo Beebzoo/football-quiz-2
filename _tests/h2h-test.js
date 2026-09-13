@@ -51,8 +51,10 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   const phase = () => ev(app, "S.phase");
 
   // a match with both countries already chosen, parked on the toss
+  /* the bench is shut for this whole file (subs=[0,0]): a wrong answer here is
+   meant to be a turnover, and the bench has its own suite in subs-test.js */
   const start = async () => {
-    run(app, 'S = freshState(["Martijn","Bram"], false, "classic", 0, "pitch", false); h2Start(); ' +
+    run(app, 'S = freshState(["Martijn","Bram"], false, "classic", 0, "pitch", false); h2Start(); S.h2h.subs=[0,0]; ' +
              'h2PickTeam("Netherlands"); h2PickTeam("Italy"); render();');
     await tick(180);
   };
@@ -92,7 +94,7 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   check("and so is a square one",        tier(LCB, RCB) === "easy",    tier(LCB, RCB));
 
   console.log("\n--- picking a country ---");
-  run(app, 'S = freshState(["Martijn","Bram"], false, "classic", 0, "pitch", false); h2Start(); render();');
+  run(app, 'S = freshState(["Martijn","Bram"], false, "classic", 0, "pitch", false); h2Start(); S.h2h.subs=[0,0]; render();');
   await tick(180);
   check("it opens on the team picker", phase() === "h_teams", phase());
   check("all thirty two sides are offered",

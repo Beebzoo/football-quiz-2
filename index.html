@@ -2032,6 +2032,35 @@
   .g3.saved .g3-cry{color:#bfe6cf;text-shadow:0 2px 0 #17402a,0 0 20px rgba(120,220,170,.6);
     animation:g3cry .6s .55s cubic-bezier(.2,1.6,.3,1) both}
   @keyframes g3cry{0%{transform:scale(2.2);opacity:0}100%{transform:scale(1);opacity:1}}
+  /* over: a shootout miss. He has leathered it over the bar, and the keeper
+     has gone the wrong way for nothing. The bar sits at 17%, so the ball ends
+     above it. */
+  .g3.missed .g3-ball{animation:g3over .9s cubic-bezier(.3,.5,.5,1) both}
+  @keyframes g3over{
+    0%{left:34%;top:78%;transform:translate(-50%,-50%) scale(1.5);opacity:1}
+    60%{left:52%;top:22%;transform:translate(-50%,-50%) scale(.72);opacity:1}
+    100%{left:58%;top:1%;transform:translate(-50%,-50%) scale(.42);opacity:.45}
+  }
+  .g3.missed .g3-keeper{animation:g3wrong 1.1s cubic-bezier(.3,.8,.4,1) both}
+  .g3.missed .g3-keeper .g3-name{opacity:0;transition:opacity .2s}
+  .g3.missed .g3-striker{animation:g3swing .5s ease-out both}
+  .g3.missed .g3-striker .f-leg.r{animation:g3boot .5s cubic-bezier(.3,1.2,.4,1) both}
+  .g3.missed .g3-cry{color:#ffc4b8;text-shadow:0 2px 0 #5a1d14,0 0 20px rgba(255,140,120,.55);
+    animation:g3cry .6s .75s cubic-bezier(.2,1.6,.3,1) both}
+
+  /* the shootout board: a row a side, a pip a kick, the next man lit */
+  .h2so{display:flex;flex-direction:column;gap:8px;margin:10px 0}
+  .h2so-row{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:12px;
+    background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-left:5px solid var(--tc)}
+  .h2so-row.next{background:rgba(255,255,255,.13);border-color:rgba(255,255,255,.3);border-left-color:var(--tc)}
+  .h2so-row b{flex:1 1 0;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.95rem}
+  .h2so-kicks{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end;max-width:52%}
+  .h2so-kicks i{width:13px;height:13px;border-radius:50%;border:1.5px solid rgba(255,255,255,.35);display:block}
+  .h2so-kicks i.in{background:#6fd08c;border-color:#6fd08c}
+  .h2so-kicks i.out{background:#e04a34;border-color:#e04a34}
+  .h2so-row em{font-style:normal;font-weight:800;font-variant-numeric:tabular-nums;min-width:1.4em;text-align:right}
+  /* the bench is laid out like the marking grid: number, name, position */
+  .h2bench{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:8px 0 10px}
 
   /* Four options. Wide targets, because this gets tapped on a phone that is
      being passed across a table, and a clear right/wrong once it is called. */
@@ -5968,13 +5997,18 @@ function books(){
 }
 
 // called the moment a match reaches the results screen, once and only once
+/* Goals first, and a shootout tally breaks a level score on the pitch. Both
+   players carry their index in i so the tally can be read for them. */
+function rankPlayers(a,b){
+  return b.score-a.score || (S.pens ? (S.pens[b.i]||0)-(S.pens[a.i]||0) : 0);
+}
 function recordMatch(){
   if(!S || S.recorded) return;
   S.recorded = true;
-  const order=[...S.players].sort((a,b)=>b.score-a.score);
+  const order=[...S.players].map((p,i)=>({...p,i})).sort(rankPlayers);
   const top=order[0];
   // a tie at the top is a draw, nobody takes the win
-  const outright = top && top.score>=0 && order.filter(p=>p.score===top.score).length===1;
+  const outright = top && top.score>=0 && order.filter(p=>rankPlayers(p,top)===0).length===1;
   const h=history();
   const rec = {
     /* the id comes from the state, so all three phones file one match rather
@@ -5984,7 +6018,7 @@ function recordMatch(){
     /* A Let's Ball night files as Let's Ball, not as whichever mode happened
        to be on the board when it finished. */
     mode: S.rr ? "rr" : S.mode, play: S.play||"board", mc: !!S.mc,
-    ref: S.ref||null, target: S.target||0, rounds: S.round,
+    ref: S.ref||null, target: S.target||0, rounds: S.round, pens: S.pens||null,
     players: S.players.map(p=>({name:String(p.name||"").trim(), score:p.score, off:p.off||0})),
     winner: outright ? String(top.name||"").trim() : null,
     losers: S.players.filter(p=>p.score<0).map(p=>String(p.name||"").trim()),
@@ -6453,6 +6487,38 @@ const H2_SAVE_NOGK   = "extreme";    // an outfield man in goal
 const H2_ORDER = ["easy", "normal", "hard", "extreme", "ball"];
 const h2Cheaper = (t, n) => H2_ORDER[Math.max(0, H2_ORDER.indexOf(t) - (n === undefined ? 1 : n))] || t;
 
+/* ---------- SUBSTITUTIONS ----------
+   Three a match, and they are second chances rather than tactics. The moment
+   one of your men gets one wrong you can pull him off, and the man who comes
+   on faces one FRESH question at the same tier, in the same spot, for the
+   same ball. Get that wrong as well and it is lost like any other ball. The
+   man who came off is gone for the match, and the bench is the real one, so
+   Robben comes on for van Persie and not "a substitute".
+
+   Your own men only: the passer, the shooter, the taker, and the keeper who
+   has just been beaten. The contests are not covered. A tackle is one man's
+   lunge, and a sub who retakes a lunge that has already been mistimed is a
+   fiction too far; the defender's cover for a bad read is the free kick it
+   costs him, not his bench. A shootout has no subs either: a miss is a miss. */
+const H2_SUBS = 3;
+
+/* ---------- THE CLOCK ----------
+   Every judged question is H2_PER_Q minutes off the clock, whoever answered
+   it and whatever it was for, so a contest and a save burn time exactly like
+   a pass does. At H2_MINUTES the whistle goes at the next dead ball: the pass
+   or the loss that took it there plays out, a shot already in the air still
+   gets its save, and a penalty is still taken. H2_TARGET stays underneath it
+   as the mercy rule: two goals ends it early.
+
+   Level at the whistle is penalties. The taker faces H2_SO_TAKER and the
+   keeper H2_SO_KEEPER, H2_SO_KICKS each and then sudden death, and the record
+   files it as a draw won on penalties, not as a goal nobody scored. */
+const H2_MINUTES   = 90;
+const H2_PER_Q     = 5;
+const H2_SO_TAKER  = "normal";
+const H2_SO_KEEPER = "hard";
+const H2_SO_KICKS  = 5;
+
 /* sent off, booked, and whether a side still has a keeper */
 const h2OffList = w => (S.h2h && S.h2h.off && S.h2h.off[w]) || [];
 const h2IsOff   = (w, i) => h2OffList(w).indexOf(i) !== -1;
@@ -6525,7 +6591,17 @@ const H2_MOUTH = 4;            // the goal you are shooting at, in view space
    instead of hanging off the touchline. */
 const h2BX = (i, mine) => { const x = h2VX(i, mine); return x + (x > 60 ? -4.2 : 4.2); };
 const h2BY = (i, mine) => h2VY(i, mine);
-const h2No = (i, w) => { const q = h2Squad(w); return (q && q.xi[i] && q.xi[i].no) || H2_SQUAD[i].no; };
+/* The man in a slot: the sub who came on for it if one did, else the man who
+   started. Every name and number on the pitch reads through this, so a sub is
+   a sub everywhere at once, on the shirt, in the caption and on the card. */
+const h2Man = (i, w) => {
+  const H = S && S.h2h;
+  const sub = H && H.subbed && H.subbed[w] && H.subbed[w][i];
+  if(sub) return sub;
+  const q = h2Squad(w);
+  return (q && q.xi[i]) || null;
+};
+const h2No = (i, w) => { const m = h2Man(i, w); return (m && m.no) || H2_SQUAD[i].no; };
 /* ---------- SOUND ----------
    The rest of the app synthesises its noises through the AudioContext. These
    two are recordings, so they go through plain Audio elements instead: a bed
@@ -6600,14 +6676,14 @@ const h2Flag  = w => { const q = h2Squad(w); return q && q.flag ? h2Badge(q.flag
 const h2Kit   = w => { const q = h2Squad(w); return (q && q.kit) || H2_KITS[w]; };
 /* the name under the shirt: the man who wore it in 2006, or the position */
 function h2Who(i, w){
-  const q = h2Squad(w);
-  return (q && q.xi[i] && q.xi[i].n) || H2_SQUAD[i].n;
+  const m = h2Man(i, w);
+  return (m && m.n) || H2_SQUAD[i].n;
 }
 /* how the pass is described: "to Cocu" once a country is picked, "to the six"
    before that */
 function h2Of(i, w){
-  const q = h2Squad(w);
-  return (q && q.xi[i] && q.xi[i].n) || H2_SQUAD[i].long;
+  const m = h2Man(i, w);
+  return (m && m.n) || H2_SQUAD[i].long;
 }
 
 const h2      = () => S.h2h;
@@ -6644,7 +6720,14 @@ function h2Start(){
               first pass that misses, and it is spent the moment it is used. */
            marks:[], markedAgainst:null, relief:false,
            contest:null, pen:false,
-           cards:[{}, {}], off:[[], []], hand:null};
+           cards:[{}, {}], off:[[], []], hand:null,
+           /* the bench: how many changes each side has left, which slot now
+              holds which bench man, which bench men have been used, the offer
+              on the table, and whether the loaded question is a sub's one
+              fresh go (so a second miss is not offered a second sub) */
+           subs:[H2_SUBS, H2_SUBS], subbed:[{}, {}], benchUsed:[[], []], sub:null, subQ:false,
+           /* the clock, and the shootout once it is running */
+           min:0, so:null};
   S.phase = "h_teams";
 }
 /* Both men pick before a ball is kicked, and they cannot pick the same side:
@@ -6796,6 +6879,7 @@ function h2TackleJudge(won){
   const target = H.sel;
   const tackle = H.contest === "tackle";
   logOutcome(tackle ? "tackle" : "press", won);
+  h2Clock();
   const marked = H.caught == null ? null : H.caught;
   H.sel = null; H.contest = null; H.caught = null;
   /* THE MARK THAT LANDED IS SPENT, and the others stand. Two marks is at most
@@ -7076,10 +7160,36 @@ function copyOutcomes(){
   catch(e){ toast("Could not copy", true); }
 }
 
+/* The verdict comes in here and is settled in h2Settle. Between the two sits
+   the bench: a wrong answer is offered a sub before it costs anything, and the
+   sub's fresh question comes back through this same door with subQ set so it
+   cannot be offered another one. The log and the clock take the question as
+   it was answered, either way. */
 function h2Judge(ok){
   const H = h2();
   stopTimer();
   logOutcome(H.pen ? "penalty" : H.shooting ? "shot" : "pass", ok);
+  h2Clock();
+  if(!ok && !H.subQ && h2CanSub(H.who, H.at)) return h2SubOffer("q");
+  H.subQ = false;
+  h2Settle(ok);
+}
+function h2Settle(ok){
+  const H = h2();
+  /* A SHOOTOUT KICK is its own thing: a miss is a miss, and nobody picks the
+     ball up. It is watched from behind the taker like any other strike, and
+     the tally is kept when the scene is over. */
+  if(H.so){
+    if(ok){ h2Fly(h2BX(H.at, true), h2BY(H.at, true), 50, H2_MOUTH, H.at, null); return h2ToSave(); }
+    H.shooting = false; H.sel = null;
+    H.result = "missed";
+    flashBad();
+    S.phase = "h_strike";
+    render();
+    clearTimeout(h2StrikeHold);
+    h2StrikeHold = setTimeout(h2AfterStrike, 1800);
+    return;
+  }
   /* MARKS STAND THROUGH A POSSESSION, so nothing is revealed here. Showing
      them after every pass would hand back the deduction the standing marks
      exist to create: the attacker is supposed to work out where they are by
@@ -7138,7 +7248,7 @@ function h2ToSave(){
   /* A penalty is meant to go in, so the keeper is asked something unfair. An
      outfield man in goal is asked something unfair for the opposite reason:
      he is not a keeper and it should show. */
-  const tier = H.pen ? H2_PEN_KEEPER : h2NoGk(h2Other()) ? H2_SAVE_NOGK : H2_SAVE;
+  const tier = H.so ? H2_SO_KEEPER : H.pen ? H2_PEN_KEEPER : h2NoGk(h2Other()) ? H2_SAVE_NOGK : H2_SAVE;
   if(!h2Draw(tier)) h2Draw(S.tier);      // if that level is dry, whatever is loaded will do
   S.timeUp = false; S.phase = "h_save";
   render();
@@ -7146,10 +7256,18 @@ function h2ToSave(){
 function h2SaveReveal(){ stopTimer(); S.phase = "h_sjudge"; render(); }
 function h2SaveTimeUp(){ if(S.phase === "h_save"){ if(h2IsMC()) h2().pick = null; h2SaveReveal(); } }
 
+/* the same door as h2Judge: a beaten keeper can be pulled for a fresh save */
 function h2SaveJudge(saved){
   const H = h2();
   stopTimer();
   logOutcome("save", saved);
+  h2Clock();
+  if(!saved && !H.subQ && h2CanSub(h2Other(), 0)) return h2SubOffer("save");
+  H.subQ = false;
+  h2SaveSettle(saved);
+}
+function h2SaveSettle(saved){
+  const H = h2();
   H.shooting = false; H.sel = null;
   /* Neither outcome takes effect yet. The strike is watched first, from behind
      the striker, and the consequences land when it is over. */
@@ -7166,6 +7284,8 @@ function h2AfterStrike(){
   if(!S || S.phase !== "h_strike") return;
   const H = h2();
   const keeper = h2Other();
+  /* a shootout kick goes on the tally and the board decides what is next */
+  if(H.so) return h2SoAfter();
   if(H.result === "saved"){
     toast("SAVED! " + S.players[keeper].name + " has it on his goal line.");
     H.who = keeper; H.at = h2Restart(keeper); H.safe = 0;
@@ -7196,10 +7316,166 @@ function h2KickOn(){
   h2Next();
 }
 
+/* ---------- THE BENCH ---------- */
+const h2SubsLeft = w => { const H = S && S.h2h; return H && H.subs ? H.subs[w] : H2_SUBS; };
+/* who is still sitting there: the real bench, less the men already used */
+function h2Bench(w){
+  const q = h2Squad(w), H = h2();
+  if(!q || !q.bench) return [];
+  const used = (H.benchUsed && H.benchUsed[w]) || [];
+  return q.bench.map((p, i) => ({p: p, i: i})).filter(b => used.indexOf(b.i) === -1);
+}
+/* Can this side bring a man on for slot i right now? Not for a man who has
+   been sent off (you play with ten), not in a shootout, and not with nobody
+   left to bring on. */
+const h2CanSub = (w, i) => h2SubsLeft(w) > 0 && h2Bench(w).length > 0 && !h2IsOff(w, i) && !h2().so;
+/* a match parked before the bench existed */
+function h2SubInit(H){
+  if(!H.subs) H.subs = [H2_SUBS, H2_SUBS];
+  if(!H.subbed) H.subbed = [{}, {}];
+  if(!H.benchUsed) H.benchUsed = [[], []];
+}
+/* The offer. kind says which door it came through: "q" is the man on the
+   ball (a pass, a shot, a penalty), "save" is the keeper who has just been
+   beaten. slot is the man who would come off. */
+function h2SubOffer(kind){
+  const H = h2();
+  h2SubInit(H);
+  const w = kind === "save" ? h2Other() : H.who;
+  H.sub = {kind: kind, w: w, slot: kind === "save" ? 0 : H.at};
+  S.phase = "h_sub";
+  render();
+}
+/* no thanks: the miss stands, exactly as it would have without the offer */
+function h2SubDecline(){
+  audio();
+  const H = h2(), sub = H.sub;
+  if(!sub) return;
+  H.sub = null; H.subQ = false;
+  if(sub.kind === "save") return h2SaveSettle(false);
+  h2Settle(false);
+}
+/* Bench man bi comes on for the slot in the offer and faces one fresh
+   question at the same tier. The only way that fails is a dry bank, and then
+   the miss stands and the change is not charged. */
+function h2SubOn(bi){
+  audio();
+  const H = h2(), sub = H.sub;
+  if(!sub) return;
+  const b = h2Bench(sub.w).filter(x => x.i === bi)[0];
+  if(!b) return;
+  const t = S.tier;
+  if(!t || !h2Draw(t)){
+    toast("No " + (t ? TIERS[t].label + " " : "") + "questions left, so the miss stands.", true);
+    H.sub = null; H.subQ = false;
+    return sub.kind === "save" ? h2SaveSettle(false) : h2Settle(false);
+  }
+  const off = h2Who(sub.slot, sub.w);
+  H.subs[sub.w] -= 1;
+  H.subbed[sub.w][sub.slot] = b.p;
+  H.benchUsed[sub.w].push(bi);
+  H.sub = null; H.subQ = true; H.pick = null;
+  toast(b.p.n + " on for " + off + ". Same ball, fresh question.");
+  S.timeUp = false;
+  S.phase = sub.kind === "save" ? "h_save" : "h_q";
+  render();
+}
+
+/* ---------- THE CLOCK ---------- */
+/* five minutes gone, whoever just answered; a shootout is played on no clock */
+function h2Clock(){ const H = h2(); if(!H || H.so) return; H.min = (H.min || 0) + H2_PER_Q; }
+const h2FullTime = () => !!(S && S.h2h) && (S.h2h.min || 0) >= H2_MINUTES;
+/* what the scorebug shows between the names */
+function h2ClockLabel(){
+  const H = h2();
+  if(H.so) return "PENALTIES";
+  if(S.phase === "h_toss" || S.phase === "h_teams") return "KICK OFF";
+  if(S.phase === "h_ft") return "FULL TIME";
+  return Math.min(H2_MINUTES, H.min || 0) + "'";
+}
+function h2Whistle(){
+  const H = h2();
+  stopTimer();
+  H.sel = null; H.shooting = false; H.pen = false; H.contest = null; H.caught = null; H.hand = null;
+  S.phase = "h_ft";
+  render();
+}
+/* out of the full-time screen: the results, or the shootout if it is level */
+function h2AfterWhistle(){
+  audio();
+  if(S.players[0].score === S.players[1].score) return h2Shootout();
+  stopTimer(); endGame();
+}
+
+/* ---------- PENALTIES ---------- */
+function h2Shootout(){
+  const H = h2();
+  /* the side that did NOT have the ball at the whistle goes first: as
+     arbitrary as a coin, without tossing one twice in a night */
+  H.so = {first: h2Other(), kicks: [[], []], n: 0};
+  S.phase = "h_pens";
+  render();
+}
+const h2SoTally = so => so.kicks.map(k => k.reduce((a, b) => a + b, 0));
+const h2SoNext  = so => (so.first + so.n) % 2;
+/* Who has won it, or null while it is still going. Inside the first
+   H2_SO_KICKS each, a side that leads by more than the other can still score
+   has won it. After that it is sudden death: level after a pair carries on,
+   a lead after a pair ends it. */
+function h2SoDecided(so){
+  const s = h2SoTally(so), n = so.kicks.map(k => k.length), K = H2_SO_KICKS;
+  for(const w of [0, 1]){
+    const o = 1 - w;
+    if(n[w] <= K && n[o] <= K && s[w] > s[o] + Math.max(0, K - n[o])) return w;
+  }
+  if(n[0] === n[1] && n[0] >= K && s[0] !== s[1]) return s[0] > s[1] ? 0 : 1;
+  return null;
+}
+/* the tier wanted, else the nearest one that still has something in it */
+function h2DrawOr(t){
+  if(h2Draw(t)) return true;
+  for(const o of H2_ORDER) if(h2Draw(o)) return true;
+  return false;
+}
+/* The next man steps up. Every kick is the striker's, or whoever is nearest
+   his spot if he has been sent off, and it is priced as a shootout kick
+   rather than off the H2_SHOT table. */
+function h2SoKick(){
+  audio();
+  const H = h2(), so = H.so;
+  if(!so || S.phase !== "h_pens" || h2SoDecided(so) != null) return;
+  const w = h2SoNext(so);
+  H.who = w; H.at = h2IsOff(w, 9) ? h2NearestTo(9, w, w) : 9;
+  H.pen = true; H.shooting = true; H.sel = null; H.pick = null; H.safe = 0;
+  if(!h2DrawOr(H2_SO_TAKER)){ toast("No questions left. It ends level.", true); return h2SoEnd(); }
+  S.timeUp = false; S.phase = "h_q";
+  render();
+}
+/* after the strike scene: onto the tally, then the board or the end */
+function h2SoAfter(){
+  const H = h2(), so = H.so;
+  so.kicks[H.who].push(H.result === "scored" ? 1 : 0);
+  so.n += 1;
+  H.pen = false; H.shooting = false; S.tier = null; S.qi = null;
+  if(h2SoDecided(so) != null) return h2SoEnd();
+  S.phase = "h_pens";
+  render();
+}
+/* the tally goes on the record next to the score, which stays what it was */
+function h2SoEnd(){
+  S.pens = h2SoTally(h2().so);
+  stopTimer(); endGame();
+}
+
 function h2Next(){
   const H = h2();
   S.tier = null; S.qi = null; S.timeUp = false;
-  H.pen = false;
+  H.pen = false; H.subQ = false;
+  /* THE WHISTLE GOES AT A DEAD BALL, which is what every road into here is:
+     the pass has landed, the loss has been collected, the save is held, the
+     goal is in. The shot in the air and the penalty never come this way until
+     they are over, so they are always finished. */
+  if(h2FullTime()) return h2Whistle();
   /* A POSSESSION, NOT A PASS. The phone only crosses the table when the ball
      has changed hands, because the marks were set against whoever is attacking
      and they stand until he loses it. Another pass in the same possession goes
@@ -7485,7 +7761,7 @@ function h2GoalSceneHTML(state){
     '<div class="g3-ball"><img class="b" src="assets/ball.png" alt=""></div>' +
     '<div class="g3-striker">' + h2FigHTML("str", kit, 168, h2No(H.at, H.who)) +
       '<span class="g3-name">' + esc(striker) + '</span></div>' +
-    '<div class="g3-cry">' + (state === "scored" ? "GOAL" : state === "saved" ? "SAVED" : "") + '</div>' +
+    '<div class="g3-cry">' + (state === "scored" ? "GOAL" : state === "saved" ? "SAVED" : state === "missed" ? "OVER" : "") + '</div>' +
   '</div>';
 }
 
@@ -7518,7 +7794,7 @@ function h2ScoreHTML(){
     '</div>' +
     '<div class="sb-names">' +
       '<span' + (H.who === 0 ? ' class="on"' : '') + '>' + esc(S.players[0].name) + '</span>' +
-      '<em>' + (S.phase === "h_toss" ? "KICK OFF" : "ROUND " + (S.round || 1)) + '</em>' +
+      '<em>' + h2ClockLabel() + '</em>' +
       '<span' + (H.who === 1 ? ' class="on"' : '') + '>' + esc(S.players[1].name) + '</span>' +
     '</div>';
 }
@@ -7557,7 +7833,7 @@ function h2Render(st){
     const caller = S.players[0].name;
     const face = H.coin ? (H.coin === "heads" ? "H" : "T") : "?";
     st.innerHTML =
-      '<div class="kick">' + ico('users') + 'One on One · first to ' + H2_TARGET + '</div>' +
+      '<div class="kick">' + ico('users') + 'One on One · first to ' + H2_TARGET + ' or ' + H2_MINUTES + ' minutes</div>' +
       '<div class="h2vs">' +
         '<div class="h2vs-s">' +
           (h2Flag(0) ? '<img src="' + h2Flag(0) + '" alt="">' : "") +
@@ -7655,14 +7931,86 @@ function h2Render(st){
     return;
   }
 
+  if(S.phase === "h_sub"){
+    const sub = H.sub || {kind: "q", w: H.who, slot: H.at};
+    const owner = S.players[sub.w];
+    const bench = h2Bench(sub.w);
+    const off = h2Who(sub.slot, sub.w);
+    const left = h2SubsLeft(sub.w);
+    const isSave = sub.kind === "save";
+    st.innerHTML =
+      h2ScoreHTML() + (isSave ? h2GoalSceneHTML("set") : h2PitchHTML(false)) +
+      '<div class="h2big">' + esc(owner.name) + ', a change?</div>' +
+      '<div class="h2hintline" style="margin-top:0">' + esc(off) + (isSave ? ' is beaten.' : ' got it wrong.') +
+        ' Bring a man on and he faces a fresh ' + (t ? t.label : "") + ' question for the same ' +
+        (isSave ? 'shot' : H.pen ? 'penalty' : H.shooting ? 'shot' : 'ball') + '. ' +
+        left + (left === 1 ? ' change' : ' changes') + ' left, and ' + esc(off) + ' is gone for good.</div>' +
+      '<div class="h2bench">' + bench.map(b =>
+        '<button class="h2markbtn" onclick="h2SubOn(' + b.i + ')">' +
+          '<span class="h2mno">' + (b.p.no || "") + '</span>' +
+          '<span class="h2mnm">' + esc(b.p.n) + '</span>' +
+          '<span class="h2mps">' + esc(b.p.pos || "") + '</span>' +
+        '</button>').join("") + '</div>' +
+      '<button class="bigbtn ghost" onclick="h2SubDecline()">' + (isSave ? "No. It is in." : "No. He has lost it.") + '</button>' +
+      foot;
+    return;
+  }
+
+  if(S.phase === "h_ft"){
+    const level = S.players[0].score === S.players[1].score;
+    st.innerHTML =
+      h2ScoreHTML() + h2PitchHTML(false) +
+      '<div class="h2big">Full time.</div>' +
+      '<div class="h2where">' + (level
+        ? 'Level at ' + S.players[0].score + ' each. Penalties.'
+        : esc(S.players[S.players[0].score > S.players[1].score ? 0 : 1].name) + ' wins it, ' +
+          S.players[0].score + ' to ' + S.players[1].score + '.') + '</div>' +
+      '<button class="bigbtn" onclick="h2AfterWhistle()">' + (level ? "Penalties" : "Results") + '</button>' +
+      foot;
+    return;
+  }
+
+  if(S.phase === "h_pens"){
+    const so = H.so;
+    const dec = h2SoDecided(so);
+    const s = h2SoTally(so);
+    const n = Math.max(H2_SO_KICKS, so.kicks[0].length, so.kicks[1].length);
+    const row = w => {
+      const k = so.kicks[w];
+      const pips = Array.from({length: n}, (_, i) =>
+        '<i' + (i < k.length ? ' class="' + (k[i] ? "in" : "out") + '"' : "") + '></i>').join("");
+      return '<div class="h2so-row' + (dec == null && h2SoNext(so) === w ? " next" : "") +
+        '" style="--tc:' + h2Kit(w) + '">' +
+        '<b>' + esc(S.players[w].name) + '</b><span class="h2so-kicks">' + pips + '</span><em>' + s[w] + '</em></div>';
+    };
+    const prev = so.n ? (so.first + so.n - 1) % 2 : null;
+    const next = S.players[h2SoNext(so)];
+    st.innerHTML =
+      h2ScoreHTML() +
+      '<div class="h2big">Penalties.</div>' +
+      '<div class="h2hintline" style="margin-top:0">' + (prev == null
+        ? 'Level after ' + H2_MINUTES + ' minutes. ' + esc(next.name) + ' goes first.'
+        : esc(S.players[prev].name) + (so.kicks[prev].slice(-1)[0] ? ' scores. ' : ' misses. ') +
+          (so.n >= H2_SO_KICKS * 2 ? 'Sudden death. ' : '') + esc(next.name) + ' next.') + '</div>' +
+      '<div class="h2so">' + row(0) + row(1) + '</div>' +
+      '<button class="bigbtn" onclick="h2SoKick()">' + esc(next.name) + ' steps up</button>' +
+      '<div class="h2hintline">' + TIERS[H2_SO_TAKER].label + ' to score it, ' + TIERS[H2_SO_KEEPER].label +
+        ' to keep it out. ' + H2_SO_KICKS + ' each, then sudden death.</div>' +
+      foot;
+    return;
+  }
+
   if(S.phase === "h_goal"){
     const scorer = S.players[H.scorer];
     const won = scorer.score >= H2_TARGET;
+    const ft = !won && h2FullTime();
+    const level = S.players[0].score === S.players[1].score;
     st.innerHTML =
       h2ScoreHTML() + h2PitchHTML(false) +
       '<div class="h2where">' + esc(scorer.name) + ' scores. ' +
         S.players[0].score + ' to ' + S.players[1].score + '.</div>' +
-      '<button class="bigbtn" onclick="h2KickOn()">' + (won ? "Full time" : "Kick off") + '</button>' +
+      '<button class="bigbtn" onclick="h2KickOn()">' +
+        (won ? "Full time" : ft ? (level ? "Full time. Penalties" : "Full time") : "Kick off") + '</button>' +
       foot;
     return;
   }
@@ -7716,7 +8064,7 @@ function h2Render(st){
 
   if(S.phase === "h_q" || S.phase === "h_judge"){
     const shown = S.phase === "h_judge";
-    const head = H.shooting ? "SHOOTING from " + h2Of(H.at, H.who)
+    const head = H.shooting ? (H.pen ? "PENALTY · " : "SHOOTING from ") + h2Of(H.at, H.who)
                             : h2PassName(H.at, H.sel == null ? H.at : H.sel);
     /* THE CARD IS LABELLED FROM THE LADDER, NOT FROM THE QUESTION THAT WAS
        DRAWN, and that is a secrecy fix rather than a cosmetic one.
@@ -7742,7 +8090,7 @@ function h2Render(st){
     const priced = (H.pen || H.contest || !t) ? t
       : (TIERS[H.shooting ? H2_SHOT[H.at] : h2TierFor(H.at, H.sel == null ? H.at : H.sel)] || t);
     st.innerHTML =
-      h2ScoreHTML() + h2PitchHTML(false) +
+      h2ScoreHTML() + (H.so ? h2GoalSceneHTML("set") : h2PitchHTML(false)) +
       '<div class="qcard" style="--dc:' + priced.color + '">' +
         '<div class="kick">' + esc(head) + ' · ' + esc(me.name) + ' · ' + priced.label + '</div>' +
         '<div class="qtext">' + esc(q().q) + '</div>' +
@@ -8559,12 +8907,17 @@ function render(){
   }
 
   if(S.phase==="results"){
-    const order=[...S.players].map((p,i)=>({...p,i})).sort((a,b)=>b.score-a.score);
+    const order=[...S.players].map((p,i)=>({...p,i})).sort(rankPlayers);
     const losers=order.filter(p=>p.score<0);
     const champ=order[0];
     const hitTarget = S.target && champ.score>=S.target;
+    /* a pitch match is timed in minutes, not rounds, and a shootout says so */
+    const ftLine = S.play==="pitch" && S.h2h
+      ? (S.pens ? `Full time · level, ${S.pens[0]}-${S.pens[1]} on penalties`
+                : `Full time · ${Math.min(H2_MINUTES, S.h2h.min||0)} minutes`)
+      : `Full time · ${S.round} round${S.round>1?"s":""}`;
     st.innerHTML = `
-      <div class="kick">${hitTarget?`${ico('flag')}First to ${S.target}`:`Full time · ${S.round} round${S.round>1?"s":""}`}</div>
+      <div class="kick">${hitTarget?`${ico('flag')}First to ${S.target}`:ftLine}</div>
       <h1 class="title">${hitTarget?`${esc(champ.name)}<br><span class="gold">wins!</span>`:`Final<br><span class="gold">Whistle</span>`}</h1>
       <img class="celebimg" src="assets/players/mvv-hero.png" alt="">
       ${S.ref?`<div class="hint" style="text-align:center">🟨 Refereed by ${esc(S.ref)}</div>`:""}
@@ -8573,7 +8926,7 @@ function render(){
           <div class="frow${k===0&&p.score>=0?" w":""}">
             <span class="pos">${k+1}</span>
             <span class="fn">${esc(p.name)}${k===0&&p.score>=0?" 🏆":""}</span>
-            <span class="fs${p.score<0?" neg":""}">${p.score}</span>
+            <span class="fs${p.score<0?" neg":""}">${p.score}${S.pens?` <small style="opacity:.7;font-size:.7em">(${S.pens[p.i]})</small>`:""}</span>
           </div>`).join("")}
       </div>
       ${losers.length?`
@@ -8848,7 +9201,7 @@ function renderSetup(st){
       <button class="bigbtn ghost${!setupMc?" sel":""}" onclick="setMc(false)"${DECKS[setupMode]?"":" disabled style=opacity:.4"}>${ico('book')}Read aloud</button>
       <button class="bigbtn ghost${setupMc?" sel":""}" onclick="setMc(true)"${DECKS[setupMode+"-mc"]?"":" disabled style=opacity:.4"}>${ico('card')}Multiple choice</button>
     </div>`:""}
-    ${setupPlay==="pitch"?`<div class="hint" style="text-align:center">Two players, first to ${H2_TARGET}. You pick a side, win the toss and pass the ball by answering: the further up the pitch the ball goes, the harder the question.</div>`:`
+    ${setupPlay==="pitch"?`<div class="hint" style="text-align:center">Two players, first to ${H2_TARGET} or ${H2_MINUTES} minutes, penalties if it is level. You pick a side, win the toss and pass the ball by answering: the further up the pitch the ball goes, the harder the question.</div>`:`
     <div class="kick" style="margin-top:2px">${ico('users')}Who's playing</div>
     <div class="row2">
       <button class="bigbtn ghost${!setupRef?" sel":""}" onclick="setRef(false)">${ico('users')}All play</button>
