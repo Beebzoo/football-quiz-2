@@ -166,7 +166,13 @@ function pickXI(players) {
     used.add(pick);
     xi.push({ n: shortName(pick.name), full: pick.name, no: pick.no, pos: pick.pos });
   }
-  return xi;
+  /* THE BENCH, the other twelve, by the same rule. A substitution that says
+     "Sneijder replaces Landzaat" needs a Sneijder to name, and until this the
+     deck stored only squad: 23 and threw the other twelve away. Same shape
+     build-clubs.js writes, so the app reads both decks the same way. */
+  const bench = players.filter(p => !used.has(p)).sort((a, b) => a.no - b.no).slice(0, 12)
+    .map(p => ({ n: shortName(p.name), full: p.name, no: p.no, pos: p.pos }));
+  return { xi, bench };
 }
 
 (async () => {
@@ -347,8 +353,9 @@ function pickXI(players) {
   const missing = [];
   let short = 0;
   for (const t of teams) {
-    const xi = pickXI(t.players);
-    if (!xi) { console.log("  !! could not field an XI for " + t.name); continue; }
+    const got = pickXI(t.players);
+    if (!got) { console.log("  !! could not field an XI for " + t.name); continue; }
+    const xi = got.xi;
     if (xi.some(p => p.pos !== SHAPE[xi.indexOf(p)])) short++;
     const kit = kitFor(t.name);
     let colour = kit ? kit.c : await harvestKit(t.name);
@@ -364,6 +371,7 @@ function pickXI(players) {
       slug: kit ? kit.s : null,
       squad: t.players.length,
       xi,
+      bench: got.bench,
     };
   }
   console.log("\ncodes: " + Object.entries(out).map(([c, v]) => v.abbr).join(" "));

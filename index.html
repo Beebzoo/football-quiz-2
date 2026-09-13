@@ -1547,7 +1547,13 @@
   .h2stage{position:relative;width:100%;max-width:400px;margin:2px auto 0;
     perspective:820px;perspective-origin:50% 38%}
   .h2stage:not(.tilt){aspect-ratio:10/13}
-  .h2stage.tilt{aspect-ratio:10/11}
+  /* The tilted stage owns the height the pitch occupies, and no more, so the
+     bottom man's feet sit on its bottom edge and his body, his label and the
+     ball's halo hang 30px below it, over whatever comes next. That was the
+     caption. z-index cannot lift the caption over them: inside a preserve-3d
+     scene the browser paints by depth, and the caption is outside the scene
+     entirely. So the stage keeps the room clear instead. */
+  .h2stage.tilt{aspect-ratio:10/11;margin-bottom:30px}
   .h2pitch{
     position:absolute;left:0;right:0;top:50%;aspect-ratio:10/13;
     --base:translateY(-50%);
@@ -1730,6 +1736,15 @@
     50%{transform:scale(1.16) rotate(400deg)}
     100%{transform:scale(1) rotate(760deg)}
   }
+  /* A GROUND BALL. No arc, so the lift track is off; no hop, so the ball rolls
+     rather than swelling towards the camera; and the shadow stays exactly
+     under it the whole way, because the shrinking shadow only ever made sense
+     for a ball that had left the floor. */
+  .h2ballwrap.pass.ground .h2lift{animation:none}
+  .h2ballwrap.pass.ground .h2bsh{animation:none}
+  .h2ballwrap.pass.ground .h2ball{animation:h2roll var(--dur,.8s) cubic-bezier(.42,.05,.35,1) both}
+  @keyframes h2roll{from{transform:rotate(0)}to{transform:rotate(620deg)}}
+  @media (prefers-reduced-motion: reduce){ .h2ballwrap.pass.ground .h2ball{animation:none} }
 
   /* the man who just gave it away flashes as the ball is taken off him */
   .h2man.lost .fig.pm{animation:h2lost .65s ease-out both}
@@ -6443,6 +6458,11 @@ const h2OffList = w => (S.h2h && S.h2h.off && S.h2h.off[w]) || [];
 const h2IsOff   = (w, i) => h2OffList(w).indexOf(i) !== -1;
 const h2Cards   = (w, i) => (((S.h2h && S.h2h.cards) || [])[w] || {})[i] || 0;
 const h2NoGk    = w => h2IsOff(w, 0);
+/* Where a side restarts from after a save or a goal: its keeper, unless the
+   keeper has been sent off, in which case whoever of his is standing nearest
+   the goal line. Both restarts used to write H.at = 0 unconditionally, which
+   with the keeper gone put the ball on a man who is not drawn. */
+const h2Restart = w => h2NoGk(w) ? h2NearestTo(0, w, w) : 0;
 /* the men a side can actually use */
 const h2Live    = w => H2_SQUAD.map((_, i) => i).filter(i => !h2IsOff(w, i));
 
@@ -6460,8 +6480,11 @@ function h2ToggleView(){
 /* dur is optional and only the challenge uses it: the ball has to arrive as the
    studs do rather than on the pass animation's own clock. --dur was already
    plumbed through h2fly, h2arc, h2hop and h2bshadow and simply never written. */
-function h2Fly(fx, fy, tx, ty, from, to, dur){
-  h2Anim = {fx, fy, tx, ty, from, to, dur};
+/* tier is the LADDER tier of the pass this flight is, or came from, and it
+   decides whether the ball goes along the grass or through the air. Left out,
+   it is a lob: shots and the challenge never pass one. */
+function h2Fly(fx, fy, tx, ty, from, to, dur, tier){
+  h2Anim = {fx, fy, tx, ty, from, to, dur, tier};
 }
 const h2GoalY = w => w === 0 ? 5 : 95;   // the mouth this player is shooting at
 
@@ -6772,6 +6795,7 @@ function h2TackleJudge(won){
   const C = h2Contest();
   const target = H.sel;
   const tackle = H.contest === "tackle";
+  logOutcome(tackle ? "tackle" : "press", won);
   const marked = H.caught == null ? null : H.caught;
   H.sel = null; H.contest = null; H.caught = null;
   /* THE MARK THAT LANDED IS SPENT, and the others stand. Two marks is at most
@@ -6790,7 +6814,8 @@ function h2TackleJudge(won){
     H.who = h2Other();
     H.at = h2NearestTo(spot, lostWho, H.who);
     H.safe = 0;
-    h2Fly(h2BX(lostAt, false), h2BY(lostAt, false), h2BX(H.at, true), h2BY(H.at, true), null, H.at);
+    h2Fly(h2BX(lostAt, false), h2BY(lostAt, false), h2BX(H.at, true), h2BY(H.at, true), null, H.at,
+          undefined, target == null ? undefined : h2TierFor(lostAt, target));
     h2Turn = true;
     h2Lost = lostAt;
     h2Showmark = null;              // the camera has swung; the mark belonged to the old view
@@ -6813,7 +6838,7 @@ function h2TackleJudge(won){
     /* the ball resumes from where it was frozen rather than jumping back to the
        passer's boot to be kicked a second time */
     const fx = C ? C.bx : h2BX(from, true), fy = C ? C.by2 : h2BY(from, true);
-    h2Fly(fx, fy, h2BX(H.at, true), h2BY(H.at, true), from, H.at);
+    h2Fly(fx, fy, h2BX(H.at, true), h2BY(H.at, true), from, H.at, undefined, h2TierFor(from, H.at));
     ching();
     toast("Goes past him, and finds " + h2Of(H.at, H.who) + ".");
     return h2Next();
@@ -6842,7 +6867,8 @@ function h2TackleJudge(won){
        straight back on your own goal line with their striker through on it. */
     const from = H.at;
     H.at = target == null ? H.at : target;
-    if(from !== H.at) h2Fly(h2BX(from, true), h2BY(from, true), h2BX(H.at, true), h2BY(H.at, true), from, H.at);
+    if(from !== H.at) h2Fly(h2BX(from, true), h2BY(from, true), h2BX(H.at, true), h2BY(H.at, true), from, H.at,
+                            undefined, h2TierFor(from, H.at));
     H.pen = true; H.shooting = true;
     if(!h2Draw(H2_PEN_TAKER)) h2Draw(S.tier);
     S.timeUp = false; S.phase = "h_q";
@@ -6855,7 +6881,7 @@ function h2TackleJudge(won){
   /* the ball runs on past the man on the floor from where it was frozen, rather
      than teleporting back to the passer to be kicked twice */
   const fx = C ? C.bx : h2BX(from, true), fy = C ? C.by2 : h2BY(from, true);
-  h2Fly(fx, fy, h2BX(H.at, true), h2BY(H.at, true), from, H.at);
+  h2Fly(fx, fy, h2BX(H.at, true), h2BY(H.at, true), from, H.at, undefined, h2TierFor(from, H.at));
   h2Next();
 }
 function h2Shoot(){
@@ -7013,9 +7039,47 @@ function h2Book(w, i){
   return "yellow";
 }
 
+/* ---------- OUTCOME LOGGING ----------
+   Every judged question is filed: which deck, which tier, which row, and
+   whether it was got. Nothing reads it yet, and that is deliberate.
+
+   The tiers are hand-assigned, which means somewhere in the bank there is an
+   Extreme everybody gets and an Easy nobody does, and on the pitch that is not
+   a nuisance, it is the geometry lying: a raking diagonal has to fail more
+   often than a short square ball or risk and reward collapse. The fix is to
+   re-tier from OBSERVED failure rate, and the only thing that decides whether
+   that is ever possible is how long the data has been accumulating. So it
+   starts now, before there is anything to do with it. Local to the phone,
+   like everything else in the app. */
+const LOG_KEY = "ball2-outcomes";
+const LOG_MAX = 8000;
+function logOutcome(kind, ok){
+  if(!S || S.tier == null || S.qi == null) return;
+  try{
+    const log = JSON.parse(localStorage.getItem(LOG_KEY) || "[]");
+    log.push({t: Date.now(), mode: S.mode, mc: !!S.mc, tier: S.tier, qi: S.qi, kind: kind, ok: !!ok});
+    if(log.length > LOG_MAX) log.splice(0, log.length - LOG_MAX);
+    localStorage.setItem(LOG_KEY, JSON.stringify(log));
+  }catch(e){}
+}
+/* the log as tab-separated text, so it can be pasted into anything */
+function outcomesTSV(){
+  let log = [];
+  try{ log = JSON.parse(localStorage.getItem(LOG_KEY) || "[]"); }catch(e){}
+  return "time\tmode\tmc\ttier\tqi\tkind\tok\n" +
+    log.map(r => [new Date(r.t).toISOString(), r.mode, r.mc ? 1 : 0, r.tier, r.qi, r.kind, r.ok ? 1 : 0].join("\t")).join("\n");
+}
+function copyOutcomes(){
+  const n = outcomesTSV().split("\n").length - 1;
+  const done = () => toast(n + " outcome" + (n === 1 ? "" : "s") + " copied.");
+  try{ navigator.clipboard.writeText(outcomesTSV()).then(done, () => toast("Could not copy", true)); }
+  catch(e){ toast("Could not copy", true); }
+}
+
 function h2Judge(ok){
   const H = h2();
   stopTimer();
+  logOutcome(H.pen ? "penalty" : H.shooting ? "shot" : "pass", ok);
   /* MARKS STAND THROUGH A POSSESSION, so nothing is revealed here. Showing
      them after every pass would hand back the deduction the standing marks
      exist to create: the attacker is supposed to work out where they are by
@@ -7031,7 +7095,10 @@ function h2Judge(ok){
     /* The camera is about to swing round, so the ball's flight is drawn in the
        NEW man's view: it starts where the old holder stood (who is now one of
        "theirs") and ends on the man who collected it. */
-    h2Fly(h2BX(lostAt, false), h2BY(lostAt, false), h2BX(H.at, true), h2BY(H.at, true), null, H.at);
+    /* the collection takes the tier of the pass it came from: a lost short ball
+       is picked up along the grass, a lost raking one drops out of the air */
+    h2Fly(h2BX(lostAt, false), h2BY(lostAt, false), h2BX(H.at, true), h2BY(H.at, true), null, H.at,
+          undefined, S.tier);
     h2Turn = true;
     h2Lost = lostAt;
     h2Showmark = null;            // the camera has swung; the marks belonged to the old view
@@ -7058,7 +7125,8 @@ function h2Judge(ok){
      safe one and draw a contested question three passes later. */
   H.safe = H2_SAFE.includes(h2TierFor(from, H.sel)) ? (H.safe || 0) + 1 : 0;
   H.at = H.sel; H.sel = null;
-  h2Fly(h2BX(from, true), h2BY(from, true), h2BX(H.at, true), h2BY(H.at, true), from, H.at);
+  h2Fly(h2BX(from, true), h2BY(from, true), h2BX(H.at, true), h2BY(H.at, true), from, H.at,
+        undefined, h2TierFor(from, H.at));
   ching();
   toast("Found " + h2Of(H.at, H.who) + ".");
   h2Next();
@@ -7081,6 +7149,7 @@ function h2SaveTimeUp(){ if(S.phase === "h_save"){ if(h2IsMC()) h2().pick = null
 function h2SaveJudge(saved){
   const H = h2();
   stopTimer();
+  logOutcome("save", saved);
   H.shooting = false; H.sel = null;
   /* Neither outcome takes effect yet. The strike is watched first, from behind
      the striker, and the consequences land when it is over. */
@@ -7099,7 +7168,7 @@ function h2AfterStrike(){
   const keeper = h2Other();
   if(H.result === "saved"){
     toast("SAVED! " + S.players[keeper].name + " has it on his goal line.");
-    H.who = keeper; H.at = 0; H.safe = 0;
+    H.who = keeper; H.at = h2Restart(keeper); H.safe = 0;
     h2Turn = true;
     return h2Next();
   }
@@ -7121,7 +7190,7 @@ function h2KickOn(){
   const H = h2();
   const keeper = h2Other();
   if(S.players[H.scorer].score >= H2_TARGET){ stopTimer(); endGame(); return; }
-  H.who = keeper; H.at = 0; H.safe = 0;
+  H.who = keeper; H.at = h2Restart(keeper); H.safe = 0;
   h2Turn = true;
   S.round++;
   h2Next();
@@ -7326,12 +7395,22 @@ function h2PitchHTML(tappable){
   /* How high the lob goes is how far it has to travel. A roll to a centre-back
      barely leaves the floor; a ball from the keeper onto the striker's chest
      is up in the lights. */
-  const lift = A ? Math.min(52, 8 + Math.hypot(A.tx - A.fx, (A.ty - A.fy) * 1.3) * 0.5) : 0;
+  /* GROUND PASSES AND LOBS, decided by the TIER and not the raw distance.
+     Every pass used to get an arc scaled by how far it went, with a floor of
+     8px, so a roll to a centre-back left the grass, which nothing on a real
+     pitch does. Easy and Normal are ground balls: no arc, no hop, the shadow
+     stays under the ball. Hard and above keep the arc, and it can be bigger
+     than it was, because by then it only ever means a real long ball. A flight
+     with no tier (a shot, the challenge, a restart) is a lob. */
+  const ground = !!A && !!A.tier && H2_SAFE.includes(A.tier);
+  const dist = A ? Math.hypot(A.tx - A.fx, (A.ty - A.fy) * 1.3) : 0;
+  const lift = !A || ground ? 0 : Math.min(64, 14 + dist * 0.6);
   const flight = A ? ';--fx:' + A.fx + '%;--fy:' + A.fy + '%;--tx:' + A.tx + '%;--ty:' + A.ty +
                      '%;--lift:' + lift.toFixed(0) + 'px' +
                      (A.dur ? ';--dur:' + A.dur + 'ms' : "") : "";
   const ball = (cls, extra) =>
-    '<div class="h2ballwrap' + (A ? " pass" : "") + cls + '" style="left:' + bx + '%;top:' + by + '%' +
+    '<div class="h2ballwrap' + (A ? (ground ? " pass ground" : " pass lob") : "") + cls +
+    '" style="left:' + bx + '%;top:' + by + '%' +
     flight + extra + '"><span class="h2bsh"></span>' +
     '<span class="h2lift"><img class="h2ball" src="assets/ball.png" alt=""></span></div>';
   /* Two ghosts running the same flight a fraction behind smear into a trail.
@@ -7556,7 +7635,9 @@ function h2Render(st){
         "'s possession. Play the ball into one and you get a <b>" + tier.label +
         '</b> question to take it off him.</div>' +
       '<div class="h2marks">' +
-        h2Live(att).map(i =>
+        /* not the man on the ball: he cannot be passed to, so a mark on him is
+           a mark thrown away, and offering it is a trap for the tired */
+        h2Live(att).filter(i => i !== H.at).map(i =>
           '<button class="h2markbtn' + (picked.indexOf(i) !== -1 ? " on" : "") +
             '" onclick="h2Mark(' + i + ')">' +
             '<span class="h2mno">' + h2No(i, att) + '</span>' +
@@ -8728,6 +8809,10 @@ function renderBoard(st){
     `:""}
     <div class="spacer"></div>
     <button class="bigbtn" onclick="closeBoard()">Back to the menu</button>
+    ${/* the outcome log rides out on the clipboard as tab-separated text: it is
+          the raw material for re-tiering the bank from what people actually
+          got, and it only accumulates from the day it starts being kept */""}
+    <button class="bigbtn ghost tinybtn" onclick="copyOutcomes()">Copy every judged question to the clipboard</button>
     ${all.length?`<button class="bigbtn ghost" style="padding:10px;font-size:.95rem" onclick="askClearRecords()">Wipe the record book</button>`:""}`;
 }
 
@@ -8995,6 +9080,7 @@ function reveal(){
 }
 function judge(correct, level){
   if(isGuest()) return mpAct("judge",[!!correct, level||null]);
+  logOutcome(S.phase==="steal_judge" ? "steal" : "board", correct);
   // stadium pays by rung, badge BALL by how far the camera was pulled back;
   // every other mode is all-or-nothing on the tier
   const stad = S.mode==="stadium";

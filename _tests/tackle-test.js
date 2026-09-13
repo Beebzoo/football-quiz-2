@@ -86,8 +86,12 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   check("and it is the defending man's card", H("hand.w") === 1, H("hand.w"));
   run(app, "h2HandGo()"); await tick(140);
   check("he gets the private screen", phase() === "h_mark", phase());
-  check("the attacker's eleven are on it", (stage(app).match(/h2markbtn/g) || []).length === 11,
+  /* ten, not eleven: the man on the ball cannot be passed to, so he is not
+     offered, because a mark on him is a mark thrown away */
+  check("the attacker's eleven are on it, less the man on the ball", (stage(app).match(/h2markbtn/g) || []).length === 10,
     (stage(app).match(/h2markbtn/g) || []).length);
+  check("and the man on the ball is the one missing",
+    !new RegExp('onclick="h2Mark\\(' + ev(app, "S.h2h.at") + '\\)"').test(stage(app)), "he was offered");
   run(app, `h2Mark(${SIX}); h2Mark(${ST});`); await tick(140);
   check("he can mark two", JSON.stringify(H("marks")) === JSON.stringify([SIX, ST]), JSON.stringify(H("marks")));
   run(app, `h2Mark(${TEN});`); await tick(140);
@@ -215,7 +219,8 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
     (stage(app).match(/class="h2man [^"]*"/g) || []).length);
   run(app, `S.phase = "h_mark"; S.h2h.who = 0; S.h2h.off[0] = [${TEN}]; render();`);
   await tick(140);
-  check("and he cannot be marked", (stage(app).match(/h2markbtn/g) || []).length === 10,
+  /* nine: eleven, less the man sent off, less the man on the ball */
+  check("and he cannot be marked", (stage(app).match(/h2markbtn/g) || []).length === 9,
     (stage(app).match(/h2markbtn/g) || []).length);
   run(app, "S.h2h.off = [[], []];");
 
@@ -225,6 +230,14 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
            `h2Shoot(); h2Reveal(); h2Judge(true);`);
   await tick(200);
   check("the save is asked at the outfielder's tier", tier() === ev(app, "H2_SAVE_NOGK"), tier());
+  /* and when the outfielder makes the save, the restart cannot go to the
+     keeper, because there is no keeper: both restarts used to write H.at = 0
+     unconditionally and put the ball on a man who is not drawn */
+  run(app, "h2SaveReveal(); h2SaveJudge(true);"); await tick(2100);   // h2AfterStrike fires at 1.9s
+  check("a save with the keeper off restarts on a man who is actually on the pitch",
+    ev(app, "S.h2h.who") === 1 && ev(app, `S.h2h.at !== ${GK}`) && ev(app, "!h2IsOff(1, S.h2h.at)"),
+    "who " + ev(app, "S.h2h.who") + " at " + ev(app, "S.h2h.at"));
+  run(app, "S.h2h.off = [[], []];");
 
   /* ---------------------------------------------------------------- */
   console.log("\n--- sitting off, and turning the whole thing off ---");
