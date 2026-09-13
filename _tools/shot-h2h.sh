@@ -189,6 +189,9 @@ setups.sheet = `S=freshState(["Martijn","Bram"],false,"classic",0,"manager",fals
 setups.dailymenu = `S=null; setupMode="classic"; setupPlay="pitch"; render();`;
 setups.dailyq = `dailyStart();`;
 setups.dailydone = `dailyStart(); for(let i=0;i<6;i++){ const Q=q(); dailyPick(i===4?(Q.k+1)%4:Q.k); dailyOn(); }`;
+/* the peel: half a card, and a whole one */
+setups.dailypeel = `dailyStart(); for(let i=0;i<3;i++){ const Q=q(); dailyPick(Q.k); dailyOn(); }`;
+setups.dailywon = `dailyStart(); for(let i=0;i<6;i++){ const Q=q(); dailyPick(Q.k); dailyOn(); }`;
 
 /* the album: the whole thing, one page, and a pack being opened */
 setups.album = `mine().album.packs = 4; mineSave(); openAlbum();`;

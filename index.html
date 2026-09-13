@@ -2654,6 +2654,28 @@
   .dstreak b{display:block;font-size:1.5rem;font-weight:800;line-height:1}
   .dstreak i{display:block;font-style:normal;font-size:.68rem;opacity:.6;margin-top:2px;
              letter-spacing:.05em;text-transform:uppercase}
+  /* PLAYER OF THE DAY. Six strips of card over one sticker, one off a rung.
+     The top one goes first, so the name is the last thing you get. */
+  .dman{display:flex;align-items:center;gap:12px;background:var(--panel);
+        border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:10px 0}
+  .dman.big{flex-direction:column;text-align:center;gap:8px;padding:14px}
+  .dman.won{border-color:var(--gold)}
+  .dmlab{font-size:.62rem;letter-spacing:.11em;text-transform:uppercase;opacity:.5;
+         order:2;flex:1}
+  .dman.big .dmlab{order:0;flex:none}
+  .dmst{position:relative;width:76px;flex-shrink:0;order:1}
+  .dman.big .dmst{width:104px;order:1}
+  .dmsub{font-size:.7rem;opacity:.6;order:3;flex-basis:100%;margin-top:-2px}
+  .dman.big .dmsub{order:2;margin-top:0}
+  .dmveil{position:absolute;inset:0;overflow:hidden;border-radius:8px}
+  .dmveil i{position:absolute;left:0;right:0;height:16.67%;top:calc(var(--s) * 16.67%);
+            /* OPAQUE, which --panel is not: it is a translucent overlay, so a
+               veil made of it would show the man straight through. The page
+               ground plus a neutral tint covers him in either theme. */
+            background:linear-gradient(180deg,rgba(128,128,128,.26),rgba(128,128,128,.13)),var(--bg);
+            border-bottom:1px solid rgba(0,0,0,.35);
+            transition:transform .5s cubic-bezier(.3,.8,.3,1), opacity .4s}
+  .dmveil i.off{transform:translateX(-115%);opacity:0}
   /* the card on the front door */
   .mm-daily{display:flex;width:100%;align-items:center;justify-content:space-between;gap:10px;
             background:var(--panel);border:1px solid var(--line);border-radius:14px;
@@ -5841,7 +5863,7 @@ function setTheme(t){
   applyTheme();
   render();
 }
-const BUILD = "14 Sep 2026 · 01:15";
+const BUILD = "14 Sep 2026 · 01:21";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five
@@ -8784,6 +8806,51 @@ function dailySix(day){
   }
   return out;
 }
+/* ---------- PLAYER OF THE DAY ----------
+   The album is shuffled once with a fixed seed and the calendar walks along
+   it, so every phone is playing for the same man on the same day and nobody
+   comes round again inside two years. A per-phone skip list was the obvious
+   build and it would have quietly broken the only thing the daily is for. */
+const DAILY_EPOCH = Date.UTC(2026, 0, 1) / 86400000;
+/* a date as a plain count of days, from the player's own calendar rather than
+   UTC, for the same reason dayKey is local */
+const dayNum = d => {
+  const t = d || new Date();
+  return Math.floor(Date.UTC(t.getFullYear(), t.getMonth(), t.getDate()) / 86400000);
+};
+const dayFromKey = k => new Date(Math.floor(k / 10000), Math.floor(k / 100) % 100 - 1, k % 100);
+let dailyOrder = null;
+function dailyMen(){
+  if(dailyOrder) return dailyOrder;
+  const book = albumBook();
+  if(!book) return null;
+  const all = [];
+  /* sorted before the shuffle, because Object.keys order is the order the
+     harvest happened to write and a re-harvest must not move the calendar */
+  for(const side of Object.keys(book).sort())
+    for(const m of albumMen(side)) all.push({side: side, no: m.no});
+  if(!all.length) return null;
+  const rnd = seeded(0x5ca1ab1e);
+  for(let i = all.length - 1; i > 0; i--){
+    const j = Math.floor(rnd() * (i + 1));
+    const t = all[i]; all[i] = all[j]; all[j] = t;
+  }
+  return (dailyOrder = all);
+}
+function dailyMan(day){
+  const all = dailyMen();
+  if(!all) return null;
+  const n = dayNum(dayFromKey(day)) - DAILY_EPOCH;
+  return all[((n % all.length) + all.length) % all.length];
+}
+/* the man himself, out of the deck, for the sticker */
+function dailyManCard(man){
+  if(!man) return null;
+  const men = albumMen(man.side);
+  const m = men.find(x => String(x.no) === String(man.no));
+  return m ? {side: man.side, m: m} : null;
+}
+
 /* today's state, created on demand and never on a render */
 function dailyToday(){
   const m = mine(), day = dayKey();
@@ -8800,7 +8867,10 @@ function dailyStart(){
        any daily has ever used on this phone, which is what stops next Tuesday
        repeating last Tuesday. */
     const spent = (m.daily && m.daily.spent) || {};
-    m.daily = {date: day, six: six, rung: 0, done: false, got: [], spent: spent};
+    m.daily = {date: day, six: six, rung: 0, done: false, got: [], spent: spent,
+               /* null until the squads land, and the daily plays fine without
+                  him: a missing card is a missing prize, not a broken day */
+               man: dailyMan(day)};
     mineSave();
   }
   const d = m.daily;
@@ -8859,16 +8929,30 @@ function dailyStreak(d){
   st.half = half ? ((st.lastHalf === yesterday) ? st.half + 1 : 1) : 0;
   if(half) st.lastHalf = d.date;
   st.last = d.date;
-  /* A PACK FOR TURNING UP, and a second for getting all the way. The album is
-     the thing the streak is for. */
-  m.album.packs = (m.album.packs || 0) + 1 + (d.reached >= 6 ? 1 : 0);
+  /* A PACK FOR TURNING UP, and the man himself for going all the way. A pack
+     is three at random; he is the one on the card, which is the only prize in
+     the app you can see coming and play towards. */
+  m.album.packs = (m.album.packs || 0) + 1;
+  if(d.reached >= 6 && d.man){
+    const id = albumId(d.man.side, {no: d.man.no});
+    if(id){
+      const isNew = albumStick(id);
+      albumCheckPage(d.man.side);
+      const card = dailyManCard(d.man);
+      toast(card ? (card.m.n + (isNew ? " is yours." : " again. One for swapping."))
+                 : "The sticker is yours.");
+    }
+  }
 }
+/* HOW MUCH OF HIM YOU HAVE UNCOVERED: one strip a rung, six strips, and the
+   last one comes off only if you reach the striker. */
+const dailyPeel = d => Math.min(DAILY.length, d && d.done ? (d.reached || 0) : (d ? d.rung : 0));
 /* THE SHARE LINE, which is the whole reason this works. Six squares, one per
    rung, and no image handling: it pastes into any chat on earth. */
 function dailyShare(){
   const d = dailyToday();
   if(!d || !d.done) return "";
-  const when = new Date(Math.floor(d.date / 10000), Math.floor(d.date / 100) % 100 - 1, d.date % 100);
+  const when = dayFromKey(d.date);
   const day = when.getDate() + " " + ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][when.getMonth()];
   let sq = "";
   for(let i = 0; i < DAILY.length; i++){
@@ -8878,7 +8962,9 @@ function dailyShare(){
   const got = d.reached >= 6 ? "all the way to the striker"
             : d.reached === 0 ? "lost it on the first pass"
             : "made it to " + DAILY[d.reached - 1].to;
+  const card = d.reached >= 6 ? dailyManCard(d.man) : null;
   return "The Daily Ball \u00b7 " + day + "\n" + sq + "  " + got +
+         (card ? "\n" + card.m.n + " is mine." : "") +
          "\nbeebzoo.github.io/football-quiz-2";
 }
 function copyDaily(){
@@ -12011,6 +12097,7 @@ function render(){
           : n === 0 ? 'Lost it<br><span class="gold">on the first pass</span>'
           : 'You got to<br><span class="gold">' + esc(DAILY[n - 1].to) + '</span>') + '</h1>' +
         ladder +
+        dailyManHTML(d, true) +
         '<div class="dstreak">' +
           '<div><b>' + streak.played + '</b><i>day' + (streak.played === 1 ? "" : "s") + ' in a row</i></div>' +
           '<div><b>' + streak.half + '</b><i>past halfway</i></div>' +
@@ -12028,6 +12115,7 @@ function render(){
     const t = TIERS[step.tier];
     st.innerHTML =
       '<div class="kick">' + ico('trophy') + 'The Daily Ball \u00b7 ' + (d.rung + 1) + ' of ' + DAILY.length + '</div>' +
+      dailyManHTML(d, false) +
       ladder +
       '<div class="qcard" style="--dc:' + t.color + '">' +
         '<div class="kick">Ball to ' + esc(step.to) + ' \u00b7 ' + esc(t.label) + '</div>' +
@@ -12377,7 +12465,8 @@ function dailyCardHTML(){
   const m = mine(), st = m.streak || {played: 0, half: 0};
   const d = (m.daily && m.daily.date === dayKey()) ? m.daily : null;
   const done = d && d.done;
-  const said = !d ? "Six questions, one per rung. Two minutes."
+  const said = !d ? (dailyMan(dayKey()) ? "Six questions, one per rung, and a sticker on it."
+                                        : "Six questions, one per rung. Two minutes.")
     : done ? (d.reached >= 6 ? "All the way to the striker." :
               d.reached === 0 ? "Lost on the first pass." : "You got to " + DAILY[d.reached - 1].to + ".")
     : "You are " + (d.rung + 1) + " of " + DAILY.length + " up the pitch.";
@@ -12615,6 +12704,29 @@ function cupQuit(){ closeSheet(); cupBlank(); CUP_VIEW = {}; render(); toast("Ru
    country's kit colour with his number on it, his name under it, and his
    position. 736 of them and not one image, so they improve whenever the
    harvest does. */
+/* THE CARD YOU ARE PLAYING FOR, under six strips. Big is the done screen,
+   where he is either yours or gone. */
+function dailyManHTML(d, big){
+  const card = dailyManCard(d && d.man);
+  if(!card) return "";
+  const peel = dailyPeel(d);
+  const won = peel >= DAILY.length;
+  return '<div class="dman' + (big ? " big" : "") + (won ? " won" : "") + '">' +
+    '<div class="dmlab">' + (won ? "Yours" : d && d.done ? "He goes back in the box"
+      : "Playing for") + '</div>' +
+    '<div class="dmst">' +
+      albumStickerHTML(card.side, card.m, true, false) +
+      '<div class="dmveil">' + DAILY.map((_, i) =>
+        '<i class="' + (i < peel ? "off" : "") + '" style="--s:' + i + '"></i>').join("") +
+      '</div>' +
+    '</div>' +
+    '<div class="dmsub">' + (won
+      ? esc(card.m.n) + ' \u00b7 ' + esc(card.side) + ' \u00b7 straight into the album'
+      : peel === 0 ? 'One strip comes off with every ball you complete.'
+      : peel + ' of ' + DAILY.length + ' \u00b7 reach the striker and he is yours') +
+    '</div>' +
+  '</div>';
+}
 function albumStickerHTML(side, m, has, dupe){
   const t = (albumBook() || {})[side] || {};
   const kit = t.kit || "#888";

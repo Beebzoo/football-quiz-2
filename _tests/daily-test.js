@@ -44,6 +44,9 @@ const check = (n, c, x) => {
   await tick(340);
   const mc = R("assets/mc/index.json");
   run(app, 'DECKS["classic-mc"] = ' + JSON.stringify(mc) + ";");
+  /* PLAYER OF THE DAY needs the album, which is the 2006 squads. The daily
+     works without them; the prize does not. */
+  run(app, "TEAMS.wc2006 = " + JSON.stringify(R("assets/wc2006/index.json")) + ";");
 
   console.log("--- everyone gets the same six on the same day ---");
   const six = d => JSON.stringify(ev(app, "dailySix(" + d + ").map(x => x.k)"));
@@ -154,6 +157,67 @@ const check = (n, c, x) => {
     run(app, "(() => { const s = mine().daily.spent; for(const x of dailySix(" + day + ")) s[x.k] = 1; })();");
   }
   check("seven days, no question twice", clash === 0, clash + " repeats");
+
+  console.log("\n--- player of the day ---");
+  /* THE SAME MAN ON EVERY PHONE is the whole reason this is not a per-phone
+     skip list, so it is the first thing checked. */
+  run(app, 'localStorage.removeItem("ball2-mine"); MINE = null;');
+  const man = d => JSON.stringify(ev(app, "dailyMan(" + d + ")"));
+  check("a day has a man", ev(app, "!!dailyMan(20260914)") === true, man(20260914));
+  check("and he is the same man asked twice", man(20260914) === man(20260914), "he moved");
+  check("a different day is a different man", man(20260915) !== man(20260914), "the same man");
+  /* A PHONE THAT HAS ALREADY WON HIM STILL GETS HIM, because the alternative
+     is two mates playing for different men and comparing squares that no
+     longer mean the same thing. */
+  const was = man(20260914);
+  run(app, '(() => { const m = dailyMan(20260914); albumStick(albumId(m.side, {no: m.no})); mineSave(); })();');
+  check("owning him does not move the calendar", man(20260914) === was, man(20260914));
+  /* NOBODY TWICE INSIDE TWO YEARS: the album is shuffled once and the calendar
+     walks along it, so the only repeat is a full lap. */
+  const lap = ev(app, "dailyMen().length");
+  check("the whole album is in the calendar", lap === 736, lap);
+  const order = ev(app, "dailyMen().map(m => m.side + '/' + m.no)");
+  check("and no man is in it twice", new Set(order).size === order.length,
+    order.length - new Set(order).size + " repeats");
+
+  console.log("\n--- one strip a rung, and the striker pays ---");
+  run(app, 'localStorage.removeItem("ball2-mine"); MINE = null; dailyStart();'); await tick(140);
+  check("today's daily is played for somebody", !!ev(app, "mine().daily.man"),
+    JSON.stringify(ev(app, "mine().daily.man")));
+  check("and nothing is uncovered yet", ev(app, "dailyPeel(mine().daily)") === 0,
+    ev(app, "dailyPeel(mine().daily)"));
+  check("the card is on the screen under six strips",
+    (stage(app).match(/--s:/g) || []).length === 6, (stage(app).match(/--s:/g) || []).length);
+  run(app, "dailyPick(q().k); dailyOn();"); await tick(120);
+  check("a rung clears a strip", ev(app, "dailyPeel(mine().daily)") === 1,
+    ev(app, "dailyPeel(mine().daily)"));
+  check("and it is the top one that goes", /class="off" style="--s:0"/.test(stage(app)),
+    "the wrong strip");
+  check("and he is not yours yet",
+    ev(app, '(() => { const m = mine().daily.man; return albumHas(albumId(m.side, {no: m.no})); })()') === false,
+    "already stuck in");
+  /* ALL THE WAY, and he goes straight into the album rather than into a pack */
+  for (let i = 0; i < 5; i++) { run(app, "dailyPick(q().k); dailyOn();"); await tick(110); }
+  check("six rungs is the striker", ev(app, "mine().daily.reached") === 6,
+    ev(app, "mine().daily.reached"));
+  check("the card is fully peeled", ev(app, "dailyPeel(mine().daily)") === 6,
+    ev(app, "dailyPeel(mine().daily)"));
+  check("and he is in the album",
+    ev(app, '(() => { const m = mine().daily.man; return albumHas(albumId(m.side, {no: m.no})); })()') === true,
+    "not stuck in");
+  check("the share line says so", /is mine\./.test(ev(app, "dailyShare()")), ev(app, "dailyShare()"));
+  /* A DAY YOU LOSE KEEPS THE PACK AND LOSES THE MAN, which is the whole point
+     of showing him at the start. */
+  run(app, 'localStorage.removeItem("ball2-mine"); MINE = null; dailyStart();'); await tick(140);
+  run(app, "dailyPick((q().k + 1) % 4); dailyOn();"); await tick(130);
+  check("one wrong answer ends it", ev(app, "mine().daily.done") === true, ev(app, "mine().daily.done"));
+  check("the pack for turning up is still paid", ev(app, "mine().album.packs") === 1,
+    ev(app, "mine().album.packs"));
+  check("but he is not yours",
+    ev(app, '(() => { const m = mine().daily.man; return albumHas(albumId(m.side, {no: m.no})); })()') === false,
+    "stuck in anyway");
+  check("and the screen says he goes back in the box",
+    /back in the box/.test(stage(app)), "no line about him");
 
   console.log("\n--- carrying it to another phone ---");
   /* the app saves on every change; the test has been poking the object
