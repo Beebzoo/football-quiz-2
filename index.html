@@ -2366,6 +2366,24 @@
   /* the change button sits under the real ones and does not compete with
      them: it is a thing you do sometimes, not the thing you came here for */
   .h2subbtn{margin-top:6px;font-size:.86rem;padding:9px;opacity:.85}
+  /* the traits screen: a row per man, his evidence under his name, and the
+     buttons he earned. The cost sits in the corner of the button so a manager
+     can see the whole sum without reading a table. */
+  .h2traits{margin:8px 0 10px}
+  .h2trrow{display:flex;align-items:center;gap:8px;justify-content:space-between;
+           padding:7px 2px;border-bottom:1px solid var(--line)}
+  .h2trrow:last-child{border-bottom:0}
+  .h2trman{min-width:0}
+  .h2trman b{display:block;font-size:.92rem}
+  .h2trman i{display:block;font-style:normal;font-size:.72rem;opacity:.62;margin-top:1px}
+  .h2trbtns{display:flex;gap:5px;flex-shrink:0}
+  .h2trbtn{position:relative;background:var(--panel);border:1px solid var(--line);
+           color:inherit;border-radius:9px;padding:6px 9px 6px 8px;font:inherit;
+           font-size:.76rem;cursor:pointer}
+  .h2trbtn.on{background:var(--ac);border-color:var(--ac);color:var(--on-ink, #111);font-weight:700}
+  .h2trbtn[disabled]{opacity:.35}
+  .h2trc{display:inline-block;margin-left:5px;font-size:.66rem;opacity:.7}
+  .h2trbtn.on .h2trc{opacity:.85}
   .h2repbox{margin:14px 0 4px}
   .h2rep{background:var(--panel);border:1px solid var(--line);border-radius:12px;
          padding:10px 12px;margin:8px 0}
@@ -5396,7 +5414,7 @@ function setTheme(t){
   applyTheme();
   render();
 }
-const BUILD = "13 Sep 2026 · 23:12";
+const BUILD = "13 Sep 2026 · 23:22";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five
@@ -6889,7 +6907,17 @@ const H2_LADDER = [
 /* what a shot costs from each man who is allowed one. It lives on the shape
    now, because a 4-4-2 has two shooters and a 4-2-3-1 has four, so it cannot
    be a table of slot numbers any more. */
-const H2_SHOT_AT = (i, w) => { const p = h2Shape(w)[i]; return (p && p.shot) || null; };
+const H2_SHOT_AT = (i, w) => {
+  const p = h2Shape(w)[i];
+  const t = (p && p.shot) || null;
+  if(!t) return null;
+  /* A FINISHER SHOOTS BETTER, floored at Normal so no shot is ever an Easy
+     question: a goal has to be worth something or the scoreline stops meaning
+     anything. */
+  if(!h2Has(i, w, "finisher")) return t;
+  const c = h2Cheaper(t, 1);
+  return H2_ORDER.indexOf(c) < H2_ORDER.indexOf("normal") ? "normal" : c;
+};
 /* WHAT A SHOT FROM HERE ACTUALLY COSTS. The shape says what it is off the
    ladder; his line says what it is tonight. A shot goes past the defence to
    the keeper, so it takes the LONG shift, the one that prices a ball in
@@ -7000,6 +7028,42 @@ const H2_TACKLE_TIER = "normal";     // what the defender answers when a mark la
    shape at the moment he committed. */
 const H2_MISS_RELIEF = 1;
 const H2_BOOKED_TIER = null;         // a booked man tackles at this instead; null leaves it alone
+
+/* ---------- TRAITS ----------
+   Five, each changing exactly one tier in exactly one place, and each earned
+   from something that happened in Germany rather than from an opinion. Cost is
+   in budget points and H2_TRAIT_BUDGET is what a manager has to spend, so a
+   side can have one expensive man or two cheap ones and never everything. */
+const H2_TRAIT_BUDGET = 3;
+const H2_TRAITS = {
+  finisher: {cost: 2, label: "Finisher", from: "Scored twice or more in Germany",
+             says: "His shot is a tier cheaper, and never cheaper than Normal."},
+  poacher:  {cost: 2, label: "Poacher", from: "A forward who scored",
+             says: "Route one to him is Extreme rather than BALL."},
+  captain:  {cost: 2, label: "Captain", from: "Wore the armband",
+             says: "Every ball he plays is a tier cheaper."},
+  enforcer: {cost: 1, label: "Enforcer", from: "Booked twice, or sent off",
+             says: "His tackle is a tier cheaper, until he is in the book himself."},
+  keeper:   {cost: 1, label: "Keeper", from: "Started in goal",
+             says: "His save is a tier cheaper."},
+};
+/* WHO HAS WHAT, keyed on the man rather than the slot. The key is his shirt
+   number and short name together, because two men in one squad can share
+   either one on their own but never both. */
+const h2TraitKey = m => m ? ((m.no || "?") + ":" + (m.n || m.full || "?")) : null;
+function h2TraitOf(i, w){
+  if(!h2Tactical()) return null;
+  const H = S && S.h2h;
+  const set = H && H.traits && H.traits[w];
+  if(!set) return null;
+  return set[h2TraitKey(h2Man(i, w))] || null;
+}
+const h2Has = (i, w, t) => h2TraitOf(i, w) === t;
+/* what a side has spent, and what it may still spend */
+function h2TraitSpend(w){
+  const H = S && S.h2h, set = (H && H.traits && H.traits[w]) || {};
+  return Object.values(set).reduce((n, t) => n + ((H2_TRAITS[t] || {}).cost || 0), 0);
+}
 const H2_REDS        = 2;            // yellows on ONE man before he goes
 const H2_PEN_TAKER   = "easy";       // a penalty is meant to go in
 const H2_PEN_KEEPER  = "extreme";
@@ -7436,11 +7500,27 @@ function h2TierFor(a, b){
      itself; a man held out of shape is one of theirs to nobody */
   const w = S && S.h2h ? S.h2h.who : 0;
   const A = h2Spot(a, w), B = h2Spot(b, w);
-  if(A.line <= 2 && B.line === 6) return "ball";   // route one, whatever the gap
+  /* A POACHER IS WORTH HITTING. Route one is BALL from anywhere, which is what
+     makes the long ball a gamble; a man who actually scored in Germany brings
+     it down one, to Extreme. Still the dearest thing on the board, and now
+     worth considering. */
+  /* ROUTE ONE IS OUTSIDE THE LADDER, and stays outside it. The rule prices a
+     ball the geometry refuses to price, so the Captain's discount does not
+     reach it: a good passer does not make a hoof a good idea, and letting two
+     traits compound here is exactly the free-goal the clamp exists to stop.
+     The Poacher is the one exception, and it is his whole point. */
+  if(A.line <= 2 && B.line === 6) return h2Has(b, w, "poacher") ? "extreme" : "ball";
   const d = A.y - B.y;                             // positive is forward
-  if(d <= 0) return "easy";                        // square or backwards is a safe ball
-  for(const step of H2_LADDER) if(d <= step.max) return step.t;
-  return "ball";
+  let t = "easy";                                  // square or backwards is a safe ball
+  if(d > 0){
+    t = "ball";
+    for(const step of H2_LADDER) if(d <= step.max){ t = step.t; break; }
+  }
+  /* A CAPTAIN PLAYS IT BETTER. Every ball FROM him, which is why he costs two:
+     it is the only trait that touches the whole board rather than one moment.
+     On the base tier, before the line and the relief are applied, so it can
+     never combine into something free. */
+  return h2Has(a, w, "captain") ? h2Cheaper(t, 1) : t;
 }
 function h2PassName(a, b){
   const t = h2TierFor(a, b);
@@ -7478,6 +7558,9 @@ function h2Start(){
               after a park and a resume. picked is the draft while the screen
               is open and stops being read the moment Done is tapped. */
            lineup:[null, null], picked:[[], []], picking:null,
+           /* what each side switched on, keyed on the MAN, because a slot is
+              inherited by the substitute who fills it and a trait is not */
+           traits:[{}, {}], tset:null,
            /* the man holding a spot he ran to, if there is one: {w, i, x, y,
               line}, in his own attacking frame like H2_SQUAD */
            adv:null};
@@ -7939,7 +8022,13 @@ function h2Contest(){
 /* a booked man holds back, if that dial is turned on */
 function h2TackleTier(on){
   const w = h2Other();
-  return (H2_BOOKED_TIER && h2Cards(w, h2Tackler(on)) > 0) ? H2_BOOKED_TIER : H2_TACKLE_TIER;
+  const by = h2Tackler(on);
+  if(H2_BOOKED_TIER && h2Cards(w, by) > 0) return H2_BOOKED_TIER;
+  /* AN ENFORCER TACKLES BETTER, and stops the moment he is in the book. That
+     is the trade the trait is named for: he is in the list because he was
+     booked twice in Germany, and the first card tonight takes it off him. */
+  if(h2Has(by, w, "enforcer") && !h2Cards(w, by)) return h2Cheaper(H2_TACKLE_TIER, 1);
+  return H2_TACKLE_TIER;
 }
 /* Book him, and send him off if that was his second. Returns "red", "yellow"
    or null so the caller can say what happened. */
@@ -8192,7 +8281,12 @@ function h2ToSave(){
   /* A penalty is meant to go in, so the keeper is asked something unfair. An
      outfield man in goal is asked something unfair for the opposite reason:
      he is not a keeper and it should show. */
-  const tier = H.so ? H2_SO_KEEPER : H.pen ? H2_PEN_KEEPER : h2NoGk(h2Other()) ? H2_SAVE_NOGK : H2_SAVE;
+  let tier = H.so ? H2_SO_KEEPER : H.pen ? H2_PEN_KEEPER : h2NoGk(h2Other()) ? H2_SAVE_NOGK : H2_SAVE;
+  /* A REAL KEEPER SAVES BETTER, but not from the spot: a penalty is meant to
+     go in and a shootout is its own game, so the trait is worth nothing in
+     either. It buys him the shots from open play, which is where a keeper
+     earns his money anyway. */
+  if(!H.so && !H.pen && h2Has(0, h2Other(), "keeper")) tier = h2Cheaper(tier, 1);
   if(!h2Draw(tier, 0, h2Other())) h2Draw(S.tier, 0, h2Other());   // his keeper, and his keeper's career
   S.timeUp = false; S.phase = "h_save";
   render();
@@ -8575,6 +8669,49 @@ function h2HandGo(){
 /* The defending side is the one NOT on the ball, which is whose screen this
    is. Stored against him, read against him when he is defending. */
 /* Each man picks his own, in turn, and sees what it does before he commits. */
+/* THE MEN WHO EARNED SOMETHING, and what each is eligible for. Read off the
+   whole eleven rather than the squad, because a trait is for a man who is
+   playing. */
+function h2Eligible(w){
+  const out = [];
+  for(let i = 0; i < 11; i++){
+    const m = h2Man(i, w);
+    const tr = (m && m.tr) || [];
+    if(tr.length) out.push({i: i, m: m, tr: tr.filter(k => H2_TRAITS[k])});
+  }
+  return out.filter(e => e.tr.length);
+}
+const h2AnyTrait = w => h2Eligible(w).length > 0;
+/* switch one on or off, refusing anything the budget cannot cover */
+function h2SetTrait(i, k){
+  audio();
+  const H = h2(), w = H.tset || 0;
+  const m = h2Man(i, w), key = h2TraitKey(m);
+  if(!key || !H2_TRAITS[k]) return;
+  if(((m && m.tr) || []).indexOf(k) < 0) return;     // he did not earn it
+  H.traits = H.traits || [{}, {}];
+  H.traits[w] = H.traits[w] || {};
+  if(H.traits[w][key] === k){ delete H.traits[w][key]; return render(); }
+  /* ONE TRAIT A MAN. Two on one player is a different game and a much harder
+     one to balance, and the budget is meant to spread the side out. */
+  const was = H.traits[w][key];
+  delete H.traits[w][key];
+  if(h2TraitSpend(w) + H2_TRAITS[k].cost > H2_TRAIT_BUDGET){
+    if(was) H.traits[w][key] = was;
+    toast("That is more than " + H2_TRAIT_BUDGET + " points.", true);
+    return render();
+  }
+  H.traits[w][key] = k;
+  render();
+}
+function h2TraitsDone(){
+  audio();
+  const H = h2();
+  if((H.tset || 0) === 0){ H.tset = 1; return render(); }
+  H.tset = null;
+  S.phase = "h_toss";
+  render();
+}
 function h2SetShape(id){
   audio();
   const H = h2();
@@ -8640,6 +8777,10 @@ function h2ShapeDone(){
   const H = h2();
   if((H.shaping || 0) === 0){ H.shaping = 1; render(); return; }
   H.shaping = null;
+  /* AND THEN WHAT THEY ARE GOOD AT, if anybody in either squad earned
+     anything. Nobody has ever failed that test, but a mode should not open a
+     screen it has nothing to put on. */
+  if(h2AnyTrait(0) || h2AnyTrait(1)){ H.tset = 0; S.phase = "h_traits"; return render(); }
   S.phase = "h_toss";
   render();
 }
@@ -9056,6 +9197,51 @@ function h2Render(st){
         '</button>').join("") + '</div>' +
       '<div class="h2hintline">' + esc(H2_SHAPES[mine].blurb) + '</div>' +
       '<button class="bigbtn" onclick="h2ShapeDone()">' +
+        (w === 0 ? esc(S.players[1].name) + " next" : "To the toss") + '</button>' +
+      foot;
+    return;
+  }
+
+  /* ---------- what they are good at ----------
+     Three points, and every eligible man in the eleven with what he earned
+     next to him. Nothing here is an opinion: a Finisher scored twice in
+     Germany, an Enforcer was booked twice, a Captain wore the armband. The
+     harvest decided who COULD; this screen decides who DOES. */
+  if(S.phase === "h_traits"){
+    const w = H.tset || 0;
+    const picker = S.players[w];
+    const kit = h2Kit(w);
+    const spent = h2TraitSpend(w), left = H2_TRAIT_BUDGET - spent;
+    const rows = h2Eligible(w);
+    const chosen = Object.entries((H.traits && H.traits[w]) || {});
+    st.innerHTML =
+      '<div class="kick">' + ico('clipboard') + 'The Dugout \u00b7 ' + esc(h2Team(w) || picker.name) + '</div>' +
+      '<div class="h2big">' + esc(picker.name) + ', what are they good at?</div>' +
+      '<div class="h2hintline" style="margin-top:0">Every one of these was earned in Germany. ' +
+        'You have ' + H2_TRAIT_BUDGET + ' points and both of you have the same ' + H2_TRAIT_BUDGET + ', ' +
+        'so a better squad does not mean more of them.</div>' +
+      '<div class="h2traits">' + rows.map(e =>
+        '<div class="h2trrow"><div class="h2trman">' +
+          '<b>' + esc(e.m.n) + '</b><i>' + esc(h2Spot(e.i, w).n) +
+          (e.m.g ? ' \u00b7 ' + e.m.g + (e.m.g === 1 ? " goal" : " goals") : "") +
+          (e.m.y ? ' \u00b7 ' + e.m.y + (e.m.y === 1 ? " yellow" : " yellows") : "") +
+          (e.m.cap ? ' \u00b7 captain' : "") + '</i></div>' +
+        '<div class="h2trbtns">' + e.tr.map(k => {
+          const on = h2TraitOf(e.i, w) === k;
+          const t = H2_TRAITS[k];
+          const afford = on || spent + t.cost <= H2_TRAIT_BUDGET;
+          return '<button class="h2trbtn' + (on ? ' on' : '') + '" style="--ac:' + kit +
+            '" onclick="h2SetTrait(' + e.i + ',' + JSON.stringify(k).replace(/"/g, '&quot;') + ')"' +
+            (afford ? '' : ' disabled') + '>' +
+            '<span class="h2trn">' + esc(t.label) + '</span>' +
+            '<span class="h2trc">' + t.cost + '</span></button>';
+        }).join("") + '</div></div>').join("") + '</div>' +
+      '<div class="h2hintline">' + (chosen.length
+        ? esc(chosen.map(([, k]) => H2_TRAITS[k].label).join(", ")) + ". " +
+          esc(H2_TRAITS[chosen[chosen.length - 1][1]].says)
+        : "Nothing switched on. They play as they come.") +
+        ' <b>' + left + ' point' + (left === 1 ? "" : "s") + ' left.</b></div>' +
+      '<button class="bigbtn" onclick="h2TraitsDone()">' +
         (w === 0 ? esc(S.players[1].name) + " next" : "To the toss") + '</button>' +
       foot;
     return;

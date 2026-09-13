@@ -268,6 +268,9 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   check("and his, without touching the first", ev(app, "S.h2h.form[1]") === "5-3-2" && ev(app, "S.h2h.form[0]") === "4-3-3",
     JSON.stringify(ev(app, "S.h2h.form")));
   run(app, "h2ShapeDone();"); await tick(120);
+  /* and then what they are good at, which is its own suite */
+  check("then the traits", ev(app, "S.phase") === "h_traits", ev(app, "S.phase"));
+  run(app, "h2TraitsDone(); h2TraitsDone();"); await tick(140);
   check("then the toss", ev(app, "S.phase") === "h_toss", ev(app, "S.phase"));
   check("and the two sides are in different shapes",
     ev(app, "h2Shape(0)[9].line") === 6 && ev(app, "h2Shape(1)[6].line") === 3,
