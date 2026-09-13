@@ -35,3 +35,4 @@ _tools/_questions/_cache/
 
 # scratch files the review agents leave behind while probing the app
 _tests/_probe*.js
+x.tmp
