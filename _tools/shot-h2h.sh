@@ -62,7 +62,14 @@ const setups={
   teams: `${base} render();`,
   hand:  `${nl2} h2TackleOn=true; S.h2h.who=0; S.h2h.at=0; h2Hand(1,"h_mark");`,
   mark:  `${nl2} h2TackleOn=true; S.h2h.who=0; S.h2h.at=0; S.h2h.hand=null; S.phase="h_mark"; render(); h2Mark(5); h2Mark(9);`,
-  tack:  `${nl2} h2TackleOn=true; S.h2h.who=0; S.h2h.at=5; S.phase="h_pick"; S.h2h.mark=9; render(); h2Select(9); h2Play();`,
+  /* the challenge: marks standing, the ball played into one of them. chal is
+     the FROZEN pose the question is asked over; chalgo fires late so the shot
+     lands mid-slide, the same trick strike and save use. */
+  chal:  `${nl2} h2TackleOn=true; S.h2h.who=0; S.h2h.at=5; S.h2h.marks=[9]; S.h2h.markedAgainst=0; S.phase="h_pick"; render(); h2Select(9); h2Play();`,
+  chalgo:`${nl2} h2TackleOn=true; S.h2h.who=0; S.h2h.at=5; S.h2h.marks=[9]; S.h2h.markedAgainst=0; S.phase="h_pick"; render(); setTimeout(()=>{ h2Select(9); h2Play(); }, 4150);`,
+  chalfar:`${nl2} h2TackleOn=true; S.h2h.who=0; S.h2h.at=0; S.h2h.marks=[9]; S.h2h.markedAgainst=0; S.phase="h_pick"; render(); h2Select(9); h2Play();`,
+  foul:  `${nl2} h2TackleOn=true; S.h2h.who=0; S.h2h.at=5; S.h2h.marks=[9]; S.h2h.markedAgainst=0; S.phase="h_pick"; render(); h2Select(9); h2Play(); setTimeout(()=>{ h2TackleReveal(); h2TackleJudge(false); }, 4000);`,
+  chalflat:`h2Tilt=false; ${nl2} h2TackleOn=true; S.h2h.who=0; S.h2h.at=5; S.h2h.marks=[9]; S.h2h.markedAgainst=0; S.phase="h_pick"; render(); h2Select(9); h2Play();`,
   cards: `${nl2} h2TackleOn=false; S.h2h.who=0; S.h2h.at=5; S.h2h.cards=[{},{}]; S.h2h.cards[0][1]=1; S.h2h.cards[0][6]=2; S.h2h.off=[[6],[]]; S.phase="h_pick"; render();`,
   toss:  `${picked} render();`,
   flip:  `${picked} render(); h2Call("heads");`,

@@ -286,6 +286,42 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
     JSON.parse(ev(app, "JSON.stringify(mpStatePayload())")).h2h.marks.length === 0,
     ev(app, "JSON.stringify(mpStatePayload().h2h.marks)"));
 
+  /* ---------------------------------------------------------------- */
+  console.log("\n--- the challenge goes in, and holds ---");
+  await place(0, SIX, [ST]);
+  run(app, `h2Select(${ST}); h2Play();`); await tick(200);
+  const s1 = stage(app);
+  check("somebody goes to ground", /class="h2man [^"]*\bdown\b/.test(s1), "nobody is down");
+  check("and he is the man who would be booked for it",
+    ev(app, `h2Contest().by === h2Tackler(${ST})`), ev(app, "JSON.stringify(h2Contest())").slice(0, 60));
+  check("he slides in on the first render", /\bslide\b/.test(s1), "no entry animation");
+  check("he leaves a mark in the grass", s1.indexOf("h2skid") !== -1, "no skid");
+  check("the contact is drawn", s1.indexOf("h2clash") !== -1, "no contact");
+  check("the man he went through braces", /class="h2man [^"]*\bcaught\b/.test(s1), "nobody braced");
+  check("everyone else gets out of the way", s1.indexOf("h2pitch") !== -1 && / chal"/.test(s1),
+    "the pitch is not dimmed");
+
+  /* the ball has to DIE on his boot, short of the man it was played to: that is
+     the whole tension of the freeze */
+  const bxy = s1.match(/class="h2ballwrap[^"]*" style="left:([\d.]+)%;top:([\d.]+)%/);
+  const cxy = ev(app, "[h2Contest().bx, h2Contest().by2]");
+  check("the ball dies at the contact, not on the passer's boot",
+    bxy && Math.abs(+bxy[1] - cxy[0]) < 0.2 && Math.abs(+bxy[2] - cxy[1]) < 0.2,
+    bxy ? bxy[1] + "," + bxy[2] + " vs " + cxy.map(n => n.toFixed(1)).join(",") : "no ball");
+
+  /* THE FREEZE. Tapping reveal re-renders the pitch, and a class carrying an
+     animation would play the whole challenge again at exactly the wrong
+     moment. He must still be down, and must NOT be sliding. */
+  run(app, "h2TackleReveal()"); await tick(180);
+  const s2 = stage(app);
+  check("revealing the answer holds the pose", /class="h2man [^"]*\bdown\b/.test(s2), "he got up");
+  check("and does not replay the slide", !/\bslide\b/.test(s2), "the challenge started again");
+
+  run(app, "h2TackleJudge(false)"); await tick(200);
+  const s3 = stage(app);
+  check("a foul carries him through it", /class="h2man [^"]*\bthru\b/.test(s3), "no follow through");
+  check("and the man he took out goes over", /class="h2man [^"]*\bfelled\b/.test(s3), "nobody fell");
+
   console.log(fails ? "\n" + fails + " FAILED" : "\nall green");
   process.exit(fails ? 1 : 0);
 })();

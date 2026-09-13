@@ -2163,6 +2163,203 @@
   @keyframes h2markpop{from{opacity:0;transform:translate(-50%,50%) scale(.4)}to{opacity:1;transform:translate(-50%,50%) scale(1)}}
   @media (prefers-reduced-motion: reduce){ .h2markring{animation:none} }
 
+  /* ============ THE CHALLENGE: A SLIDE, AND THEN A FREEZE ============
+
+     The question IS the tackle, so the tackle has to stop halfway and wait,
+     possibly for half a minute while the table argues. Everything here is built
+     round that. The entry is the one-render h2Chal flag; the pose it ends on is
+     written ONCE, on .down, and is recomputed from H.contest every render, so
+     the re-render that reveals the answer draws the same frozen frame instead
+     of playing the whole challenge again.
+
+     GOING TO GROUND IS VERY NEARLY FREE, and that is not a cheat. These men are
+     only standing up in the first place because .h2fig counter-rotates them
+     rotateX(-46deg) back out of the tilted grass. Take the counter-rotation
+     away and the man IS lying in the pitch's own plane, boots still pinned
+     where he left them. --fall then turns him, in the plane he is now lying in,
+     to point back down the line he came in on. Two rotations, one of them free.
+
+     Almost all of the reading is done by the grass rather than by the figure: a
+     31px shadow smear and a stud scar are full-size marks lying flat on the
+     most legible surface on the screen, where a 42px counter-rotated man is
+     not. Nothing else in the game ever scars the turf, so it cannot be mistaken
+     for anything. */
+
+  /* everyone who is not in it gets out of the way. One line, and it turns
+     twenty-two men into three. */
+  .h2pitch.chal .h2man:not(.key){opacity:.26}
+  .h2pitch.chal .h2man:not(.key) .h2lb{opacity:0}
+  .h2pitch.chal .h2man{transition:opacity .3s ease}
+
+  /* ---------- THE HELD POSE. This IS the freeze. ---------- */
+  .h2man.down{opacity:1;z-index:4}
+  /* THE SEAT. Their men are bottom-anchored and ours are centre-anchored once
+     the pitch tilts, so at the same coordinate their boots sit a whole figure
+     below our man's boots. Left alone the challenge lands short and touches
+     nobody. He is centre-anchored for the length of it, like the man he is
+     going through. */
+  .h2pitch.tilt .h2man.down{transform:translate(-50%,-50%) translateZ(10px)}
+  .h2pitch.tilt .h2man.down .h2fig{transform:rotateX(-9deg)}
+  /* -9 and not 0: flat along the turf z-fights it down his whole length */
+  .h2man.down .fig.pm{transform:rotate(var(--fall,0deg));
+    filter:drop-shadow(0 0 5px rgba(255,143,120,.75)) drop-shadow(0 1px 2px rgba(0,0,0,.5))}
+  /* studs out. The leading leg is LONGER than a standing one because it is
+     stretched, and those few pixels are what actually reach the ball. */
+  .h2man.down .f-leg.r{height:47%;transform:rotate(-13deg)}
+  .h2man.down .f-leg.l{transform:rotate(44deg)}
+  .h2man.down.mirr .f-leg.r{height:38%;transform:rotate(-44deg)}
+  .h2man.down.mirr .f-leg.l{height:47%;transform:rotate(13deg)}
+  .h2man.down .f-arm.l{transform:rotate(34deg)}
+  .h2man.down .f-arm.r{transform:rotate(-54deg)}
+  /* a man on the floor does not cast a neat little puddle */
+  .h2man.down .h2sh{width:10px;height:31px;background:rgba(0,0,0,.4);filter:blur(2.6px);
+    transform:translate(-50%,50%) rotate(var(--fall,0deg)) translateY(-40%)}
+
+  /* the man he went through: braced over the ball, not receiving it */
+  .h2man.caught .fig.pm{transform:rotate(var(--brace,-9deg))}
+  .h2man.caught .f-leg.l{transform:rotate(31deg)}
+  .h2man.caught .f-arm.l{transform:rotate(46deg)}
+  .h2man.caught .f-arm.r{transform:rotate(-40deg)}
+
+  /* what he leaves in the grass. A direct child of the man and NOT of .h2fig,
+     so it never gets the standing-up counter-rotation and stays in the turf. */
+  .h2skid{position:absolute;left:50%;bottom:0;width:11px;height:var(--skid,34px);
+    border-radius:46%;pointer-events:none;opacity:.85;filter:blur(.7px);z-index:0;
+    transform:translate(-50%,50%) rotate(var(--fall,0deg)) translateY(-46%);
+    background:
+      repeating-linear-gradient(90deg,transparent 0 2px,rgba(24,14,6,.5) 2px 4px),
+      linear-gradient(180deg,rgba(30,20,10,0),rgba(32,20,9,.55) 42%,rgba(44,29,11,.45))}
+  .h2skid.in{opacity:0;animation:h2skidin .34s ease-out both;
+    animation-delay:calc(var(--sd,700ms) * .54)}
+  @keyframes h2skidin{to{opacity:.85}}
+
+  /* THE CONTACT. A completely dead screen held for half a minute reads as a
+     crash, so exactly one thing keeps breathing, on the possession ring's own
+     period and in the salmon the marking screen uses. */
+  .h2clash{position:absolute;width:26px;height:26px;z-index:5;pointer-events:none;
+    transform:translate(-50%,-50%) translateZ(1px)}
+  .h2clash i{display:block;width:100%;height:100%;border-radius:50%;
+    border:1.5px solid rgba(255,143,120,.85);
+    box-shadow:0 0 14px rgba(224,74,52,.45),inset 0 0 10px rgba(224,74,52,.3);
+    animation:h2clashhold 1.9s ease-in-out infinite}
+  @keyframes h2clashhold{0%,100%{transform:scale(1);opacity:.9}50%{transform:scale(1.17);opacity:.5}}
+  .h2clash.hit{opacity:0;animation:h2fadein .28s ease-out both;animation-delay:var(--hit,0ms)}
+  @keyframes h2fadein{to{opacity:1}}
+  .h2clash.hit i::after{content:"";position:absolute;inset:-10px;border-radius:50%;
+    background:radial-gradient(circle,rgba(255,255,255,.95),rgba(255,168,138,.5) 40%,transparent 70%);
+    animation:h2spark .34s ease-out both;animation-delay:var(--hit,0ms)}
+  @keyframes h2spark{0%{opacity:0;transform:scale(.3)}22%{opacity:1;transform:scale(1)}
+    100%{opacity:0;transform:scale(1.5)}}
+
+  /* ---------- THE ENTRY. One render, and it lands on .down ----------
+     EVERY TRACK BELOW LEAVES ITS 100% FRAME IMPLIED wherever it can. A missing
+     100% takes the element's own computed value, which IS .down, so the freeze
+     is the animation's last frame by construction rather than by two sets of
+     numbers being kept in step by hand. */
+  .h2man.slide{animation:h2slidein var(--sd,700ms) both}
+  @keyframes h2slidein{
+    0%{left:var(--sx);top:var(--sy);animation-timing-function:cubic-bezier(.4,0,.6,1)}
+    56%{left:var(--lx);top:var(--ly);animation-timing-function:cubic-bezier(.15,.85,.3,1)}}
+  .h2pitch.tilt .h2man.slide .h2fig{animation:h2ground var(--sd,700ms) cubic-bezier(.35,.1,.3,1) both}
+  @keyframes h2ground{
+    0%,50%{transform:rotateX(-46deg)}
+    62%{transform:rotateX(-41deg)}
+    100%{transform:rotateX(-9deg)}}
+  .h2man.slide .fig.pm{animation:h2golow var(--sd,700ms) cubic-bezier(.3,.2,.25,1) both}
+  @keyframes h2golow{
+    0%{transform:rotate(0)}
+    26%{transform:rotate(calc(var(--fall) * .1))}
+    54%{transform:rotate(calc(var(--fall) * .16))}
+    84%{transform:rotate(calc(var(--fall) * 1.07))}}
+  /* one keyframe set per limb: the run and the lunge cannot be two animations
+     on one property, so they are one timeline handing over at 56% */
+  .h2man.slide .f-leg.r{animation:h2sldlead var(--sd,700ms) linear both}
+  @keyframes h2sldlead{
+    0%{transform:rotate(-26deg);height:38%}
+    14%{transform:rotate(24deg)}30%{transform:rotate(-26deg)}46%{transform:rotate(22deg)}
+    58%{transform:rotate(34deg);height:38%}
+    80%{transform:rotate(-20deg);height:49%}}
+  .h2man.slide .f-leg.l{animation:h2sldtrail var(--sd,700ms) linear both}
+  @keyframes h2sldtrail{
+    0%{transform:rotate(26deg)}14%{transform:rotate(-24deg)}30%{transform:rotate(26deg)}
+    46%{transform:rotate(-22deg)}58%{transform:rotate(-8deg)}82%{transform:rotate(50deg)}}
+  .h2man.slide .f-arm.r{animation:h2sldarmr var(--sd,700ms) ease-out both}
+  @keyframes h2sldarmr{0%{transform:rotate(22deg)}14%{transform:rotate(-26deg)}
+    30%{transform:rotate(22deg)}46%{transform:rotate(-26deg)}58%{transform:rotate(-40deg)}}
+  .h2man.slide .f-arm.l{animation:h2sldarml var(--sd,700ms) ease-out both}
+  @keyframes h2sldarml{0%{transform:rotate(-22deg)}14%{transform:rotate(26deg)}
+    30%{transform:rotate(-22deg)}46%{transform:rotate(26deg)}58%{transform:rotate(40deg)}}
+  /* the puddle becomes a smear. Every stop lists the full function list so it
+     interpolates as rotations rather than as matrices. */
+  .h2man.slide .h2sh{animation:h2sldsh var(--sd,700ms) ease-out both}
+  @keyframes h2sldsh{
+    0%,52%{width:22px;height:7px;background:rgba(0,0,0,.42);filter:blur(1.6px);
+      transform:translate(-50%,50%) rotate(0deg) translateY(0)}
+    68%{width:17px;height:13px;background:rgba(0,0,0,.34);filter:blur(2px);
+      transform:translate(-50%,50%) rotate(calc(var(--fall) * .7)) translateY(-18%)}}
+  /* the man being tackled gets INTO his brace rather than appearing in it */
+  .h2man.caught.brace .fig.pm{animation:h2braced var(--sd,700ms) ease-out both}
+  @keyframes h2braced{0%,44%{transform:rotate(0)}}
+
+  /* ---------- OUT OF THE FREEZE: HE WENT THROUGH HIM ----------
+     He carries on past where the ball was, which is what a mistimed tackle is,
+     lies there for the whistle, and picks himself up. Every track ends on the
+     plain standing values, so the class simply falling away on the next render
+     shows nothing at all. */
+  .h2man.thru .fig.pm{animation:h2thrufig 1.3s ease-in-out both}
+  @keyframes h2thrufig{
+    0%{transform:rotate(var(--fall))}
+    22%,58%{transform:rotate(calc(var(--fall) + 14deg))}
+    100%{transform:rotate(0)}}
+  .h2pitch.tilt .h2man.thru .h2fig{animation:h2thrugnd 1.3s ease-in-out both}
+  @keyframes h2thrugnd{0%,58%{transform:rotateX(-9deg)}100%{transform:rotateX(-46deg)}}
+  .h2man.thru .f-leg.r{animation:h2thruleg 1.3s ease-in-out both}
+  @keyframes h2thruleg{0%,58%{transform:rotate(-13deg);height:47%}100%{transform:rotate(0);height:38%}}
+  .h2man.thru .f-leg.l{animation:h2thrutrail 1.3s ease-in-out both}
+  @keyframes h2thrutrail{0%,58%{transform:rotate(44deg)}100%{transform:rotate(0)}}
+  .h2man.thru .f-arm.l{animation:h2thruarml 1.3s ease-in-out both}
+  @keyframes h2thruarml{0%,58%{transform:rotate(34deg)}100%{transform:rotate(8deg)}}
+  .h2man.thru .f-arm.r{animation:h2thruarmr 1.3s ease-in-out both}
+  @keyframes h2thruarmr{0%,58%{transform:rotate(-54deg)}100%{transform:rotate(-8deg)}}
+  .h2man.thru .h2sh{animation:h2thrush 1.3s ease-in-out both}
+  @keyframes h2thrush{
+    0%,58%{width:10px;height:31px;filter:blur(2.6px);
+      transform:translate(-50%,50%) rotate(var(--fall)) translateY(-40%)}
+    100%{width:22px;height:7px;filter:blur(1.6px);
+      transform:translate(-50%,50%) rotate(0deg) translateY(0)}}
+  /* the press he lost: the copy says he was left on the floor, so he is */
+  .h2man.thru.stay .fig.pm,.h2man.thru.stay .f-leg.r,.h2man.thru.stay .f-leg.l,
+  .h2man.thru.stay .f-arm.l,.h2man.thru.stay .f-arm.r,.h2man.thru.stay .h2sh,
+  .h2pitch.tilt .h2man.thru.stay .h2fig{animation:none}
+  .h2man.thru.stay .fig.pm{transform:rotate(calc(var(--fall) + 14deg))}
+  /* the card comes off the shirt as the whistle goes */
+  .h2man.thru .h2card{animation:h2cardup .5s cubic-bezier(.3,1.6,.4,1) both;animation-delay:.42s}
+  @keyframes h2cardup{
+    0%{opacity:0;transform:translateY(6px) rotate(8deg) scale(.4)}
+    100%{opacity:1;transform:translateY(0) rotate(8deg) scale(1)}}
+  /* and the man who was fouled goes over the top of him and gets back up */
+  .h2man.felled .fig.pm{animation:h2felled 1.3s ease-in-out both}
+  @keyframes h2felled{0%{transform:rotate(0)}18%,50%{transform:rotate(var(--tip,38deg))}
+    100%{transform:rotate(0)}}
+  .h2pitch.tilt .h2man.felled .h2fig{animation:h2felldown 1.3s ease-in-out both}
+  @keyframes h2felldown{0%{transform:rotateX(-46deg)}18%,50%{transform:rotateX(-20deg)}
+    100%{transform:rotateX(-46deg)}}
+
+  /* ---------- REDUCED MOTION ----------
+     The payload here is a POSE, so there is nothing to compromise: kill every
+     track and the challenge simply appears, already frozen, exactly as it would
+     have looked at the end of the entry. */
+  @media (prefers-reduced-motion: reduce){
+    .h2man.slide,.h2man.slide *,.h2man.caught.brace .fig.pm,
+    .h2man.thru,.h2man.thru *,.h2man.felled .fig.pm,
+    .h2pitch.tilt .h2man.thru .h2fig,.h2pitch.tilt .h2man.felled .h2fig,
+    .h2clash.hit,.h2clash i,.h2clash.hit i::after,.h2skid.in{animation:none}
+    .h2man.thru .h2card{opacity:1;animation:none}
+    .h2clash.hit{opacity:1}
+    .h2skid.in{opacity:.85}
+    .h2pitch.chal .h2man{transition:none}
+  }
+
 
   /* the country under a player's name on the scoreline */
   .h2ctry{display:block;font:600 .64rem var(--ui);font-style:normal;opacity:.6;
@@ -6260,8 +6457,11 @@ function h2ToggleView(){
   try{ localStorage.setItem("ball2-h2h-flat", h2Tilt ? "0" : "1"); }catch(e){}
   render();
 }
-function h2Fly(fx, fy, tx, ty, from, to){
-  h2Anim = {fx, fy, tx, ty, from, to};
+/* dur is optional and only the challenge uses it: the ball has to arrive as the
+   studs do rather than on the pass animation's own clock. --dur was already
+   plumbed through h2fly, h2arc, h2hop and h2bshadow and simply never written. */
+function h2Fly(fx, fy, tx, ty, from, to, dur){
+  h2Anim = {fx, fy, tx, ty, from, to, dur};
 }
 const h2GoalY = w => w === 0 ? 5 : 95;   // the mouth this player is shooting at
 
@@ -6352,6 +6552,25 @@ let h2Lost = null;             // the man who just gave it away, for one render
    reveal is part of the rule rather than decoration: the attacker sees the
    read, and the defender finds out whether he was baited. */
 let h2Showmark = null;
+/* THE CHALLENGE, and why it is two things rather than one.
+
+   A pass into a marked man is a tackle going in, and the question decides how
+   it ends, so the animation has to run once and then HOLD at contact, possibly
+   for half a minute while the table argues. Holding is easy; the trap is that
+   the screen re-renders when he taps to reveal the answer, and a class that
+   carries an animation would play the whole challenge again from the top.
+
+   So the entry beat is a ONE-RENDER flag, set when the tackle is triggered and
+   spent by the first draw of the pitch, and the held pose is derived from state
+   that survives (H.contest === "tackle"). First render: it goes in. Every
+   render after that: it is already in, and nothing moves. */
+let h2Chal = null;
+/* COMING OUT OF THE FREEZE AFTER A FOUL. He carries on through, the whistle
+   goes, the card comes off his shirt, and he picks himself up. It has to carry
+   its own copy of the geometry: by the time this is drawn H.contest and
+   H.caught have been cleared, so h2Contest would hand back null and the man
+   would simply snap upright with no explanation. */
+let h2Foul = null;
 const h2Abbr  = w => { const q = h2Squad(w); return (q && q.abbr) ||
   (S.players[w] ? S.players[w].name.slice(0, 3).toUpperCase() : "???"); };
 const h2Flag  = w => { const q = h2Squad(w); return q && q.flag ? h2Badge(q.flag) : null; };
@@ -6485,6 +6704,12 @@ function h2Play(){
         H.contest = "tackle";
         H.caught = H.sel;          // which mark landed, for the judge and the reveal
         H.shooting = false;
+        h2Chal = true;                 // the entry beat, spent by the next render
+        /* THE BALL IS ACTUALLY PLAYED NOW. Until this it did not move a pixel
+           into a challenge: it simply teleported once the judge was in. It
+           flies to the contact point and dies there, arriving as the studs do. */
+        const C = h2Contest();
+        if(C) h2Fly(h2BX(H.at, true), h2BY(H.at, true), C.bx, C.by2, H.at, null, Math.round(C.sd * 0.84));
         S.timeUp = false; S.phase = "h_tackle";
         render();
         return;
@@ -6542,6 +6767,9 @@ function h2TackleTimeUp(){ if(S.phase === "h_tackle"){ if(h2IsMC()) h2().pick = 
 function h2TackleJudge(won){
   const H = h2();
   stopTimer();
+  /* the geometry of the challenge, taken BEFORE the state that produced it is
+     cleared a few lines down */
+  const C = h2Contest();
   const target = H.sel;
   const tackle = H.contest === "tackle";
   const marked = H.caught == null ? null : H.caught;
@@ -6573,10 +6801,19 @@ function h2TackleJudge(won){
   }
 
   if(!tackle){
-    /* he went to ground and was left there: the pass is on, no question needed */
+    /* He went to ground and was left there: the pass is on, no question needed.
+       He stays down, because the copy says he was left there, so .stay drops
+       the getting-up half of the animation. */
     const from = H.at;
     H.at = target == null ? H.at : target;
-    h2Fly(h2BX(from, true), h2BY(from, true), h2BX(H.at, true), h2BY(H.at, true), from, H.at);
+    /* the WHOLE geometry, not a subset: the pitch draws the resolve through
+       exactly the same code path as the freeze, so it wants every field that
+       path reads or it throws on the first missing one. */
+    if(C) h2Foul = Object.assign({}, C, {stay: true});
+    /* the ball resumes from where it was frozen rather than jumping back to the
+       passer's boot to be kicked a second time */
+    const fx = C ? C.bx : h2BX(from, true), fy = C ? C.by2 : h2BY(from, true);
+    h2Fly(fx, fy, h2BX(H.at, true), h2BY(H.at, true), from, H.at);
     ching();
     toast("Goes past him, and finds " + h2Of(H.at, H.who) + ".");
     return h2Next();
@@ -6588,6 +6825,9 @@ function h2TackleJudge(won){
   const man = marked == null ? 0 : h2NearestTo(marked, H.who, other);
   const card = h2Book(other, man);
   const who = h2Who(man, other), on = marked == null ? "him" : h2Of(marked, H.who);
+  /* out of the freeze: he carries on THROUGH, which is what a mistimed tackle
+     is, and the man he took out goes over the top of him */
+  if(C) h2Foul = Object.assign({}, C, {stay: false});
   flashBad();
 
   /* through the back of one of the front three is a penalty, and it is priced
@@ -6612,7 +6852,10 @@ function h2TackleJudge(won){
         (card === "red" ? "RED CARD. " : "Yellow card. ") + "Free kick.", true);
   const from = H.at;
   H.at = target == null ? H.at : target;
-  h2Fly(h2BX(from, true), h2BY(from, true), h2BX(H.at, true), h2BY(H.at, true), from, H.at);
+  /* the ball runs on past the man on the floor from where it was frozen, rather
+     than teleporting back to the passer to be kicked twice */
+  const fx = C ? C.bx : h2BX(from, true), fy = C ? C.by2 : h2BY(from, true);
+  h2Fly(fx, fy, h2BX(H.at, true), h2BY(H.at, true), from, H.at);
   h2Next();
 }
 function h2Shoot(){
@@ -6706,6 +6949,54 @@ function h2NearestTo(lostAt, lostWho, newWho){
    rather than reading it off the state, because with two marks standing the
    state no longer knows which of them a given pass ran into. */
 function h2Tackler(on){ const H = h2(); return h2NearestTo(on, H.who, h2Other()); }
+
+/* ---------- THE GEOMETRY OF A CHALLENGE ----------
+   Where the tackler comes from, where he ends up, and which way he is pointing
+   when he gets there. NOTHING IS STORED: the whole thing is a function of two
+   men and which way the pitch is facing, so every render recomputes it and the
+   held pose cannot drift away from the animation that produced it.
+
+   Both men are read in VIEW space, which is the only place they agree: the man
+   being challenged is one of ours and drawn our way round, the tackler is one
+   of theirs and drawn mirrored. */
+function h2Contest(){
+  const H = S && S.h2h;
+  if(!H || !H.contest) return null;
+  const on = H.contest === "tackle" ? H.caught : H.at;   // the man being challenged
+  if(on == null || h2IsOff(h2Other(), on) === true) return null;
+  const by = h2Tackler(on);
+  /* he can be sent off by the very card this challenge is about to produce, and
+     a man who is off is not drawn, so there would be nobody to slide in */
+  if(by == null || h2IsOff(h2Other(), by)) return null;
+  const mx = h2VX(on, true),  my = h2VY(on, true);
+  const sx = h2VX(by, false), sy = h2VY(by, false);
+  /* y weighted 1.3 because the pitch is drawn taller than it is wide, the same
+     weighting h2NearestTo uses to pick him in the first place. In this space the
+     numbers are proportional to real pixels, so an angle taken here is an angle
+     rotate() will honour. */
+  const vx = mx - sx, vy = (my - sy) * 1.3;
+  const L = Math.hypot(vx, vy) || 1, ux = vx / L, uy = vy / L;
+  const CONTACT = 4.6;                                     // studs, not standing on him
+  const SLIDE = Math.min(9.5, Math.max(2.2, L - CONTACT)); // a body length, capped
+  const cx = mx - ux * CONTACT, cy = my - uy * CONTACT / 1.3;
+  const lx = cx - ux * SLIDE,   ly = cy - uy * SLIDE / 1.3;
+  /* His head points back down the line he came in on. Local up is his head, so
+     this is the angle taking (0,-1) onto -u.
+
+     FLOORED AT 58 DEGREES, not the 22 the design first proposed. In the pitch
+     plane the vertical axis foreshortens by cos(46), so a man lying near
+     straight-up-screen is a 25px stack pointing away from the camera, which is
+     the exact blob the floor exists to prevent. He is turned toward the middle
+     of the pitch, where there is room for him to lie. */
+  let fall = Math.atan2(-ux, uy) * 180 / Math.PI;
+  const away = mx < 50 ? 1 : -1;
+  if(Math.abs(fall) < 58) fall = 58 * away;
+  return {on: on, by: by, sx: sx, sy: sy, lx: lx, ly: ly, cx: cx, cy: cy, fall: fall,
+    mirr: fall > 0, brace: (fall > 0 ? -9 : 9),
+    skid: Math.round(SLIDE * 3.7),
+    bx: cx + ux * 1.1, by2: cy + uy * 1.1 / 1.3,
+    sd: Math.round(420 + Math.min(L - SLIDE, 40) * 9)};
+}
 /* a booked man holds back, if that dial is turned on */
 function h2TackleTier(on){
   const w = h2Other();
@@ -6928,9 +7219,18 @@ function h2PitchHTML(tappable){
   const lost = h2Lost; h2Lost = null;
   const shown = h2Showmark; h2Showmark = null;
   const tilt = h2Tilt ? " tilt" : "";
+  /* THE CHALLENGE. going is the one-render entry beat, spent here; C is the
+     geometry, recomputed every render from the state, so the pose the entry
+     lands on and the pose every later render draws are the same numbers. */
+  const going = h2Chal; h2Chal = null;
+  const foul = h2Foul; h2Foul = null;
+  /* The same pair, drawn the same way, whether the challenge is being held or
+     being resolved: C while the question is live, foul once it has gone
+     against him. One shape so the man does not jump between the two. */
+  const C = h2Contest() || foul;
 
   let out = '<div class="h2stage' + tilt + '"><div class="h2pitch' + tilt + (turn ? " turned" : "") +
-    (cele ? " cele" : "") + '">' +
+    (cele ? " cele" : "") + (C ? " chal" : "") + '">' +
     '<div class="h2box t"></div><div class="h2box b"></div>' +
     '<div class="h2six t"></div><div class="h2six b"></div>' +
     '<div class="h2circle"></div><div class="h2spot"></div>';
@@ -6951,15 +7251,33 @@ function h2PitchHTML(tappable){
     const yellows = h2Cards(who, i);
     const cls = (o.them ? "them" : "") + " " +
       [o.can && "can", o.sel && "sel", o.hold && "hold", o.from && "from", o.to && "to",
-       o.lost && "lost", o.mark && "marked", yellows && "booked"].filter(Boolean).join(" ");
+       o.lost && "lost", o.mark && "marked", yellows && "booked",
+       /* the challenge: down is the held pose, slide the one-render entry;
+          caught is the man it went in on, key keeps him out of the dimming */
+       o.down && "down", o.down && o.mirr && "mirr", o.down && o.going && "slide",
+       o.down && o.thru && "thru", o.down && o.thru && o.stay && "stay",
+       o.caught && "caught", o.caught && o.going && "brace", o.caught && o.felled && "felled",
+       o.key && "key"].filter(Boolean).join(" ");
     /* The goal scene had proper footballers and the pitch had little jerseys,
        and side by side the jerseys looked wrong. Same component, smaller. */
-    return '<div class="h2man ' + cls + '" style="left:' + h2VX(i, mine) + '%;top:' + h2VY(i, mine) +
-      '%;--i:' + i + '">' +
+    /* the tackler is drawn at the contact point rather than his own spot, and
+       every number the CSS needs to get him there rides on the element */
+    const px = o.down && C ? C.cx : h2VX(i, mine);
+    const py = o.down && C ? C.cy : h2VY(i, mine);
+    const vars = o.down && C
+      ? ';--fall:' + C.fall.toFixed(1) + 'deg;--sx:' + C.sx.toFixed(1) + '%;--sy:' + C.sy.toFixed(1) +
+        '%;--lx:' + C.lx.toFixed(1) + '%;--ly:' + C.ly.toFixed(1) + '%;--sd:' + C.sd +
+        'ms;--skid:' + C.skid + 'px'
+      : o.caught && C ? ';--brace:' + C.brace + 'deg' : "";
+    return '<div class="h2man ' + cls + '" style="left:' + px + '%;top:' + py +
+      '%;--i:' + i + vars + '">' +
       '<span class="h2sh"></span>' +
       (o.hold ? '<span class="h2ring"></span>' : "") +
+      (o.down ? '<span class="h2skid' + (o.going ? " in" : "") + '"></span>' : "") +
       '<span class="h2fig">' +
-        h2FigHTML("pm", kit, o.them ? 34 : 48, h2No(i, who)) +
+        /* he is the subject of the question, so he is drawn at our size rather
+           than at the smaller size the rest of their eleven get */
+        h2FigHTML("pm", kit, o.down ? 42 : o.them ? 34 : 48, h2No(i, who)) +
       '</span>' +
       (yellows ? '<span class="h2card' + (yellows > 1 ? " red" : "") + '"></span>' : "") +
       (o.mark ? '<span class="h2markring"></span>' : "") +
@@ -6975,7 +7293,9 @@ function h2PitchHTML(tappable){
   // theirs first, so your own men sit on top of them where they overlap
   H2_SQUAD.forEach((p, i) => {
     if(h2IsOff(them, i)) return;
-    out += man(i, false, {them:true, lost: i === lost});
+    out += man(i, false, {them:true, lost: i === lost,
+      down: !!C && C.by === i, mirr: !!C && C.mirr, going: going, key: !!C && C.by === i,
+      thru: !!foul, stay: !!foul && foul.stay});
   });
   H2_SQUAD.forEach((p, i) => {
     if(h2IsOff(H.who, i)) return;
@@ -6986,6 +7306,12 @@ function h2PitchHTML(tappable){
       from: !!A && i === A.from,
       to:   !!A && i === A.to,
       mark: !!shown && shown.indexOf(i) !== -1,
+      caught: !!C && C.on === i,
+      going: going,
+      felled: !!foul && !foul.stay,
+      /* the passer, the man he found and the man who went through him: the
+         three the eye needs. Everyone else dims out of the way. */
+      key: !!C && (C.on === i || i === H.at),
     });
   });
 
@@ -6993,12 +7319,17 @@ function h2PitchHTML(tappable){
      on the boot it left. */
   let bx = h2BX(H.at, true), by = h2BY(H.at, true);
   if(S.phase === "h_save" || S.phase === "h_sjudge"){ bx = 50; by = H2_MOUTH; }
+  /* IN A CHALLENGE THE BALL DIES ON HIS BOOT, short of the man it was played
+     to. It never arrives, and that is the whole tension of the freeze: the
+     question is what decides whether it ever does. */
+  else if(C){ bx = C.bx; by = C.by2; }
   /* How high the lob goes is how far it has to travel. A roll to a centre-back
      barely leaves the floor; a ball from the keeper onto the striker's chest
      is up in the lights. */
   const lift = A ? Math.min(52, 8 + Math.hypot(A.tx - A.fx, (A.ty - A.fy) * 1.3) * 0.5) : 0;
   const flight = A ? ';--fx:' + A.fx + '%;--fy:' + A.fy + '%;--tx:' + A.tx + '%;--ty:' + A.ty +
-                     '%;--lift:' + lift.toFixed(0) + 'px' : "";
+                     '%;--lift:' + lift.toFixed(0) + 'px' +
+                     (A.dur ? ';--dur:' + A.dur + 'ms' : "") : "";
   const ball = (cls, extra) =>
     '<div class="h2ballwrap' + (A ? " pass" : "") + cls + '" style="left:' + bx + '%;top:' + by + '%' +
     flight + extra + '"><span class="h2bsh"></span>' +
@@ -7007,6 +7338,12 @@ function h2PitchHTML(tappable){
      Cheaper and better looking than trying to draw one. */
   if(A){ out += ball(" ghost g2", ";animation-delay:-.12s") + ball(" ghost g1", ";animation-delay:-.06s"); }
   out += ball("", "");
+  /* THE CONTACT. The pitch is frozen for as long as the table needs it, and a
+     completely dead screen reads as a crash rather than as a pause, so exactly
+     one thing keeps breathing: the same 1.9s as the possession ring, in the
+     salmon the marking screen uses, because this is the mark paying off. */
+  if(C) out += '<div class="h2clash' + (going ? " hit" : "") + '" style="left:' + C.bx.toFixed(1) +
+    '%;top:' + C.by2.toFixed(1) + '%;--hit:' + Math.round(C.sd * 0.84) + 'ms"><i></i></div>';
   if(cele) out += '<div class="h2net"></div>';
   out += '</div>';
   if(cele) out += '<div class="h2goalcry"><span>GOAL</span></div>';
