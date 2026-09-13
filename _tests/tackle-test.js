@@ -118,8 +118,12 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   check("the first pass that misses comes a tier cheaper", t1 === "hard", t1 + " (ladder says extreme)");
   check("and the relief is spent", H("relief") === false, H("relief"));
   run(app, "h2Reveal(); h2Judge(true)"); await tick(200);
-  run(app, `h2Select(${LW}); h2Play();`); await tick(160);
-  check("the next one pays full price", tier() === ev(app, `h2TierFor(${TEN},${LW})`), tier());
+  /* back to the keeper and the SAME pass, because it has to be one where
+     relieved and full price differ: GK to the ten is extreme, relieved hard.
+     Asking for a pass that is already at the bottom of the ladder makes this
+     check unfailable, which is how it was first written. */
+  run(app, `S.h2h.at = ${GK}; h2Select(${TEN}); h2Play();`); await tick(160);
+  check("the next one pays full price", tier() === ev(app, `h2TierFor(${GK},${TEN})`), tier());
 
   console.log("\n--- a mark that lands is spent, and the other stands ---");
   await place(0, GK, [SIX, ST]);
@@ -202,7 +206,10 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   await tick(160);
   check("nobody can pass to him", ev(app, `(h2Select(${TEN}), S.h2h.sel)`) === null, ev(app, "S.h2h.sel"));
   check("he cannot shoot either", ev(app, `h2CanShoot(${TEN})`) === false, ev(app, `h2CanShoot(${TEN})`));
-  check("he is not collecting turnovers", ev(app, `h2NearestTo(${TEN}, 0, 1)`) !== TEN, ev(app, `h2NearestTo(${TEN}, 0, 1)`));
+  /* the ball has to be lost somewhere the ten WOULD have collected it, or the
+     check passes on a technicality: the ten is never the nearest man to
+     himself. Lost on the six, the ten is the closest at 16.8, but for the red */
+  check("he is not collecting turnovers", ev(app, `h2NearestTo(${SIX}, 0, 1)`) !== TEN, ev(app, `h2NearestTo(${SIX}, 0, 1)`));
   check("and he is not drawn on the pitch",
     (stage(app).match(/class="h2man [^"]*"/g) || []).length === 21,
     (stage(app).match(/class="h2man [^"]*"/g) || []).length);
@@ -236,6 +243,48 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   run(app, "h2TackleOn = false; S.h2h.who = 0; S.h2h.at = 0; S.h2h.markedAgainst = null; h2Next();");
   await tick(150);
   check("with tackles off a turn goes straight to the pitch", phase() === "h_pick", phase());
+
+  /* ---------------------------------------------------------------- */
+  console.log("\n--- and the secret stays secret (the things a review caught) ---");
+  await start();
+  run(app, "h2TackleOn = true;");
+
+  /* the card must never be labelled from the drawn tier: the relief only
+     exists when marks were set, so a cheaper label proves he marked, and a
+     full-price one proves he did not and the rest of the possession is free */
+  await place(0, GK, [SIX, ST]);
+  run(app, `h2Select(${TEN}); h2Play();`); await tick(180);
+  const withMarks = stage(app).match(/class="kick">([^<]*)</);
+  const drawnTier = tier();
+  await place(0, GK, []);
+  run(app, `h2Select(${TEN}); h2Play();`); await tick(180);
+  const noMarks = stage(app).match(/class="kick">([^<]*)</);
+  check("the question really was made cheaper", drawnTier === "hard" && tier() === "extreme",
+    drawnTier + " vs " + tier());
+  check("but the card reads the same either way",
+    withMarks && noMarks && withMarks[1] === noMarks[1],
+    (withMarks ? withMarks[1] : "?") + "   |   " + (noMarks ? noMarks[1] : "?"));
+
+  /* flipping the rule off and on must not leave last possession's men live */
+  await place(0, GK, [SIX, ST]);
+  run(app, "h2ToggleTackle();"); await tick(120);
+  check("switching the rule clears the marks", H("marks").length === 0, JSON.stringify(H("marks")));
+  check("and forgets whose possession they were", H("markedAgainst") === null, H("markedAgainst"));
+  run(app, "h2ToggleTackle();"); await tick(120);
+  run(app, `S.phase = "h_pick"; render(); h2Select(${SIX}); h2Play();`); await tick(180);
+  check("so a stale mark cannot fire", phase() === "h_q", phase());
+
+  /* a raking ball relieved to normal is still a raking ball */
+  await place(0, GK, [SIX]);
+  run(app, `S.h2h.safe = 0; h2Select(${TEN}); h2Play();`); await tick(170);
+  run(app, "h2Reveal(); h2Judge(true)"); await tick(220);
+  check("a relieved long ball does not feed the press streak", H("safe") === 0, H("safe"));
+
+  /* the marks are never broadcast to the other phone */
+  await place(0, GK, [SIX, ST]);
+  check("and they never go on the wire",
+    JSON.parse(ev(app, "JSON.stringify(mpStatePayload())")).h2h.marks.length === 0,
+    ev(app, "JSON.stringify(mpStatePayload().h2h.marks)"));
 
   console.log(fails ? "\n" + fails + " FAILED" : "\nall green");
   process.exit(fails ? 1 : 0);

@@ -5313,7 +5313,19 @@ function mpDoAct(p){
 }
 function mpStatePayload(){
   // while everyone is typing, the answers stay secret: strip them from the mirror
-  return (S && S.phase==="w_answer") ? {...S, wans:S.players.map(()=>"")} : S;
+  if(S && S.phase==="w_answer") return {...S, wans:S.players.map(()=>"")};
+  /* THE MARKS NEVER GO ON THE WIRE. The whole state is broadcast to every
+     phone in the room on each render, so on the pitch that was posting the two
+     men being marked to the man they are being marked against, and a guest
+     phone would happily draw the private marking screen from it. Stripped for
+     the whole match rather than only during h_mark, because they STAND: a
+     mirror sent one pass later gives away just as much as one sent during.
+
+     Safe to blank outright. The only thing that reads them is the marking grid,
+     which is the host's own screen, and the end-of-possession reveal is a toast
+     built on the host from a local variable that was never in S anyway. */
+  if(S && S.play==="pitch" && S.h2h) return {...S, h2h:{...S.h2h, marks:[]}};
+  return S;
 }
 function mpQueueState(){
   if(!MP || MP.role!=="host" || !MP.ch) return;
@@ -6197,6 +6209,17 @@ let h2TackleOn = true;
 try{ h2TackleOn = localStorage.getItem("ball2-tackle") !== "0"; }catch(e){}
 function h2ToggleTackle(){
   h2TackleOn = !h2TackleOn;
+  /* THE RULE CHANGED UNDER THE POSSESSION, so the possession's marking state
+     cannot survive it. Without this the switch is an exploit rather than a
+     toggle: marks are cleared in exactly one place, the marking handoff, and
+     h2Next only reaches that when the ball has changed hands. Turn the rule
+     off, let possession come back round, turn it on, and markedAgainst still
+     points at the man on the ball, so no marking screen runs and two men he
+     marked two possessions ago are live against an opponent who was never told.
+     markedAgainst = null is the half that matters: it is what makes the next
+     turnover hand the phone over properly. */
+  const H = S && S.h2h;
+  if(H){ H.marks = []; H.markedAgainst = null; H.relief = false; H.caught = null; }
   try{ localStorage.setItem("ball2-tackle", h2TackleOn ? "1" : "0"); }catch(e){}
   render();
 }
@@ -6448,7 +6471,9 @@ function h2Draw(t){
 function h2Play(){
   const H = h2();
   if(H.sel == null) return;
-  let t = h2TierFor(H.at, H.sel);
+  const ladder = h2TierFor(H.at, H.sel);   // what the PASS is, before any relief
+  let t = ladder;
+  let relieved = false;
   /* THE TACKLE comes first, because it decides whether the attacker is asked
      anything at all. A pass into a marked man is the DEFENDER's question. A
      pass that misses every mark is the attacker's, and the first of those in a
@@ -6467,18 +6492,27 @@ function h2Play(){
       // nothing left at that level: let it through rather than stall the game
     } else if(H.relief){
       t = h2Cheaper(t, H2_MISS_RELIEF);
-      H.relief = false;            // once a possession, not once a pass
+      /* NOT SPENT YET. Every exit below this can still bail out on a dry bank
+         and leave the ball where it was, and a relief burned on a pass that
+         never happened is a relief the attacker never got. It is committed at
+         the points where the ball actually moves. */
+      relieved = true;
     }
   }
   /* THE PRESS. One short ball too many and he comes in for it anyway. This is
      pressure that builds from knocking it about rather than anybody's
      decision, which is why it is no longer called the tackle. The intended
      pass is held in H.sel and is played out either way: he wins it, or you go
-     past him. */
-  if(H2_SAFE.includes(t) && H.safe >= H2_PRESS_AT){
+     past him.
+
+     It reads the LADDER and not the relieved tier, the same way the streak
+     does in h2Judge: a raking ball is a raking ball, and having been made
+     cheaper for missing a mark should not turn it into knocking it about. */
+  if(H2_SAFE.includes(ladder) && H.safe >= H2_PRESS_AT){
     if(h2Draw(H2_PRESS_TIER)){
       H.contest = "press";
       H.shooting = false;
+      if(relieved) H.relief = false;
       S.timeUp = false; S.phase = "h_tackle";
       render();
       return;
@@ -6486,6 +6520,7 @@ function h2Play(){
     // no question left at that level: let the pass go rather than stall the game
   }
   if(!h2Draw(t)){ toast("No " + TIERS[t].label + " questions left", true); return; }
+  if(relieved) H.relief = false;    // once a possession, and only once it is played
   H.shooting = false;
   S.timeUp = false; S.phase = "h_q";
   render();
@@ -6560,6 +6595,14 @@ function h2TackleJudge(won){
   if(marked != null && H2_SQUAD[marked].line === 6){
     toast(who + " brings " + on + " down. " +
           (card === "red" ? "RED CARD. " : "Yellow card. ") + "PENALTY.", true);
+    /* THE FOULED MAN GETS THE BALL FIRST, exactly as he does on a free kick a
+       few lines down. Without this the spot kick is taken from wherever the
+       ball happened to be, so the caption reads that the keeper is shooting,
+       and worse, missing a penalty you won in your own box hands the ball
+       straight back on your own goal line with their striker through on it. */
+    const from = H.at;
+    H.at = target == null ? H.at : target;
+    if(from !== H.at) h2Fly(h2BX(from, true), h2BY(from, true), h2BX(H.at, true), h2BY(H.at, true), from, H.at);
     H.pen = true; H.shooting = true;
     if(!h2Draw(H2_PEN_TAKER)) h2Draw(S.tier);
     S.timeUp = false; S.phase = "h_q";
@@ -6581,11 +6624,10 @@ function h2Shoot(){
      is still going. Marking men while the ball is already in range is a
      gamble, which is exactly right. */
   let t = H2_SHOT[H.at];
-  if(h2TackleOn && H.marks && H.marks.length && H.relief){
-    t = h2Cheaper(t, H2_MISS_RELIEF);
-    H.relief = false;
-  }
+  const relieved = !!(h2TackleOn && H.marks && H.marks.length && H.relief);
+  if(relieved) t = h2Cheaper(t, H2_MISS_RELIEF);
   if(!h2Draw(t)){ toast("No " + TIERS[t].label + " questions left", true); return; }
+  if(relieved) H.relief = false;   // spent on a shot that is actually taken
   H.shooting = true; H.sel = null;
   S.timeUp = false; S.phase = "h_q";
   render();
@@ -6716,8 +6758,14 @@ function h2Judge(ok){
     return h2ToSave();
   }
   const from = H.at;
-  /* a short ball adds to the streak; a real one commits and clears it */
-  H.safe = H2_SAFE.includes(S.tier) ? (H.safe || 0) + 1 : 0;
+  /* A SHORT BALL ADDS TO THE STREAK; A REAL ONE COMMITS AND CLEARS IT, and
+     what counts is the LADDER, not the question that was actually asked. This
+     used to read S.tier, which is the drawn tier, so a raking ball that had
+     been relieved from Hard down to Normal was filed as knocking it about and
+     fed the press streak. That is the wrong way round twice over: the relief
+     is meant to reward committing to a real ball, not to have it counted as a
+     safe one and draw a contested question three passes later. */
+  H.safe = H2_SAFE.includes(h2TierFor(from, H.sel)) ? (H.safe || 0) + 1 : 0;
   H.at = H.sel; H.sel = null;
   h2Fly(h2BX(from, true), h2BY(from, true), h2BX(H.at, true), h2BY(H.at, true), from, H.at);
   ching();
@@ -6825,6 +6873,13 @@ function h2Next(){
    words, they see the colour. */
 function h2Hand(w, next, down){
   const H = h2();
+  /* NOTHING RAISED ON ONE MAN'S SCREEN CROSSES THE TABLE. A toast lives for a
+     couple of seconds and the handoff cards are tapped through faster than
+     that, so "Two is all you get" was raised on the private screen and still
+     sitting there when the attacker got the phone back: proof that the
+     defender had marked his full two, which is exactly the thing the identical
+     put-it-down card exists to hide. */
+  try{ const t = $("#toast"); clearTimeout(t._h); t.classList.remove("show"); }catch(e){}
   /* a fresh possession starts with a blank sheet, never with last time's men
      still ticked */
   if(next === "h_mark"){ H.marks = []; H.relief = false; H.caught = null; }
@@ -7245,10 +7300,33 @@ function h2Render(st){
     const shown = S.phase === "h_judge";
     const head = H.shooting ? "SHOOTING from " + h2Of(H.at, H.who)
                             : h2PassName(H.at, H.sel == null ? H.at : H.sel);
+    /* THE CARD IS LABELLED FROM THE LADDER, NOT FROM THE QUESTION THAT WAS
+       DRAWN, and that is a secrecy fix rather than a cosmetic one.
+
+       The relief only exists when marks were set, so a card reading Hard under
+       a pass the ladder prices at Extreme is proof that the defender marked
+       somebody, and a card reading Extreme is proof he did not. The second is
+       the dangerous half: knowing he chose to let you play means knowing the
+       whole possession is free, so you go route one to the striker and shoot
+       with nothing to lose. The identical put-it-down card is defeated on the
+       first ball.
+
+       Labelling it any other way leaks it too. Showing the RELIEVED tier in the
+       confirm bar before he commits is worse, because he learns it before he
+       has spent anything. So the price he is shown is what the pass is worth,
+       every time, and the relief lives where it cannot be read: in which
+       question actually came out of the bank. In this mode a tier pays no
+       points, so the label was only ever telling him how hard to expect it to
+       be, and the ladder tells him that honestly.
+
+       A penalty and a contested ball keep their own label: both are announced
+       out loud anyway, and a penalty priced off H2_SHOT would be a lie. */
+    const priced = (H.pen || H.contest || !t) ? t
+      : (TIERS[H.shooting ? H2_SHOT[H.at] : h2TierFor(H.at, H.sel == null ? H.at : H.sel)] || t);
     st.innerHTML =
       h2ScoreHTML() + h2PitchHTML(false) +
-      '<div class="qcard" style="--dc:' + t.color + '">' +
-        '<div class="kick">' + esc(head) + ' · ' + esc(me.name) + ' · ' + t.label + '</div>' +
+      '<div class="qcard" style="--dc:' + priced.color + '">' +
+        '<div class="kick">' + esc(head) + ' · ' + esc(me.name) + ' · ' + priced.label + '</div>' +
         '<div class="qtext">' + esc(q().q) + '</div>' +
         (shown && !h2IsMC() ? '<div class="atext"><span class="lbl">Answer</span>' + esc(q().a) + '</div>' : "") +
         (h2IsMC() ? h2McOptionsHTML(shown) : "") +
@@ -8486,8 +8564,17 @@ function resumeGame(){
        secret was in somebody's head and the phone has been closed since, so
        restoring the private screen would either show the mark to the wrong man
        or ask him to remember what he picked last Friday. */
+    /* PARKED MID-HANDOFF: GO BACK INTO IT, do not drop to the pitch.
+       Dropping out left marks empty with markedAgainst stamped, so the
+       attacker got one guaranteed free pass and the marking screen then
+       appeared one ball into the possession, which is both a gift and a tell.
+       h2Hand blanks marks, relief and caught on the way in, so the defender
+       simply sets them again, which is the right answer: the secret was in
+       somebody's head and the phone has been closed since. */
     if(S.phase === "h_hand" || S.phase === "h_mark"){
-      H.marks = []; H.markedAgainst = null; H.hand = null; S.phase = "h_pick";
+      H.markedAgainst = null; H.hand = null;
+      if(h2TackleOn) h2Hand(h2Other(), "h_mark");
+      else { H.marks = []; S.phase = "h_pick"; }
     }
   }
   render();
