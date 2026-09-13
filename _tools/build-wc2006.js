@@ -142,7 +142,12 @@ function parseSquads(wikitext) {
       players.push({
         no: parseInt(f.no, 10) || 99,
         pos: f.pos.trim().toUpperCase(),
-        name: unlink(f.name),
+        /* A NAME ENDS WHERE THE FIRST FOOTNOTE BEGINS. unlink strips HTML
+           tags, so a <ref> vanished and left the {{cite news}} inside it
+           behind, plus the sentence after it: Serbia and Montenegro shipped
+           a bench man called "squad." whose full name was four hundred
+           characters of UEFA citation. Cut first, clean second. */
+        name: unlink(String(f.name).split(/<ref|{{/)[0]),
         caps: parseInt(f.caps, 10) || 0,
         club: unlink(f.club || ""),
       });
