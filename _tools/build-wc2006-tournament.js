@@ -73,6 +73,7 @@ const SQUADS = YEAR + " FIFA World Cup squads";
    better than comparing 2022 to 2006 and calling the difference a bug. */
 const PUBLISHED_BY_YEAR = {
   "2006": { goals: 147, yellows: 345, reds: 28 },
+  "2018": { goals: 169, yellows: 219, reds: 4 },
   "2022": { goals: 172, yellows: 227, reds: 4 },
 };
 const PUBLISHED = PUBLISHED_BY_YEAR[YEAR] || null;
@@ -131,6 +132,22 @@ const ALIAS = {
   "Jorge Martín Núñez": "Jorge Núñez",
   "Julio Ricardo Cruz": "Julio Cruz",
   "Luís Manuel Ferreira Delgado": "Delgado",
+  /* 2018. The squad page gives him his family name in full and the match
+     reports drop the article, which is the standard Arabic transliteration
+     disagreement rather than two different men. */
+  "Abdallah Said": "Abdallah El Said",
+  /* 2018. Wikipedia gives the middle name or a disambiguator in the match
+     reports and the plain name in the squad, and two of these are two
+     different men who share a name, which is exactly why the disambiguator is
+     there. Each one checked against assets/wc2018/index.json by hand. */
+  /* TWO MEN, ONE NAME. Uruguay's Carlos Sánchez and Colombia's Carlos
+     Sánchez, and the deck holds both under exactly that name, so the alias
+     has to name the side as well or the wrong man gets the card. */
+  "Carlos Andrés Sánchez": {n: "Carlos Sánchez", side: "Uruguay"},
+  "Carlos Sánchez (Uruguayan footballer)": {n: "Carlos Sánchez", side: "Uruguay"},
+  "Carlos Sánchez (Colombian footballer)": {n: "Carlos Sánchez", side: "Colombia"},
+  "Alberto Junior Rodríguez": "Alberto Rodríguez",
+  "Gabriel Enrique Gómez": "Gabriel Gómez",
   /* on the pitch in Germany, not among the twenty-three their country's squad
      page lists. Two articles disagreeing, not something to paper over. */
   "Hussein Sulaimani": null,
@@ -141,11 +158,23 @@ function find(name, side) {
   /* THE QUALIFIER COMES OFF THE RAW TITLE. norm() turns brackets into spaces,
      so by the time it has run there is nothing left to cut and "Ronaldo
      (Brazilian footballer)" is a four-word name nobody has. */
-  let raw = String(name).replace(/\s*\([^)]*\)\s*$/, "").trim();
-  if (Object.prototype.hasOwnProperty.call(ALIAS, raw)) {
-    if (ALIAS[raw] === null) return null;      // known, and known not to be in the deck
-    raw = ALIAS[raw];
+  /* THE TABLE SEES THE TITLE FIRST, brackets and all. Stripping them before
+     the lookup meant a disambiguated title could never be aliased, which is
+     the one case where the bracket is the whole point. */
+  let raw = String(name).trim();
+  let want = null;
+  for (const key of [raw, raw.replace(/\s*\([^)]*\)\s*$/, "").trim()]) {
+    if (!Object.prototype.hasOwnProperty.call(ALIAS, key)) continue;
+    if (ALIAS[key] === null) return null;      // known, and known not to be in the deck
+    const v = ALIAS[key];
+    if (typeof v === "string") raw = v;
+    else { raw = v.n; want = v.side || null; }
+    break;
   }
+  raw = raw.replace(/\s*\([^)]*\)\s*$/, "").trim();
+  /* a side named in the alias is as good as one named by the caller, and the
+     callers below read a concatenated page and have none */
+  if (want) side = want;
   const n = norm(raw);
   let hit = byFull[n] || [];
   if (hit.length > 1 && side) hit = hit.filter(m => m.side === side);
@@ -223,7 +252,7 @@ function goalsIn(tpl) {
     man.app += 1;
     const rest = m[2] || "";
     const ys = (rest.match(/\{\{\s*yel\b/gi) || []).length;
-    const rs = (rest.match(/\{\{\s*(sent off|red|yel-red|dismissed)\b/gi) || []).length;
+    const rs = (rest.match(/\{\{\s*(sent ?off|red|yel-red|y-r|dismissed)\b/gi) || []).length;
     man.y += ys; man.r += rs; yel += ys; red += rs;
   }
   console.log("line-up rows: " + rows + ", yellows " + yel + ", reds " + red +

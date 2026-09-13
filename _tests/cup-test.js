@@ -45,6 +45,8 @@ const check = (n, c, x) => {
 
 const CUP = R("assets/cup/2006.json");
 const WC = R("assets/wc2006/index.json");
+const CUP18 = R("assets/cup/2018.json");
+const WC18 = R("assets/wc2018/index.json");
 
 (async () => {
   const app = makeInstance("cup");
@@ -52,7 +54,9 @@ const WC = R("assets/wc2006/index.json");
   /* the harness is offline on purpose, so both decks are handed over the way a
      fetch would have handed them over */
   run(app, "TEAMS.wc2006 = " + JSON.stringify(WC) + ";");
-  run(app, "CUP = " + JSON.stringify(CUP) + ";");
+  run(app, "CUPS['2006'] = " + JSON.stringify(CUP) + ";");
+  run(app, "TEAMS.wc2018 = " + JSON.stringify(WC18) + ";");
+  run(app, "CUPS['2018'] = " + JSON.stringify(CUP18) + ";");
   /* The Dugout asks Pick One, so the Cup needs the multiple choice bank before
      it will let anybody kick off. */
   run(app, 'DECKS["classic-mc"] = ' + JSON.stringify(R("assets/mc/index.json")) + ";");
@@ -284,6 +288,62 @@ const WC = R("assets/wc2006/index.json");
   run(app, "S.players[0].score = 1; S.players[1].score = 1; S.h2h.min = H2_MINUTES; h2AfterWhistle();");
   await tick(150);
   check("a level knockout goes to penalties", ev(app, "S.phase") === "h_pens", ev(app, "S.phase"));
+
+  console.log("\n--- a second tournament ---");
+  clean();
+  run(app, "CUP_YEAR = '2006';");
+  check("both tournaments are on the phone", ev(app, "cupYearsLive().join(',')") === "2006,2018",
+    ev(app, "cupYearsLive().join(',')"));
+  check("2006 is where it opens", ev(app, "cupYear()") === "2006", ev(app, "cupYear()"));
+  /* THE SIDE LISTS ARE DIFFERENT TOURNAMENTS, which is the cheapest possible
+     proof that the year is actually being read. */
+  check("and Trinidad are in the 2006 draw", ev(app, 'cupGroupOf("Trinidad and Tobago")') === "B",
+    ev(app, 'cupGroupOf("Trinidad and Tobago")'));
+  run(app, "cupSetYear('2018');"); await tick(120);
+  check("switching moves the tournament", ev(app, "cupYear()") === "2018", ev(app, "cupYear()"));
+  check("Trinidad are not in 2018", ev(app, 'cupGroupOf("Trinidad and Tobago")') === null,
+    ev(app, 'cupGroupOf("Trinidad and Tobago")'));
+  check("but Panama are", ev(app, 'cupGroupOf("Panama")') === "G", ev(app, 'cupGroupOf("Panama")'));
+  check("and France won it", ev(app, 'cupRank("France")') === 7, ev(app, 'cupRank("France")'));
+  check("while Germany went out in the group", ev(app, 'cupRank("Germany")') === 1,
+    ev(app, 'cupRank("Germany")'));
+
+  console.log("\n--- and a 2018 run is a 2018 run all the way through ---");
+  run(app, 'cupStart("Panama");'); await tick(120);
+  c = cup();
+  check("the run knows its year", c.year === "2018", c.year);
+  check("in the right group", c.group === "G", c.group);
+  check("against the sides who were in it",
+    c.fixtures.slice().sort().join(",") === "Belgium,England,Tunisia", c.fixtures.join(","));
+  /* A RUN PINS ITS TOURNAMENT. Switching the picker under a half-played run
+     would strand it, so it simply does not move. */
+  run(app, "cupSetYear('2006');"); await tick(110);
+  check("a run in progress pins the tournament", ev(app, "cupYear()") === "2018",
+    ev(app, "cupYear()"));
+  /* AND IT IS PLAYED WITH THE 2018 SQUADS */
+  run(app, "cupPlay();"); await tick(160);
+  check("the match uses the 2018 pool", ev(app, "S.pool") === "wc2018", ev(app, "S.pool"));
+  check("with Panama in it", ev(app, "S.h2h.teams[0]") === "Panama", ev(app, "S.h2h.teams[0]"));
+  /* the shirt is the proof: 2018 Panama, not a 2006 side */
+  check("and 2018 men on the pitch",
+    /Panama/.test(JSON.stringify(ev(app, "Object.keys(TEAMS.wc2018)"))) &&
+    ev(app, "h2Man(0,0).full") === WC18.Panama.xi[0].full,
+    ev(app, "h2Man(0,0).full") + " / " + WC18.Panama.xi[0].full);
+  run(app, "S = null;"); await tick(110);
+  /* THROUGH THE GROUP AND INTO 2018'S DRAW */
+  file(2, 0); file(2, 0); file(2, 0);
+  c = cup();
+  check("nine points tops Group G", c.place === 1 && c.round === "r16", c.place + " / " + c.round);
+  check("and the last sixteen is the real 2018 draw",
+    CUP18.slots[c.at] === "G1", CUP18.slots[c.at]);
+  check("which in 2018 played the runner-up of Group H",
+    ev(app, "cupNext()") === CUP18.groups.H.sides[1], ev(app, "cupNext()"));
+  /* AND THE REAL 2018 TIES STILL END THE WAY THEY ENDED */
+  const real18 = ev(app, 'cupDecide("Brazil", "Belgium")');
+  check("Belgium still knock Brazil out in Kazan",
+    real18.w === "Belgium" && real18.f === 1 && real18.g === 2, JSON.stringify(real18));
+  clean();
+  run(app, "CUP_YEAR = '2006';");
 
   console.log("\n--- the screens ---");
   clean();

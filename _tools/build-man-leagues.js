@@ -267,7 +267,7 @@ async function entities(ids) {
 (async () => {
   /* ---------- 3. resolve ---------- */
   /* the squad lists first: exact, and they cannot pick the wrong Raul */
-  console.log("\nreading the 2006 squad lists for article titles...");
+  console.log("\nreading the " + POOL.replace(/^wc/, "") + " squad lists for article titles...");
   const links = await squadLinks();
   const wanted = [...new Set(men.map(m => links[norm(m.full)] || links[norm(m.n)]).filter(Boolean))];
   console.log("  " + wanted.length + " articles linked; following enwiki redirects...");
@@ -335,7 +335,7 @@ async function entities(ids) {
     if (bestScore >= 7) sure++;
     if (bestScore >= 4) tied++;
   }
-  console.log("tied to their 2006 side by passport AND club record: " + sure + "/" + men.length);
+  console.log("tied to their own side by passport AND club record: " + sure + "/" + men.length);
   console.log("tied by at least one of the two: " + tied + "/" + men.length);
 
   /* ---------- 4. the clubs, and where they are ---------- */

@@ -205,6 +205,9 @@ setups.cupgroup = `cupStart("Trinidad and Tobago"); render();`;
 setups.cupchart = `cupStart("Trinidad and Tobago"); cupFiled(3,0); cupFiled(2,0); cupFiled(1,0); render();`;
 setups.cupout = `cupStart("Togo"); cupFiled(0,2); cupFiled(0,2); cupFiled(1,2); render();`;
 setups.cupwon = `cupStart("Trinidad and Tobago"); cupFiled(3,0); cupFiled(2,0); cupFiled(1,0); for(let i=0;i<4;i++) cupFiled(2,1); render();`;
+/* and the second tournament */
+setups.cup2018 = `cupSetYear("2018");`;
+setups.cup2018group = `cupSetYear("2018"); cupStart("Panama"); render();`;
 
 const SHOT_SHAPES = ["4-2-3-1", "4-4-2", "4-3-3", "3-5-2", "5-3-2"];
 const SHOT_LINES = ["high", "mid", "low"];

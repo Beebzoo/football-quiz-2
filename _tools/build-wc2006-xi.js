@@ -117,6 +117,19 @@ const ALIAS = {
   "Jorge Martín Núñez": "Jorge Núñez",
   "Julio Ricardo Cruz": "Julio Cruz",
   "Luís Manuel Ferreira Delgado": "Delgado",
+  /* 2018. The squad page gives him his family name in full and the match
+     reports drop the article, which is the standard Arabic transliteration
+     disagreement rather than two different men. */
+  "Abdallah Said": "Abdallah El Said",
+  /* 2018. Wikipedia gives the middle name or a disambiguator in the match
+     reports and the plain name in the squad, and two of these are two
+     different men who share a name, which is exactly why the disambiguator is
+     there. Each one checked against assets/wc2018/index.json by hand. */
+  "Carlos Andrés Sánchez": "Carlos Sánchez",
+  "Carlos Sánchez (Uruguayan footballer)": "Carlos Sánchez",
+  "Carlos Sánchez (Colombian footballer)": "Carlos Sánchez",
+  "Alberto Junior Rodríguez": "Alberto Rodríguez",
+  "Gabriel Enrique Gómez": "Gabriel Gómez",
 };
 /* COUNTRY NAMES DIFFER between the kit titles and the deck keys. Checked one
    at a time against the deck rather than guessed. */
@@ -163,18 +176,67 @@ const SLOTS = [
   { n: "RW",  want: ["RW", "RM", "RF", "SS"] },
 ];
 
-/* Order a real line-up into the app's slots, and say where it had to guess. */
-function fit(lineup) {
-  const pool = lineup.slice();
-  const out = [], notes = [];
-  for (const slot of SLOTS) {
-    let at = -1;
-    for (const w of slot.want) { at = pool.findIndex(p => p.pos === w); if (at > -1) break; }
-    if (at < 0) {
-      at = 0;
-      if (pool.length) notes.push(slot.n + " filled by a " + pool[0].pos);
+/* HOW FAR UP THE PITCH EACH POSITION IS, nought at your own goal and four at
+   theirs. It is only ever used to decide which of two men a slot would rather
+   borrow, so the exact numbers matter less than their order, and their order
+   is not arguable. */
+const ZONE = {
+  GK: 0,
+  SW: 1, CB: 1, DF: 1, LB: 1.3, RB: 1.3, LWB: 1.6, RWB: 1.6,
+  DM: 2, CM: 2.5, MF: 2.5, LM: 2.6, RM: 2.6,
+  AM: 3, SS: 3.4, LW: 3.4, RW: 3.4, LF: 3.8, RF: 3.8,
+  CF: 4, ST: 4, FW: 4,
+};
+const SLOT_ZONE = [0, 1, 1, 1.3, 1.3, 2, 2.5, 3, 3.4, 4, 3.4];
+/* what it costs to put this man in this slot: his place on the wish list if he
+   is on it, otherwise ten plus how far he has been moved. The keeper is not
+   negotiable at any price. */
+function cost(si, slot, man){
+  const at = slot.want.indexOf(man.pos);
+  if(at > -1) return at;
+  if(si === 0 || man.pos === "GK") return 1000;
+  const z = ZONE[man.pos];
+  return 10 + Math.abs(SLOT_ZONE[si] - (z === undefined ? 2.5 : z));
+}
+/* Order a real line-up into the app's slots, and say where it had to guess.
+   The whole eleven at once rather than slot by slot: see the note at the top
+   of this file about Vertonghen in attacking midfield. */
+function fit(lineup){
+  const men = lineup.slice();
+  const n = SLOTS.length;
+  const C = SLOTS.map((slot, si) => men.map(m => cost(si, slot, m)));
+  /* a greedy start: the cheapest pair still going, over and over */
+  const pick = new Array(n).fill(-1), taken = new Array(men.length).fill(false);
+  for(let k = 0; k < n; k++){
+    let best = Infinity, bs = -1, bm = -1;
+    for(let si = 0; si < n; si++){
+      if(pick[si] > -1) continue;
+      for(let mi = 0; mi < men.length; mi++){
+        if(taken[mi]) continue;
+        if(C[si][mi] < best){ best = C[si][mi]; bs = si; bm = mi; }
+      }
     }
-    out.push(pool.splice(at, 1)[0] || null);
+    if(bs < 0) break;
+    pick[bs] = bm; taken[bm] = true;
+  }
+  /* then swap any two until no swap is an improvement, which at eleven by
+     eleven settles in a handful of passes */
+  for(let pass = 0; pass < 12; pass++){
+    let moved = false;
+    for(let a = 0; a < n; a++) for(let b = a + 1; b < n; b++){
+      const ma = pick[a], mb = pick[b];
+      if(ma < 0 || mb < 0) continue;
+      if(C[a][mb] + C[b][ma] < C[a][ma] + C[b][mb]){
+        pick[a] = mb; pick[b] = ma; moved = true;
+      }
+    }
+    if(!moved) break;
+  }
+  const out = [], notes = [];
+  for(let si = 0; si < n; si++){
+    const m = pick[si] > -1 ? men[pick[si]] : null;
+    out.push(m || null);
+    if(m && SLOTS[si].want.indexOf(m.pos) < 0) notes.push(SLOTS[si].n + " filled by a " + m.pos);
   }
   return { xi: out, notes: notes };
 }

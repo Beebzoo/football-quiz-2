@@ -5710,6 +5710,9 @@ const POOLS = {
   wc2006: {label:"World Cup 2006", group:"World Cups", of:"classic",
            file:"assets/wc2006/index.json", flags:"assets/natflags/", ext:".png",
            blurb:"Thirty-two nations, and the eleven each of them actually started their last match with."},
+  wc2018: {label:"World Cup 2018", group:"World Cups", of:"classic",
+           file:"assets/wc2018/index.json", flags:"assets/natflags/", ext:".png",
+           blurb:"Russia. Thirty-two nations, and the eleven each of them started their last match with."},
   wc2022: {label:"World Cup 2022", group:"World Cups", of:"classic",
            file:"assets/wc2022/index.json", flags:"assets/natflags/", ext:".png",
            blurb:"Thirty-two nations from Qatar, twenty-six men each, and the eleven each of them last put out."},
@@ -5863,7 +5866,7 @@ function setTheme(t){
   applyTheme();
   render();
 }
-const BUILD = "14 Sep 2026 · 01:21";
+const BUILD = "14 Sep 2026 · 01:35";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five
@@ -9229,29 +9232,49 @@ function aiTick(){
 }
 
 /* ================= THE CUP ================= */
-const CUP_POOL = "wc2006";
-/* THE TOURNAMENT ITSELF, fetched like every other deck. Four kilobytes, and
-   the Cup simply is not offered until it lands. */
-let CUP = null;
-fetch("assets/cup/2006.json").then(r => r.ok ? r.json() : null).then(j => {
-  if(!j) return;
-  CUP = j;
-  if(CUP_VIEW || !S || S.phase === "setup") render();
-}).catch(()=>{});
-const cupReady = () => !!(CUP && TEAMS[CUP_POOL]);
-const cupBook = () => TEAMS[CUP_POOL] || {};
+/* EVERY TOURNAMENT THE APP HAS A POOL FOR. Four kilobytes each, fetched like
+   every other deck, and a year is simply not offered until both its table and
+   its squads have landed. */
+const CUP_YEARS = ["2006", "2018"];
+const cupPool = y => "wc" + y;
+const CUPS = {};
+let CUP_YEAR = CUP_YEARS[0];
+for(const y of CUP_YEARS)
+  fetch("assets/cup/" + y + ".json").then(r => r.ok ? r.json() : null).then(j => {
+    if(!j) return;
+    CUPS[y] = j;
+    if(CUP_VIEW || !S || S.phase === "setup") render();
+  }).catch(()=>{});
+/* WHICH ONE IS ON. A saved run pins it, because a run is a tournament and
+   half a run through 2018 cannot be finished in 2006. */
+const cupYear = () => { const c = mine().cup; return (c && c.year) || CUP_YEAR; };
+const cupReady = () => { const y = cupYear(); return !!(CUPS[y] && TEAMS[cupPool(y)]); };
+const cupYearsLive = () => CUP_YEARS.filter(y => CUPS[y] && TEAMS[cupPool(y)]);
+function cupSetYear(y){
+  audio();
+  if(mine().cup) return;                 // a run pins its own tournament
+  if(CUP_YEARS.indexOf(y) < 0) return;
+  CUP_YEAR = y;
+  CUP_VIEW = {};
+  render();
+}
+const CUP_POOL = null;   // kept out of the way: the pool comes from the year
+void CUP_POOL;
+const cupBook = () => TEAMS[cupPool(cupYear())] || {};
 /* THE CUP IS NOT A MATCH, so its flag cannot come from h2Badge: that reads the
    pool off S, and the wall chart is looked at with no match on. */
 const cupFlag = side => { const t = cupBook()[side]; return t && t.flag ? "assets/natflags/" + t.flag + ".png" : null; };
 const cupKit  = side => (cupBook()[side] || {}).kit || "#8a8a8a";
-const cupSides = () => CUP ? [].concat.apply([], "ABCDEFGH".split("").map(g => CUP.groups[g].sides)) : [];
-const cupGroupOf = side => CUP ? ("ABCDEFGH".split("").find(g => CUP.groups[g].sides.indexOf(side) > -1) || null) : null;
+const cupOf = () => CUPS[cupYear()] || null;
+const cupSides = () => { const C = cupOf(); return C ? [].concat.apply([], "ABCDEFGH".split("").map(g => C.groups[g].sides)) : []; };
+const cupGroupOf = side => { const C = cupOf();
+  return C ? ("ABCDEFGH".split("").find(g => C.groups[g].sides.indexOf(side) > -1) || null) : null; };
 
 /* HOW FAR EACH SIDE REALLY WENT, 7 for the winners down to 1 for a side that
    went home bottom of its group. It decides two things, and both of them are
    the same judgement: how hard the computer plays, and who wins a tie that
    2006 never staged. */
-const cupRank  = side => (CUP && CUP.rank[side]) || 1;
+const cupRank  = side => { const C = cupOf(); return (C && C.rank[side]) || 1; };
 const cupLevel = side => cupRank(side) >= 6 ? "champs" : cupRank(side) >= 4 ? "ere" : "sunday";
 const CUP_SAYS = {7: "won it", 6: "lost the final", 5: "lost the semi-final",
                   4: "went out in the quarter-final", 3: "went out in the last sixteen",
@@ -9282,18 +9305,19 @@ function cupStart(side){
   audio();
   if(!cupReady()) return toast("The tournament is still loading.", true);
   const g = cupGroupOf(side);
-  if(!g) return toast("That side is not in the 2006 draw.", true);
-  const played = CUP.groups[g].played;
-  const run = {year: CUP.year, nation: side, group: g, round: "group", n: 0,
+  if(!g) return toast("That side is not in the draw.", true);
+  const C = cupOf();
+  const played = C.groups[g].played;
+  const run = {year: C.year, nation: side, group: g, round: "group", n: 0,
                alive: true, won: false, out: null, results: [], table: {},
                /* your three, in the order the fixture list had them */
                fixtures: played.filter(m => m.a === side || m.b === side)
                                .map(m => m.a === side ? m.b : m.a),
                line: null, at: 0, chart: []};
-  for(const t of CUP.groups[g].sides) run.table[t] = {p: 0, w: 0, d: 0, l: 0, gf: 0, ga: 0, pts: 0};
+  for(const t of C.groups[g].sides) run.table[t] = {p: 0, w: 0, d: 0, l: 0, gf: 0, ga: 0, pts: 0};
   /* THE OTHER THREE HAVE ALREADY PLAYED EACH OTHER, with the real scores. The
      group you walk into is the group that happened, minus your results, and by
-     the end of your third match the table is the real 2006 table with yours
+     the end of your third match the table is the real table with yours
      swapped in. No dice anywhere in it. */
   for(const m of played) if(m.a !== side && m.b !== side) cupRow(run, m.a, m.b, m.f, m.g);
   mine().cup = run;
@@ -9315,7 +9339,8 @@ function cupRow(run, a, b, f, g){
    rather than a thumb on the scale: it only ever separates two sides who are
    level on all three, which in 2006 itself happened to nobody. */
 function cupTable(run){
-  const real = CUP ? CUP.groups[run.group].sides : [];
+  const C = CUPS[run.year] || cupOf();
+  const real = C ? C.groups[run.group].sides : [];
   return Object.keys(run.table).map(k => Object.assign({side: k}, run.table[k]))
     .sort((a, b) => (b.pts - a.pts) || ((b.gf - b.ga) - (a.gf - a.ga)) || (b.gf - a.gf) ||
                     (real.indexOf(a.side) - real.indexOf(b.side)));
@@ -9330,10 +9355,11 @@ function cupNext(){
 }
 /* ---------- the sixteen ---------- */
 function cupBuildLine(run){
+  const C = CUPS[run.year];
   const t = cupTable(run);
-  run.line = CUP.slots.map(sl => {
+  run.line = C.slots.map(sl => {
     const g = sl[0], n = +sl[1];
-    return g === run.group ? t[n - 1].side : CUP.groups[g].sides[n - 1];
+    return g === run.group ? t[n - 1].side : C.groups[g].sides[n - 1];
   });
   run.at = run.line.indexOf(run.nation);
 }
@@ -9343,7 +9369,7 @@ const cupWinner = m => m.f > m.g ? m.a : m.f < m.g ? m.b : ((m.pf || 0) > (m.pg 
    the draw and somebody else is not come down to how far each side went, and
    even those get enough of a wobble to be a football match. */
 function cupDecide(a, b){
-  for(const m of (CUP.ko || [])){
+  for(const m of ((cupOf() || {}).ko || [])){
     if(m.a === a && m.b === b) return {w: cupWinner(m), f: m.f, g: m.g, pf: m.pf, pg: m.pg, real: true};
     if(m.a === b && m.b === a) return {w: cupWinner(m), f: m.g, g: m.f, pf: m.pg, pg: m.pf, real: true};
   }
@@ -9405,7 +9431,7 @@ function cupFiled(f, g, pens){
   if(c.round === "final"){
     c.alive = false; c.won = true;
     cupFile(c);
-    cupCrown(c.nation);
+    cupCrown(c.nation, c.year);
   } else {
     c.round = CUP_ROUNDS[CUP_ROUNDS.indexOf(c.round) + 1];
     cupPay(2, "the win");
@@ -9448,7 +9474,12 @@ function cupLine(r){
 /* WINNING IT FINISHES YOUR PAGE. Twenty-three stickers of the country you took
    all the way, which is a foil, which is their bench in The Dugout for every
    match after it. Seven matches for a squad you keep. */
-function cupCrown(side){
+/* WINNING IT FINISHES YOUR PAGE, when the page exists. The album is the 2006
+   book and only the 2006 book, because a second album is a second collection
+   and that is a decision rather than a side effect of adding a pool. Win it
+   with a 2018 side and the prize is packs. */
+function cupCrown(side, year){
+  if(year && year !== "2006") return albumGive(6, "the World Cup");
   const men = albumMen(side);
   let stuck = 0;
   for(const m of men) if(!albumHas(albumId(side, m))){ albumStick(albumId(side, m)); stuck++; }
@@ -9465,13 +9496,16 @@ function cupPlay(){
   if(!cupReady()) return toast("The tournament is still loading.", true);
   if(!modeReady("classic", "manager", true)) return toast("The deck is still loading, give it a second", true);
   CUP_VIEW = null;
+  /* A 2018 RUN IS PLAYED WITH THE 2018 SQUADS. The run carries its year, so
+     the pool follows from it rather than from whatever was last picked. */
+  const pool = cupPool(c.year);
   /* BOTH SIDES ARE NAMED AFTER THE COUNTRY, so the scorebug and the final
      whistle read like a match report rather than like you against Route One.
      Which of the four he is belongs on the card before kick-off and on the
      team sheet, where a manager would read it. */
   S = freshState([c.nation, them], false, "classic", 0, "manager", true);
-  S.pool = CUP_POOL;
-  S.cup = {round: c.round, v: them};
+  S.pool = pool;
+  S.cup = {round: c.round, v: them, year: c.year};
   S.players[1].ai = cupStyle(them);
   S.players[1].level = cupLevel(them);
   h2Start();
@@ -12489,11 +12523,11 @@ function dailyCardHTML(){
 function cupRow_(){
   if(!cupReady()) return "";
   const c = cupRun();
-  const said = !c ? "Take a nation through 2006"
+  const said = !c ? "Take a nation through " + cupYear()
     : c.won ? "Champions of the world"
     : !c.alive ? "Out in " + c.out
-    : c.round === "group" ? esc(c.nation) + " \u00b7 group match " + (c.n + 1) + " of 3"
-    : esc(c.nation) + " \u00b7 " + CUP_ROUND_NAME[c.round];
+    : c.round === "group" ? esc(c.nation) + " " + c.year + " \u00b7 group match " + (c.n + 1) + " of 3"
+    : esc(c.nation) + " " + c.year + " \u00b7 " + CUP_ROUND_NAME[c.round];
   return '<button class="mm-daily cuprow" onclick="openCup()">' +
     '<span class="dd-l"><span class="dd-t">The Cup</span>' +
       '<span class="dd-s">' + said + '</span></span>' +
@@ -12558,6 +12592,7 @@ function renderCup(st){
    has ever held a wall chart looks for a country. What each side actually did
    is printed on it: the whole joke of taking Togo is knowing what Togo did. */
 function cupPickScreen(st){
+  const C = cupOf();
   const pick = CUP_VIEW.pick;
   if(pick){
     const g = cupGroupOf(pick);
@@ -12565,13 +12600,13 @@ function cupPickScreen(st){
       '<div class="kick">' + ico('flag') + 'Group ' + g + '</div>' +
       '<div class="cupme big" style="--kc:' + cupKit(pick) + '">' +
         (cupFlag(pick) ? '<img src="' + cupFlag(pick) + '" alt="">' : '') +
-        '<div><b>' + esc(pick) + '</b><i>In 2006 they ' + CUP_SAYS[cupRank(pick)] + '</i></div>' +
+        '<div><b>' + esc(pick) + '</b><i>In ' + C.year + ' they ' + CUP_SAYS[cupRank(pick)] + '</i></div>' +
       '</div>' +
       '<div class="h2hintline">Three group matches against ' +
-        CUP.groups[g].sides.filter(x => x !== pick).map(x => esc(x)).join(", ") +
+        C.groups[g].sides.filter(x => x !== pick).map(x => esc(x)).join(", ") +
         '. Finish in the top two and you are in the last sixteen, ' +
         'in the slot the draw actually gave whoever finished there.</div>' +
-      '<div class="cupodds">' + CUP.groups[g].sides.filter(x => x !== pick).map(x =>
+      '<div class="cupodds">' + C.groups[g].sides.filter(x => x !== pick).map(x =>
         '<div><span class="cupdot ' + cupHard(x) + '"></span>' + esc(x) +
         '<i>' + AI_LEVELS[cupLevel(x)].label + ' \u00b7 ' + AI_MEN[cupStyle(x)].label + '</i></div>').join("") +
       '</div>' +
@@ -12581,13 +12616,22 @@ function cupPickScreen(st){
     return;
   }
   st.innerHTML =
-    '<div class="kick">' + ico('trophy') + 'The Cup \u00b7 ' + CUP.year + '</div>' +
+    '<div class="kick">' + ico('trophy') + 'The Cup \u00b7 ' + C.year + '</div>' +
     '<h1 class="title">Pick a<br><span class="gold">nation</span></h1>' +
+    /* WHICH TOURNAMENT, when there is more than one on the phone. The same
+       question one level up, in the same shape as the pool row above the team
+       grid in The Dugout. */
+    (cupYearsLive().length > 1
+      ? '<div class="h2poolrow">' + cupYearsLive().map(y =>
+          '<button class="h2poolb' + (cupYear() === y ? " on" : "") +
+          '" onclick="cupSetYear(' + JSON.stringify(y).replace(/"/g, "&quot;") + ')">' +
+          y + '</button>').join("") + '</div>'
+      : "") +
     '<div class="h2hintline">Seven matches, saved as you go. The real groups, the real draw, ' +
       'and the ties that really happened end the way they really ended.</div>' +
     "ABCDEFGH".split("").map(g =>
       '<div class="cupgrp"><h3>Group ' + g + '</h3><div class="cupg4">' +
-      CUP.groups[g].sides.map(side =>
+      C.groups[g].sides.map(side =>
         '<button class="h2teambtn" style="--kc:' + cupKit(side) + '" onclick="cupLook(' +
         JSON.stringify(side).replace(/"/g, "&quot;") + ')">' +
         (cupFlag(side) ? '<img class="h2flag" src="' + cupFlag(side) + '" alt="">'
@@ -12609,7 +12653,7 @@ function cupCardHTML(c, them){
       (c.round === "group" ? "Group " + c.group : CUP_ROUND_SHORT[c.round]) + '</i></div></div>' +
     '<div class="cupcl"><span>Form</span>' + esc(lv.label) + '</div>' +
     '<div class="cupcl"><span>Style</span>' + esc(st_.label) + '</div>' +
-    '<div class="cupcl"><span>In 2006</span>They ' + CUP_SAYS[cupRank(them)] + '</div>' +
+    '<div class="cupcl"><span>In ' + c.year + '</span>They ' + CUP_SAYS[cupRank(them)] + '</div>' +
     '<div class="cupsay">' + esc(st_.says) + '</div>' +
   '</div>';
 }

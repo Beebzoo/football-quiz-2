@@ -100,7 +100,10 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   /* A MAN WHO DID GO ABROAD. Found by looking rather than named, because the
      deck carries real elevens now and the eleven that started Costa Rica's
      last match is not the one sorted by shirt number. */
-  const abroad = [...Array(11).keys()].find(i => (lg(i, 0) || []).length);
+  /* NOT THE MAN ON THE BALL. The passer is the eight, and a pass to yourself
+     is not a pass: the moment the harvest moved a travelled Costa Rican into
+     that slot, this quietly stopped testing anything. */
+  const abroad = [...Array(11).keys()].find(i => i !== EIGHT && (lg(i, 0) || []).length);
   check("somebody in the Costa Rican eleven played abroad", abroad != null,
     [...Array(11).keys()].map(i => JSON.stringify(lg(i, 0))).join(" "));
   if(abroad != null){

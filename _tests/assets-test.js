@@ -97,6 +97,78 @@ check("no portrait weighs more than 120KB", heavy.length === 0,
       `${heavy.length} heavy, e.g. ${heavy[0] && heavy[0].f}`);
 
 /* the faces are deliberately kept out of the precache: they would triple it */
+/* ---------- every squad pool ---------- */
+console.log("\n--- the squad pools ---");
+{
+  /* the registry as the app declares it, read out of index.html rather than
+     typed here, so a pool added to one and not the other shows up */
+  const app = fs.readFileSync(path.join(REPO, "index.html"), "utf8");
+  const block = app.slice(app.indexOf("const POOLS = {"), app.indexOf("const QUIZZES = {"));
+  const rows = [...block.matchAll(/^\s*"?([a-z0-9-]+)"?:\s*\{[\s\S]*?file:\s*"([^"]+)"[\s\S]*?flags:\s*(null|"[^"]*")[\s\S]*?ext:\s*"([^"]*)"/gm)]
+    .map(m => ({id: m[1], file: m[2], flags: m[3] === "null" ? null : m[3].slice(1, -1), ext: m[4]}));
+  check("the pool registry parses", rows.length >= 3, rows.length + " pools found");
+
+  for(const row of rows){
+    const p = path.join(REPO, row.file);
+    if(!fs.existsSync(p)){ check(row.id + ": the file is on disk", false, row.file); continue; }
+    const deck = JSON.parse(fs.readFileSync(p, "utf8"));
+    const sides = Object.keys(deck);
+    const bad = [], broken = [], plain = [];
+    const kits = {};
+    let men = 0, withLg = 0;
+    for(const name of sides){
+      const t = deck[name];
+      const xi = t.xi || [], bench = t.bench || [];
+      if(xi.length !== 11) bad.push(name + " has " + xi.length + " in the XI");
+      const gks = xi.filter(m => m.pos === "GK").length;
+      if(gks !== 1) bad.push(name + " has " + gks + " keepers in the XI");
+      /* A MAN IN BOTH LISTS IS TWO MEN as far as a substitution is concerned,
+         and it is the sort of thing a harvest does silently. */
+      const seen = new Set();
+      for(const m of [...xi, ...bench]){
+        const k = String(m.no) + "|" + m.n;
+        if(seen.has(k)) bad.push(name + ": " + m.n + " is in the squad twice");
+        seen.add(k);
+        men++;
+        if(m.lg && m.lg.length) withLg++;
+      }
+      if(row.flags){
+        /* NO BADGE IS A DESIGN: the picker draws a kit-coloured swatch for a
+           side that has none, so a pool can ship before every crest is found.
+           A NAMED badge with no file is the bug, because that is a broken
+           image on the first screen anybody sees. */
+        if(!t.flag) plain.push(name);
+        else if(!fs.existsSync(path.join(REPO, row.flags + t.flag + row.ext))) broken.push(name + " (" + t.flag + ")");
+      }
+      const k = String(t.kit || "").toUpperCase();
+      if(k) kits[k] = (kits[k] || 0) + 1;
+    }
+    console.log("      " + row.id + ": " + sides.length + " sides, " + men + " men, " +
+      Math.round(withLg / Math.max(1, men) * 100) + "% with a career" +
+      (plain.length ? ", " + plain.length + " with no badge" : ""));
+    check(row.id + ": every side is eleven men and one keeper", bad.length === 0,
+      bad.slice(0, 3).join("; "));
+    if(row.flags) check(row.id + ": every badge it names is on disk", broken.length === 0,
+      broken.slice(0, 5).join(", "));
+    /* THE DOMINANT COLOUR, PRINTED EVERY RUN, because this is the one number
+       that says whether the kit harvest worked and it is worth looking at
+       rather than only worth failing on.
+
+       WHITE IS THE BASE OF EVERY STRIPED SHIRT, which is why half of La Liga
+       comes back #FFFFFF: Athletic, Espanyol, Racing, Malaga and Rayo are all
+       white with something on top, and the harvest reads the base. That is a
+       real gap (ten identical kits on one pitch) and it is recorded in
+       PLAN.md rather than papered over here, so the bar is set where a
+       genuinely failed harvest sits: three fifths of a pool in one colour. */
+    const worst = Object.entries(kits).sort((a, b) => b[1] - a[1])[0] || ["", 0];
+    console.log("      " + row.id + ": most common kit " + worst[0] + " on " +
+      worst[1] + " of " + sides.length);
+    check(row.id + ": kit colours were actually harvested",
+      worst[1] <= Math.max(4, sides.length * 0.6),
+      worst[1] + " of " + sides.length + " sides in " + worst[0]);
+  }
+}
+
 console.log("\n--- service worker ---");
 const sw = fs.readFileSync(path.join(REPO, "sw.js"), "utf8");
 check("faces index is precached", sw.includes("assets/faces/index.json"));

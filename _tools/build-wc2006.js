@@ -285,7 +285,13 @@ function pickXI(players) {
   const natRows = Object.values(JSON.parse(fs.readFileSync(path.join(REPO, "assets/nations/index.json"), "utf8"))).flat();
   const natFlag = new Map();
   natRows.forEach(r => { if (r.country && r.flag) natFlag.set(r.country, r.flag); });
+  /* THE FLAG LIST IS A LIST OF STATES, and a football team is not always one.
+     "Kingdom of the Netherlands" and "Kingdom of Denmark" are what the nations
+     bank calls them, England is not a state at all, and the pattern repeats
+     every time a tournament adds a monarchy. So the alias is tried, then the
+     kingdom form, then the plain name, before anything is downloaded. */
   const FLAG_ALIAS = { "Netherlands": "Kingdom of the Netherlands" };
+  const flagTries = c => [FLAG_ALIAS[c], "Kingdom of " + c, "Kingdom of the " + c, c].filter(Boolean);
   const slug = t => t.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
 
   const getBuf = url => new Promise((res, rej) => {
@@ -320,8 +326,10 @@ function pickXI(players) {
   }
 
   async function flagFor(country) {
-    const code = natFlag.get(FLAG_ALIAS[country] || country) || natFlag.get(country);
-    if (code && fs.existsSync(path.join(FLAGDIR, code + ".png"))) return code;
+    for (const name of flagTries(country)) {
+      const code = natFlag.get(name);
+      if (code && fs.existsSync(path.join(FLAGDIR, code + ".png"))) return code;
+    }
     return DRY ? null : await downloadFlag(country);
   }
 

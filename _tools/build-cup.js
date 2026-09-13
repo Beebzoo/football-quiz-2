@@ -137,7 +137,11 @@ function boxes(t) {
    order IS the draw: which group winner meets which runner-up, and therefore
    which half of the draw a run ends up in. */
 function bracket(t) {
-  const i = t.indexOf("{{Round16");
+  /* TWO SPELLINGS OF THE SAME BRACKET. 2006 writes {{Round16}} and 2018
+     writes {{#invoke:RoundN|N16}}, which is the module the template now
+     wraps. The rows inside are identical, so only the way in differs. */
+  let i = t.indexOf("{{Round16");
+  if (i < 0) i = t.search(/{{#invoke:RoundN|N16/);
   if (i < 0) return [];
   const end = t.indexOf("\n}}", i);
   const body = t.slice(i, end < 0 ? t.length : end);
