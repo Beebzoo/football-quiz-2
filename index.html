@@ -2634,6 +2634,36 @@
            border-radius:999px;padding:7px 12px;font:inherit;font-size:.8rem;cursor:pointer;opacity:.75}
   .h2poolb.on{background:var(--green-fill);border-color:var(--on-line);color:var(--green-ink);
               opacity:1;font-weight:700}
+  /* the daily's ladder: six rungs, top of the pitch at the top of the screen,
+     lit as far as you got. It is the picture the share line is made of. */
+  .dl{display:flex;flex-direction:column;gap:3px;margin:10px 0}
+  .dlr{display:flex;align-items:center;justify-content:space-between;gap:10px;
+       padding:6px 10px;border-radius:8px;border:1px solid var(--line);
+       background:var(--panel);opacity:.4}
+  .dlr i{font-style:normal;font-size:.66rem;letter-spacing:.09em;text-transform:uppercase;
+         color:var(--dc);font-weight:800}
+  .dlr b{font-size:.8rem;font-weight:600}
+  .dlr.now{opacity:1;border-color:var(--dc);box-shadow:0 0 0 1px var(--dc)}
+  .dlr.won{opacity:1;border-color:#3E6B52;background:rgba(62,107,82,.18)}
+  .dlr.lost{opacity:1;border-color:#8C3A2A;background:rgba(140,58,42,.18)}
+  .dstreak{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}
+  .dstreak div{background:var(--panel);border:1px solid var(--line);border-radius:12px;
+               padding:10px;text-align:center}
+  .dstreak b{display:block;font-size:1.5rem;font-weight:800;line-height:1}
+  .dstreak i{display:block;font-style:normal;font-size:.68rem;opacity:.6;margin-top:2px;
+             letter-spacing:.05em;text-transform:uppercase}
+  /* the card on the front door */
+  .mm-daily{display:flex;width:100%;align-items:center;justify-content:space-between;gap:10px;
+            background:var(--panel);border:1px solid var(--line);border-radius:14px;
+            padding:12px 14px;color:inherit;font:inherit;cursor:pointer;text-align:left}
+  .mm-daily.done{opacity:.78}
+  .dd-t{display:block;font-weight:800;font-size:1rem}
+  .dd-s{display:block;font-size:.76rem;opacity:.62;margin-top:2px}
+  .dd-r{flex-shrink:0;text-align:center}
+  .dd-r b{display:block;font-size:1.3rem;font-weight:800;line-height:1}
+  .dd-r i{display:block;font-style:normal;font-size:.6rem;opacity:.6;text-transform:uppercase}
+  .dd-go{background:var(--green-fill);color:var(--green-ink);border-radius:999px;
+         padding:7px 14px;font-weight:800;font-size:.8rem}
   .h2repbox{margin:14px 0 4px}
   .h2rep{background:var(--panel);border:1px solid var(--line);border-radius:12px;
          padding:10px 12px;margin:8px 0}
@@ -5720,7 +5750,7 @@ function setTheme(t){
   applyTheme();
   render();
 }
-const BUILD = "14 Sep 2026 · 00:27";
+const BUILD = "14 Sep 2026 · 00:34";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five
@@ -6987,7 +7017,10 @@ document.addEventListener("visibilitychange",()=>{ if(!document.hidden && S) wak
 /* ============================== RENDER ============================== */
 function renderBug(){
   const bug=$("#scorebug");
-  if(!S || S.phase==="setup"){ bug.hidden=true; bug.innerHTML=""; return; }
+  /* THE DAILY HAS NO SCORE AND NO OPPONENT, so the match scorebug on top of
+     it is two players and a running total that mean nothing. It has a ladder
+     of its own, which is the only score it has. */
+  if(!S || S.phase==="setup" || S.play==="daily"){ bug.hidden=true; bug.innerHTML=""; return; }
   bug.hidden=false;
   const home = `<button class="homeball" onclick="toMenu()" aria-label="Back to the menu" title="Back to the menu"><img src="assets/ball.png" alt=""></button>`;
   const best=Math.max(...S.players.map(p=>p.score));
@@ -8506,6 +8539,251 @@ function h2Book(w, i){
    that is ever possible is how long the data has been accumulating. So it
    starts now, before there is anything to do with it. Local to the phone,
    like everything else in the app. */
+/* ---------- WHAT THIS PHONE REMEMBERS ----------
+   One key, one object, read once and written on every change. Everything the
+   retention features build up lives here so it can be exported as one file:
+   without a server, that export is the only backup any of it will ever have.
+
+     { daily:  {date, rung, done, answers[], history[]},
+       streak: {played, half, last},
+       album:  {have:{"italy/1":2}, packs, foils[]},
+       cup:    {nation, round, group, results, alive} }
+
+   A read never throws and never returns undefined, because every caller is a
+   renderer and a renderer that has to guard is a renderer with a bug in it. */
+const MINE_KEY = "ball2-mine";
+const MINE_BLANK = {daily: null, streak: {played: 0, half: 0, last: null},
+                    album: {have: {}, packs: 0, foils: []}, cup: null};
+let MINE = null;
+function mine(){
+  if(MINE) return MINE;
+  try{ MINE = JSON.parse(localStorage.getItem(MINE_KEY) || "null"); }catch(e){ MINE = null; }
+  if(!MINE || typeof MINE !== "object") MINE = JSON.parse(JSON.stringify(MINE_BLANK));
+  /* a build that adds a field must not break a phone that has the old shape */
+  for(const k of Object.keys(MINE_BLANK)) if(MINE[k] === undefined) MINE[k] = MINE_BLANK[k];
+  if(!MINE.album || typeof MINE.album !== "object") MINE.album = {have: {}, packs: 0, foils: []};
+  if(!MINE.album.have) MINE.album.have = {};
+  if(!MINE.streak) MINE.streak = {played: 0, half: 0, last: null};
+  return MINE;
+}
+function mineSave(){
+  try{ localStorage.setItem(MINE_KEY, JSON.stringify(mine())); }catch(e){}
+}
+
+/* ---------- carrying it to another phone ----------
+   Everything this phone knows, including the keys that predate the namespace,
+   as one file. It is not a sync and it is not a backup service: it is the
+   thing that means a cleared browser is an inconvenience rather than the end
+   of a two-year album. */
+/* SPELLED OUT RATHER THAN REFERENCED. Two of these constants are declared
+   further down the file, and a const in the temporal dead zone throws on the
+   line that reads it, which would be a blank app rather than a missing export. */
+const EXPORT_KEYS = ["ball2-mine", "ball-quiz-history-v1", "ball-crew",
+                     "ball2-outcomes", "ball-names", "ball-mp-name"];
+function exportMine(){
+  const out = {app: "BALL 2", at: new Date().toISOString(), data: {}};
+  for(const k of EXPORT_KEYS){
+    try{ const v = localStorage.getItem(k); if(v != null) out.data[k] = v; }catch(e){}
+  }
+  return JSON.stringify(out);
+}
+function copyMine(){
+  const text = exportMine();
+  const n = Object.keys(JSON.parse(text).data).length;
+  const done = () => toast(n + " thing" + (n === 1 ? "" : "s") + " copied. Paste it somewhere safe.");
+  try{ navigator.clipboard.writeText(text).then(done, () => toast("Could not copy", true)); }
+  catch(e){ toast("Could not copy", true); }
+}
+/* IT REFUSES RATHER THAN GUESSES. An import is the one action here that can
+   destroy something, so anything that is not plainly one of our own exports is
+   turned away, and the player is told what it wanted instead. */
+function importMine(text){
+  let j = null;
+  try{ j = JSON.parse(text); }catch(e){ return toast("That is not a BALL file.", true); }
+  if(!j || j.app !== "BALL 2" || !j.data) return toast("That is not a BALL file.", true);
+  let n = 0;
+  for(const k of EXPORT_KEYS){
+    if(typeof j.data[k] !== "string") continue;
+    try{ localStorage.setItem(k, j.data[k]); n++; }catch(e){}
+  }
+  MINE = null;
+  toast(n + " thing" + (n === 1 ? "" : "s") + " restored.");
+  render();
+}
+
+/* ---------- THE DAILY BALL ----------
+   Six questions up the ladder. The rungs are named after the pass each one
+   would be on the pitch, because the point is that a player who only ever
+   plays the daily still learns what a raking ball costs. */
+const DAILY = [
+  {to: "the centre-back", tier: "easy"},
+  {to: "the wing-back",   tier: "normal"},
+  {to: "the six",         tier: "hard"},
+  {to: "the eight",       tier: "extreme"},
+  {to: "the ten",         tier: "extreme"},
+  {to: "the striker",     tier: "ball"},
+];
+/* TODAY, in the player's own calendar. Not UTC: a daily that rolls over at one
+   in the morning is a daily somebody misses through no fault of their own. */
+function dayKey(d){
+  const t = d || new Date();
+  return t.getFullYear() * 10000 + (t.getMonth() + 1) * 100 + t.getDate();
+}
+/* mulberry32, twelve lines, and the only randomness in the app that has to
+   produce the same answer on two different phones */
+function seeded(a){
+  return function(){
+    a |= 0; a = (a + 0x6D2B79F5) | 0;
+    let t = Math.imul(a ^ (a >>> 15), 1 | a);
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+  };
+}
+/* A QUESTION'S NAME IS ITS WORDS. An index into a tier is not a name: append a
+   pack and every index below it moves, and with it every daily ever played. */
+function qKey(q){
+  const t = (q && q.q) || "";
+  let h = 5381;
+  for(let i = 0; i < t.length; i++) h = ((h * 33) ^ t.charCodeAt(i)) >>> 0;
+  return h.toString(36);
+}
+/* the classic bank for a tier, as {key, i} sorted by key, which is the same
+   order on every phone whatever the build did to the array */
+const dailyBankCache = {};
+function dailyBank(tier){
+  if(dailyBankCache[tier]) return dailyBankCache[tier];
+  const bank = (DECKS["classic-mc"] || {})[tier] || [];
+  const rows = bank.map((q, i) => ({k: qKey(q), i: i}));
+  rows.sort((a, b) => a.k < b.k ? -1 : a.k > b.k ? 1 : 0);
+  return (dailyBankCache[tier] = rows);
+}
+/* THE SIX FOR A GIVEN DAY. Deterministic from the date alone, and it walks
+   past anything a previous daily already used so a week does not repeat
+   itself. */
+function dailySix(day){
+  const rnd = seeded(day);
+  const used = (mine().daily && mine().daily.spent) || {};
+  const out = [];
+  for(const rung of DAILY){
+    const rows = dailyBank(rung.tier);
+    if(!rows.length) return null;
+    let pick = null;
+    /* a bounded walk rather than a filter: the used list is small and the
+       bank is thousands, so this lands on the first or second try */
+    for(let n = 0; n < 40 && !pick; n++){
+      const cand = rows[Math.floor(rnd() * rows.length)];
+      if(!used[cand.k]) pick = cand;
+    }
+    if(!pick) pick = rows[Math.floor(rnd() * rows.length)];
+    out.push({tier: rung.tier, to: rung.to, k: pick.k, i: pick.i});
+  }
+  return out;
+}
+/* today's state, created on demand and never on a render */
+function dailyToday(){
+  const m = mine(), day = dayKey();
+  if(m.daily && m.daily.date === day) return m.daily;
+  return null;
+}
+function dailyStart(){
+  audio();
+  const m = mine(), day = dayKey();
+  if(!m.daily || m.daily.date !== day){
+    const six = dailySix(day);
+    if(!six) return toast("The daily needs the Pick One pack. Try again in a moment.", true);
+    /* SPENT IS CARRIED FORWARD, NOT RESET. It is the record of every question
+       any daily has ever used on this phone, which is what stops next Tuesday
+       repeating last Tuesday. */
+    const spent = (m.daily && m.daily.spent) || {};
+    m.daily = {date: day, six: six, rung: 0, done: false, got: [], spent: spent};
+    mineSave();
+  }
+  const d = m.daily;
+  if(d.done){ S = null; S = freshState(["You"], false, "classic", 0, "daily", true); S.phase = "d_done"; return render(); }
+  S = freshState(["You"], false, "classic", 0, "daily", true);
+  dailyAsk();
+}
+function dailyAsk(){
+  const d = mine().daily;
+  const step = d.six[d.rung];
+  S.tier = step.tier;
+  S.qi = step.i;
+  S.qd = null;
+  S.timeUp = false;
+  S.phase = "d_q";
+  S.dpick = null;
+  render();
+}
+function dailyPick(i){
+  audio();
+  if(S.phase !== "d_q") return;
+  S.dpick = i;
+  S.phase = "d_judge";
+  render();
+}
+function dailyOn(){
+  audio();
+  const d = mine().daily;
+  const right = S.dpick === q().k;
+  d.got.push(!!right);
+  /* SPENT THE MOMENT IT IS SEEN, right or wrong. A question you were shown is
+     a question you know, so it must not come round again next week. */
+  d.spent[d.six[d.rung].k] = 1;
+  S.dpick = null;
+  if(right && d.rung < DAILY.length - 1){
+    d.rung += 1; mineSave(); return dailyAsk();
+  }
+  d.done = true;
+  /* HOW FAR UP THE PITCH. The rung he answered correctly, so six is the lot. */
+  d.reached = d.got.filter(Boolean).length;
+  dailyStreak(d);
+  mineSave();
+  S.phase = "d_done";
+  render();
+}
+/* TWO NUMBERS, BOTH LOCAL, AND NO FORGIVENESS. A streak you can buy back is
+   not a streak. */
+function dailyStreak(d){
+  const m = mine(), st = m.streak;
+  const y = new Date(); y.setDate(y.getDate() - 1);
+  const yesterday = dayKey(y);
+  if(st.last === d.date) return;                 // already counted today
+  st.played = (st.last === yesterday) ? st.played + 1 : 1;
+  /* past the halfway line is the six or better, which is three rungs */
+  const half = d.reached >= 3;
+  st.half = half ? ((st.lastHalf === yesterday) ? st.half + 1 : 1) : 0;
+  if(half) st.lastHalf = d.date;
+  st.last = d.date;
+  /* A PACK FOR TURNING UP, and a second for getting all the way. The album is
+     the thing the streak is for. */
+  m.album.packs = (m.album.packs || 0) + 1 + (d.reached >= 6 ? 1 : 0);
+}
+/* THE SHARE LINE, which is the whole reason this works. Six squares, one per
+   rung, and no image handling: it pastes into any chat on earth. */
+function dailyShare(){
+  const d = dailyToday();
+  if(!d || !d.done) return "";
+  const when = new Date(Math.floor(d.date / 10000), Math.floor(d.date / 100) % 100 - 1, d.date % 100);
+  const day = when.getDate() + " " + ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"][when.getMonth()];
+  let sq = "";
+  for(let i = 0; i < DAILY.length; i++){
+    if(i < d.got.length) sq += d.got[i] ? "\u{1F7E9}" : "\u{1F7E5}";
+    else sq += "\u2B1B";
+  }
+  const got = d.reached >= 6 ? "all the way to the striker"
+            : d.reached === 0 ? "lost it on the first pass"
+            : "made it to " + DAILY[d.reached - 1].to;
+  return "The Daily Ball \u00b7 " + day + "\n" + sq + "  " + got +
+         "\nbeebzoo.github.io/football-quiz-2";
+}
+function copyDaily(){
+  const t = dailyShare();
+  if(!t) return;
+  const done = () => toast("Copied. Go and gloat.");
+  try{ navigator.clipboard.writeText(t).then(done, () => toast("Could not copy", true)); }
+  catch(e){ toast("Could not copy", true); }
+}
+
 const LOG_KEY = "ball2-outcomes";
 const LOG_MAX = 8000;
 /* WHO IT WAS ABOUT, read at the moment it happened. w is the side the man
@@ -10958,6 +11236,66 @@ function render(){
     return;
   }
 
+  /* ---------- THE DAILY BALL ----------
+     Six questions up the ladder, with the ladder drawn beside them, so a
+     player who has never seen the pitch still learns what a raking ball costs
+     next to a square one. The options are the match's own Pick One buttons:
+     the daily is the same questions the app has always asked, in the order the
+     pitch asks them. */
+  if(S.phase === "d_q" || S.phase === "d_judge" || S.phase === "d_done"){
+    const d = mine().daily || {six: [], got: [], rung: 0, reached: 0};
+    const streak = mine().streak || {played: 0, half: 0};
+    const shown = S.phase === "d_judge";
+    const ladder = '<div class="dl">' + DAILY.map((r, i) => {
+      const got = i < d.got.length ? (d.got[i] ? " won" : " lost") : "";
+      const now = (S.phase !== "d_done" && i === d.rung) ? " now" : "";
+      return '<div class="dlr' + got + now + '" style="--dc:' + TIERS[r.tier].color + '">' +
+             '<i>' + esc(TIERS[r.tier].label) + '</i><b>' + esc(r.to) + '</b></div>';
+    }).reverse().join("") + '</div>';
+
+    if(S.phase === "d_done"){
+      const n = d.reached || 0;
+      st.innerHTML =
+        '<div class="kick">' + ico('trophy') + 'The Daily Ball</div>' +
+        '<h1 class="title">' + (n >= 6 ? 'All the way<br><span class="gold">to the striker</span>'
+          : n === 0 ? 'Lost it<br><span class="gold">on the first pass</span>'
+          : 'You got to<br><span class="gold">' + esc(DAILY[n - 1].to) + '</span>') + '</h1>' +
+        ladder +
+        '<div class="dstreak">' +
+          '<div><b>' + streak.played + '</b><i>day' + (streak.played === 1 ? "" : "s") + ' in a row</i></div>' +
+          '<div><b>' + streak.half + '</b><i>past halfway</i></div>' +
+        '</div>' +
+        '<button class="bigbtn" onclick="copyDaily()">' + ico('users') + 'Copy the result</button>' +
+        '<div class="h2hintline">Six squares and a line of text. It pastes into anything.</div>' +
+        '<button class="bigbtn ghost" onclick="toMenu()">Back</button>';
+      return;
+    }
+
+    const Q = q();
+    if(!Q){ st.innerHTML = '<div class="h2big">The daily is not ready.</div>' +
+      '<button class="bigbtn ghost" onclick="toMenu()">Back</button>'; return; }
+    const step = d.six[d.rung];
+    const t = TIERS[step.tier];
+    st.innerHTML =
+      '<div class="kick">' + ico('trophy') + 'The Daily Ball \u00b7 ' + (d.rung + 1) + ' of ' + DAILY.length + '</div>' +
+      ladder +
+      '<div class="qcard" style="--dc:' + t.color + '">' +
+        '<div class="kick">Ball to ' + esc(step.to) + ' \u00b7 ' + esc(t.label) + '</div>' +
+        '<div class="qtext">' + esc(Q.q) + '</div>' +
+        '<div class="h2mc">' + Q.o.map((o, i) => {
+          const cls = !shown ? "" : i === Q.k ? " right" : (i === S.dpick ? " wrong" : " dim");
+          return '<button class="h2opt' + cls + '"' + (shown ? " disabled" : "") +
+            (shown ? "" : ' onclick="dailyPick(' + i + ')"') + '>' +
+            '<span class="k">' + "ABCD"[i] + '</span><span class="t">' + esc(o) + '</span></button>';
+        }).join("") + '</div>' +
+      '</div>' +
+      (shown ? '<button class="bigbtn" onclick="dailyOn()">' +
+        (S.dpick === Q.k ? (d.rung < DAILY.length - 1 ? "Up the pitch" : "That is the lot") : "That is that")
+        + '</button>' : '') +
+      '<button class="bigbtn ghost" onclick="toMenu()">Leave it</button>';
+    return;
+  }
+
   if(S.phase==="results"){
     const order=[...S.players].map((p,i)=>({...p,i})).sort(rankPlayers);
     const losers=order.filter(p=>p.score<0);
@@ -11234,6 +11572,26 @@ function renderBoard(st){
     ${all.length?`<button class="bigbtn ghost" style="padding:10px;font-size:.95rem" onclick="askClearRecords()">Wipe the record book</button>`:""}`;
 }
 
+/* THE WAY IN, and the only thing on the front door that changes by itself.
+   It says what today is, what you did with it, and what your streak is, which
+   between them are the three reasons anybody opens an app on a Tuesday. */
+function dailyCardHTML(){
+  if(!DECKS["classic-mc"]) return "";      // the pack has not landed yet
+  const m = mine(), st = m.streak || {played: 0, half: 0};
+  const d = (m.daily && m.daily.date === dayKey()) ? m.daily : null;
+  const done = d && d.done;
+  const said = !d ? "Six questions, one per rung. Two minutes."
+    : done ? (d.reached >= 6 ? "All the way to the striker." :
+              d.reached === 0 ? "Lost on the first pass." : "You got to " + DAILY[d.reached - 1].to + ".")
+    : "You are " + (d.rung + 1) + " of " + DAILY.length + " up the pitch.";
+  return '<div class="mm-sect"><button class="mm-daily' + (done ? " done" : "") +
+    '" onclick="dailyStart()">' +
+    '<span class="dd-l"><span class="dd-t">The Daily Ball</span>' +
+      '<span class="dd-s">' + esc(said) + '</span></span>' +
+    (st.played ? '<span class="dd-r"><b>' + st.played + '</b><i>day' +
+      (st.played === 1 ? "" : "s") + '</i></span>' : '<span class="dd-r dd-go">Play</span>') +
+    '</button></div>';
+}
 function renderSetup(st){
   const saved = (()=>{ try{ const s=JSON.parse(localStorage.getItem(SAVE_KEY)); return s && s.phase!=="setup" && s.phase!=="results" ? s : null; }catch(e){ return null; }})();
   /* how deep the chosen quiz is, for the front door's right hand side */
@@ -11267,6 +11625,8 @@ function renderSetup(st){
         <button class="mm-kick" onclick="resumeGame()"><span class="big">Resume</span><img src="assets/ball.png" alt=""></button>
         <button class="mm-ghost" onclick="askCancelMatch()">Cancel match in progress</button>
       </div>`:""}
+
+      ${dailyCardHTML()}
 
       <div class="mm-fixtures">
         <div class="mm-eyebrow">How you play</div>
