@@ -72,6 +72,7 @@ const HISTORIC = {
   "norwich-city": "premier", "watford": "premier", "west-bromwich-albion": "premier",
   "queens-park-rangers": "premier", "sheffield-united": "premier", "derby-county": "premier",
   "leicester": "premier", "leicester-city": "premier", "fulham": "premier",
+  "west-ham": "premier", "west-ham-united": "premier", "newcastle": "premier",
   "burnley": "premier", "southampton": "premier", "sunderland": "premier",
   "leeds-united": "premier", "wimbledon": "premier", "portsmouth-fc": "premier",
   "huddersfield-town": "premier", "coventry-city": "premier", "ipswich-town": "premier",

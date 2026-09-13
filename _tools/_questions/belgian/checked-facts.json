@@ -193,11 +193,12 @@
   "tier": "normal",
   "cat": "champions",
   "q": "Which club won the 2004-05 Belgian Pro League?",
-  "a": "Brussels",
+  "a": "Club Brugge",
   "src": "https://en.wikipedia.org/wiki/2004%E2%80%9305_Belgian_First_Division",
   "conf": "sure",
   "verdict": "ok",
-  "note": "harvested from the season table"
+  "note": "was Brussels, who had just come up; corrected 13 Sep 2026",
+  "sub": "They settled it against Anderlecht with a game to spare."
  },
  {
   "tier": "hard",

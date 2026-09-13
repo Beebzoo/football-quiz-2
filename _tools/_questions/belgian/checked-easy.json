@@ -147,11 +147,13 @@
  {
   "tier": "easy",
   "cat": "europe",
-  "q": "Which Belgian club reached the 1988 Cup Winners' Cup final and has the most Belgian titles?",
-  "a": "Anderlecht",
+  "q": "Which Belgian club beat Ajax to win the 1988 Cup Winners' Cup?",
+  "a": "KV Mechelen",
   "src": "https://en.wikipedia.org/wiki/R.S.C._Anderlecht",
   "conf": "likely",
-  "verdict": "ok"
+  "verdict": "ok",
+  "sub": "Piet den Boer headed the only goal in Strasbourg.",
+  "note": "was Anderlecht, who were not in that final; corrected 13 Sep 2026"
  },
  {
   "tier": "easy",

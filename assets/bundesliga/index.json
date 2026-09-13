@@ -167,6 +167,210 @@
    "a": "Robert Lewandowski",
    "sub": "He got 41 of them.",
    "cat": "scorers"
+  },
+  {
+   "q": "The Allianz Arena and the Olympiastadion are both football grounds in which German city?",
+   "a": "Munich",
+   "sub": "The Allianz Arena opened in 2005.",
+   "cat": "grounds"
+  },
+  {
+   "q": "Which club comes from the mining city of Gelsenkirchen?",
+   "a": "Schalke 04",
+   "sub": "Their supporters are known as the miners.",
+   "cat": "grounds"
+  },
+  {
+   "q": "Which Bayern Munich goalkeeper was nicknamed Der Titan?",
+   "a": "Oliver Kahn",
+   "cat": "records",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "Which Bayern Munich forward invented the nickname Der Raumdeuter for his own role?",
+   "a": "Thomas Müller",
+   "cat": "records",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "Which German club did Uli Hoeness serve as president and Karl-Heinz Rummenigge as chief executive?",
+   "a": "Bayern Munich",
+   "cat": "records"
+  },
+  {
+   "q": "What is the name of the mid-season break the Bundesliga takes over December and January?",
+   "a": "The winter break",
+   "cat": "records"
+  },
+  {
+   "q": "Which England striker scored 36 goals in his first Bundesliga season at Bayern Munich?",
+   "a": "Harry Kane",
+   "sub": "He finished eight goals clear of Serhou Guirassy in 2023-24.",
+   "cat": "scorers",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "Which Bayern Munich striker scored 41 league goals in the 2020-21 Bundesliga season?",
+   "a": "Robert Lewandowski",
+   "cat": "scorers",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "By the end of 2019-20, which club had won the DFB-Pokal more times than any other?",
+   "a": "Bayern Munich",
+   "cat": "cups"
+  },
+  {
+   "q": "Bayern Munich's run of eleven Bundesliga titles in a row ended in which season?",
+   "a": "2023-24",
+   "cat": "champions",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "Which German club won the treble of league, cup and Champions League in 2020?",
+   "a": "Bayern Munich",
+   "cat": "europe"
+  },
+  {
+   "q": "Which Italian manager won the 2016-17 Bundesliga title with Bayern Munich?",
+   "a": "Carlo Ancelotti",
+   "cat": "managers",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "Which Belgian, once Manchester City's captain, became Bayern Munich manager in 2024?",
+   "a": "Vincent Kompany",
+   "cat": "managers",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "Which Spanish manager led Bayer Leverkusen to the 2023-24 Bundesliga title?",
+   "a": "Xabi Alonso",
+   "cat": "managers",
+   "club": "bayer-leverkusen"
+  },
+  {
+   "q": "Which German manager won the Champions League with Chelsea and later took charge of Bayern Munich?",
+   "a": "Thomas Tuchel",
+   "cat": "managers",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "Which Canadian left-back joined Bayern Munich from the Vancouver Whitecaps in 2019?",
+   "a": "Alphonso Davies",
+   "cat": "imports",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "Which England midfielder joined Borussia Dortmund from Birmingham City in 2020?",
+   "a": "Jude Bellingham",
+   "cat": "imports",
+   "club": "borussia-dortmund"
+  },
+  {
+   "q": "Which United States midfielder came through at Borussia Dortmund and joined Chelsea in 2019?",
+   "a": "Christian Pulisic",
+   "cat": "imports",
+   "club": "borussia-dortmund"
+  },
+  {
+   "q": "Which French winger joined Bayern Munich from Marseille in 2007?",
+   "a": "Franck Ribéry",
+   "cat": "imports",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "Which Dutch winger left Real Madrid for Bayern Munich in 2009?",
+   "a": "Arjen Robben",
+   "cat": "imports",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "Which Senegal forward joined Bayern Munich from Liverpool in 2022?",
+   "a": "Sadio Mané",
+   "cat": "imports",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "Erling Haaland, Jude Bellingham and Jadon Sancho all played for which German club?",
+   "a": "Borussia Dortmund",
+   "cat": "imports"
+  },
+  {
+   "q": "Which winger did Bayern Munich sign from Manchester City in 2020?",
+   "a": "Leroy Sané",
+   "cat": "imports",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "Which club did Jadon Sancho join from Borussia Dortmund in 2021?",
+   "a": "Manchester United",
+   "cat": "transfers",
+   "club": "borussia-dortmund"
+  },
+  {
+   "q": "Which Germany forward left Bayer Leverkusen for Chelsea in 2020 and later joined Arsenal?",
+   "a": "Kai Havertz",
+   "cat": "transfers",
+   "club": "bayer-leverkusen"
+  },
+  {
+   "q": "Which German club did Liverpool sign Florian Wirtz from in 2025?",
+   "a": "Bayer Leverkusen",
+   "sub": "The deal could rise to a British record 116 million pounds.",
+   "cat": "transfers"
+  },
+  {
+   "q": "Which club did Mario Götze rejoin in 2016 after three years at Bayern Munich?",
+   "a": "Borussia Dortmund",
+   "cat": "transfers",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "Which Bayern Munich midfielder joined Manchester United in 2015?",
+   "a": "Bastian Schweinsteiger",
+   "cat": "transfers",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "Which Germany midfielder left Borussia Dortmund for Manchester City in 2016?",
+   "a": "İlkay Gündoğan",
+   "cat": "transfers",
+   "club": "borussia-dortmund"
+  },
+  {
+   "q": "Which Bayern Munich midfielder joined Real Madrid in 2014?",
+   "a": "Toni Kroos",
+   "cat": "transfers",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "Which Borussia Dortmund defender returned to Bayern Munich in 2016?",
+   "a": "Mats Hummels",
+   "cat": "transfers",
+   "club": "borussia-dortmund"
+  },
+  {
+   "q": "Which Germany striker moved from Werder Bremen to Bayern Munich in 2007 and later played for Lazio?",
+   "a": "Miroslav Klose",
+   "cat": "transfers",
+   "club": "werder-bremen"
+  },
+  {
+   "q": "Which German club did Chelsea sign Timo Werner from in 2020?",
+   "a": "RB Leipzig",
+   "cat": "transfers"
+  },
+  {
+   "q": "Which Borussia Dortmund striker joined Arsenal in January 2018 for a club record fee?",
+   "a": "Pierre-Emerick Aubameyang",
+   "cat": "transfers",
+   "club": "borussia-dortmund"
+  },
+  {
+   "q": "Which Ruhr club went down from the Bundesliga in 2021 and again in 2023?",
+   "a": "Schalke 04",
+   "cat": "relegation"
   }
  ],
  "normal": [
@@ -241,8 +445,9 @@
   },
   {
    "q": "Who was the top scorer in the 2013-14 Bundesliga?",
-   "a": "Borussia Dortmund",
-   "cat": "scorers"
+   "a": "Robert Lewandowski",
+   "cat": "scorers",
+   "sub": "He got 20 of them, and left for Bayern that summer."
   },
   {
    "q": "Which club finished second in the 2016-17 Bundesliga?",
@@ -293,6 +498,207 @@
    "q": "Which club finished second in the 2025-26 Bundesliga?",
    "a": "Borussia Dortmund",
    "cat": "champions"
+  },
+  {
+   "q": "Which club won the Bundesliga in 1969-70 and 1970-71 under Hennes Weisweiler?",
+   "a": "Borussia Mönchengladbach",
+   "sub": "They were the first club to retain the Bundesliga title.",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the Bundesliga in 1994-95 and 1995-96 under Ottmar Hitzfeld?",
+   "a": "Borussia Dortmund",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the 1999-2000 Bundesliga on goal difference after Bayer Leverkusen lost at Unterhaching?",
+   "a": "Bayern Munich",
+   "sub": "Both finished on 73 points.",
+   "cat": "champions",
+   "club": "bayer-leverkusen"
+  },
+  {
+   "q": "Which club won its first Bundesliga title in 1978-79, with Kevin Keegan in the side?",
+   "a": "Hamburger SV",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the 1991-92 Bundesliga, the season played with twenty clubs after reunification?",
+   "a": "VfB Stuttgart",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the Bundesliga in 1987-88 and 1992-93 under Otto Rehhagel?",
+   "a": "Werder Bremen",
+   "cat": "champions"
+  },
+  {
+   "q": "Which Italian striker was the Bundesliga's top scorer in 2007-08 with 24 goals for Bayern Munich?",
+   "a": "Luca Toni",
+   "cat": "scorers",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "Which Bosnian striker scored 26 league goals as Wolfsburg won the 2008-09 Bundesliga?",
+   "a": "Edin Džeko",
+   "sub": "His partner Grafite got 28 that season.",
+   "cat": "scorers"
+  },
+  {
+   "q": "Which Peruvian striker scored 197 Bundesliga goals for Werder Bremen, Bayern Munich and 1. FC Köln?",
+   "a": "Claudio Pizarro",
+   "cat": "scorers",
+   "club": "werder-bremen"
+  },
+  {
+   "q": "Which Polish club did Borussia Dortmund sign Robert Lewandowski from in 2010?",
+   "a": "Lech Poznan",
+   "cat": "imports",
+   "club": "borussia-dortmund"
+  },
+  {
+   "q": "Which South Korea forward played for Hamburger SV and Bayer Leverkusen before joining Tottenham in 2015?",
+   "a": "Son Heung-min",
+   "cat": "imports",
+   "club": "hamburger-sv"
+  },
+  {
+   "q": "Which Japanese midfielder won two Bundesliga titles under Jürgen Klopp at Borussia Dortmund?",
+   "a": "Shinji Kagawa",
+   "cat": "imports",
+   "club": "borussia-dortmund"
+  },
+  {
+   "q": "Which manager won the 2006-07 Bundesliga title with VfB Stuttgart?",
+   "a": "Armin Veh",
+   "cat": "managers",
+   "club": "vfb-stuttgart"
+  },
+  {
+   "q": "Which German manager won the Bundesliga with Wolfsburg in 2009 and later coached Schalke 04 and Fulham?",
+   "a": "Felix Magath",
+   "cat": "managers",
+   "club": "schalke-04"
+  },
+  {
+   "q": "Which coach left RB Leipzig for Bayern Munich in 2021 for a record compensation fee?",
+   "a": "Julian Nagelsmann",
+   "cat": "managers",
+   "club": "rb-leipzig"
+  },
+  {
+   "q": "Which manager took Mainz 05 up to the Bundesliga for the first time in 2004?",
+   "a": "Jürgen Klopp",
+   "cat": "managers",
+   "club": "mainz-05"
+  },
+  {
+   "q": "Which club beat Bayern Munich 5-2 in the 2012 German cup final to complete the double?",
+   "a": "Borussia Dortmund",
+   "cat": "cups",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "Which club beat Bayern Munich 3-1 in the 2018 DFB-Pokal final?",
+   "a": "Eintracht Frankfurt",
+   "sub": "Ante Rebic scored twice.",
+   "cat": "cups",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "Which club beat Eintracht Frankfurt 2-0 to win the 2023 DFB-Pokal final in Berlin?",
+   "a": "RB Leipzig",
+   "cat": "cups",
+   "club": "eintracht-frankfurt"
+  },
+  {
+   "q": "Which Spanish club did Bayern Munich beat 4-0 in a replay to win the 1974 European Cup?",
+   "a": "Atletico Madrid",
+   "cat": "europe",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "Which English club did Borussia Dortmund beat at Hampden Park to win the 1966 Cup Winners Cup?",
+   "a": "Liverpool",
+   "sub": "It was the first European trophy won by a German club.",
+   "cat": "europe",
+   "club": "borussia-dortmund"
+  },
+  {
+   "q": "Which Scottish club did Eintracht Frankfurt beat on penalties to win the 2022 Europa League final?",
+   "a": "Rangers",
+   "cat": "europe",
+   "club": "eintracht-frankfurt"
+  },
+  {
+   "q": "The club finishing sixteenth in the Bundesliga plays off against which side to stay up?",
+   "a": "The third-placed club in the 2. Bundesliga",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club won promotion back to the Bundesliga in 2025 after seven seasons in the second tier?",
+   "a": "Hamburger SV",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which Berlin club has played its home games at the Olympiastadion, built for the 1936 Games?",
+   "a": "Hertha BSC",
+   "cat": "grounds"
+  },
+  {
+   "q": "Which Berlin club plays at the Alte Försterei, a ground its own supporters rebuilt in 2008?",
+   "a": "Union Berlin",
+   "cat": "grounds"
+  },
+  {
+   "q": "Which ground did Borussia Dortmund leave in 1974 when the Westfalenstadion opened?",
+   "a": "The Stadion Rote Erde",
+   "cat": "grounds",
+   "club": "borussia-dortmund"
+  },
+  {
+   "q": "In which year did the Bundesliga kick off its very first season?",
+   "a": "1963",
+   "cat": "records"
+  },
+  {
+   "q": "What is the cannon-shaped trophy given to the Bundesliga's leading scorer called?",
+   "a": "The Torjägerkanone",
+   "sub": "The football magazine kicker has handed it out since 1966.",
+   "cat": "records"
+  },
+  {
+   "q": "Borussia, the name carried by the Dortmund and Mönchengladbach clubs, is the Latin name for what?",
+   "a": "Prussia",
+   "cat": "records"
+  },
+  {
+   "q": "Which Bundesliga club, founded in 1899, was bankrolled into the top flight by SAP co-founder Dietmar Hopp?",
+   "a": "TSG Hoffenheim",
+   "cat": "records"
+  },
+  {
+   "q": "Which club did Bayern Munich sign Mario Gomez from in 2009 for a then German record fee?",
+   "a": "VfB Stuttgart",
+   "cat": "transfers",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "Which club did Bayern Munich sign Michael Ballack from in 2002?",
+   "a": "Bayer Leverkusen",
+   "cat": "transfers",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "Which club did Borussia Dortmund sell Ousmane Dembele to in 2017?",
+   "a": "Barcelona",
+   "cat": "transfers",
+   "club": "borussia-dortmund"
+  },
+  {
+   "q": "Which German club did Arsenal sign Granit Xhaka from in 2016?",
+   "a": "Borussia Mönchengladbach",
+   "cat": "transfers"
   }
  ],
  "hard": [

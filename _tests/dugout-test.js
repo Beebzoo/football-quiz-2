@@ -46,6 +46,15 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
 
   const qd = () => ev(app, "S.qd");
   const lg = (i, w) => ev(app, "h2Man(" + i + "," + w + ").lg") || null;
+  /* WHICH SLOT IS HE IN. Never hardcode it: the shape decides, and so does
+     the squad file, which changes when the harvest improves. */
+  const slotOf = (name, w) => {
+    for(let i = 0; i < 11; i++){
+      const m = ev(app, "h2Man(" + i + "," + w + ")");
+      if(m && (m.full || "").indexOf(name) > -1) return i;
+    }
+    return -1;
+  };
   const start = (play, a, b) => run(app,
     'S = freshState(["Martijn","Bram"], false, "classic", 0, "' + play + '", false); h2Start(); ' +
     'h2PickTeam(' + JSON.stringify(a) + '); h2PickTeam(' + JSON.stringify(b) + '); ' +
@@ -58,13 +67,15 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   /* ---------------------------------------------------------------- */
   console.log("--- the deck comes from the man ---");
   start("manager", "Italy", "Costa Rica");
-  await passTo(SIX, RCB);
-  /* Cannavaro played in two, and which one a given ball asks is a coin toss by
+  const CANNA = slotOf("Cannavaro", 0);
+  check("Cannavaro is in the Italian eleven", CANNA > -1, CANNA);
+  await passTo(SIX, CANNA);
+  /* He played in two, and which one a given ball asks is a coin toss by
      design, so the test asks what the rule promises rather than pinning the
      toss: it has to be one of HIS. */
   check("a ball to Cannavaro draws one of his leagues",
-    (lg(RCB, 0) || []).includes(qd()), qd() + " / " + JSON.stringify(lg(RCB, 0)));
-  check("he has two to draw from", (lg(RCB, 0) || []).length === 2, JSON.stringify(lg(RCB, 0)));
+    (lg(CANNA, 0) || []).includes(qd()), qd() + " / " + JSON.stringify(lg(CANNA, 0)));
+  check("he has two to draw from", (lg(CANNA, 0) || []).length === 2, JSON.stringify(lg(CANNA, 0)));
   check("the card names whichever it was",
     stage(app).indexOf(ev(app, "QUIZZES[S.qd].label")) !== -1, "not named: " + qd());
   check("and the question really came out of that deck",

@@ -81,8 +81,9 @@
    "cat": "imports"
   },
   {
-   "q": "Which Belgian club reached the 1988 Cup Winners' Cup final and has the most Belgian titles?",
-   "a": "Anderlecht",
+   "q": "Which Belgian club beat Ajax to win the 1988 Cup Winners' Cup?",
+   "a": "KV Mechelen",
+   "sub": "Piet den Boer headed the only goal in Strasbourg.",
    "cat": "europe"
   },
   {
@@ -157,6 +158,192 @@
    "q": "Which club won the 2025-26 Belgian Pro League?",
    "a": "Club Brugge",
    "cat": "champions"
+  },
+  {
+   "q": "Which club won the 2017-18 Belgian Pro League?",
+   "a": "Club Brugge",
+   "cat": "champions"
+  },
+  {
+   "q": "The 2019-20 Belgian season was halted by the pandemic and the leaders were handed the title. Which club?",
+   "a": "Club Brugge",
+   "cat": "champions"
+  },
+  {
+   "q": "Which two clubs meet in the Belgian league fixture known as de Topper?",
+   "a": "Anderlecht and Club Brugge",
+   "cat": "records"
+  },
+  {
+   "q": "Which Belgian club did Vincent Kompany manage before he took over at Burnley in 2022?",
+   "a": "Anderlecht",
+   "cat": "managers"
+  },
+  {
+   "q": "Which Belgian club did Mark van Bommel lead to the league and cup double in 2022-23?",
+   "a": "Royal Antwerp",
+   "sub": "Their first league title in 66 years.",
+   "cat": "managers"
+  },
+  {
+   "q": "Which Belgian club is nicknamed the Great Old?",
+   "a": "Royal Antwerp",
+   "cat": "records"
+  },
+  {
+   "q": "Which Belgian club is nicknamed the Buffalos?",
+   "a": "Gent",
+   "cat": "records"
+  },
+  {
+   "q": "Which Brussels stadium stages the Belgian Cup final?",
+   "a": "The King Baudouin Stadium",
+   "cat": "cups"
+  },
+  {
+   "q": "Which Anderlecht teenager finished as top scorer in the 2009-10 Belgian season?",
+   "a": "Romelu Lukaku",
+   "sub": "He was still 16 when the season kicked off.",
+   "cat": "scorers",
+   "club": "anderlecht"
+  },
+  {
+   "q": "Which Belgian club sold Christian Benteke to Aston Villa in 2012?",
+   "a": "Genk",
+   "cat": "transfers"
+  },
+  {
+   "q": "Which Belgian club did Marouane Fellaini leave for Everton in 2008?",
+   "a": "Standard Liege",
+   "cat": "transfers"
+  },
+  {
+   "q": "Which Belgian club sold Leandro Trossard to Brighton in 2019?",
+   "a": "Genk",
+   "cat": "transfers"
+  },
+  {
+   "q": "Which Belgian club did Youri Tielemans leave for Monaco in 2017?",
+   "a": "Anderlecht",
+   "cat": "transfers"
+  },
+  {
+   "q": "Which Belgian club lost to Aston Villa in the 2024-25 Champions League last 16?",
+   "a": "Club Brugge",
+   "cat": "europe"
+  },
+  {
+   "q": "Which Belgian club did Toby Alderweireld join in 2022 after a season in Qatar?",
+   "a": "Royal Antwerp",
+   "cat": "imports"
+  },
+  {
+   "q": "Which club did Club Brugge beat 2-1 in the 2025 Belgian Cup final?",
+   "a": "Anderlecht",
+   "sub": "Romeo Vermant scored both.",
+   "cat": "cups",
+   "club": "club-brugge"
+  },
+  {
+   "q": "Which club beat Anderlecht 3-1 in the 2026 Belgian Cup final?",
+   "a": "Union Saint-Gilloise",
+   "sub": "Kevin Mac Allister opened the scoring.",
+   "cat": "cups",
+   "club": "anderlecht"
+  },
+  {
+   "q": "Who scored thirty-three goals for Genk in the 2020-21 Belgian season?",
+   "a": "Paul Onuachu",
+   "cat": "scorers",
+   "club": "genk"
+  },
+  {
+   "q": "Which Belgian club sold Wilfred Ndidi to Leicester in 2017?",
+   "a": "Genk",
+   "cat": "transfers"
+  },
+  {
+   "q": "Which Belgian club did Michy Batshuayi leave for Marseille in 2014?",
+   "a": "Standard Liege",
+   "cat": "transfers"
+  },
+  {
+   "q": "Which Belgian club sold Jonathan David to Lille in 2020?",
+   "a": "Gent",
+   "cat": "transfers"
+  },
+  {
+   "q": "Which Belgian club sold Bart Verbruggen to Brighton in 2023?",
+   "a": "Anderlecht",
+   "cat": "transfers"
+  },
+  {
+   "q": "Which Belgian club did Arnaut Danjuma leave for Bournemouth in 2019?",
+   "a": "Club Brugge",
+   "cat": "transfers"
+  },
+  {
+   "q": "Which Belgian club did Kaoru Mitoma spend the 2021-22 season on loan at?",
+   "a": "Union Saint-Gilloise",
+   "cat": "imports"
+  },
+  {
+   "q": "Which Belgian club sold Victor Boniface to Bayer Leverkusen in 2023?",
+   "a": "Union Saint-Gilloise",
+   "cat": "transfers"
+  },
+  {
+   "q": "Which club won the Belgian Cup in 2021, beating Standard 2-1 in the final?",
+   "a": "Genk",
+   "cat": "cups"
+  },
+  {
+   "q": "Which club beat Anderlecht on penalties to win the 2022 Belgian Cup?",
+   "a": "Gent",
+   "cat": "cups",
+   "club": "anderlecht"
+  },
+  {
+   "q": "Which Belgian club plays at the Stade Joseph Marien, beside a park in Forest?",
+   "a": "Union Saint-Gilloise",
+   "cat": "grounds"
+  },
+  {
+   "q": "Which Belgian club has been owned by the Japanese company DMM.com since 2017?",
+   "a": "Sint-Truiden",
+   "cat": "records"
+  },
+  {
+   "q": "Which Belgian club went bust in April 2020 and merged with a club from Temse?",
+   "a": "Lokeren",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which Belgian club did the Dutch striker Vincent Janssen join in 2022?",
+   "a": "Royal Antwerp",
+   "cat": "imports"
+  },
+  {
+   "q": "Which Union Saint-Gilloise striker topped the Belgian scoring charts in 2021-22?",
+   "a": "Deniz Undav",
+   "cat": "scorers"
+  },
+  {
+   "q": "Which coach won three Belgian titles in a row, one with Genk and two with Club Brugge?",
+   "a": "Philippe Clement",
+   "cat": "managers",
+   "club": "genk"
+  },
+  {
+   "q": "Which Belgian club reached the Champions League last 16 in 2015-16, going out to Wolfsburg?",
+   "a": "Gent",
+   "cat": "europe"
+  },
+  {
+   "q": "Which Dutch coach won the 2021-22 Belgian title with Club Brugge before joining Ajax?",
+   "a": "Alfred Schreuder",
+   "cat": "managers",
+   "club": "club-brugge"
   }
  ],
  "normal": [
@@ -182,7 +369,8 @@
   },
   {
    "q": "Which club won the 2004-05 Belgian Pro League?",
-   "a": "Brussels",
+   "a": "Club Brugge",
+   "sub": "They settled it against Anderlecht with a game to spare.",
    "cat": "champions"
   },
   {
@@ -278,6 +466,204 @@
    "q": "Which club finished second in the 2025-26 Belgian Pro League?",
    "a": "Union SG",
    "cat": "champions"
+  },
+  {
+   "q": "Which club won the 1997-98 Belgian league title?",
+   "a": "Club Brugge",
+   "cat": "champions"
+  },
+  {
+   "q": "Which coach led Gent to their first Belgian league title in 2014-15?",
+   "a": "Hein Vanhaezebrouck",
+   "cat": "managers",
+   "club": "gent"
+  },
+  {
+   "q": "Which Antwerp captain scored in the 94th minute at Genk in 2023 to win the title?",
+   "a": "Toby Alderweireld",
+   "sub": "It made it 2-2 on the last day.",
+   "cat": "champions",
+   "club": "antwerp"
+  },
+  {
+   "q": "Which Belgian club won the 2019 Belgian Cup while playing in the second tier?",
+   "a": "Mechelen",
+   "sub": "They beat Gent 2-1 in the final.",
+   "cat": "cups"
+  },
+  {
+   "q": "Which small Belgian club won the 2001 Belgian Cup, the first major trophy in its history?",
+   "a": "Westerlo",
+   "sub": "Jef Delen scored the only goal against Lommel.",
+   "cat": "cups"
+  },
+  {
+   "q": "Which Belgian club won the cup in 2012 and again in 2014?",
+   "a": "Lokeren",
+   "cat": "cups"
+  },
+  {
+   "q": "Which club beat Oostende on penalties to win the 2017 Belgian Cup?",
+   "a": "Zulte Waregem",
+   "cat": "cups"
+  },
+  {
+   "q": "Which Belgian club won the 2024 Belgian Cup, beating Antwerp 1-0 in the final?",
+   "a": "Union Saint-Gilloise",
+   "cat": "cups",
+   "club": "antwerp"
+  },
+  {
+   "q": "Which former Club Brugge winger scored the only goal as Antwerp won the 2020 Belgian Cup?",
+   "a": "Lior Refaelov",
+   "cat": "cups",
+   "club": "club-brugge"
+  },
+  {
+   "q": "Which Club Brugge winger was the top scorer in the 2010-11 Belgian season?",
+   "a": "Ivan Perisic",
+   "cat": "scorers",
+   "club": "club-brugge"
+  },
+  {
+   "q": "Which Lokeren striker topped the Belgian scoring charts in 1998-99?",
+   "a": "Jan Koller",
+   "cat": "scorers"
+  },
+  {
+   "q": "Which Genk striker scored thirty goals to finish top scorer in 2001-02?",
+   "a": "Wesley Sonck",
+   "cat": "scorers",
+   "club": "genk"
+  },
+  {
+   "q": "Which Antwerp striker was the top scorer in the 2019-20 Belgian season?",
+   "a": "Dieumerci Mbokani",
+   "cat": "scorers",
+   "club": "antwerp"
+  },
+  {
+   "q": "Which Cercle Brugge striker was the top scorer in the 2023-24 Belgian season?",
+   "a": "Kevin Denkey",
+   "sub": "He got 27 of them.",
+   "cat": "scorers",
+   "club": "cercle-brugge"
+  },
+  {
+   "q": "Which Gent striker topped the Belgian scoring charts in 2022-23?",
+   "a": "Hugo Cuypers",
+   "sub": "He got twenty-seven of them.",
+   "cat": "scorers",
+   "club": "gent"
+  },
+  {
+   "q": "Which Belgian club sold Kevin Denkey to FC Cincinnati for a record MLS fee in 2024?",
+   "a": "Cercle Brugge",
+   "cat": "transfers"
+  },
+  {
+   "q": "Which Belgian club sold Charles De Ketelaere to AC Milan in 2022?",
+   "a": "Club Brugge",
+   "cat": "transfers"
+  },
+  {
+   "q": "Which Belgian club sold Sergej Milinkovic-Savic to Lazio in 2015?",
+   "a": "Genk",
+   "cat": "transfers"
+  },
+  {
+   "q": "Which Belgian club did Steven Defour leave for Porto in 2011?",
+   "a": "Standard Liege",
+   "cat": "transfers"
+  },
+  {
+   "q": "Which Belgian club sold Roman Yaremchuk to Benfica in 2021?",
+   "a": "Gent",
+   "cat": "transfers"
+  },
+  {
+   "q": "Which Belgian club sold Paul Onuachu to Southampton in 2023?",
+   "a": "Genk",
+   "cat": "transfers"
+  },
+  {
+   "q": "Which Belgian club did Alexis Saelemaekers leave for AC Milan in 2020?",
+   "a": "Anderlecht",
+   "cat": "transfers"
+  },
+  {
+   "q": "Which Belgian club did Philippe Clement leave in 2022 to take the Monaco job?",
+   "a": "Club Brugge",
+   "cat": "managers"
+  },
+  {
+   "q": "Which coach took over at Club Brugge in March 2024 and won the title within months?",
+   "a": "Nicky Hayen",
+   "sub": "He replaced Ronny Deila.",
+   "cat": "managers",
+   "club": "club-brugge"
+  },
+  {
+   "q": "Zulte Waregem's old Regenboogstadion took its name from the rainbow jersey of which sport?",
+   "a": "Cycling",
+   "sub": "It was built for the 1957 world road race.",
+   "cat": "grounds",
+   "club": "zulte-waregem"
+  },
+  {
+   "q": "Which Belgian club plays at the AFAS Stadion, known to fans as Achter de Kazerne?",
+   "a": "Mechelen",
+   "cat": "grounds"
+  },
+  {
+   "q": "Which Belgian club plays at the Stayen?",
+   "a": "Sint-Truiden",
+   "cat": "grounds"
+  },
+  {
+   "q": "Which Club Brugge midfielder won the Belgian Golden Shoe in 2018, 2019 and 2024?",
+   "a": "Hans Vanaken",
+   "cat": "records",
+   "club": "club-brugge"
+  },
+  {
+   "q": "By the end of 2025, which club had won the Belgian Cup more often than any other, with twelve?",
+   "a": "Club Brugge",
+   "cat": "records"
+  },
+  {
+   "q": "Which Dutchman won the Belgian Golden Shoe in 2017 while captaining Club Brugge?",
+   "a": "Ruud Vormer",
+   "cat": "records",
+   "club": "club-brugge"
+  },
+  {
+   "q": "Which Belgian club reached the Europa League quarter-finals in 2022-23?",
+   "a": "Union Saint-Gilloise",
+   "sub": "Bayer Leverkusen ended the run.",
+   "cat": "europe"
+  },
+  {
+   "q": "Anderlecht beat which English club 4-2 in the 1976 Cup Winners' Cup final?",
+   "a": "West Ham United",
+   "cat": "europe",
+   "club": "anderlecht"
+  },
+  {
+   "q": "Which Belgian club went bankrupt in 2018, twenty-one years after it won the league title?",
+   "a": "Lierse",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club beat Club Brugge 2-1 to win the 2005 Belgian Cup?",
+   "a": "Germinal Beerschot",
+   "cat": "cups",
+   "club": "club-brugge"
+  },
+  {
+   "q": "Which Belgian club plays at the ground known as the Mambourg?",
+   "a": "Charleroi",
+   "cat": "grounds"
   }
  ],
  "hard": [

@@ -1,0 +1,321 @@
+[
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "Which club won the 2017-18 Belgian Pro League?",
+  "a": "Club Brugge",
+  "src": "https://en.wikipedia.org/wiki/Belgian_Pro_League",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "champions",
+  "q": "The 2019-20 Belgian season was halted by the pandemic and the leaders were handed the title. Which club?",
+  "a": "Club Brugge",
+  "src": "https://en.wikipedia.org/wiki/2019%E2%80%9320_Belgian_First_Division_A",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "records",
+  "q": "Which two clubs meet in the Belgian league fixture known as de Topper?",
+  "a": "Anderlecht and Club Brugge",
+  "src": "https://en.wikipedia.org/wiki/Belgian_Pro_League",
+  "conf": "likely",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "managers",
+  "q": "Which Belgian club did Vincent Kompany manage before he took over at Burnley in 2022?",
+  "a": "Anderlecht",
+  "src": "https://en.wikipedia.org/wiki/Vincent_Kompany",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "managers",
+  "q": "Which Belgian club did Mark van Bommel lead to the league and cup double in 2022-23?",
+  "a": "Royal Antwerp",
+  "sub": "Their first league title in 66 years.",
+  "src": "https://en.wikipedia.org/wiki/Royal_Antwerp_F.C.",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "records",
+  "q": "Which Belgian club is nicknamed the Great Old?",
+  "a": "Royal Antwerp",
+  "src": "https://en.wikipedia.org/wiki/Royal_Antwerp_F.C.",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "records",
+  "q": "Which Belgian club is nicknamed the Buffalos?",
+  "a": "Gent",
+  "src": "https://en.wikipedia.org/wiki/K.A.A._Gent",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "cups",
+  "q": "Which Brussels stadium stages the Belgian Cup final?",
+  "a": "The King Baudouin Stadium",
+  "src": "https://en.wikipedia.org/wiki/King_Baudouin_Stadium",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "scorers",
+  "q": "Which Anderlecht teenager finished as top scorer in the 2009-10 Belgian season?",
+  "a": "Romelu Lukaku",
+  "sub": "He was still 16 when the season kicked off.",
+  "src": "https://en.wikipedia.org/wiki/Belgian_Pro_League_top_scorers",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "transfers",
+  "q": "Which Belgian club sold Christian Benteke to Aston Villa in 2012?",
+  "a": "Genk",
+  "src": "https://en.wikipedia.org/wiki/Christian_Benteke",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "transfers",
+  "q": "Which Belgian club did Marouane Fellaini leave for Everton in 2008?",
+  "a": "Standard Liege",
+  "src": "https://en.wikipedia.org/wiki/Marouane_Fellaini",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "transfers",
+  "q": "Which Belgian club sold Leandro Trossard to Brighton in 2019?",
+  "a": "Genk",
+  "src": "https://en.wikipedia.org/wiki/Leandro_Trossard",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "transfers",
+  "q": "Which Belgian club did Youri Tielemans leave for Monaco in 2017?",
+  "a": "Anderlecht",
+  "src": "https://en.wikipedia.org/wiki/Youri_Tielemans",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "europe",
+  "q": "Which Belgian club lost to Aston Villa in the 2024-25 Champions League last 16?",
+  "a": "Club Brugge",
+  "src": "https://en.wikipedia.org/wiki/2024%E2%80%9325_UEFA_Champions_League",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "imports",
+  "q": "Which Belgian club did Toby Alderweireld join in 2022 after a season in Qatar?",
+  "a": "Royal Antwerp",
+  "src": "https://en.wikipedia.org/wiki/Toby_Alderweireld",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "cups",
+  "q": "Which club did Club Brugge beat 2-1 in the 2025 Belgian Cup final?",
+  "a": "Anderlecht",
+  "sub": "Romeo Vermant scored both.",
+  "src": "https://en.wikipedia.org/wiki/2025_Belgian_Cup_final",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "cups",
+  "q": "Which club beat Anderlecht 3-1 in the 2026 Belgian Cup final?",
+  "a": "Union Saint-Gilloise",
+  "sub": "Kevin Mac Allister opened the scoring.",
+  "src": "https://en.wikipedia.org/wiki/2026_Belgian_Cup_final",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "scorers",
+  "q": "Who scored thirty-three goals for Genk in the 2020-21 Belgian season?",
+  "a": "Paul Onuachu",
+  "src": "https://en.wikipedia.org/wiki/Belgian_Pro_League_top_scorers",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "transfers",
+  "q": "Which Belgian club sold Wilfred Ndidi to Leicester in 2017?",
+  "a": "Genk",
+  "src": "https://en.wikipedia.org/wiki/Wilfred_Ndidi",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "transfers",
+  "q": "Which Belgian club did Michy Batshuayi leave for Marseille in 2014?",
+  "a": "Standard Liege",
+  "src": "https://en.wikipedia.org/wiki/Michy_Batshuayi",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "transfers",
+  "q": "Which Belgian club sold Jonathan David to Lille in 2020?",
+  "a": "Gent",
+  "src": "https://en.wikipedia.org/wiki/Jonathan_David",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "transfers",
+  "q": "Which Belgian club sold Bart Verbruggen to Brighton in 2023?",
+  "a": "Anderlecht",
+  "src": "https://en.wikipedia.org/wiki/Bart_Verbruggen",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "transfers",
+  "q": "Which Belgian club did Arnaut Danjuma leave for Bournemouth in 2019?",
+  "a": "Club Brugge",
+  "src": "https://en.wikipedia.org/wiki/Arnaut_Danjuma",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "imports",
+  "q": "Which Belgian club did Kaoru Mitoma spend the 2021-22 season on loan at?",
+  "a": "Union Saint-Gilloise",
+  "src": "https://en.wikipedia.org/wiki/Kaoru_Mitoma",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "transfers",
+  "q": "Which Belgian club sold Victor Boniface to Bayer Leverkusen in 2023?",
+  "a": "Union Saint-Gilloise",
+  "src": "https://en.wikipedia.org/wiki/Victor_Boniface",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "cups",
+  "q": "Which club won the Belgian Cup in 2021, beating Standard 2-1 in the final?",
+  "a": "Genk",
+  "src": "https://en.wikipedia.org/wiki/List_of_Belgian_Cup_finals",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "cups",
+  "q": "Which club beat Anderlecht on penalties to win the 2022 Belgian Cup?",
+  "a": "Gent",
+  "src": "https://en.wikipedia.org/wiki/List_of_Belgian_Cup_finals",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "grounds",
+  "q": "Which Belgian club plays at the Stade Joseph Marien, beside a park in Forest?",
+  "a": "Union Saint-Gilloise",
+  "src": "https://en.wikipedia.org/wiki/Stade_Joseph_Marien",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "records",
+  "q": "Which Belgian club has been owned by the Japanese company DMM.com since 2017?",
+  "a": "Sint-Truiden",
+  "src": "https://en.wikipedia.org/wiki/Sint-Truidense_V.V.",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "relegation",
+  "q": "Which Belgian club went bust in April 2020 and merged with a club from Temse?",
+  "a": "Lokeren",
+  "src": "https://en.wikipedia.org/wiki/K.S.C._Lokeren_Oost-Vlaanderen",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "imports",
+  "q": "Which Belgian club did the Dutch striker Vincent Janssen join in 2022?",
+  "a": "Royal Antwerp",
+  "src": "https://en.wikipedia.org/wiki/Vincent_Janssen",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "scorers",
+  "q": "Which Union Saint-Gilloise striker topped the Belgian scoring charts in 2021-22?",
+  "a": "Deniz Undav",
+  "src": "https://en.wikipedia.org/wiki/Belgian_Pro_League_top_scorers",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "managers",
+  "q": "Which coach won three Belgian titles in a row, one with Genk and two with Club Brugge?",
+  "a": "Philippe Clement",
+  "src": "https://en.wikipedia.org/wiki/Philippe_Clement",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "europe",
+  "q": "Which Belgian club reached the Champions League last 16 in 2015-16, going out to Wolfsburg?",
+  "a": "Gent",
+  "src": "https://en.wikipedia.org/wiki/2015%E2%80%9316_UEFA_Champions_League",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "managers",
+  "q": "Which Dutch coach won the 2021-22 Belgian title with Club Brugge before joining Ajax?",
+  "a": "Alfred Schreuder",
+  "src": "https://en.wikipedia.org/wiki/Alfred_Schreuder",
+  "conf": "sure",
+  "verdict": "ok"
+ }
+]

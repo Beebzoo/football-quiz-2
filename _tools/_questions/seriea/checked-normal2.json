@@ -1,0 +1,327 @@
+[
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Which Napoli striker was the Serie A top scorer in 2022-23 with twenty-six goals?",
+  "a": "Victor Osimhen",
+  "src": "https://en.wikipedia.org/wiki/List_of_Serie_A_top_scorers",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Which Lazio striker scored thirty-six Serie A goals in 2019-20 to win the Golden Shoe?",
+  "a": "Ciro Immobile",
+  "src": "https://en.wikipedia.org/wiki/Ciro_Immobile",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Which Sampdoria striker was the Serie A top scorer in 2018-19?",
+  "a": "Fabio Quagliarella",
+  "sub": "He was thirty-six years old.",
+  "src": "https://en.wikipedia.org/wiki/List_of_Serie_A_top_scorers",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Which Udinese striker was the Serie A top scorer in both 2009-10 and 2010-11?",
+  "a": "Antonio Di Natale",
+  "src": "https://en.wikipedia.org/wiki/Antonio_Di_Natale",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Which Roma captain was the Serie A top scorer in 2006-07 with twenty-six goals?",
+  "a": "Francesco Totti",
+  "src": "https://en.wikipedia.org/wiki/List_of_Serie_A_top_scorers",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Which Atalanta striker was the Serie A top scorer in 2024-25?",
+  "a": "Mateo Retegui",
+  "sub": "Twenty-five goals.",
+  "src": "https://en.wikipedia.org/wiki/List_of_Serie_A_top_scorers",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "scorers",
+  "q": "Which AC Milan striker was the Serie A top scorer in 2003-04?",
+  "a": "Andriy Shevchenko",
+  "src": "https://en.wikipedia.org/wiki/List_of_Serie_A_top_scorers",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "cups",
+  "q": "Which club beat AC Milan 1-0 to win the 2025 Coppa Italia, their first since 1974?",
+  "a": "Bologna",
+  "sub": "Dan Ndoye scored it in Rome.",
+  "src": "https://en.wikipedia.org/wiki/2025_Coppa_Italia_final",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "cups",
+  "q": "Which club beat Juventus on penalties to win the 2020 Coppa Italia final?",
+  "a": "Napoli",
+  "sub": "0-0 after ninety minutes, 4-2 on penalties, in an empty stadium.",
+  "src": "https://en.wikipedia.org/wiki/2020_Coppa_Italia_final",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "cups",
+  "q": "Which club beat Roma 1-0 in the 2013 Coppa Italia final, the first Rome derby final?",
+  "a": "Lazio",
+  "sub": "Senad Lulic scored it.",
+  "src": "https://en.wikipedia.org/wiki/2013_Coppa_Italia_final",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "cups",
+  "q": "Which club beat Juventus 4-2 after extra time in the 2022 Coppa Italia final?",
+  "a": "Inter Milan",
+  "src": "https://en.wikipedia.org/wiki/2022_Coppa_Italia_final",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "europe",
+  "q": "Who scored a hat-trick for Atalanta in the 2024 Europa League final?",
+  "a": "Ademola Lookman",
+  "sub": "The first hat-trick in a Europa League final.",
+  "src": "https://en.wikipedia.org/wiki/2024_UEFA_Europa_League_final",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "europe",
+  "q": "Which English club beat Fiorentina in the 2023 Europa Conference League final?",
+  "a": "West Ham United",
+  "sub": "Jarrod Bowen scored in the 90th minute.",
+  "src": "https://en.wikipedia.org/wiki/2023_UEFA_Europa_Conference_League_final",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "europe",
+  "q": "Which Italian club lost the 2017 Champions League final 4-1 to Real Madrid?",
+  "a": "Juventus",
+  "src": "https://en.wikipedia.org/wiki/2017_UEFA_Champions_League_final",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "europe",
+  "q": "Which Italian club lost the 1984 European Cup final to Liverpool at its own ground?",
+  "a": "Roma",
+  "src": "https://en.wikipedia.org/wiki/1984_European_Cup_final",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "managers",
+  "q": "Which manager led Inter Milan to the Serie A titles of 2006-07 and 2007-08?",
+  "a": "Roberto Mancini",
+  "src": "https://en.wikipedia.org/wiki/Roberto_Mancini",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "managers",
+  "q": "Which manager led AC Milan to the Serie A title in 2021-22?",
+  "a": "Stefano Pioli",
+  "src": "https://en.wikipedia.org/wiki/Stefano_Pioli",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "managers",
+  "q": "Which manager won five Serie A titles in a row with Juventus from 2014-15?",
+  "a": "Massimiliano Allegri",
+  "src": "https://en.wikipedia.org/wiki/Massimiliano_Allegri",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "managers",
+  "q": "Which manager took charge of Atalanta in 2016 and later won them the Europa League?",
+  "a": "Gian Piero Gasperini",
+  "src": "https://en.wikipedia.org/wiki/Gian_Piero_Gasperini",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "managers",
+  "q": "Which manager won the Serie A title with Juventus in 2019-20, his only season there?",
+  "a": "Maurizio Sarri",
+  "src": "https://en.wikipedia.org/wiki/Maurizio_Sarri",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "transfers",
+  "q": "Which club did Juventus sign Dusan Vlahović from in January 2022?",
+  "a": "Fiorentina",
+  "src": "https://en.wikipedia.org/wiki/Du%C5%A1an_Vlahovi%C4%87",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "transfers",
+  "q": "Which Italian club did Chelsea sign Jorginho from in 2018?",
+  "a": "Napoli",
+  "src": "https://en.wikipedia.org/wiki/Jorginho",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "transfers",
+  "q": "Which club did Inter Milan sign Hakan Çalhanoğlu from on a free transfer in 2021?",
+  "a": "AC Milan",
+  "src": "https://en.wikipedia.org/wiki/Hakan_%C3%87alhano%C4%9Flu",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "imports",
+  "q": "Which Georgian winger did Napoli sign in 2022, a year before they won the Scudetto?",
+  "a": "Khvicha Kvaratskhelia",
+  "src": "https://en.wikipedia.org/wiki/Khvicha_Kvaratskhelia",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "imports",
+  "q": "Which Argentine striker did Juventus sign from Napoli in 2016 for a record Italian fee?",
+  "a": "Gonzalo Higuaín",
+  "sub": "Ninety million euros.",
+  "src": "https://en.wikipedia.org/wiki/Gonzalo_Higua%C3%ADn",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "imports",
+  "q": "Which Chilean midfielder did Juventus sign from Bayer Leverkusen in 2011?",
+  "a": "Arturo Vidal",
+  "src": "https://en.wikipedia.org/wiki/Arturo_Vidal",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "stories",
+  "q": "Which club did Silvio Berlusconi buy in 2018 and take up to Serie A?",
+  "a": "Monza",
+  "src": "https://en.wikipedia.org/wiki/AC_Monza",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "stories",
+  "q": "Which Chinese retail group took control of Inter Milan in 2016?",
+  "a": "Suning",
+  "src": "https://en.wikipedia.org/wiki/Inter_Milan",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "stories",
+  "q": "Which American businessman bought Roma from James Pallotta in 2020?",
+  "a": "Dan Friedkin",
+  "src": "https://www.asroma.com/en/news/58433/the-friedkin-group-are-the-new-owners-of-as-roma",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "stories",
+  "q": "Which Italian family, the founders of Fiat, took over Juventus in 1923?",
+  "a": "The Agnelli family",
+  "src": "https://en.wikipedia.org/wiki/Juventus_FC",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "records",
+  "q": "Which club did Gianluigi Buffon, Fabio Cannavaro and Hernan Crespo all play for in the 1990s?",
+  "a": "Parma",
+  "src": "https://en.wikipedia.org/wiki/Parma_Calcio_1913",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "grounds",
+  "q": "Chievo shared the Stadio Bentegodi with which other club from the same city?",
+  "a": "Hellas Verona",
+  "src": "https://en.wikipedia.org/wiki/Stadio_Marc%27Antonio_Bentegodi",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "grounds",
+  "q": "Which club plays its home games at the Stadio Renzo Barbera in Sicily?",
+  "a": "Palermo",
+  "src": "https://en.wikipedia.org/wiki/Stadio_Renzo_Barbera",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "champions",
+  "q": "Which club sealed a twentieth Scudetto in the 2024 Milan derby and earned a second star?",
+  "a": "Inter Milan",
+  "sub": "Ten titles buys a star.",
+  "src": "https://en.wikipedia.org/wiki/2023%E2%80%9324_Serie_A",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "normal",
+  "cat": "relegation",
+  "q": "Which Ligurian club went down from Serie A in 2021-22 after fifteen years in the top flight?",
+  "a": "Genoa",
+  "sub": "They came straight back up.",
+  "src": "https://en.wikipedia.org/wiki/Genoa_CFC",
+  "conf": "sure",
+  "verdict": "ok"
+ }
+]

@@ -1,0 +1,322 @@
+[
+ {
+  "tier": "easy",
+  "cat": "grounds",
+  "q": "In which Italian city would you find the San Siro?",
+  "a": "Milan",
+  "src": "https://en.wikipedia.org/wiki/San_Siro",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "grounds",
+  "q": "Napoli's Stadio San Paolo was renamed in 2020 after which former player of theirs?",
+  "a": "Diego Maradona",
+  "sub": "He died in November 2020.",
+  "src": "https://en.wikipedia.org/wiki/Stadio_Diego_Armando_Maradona",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "grounds",
+  "q": "Which club plays its home games at the Gewiss Stadium in Bergamo?",
+  "a": "Atalanta",
+  "src": "https://en.wikipedia.org/wiki/Gewiss_Stadium",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "grounds",
+  "q": "Which Serie A club comes from the north-eastern city of Udine?",
+  "a": "Udinese",
+  "src": "https://en.wikipedia.org/wiki/Udinese_Calcio",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "grounds",
+  "q": "Which Serie A club plays its football on the island of Sardinia?",
+  "a": "Cagliari",
+  "src": "https://en.wikipedia.org/wiki/Cagliari_Calcio",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "records",
+  "q": "Which Italian club is nicknamed the Giallorossi, the yellow and reds?",
+  "a": "Roma",
+  "src": "https://en.wikipedia.org/wiki/AS_Roma",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "records",
+  "q": "Which Rome club takes its name from the region that surrounds the city?",
+  "a": "Lazio",
+  "src": "https://en.wikipedia.org/wiki/SS_Lazio",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "records",
+  "q": "Which Italian club plays at home in purple shirts?",
+  "a": "Fiorentina",
+  "sub": "Viola is Italian for purple.",
+  "src": "https://en.wikipedia.org/wiki/ACF_Fiorentina",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "records",
+  "q": "Which Italian club did Gabriel Batistuta play for from 1991 to 2000?",
+  "a": "Fiorentina",
+  "src": "https://en.wikipedia.org/wiki/Gabriel_Batistuta",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "records",
+  "q": "Which Italian club's name is the Latin word for youth?",
+  "a": "Juventus",
+  "src": "https://en.wikipedia.org/wiki/Juventus_FC",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "records",
+  "q": "Which two clubs meet in the Derby d'Italia?",
+  "a": "Juventus and Inter Milan",
+  "sub": "The journalist Gianni Brera coined the name.",
+  "src": "https://en.wikipedia.org/wiki/Derby_d%27Italia",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "records",
+  "q": "Which animal on Roma's badge is shown suckling Romulus and Remus?",
+  "a": "A she-wolf",
+  "src": "https://en.wikipedia.org/wiki/AS_Roma",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "records",
+  "q": "What is the division directly below Serie A called?",
+  "a": "Serie B",
+  "src": "https://en.wikipedia.org/wiki/Serie_B",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "cups",
+  "q": "What is the Italian super cup between the league champions and the cup winners called?",
+  "a": "The Supercoppa Italiana",
+  "src": "https://en.wikipedia.org/wiki/Supercoppa_Italiana",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "cups",
+  "q": "Winning the Coppa Italia earns a place in which European competition?",
+  "a": "The Europa League",
+  "src": "https://en.wikipedia.org/wiki/Coppa_Italia",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "imports",
+  "q": "Which Belgian striker did Inter Milan sign from Manchester United in 2019?",
+  "a": "Romelu Lukaku",
+  "src": "https://en.wikipedia.org/wiki/Romelu_Lukaku",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "imports",
+  "q": "Which Brazilian striker nicknamed O Fenomeno played for both Inter Milan and AC Milan?",
+  "a": "Ronaldo",
+  "src": "https://en.wikipedia.org/wiki/Ronaldo_%28Brazilian_footballer%29",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "imports",
+  "q": "Which Danish midfielder joined Inter Milan from Tottenham in 2020?",
+  "a": "Christian Eriksen",
+  "src": "https://en.wikipedia.org/wiki/Christian_Eriksen",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "imports",
+  "q": "Which French striker joined AC Milan from Chelsea in 2021?",
+  "a": "Olivier Giroud",
+  "src": "https://en.wikipedia.org/wiki/Olivier_Giroud",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "imports",
+  "q": "Which Argentine striker did Inter Milan sign from Racing Club in 2018?",
+  "a": "Lautaro Martínez",
+  "src": "https://en.wikipedia.org/wiki/Lautaro_Mart%C3%ADnez",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "imports",
+  "q": "Which Cameroon striker joined Inter Milan from Barcelona in 2009 and won the treble?",
+  "a": "Samuel Eto'o",
+  "src": "https://en.wikipedia.org/wiki/Samuel_Eto%27o",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "transfers",
+  "q": "Which Italian club did David Beckham join on loan from LA Galaxy in 2009?",
+  "a": "AC Milan",
+  "src": "https://en.wikipedia.org/wiki/David_Beckham",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "transfers",
+  "q": "Which Rome club did Paulo Dybala join on a free transfer from Juventus in 2022?",
+  "a": "Roma",
+  "src": "https://en.wikipedia.org/wiki/Paulo_Dybala",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "transfers",
+  "q": "Which goalkeeper left AC Milan for Paris Saint-Germain on a free transfer in 2021?",
+  "a": "Gianluigi Donnarumma",
+  "src": "https://en.wikipedia.org/wiki/Gianluigi_Donnarumma",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "stories",
+  "q": "Which Italian club did Silvio Berlusconi own for thirty-one years until 2017?",
+  "a": "AC Milan",
+  "src": "https://en.wikipedia.org/wiki/Silvio_Berlusconi",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "stories",
+  "q": "Which pink Italian daily newspaper is famous for its Serie A coverage?",
+  "a": "La Gazzetta dello Sport",
+  "src": "https://en.wikipedia.org/wiki/La_Gazzetta_dello_Sport",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "records",
+  "q": "Which Italian club did Alessandro Del Piero play for from 1993 to 2012?",
+  "a": "Juventus",
+  "src": "https://en.wikipedia.org/wiki/Alessandro_Del_Piero",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "records",
+  "q": "Which Italian club did Javier Zanetti captain for more than a decade?",
+  "a": "Inter Milan",
+  "src": "https://en.wikipedia.org/wiki/Javier_Zanetti",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "records",
+  "q": "Which club did Edinson Cavani, Gonzalo Higuaín and Victor Osimhen all score for?",
+  "a": "Napoli",
+  "src": "https://en.wikipedia.org/wiki/SSC_Napoli",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "europe",
+  "q": "Which French club beat Inter Milan 5-0 in the 2025 Champions League final?",
+  "a": "Paris Saint-Germain",
+  "src": "https://en.wikipedia.org/wiki/2025_UEFA_Champions_League_final",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "europe",
+  "q": "Which Italian club did Manchester City beat in the 2023 Champions League final?",
+  "a": "Inter Milan",
+  "src": "https://en.wikipedia.org/wiki/2023_UEFA_Champions_League_final",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "europe",
+  "q": "AC Milan won the 2007 Champions League final in Athens. Which English club did they beat?",
+  "a": "Liverpool",
+  "sub": "Revenge for Istanbul two years earlier.",
+  "src": "https://en.wikipedia.org/wiki/2007_UEFA_Champions_League_final",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "scorers",
+  "q": "Which Juventus forward was the Serie A top scorer in 2020-21?",
+  "a": "Cristiano Ronaldo",
+  "sub": "Twenty-nine goals.",
+  "src": "https://en.wikipedia.org/wiki/List_of_Serie_A_top_scorers",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "scorers",
+  "q": "Which Swedish striker was the Serie A top scorer in 2011-12 while at AC Milan?",
+  "a": "Zlatan Ibrahimović",
+  "src": "https://en.wikipedia.org/wiki/List_of_Serie_A_top_scorers",
+  "conf": "sure",
+  "verdict": "ok"
+ },
+ {
+  "tier": "easy",
+  "cat": "managers",
+  "q": "Which manager won the Serie A title with Napoli in 2024-25?",
+  "a": "Antonio Conte",
+  "src": "https://en.wikipedia.org/wiki/2024%E2%80%9325_Serie_A",
+  "conf": "sure",
+  "verdict": "ok"
+ }
+]

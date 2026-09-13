@@ -947,11 +947,12 @@
   "tier": "normal",
   "cat": "scorers",
   "q": "Who was the top scorer in the 2013-14 Bundesliga?",
-  "a": "Borussia Dortmund",
+  "a": "Robert Lewandowski",
   "src": "https://en.wikipedia.org/wiki/2013%E2%80%9314_Bundesliga",
   "conf": "sure",
   "verdict": "ok",
-  "note": "harvested from the season table"
+  "note": "harvested from the season table answer was the club, not the man; corrected 13 Sep 2026",
+  "sub": "He got 20 of them, and left for Bayern that summer."
  },
  {
   "tier": "normal",

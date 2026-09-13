@@ -5379,7 +5379,7 @@ function setTheme(t){
   applyTheme();
   render();
 }
-const BUILD = "13 Sep 2026 · 22:21";
+const BUILD = "13 Sep 2026 · 22:33";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five
@@ -7199,7 +7199,44 @@ const h2Team  = w => (S.h2h.teams && S.h2h.teams[w]) || null;
    Let's Ball, that league's clubs for a league. Same shape either way, which is
    why nothing below this line cares which it got. */
 const h2Pool  = () => (S && TEAMS[S.mode]) || null;
-const h2Squad = w => { const t = h2Team(w), p = h2Pool(); return (t && p && p[t]) ? p[t] : null; };
+/* THE ELEVEN IN THE ORDER THE SHAPES ASSUME. `from` indexes a 4-2-3-1, so
+   slot 0 has to be a keeper and slots 8 to 10 have to be the front line, or a
+   shape rearranges the wrong men. The deck is built that way and two squads in
+   it still are not, so this sorts by the position each man actually has rather
+   than trusting the order.
+
+   A SPARE KEEPER TRADES PLACES WITH THE BENCH. Mexico's eleventh man is their
+   second goalkeeper, and no amount of sorting makes him a right winger; he
+   swaps with the first outfielder sitting down. Both lists are rewritten
+   together, because a substitution reads both and a man in each would be two
+   men. It runs once per squad and it is deterministic, so a parked match
+   resumes onto exactly the same eleven. */
+const H2_ROLE = ["GK", "DF", "DF", "DF", "DF", "MF", "MF", "MF", "FW", "FW", "FW"];
+const H2_NEAR = {GK: ["GK"], DF: ["DF", "MF", "FW"], MF: ["MF", "FW", "DF"], FW: ["FW", "MF", "DF"]};
+const h2Sorted = new WeakSet();
+function h2Order(t){
+  if(!t || h2Sorted.has(t) || !t.xi || t.xi.length !== 11) return t;
+  h2Sorted.add(t);
+  const xi = t.xi.slice(), bench = (t.bench || []).slice();
+  for(const gk of xi.filter(m => m && m.pos === "GK").slice(1)){
+    const j = bench.findIndex(m => m && m.pos && m.pos !== "GK");
+    if(j < 0) break;
+    xi[xi.indexOf(gk)] = bench[j];
+    bench[j] = gk;
+  }
+  const pool = {GK: [], DF: [], MF: [], FW: []};
+  for(const m of xi) (pool[m && m.pos] || pool.MF).push(m);
+  const out = [];
+  for(const want of H2_ROLE){
+    let man = null;
+    for(const p of H2_NEAR[want]) if(pool[p].length){ man = pool[p].shift(); break; }
+    if(!man) for(const p of ["MF", "DF", "FW", "GK"]) if(pool[p].length){ man = pool[p].shift(); break; }
+    out.push(man);
+  }
+  if(out.every(Boolean)){ t.xi = out; t.bench = bench; }
+  return t;
+}
+const h2Squad = w => { const t = h2Team(w), p = h2Pool(); return (t && p && p[t]) ? h2Order(p[t]) : null; };
 /* where this quiz keeps its badges, and what they are called */
 const h2Badge = code => { const r = S && QUIZZES[S.mode]; return r && code ? r.flags + code + r.ext : null; };
 /* TWO FRAMES, and keeping them apart is the whole trick.

@@ -115,6 +115,24 @@ function shortName(full) {
 /* the eleven slots the pitch draws, in order */
 const SHAPE = ["GK", "DF", "DF", "DF", "DF", "MF", "MF", "MF", "FW", "FW", "FW"];
 
+/* every {{name|...}} in the text, returned as its raw inside, found by
+   counting braces rather than by hoping the line ends politely */
+function templates(body, name) {
+  const out = [];
+  const open = new RegExp("\\{\\{\\s*" + name + "\\s*\\|", "gi");
+  let m;
+  while ((m = open.exec(body))) {
+    let i = m.index + 2, depth = 1;
+    while (i < body.length && depth > 0) {
+      if (body.startsWith("{{", i)) { depth += 1; i += 2; }
+      else if (body.startsWith("}}", i)) { depth -= 1; i += 2; }
+      else i += 1;
+    }
+    if (depth === 0) out.push(body.slice(m.index + m[0].length, i - 2));
+  }
+  return out;
+}
+
 function parseSquads(wikitext) {
   const teams = [];
   // ===Country=== ... {{National football squad start}} ... {{...end}}
@@ -123,7 +141,7 @@ function parseSquads(wikitext) {
   heads.forEach((h, i) => {
     const body = wikitext.slice(h.at, i + 1 < heads.length ? heads[i + 1].at : wikitext.length);
     const players = [];
-    for (const m of body.matchAll(/\{\{\s*National football squad player\s*\|([\s\S]*?)\}\}\s*$/gm)) {
+    for (const inside of templates(body, "National football squad player")) {
       const f = {};
       /* Split on | at depth zero. BOTH kinds of bracket have to be counted:
          the nested {{birth date}} is the obvious one, but a captain is written
@@ -131,7 +149,7 @@ function parseSquads(wikitext) {
          that pipe lives inside [[...]]. Counting only braces cut every
          captain's name in half. */
       let depth = 0, cur = "";
-      for (const ch of m[1]) {
+      for (const ch of inside) {
         if (ch === "{" || ch === "[") depth++;
         else if (ch === "}" || ch === "]") depth--;
         if (ch === "|" && depth === 0) { const e = cur.indexOf("="); if (e > 0) f[cur.slice(0, e).trim()] = cur.slice(e + 1); cur = ""; }
@@ -164,8 +182,15 @@ function pickXI(players) {
   const xi = [];
   for (const want of SHAPE) {
     let pick = pools[want].find(p => !used.has(p));
-    if (!pick) {   // a squad short of forwards borrows from midfield rather than failing
-      pick = players.slice().sort((a, b) => a.no - b.no).find(p => !used.has(p));
+    if (!pick) {
+      /* A SQUAD SHORT OF FORWARDS BORROWS FROM MIDFIELD, not from the reserve
+         goalkeepers. Mexico took three keepers and two forwards to 2006, and
+         a plain shirt-number sort handed the eleventh slot to José de Jesús
+         Corona at number 12, which put a goalkeeper on the right wing with a
+         shot on goal. Any outfielder first, a keeper only if there is nobody
+         else left at all. */
+      const free = players.slice().sort((a, b) => a.no - b.no).filter(p => !used.has(p));
+      pick = free.find(p => p.pos !== "GK") || free[0];
     }
     if (!pick) return null;
     used.add(pick);

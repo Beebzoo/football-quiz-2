@@ -156,6 +156,14 @@ function clubFor(q, a) {
   return hits[0].s;
 }
 
+/* DOES THE QUESTION ASK FOR A PERSON? Only the openings that can have no other
+   kind of answer. "Which club" and "who won" are left alone on purpose,
+   because a club is the right answer to both. */
+const ASKS_PERSON = /^(who (was|were) the (top|leading) (goal)?scorer|who scored|who kept|who managed|who was (the )?(manager|coach|captain|keeper|goalkeeper)|which (player|striker|goalkeeper|keeper|manager|coach|midfielder|defender|forward|winger))/i;
+/* is the whole answer a club and nothing else */
+const answerIsClub = a => CLUBS.some(c => c.names.some(n =>
+  String(a).trim().toLowerCase() === String(n).trim().toLowerCase()));
+
 /* ---- the shipping pack, when appending ---- */
 const pack = Object.fromEntries(TIERS.map(t => [t, []]));
 if (append && fs.existsSync(OUT)) {
@@ -186,6 +194,14 @@ for (const f of files) {
     if (/[{}|\[\]]/.test(q + a)) why.push("brackets");
     if (!/[?.!]$/.test(q)) why.push("no terminal punctuation");
     if (/\b(currently|all[- ]time|still holds?|to date|as of (today|now)|the current|most capped|record holder)\b/i.test(q)) why.push("live record");
+    /* THE ANDERLECHT CHECK. "and has the most Belgian titles" slipped past
+       the live-record filter because bare "most" is not on the banned list,
+       and a superlative in the present tense goes stale the moment somebody
+       wins another one. Past tense anchored to a season is still fine:
+       "by the end of 2017-18, which club HAD the most" reads as history. */
+    if (/(has|have|holds|hold|is|are) the (most|fewest|highest|lowest|best|longest|biggest)/i.test(q)) why.push("live superlative");
+    /* the Lewandowski check: a person was asked for and a club came back */
+    if (ASKS_PERSON.test(q) && answerIsClub(a)) why.push("asks for a person, answers with a club");
     if (!why.length) { const d = nearDupe({q: q, a: a}); if (d) why.push("dupe of " + d.where + ": " + d.q.slice(0, 70)); }
     if (why.length) { rejects.push({f: f, q: (r.q || "").slice(0, 90), why: why.join("; ")}); continue; }
     const out = {q: q, a: a};
