@@ -5379,7 +5379,7 @@ function setTheme(t){
   applyTheme();
   render();
 }
-const BUILD = "13 Sep 2026 · 21:49";
+const BUILD = "13 Sep 2026 · 22:21";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five
@@ -5787,7 +5787,7 @@ function freshState(names, timed=true, mode="classic", target=100, play="board",
     rr:false, rrTurn:0, rrLast:null,
     h2h:null, // one on one: the ball, who has it, and whether a shot is live
     used:{easy:[],normal:[],hard:[],extreme:[],ball:[]},
-    usedQ:{}, qd:null,   // The Dugout draws from league decks, which count their own
+    usedQ:{}, qd:null, qfall:null,   // The Dugout draws from league decks, which count their own
   };
 }
 // returns index of a player who has reached the win target, else -1 (highest wins ties)
@@ -7452,16 +7452,34 @@ function h2Select(i){
 
    Only decks that have actually landed are offered, so a man whose leagues are
    still downloading asks the bank rather than nothing. */
-function h2DeckFor(i, w){
-  if(!h2Tactical() || i == null) return null;
+/* ALL of his leagues, in a random order. Picking one and giving up on it threw
+   the others away: a Cannavaro ball on a dry Serie A went to the classic bank
+   while his La Liga sat there full. The shuffle keeps it unpredictable, the
+   list keeps it honest. */
+function h2Decks(i, w){
+  if(!h2Tactical() || i == null) return [];
   const m = h2Man(i, w);
   const live = ((m && m.lg) || []).filter(id => DECKS[S.mc ? id + "-mc" : id]);
-  return live.length ? live[Math.floor(Math.random() * live.length)] : null;
+  for(let k = live.length - 1; k > 0; k--){
+    const j = Math.floor(Math.random() * (k + 1));
+    const t = live[k]; live[k] = live[j]; live[j] = t;
+  }
+  return live;
 }
 /* WHICH LEAGUE IS BEING ASKED, for the card. Saying it out loud is most of
    the point: the rule is invisible otherwise, and knowing that a ball to
    Cannavaro is a Serie A question is the whole reason you picked that side. */
-const h2League = () => (S && S.qd && QUIZZES[S.qd]) ? " \u00b7 " + QUIZZES[S.qd].label : "";
+const h2League = () => {
+  if(!S) return "";
+  if(S.qd && QUIZZES[S.qd]) return " \u00b7 " + QUIZZES[S.qd].label;
+  /* He has leagues and not one of them had a question left at this tier.
+     Saying so is the difference between a rule and a glitch. */
+  const f = S.qfall || [];
+  if(!f.length) return "";
+  return " \u00b7 " + (f.length === 1 ? f[0] + " is empty tonight"
+    : f.length === 2 ? f[0] + " and " + f[1] + " are empty tonight"
+    : "his leagues are empty tonight");
+};
 const h2Bank = (id, t) => id ? ((DECKS[S.mc ? id + "-mc" : id] || {})[t] || null) : bankFor(t);
 /* used is per deck, because the indexes are per deck: question 12 of Serie A
    is not question 12 of the classic bank, and one shared list would cross them
@@ -7476,16 +7494,24 @@ function h2Used(id, t){
    one shooting, the one being marked. Left out, it is the quiz's own bank,
    which is every mode except this one. */
 function h2Draw(t, i, w){
-  const id = h2DeckFor(i, w);
-  const bank = h2Bank(id, t);
-  if(!bank) return id ? h2Draw(t) : false;        // his league is dry, the bank is not
-  const used = h2Used(id, t);
-  const avail = bank.map((_, n) => n).filter(n => !used.includes(n));
-  if(!avail.length) return id ? h2Draw(t) : false;
-  S.tier = t;
-  S.qd = id;
-  S.qi = avail[Math.floor(Math.random() * avail.length)];
-  used.push(S.qi);
+  const mine = h2Decks(i, w);
+  const take = (id) => {
+    const bank = h2Bank(id, t);
+    if(!bank) return false;
+    const used = h2Used(id, t);
+    const avail = bank.map((_, n) => n).filter(n => !used.includes(n));
+    if(!avail.length) return false;
+    S.tier = t; S.qd = id;
+    S.qi = avail[Math.floor(Math.random() * avail.length)];
+    used.push(S.qi);
+    return true;
+  };
+  for(const id of mine){ if(take(id)){ S.qfall = null; return true; } }
+  /* Nothing of his had anything left at this level, so the quiz's own bank
+     answers instead. The card is told which leagues went dry, because it names
+     the league out loud on every other ball and silence would read as a bug. */
+  if(!take(null)) return false;
+  S.qfall = mine.length ? mine.map(id => (QUIZZES[id] || {}).label || id) : null;
   return true;
 }
 function h2Play(){
@@ -8209,7 +8235,7 @@ function h2SoEnd(){
 
 function h2Next(){
   const H = h2();
-  S.tier = null; S.qi = null; S.qd = null; S.timeUp = false;
+  S.tier = null; S.qi = null; S.qd = null; S.qfall = null; S.timeUp = false;
   H.pen = false; H.subQ = false;
   /* THE HOLD BELONGS TO WHOEVER IS ON THE BALL, so anything that moved the
      ball puts him back in the shape, and he jogs there rather than being
@@ -8739,8 +8765,11 @@ function h2Render(st){
         '<button class="bigbtn ghost h2lineb' + (h2Line(h2Other()) === k ? " sel" : "") +
         '" onclick="h2SetLine(' + JSON.stringify(k) + ')">' + H2_LINES[k].label + '</button>').join("") +
       '</div>' +
-      '<div class="h2hintline" style="margin:0 0 8px">' + esc(me.name) + ' is ' +
-        esc(H2_LINES[h2Line(h2Other())].says) + ' He can see it.</div>';
+      /* THIS SCREEN IS THE DEFENDER'S, and me is whoever is on the ball. It
+         was telling Bram that Martijn was sitting deep, about Bram's own
+         instruction. The line is yours, and he is the one who gets to see it. */
+      '<div class="h2hintline" style="margin:0 0 8px">Your side is ' +
+        esc(H2_LINES[h2Line(h2Other())].says) + ' ' + esc(me.name) + ' can see it.</div>';
     st.innerHTML =
       '<div class="kick">' + ico('users') + (h2TackleOn ? 'Your tackle · ' : 'Your instructions · ') + esc(them.name) + '</div>' +
       '<div class="h2big">' + (h2TackleOn ? "Mark two of them." : "Set your line.") + '</div>' +

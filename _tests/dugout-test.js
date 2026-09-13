@@ -290,6 +290,56 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   check("One on One with tackles off still hands nothing over",
     ev(app, "S.phase") === "h_pick", ev(app, "S.phase"));
 
+  /* ---------------------------------------------------------------- */
+  console.log("\n--- a dry league falls through to his other one, not to the bank ---");
+  start("manager", "Netherlands", "Italy");
+  /* a man with more than one league, so there is something to fall through TO.
+     van Nistelrooy is the four league case and the reason the rule exists. */
+  const many = [...Array(11).keys()].find(i => ((lg(i, 0) || []).length) > 1);
+  check("somebody in the Dutch eleven carries more than one league", many != null, many);
+  if (many != null) {
+    const his = ev(app, "h2Man(" + many + ",0).lg");
+    /* empty every one of his leagues at Easy except the last, and check the
+       draw finds the last rather than giving up on the first */
+    const keep = his[his.length - 1];
+    for (const id of his) if (id !== keep)
+      run(app, 'S.usedQ[' + JSON.stringify(id) + '] = {easy: (DECKS[' + JSON.stringify(id) + '].easy||[]).map((_,n)=>n)};');
+    run(app, "S.qd = null; S.qfall = null; h2Draw('easy', " + many + ", 0);");
+    check("it draws from the one league he has left", qd() === keep, qd());
+    check("and says nothing about a fallback", ev(app, "S.qfall") === null, JSON.stringify(ev(app, "S.qfall")));
+
+    /* now empty that one too: the bank answers, and the card says why */
+    run(app, 'S.usedQ[' + JSON.stringify(keep) + '] = {easy: (DECKS[' + JSON.stringify(keep) + '].easy||[]).map((_,n)=>n)};');
+    run(app, "S.qd = null; S.qfall = null; h2Draw('easy', " + many + ", 0);");
+    check("with all of them dry the classic bank answers", qd() === null, qd());
+    check("and the card is told which leagues went dry",
+      (ev(app, "S.qfall") || []).length === his.length, JSON.stringify(ev(app, "S.qfall")));
+    check("so it says so out loud", /empty tonight/.test(ev(app, "h2League()")), ev(app, "h2League()"));
+  }
+
+  /* a man with no leagues at all was always the bank, and must not start
+     claiming a league went dry */
+  start("manager", "Costa Rica", "Italy");
+  const none = [...Array(11).keys()].find(i => !((lg(i, 0) || []).length));
+  if (none != null) {
+    run(app, "S.qd = null; S.qfall = null; h2Draw('easy', " + none + ", 0);");
+    check("a man with no career draws the bank quietly", qd() === null && ev(app, "S.qfall") === null,
+      qd() + " / " + JSON.stringify(ev(app, "S.qfall")));
+    check("and the card says nothing about leagues", ev(app, "h2League()") === "", ev(app, "h2League()"));
+  }
+
+  /* ---------------------------------------------------------------- */
+  console.log("\n--- the line screen belongs to the man reading it ---");
+  start("manager", "Italy", "Netherlands");
+  run(app, "h2TackleOn = false; S.h2h.who = 0; h2KickOff();"); await tick(140);
+  run(app, "h2HandGo();"); await tick(140);
+  /* Martijn is on the ball, Bram has the phone and is setting HIS OWN line.
+     It used to read "Martijn is holding a normal line" on Bram's screen. */
+  check("it does not tell the defender the attacker set his line",
+    !/Martijn is (holding|pushed|sitting)/.test(stage(app)), "still blames the attacker");
+  check("it says the line is yours", /Your side is/.test(stage(app)), "no owner named");
+  check("and that the other man can see it", /Martijn can see it/.test(stage(app)), "not told");
+
   console.log("\n--- the menu only offers it where the eleven have careers ---");
   check("Let's Ball can be managed", ev(app, 'canEver("classic","manager")') === true, ev(app, 'canEver("classic","manager")'));
   check("a league quiz cannot, its squads have no careers yet",
