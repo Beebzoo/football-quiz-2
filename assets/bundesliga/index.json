@@ -901,6 +901,220 @@
    "q": "Which clubs went down from the Bundesliga in 2025-26?",
    "a": "VfL Wolfsburg, 1. FC Heidenheim, FC St. Pauli",
    "cat": "relegation"
+  },
+  {
+   "q": "Which club were the first Bundesliga champions, taking the title in 1963-64?",
+   "a": "1. FC Köln",
+   "sub": "Meidericher SV, later MSV Duisburg, finished second.",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the 1965-66 Bundesliga, finishing ahead of newly promoted Bayern Munich?",
+   "a": "1860 Munich",
+   "sub": "It was their first and only German league title.",
+   "cat": "champions",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "Which club won the 1966-67 Bundesliga, the only German league title in its history?",
+   "a": "Eintracht Braunschweig",
+   "sub": "It came in only their fourth Bundesliga season.",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in 1969-70 and again in 1970-71 as Borussia Mönchengladbach took both titles?",
+   "a": "Bayern Munich",
+   "cat": "champions",
+   "club": "borussia-monchengladbach"
+  },
+  {
+   "q": "Which club finished second in the 1994-95 Bundesliga, behind Borussia Dortmund?",
+   "a": "Werder Bremen",
+   "cat": "champions",
+   "club": "borussia-dortmund"
+  },
+  {
+   "q": "Which club did Schalke 04 beat 5-0 in the 2011 DFB-Pokal final?",
+   "a": "MSV Duisburg",
+   "sub": "They were a second division side that season.",
+   "cat": "cups",
+   "club": "schalke-04"
+  },
+  {
+   "q": "Which club beat Bayern Munich 2-1 in the 1985 German cup final?",
+   "a": "Bayer Uerdingen",
+   "cat": "cups",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "Which club beat Borussia Dortmund 3-1 in the 2015 DFB-Pokal final?",
+   "a": "VfL Wolfsburg",
+   "cat": "cups",
+   "club": "borussia-dortmund"
+  },
+  {
+   "q": "Which third division club reached the 1997 DFB-Pokal final and lost 2-0 to VfB Stuttgart?",
+   "a": "Energie Cottbus",
+   "sub": "Giovane Élber scored both goals in his last match for Stuttgart.",
+   "cat": "cups",
+   "club": "vfb-stuttgart"
+  },
+  {
+   "q": "Which club did Werder Bremen beat 3-2 in the 2004 DFB-Pokal final to complete the double?",
+   "a": "Alemannia Aachen",
+   "cat": "cups",
+   "club": "werder-bremen"
+  },
+  {
+   "q": "Which English club beat Borussia Mönchengladbach 3-1 in the 1977 European Cup final in Rome?",
+   "a": "Liverpool",
+   "cat": "europe",
+   "club": "borussia-monchengladbach"
+  },
+  {
+   "q": "Which German club lost the 1980 European Cup final 1-0 to Nottingham Forest?",
+   "a": "Hamburger SV",
+   "cat": "europe"
+  },
+  {
+   "q": "Which Italian club did Hamburger SV beat 1-0 in the 1983 European Cup final in Athens?",
+   "a": "Juventus",
+   "sub": "Felix Magath scored after eight minutes.",
+   "cat": "europe",
+   "club": "hamburger-sv"
+  },
+  {
+   "q": "Eintracht Frankfurt won the 1980 UEFA Cup final against which other German club?",
+   "a": "Borussia Mönchengladbach",
+   "sub": "Frankfurt lost the first leg 3-2 and won the second 1-0.",
+   "cat": "europe",
+   "club": "eintracht-frankfurt"
+  },
+  {
+   "q": "Which German club lost the first leg of the 1988 UEFA Cup final 3-0 to Espanyol and still won the trophy?",
+   "a": "Bayer Leverkusen",
+   "sub": "They won the second leg 3-0 and then the shootout.",
+   "cat": "europe"
+  },
+  {
+   "q": "Which two clubs from the former East Germany were admitted to the Bundesliga in 1991 after reunification?",
+   "a": "Hansa Rostock and Dynamo Dresden",
+   "sub": "The league ran with twenty clubs for that one season.",
+   "cat": "records"
+  },
+  {
+   "q": "Which club did Borussia Mönchengladbach beat in the 2011 relegation play-off to stay in the Bundesliga?",
+   "a": "VfL Bochum",
+   "cat": "relegation",
+   "club": "borussia-monchengladbach"
+  },
+  {
+   "q": "Hertha BSC went down in 2012 after losing a relegation play-off to which second division club?",
+   "a": "Fortuna Düsseldorf",
+   "cat": "relegation"
+  },
+  {
+   "q": "Werder Bremen stayed up on away goals in the 2020 play-off against which second division side?",
+   "a": "1. FC Heidenheim",
+   "sub": "Three goals came in the last five minutes of the second leg.",
+   "cat": "relegation",
+   "club": "werder-bremen"
+  },
+  {
+   "q": "Which club did Hamburger SV beat after extra time to survive the 2015 relegation play-off?",
+   "a": "Karlsruher SC",
+   "cat": "relegation",
+   "club": "hamburger-sv"
+  },
+  {
+   "q": "Union Berlin reached the Bundesliga for the first time in 2019 by knocking out which club?",
+   "a": "VfB Stuttgart",
+   "sub": "Union went through on away goals after two draws.",
+   "cat": "relegation",
+   "club": "union-berlin"
+  },
+  {
+   "q": "Which Fortuna Düsseldorf striker was the Bundesliga's leading scorer in 1978-79?",
+   "a": "Klaus Allofs",
+   "cat": "scorers"
+  },
+  {
+   "q": "Which VfB Stuttgart forward won the Torjägerkanone in 1987-88?",
+   "a": "Jürgen Klinsmann",
+   "cat": "scorers",
+   "club": "vfb-stuttgart"
+  },
+  {
+   "q": "Which Ghanaian shared the Torjägerkanone in 1992-93 and again in 1993-94 while at Eintracht Frankfurt?",
+   "a": "Tony Yeboah",
+   "cat": "scorers",
+   "club": "eintracht-frankfurt"
+  },
+  {
+   "q": "Which Hertha BSC striker took the Torjägerkanone in 1998-99?",
+   "a": "Michael Preetz",
+   "cat": "scorers"
+  },
+  {
+   "q": "Which Slovak forward scored 24 goals for 1. FC Nürnberg to top the Bundesliga charts in 2004-05?",
+   "a": "Marek Mintál",
+   "cat": "scorers"
+  },
+  {
+   "q": "Which Greek striker won the Torjägerkanone in 2006-07 with 20 goals for VfL Bochum?",
+   "a": "Theofanis Gekas",
+   "cat": "scorers"
+  },
+  {
+   "q": "Which Japanese club did Borussia Dortmund sign Shinji Kagawa from in 2010?",
+   "a": "Cerezo Osaka",
+   "sub": "The fee was around 350,000 euros.",
+   "cat": "imports",
+   "club": "borussia-dortmund"
+  },
+  {
+   "q": "Which Austrian club did Borussia Dortmund sign Erling Haaland from in January 2020?",
+   "a": "Red Bull Salzburg",
+   "cat": "imports",
+   "club": "borussia-dortmund"
+  },
+  {
+   "q": "Which Portuguese club did Werder Bremen sign the Brazilian playmaker Diego from in 2006?",
+   "a": "Porto",
+   "sub": "He was voted the Bundesliga's player of the season in his first year.",
+   "cat": "imports",
+   "club": "werder-bremen"
+  },
+  {
+   "q": "Which English club did Bayern Munich sign Jérôme Boateng from in 2011?",
+   "a": "Manchester City",
+   "cat": "imports",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "Which manager was sacked by Bayern Munich the day after a 5-1 defeat at Eintracht Frankfurt in 2019?",
+   "a": "Niko Kovac",
+   "sub": "Frankfurt was the club he had beaten Bayern with in the 2018 cup final.",
+   "cat": "managers",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "Which manager spent twelve years in charge of SC Freiburg before stepping down in 2024?",
+   "a": "Christian Streich",
+   "sub": "He had been at the club since taking the under-19 side in 1995.",
+   "cat": "managers",
+   "club": "freiburg"
+  },
+  {
+   "q": "Which club has its home on the Betzenberg, at a ground named after Fritz Walter?",
+   "a": "1. FC Kaiserslautern",
+   "cat": "grounds"
+  },
+  {
+   "q": "Which club has played at the Waldstadion since 1963, a ground now called the Deutsche Bank Park?",
+   "a": "Eintracht Frankfurt",
+   "sub": "It was the Commerzbank-Arena from 2005 to 2020.",
+   "cat": "grounds"
   }
  ],
  "extreme": [
@@ -1289,6 +1503,103 @@
    "q": "Which German club plays in a stadium built inside a former quarry and is famous for its fan culture at Millerntor?",
    "a": "St Pauli",
    "cat": "stories"
+  },
+  {
+   "q": "A club president exposed the 1971 Bundesliga match-fixing scandal by playing secret tapes at his fiftieth birthday party. Which club?",
+   "a": "Kickers Offenbach",
+   "sub": "Fifty-two players were punished and Arminia Bielefeld lost its licence.",
+   "cat": "stories"
+  },
+  {
+   "q": "Borussia Mönchengladbach won 12-0 on the last day of 1977-78 and still lost the title. Which club took it on goal difference?",
+   "a": "1. FC Köln",
+   "sub": "Köln won 5-0 at St Pauli the same afternoon.",
+   "cat": "stories",
+   "club": "borussia-monchengladbach"
+  },
+  {
+   "q": "Which club's fans celebrated a Bundesliga title for four minutes in 2001 before Bayern Munich equalised in stoppage time at Hamburg?",
+   "a": "Schalke 04",
+   "sub": "German newspapers called them the champions of hearts.",
+   "cat": "stories",
+   "club": "bayern-munchen"
+  },
+  {
+   "q": "Which club won the 1967-68 Bundesliga and was relegated the very next season?",
+   "a": "1. FC Nürnberg",
+   "sub": "Max Merkel had torn up the title-winning side, thinking it too old.",
+   "cat": "stories"
+  },
+  {
+   "q": "Which club was left out when the Bundesliga was founded in 1963 and had to wait until 1965 to get in?",
+   "a": "Bayern Munich",
+   "sub": "Only one Munich club was allowed, and 1860 Munich had won the Oberliga.",
+   "cat": "stories"
+  },
+  {
+   "q": "Which German club beat Inter Milan 7-1 in 1971 only for the result to be wiped out after a fan threw a can at Roberto Boninsegna?",
+   "a": "Borussia Mönchengladbach",
+   "sub": "The replay in Berlin finished 0-0 and Inter went through.",
+   "cat": "europe"
+  },
+  {
+   "q": "Which second division club beat Borussia Mönchengladbach on penalties to win the 1992 German cup?",
+   "a": "Hannover 96",
+   "sub": "No club from outside the top flight had ever managed it before.",
+   "cat": "cups",
+   "club": "borussia-monchengladbach"
+  },
+  {
+   "q": "Which club's reserve side lost the 1993 DFB-Pokal final to Bayer Leverkusen, the only time a second string has got that far?",
+   "a": "Hertha BSC",
+   "sub": "Ulf Kirsten scored the only goal of the final.",
+   "cat": "cups",
+   "club": "bayer-leverkusen"
+  },
+  {
+   "q": "Which Bayer Leverkusen striker was given a goal at Hoffenheim in 2013 after his header went wide and through a hole in the netting?",
+   "a": "Stefan Kießling",
+   "sub": "The 2-1 result stood and Hoffenheim's appeal was thrown out.",
+   "cat": "stories",
+   "club": "bayer-leverkusen"
+  },
+  {
+   "q": "Which German referee was jailed in 2005 for fixing matches, among them a cup tie in which Paderborn beat Hamburger SV 4-2?",
+   "a": "Robert Hoyzer",
+   "sub": "He was also banned from football for life.",
+   "cat": "stories",
+   "club": "paderborn"
+  },
+  {
+   "q": "A Bayer Leverkusen goalkeeper scored a penalty at Schalke 04 in 2004 and was lobbed from the halfway line while celebrating. Who?",
+   "a": "Hans-Jörg Butt",
+   "sub": "Mike Hanke scored straight from the kick-off.",
+   "cat": "stories",
+   "club": "bayer-leverkusen"
+  },
+  {
+   "q": "Which club filled its own pitch with around 800 sofas brought from home so that fans could watch the 2014 World Cup together?",
+   "a": "Union Berlin",
+   "sub": "They called it the World Cup living room.",
+   "cat": "stories"
+  },
+  {
+   "q": "German fans threw tennis balls and chocolate coins onto pitches and locked bike locks to goalposts in 2024. What did they stop?",
+   "a": "The sale of a stake in the league's media rights to a private investor",
+   "sub": "The DFL dropped the deal in February 2024.",
+   "cat": "stories"
+  },
+  {
+   "q": "Which club dropped to the amateur fourth tier in 2017 when its Jordanian investor refused to pay for a third division licence?",
+   "a": "1860 Munich",
+   "sub": "Hasan Ismaik wanted control that would have broken the fifty plus one rule.",
+   "cat": "stories"
+  },
+  {
+   "q": "Which club went down from the Bundesliga in 1995, was then refused a second division licence over its debts, and fell to the third tier?",
+   "a": "Dynamo Dresden",
+   "sub": "They spent more than a decade in regional football.",
+   "cat": "relegation"
   }
  ]
 }

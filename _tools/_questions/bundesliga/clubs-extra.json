@@ -1,0 +1,7 @@
+[
+ {"s":"borussia-monchengladbach",
+  "names":["Borussia Mönchengladbach","Borussia Monchengladbach","Mönchengladbach","Monchengladbach"],
+  "not":["Borussia Dortmund"]},
+ {"s":"koln", "names":["1. FC Köln","1. FC Koln","FC Köln","Cologne"]},
+ {"s":"bayern-munchen", "names":["FC Bayern München","Bayern München"]}
+]

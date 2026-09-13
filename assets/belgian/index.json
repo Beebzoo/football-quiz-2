@@ -766,6 +766,243 @@
    "q": "Which clubs went down from the Belgian Pro League in 2025-26?",
    "a": "Dender EH",
    "cat": "relegation"
+  },
+  {
+   "q": "Which club finished second in the 2018-19 Belgian season, two points behind Genk?",
+   "a": "Club Brugge",
+   "cat": "champions",
+   "club": "genk"
+  },
+  {
+   "q": "Which club finished second in the 2022-23 Belgian season, one point behind Antwerp?",
+   "a": "Genk",
+   "sub": "Union Saint-Gilloise were level on points in third.",
+   "cat": "champions",
+   "club": "antwerp"
+  },
+  {
+   "q": "Union Saint-Gilloise led the 2021-22 Belgian regular season by five points. Which club caught them once the points were halved?",
+   "a": "Club Brugge",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second when the 2019-20 Belgian season was stopped early and Club Brugge were handed the title?",
+   "a": "Gent",
+   "cat": "champions",
+   "club": "club-brugge"
+  },
+  {
+   "q": "Which club won the 1988-89 Belgian title, twelve months after lifting the Cup Winners' Cup?",
+   "a": "Mechelen",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club won the Belgian league title in 1978-79 and again in 1983-84?",
+   "a": "Beveren",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club did Standard Liège beat over two legs to decide the 2008-09 Belgian title?",
+   "a": "Anderlecht",
+   "sub": "Axel Witsel's penalty settled the second leg at Sclessin.",
+   "cat": "champions",
+   "club": "standard-liege"
+  },
+  {
+   "q": "Which Norwegian coach won the Belgian title with Club Brugge in 2002-03 and again in 2004-05?",
+   "a": "Trond Sollied",
+   "sub": "He won two Belgian Cups there as well.",
+   "cat": "managers",
+   "club": "club-brugge"
+  },
+  {
+   "q": "Which coach ended Standard Liège's twenty-five year wait for the Belgian title in 2007-08?",
+   "a": "Michel Preud'homme",
+   "cat": "managers",
+   "club": "standard-liege"
+  },
+  {
+   "q": "Which club sacked Hein Vanhaezebrouck in December 2018, fourteen months after appointing him?",
+   "a": "Anderlecht",
+   "cat": "managers"
+  },
+  {
+   "q": "Which coach led newly promoted Union Saint-Gilloise in 2021-22 and then crossed Brussels to take the Anderlecht job?",
+   "a": "Felice Mazzu",
+   "cat": "managers",
+   "club": "anderlecht"
+  },
+  {
+   "q": "Which coach won the 2024-25 Belgian title with Union Saint-Gilloise before leaving for Monaco?",
+   "a": "Sebastien Pocognoli",
+   "cat": "managers"
+  },
+  {
+   "q": "Which Genk striker was the Belgian top scorer in 1997-98 with twenty-two goals?",
+   "a": "Branko Strupar",
+   "cat": "scorers",
+   "club": "genk"
+  },
+  {
+   "q": "Which Mouscron striker scored twenty-eight goals to top the Belgian charts in 2003-04?",
+   "a": "Luigi Pieroni",
+   "cat": "scorers"
+  },
+  {
+   "q": "Which Charleroi striker was the top scorer in the 2007-08 Belgian season?",
+   "a": "Joseph Akpala",
+   "sub": "Eighteen goals, and Charleroi finished mid-table.",
+   "cat": "scorers",
+   "club": "charleroi"
+  },
+  {
+   "q": "Which French club did Genk sign Kalidou Koulibaly from in 2012?",
+   "a": "Metz",
+   "sub": "Two years later he was at Napoli.",
+   "cat": "transfers",
+   "club": "genk"
+  },
+  {
+   "q": "Which Danish club did Genk sign Paul Onuachu from in 2019?",
+   "a": "Midtjylland",
+   "cat": "transfers",
+   "club": "genk"
+  },
+  {
+   "q": "Which Belgian club did Club Brugge sign Hans Vanaken from in 2015?",
+   "a": "Lokeren",
+   "cat": "transfers",
+   "club": "club-brugge"
+  },
+  {
+   "q": "Which Italian club signed Ardon Jashari from Club Brugge in 2025?",
+   "a": "AC Milan",
+   "sub": "They had bought Charles De Ketelaere from the same club in 2022.",
+   "cat": "transfers",
+   "club": "club-brugge"
+  },
+  {
+   "q": "Which Spanish club signed Arthur Vermeeren from Royal Antwerp in January 2024?",
+   "a": "Atletico Madrid",
+   "sub": "Eighteen million euros for an eighteen-year-old.",
+   "cat": "transfers",
+   "club": "antwerp"
+  },
+  {
+   "q": "Which German club signed Antonio Nusa from Club Brugge in 2024?",
+   "a": "RB Leipzig",
+   "cat": "transfers",
+   "club": "club-brugge"
+  },
+  {
+   "q": "Which English club signed Aleksandar Mitrovic from Anderlecht in 2015?",
+   "a": "Newcastle United",
+   "cat": "transfers",
+   "club": "anderlecht"
+  },
+  {
+   "q": "Which Belgian club did the goalkeeper Jean-Marie Pfaff leave for Bayern Munich in 1982?",
+   "a": "Beveren",
+   "cat": "transfers"
+  },
+  {
+   "q": "Which Belgian club signed Jonathan David from the Canadian amateur side Ottawa Internationals in 2018?",
+   "a": "Gent",
+   "sub": "Salzburg and Stuttgart had both turned him down.",
+   "cat": "imports"
+  },
+  {
+   "q": "At which Belgian club did Thorgan Hazard win the 2013 Golden Shoe, on loan from Chelsea?",
+   "a": "Zulte Waregem",
+   "cat": "imports"
+  },
+  {
+   "q": "Which Belgian club beat Manchester United 2-1 in the Champions League in October 2000?",
+   "a": "Anderlecht",
+   "cat": "europe"
+  },
+  {
+   "q": "Club Brugge won 4-0 away at which Portuguese club in the 2022-23 Champions League?",
+   "a": "Porto",
+   "sub": "Antonio Nusa scored on his debut, aged seventeen.",
+   "cat": "europe",
+   "club": "club-brugge"
+  },
+  {
+   "q": "Which Italian club beat Anderlecht 2-0 after extra time in the 1990 Cup Winners' Cup final?",
+   "a": "Sampdoria",
+   "sub": "Gianluca Vialli scored both, in Gothenburg.",
+   "cat": "europe",
+   "club": "anderlecht"
+  },
+  {
+   "q": "Which Dutch club did Union Saint-Gilloise beat 3-1 away in their first Champions League league phase match in 2025?",
+   "a": "PSV",
+   "cat": "europe"
+  },
+  {
+   "q": "Which Belgian club plays at the Olympisch Stadion, the ground used for the 1920 Olympic Games?",
+   "a": "Beerschot",
+   "cat": "grounds"
+  },
+  {
+   "q": "Which Belgian club plays at the Guldensporenstadion?",
+   "a": "Kortrijk",
+   "cat": "grounds"
+  },
+  {
+   "q": "Which club finished bottom of the 2017-18 Belgian regular season and went down?",
+   "a": "Mechelen",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club ended thirteen years in the second tier by winning promotion to the Belgian top flight in 2017?",
+   "a": "Royal Antwerp",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club, relegated from the Belgian top flight in 2023, was declared bankrupt by a Bruges court in June 2024?",
+   "a": "Oostende",
+   "sub": "What was left of them merged with a club from Diksmuide.",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club won the 2003 Belgian Cup, beating Sint-Truiden 3-1 in the final?",
+   "a": "La Louvière",
+   "sub": "The only major trophy in the club's history.",
+   "cat": "cups",
+   "club": "sint-truidense"
+  },
+  {
+   "q": "Which club beat Club Brugge 2-1 to win the 2016 Belgian Cup?",
+   "a": "Standard Liège",
+   "cat": "cups",
+   "club": "club-brugge"
+  },
+  {
+   "q": "Which club beat Mechelen 2-0 in the 2023 Belgian Cup final to complete a league and cup double?",
+   "a": "Antwerp",
+   "cat": "cups",
+   "club": "mechelen"
+  },
+  {
+   "q": "Which goalkeeper won the Belgian Golden Shoe in 2022 while playing for Club Brugge?",
+   "a": "Simon Mignolet",
+   "cat": "records",
+   "club": "club-brugge"
+  },
+  {
+   "q": "Which eighteen-year-old won the Belgian Golden Shoe in 2004 while playing for Anderlecht?",
+   "a": "Vincent Kompany",
+   "cat": "records",
+   "club": "anderlecht"
+  },
+  {
+   "q": "Which Club Brugge striker died in a car crash in 2008, after which the club stopped handing out his number 23 shirt?",
+   "a": "Francois Sterchele",
+   "sub": "He had been the league's top scorer in 2006-07.",
+   "cat": "records",
+   "club": "club-brugge"
   }
  ],
  "extreme": [
@@ -1111,6 +1348,80 @@
   {
    "q": "Which Belgian club did Vincent Kompany captain before joining Hamburg and then Manchester City?",
    "a": "Anderlecht",
+   "cat": "stories"
+  },
+  {
+   "q": "Which Standard Liège goalkeeper headed a 95th minute equaliser against AZ Alkmaar in the 2009 Champions League?",
+   "a": "Sinan Bolat",
+   "sub": "The first keeper to score from open play in the competition.",
+   "cat": "stories",
+   "club": "standard-liege"
+  },
+  {
+   "q": "Which Belgian club forfeited three games in a row in December 2009, went under, and had every result it had played wiped from the table?",
+   "a": "Excelsior Mouscron",
+   "sub": "The players had not been paid since November.",
+   "cat": "stories"
+  },
+  {
+   "q": "Royal Antwerp took a steady stream of young loan players from which English club from 1998 onwards?",
+   "a": "Manchester United",
+   "sub": "John O'Shea and Jonny Evans were among the thirty-odd sent over.",
+   "cat": "stories",
+   "club": "antwerp"
+  },
+  {
+   "q": "Which Belgian club did Qatar's Aspire academy buy in 2012, as a way of getting its graduates into European football?",
+   "a": "Eupen",
+   "sub": "Paris Saint-Germain's owners took the club on later.",
+   "cat": "stories"
+  },
+  {
+   "q": "UEFA threw the 2019 Belgian Cup winners out of the Europa League over match-fixing. Which club was it?",
+   "a": "Mechelen",
+   "sub": "They had been accused of buying a relegation game the year before.",
+   "cat": "stories"
+  },
+  {
+   "q": "Which club finished bottom when the 2019-20 Belgian season was abandoned, then stayed up because the league voted to grow to eighteen?",
+   "a": "Waasland-Beveren",
+   "cat": "stories"
+  },
+  {
+   "q": "Which Belgian club went bankrupt in 2013, was rebuilt by taking over a local amateur side, and was back in the top flight by 2020?",
+   "a": "Beerschot",
+   "sub": "They restarted in the fifth tier in front of twelve thousand.",
+   "cat": "stories"
+  },
+  {
+   "q": "Which American investor, also behind Crystal Palace and Lyon, bought RWD Molenbeek and took them up in 2023?",
+   "a": "John Textor",
+   "sub": "They went straight back down a year later.",
+   "cat": "stories"
+  },
+  {
+   "q": "Union Saint-Gilloise could not host a European home game at their own ground. Whose stadium across Brussels did they borrow?",
+   "a": "Anderlecht",
+   "sub": "The Stade Joseph Marien does not meet UEFA's rules.",
+   "cat": "stories"
+  },
+  {
+   "q": "Belgium's top flight has carried the name Jupiler since 1993. What sort of thing is Jupiler?",
+   "a": "A beer",
+   "sub": "A pilsner brewed at Jupille, near Liege.",
+   "cat": "stories"
+  },
+  {
+   "q": "Standard Liège were 3-1 up in October 2022 when the game was abandoned. Whose fans had thrown flares and seats onto the pitch?",
+   "a": "Anderlecht",
+   "sub": "The same fixture had been called off the same way in 2019.",
+   "cat": "stories",
+   "club": "standard-liege"
+  },
+  {
+   "q": "Which Belgian club led Real Madrid 2-0 at half time at the Bernabeu in 2019, both goals from Emmanuel Dennis?",
+   "a": "Club Brugge",
+   "sub": "Ramos and Casemiro rescued a 2-2 draw.",
    "cat": "stories"
   }
  ]

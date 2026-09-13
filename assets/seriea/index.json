@@ -840,6 +840,244 @@
    "q": "Which clubs went down from the Serie A in 2025-26?",
    "a": "Cremonese, Hellas Verona, Pisa",
    "cat": "relegation"
+  },
+  {
+   "q": "Which club beat Juventus over two legs to win the 1991-92 Coppa Italia, their first major trophy?",
+   "a": "Parma",
+   "sub": "Nevio Scala's side won a European trophy the season after.",
+   "cat": "cups",
+   "club": "juventus"
+  },
+  {
+   "q": "Which club beat Roma over two legs to win the 1992-93 Coppa Italia?",
+   "a": "Torino",
+   "sub": "They lost the second leg 5-2 in Rome and went through on away goals.",
+   "cat": "cups",
+   "club": "roma"
+  },
+  {
+   "q": "Which club beat Atalanta over two legs to win the 1995-96 Coppa Italia?",
+   "a": "Fiorentina",
+   "sub": "Claudio Ranieri was their manager.",
+   "cat": "cups",
+   "club": "atalanta"
+  },
+  {
+   "q": "Which club beat Juventus over two legs to win the 2004 Coppa Italia?",
+   "a": "Lazio",
+   "sub": "They won the first leg 2-0 and drew the second.",
+   "cat": "cups",
+   "club": "juventus"
+  },
+  {
+   "q": "Which Sicilian club did Inter Milan beat 3-1 in the 2011 Coppa Italia final?",
+   "a": "Palermo",
+   "sub": "Inter had won the treble the season before.",
+   "cat": "cups",
+   "club": "inter"
+  },
+  {
+   "q": "Which club beat Juventus 2-0 in the 2012 Coppa Italia final?",
+   "a": "Napoli",
+   "sub": "It ended a twenty-five year wait for the trophy.",
+   "cat": "cups",
+   "club": "juventus"
+  },
+  {
+   "q": "Who scored the only goal of the 2013 Coppa Italia final between Lazio and Roma?",
+   "a": "Senad Lulić",
+   "sub": "The first Coppa Italia final ever contested by the two Rome clubs.",
+   "cat": "cups",
+   "club": "lazio"
+  },
+  {
+   "q": "Which club was Filippo Inzaghi playing for when he was the Serie A top scorer in 1996-97?",
+   "a": "Atalanta",
+   "sub": "Twenty-four goals in his one season in Bergamo.",
+   "cat": "scorers"
+  },
+  {
+   "q": "Which Sampdoria striker was the Serie A top scorer in 1990-91?",
+   "a": "Gianluca Vialli",
+   "sub": "Nineteen goals, and Sampdoria won their only Scudetto.",
+   "cat": "scorers"
+  },
+  {
+   "q": "Which club was Ciro Immobile playing for when he was the Serie A top scorer in 2013-14?",
+   "a": "Torino",
+   "sub": "Twenty-two goals, and he was sold to Borussia Dortmund that summer.",
+   "cat": "scorers"
+  },
+  {
+   "q": "Which Piacenza striker shared the 2001-02 Serie A top scorer award with Juventus forward David Trezeguet?",
+   "a": "Dario Hübner",
+   "sub": "He was thirty-five, and had only reached Serie A at thirty.",
+   "cat": "scorers",
+   "club": "juventus"
+  },
+  {
+   "q": "Which Roma striker was the Serie A top scorer in 2016-17 with twenty-nine goals?",
+   "a": "Edin Džeko",
+   "sub": "Roma finished second to Juventus that season.",
+   "cat": "scorers",
+   "club": "roma"
+  },
+  {
+   "q": "Which Argentine club did Fiorentina sign Gabriel Batistuta from in 1991?",
+   "a": "Boca Juniors",
+   "sub": "A Fiorentina vice-president had watched him at the Copa America.",
+   "cat": "imports",
+   "club": "fiorentina"
+  },
+  {
+   "q": "Which Brazilian club did Napoli sign Careca from in 1987?",
+   "a": "São Paulo",
+   "sub": "He scored in both legs of the 1989 UEFA Cup final.",
+   "cat": "imports",
+   "club": "napoli"
+  },
+  {
+   "q": "Which French club did AC Milan sign George Weah from in 1995?",
+   "a": "Paris Saint-Germain",
+   "sub": "He was named world player of the year in his first Milan season.",
+   "cat": "imports",
+   "club": "milan"
+  },
+  {
+   "q": "Which German club did Inter Milan sign Lothar Matthäus and Andreas Brehme from in 1988?",
+   "a": "Bayern Munich",
+   "sub": "Matthäus won the Serie A title in his first season in Italy.",
+   "cat": "imports",
+   "club": "inter"
+  },
+  {
+   "q": "Which club did AC Milan sign Andriy Shevchenko from in 1999?",
+   "a": "Dynamo Kyiv",
+   "sub": "He scored 175 goals for Milan across seven seasons.",
+   "cat": "imports",
+   "club": "milan"
+  },
+  {
+   "q": "Which club did Lazio sign Hernan Crespo from in 2000?",
+   "a": "Parma",
+   "sub": "He became the first player to cost more than thirty million pounds.",
+   "cat": "transfers",
+   "club": "lazio"
+  },
+  {
+   "q": "Which English club did Parma sell Faustino Asprilla to in 1996?",
+   "a": "Newcastle United",
+   "sub": "Parma had signed him from Atletico Nacional four years earlier.",
+   "cat": "transfers",
+   "club": "parma"
+  },
+  {
+   "q": "Which German club did Napoli beat over two legs to win the 1989 UEFA Cup?",
+   "a": "Stuttgart",
+   "sub": "It is the only European trophy Napoli have ever won.",
+   "cat": "europe",
+   "club": "napoli"
+  },
+  {
+   "q": "Which Belgian club did Sampdoria beat in the 1990 Cup Winners' Cup final?",
+   "a": "Anderlecht",
+   "sub": "It was settled in extra time.",
+   "cat": "europe"
+  },
+  {
+   "q": "Which Spanish club did Lazio beat in the 1999 Cup Winners' Cup final, the last one ever played?",
+   "a": "Mallorca",
+   "sub": "Pavel Nedved got the winner at Villa Park.",
+   "cat": "europe",
+   "club": "lazio"
+  },
+  {
+   "q": "Which Italian club did Parma beat over two legs to win the 1995 UEFA Cup?",
+   "a": "Juventus",
+   "sub": "Dino Baggio scored both Parma goals.",
+   "cat": "europe",
+   "club": "parma"
+  },
+  {
+   "q": "Genoa reached the 1992 UEFA Cup semi-finals. Which English club did they beat 2-1 at Anfield on the way?",
+   "a": "Liverpool",
+   "sub": "The first Italian side ever to win there.",
+   "cat": "europe",
+   "club": "genoa"
+  },
+  {
+   "q": "Which manager did Inter Milan sack in October 2000, one game into the new season?",
+   "a": "Marcello Lippi",
+   "sub": "They had also gone out of the Champions League to Helsingborg.",
+   "cat": "managers",
+   "club": "inter"
+  },
+  {
+   "q": "Which manager did Inter Milan sack in September 2011 after five games in charge?",
+   "a": "Gian Piero Gasperini",
+   "sub": "No wins, and a 3-1 defeat to newly promoted Novara finished him.",
+   "cat": "managers",
+   "club": "inter"
+  },
+  {
+   "q": "Which manager won the 1998-99 Serie A title with AC Milan in his first season at the club?",
+   "a": "Alberto Zaccheroni",
+   "sub": "He had taken Udinese to third the year before.",
+   "cat": "managers",
+   "club": "milan"
+  },
+  {
+   "q": "Which Czech manager built the attacking Foggia side of the early 1990s and later managed both Roma and Lazio?",
+   "a": "Zdenek Zeman",
+   "sub": "Those Foggia years are remembered as Zemanlandia.",
+   "cat": "managers",
+   "club": "roma"
+  },
+  {
+   "q": "Which architect designed the flower-shaped Stadio San Nicola in Bari for the 1990 World Cup?",
+   "a": "Renzo Piano",
+   "sub": "Twenty-six petals, split by eight metre gaps.",
+   "cat": "grounds"
+  },
+  {
+   "q": "Juventus Stadium was built on the site of which demolished ground?",
+   "a": "The Stadio delle Alpi",
+   "sub": "Built for the 1990 World Cup and never loved.",
+   "cat": "grounds",
+   "club": "juventus"
+  },
+  {
+   "q": "Which Emilian club plays its home games at the Stadio Ennio Tardini?",
+   "a": "Parma",
+   "sub": "It opened in 1923, named after the Parma president who pushed it through.",
+   "cat": "grounds"
+  },
+  {
+   "q": "Which club plays its home games at the Stadio Renato Dall'Ara?",
+   "a": "Bologna",
+   "sub": "David Platt volleyed England past Belgium there in 1990.",
+   "cat": "grounds"
+  },
+  {
+   "q": "Inter Milan led the table on the final day of 2001-02 and lost 4-2. Which club beat them?",
+   "a": "Lazio",
+   "sub": "Juventus won their last game and took the title instead.",
+   "cat": "champions",
+   "club": "inter"
+  },
+  {
+   "q": "Which club finished second to Napoli in the 1986-87 Serie A?",
+   "a": "Juventus",
+   "sub": "Napoli took the double that season.",
+   "cat": "champions",
+   "club": "napoli"
+  },
+  {
+   "q": "Sinisa Mihajlović scored a hat-trick of free kicks for Lazio in 1998 against which club?",
+   "a": "Sampdoria",
+   "sub": "Lazio won 5-2, and he had played for the other lot himself.",
+   "cat": "records",
+   "club": "lazio"
   }
  ],
  "extreme": [
@@ -1247,6 +1485,102 @@
    "q": "Which Italian club was refounded in 2018 after bankruptcy and had to start again in Serie D?",
    "a": "Bari",
    "cat": "stories"
+  },
+  {
+   "q": "Cremonese keeper Michelangelo Rampulla did something in 1992 no Serie A goalkeeper had managed before. What was it?",
+   "a": "He scored, heading in an equaliser away at Atalanta.",
+   "sub": "Last minute, from an Alviero Chiorri free kick.",
+   "cat": "stories"
+  },
+  {
+   "q": "Napoli were handed a 2-0 win at Atalanta in 1990 after Alemão went down at Bergamo. What had hit him?",
+   "a": "A coin thrown from the stands.",
+   "sub": "The two points helped Napoli pip Milan to the Scudetto.",
+   "cat": "stories",
+   "club": "napoli"
+  },
+  {
+   "q": "Which newly promoted club led Serie A for six weeks in 2001-02 and finished fifth?",
+   "a": "Chievo",
+   "sub": "Fifth put them in the UEFA Cup in their first top flight season.",
+   "cat": "stories"
+  },
+  {
+   "q": "Genoa won Serie B in 2004-05 and did not go up. What happened to them instead?",
+   "a": "They were sent down to Serie C1 for fixing the final game.",
+   "sub": "Three points off too, and bottom of the league they had just won.",
+   "cat": "relegation",
+   "club": "genoa"
+  },
+  {
+   "q": "Which Serie B club reached the semi-finals of the 1988 Cup Winners' Cup?",
+   "a": "Atalanta",
+   "sub": "Mechelen knocked them out and went on to win it.",
+   "cat": "europe"
+  },
+  {
+   "q": "Which striker took a pay cut to play for his home town club Livorno and was the Serie A top scorer in 2004-05?",
+   "a": "Cristiano Lucarelli",
+   "sub": "Some players buy a Ferrari, he said, I bought the Livorno shirt.",
+   "cat": "scorers"
+  },
+  {
+   "q": "Which Bari striker shared the 1995-96 Serie A top scorer award with Giuseppe Signori while his club went down?",
+   "a": "Igor Protti",
+   "sub": "Twenty-four goals, and Bari finished fifteenth.",
+   "cat": "scorers"
+  },
+  {
+   "q": "Which striker stayed with Fiorentina after they went down in 1993 and scored sixteen goals to take them straight back up?",
+   "a": "Gabriel Batistuta",
+   "sub": "Claudio Ranieri was the manager who took them up.",
+   "cat": "stories",
+   "club": "fiorentina"
+  },
+  {
+   "q": "AC Milan fans protested outside the club offices in January 2009 to stop Kaká joining which club?",
+   "a": "Manchester City",
+   "sub": "Berlusconi called the bid off within days.",
+   "cat": "transfers",
+   "club": "milan"
+  },
+  {
+   "q": "Inter Milan sacked Rafael Benítez in December 2010 five days after he had won which trophy?",
+   "a": "The Club World Cup",
+   "sub": "They had slid to sixth in Serie A, thirteen points off the top.",
+   "cat": "managers",
+   "club": "inter"
+  },
+  {
+   "q": "Palermo owner Maurizio Zamparini got through more than forty of what in fifteen years at the club?",
+   "a": "Managers",
+   "sub": "He bought Palermo in 2002 and sold up in 2018.",
+   "cat": "managers"
+  },
+  {
+   "q": "The 2004 Rome derby was abandoned early in the second half after a rumour swept the stands. What was the rumour?",
+   "a": "That police had killed a boy outside the ground. It was untrue.",
+   "sub": "Totti went to the Curva, then asked for the game to be called off.",
+   "cat": "stories"
+  },
+  {
+   "q": "Which club started the 2006-07 season with a fifteen point deduction for Calciopoli?",
+   "a": "Fiorentina",
+   "sub": "They had been docked nineteen the season before as well.",
+   "cat": "stories"
+  },
+  {
+   "q": "Which club was docked ten points in 2022-23 over the way it had accounted for transfers, and finished seventh?",
+   "a": "Juventus",
+   "sub": "An earlier fifteen point deduction had been overturned on appeal.",
+   "cat": "stories"
+  },
+  {
+   "q": "Silvio Berlusconi presented his new AC Milan squad in 1986 by landing them on the pitch in helicopters. What was playing?",
+   "a": "Wagner's Ride of the Valkyries",
+   "sub": "Three helicopters, ten thousand fans, and Baresi first out.",
+   "cat": "stories",
+   "club": "milan"
   }
  ]
 }

@@ -738,6 +738,238 @@
    "q": "Which clubs went down from the La Liga in 2025-26?",
    "a": "Mallorca, Girona, Real Oviedo",
    "cat": "relegation"
+  },
+  {
+   "q": "Which club won the first La Liga title, played in 1929?",
+   "a": "Barcelona",
+   "sub": "Real Madrid, then called Madrid FC, finished second.",
+   "cat": "champions"
+  },
+  {
+   "q": "Which Seville club won its only La Liga title in 1934-35?",
+   "a": "Real Betis",
+   "sub": "Madrid finished second, three points behind.",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club finished second in La Liga in both 1993-94 and 1994-95?",
+   "a": "Deportivo La Coruña",
+   "sub": "Barcelona pipped them the first year, Real Madrid the second.",
+   "cat": "champions"
+  },
+  {
+   "q": "Which Basque club won back-to-back La Liga titles in 1980-81 and 1981-82?",
+   "a": "Real Sociedad",
+   "sub": "Real Madrid were second in the first of the two.",
+   "cat": "champions"
+  },
+  {
+   "q": "Which Canary Islands club finished second in the 1968-69 La Liga?",
+   "a": "Las Palmas",
+   "sub": "Real Madrid took the title that year.",
+   "cat": "champions"
+  },
+  {
+   "q": "Which Brazilian striker won the Pichichi with 30 goals for Barcelona in 1993-94?",
+   "a": "Romário",
+   "sub": "He was gone to Flamengo within eighteen months.",
+   "cat": "scorers",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which Dutch striker won the Pichichi with Deportivo La Coruña in 2002-03?",
+   "a": "Roy Makaay",
+   "sub": "Twenty-nine goals, and Bayern Munich bought him that summer.",
+   "cat": "scorers"
+  },
+  {
+   "q": "Which Uruguayan won the Pichichi with Villarreal in 2004-05?",
+   "a": "Diego Forlán",
+   "sub": "He won it again with Atlético Madrid in 2008-09.",
+   "cat": "scorers",
+   "club": "villarreal"
+  },
+  {
+   "q": "Which Girona striker won the Pichichi in 2023-24?",
+   "a": "Artem Dovbyk",
+   "sub": "Twenty-four goals, in the season Girona finished third.",
+   "cat": "scorers"
+  },
+  {
+   "q": "Which goalkeeper won the Zamora trophy four seasons in a row from 2015-16?",
+   "a": "Jan Oblak",
+   "sub": "The Zamora goes to the keeper with the lowest goals-to-games ratio.",
+   "cat": "records"
+  },
+  {
+   "q": "Real Madrid and Barcelona are two of the three clubs never relegated from La Liga. Which is the third?",
+   "a": "Athletic Bilbao",
+   "sub": "All three are founder members from 1929.",
+   "cat": "records",
+   "club": "real-madrid"
+  },
+  {
+   "q": "Whose Spanish league goalscoring record did Barcelona's Lionel Messi pass in 2014?",
+   "a": "Telmo Zarra",
+   "sub": "Zarra's 251 goals for Athletic Bilbao had stood since 1955.",
+   "cat": "records",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which English club did Sevilla beat 4-0 in the 2006 UEFA Cup final?",
+   "a": "Middlesbrough",
+   "sub": "It was Sevilla's first European trophy.",
+   "cat": "europe",
+   "club": "sevilla"
+  },
+  {
+   "q": "Which English club did Atlético Madrid beat 2-1 in the 2010 Europa League final?",
+   "a": "Fulham",
+   "sub": "Diego Forlán scored twice, the winner in the 116th minute.",
+   "cat": "europe",
+   "club": "atletico-madrid"
+  },
+  {
+   "q": "Which French club did Valencia beat 2-0 in the 2004 UEFA Cup final?",
+   "a": "Marseille",
+   "sub": "Valencia won the league and the UEFA Cup that season.",
+   "cat": "europe",
+   "club": "valencia"
+  },
+  {
+   "q": "Who scored the only goal of the 1998 Champions League final for Real Madrid?",
+   "a": "Predrag Mijatović",
+   "sub": "It ended a 32-year wait for a seventh European Cup.",
+   "cat": "europe",
+   "club": "real-madrid"
+  },
+  {
+   "q": "Which club beat Real Madrid 3-2 after extra time in the 2004 Copa del Rey final?",
+   "a": "Real Zaragoza",
+   "sub": "Their fifth Copa del Rey, and their last.",
+   "cat": "cups",
+   "club": "real-madrid"
+  },
+  {
+   "q": "Which club beat Recreativo Huelva 3-0 in the 2003 Copa del Rey final?",
+   "a": "Mallorca",
+   "sub": "It was the island club's first Copa del Rey.",
+   "cat": "cups"
+  },
+  {
+   "q": "Which club did Sevilla beat 1-0 in the 2007 Copa del Rey final?",
+   "a": "Getafe",
+   "sub": "Sevilla won the UEFA Cup the same month.",
+   "cat": "cups",
+   "club": "sevilla"
+  },
+  {
+   "q": "Which club did Real Sociedad beat 1-0 in the 2020 Copa del Rey final?",
+   "a": "Athletic Bilbao",
+   "sub": "The Basque final was held back a year and played with no crowd.",
+   "cat": "cups",
+   "club": "real-sociedad"
+  },
+  {
+   "q": "Which manager replaced Rafael Benítez at Real Madrid in January 2016?",
+   "a": "Zinedine Zidane",
+   "sub": "He won the Champions League five months later.",
+   "cat": "managers",
+   "club": "real-madrid"
+  },
+  {
+   "q": "Which manager did Barcelona sack in January 2020, with Quique Setién taking over?",
+   "a": "Ernesto Valverde",
+   "sub": "He had won La Liga in both of his full seasons there.",
+   "cat": "managers",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which Serbian led Atlético Madrid to the league and cup double in 1995-96?",
+   "a": "Radomir Antić",
+   "sub": "He later managed both Real Madrid and Barcelona too.",
+   "cat": "managers",
+   "club": "atletico-madrid"
+  },
+  {
+   "q": "Which Argentine took Valencia to the Champions League finals of 2000 and 2001?",
+   "a": "Héctor Cúper",
+   "sub": "He lost both, to Real Madrid and then Bayern Munich.",
+   "cat": "managers",
+   "club": "valencia"
+  },
+  {
+   "q": "Which manager won the UEFA Cup with Sevilla in both 2006 and 2007?",
+   "a": "Juande Ramos",
+   "sub": "He left for Tottenham Hotspur a few months after the second.",
+   "cat": "managers",
+   "club": "sevilla"
+  },
+  {
+   "q": "Which Dutch club did Barcelona sign Ronaldo from in 1996?",
+   "a": "PSV Eindhoven",
+   "sub": "He scored 34 league goals and left for Inter Milan after one season.",
+   "cat": "transfers",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which club did Luis Enrique leave on a free transfer to join Barcelona in 1996?",
+   "a": "Real Madrid",
+   "sub": "He ran his contract down and then stayed eight years at Barcelona.",
+   "cat": "transfers",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which club did Real Madrid sign Claude Makélélé from in 2000?",
+   "a": "Celta Vigo",
+   "sub": "Real Madrid sold him on to Chelsea three years later.",
+   "cat": "transfers",
+   "club": "real-madrid"
+  },
+  {
+   "q": "Which striker moved to Inter Milan in the 2009 deal that took Zlatan Ibrahimović to Barcelona?",
+   "a": "Samuel Eto'o",
+   "sub": "He won the treble with Inter Milan the following season.",
+   "cat": "transfers",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which club did Villarreal sign Juan Román Riquelme from in 2003?",
+   "a": "Barcelona",
+   "sub": "He went on loan first, then signed permanently.",
+   "cat": "transfers",
+   "club": "villarreal"
+  },
+  {
+   "q": "Which Dane won four straight La Liga titles with Barcelona and then a fifth with Real Madrid?",
+   "a": "Michael Laudrup",
+   "sub": "The fifth came in 1994-95, the season after he crossed.",
+   "cat": "imports",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which club plays its home games at El Sadar?",
+   "a": "Osasuna",
+   "sub": "The ground in Pamplona is named after the river Sadar.",
+   "cat": "grounds"
+  },
+  {
+   "q": "Which club plays at El Molinón, the oldest ground in Spanish professional football?",
+   "a": "Sporting Gijón",
+   "sub": "In use since at least 1908, on the site of an old watermill.",
+   "cat": "grounds"
+  },
+  {
+   "q": "Which club was relegated in 2011-12, one season after finishing fourth in La Liga?",
+   "a": "Villarreal",
+   "sub": "A final day defeat to Atlético Madrid sent them down.",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which Madrid club was relegated in 1999-2000 in the same season it reached the Copa del Rey final?",
+   "a": "Atlético Madrid",
+   "sub": "Espanyol beat them 2-1 in the final at the Mestalla.",
+   "cat": "relegation"
   }
  ],
  "extreme": [
@@ -1149,6 +1381,107 @@
    "a": "Barcelona",
    "sub": "Real Madrid, Athletic Bilbao and Osasuna are member-owned too.",
    "cat": "stories"
+  },
+  {
+   "q": "In 1931 Barcelona lost a league match 12-1. Which club beat them?",
+   "a": "Athletic Bilbao",
+   "sub": "Bata scored seven of the twelve. No La Liga side has won by eleven since.",
+   "cat": "stories",
+   "club": "barcelona"
+  },
+  {
+   "q": "Deportivo La Coruña needed a last-minute penalty on the final day of 1993-94 to win the title. Who missed it?",
+   "a": "Miroslav Djukić",
+   "sub": "A centre-back took it because the usual taker was off. Barcelona were champions.",
+   "cat": "stories"
+  },
+  {
+   "q": "Which club beat Real Madrid on the final day in both 1992 and 1993, handing Barcelona the title each time?",
+   "a": "Tenerife",
+   "sub": "In 1992 Madrid were 2-0 up and lost 3-2.",
+   "cat": "stories",
+   "club": "real-madrid"
+  },
+  {
+   "q": "Real Madrid's 2011 Copa del Rey trophy was wrecked hours after the final. How?",
+   "a": "Sergio Ramos dropped it off the parade bus and the bus ran over it.",
+   "sub": "They got a replica. The club had waited 18 years for that cup.",
+   "cat": "stories",
+   "club": "real-madrid"
+  },
+  {
+   "q": "Which third tier club beat Real Madrid 4-0 in the 2009 Copa del Rey?",
+   "a": "Alcorcón",
+   "sub": "The night is known in Spain as the Alcorconazo. Only 2,997 saw it.",
+   "cat": "stories",
+   "club": "real-madrid"
+  },
+  {
+   "q": "Barcelona were unbeaten in the 2017-18 league until the second last game. Which club beat them 5-4?",
+   "a": "Levante",
+   "sub": "Emmanuel Boateng scored a hat-trick and Levante led 5-1.",
+   "cat": "stories",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which club finished 13th in 2014-15 and was relegated from La Liga anyway, for unpaid tax?",
+   "a": "Elche",
+   "sub": "Eibar, who finished third from bottom, went up in their place.",
+   "cat": "stories"
+  },
+  {
+   "q": "Which club's players refused to kick off against Real Sociedad in a 2014 Copa del Rey tie?",
+   "a": "Racing Santander",
+   "sub": "They had not been paid for seven months and stood in a line instead.",
+   "cat": "stories",
+   "club": "real-sociedad"
+  },
+  {
+   "q": "Which Mexican billionaire rescued Real Oviedo in 2012 after fans worldwide bought shares in the club?",
+   "a": "Carlos Slim",
+   "sub": "Nearly 37,000 people from 86 countries bought shares at 11 euros each.",
+   "cat": "stories"
+  },
+  {
+   "q": "Barcelona's first agreement to sign the 13-year-old Lionel Messi in 2000 was written on what?",
+   "a": "A paper napkin",
+   "sub": "Carles Rexach wrote it over lunch. It sold at auction in 2024.",
+   "cat": "stories",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which Sevilla goalkeeper headed a stoppage-time equaliser at Shakhtar Donetsk in the 2007 UEFA Cup?",
+   "a": "Andrés Palop",
+   "sub": "Dani Alves took the corner. Sevilla won in extra time and kept the cup.",
+   "cat": "stories",
+   "club": "sevilla"
+  },
+  {
+   "q": "Who finished a hat-trick with an overhead kick on the last day of 2000-01 to put Barcelona into the Champions League?",
+   "a": "Rivaldo",
+   "sub": "Barcelona beat Valencia 3-2 and took the last place off them.",
+   "cat": "stories",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which Barcelona assistant coach did José Mourinho poke in the eye during a 2011 Supercopa brawl?",
+   "a": "Tito Vilanova",
+   "sub": "Vilanova slapped him back. Both were banned.",
+   "cat": "stories",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which Spanish club lost the 2001 UEFA Cup final 5-4 to Liverpool on a golden goal?",
+   "a": "Alavés",
+   "sub": "Their own defender headed the winner past his keeper, with nine men left.",
+   "cat": "stories"
+  },
+  {
+   "q": "Real Madrid's centenary year was spoiled by a 2002 Copa del Rey final defeat at the Bernabéu. To which club?",
+   "a": "Deportivo La Coruña",
+   "sub": "Spain calls it the Centenariazo. Deportivo won 2-1.",
+   "cat": "stories",
+   "club": "real-madrid"
   }
  ]
 }
