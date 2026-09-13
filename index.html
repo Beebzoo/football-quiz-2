@@ -1198,7 +1198,12 @@
   /* The two ways to play. Same furniture as every other ghost button, so the
      selected state is the gold the app already uses, with room for a line
      saying what each one actually is. */
-  .playpick{margin-top:6px}
+  .playpick{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+  /* the third one spans the row: it is the newest and the longest named, and
+     three across a phone turns every label into two cramped lines */
+  /* the third spans the row rather than squeezing three across a phone,
+     but it stays a column like the other two so the name gets one line */
+  .playcard.wide{grid-column:1 / -1;padding:12px 10px}
   .playcard{display:flex;flex-direction:column;align-items:center;gap:3px;
     padding:14px 10px;line-height:1.15;text-align:center}
   .playcard small{display:block;font:500 .7rem/1.2 var(--ui);opacity:.62;letter-spacing:0}
@@ -5108,7 +5113,15 @@ const canPitch = id => !!(QUIZZES[id] && QUIZZES[id].teams);
    flagship quiz of the mode the app opens on for as long as the download
    took. startGame already refuses a kick off with "that deck is still
    loading, give it a second", which is the honest place to say it. */
-const canEver    = (id, play) => play === "pitch" ? canPitch(id) : true;
+/* The Dugout reads a man's career to decide which deck his question comes
+   from, so it only means anything where the eleven HAVE careers. That is
+   the 2006 squads today; the club squads would need the same harvest, and
+   their careers mostly route back to their own league anyway, which is the
+   less interesting version. */
+const HAS_CAREERS = {classic: true};
+const canEver    = (id, play) =>
+  play === "manager" ? !!(canPitch(id) && HAS_CAREERS[id]) :
+  play === "pitch"   ? canPitch(id) : true;
 const playableAs = (id, play) => canEver(id, play) && modeLive(id);
 
 /* DECKS[id] is the spoken deck, DECKS[id + "-mc"] the multiple choice one, and
@@ -5121,7 +5134,7 @@ const playableAs = (id, play) => canEver(id, play) && modeLive(id);
    "am I on the new one?" is a question the phone can answer by itself:
    nearly everything built lately happens during a match, so a stale phone
    and a fresh one look identical on the menu. */
-const BUILD = "13 Sep 2026 · 17:06";
+const BUILD = "13 Sep 2026 · 17:31";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five
@@ -5683,7 +5696,7 @@ function mpStatePayload(){
      Safe to blank outright. The only thing that reads them is the marking grid,
      which is the host's own screen, and the end-of-possession reveal is a toast
      built on the host from a local variable that was never in S anyway. */
-  if(S && S.play==="pitch" && S.h2h) return {...S, h2h:{...S.h2h, marks:[]}};
+  if(S && isPitch(S.play) && S.h2h) return {...S, h2h:{...S.h2h, marks:[]}};
   return S;
 }
 function mpQueueState(){
@@ -5968,6 +5981,7 @@ function matchLabel(m){
 }
 function playLabel(m){
   if(!m) return "";
+  if(m.play==="manager") return m.mc ? "The Dugout · Pick One" : "The Dugout";
   if(m.play==="pitch") return m.mc ? "One on One · Pick One" : "One on One";
   return m.mc ? "Multiple choice" : "";
 }
@@ -6750,7 +6764,14 @@ const h2GoalY = w => w === 0 ? 5 : 95;   // the mouth this player is shooting at
    than being written out twice. */
 /* Two questions that used to be answered by comparing mode strings, and are
    now simply the two fields that were hiding inside them. */
-const h2Mode = () => !!S && S.play === "pitch";
+/* ON A PITCH. One on One and The Dugout are the same game with the same
+   ladder; the second one adds line-ups, careers carrying the questions,
+   formations and line height on top. So every test of "is there a ball in
+   this" goes through isPitch, and h2Tactical marks the handful of places
+   that genuinely differ. */
+const isPitch    = p => p === "pitch" || p === "manager";
+const h2Tactical = () => !!S && S.play === "manager";
+const h2Mode = () => !!S && isPitch(S.play);
 const h2IsMC = () => !!S && !!S.mc;
 const h2Team  = w => (S.h2h.teams && S.h2h.teams[w]) || null;
 /* The sides come from whichever quiz is being played: the 2006 World Cup for
@@ -8479,7 +8500,7 @@ function render(){
      on the body while a match in that mode is on screen. */
   const ereOn = !!S && S.mode==="ere" && S.phase!=="setup" && S.phase!=="results";
   document.body.classList[ereOn?"add":"remove"]("eremode");
-  if(!S || S.play!=="pitch" || S.phase==="results") document.body.classList.remove("h2hmode");
+  if(!S || !isPitch(S.play) || S.phase==="results") document.body.classList.remove("h2hmode");
 
   const grole=guestRole();
   if(grole==="wans"){ st.innerHTML=mpGuestAnswerHTML(); return; }
@@ -8494,7 +8515,7 @@ function render(){
 
   /* One on One owns the whole screen from the toss to the final whistle, so
      it is dispatched before the shared phases rather than joining them. */
-  const h2On = S.play==="pitch" && S.phase!=="results";
+  const h2On = isPitch(S.play) && S.phase!=="results";
   document.body.classList[h2On?"add":"remove"]("h2hmode");
   if(!h2On) h2CrowdStop();   // results, the menu, another mode
   if(h2On){ h2Render(st); return; }
@@ -9183,7 +9204,7 @@ function render(){
     /* a pitch match is timed in minutes, not rounds; a shootout says so, and so
        does a match that ended early on the mercy rule */
     const h2min = S.h2h ? Math.min(H2_MINUTES, S.h2h.min||0) : 0;
-    const ftLine = S.play==="pitch" && S.h2h
+    const ftLine = isPitch(S.play) && S.h2h
       ? (S.pens ? `Full time · level, ${S.pens[0]}-${S.pens[1]} on penalties`
         : champ.score>=H2_TARGET && h2min<H2_MINUTES ? `First to ${H2_TARGET} · ${h2min} minutes`
         : `Full time · ${h2min} minutes`)
@@ -9255,7 +9276,7 @@ function modeReady(id, play, mc){
   if(id==="career") return true;
   if(id==="badge")  return !!BADGE;
   if(!DECKS[mc ? id + "-mc" : id]) return false;
-  if(play==="pitch" && !TEAMS[id]) return false;
+  if(isPitch(play) && !TEAMS[id]) return false;
   return true;
 }
 /* and is it playable in ANY combination, which is what greys out a tile */
@@ -9279,11 +9300,11 @@ function setMode(m){ snapshotNames(); setupMode=m;
      than offering something that would break. */
   if(!canPitch(m)) setupPlay="board";
   if(!isQuiz(m))   setupMc=false;
-  if(setupPlay==="pitch"){ setupCount=2; setupRef=false; }   // two players, no referee
+  if(isPitch(setupPlay)){ setupCount=2; setupRef=false; }   // two players, no referee
   modesOpen=false; extraOpen=false; render(); }
 function setPlay(v){
   snapshotNames(); setupPlay=v;
-  if(v==="pitch"){ setupCount=2; setupRef=false; }
+  if(isPitch(v)){ setupCount=2; setupRef=false; }
   /* The quiz is picked AFTER this now, so one that can NEVER be played this
      way is let go of rather than left sitting there selected and unplayable,
      and the drawer opens because choosing again is the next thing to do.
@@ -9443,7 +9464,7 @@ function renderBoard(st){
         const line=[...m.players].sort((a,b)=>b.score-a.score)
           .map(p=>`${esc(p.name)} ${p.score}`).join(" · ");
         return `<div class="logrow">
-          <div class="logtop">${d} · ${matchLabel(m)}${(p=>p?` · ${p}`:"")(playLabel(m))}${m.target&&m.play!=="pitch"?` · first to ${m.target}`:""}${m.ref?` · ref ${esc(m.ref)}`:""}</div>
+          <div class="logtop">${d} · ${matchLabel(m)}${(p=>p?` · ${p}`:"")(playLabel(m))}${m.target&&!isPitch(m.play)?` · first to ${m.target}`:""}${m.ref?` · ref ${esc(m.ref)}`:""}</div>
           <div class="logsc">${line}</div>
           <div class="logwin">${m.winner?`🏆 ${esc(m.winner)}`:"drawn at the top"}${(m.losers||[]).length?` · 🥃 ${esc(m.losers.join(" & "))}`:""}</div>
         </div>`;
@@ -9472,9 +9493,10 @@ function renderSetup(st){
           quizzes and hid the two real ones beneath them. Both are always
           offered: what dims now is the quiz that cannot take it. */""}
     <div class="kick" style="margin-top:2px">${ico('ball')}How you play</div>
-    <div class="row2 playpick">
+    <div class="playpick">
       <button class="bigbtn ghost playcard${setupPlay==="pitch"?" sel":""}" style="--ac:#6fd39b" onclick="setPlay('pitch')">${ico('users')}Football game<small>A match, on a pitch</small></button>
       <button class="bigbtn ghost playcard${setupPlay==="board"?" sel":""}" style="--ac:#8fd8c4" onclick="setPlay('board')">${ico('grid')}Normal mode<small>The quiz, pick a tier</small></button>
+      <button class="bigbtn ghost playcard wide${setupPlay==="manager"?" sel":""}" style="--ac:#e9b84c" onclick="setPlay('manager')">${ico('clipboard')}The Dugout<small>Your line-up picks your questions</small></button>
     </div>
     <div class="kick" style="margin-top:10px">${ico('trophy')}What you answer</div>
     <button class="bigbtn ghost lbbtn${setupMode==="classic"?" sel":""}" onclick="setMode('classic')"${playableAs("classic", setupPlay)?"":" disabled style=opacity:.4"}><img class="ballic" src="assets/ball.png" alt="">Let's Ball</button>
@@ -9492,6 +9514,7 @@ function renderSetup(st){
       <button class="bigbtn ghost${!setupMc?" sel":""}" onclick="setMc(false)"${DECKS[setupMode]?"":" disabled style=opacity:.4"}>${ico('book')}Read aloud</button>
       <button class="bigbtn ghost${setupMc?" sel":""}" onclick="setMc(true)"${DECKS[setupMode+"-mc"]?"":" disabled style=opacity:.4"}>${ico('card')}Multiple choice</button>
     </div>`:""}
+    ${setupPlay==="manager"?`<div class="hint" style="text-align:center">Everything One on One is, plus the eleven you picked it with. A ball to a man draws a question from where he actually played, so Cannavaro asks Serie A and van Nistelrooy could ask any of three. Picking your side is picking your questions, and his line-up is on the pitch for you to read.</div>`:""}
     ${setupPlay==="pitch"?`<div class="hint" style="text-align:center">Two players, first to ${H2_TARGET} or ${H2_MINUTES} minutes, penalties if it is level. You pick a side, win the toss and pass the ball by answering: the further up the pitch the ball goes, the harder the question.</div>`:`
     <div class="kick" style="margin-top:2px">${ico('users')}Who's playing</div>
     <div class="row2">
@@ -9508,7 +9531,7 @@ function renderSetup(st){
     </div>`}
     ${/* A match on the pitch is won by scoring goals, not by reaching a points
           total, so the target board is meaningless there and comes off. */""}
-    ${setupPlay==="pitch"?"":`
+    ${isPitch(setupPlay)?"":`
     <div class="kick" style="margin-top:2px">${ico('flag')}First to… wins</div>
     <div class="row2">
       <button class="bigbtn ghost${setupTarget===50?" sel":""}" onclick="setTarget(50)">50</button>
@@ -9516,8 +9539,8 @@ function renderSetup(st){
       <button class="bigbtn ghost${setupTarget===200?" sel":""}" onclick="setTarget(200)">200</button>
       <button class="bigbtn ghost${!setupTarget?" sel":""}" onclick="setTarget(0)">No limit</button>
     </div>`}
-    ${Array.from({length:(setupPlay==="pitch"?2:(setupRef?2:setupCount))},(_,i)=>`<input class="nm-in" id="n${i}" placeholder="${esc(REGULARS[i]||("Player "+(i+1)))}" maxlength="12" autocomplete="off" value="${esc(setupNames[i]||"")}">`).join("")}
-    ${setupRef&&setupPlay!=="pitch"?`<input class="nm-in" id="n2" placeholder="Referee 🟨" maxlength="12" autocomplete="off" value="${esc(setupNames[2]||"")}">`:""}
+    ${Array.from({length:(isPitch(setupPlay)?2:(setupRef?2:setupCount))},(_,i)=>`<input class="nm-in" id="n${i}" placeholder="${esc(REGULARS[i]||("Player "+(i+1)))}" maxlength="12" autocomplete="off" value="${esc(setupNames[i]||"")}">`).join("")}
+    ${setupRef&&!isPitch(setupPlay)?`<input class="nm-in" id="n2" placeholder="Referee 🟨" maxlength="12" autocomplete="off" value="${esc(setupNames[2]||"")}">`:""}
     <button class="bigbtn" onclick="startGame()"><img class="ballic" src="assets/ball.png" alt="">Kick off</button>`}
     ${books().length?`<div class="hint lastline">${(h=>{const m=h[h.length-1];return "Last match · "+m.players.map(p=>esc(p.name)+" "+p.score).join(" · ")+(m.winner?" · 🏆 "+esc(m.winner):" · draw");})(books())}</div>
     <button class="bigbtn ghost" style="padding:10px;font-size:.95rem" onclick="openBoard()">${ico('trophy')}The Table · ${books().length} match${books().length===1?"":"es"}${crewName()?" · "+esc(crewName()):""}</button>`:""}
@@ -9557,7 +9580,7 @@ function startGame(){
   if(!setupMode) return;
   audio(); wakeLock();
   /* the pitch is two men and no referee, whatever the board toggles say */
-  const count = setupPlay==="pitch" ? 2 : (setupRef ? 2 : setupCount);
+  const count = isPitch(setupPlay) ? 2 : (setupRef ? 2 : setupCount);
   const names=Array.from({length:count},(_,i)=>{
     const el=document.getElementById("n"+i);
     const v=el ? el.value.trim() : "";
@@ -9570,13 +9593,13 @@ function startGame(){
     toast("That deck is still loading, give it a second", true); return;
   }
   S=freshState(names, setupTimed, setupMode, setupTarget, setupPlay, setupMc);
-  if(setupRef && setupPlay!=="pitch"){
+  if(setupRef && !isPitch(setupPlay)){
     const el=document.getElementById("n2");
     S.ref=(el && el.value.trim()) || "The ref";
   }
   modeIntro(matchLabel(S));   // first, so anything that deals waits for it
   if(S.mode==="career") newCareer();
-  if(S.play==="pitch") h2Start();
+  if(isPitch(S.play)) h2Start();
   render();
 }
 function resumeGame(){
@@ -9626,7 +9649,7 @@ function resumeGame(){
   if(["judge","steal_judge","deadq","steal_offer"].includes(S.phase) && S.qi==null) S.phase="pick";
   if(["c_who","c_judge"].includes(S.phase)) S.phase="c_play";
   if(S.mode==="career" && !S.career) newCareer();
-  if(S.play==="pitch" && !S.h2h) h2Start();   // a save from before the mode existed
+  if(isPitch(S.play) && !S.h2h) h2Start();   // a save from before the mode existed
   if(S.h2h){
     /* saves from before the tackle existed */
     const H = S.h2h;
@@ -10295,7 +10318,7 @@ function rematch(){
      h2h:null and phase "pick", One on One was dispatched on the mode id alone,
      and h2Render was handed a null to read the ball's position out of. It has
      to start a fresh match the same way kicking off does. */
-  if(S.play==="pitch") h2Start();
+  if(isPitch(S.play)) h2Start();
   if(S.mode==="career" || S.mode==="mgr") newCareer();
   if(S.mode==="xi") newXI();
   if(S.mode==="duel") newDuel();
