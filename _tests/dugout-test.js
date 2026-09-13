@@ -264,8 +264,17 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
     [...Array(11).keys()].some(i => (ev(app, "h2Man(" + i + ",0)") || {}).full === inName), inName + " not found");
   check("and slot 0 is still a goalkeeper",
     (ev(app, "h2Man(0,0)") || {}).pos === "GK", JSON.stringify(ev(app, "h2Man(0,0)")));
-  check("the man he dropped is on the bench",
-    ev(app, "h2Bench(0).length") === 12, ev(app, "h2Bench(0).length"));
+  /* THE BENCH IN THE DUGOUT IS EARNED, so this asks the lineup rather than the
+     bench: the twelve he left out are the twelve he left out whether or not
+     the album has unlocked them yet. */
+  check("the man he dropped is among the twelve he left out",
+    ev(app, "S.h2h.lineup[0].bench.length") === 12, ev(app, "S.h2h.lineup[0].bench.length"));
+  check("and the bench is shut until the album page is finished",
+    ev(app, "h2Bench(0).length") === 0, ev(app, "h2Bench(0).length"));
+  run(app, "(() => { const t = TEAMS.wc2006.Netherlands, a = mine().album; " +
+    "for(const m of [...(t.xi||[]), ...(t.bench||[])]) a.have[(t.slug||'x') + '/' + m.no] = 1; " +
+    "a.foils.push('Netherlands'); mineSave(); })();");
+  check("and open once it is", ev(app, "h2Bench(0).length") === 12, ev(app, "h2Bench(0).length"));
   run(app, "h2SquadDone();"); await tick(120);
   check("and then it asks for a shape", ev(app, "S.phase") === "h_shape", ev(app, "S.phase"));
   check("the first man is up", (ev(app, "S.h2h.shaping") || 0) === 0, ev(app, "S.h2h.shaping"));

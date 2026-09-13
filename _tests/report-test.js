@@ -26,6 +26,19 @@ const run = (c, s) => vm.runInContext(s, c);
 const tick = (ms = 110) => new Promise(r => setTimeout(r, ms));
 const R = p => JSON.parse(fs.readFileSync(path.join(REPO, p), "utf8"));
 let fails = 0;
+  /* THE DUGOUT'S BENCH IS EARNED. A country whose album page is unfinished
+     plays with eleven men and nobody to bring on, so a test that reaches for a
+     substitute finishes the page the way a player would. */
+  const finishBoth = (ctx) => run(ctx, "(() => { for(const w of [0,1]){ " +
+    "const t = TEAMS.wc2006[h2Team(w)]; if(!t) continue; const a = mine().album; " +
+    "for(const m of [...(t.xi||[]), ...(t.bench||[])]) a.have[t.slug + '/' + m.no] = 1; " +
+    "if(a.foils.indexOf(h2Team(w)) < 0) a.foils.push(h2Team(w)); } mineSave(); })();");
+  const finish = (ctx, side) => run(ctx, "(() => { const t = TEAMS.wc2006[" +
+    JSON.stringify(side) + "]; const a = mine().album; " +
+    "for(const m of [...(t.xi||[]), ...(t.bench||[])]) a.have[t.slug + '/' + m.no] = 1; " +
+    "if(a.foils.indexOf(" + JSON.stringify(side) + ") < 0) a.foils.push(" +
+    JSON.stringify(side) + "); mineSave(); })();");
+
 const check = (n, c, x) => {
   console.log((c ? "  PASS  " : "  FAIL  ") + n + (c ? "" : "   <-- got: " + x));
   if (!c) fails++;
@@ -114,6 +127,7 @@ const check = (n, c, x) => {
   await ball(0, 5, 7, false);
   await ball(0, 5, 7, false);
   /* put a fresh man in that slot and play three more, all found */
+  finishBoth(app);
   run(app, "S.h2h.subbed[0][7] = h2Bench(0)[0].p; S.h2h.benchUsed[0].push(0);");
   const after = ev(app, "h2Man(7,0).n");
   check("a different man is in the slot now", after !== before, before + " then " + after);

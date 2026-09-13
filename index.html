@@ -2664,6 +2664,30 @@
   .dd-r i{display:block;font-style:normal;font-size:.6rem;opacity:.6;text-transform:uppercase}
   .dd-go{background:var(--green-fill);color:var(--green-ink);border-radius:999px;
          padding:7px 14px;font-weight:800;font-size:.8rem}
+  /* the album: pages, then slots. A gap is a drawn sticker with the ink taken
+     out of it, because the number and the name still being there is the whole
+     feeling. */
+  .alpages{display:grid;grid-template-columns:repeat(2,1fr);gap:7px;margin:10px 0}
+  .alpg{display:flex;align-items:center;justify-content:space-between;gap:8px;
+        background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--kc);
+        border-radius:10px;padding:9px 11px;color:inherit;font:inherit;cursor:pointer;text-align:left}
+  .alpg.foil{border-color:var(--gold);background:linear-gradient(120deg,rgba(201,154,46,.16),transparent)}
+  .alpn{font-size:.78rem;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .alpc{font-size:.7rem;opacity:.6;flex-shrink:0}
+  .alpage{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:10px 0}
+  .alslot{padding:0;border:0;background:none;color:inherit;font:inherit}
+  .alslot.want{cursor:pointer}
+  .alpack{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
+  .alst{background:var(--panel);border:1px solid var(--line);border-radius:8px;
+        padding:8px 4px;text-align:center}
+  .alst.foil{border-color:var(--gold);background:linear-gradient(120deg,rgba(201,154,46,.2),transparent)}
+  .alst.empty{opacity:.34;filter:grayscale(1)}
+  .alst.empty .xshirt{background:transparent;border:1px dashed var(--line);color:var(--ink-dim)}
+  .alst.dupe{opacity:.6}
+  .alst .xshirt{width:34px;height:32px;font-size:.8rem}
+  .alsn{font-size:.64rem;font-weight:700;margin-top:3px;overflow:hidden;
+        text-overflow:ellipsis;white-space:nowrap}
+  .alsp{font-size:.56rem;opacity:.5;letter-spacing:.06em}
   .h2repbox{margin:14px 0 4px}
   .h2rep{background:var(--panel);border:1px solid var(--line);border-radius:12px;
          padding:10px 12px;margin:8px 0}
@@ -5750,7 +5774,7 @@ function setTheme(t){
   applyTheme();
   render();
 }
-const BUILD = "14 Sep 2026 · 00:48";
+const BUILD = "14 Sep 2026 · 01:03";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five
@@ -8037,6 +8061,9 @@ function h2Start(){
 function h2PickTeam(country){
   audio();
   const H = h2();
+  /* THREE OF A COUNTRY THE FIRST TIME YOU PLAY AS THEM, from that country only.
+     It is the pack that makes somebody pick a side they have never picked. */
+  if(h2PoolId() === ALBUM_POOL && TEAMS[ALBUM_POOL] && TEAMS[ALBUM_POOL][country]) albumFirstTime(country);
   const slot = H.teams[0] == null ? 0 : 1;
   if(H.teams.includes(country)) return;
   H.teams[slot] = country;
@@ -8915,6 +8942,18 @@ function aiMarks(w){
    computer's decision, it makes it after a beat so the human sees the choice
    rather than the screen jumping. Every phase is untouched: the computer taps
    the buttons a person would. */
+/* THE ALBUM IS NOT A MATCH, so it does not live in S: opening it must not end
+   a game somebody has parked, and closing it must put them back where they
+   were. */
+let ALBUM_VIEW = null;
+function openAlbum(side){
+  audio();
+  ALBUM_VIEW = {side: side || null};
+  render();
+}
+function closeAlbum(){ audio(); ALBUM_VIEW = null; render(); }
+function albumSwapTo(id){ albumSwap(id); }
+
 let aiTimer = null;
 /* THE BEAT the computer pauses for, so a human sees what it chose rather than
    the screen jumping. A variable rather than a constant because a test that
@@ -9017,6 +9056,123 @@ function aiTick(){
   if(p === "h_pens" && H.so && aiIsOn(H.who))
     return aiLater(() => { if(S.phase === "h_pens") h2SoKick(); });
   if(p === "h_ft") return;
+}
+
+/* ================= THE ALBUM ================= */
+/* THE ALBUM IS ONE POOL, and it is the 2006 World Cup, because that is the one
+   with an album. A second pool would be a second album, not a bigger one. */
+const ALBUM_POOL = "wc2006";
+const albumBook = () => TEAMS[ALBUM_POOL] || null;
+/* A STICKER IS A SLUG AND A SHIRT NUMBER. Not a name, because names change
+   spelling between harvests, and not an index, because indexes move. */
+const albumId = (side, m) => {
+  const t = (albumBook() || {})[side];
+  return (t && m) ? (t.slug || side) + "/" + m.no : null;
+};
+function albumMen(side){
+  const t = (albumBook() || {})[side];
+  if(!t) return [];
+  return [...(t.xi || []), ...(t.bench || [])];
+}
+const albumSides = () => Object.keys(albumBook() || {}).sort();
+const albumHas = id => (mine().album.have[id] || 0) > 0;
+/* A PAGE IS DONE when every man on it is stuck in. The bench is part of the
+   page on purpose: eleven out of twenty-three is not an album page. */
+function albumDone(side){
+  const men = albumMen(side);
+  return men.length > 0 && men.every(m => albumHas(albumId(side, m)));
+}
+const albumFoil = side => mine().album.foils.indexOf(side) > -1;
+function albumCount(){
+  const book = albumBook();
+  if(!book) return {have: 0, all: 0};
+  let have = 0, all = 0;
+  for(const side of Object.keys(book))
+    for(const m of albumMen(side)){ all++; if(albumHas(albumId(side, m))) have++; }
+  return {have: have, all: all};
+}
+/* ---------- earning ---------- */
+function albumGive(n, why){
+  const m = mine();
+  m.album.packs = (m.album.packs || 0) + n;
+  mineSave();
+  if(why) toast(n + " pack" + (n === 1 ? "" : "s") + " for " + why + ".");
+}
+/* THE FIRST TIME YOU PLAY AS A COUNTRY, from that country only. It is the pack
+   that makes somebody pick a side they have never picked. */
+function albumFirstTime(side){
+  const m = mine();
+  m.album.seen = m.album.seen || {};
+  if(m.album.seen[side]) return;
+  m.album.seen[side] = 1;
+  const men = albumMen(side);
+  if(!men.length){ mineSave(); return; }
+  /* three from that squad, which is most of the way to a page nobody else has */
+  for(let i = 0; i < 3; i++) albumStick(albumId(side, men[Math.floor(Math.random() * men.length)]));
+  mineSave();
+  toast("Three " + side + " stickers for playing as them.");
+}
+/* ---------- opening ---------- */
+function albumStick(id){
+  if(!id) return false;
+  const have = mine().album.have;
+  const dupe = (have[id] || 0) > 0;
+  have[id] = (have[id] || 0) + 1;
+  return !dupe;
+}
+/* ONE PACK IS THREE STICKERS, random across the whole album, doubles allowed,
+   because an album without doubles is a checklist. */
+function albumOpen(){
+  audio();
+  const m = mine();
+  if(!(m.album.packs > 0)) return;
+  const book = albumBook();
+  if(!book) return toast("The squads are still loading.", true);
+  const all = [];
+  for(const side of Object.keys(book)) for(const man of albumMen(side)) all.push({side: side, m: man});
+  if(!all.length) return;
+  m.album.packs -= 1;
+  const got = [];
+  for(let i = 0; i < 3; i++){
+    const p = all[Math.floor(Math.random() * all.length)];
+    const id = albumId(p.side, p.m);
+    const isNew = albumStick(id);
+    got.push({id: id, side: p.side, m: p.m, isNew: isNew});
+  }
+  /* A FINISHED PAGE IS A FOIL, and it is checked here rather than on render so
+     it happens once and can say so. */
+  for(const g of got) albumCheckPage(g.side);
+  m.album.last = got;
+  mineSave();
+  S = null;
+  ALBUM_VIEW = {open: got};
+  render();
+}
+function albumCheckPage(side){
+  const m = mine();
+  if(!albumDone(side) || m.album.foils.indexOf(side) > -1) return;
+  m.album.foils.push(side);
+  toast(side + " complete. Their bench is yours.");
+}
+/* ---------- doubles ---------- */
+const albumDupes = () => Object.keys(mine().album.have).filter(id => mine().album.have[id] > 1);
+/* THREE DOUBLES FOR ONE YOU CHOOSE, which is the oldest rule in the playground
+   and the only one that makes a double worth having. */
+function albumSwap(wantId){
+  audio();
+  const m = mine(), dupes = albumDupes();
+  if(dupes.length < 3) return toast("You need three doubles.", true);
+  if(albumHas(wantId)) return toast("You already have him.", true);
+  for(let i = 0; i < 3; i++){
+    const id = dupes[i];
+    m.album.have[id] -= 1;
+    if(m.album.have[id] <= 0) delete m.album.have[id];
+  }
+  albumStick(wantId);
+  const side = albumSides().filter(x => wantId.indexOf(((albumBook()[x] || {}).slug || x) + "/") === 0)[0];
+  if(side) albumCheckPage(side);
+  mineSave();
+  render();
 }
 
 const LOG_KEY = "ball2-outcomes";
@@ -9331,9 +9487,16 @@ function h2Bench(w){
   /* THE TWELVE HE LEFT OUT. Fixed at kick-off and never recomputed, which is
      the property that makes a substitution safe: benchUsed stores indices into
      this list, so the list has to mean the same men all match. */
-  const list = h2Lineup(w) ? h2Lineup(w).bench : q.bench;
-  const used = (H.benchUsed && H.benchUsed[w]) || [];
-  return list.map((p, i) => ({p: p, i: i})).filter(b => used.indexOf(b.i) === -1);
+  let list = h2Lineup(w) ? h2Lineup(w).bench : q.bench;
+  /* AND IT IS EARNED. A country whose album page is unfinished plays with the
+     eleven and nobody to bring on, which is a real cost and the only reason
+     anybody would finish a page. The 2006 pool only: the finals have no bench
+     by design and a club squad has nothing to collect. */
+  /* THE DUGOUT ONLY, and the 2006 pool only. One on One is the Friday-night
+     product and it is not where progression belongs; the finals have no bench
+     by design; a club squad has nothing to collect. */
+  if(h2Tactical() && h2PoolId() === ALBUM_POOL && !albumFoil(h2Team(w))) list = [];
+  return list.map((p, i) => ({p: p, i: i})).filter(b => (((H.benchUsed && H.benchUsed[w]) || []).indexOf(b.i) === -1));
 }
 /* Can this side bring a man on for slot i right now? Not for a man who has
    been sent off (you play with ten), not in a shootout, and not with nobody
@@ -10795,6 +10958,9 @@ function render(){
   }
   if(grole==="steal"){ st.innerHTML=mpStealHTML(); return; }
 
+  /* THE ALBUM IS NOT A MATCH AND NOT THE MENU. It sits in front of both, so a
+     game somebody has parked is still parked when they close it. */
+  if(ALBUM_VIEW) return renderAlbum(st);
   if(!S || S.phase==="setup"){ return showBoard ? renderBoard(st) : renderSetup(st); }
 
   /* One on One owns the whole screen from the toss to the final whistle, so
@@ -11848,14 +12014,108 @@ function dailyCardHTML(){
     : done ? (d.reached >= 6 ? "All the way to the striker." :
               d.reached === 0 ? "Lost on the first pass." : "You got to " + DAILY[d.reached - 1].to + ".")
     : "You are " + (d.rung + 1) + " of " + DAILY.length + " up the pitch.";
+  const A = mine().album;
+  const c = albumCount();
+  const albumRow = c.all ? '<button class="mm-ghost" onclick="openAlbum()">' +
+    'The album \u00b7 ' + c.have + ' of ' + c.all +
+    (A.packs > 0 ? ' \u00b7 ' + A.packs + ' pack' + (A.packs === 1 ? "" : "s") + ' to open' : "") +
+    '</button>' : "";
   return '<div class="mm-sect"><button class="mm-daily' + (done ? " done" : "") +
     '" onclick="dailyStart()">' +
     '<span class="dd-l"><span class="dd-t">The Daily Ball</span>' +
       '<span class="dd-s">' + esc(said) + '</span></span>' +
     (st.played ? '<span class="dd-r"><b>' + st.played + '</b><i>day' +
       (st.played === 1 ? "" : "s") + '</i></span>' : '<span class="dd-r dd-go">Play</span>') +
-    '</button></div>';
+    '</button>' + albumRow + '</div>';
 }
+/* THE STICKER, drawn rather than fetched: the app's own shirt polygon in the
+   country's kit colour with his number on it, his name under it, and his
+   position. 736 of them and not one image, so they improve whenever the
+   harvest does. */
+function albumStickerHTML(side, m, has, dupe){
+  const t = (albumBook() || {})[side] || {};
+  const kit = t.kit || "#888";
+  return '<div class="alst' + (has ? "" : " empty") + (dupe ? " dupe" : "") +
+    (albumFoil(side) && has ? " foil" : "") + '" style="--kit:' + kit + ';--kink:' + kitInk(kit) + '">' +
+    '<div class="xshirt">' + (m.no || "") + '</div>' +
+    '<div class="alsn">' + esc(m.n || "") + '</div>' +
+    '<div class="alsp">' + esc(m.pos || "") + '</div>' +
+  '</div>';
+}
+  /* ---------- THE ALBUM ----------
+     Thirty-two pages, twenty-three slots each. A missing man is drawn and then
+     emptied rather than left out, because the gap with his number still in it
+     is the entire feeling. */
+function renderAlbum(st){
+    const book = albumBook();
+    if(!book){ st.innerHTML = '<div class="h2big">The squads are still loading.</div>' +
+      '<button class="bigbtn ghost" onclick="closeAlbum()">Back</button>'; return; }
+    const A = mine().album;
+
+    /* just opened a pack */
+    if(ALBUM_VIEW.open){
+      st.innerHTML =
+        '<div class="kick">' + ico('trophy') + 'Three stickers</div>' +
+        '<div class="alpack">' + ALBUM_VIEW.open.map(g =>
+          albumStickerHTML(g.side, g.m, true, !g.isNew)).join("") + '</div>' +
+        '<div class="h2hintline">' +
+          (ALBUM_VIEW.open.filter(g => g.isNew).length
+            ? ALBUM_VIEW.open.filter(g => g.isNew).length + " new."
+            : "All doubles. It happens.") +
+          ' You have ' + A.packs + ' pack' + (A.packs === 1 ? "" : "s") + ' left.</div>' +
+        (A.packs > 0 ? '<button class="bigbtn" onclick="albumOpen()">Open another</button>' : "") +
+        '<button class="bigbtn ghost" onclick="openAlbum()">The album</button>';
+      return;
+    }
+
+    /* one country's page */
+    if(ALBUM_VIEW.side){
+      const side = ALBUM_VIEW.side, men = albumMen(side);
+      const got = men.filter(m => albumHas(albumId(side, m))).length;
+      const dupes = albumDupes().length;
+      st.innerHTML =
+        '<div class="kick">' + ico('users') + esc(side) +
+          (albumFoil(side) ? ' \u00b7 complete' : '') + '</div>' +
+        '<div class="h2big">' + got + ' of ' + men.length + '</div>' +
+        (albumFoil(side)
+          ? '<div class="h2hintline" style="margin-top:0">Their bench is yours in The Dugout.</div>'
+          : '<div class="h2hintline" style="margin-top:0">Finish the page and their bench is yours in The Dugout. ' +
+            (dupes >= 3 ? 'Tap a gap to swap three doubles for him.' : 'You need three doubles to swap.') + '</div>') +
+        '<div class="alpage">' + men.map(m => {
+          const id = albumId(side, m), has = albumHas(id);
+          const can = !has && dupes >= 3;
+          return (can ? '<button class="alslot want" onclick="albumSwapTo(' +
+                        JSON.stringify(id).replace(/"/g, "&quot;") + ')">' : '<div class="alslot' + (has ? "" : " gap") + '">') +
+                 albumStickerHTML(side, m, has, false) +
+                 (can ? '</button>' : '</div>');
+        }).join("") + '</div>' +
+        '<button class="bigbtn ghost" onclick="openAlbum()">All the pages</button>';
+      return;
+    }
+
+    /* the whole album */
+    const c = albumCount();
+    st.innerHTML =
+      '<div class="kick">' + ico('trophy') + 'The album \u00b7 2006</div>' +
+      '<div class="h2big">' + c.have + ' of ' + c.all + '</div>' +
+      (A.packs > 0
+        ? '<button class="bigbtn" onclick="albumOpen()">Open a pack \u00b7 ' + A.packs + ' waiting</button>'
+        : '<div class="h2hintline" style="margin-top:0">Packs come from playing. One for the daily, one for winning, ' +
+          'and three of a country the first time you play as them.</div>') +
+      '<div class="alpages">' + albumSides().map(side => {
+        const men = albumMen(side);
+        const got = men.filter(m => albumHas(albumId(side, m))).length;
+        const t = book[side];
+        return '<button class="alpg' + (albumFoil(side) ? " foil" : "") +
+          '" style="--kc:' + (t.kit || "#888") + '" onclick="openAlbum(' +
+          JSON.stringify(side).replace(/"/g, "&quot;") + ')">' +
+          '<span class="alpn">' + esc(side) + '</span>' +
+          '<span class="alpc">' + got + '/' + men.length + '</span></button>';
+      }).join("") + '</div>' +
+      '<button class="bigbtn ghost" onclick="closeAlbum()">Back</button>';
+    return;
+}
+
 function renderSetup(st){
   const saved = (()=>{ try{ const s=JSON.parse(localStorage.getItem(SAVE_KEY)); return s && s.phase!=="setup" && s.phase!=="results" ? s : null; }catch(e){ return null; }})();
   /* how deep the chosen quiz is, for the front door's right hand side */
@@ -12733,7 +12993,22 @@ function askEnd(){
     <button class="bigbtn bad" onclick="endGame()">End the match</button>
     <button class="bigbtn ghost" onclick="closeSheet()">Keep playing</button>`);
 }
+/* A PACK FOR WINNING. The album is what a Friday night feeds, which is the
+   only way a collection built alone means anything to the people you play
+   with. */
+function albumAfterMatch(){
+  try{
+    if(!S || !isPitch(S.play)) return;
+    const solo = S.players.filter(p => p.ai).length > 0;
+    /* against a computer the human has to have won it; on a shared phone the
+       pack goes to the phone, which is the only thing with an album on it */
+    const won = solo ? (S.players[0].score > S.players[1].score)
+                     : Math.max.apply(null, S.players.map(p => p.score)) > 0;
+    if(won) albumGive(1, "the win");
+  }catch(e){}
+}
 function endGame(){
+  albumAfterMatch();
   closeSheet(); stopTimer(); S.phase="results"; recordMatch(); render();
   if(Math.max(...S.players.map(p=>p.score))>=0) confetti(48);
 }

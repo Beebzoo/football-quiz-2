@@ -190,6 +190,11 @@ setups.dailymenu = `S=null; setupMode="classic"; setupPlay="pitch"; render();`;
 setups.dailyq = `dailyStart();`;
 setups.dailydone = `dailyStart(); for(let i=0;i<6;i++){ const Q=q(); dailyPick(i===4?(Q.k+1)%4:Q.k); dailyOn(); }`;
 
+/* the album: the whole thing, one page, and a pack being opened */
+setups.album = `mine().album.packs = 4; mineSave(); openAlbum();`;
+setups.albumpage = `(() => { const t = TEAMS.wc2006.Netherlands, a = mine().album; const men = [...(t.xi||[]), ...(t.bench||[])]; men.slice(0, 14).forEach(m => a.have[(t.slug) + "/" + m.no] = 1); a.have[(t.slug) + "/" + men[0].no] = 3; a.have[(t.slug) + "/" + men[1].no] = 2; a.have[(t.slug) + "/" + men[2].no] = 2; mineSave(); })(); openAlbum("Netherlands");`;
+setups.albumpack = `mine().album.packs = 3; mineSave(); albumOpen();`;
+
 const SHOT_SHAPES = ["4-2-3-1", "4-4-2", "4-3-3", "3-5-2", "5-3-2"];
 const SHOT_LINES = ["high", "mid", "low"];
 const dug = `S=freshState(["Martijn","Bram"],false,"classic",0,"manager",false); h2TackleOn=false; h2Start(); h2PickTeam("Netherlands"); h2PickTeam("Italy"); S.h2h.tossed=true;`;

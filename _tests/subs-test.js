@@ -366,7 +366,17 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
      The whole risk is WHERE. A change is a break in play, so it must never be
      reachable with a ball in the air or a question live. */
   /* a Dugout match, which is the only place a voluntary change lives */
-  const mgr = () => run(app, 'S = freshState(["Martijn","Bram"], false, "classic", 0, "manager", false); h2Start(); h2PickTeam("Netherlands"); h2PickTeam("Italy"); S.h2h.tossed = true; S.h2h.subs=[3,3]; h2TackleOn = false; render();');
+  /* THE BENCH IN THE DUGOUT IS EARNED. A country whose album page is not
+     finished plays with eleven men and nobody to bring on, so a test about
+     substitutions has to finish the page the way a player would. */
+  const finish = (side) => run(app, "(() => { const t = TEAMS.wc2006[" +
+    JSON.stringify(side) + "]; const a = mine().album; " +
+    "for(const m of [...(t.xi||[]), ...(t.bench||[])]) a.have[(t.slug||" +
+    JSON.stringify(side) + ") + '/' + m.no] = 1; " +
+    "if(a.foils.indexOf(" + JSON.stringify(side) + ") < 0) a.foils.push(" +
+    JSON.stringify(side) + "); mineSave(); })();");
+  const mgr = () => { finish("Netherlands"); finish("Italy");
+    run(app, 'S = freshState(["Martijn","Bram"], false, "classic", 0, "manager", false); h2Start(); h2PickTeam("Netherlands"); h2PickTeam("Italy"); S.h2h.tossed = true; S.h2h.subs=[3,3]; h2TackleOn = false; render();'); };
 
   console.log("\n--- a change he asked for ---");
   mgr();

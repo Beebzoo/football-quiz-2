@@ -31,6 +31,19 @@ const run = (c, s) => vm.runInContext(s, c);
 const tick = (ms = 120) => new Promise(r => setTimeout(r, ms));
 const R = p => JSON.parse(fs.readFileSync(path.join(REPO, p), "utf8"));
 let fails = 0;
+  /* THE DUGOUT'S BENCH IS EARNED. A country whose album page is unfinished
+     plays with eleven men and nobody to bring on, so a test that reaches for a
+     substitute finishes the page the way a player would. */
+  const finishBoth = (ctx) => run(ctx, "(() => { for(const w of [0,1]){ " +
+    "const t = TEAMS.wc2006[h2Team(w)]; if(!t) continue; const a = mine().album; " +
+    "for(const m of [...(t.xi||[]), ...(t.bench||[])]) a.have[t.slug + '/' + m.no] = 1; " +
+    "if(a.foils.indexOf(h2Team(w)) < 0) a.foils.push(h2Team(w)); } mineSave(); })();");
+  const finish = (ctx, side) => run(ctx, "(() => { const t = TEAMS.wc2006[" +
+    JSON.stringify(side) + "]; const a = mine().album; " +
+    "for(const m of [...(t.xi||[]), ...(t.bench||[])]) a.have[t.slug + '/' + m.no] = 1; " +
+    "if(a.foils.indexOf(" + JSON.stringify(side) + ") < 0) a.foils.push(" +
+    JSON.stringify(side) + "); mineSave(); })();");
+
 const check = (n, c, x) => {
   console.log((c ? "  PASS  " : "  FAIL  ") + n + (c ? "" : "   <-- got: " + x));
   if (!c) fails++;
@@ -193,6 +206,7 @@ const check = (n, c, x) => {
   run(app, "h2SetTrait(" + k2 + ", 'finisher');"); await tick(100);
   check("the man in the slot has it", ev(app, "h2TraitOf(" + k2 + ",0)") === "finisher",
     ev(app, "h2TraitOf(" + k2 + ",0)"));
+  finishBoth(app);
   run(app, "S.h2h.subbed[0][" + k2 + "] = h2Bench(0)[0].p;"); await tick(100);
   check("the man who replaces him does NOT inherit it",
     ev(app, "h2TraitOf(" + k2 + ",0)") === null, ev(app, "h2TraitOf(" + k2 + ",0)"));
