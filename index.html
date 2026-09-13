@@ -330,8 +330,11 @@
     --on-ink:#2D4A3E;
     --desk:#E8E4DA;
     --drop:rgba(42,38,32,.16);
-    --mow-a:#FDF6E2; --mow-b:#F7EFD9;
-    --flood:rgba(255,255,255,.6);
+    /* FLAT. Mown bands on cream are streaks and a floodlight on cream is a
+       smudge behind the wordmark. Paper is paper: one colour, and the green
+       rule under the header does the dividing. */
+    --mow-a:#FDF6E2; --mow-b:#FDF6E2;
+    --flood:transparent;
     --chalkline:rgba(45,74,62,.14);
     --chalkline-soft:rgba(45,74,62,.09);
     /* gold on cream has nowhere near the contrast it has at night, so the
@@ -378,6 +381,7 @@
   body.careermode .clubcard{
     border-color:var(--edge-soft);
     box-shadow:0 6px 18px var(--drop), 0 0 24px var(--flood);
+    /* on paper the glow is transparent, so the drop shadow is doing it all */
   }
   body.careermode .clubcard.mystery{
     background:var(--paper-2);border-color:var(--edge);
@@ -1421,7 +1425,11 @@
   .mm-word{font:700 clamp(48px,14vw,58px)/.86 var(--ui);letter-spacing:-.01em;color:var(--ink);margin-top:6px;
     cursor:pointer;-webkit-tap-highlight-color:transparent}
   .mm-tag{font:400 12px/1.3 var(--serif);font-style:italic;color:var(--ink-dim);margin-top:7px}
+  /* The shadow is night-strength: a ball floating over cream with a dark halo
+     reads as dirty rather than as lit. On paper it gets a shorter, softer one
+     and sits down on the page instead of hovering over it. */
   .mm-head img{width:58px;height:58px;flex:none;filter:drop-shadow(0 6px 16px var(--drop))}
+  :root[data-theme="light"] .mm-head img{filter:drop-shadow(0 3px 7px rgba(42,38,32,.22))}
   .mm-page{display:flex;flex-direction:column;gap:22px;padding-top:18px}
   .mm-eyebrow{font:700 10px/1 var(--ui);letter-spacing:.24em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:8px}
   .mm-sect{display:flex;flex-direction:column;gap:10px}
@@ -5371,7 +5379,7 @@ function setTheme(t){
   applyTheme();
   render();
 }
-const BUILD = "13 Sep 2026 · 21:37";
+const BUILD = "13 Sep 2026 · 21:49";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five
