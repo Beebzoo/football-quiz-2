@@ -176,6 +176,9 @@ setups.report = `S=freshState(["Martijn","Bram"],false,"classic",0,"manager",fal
   ball(5,7,false); ball(5,7,false); ball(5,7,false); ball(5,7,true); ball(5,9,true); ball(5,9,true);
   S.players[0].score=1; S.phase="results"; render();`;
 
+/* a change nobody was forced into: the eleven, then the bench */
+setups.change = `S=freshState(["Martijn","Bram"],false,"classic",0,"manager",false); h2TackleOn=false; h2Start(); h2PickTeam("Netherlands"); h2PickTeam("Italy"); S.h2h.tossed=true; S.h2h.subs=[3,3]; S.h2h.who=0; S.h2h.at=5; S.h2h.sel=null; S.h2h.markedAgainst=0; S.phase="h_pick"; render(); h2SubWant(); h2SubOff(7);`;
+
 const SHOT_SHAPES = ["4-2-3-1", "4-4-2", "4-3-3", "3-5-2", "5-3-2"];
 const SHOT_LINES = ["high", "mid", "low"];
 const dug = `S=freshState(["Martijn","Bram"],false,"classic",0,"manager",false); h2TackleOn=false; h2Start(); h2PickTeam("Netherlands"); h2PickTeam("Italy"); S.h2h.tossed=true;`;

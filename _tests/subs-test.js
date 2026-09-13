@@ -355,6 +355,91 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   run(app, "h2McPlayOn()"); await tick(160);
   check("and the right tap plays it", H("at") === TEN && H("who") === 0, H("at") + "/" + H("who"));
 
+  /* ================================================================
+     A CHANGE HE MEANT TO MAKE
+     ================================================================
+     The bench was a rescue: the only way to use one was to get a question
+     wrong first, which means you never choose it, and the man who comes on is
+     decided by whichever slot happened to lose the ball. A manager should be
+     able to look at the pitch and take a man off because he wants to.
+
+     The whole risk is WHERE. A change is a break in play, so it must never be
+     reachable with a ball in the air or a question live. */
+  /* a Dugout match, which is the only place a voluntary change lives */
+  const mgr = () => run(app, 'S = freshState(["Martijn","Bram"], false, "classic", 0, "manager", false); h2Start(); h2PickTeam("Netherlands"); h2PickTeam("Italy"); S.h2h.tossed = true; S.h2h.subs=[3,3]; h2TackleOn = false; render();');
+
+  console.log("\n--- a change he asked for ---");
+  mgr();
+  await tick(140);
+  run(app, 'S.h2h.who=0; S.h2h.at=5; S.h2h.sel=null; S.h2h.markedAgainst=0; S.phase="h_pick"; render();');
+  await tick(120);
+  check("the man on the ball is offered a change", /h2SubWant/.test(stage(app)), "no button");
+  const mins0 = ev(app, "S.h2h.min") || 0;
+  const subs0 = ev(app, "S.h2h.subs[0]");
+  run(app, "h2Select(7); render();"); await tick(120);
+  check("but not once he has picked a ball out", !/h2SubWant/.test(stage(app)), "still offered mid-pass");
+  run(app, "S.h2h.sel=null; render(); h2SubWant();"); await tick(120);
+  check("it opens the change screen", ev(app, "S.phase") === "h_sub", ev(app, "S.phase"));
+  check("and it knows nobody was forced into it", ev(app, "S.h2h.sub.kind") === "tactic",
+    JSON.stringify(ev(app, "S.h2h.sub")));
+  check("the eleven are offered, to say who is going off",
+    (stage(app).match(/h2SubOff\(/g) || []).length === 11, (stage(app).match(/h2SubOff\(/g) || []).length);
+  check("and nobody is offered to come on yet, because nobody is going off",
+    (stage(app).match(/h2SubSwap\(/g) || []).length === 0, (stage(app).match(/h2SubSwap\(/g) || []).length);
+  const offName = ev(app, "h2Man(7,0).n");
+  run(app, "h2SubOff(7);"); await tick(120);
+  check("picking a man opens the bench",
+    (stage(app).match(/h2SubSwap\(/g) || []).length === 12, (stage(app).match(/h2SubSwap\(/g) || []).length);
+  check("and it says who is coming off", stage(app).indexOf(offName + " is coming off") > -1, "not named");
+  const onName = ev(app, "h2Bench(0)[3].p.n");
+  run(app, "h2SubSwap(h2Bench(0)[3].i);"); await tick(160);
+  check("the man he chose is on the pitch", ev(app, "h2Man(7,0).n") === onName,
+    ev(app, "h2Man(7,0).n") + " wanted " + onName);
+  check("a change was spent", ev(app, "S.h2h.subs[0]") === subs0 - 1, ev(app, "S.h2h.subs[0]"));
+  check("and five minutes with it", (ev(app, "S.h2h.min") || 0) === mins0 + 5,
+    (ev(app, "S.h2h.min") || 0) + " was " + mins0);
+  check("NO question was asked, because nothing was being answered",
+    ev(app, "S.phase") !== "h_q" && ev(app, "S.tier") == null, ev(app, "S.phase") + "/" + ev(app, "S.tier"));
+  check("and the ball is still his, where it was", ev(app, "S.h2h.who") === 0 && ev(app, "S.h2h.at") === 5,
+    ev(app, "S.h2h.who") + "/" + ev(app, "S.h2h.at"));
+
+  console.log("\n--- and one he thought better of ---");
+  run(app, 'S.h2h.who=0; S.h2h.at=5; S.h2h.sel=null; S.phase="h_pick"; render(); h2SubWant();');
+  await tick(120);
+  const subs1 = ev(app, "S.h2h.subs[0]"), mins1 = ev(app, "S.h2h.min") || 0;
+  run(app, "h2SubDecline();"); await tick(120);
+  check("backing out costs no change", ev(app, "S.h2h.subs[0]") === subs1, ev(app, "S.h2h.subs[0]"));
+  check("and no time", (ev(app, "S.h2h.min") || 0) === mins1, ev(app, "S.h2h.min"));
+  check("and puts him back where he was", ev(app, "S.phase") === "h_pick", ev(app, "S.phase"));
+
+  console.log("\n--- the defender gets his, on his own screen ---");
+  mgr();
+  run(app, "h2TackleOn = false; S.h2h.who = 0; h2KickOff();"); await tick(160);
+  check("the phone crosses", ev(app, "S.phase") === "h_hand", ev(app, "S.phase"));
+  run(app, "h2HandGo();"); await tick(160);
+  check("and the private screen offers HIM a change", /h2SubWant/.test(stage(app)), "not offered");
+  run(app, "h2SubWant();"); await tick(120);
+  check("which belongs to the defending side", ev(app, "S.h2h.sub.w") === 1, ev(app, "S.h2h.sub.w"));
+  run(app, "h2SubOff(9); h2SubSwap(h2Bench(1)[0].i);"); await tick(160);
+  check("and it hands the phone back to the same private screen, not across the table",
+    ev(app, "S.phase") === "h_mark", ev(app, "S.phase"));
+
+  console.log("\n--- never with a ball in the air ---");
+  mgr();
+  run(app, 'S.h2h.who=0; S.h2h.at=9; S.h2h.markedAgainst=0; S.phase="h_pick"; render(); h2Shoot();');
+  await tick(160);
+  check("a live question does not offer one", !/h2SubWant/.test(stage(app)), "offered mid-question");
+  mgr();
+  run(app, 'S.h2h.so = {kicks:[[],[]], n:0}; S.h2h.who=0; S.h2h.at=5; S.h2h.sel=null; S.h2h.markedAgainst=0; S.phase="h_pick"; render();');
+  await tick(120);
+  check("nor does a shootout", !/h2SubWant/.test(stage(app)), "offered in the shootout");
+
+  console.log("\n--- and never when there is nothing left to bring on ---");
+  mgr();
+  run(app, 'S.h2h.subs=[0,0]; S.h2h.who=0; S.h2h.at=5; S.h2h.sel=null; S.h2h.markedAgainst=0; S.phase="h_pick"; render();');
+  await tick(120);
+  check("no changes left, no button", !/h2SubWant/.test(stage(app)), "offered with none left");
+
   console.log("\n" + (fails ? fails + " FAILED" : "ALL PASS"));
   process.exit(fails ? 1 : 0);
 })().catch(e => { console.error(e); process.exit(1); });

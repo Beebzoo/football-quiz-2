@@ -2363,6 +2363,9 @@
   /* the scouting report: two quiet blocks, one per manager, in the panel
      colour rather than shouting. Nobody needs this to be loud; they need to be
      able to read it while somebody pours a drink. */
+  /* the change button sits under the real ones and does not compete with
+     them: it is a thing you do sometimes, not the thing you came here for */
+  .h2subbtn{margin-top:6px;font-size:.86rem;padding:9px;opacity:.85}
   .h2repbox{margin:14px 0 4px}
   .h2rep{background:var(--panel);border:1px solid var(--line);border-radius:12px;
          padding:10px 12px;margin:8px 0}
@@ -5393,7 +5396,7 @@ function setTheme(t){
   applyTheme();
   render();
 }
-const BUILD = "13 Sep 2026 · 23:07";
+const BUILD = "13 Sep 2026 · 23:12";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five
@@ -8298,13 +8301,78 @@ function h2SubOffer(kind){
   S.phase = "h_sub";
   render();
 }
+/* A CHANGE HE ASKED FOR. Two taps: who comes off, then who comes on, because
+   nothing has gone wrong to nominate a slot for him. Only ever from a screen
+   where nothing is in the air, which the two call sites enforce. */
+/* THE BUTTON, or nothing at all. A greyed-out change with no changes left is
+   a worse screen than one without the button, because it invites a tap that
+   does nothing. */
+function h2SubBtn(w){
+  if(!h2Tactical() || !h2CanSub2(w)) return "";
+  const n = h2SubsLeft(w);
+  return '<button class="bigbtn ghost h2subbtn" onclick="h2SubWant()">' + ico('users') +
+    'Make a change \u00b7 ' + n + ' left</button>';
+}
+/* like h2CanSub, but for a change nobody was forced into: there is no slot
+   yet, so there is no sent-off man to refuse */
+const h2CanSub2 = w => h2SubsLeft(w) > 0 && h2Bench(w).length > 0 && !h2().so && !h2FullTime();
+function h2SubWant(){
+  audio();
+  const H = h2();
+  h2SubInit(H);
+  /* the side whose screen this is: the defender on the private screen, the
+     man on the ball on his own */
+  const w = S.phase === "h_mark" ? h2Other() : H.who;
+  if(!h2SubsLeft(w) || !h2Bench(w).length) return;
+  H.sub = {kind: "tactic", w: w, slot: null, from: S.phase};
+  S.phase = "h_sub";
+  render();
+}
+/* who is coming off, on a change nobody was forced into */
+function h2SubOff(i){
+  audio();
+  const H = h2(), sub = H.sub;
+  if(!sub || sub.kind !== "tactic") return;
+  if(h2IsOff(sub.w, i)) return;          // you cannot replace a man who is not on
+  sub.slot = sub.slot === i ? null : i;
+  render();
+}
+/* he comes on, and no question is asked, because nothing was being answered */
+function h2SubSwap(bi){
+  audio();
+  const H = h2(), sub = H.sub;
+  if(!sub || sub.kind !== "tactic" || sub.slot == null) return;
+  const b = h2Bench(sub.w).filter(x => x.i === bi)[0];
+  if(!b) return;
+  const off = h2Who(sub.slot, sub.w);
+  H.subs[sub.w] -= 1;
+  H.subbed[sub.w][sub.slot] = b.p;
+  H.benchUsed[sub.w].push(bi);
+  const back = sub.from;
+  H.sub = null;
+  toast(b.p.n + " on for " + off + ".");
+  /* FIVE MINUTES, like everything else that happens. From the attacker's
+     screen it goes back through h2Next so the whistle is picked up for free;
+     from the private screen it must not, or the phone crosses the table twice
+     for one possession, so the clock ticks and the whistle lands at the next
+     dead ball the way the rule already says it does. */
+  h2Clock();
+  if(back === "h_pick"){ H.sel = null; return h2Next(); }
+  S.phase = back || "h_mark";
+  render();
+}
+
 /* no thanks: the miss stands, exactly as it would have without the offer */
 function h2SubDecline(){
   audio();
   const H = h2(), sub = H.sub;
   if(!sub) return;
+  const kind = sub.kind, back = sub.from;
   H.sub = null; H.subQ = false;
-  if(sub.kind === "save") return h2SaveSettle(false);
+  /* A CHANGE HE CHANGED HIS MIND ABOUT costs nothing and settles nothing,
+     because there was no miss underneath it to settle. */
+  if(kind === "tactic"){ S.phase = back || "h_pick"; return render(); }
+  if(kind === "save") return h2SaveSettle(false);
   h2Settle(false);
 }
 /* Bench man bi comes on for the slot in the offer and faces one fresh
@@ -9109,11 +9177,58 @@ function h2Render(st){
         : '') +
       '<button class="bigbtn' + (h2TackleOn ? " ghost" : "") + '" onclick="h2MarksDone(true)">' +
         (h2TackleOn ? "Let him play" : "Done") + '</button>' +
+      /* HIS ONE MOMENT WITH THE PHONE. The marks and the line are already set
+         here, so the bench belongs here too: it is the same private half
+         minute, and it is the only point in his opponent's possession when he
+         is allowed to touch anything. */
+      h2SubBtn(h2Other()) +
       (h2TackleOn
         ? '<div class="hint" style="text-align:center">He only finds out where you were when he loses it. ' +
           'Get it wrong in the wrong place and you give away a free kick, a booking, or a penalty.</div>'
         : '<div class="hint" style="text-align:center">He can see where your line is. What he cannot see is ' +
           'whether it suits what he knows.</div>');
+    return;
+  }
+
+  /* ---------- a change he asked for ----------
+     Nothing has gone wrong, so nothing nominates a man. Two rows: the eleven,
+     to say who is coming off, then the bench, which only opens once he has. */
+  if(S.phase === "h_sub" && H.sub && H.sub.kind === "tactic"){
+    const sub = H.sub;
+    const owner = S.players[sub.w];
+    const left = h2SubsLeft(sub.w);
+    const bench = h2Bench(sub.w);
+    const kit = h2Kit(sub.w);
+    const offName = sub.slot == null ? null : h2Who(sub.slot, sub.w);
+    const man = i => {
+      const m = h2Man(i, sub.w), sp = h2Spot(i, sub.w), gone = h2IsOff(sub.w, i);
+      return '<button class="h2markbtn' + (sub.slot === i ? ' on' : '') + '" style="--ac:' + kit +
+        '" onclick="h2SubOff(' + i + ')"' + (gone ? ' disabled' : '') + '>' +
+        '<span class="h2mno">' + ((m && m.no) || sp.no || "") + '</span>' +
+        '<span class="h2mnm">' + esc((m && m.n) || sp.n) + '</span>' +
+        '<span class="h2mps">' + esc(sp.n) + '</span>' +
+      '</button>';
+    };
+    st.innerHTML =
+      h2ScoreHTML() + h2PitchHTML(false) +
+      '<div class="h2big">' + esc(owner.name) + ', make a change.</div>' +
+      '<div class="h2hintline" style="margin-top:0">' +
+        (sub.slot == null
+          ? "Nothing has gone wrong. Take a man off because you want to, and the man who comes on faces no question. It costs five minutes."
+          : esc(offName) + " is coming off. Who is replacing him?") +
+        ' ' + left + (left === 1 ? ' change' : ' changes') + ' left.</div>' +
+      '<div class="kick" style="margin-top:2px">' + ico('users') + 'Off' + '</div>' +
+      '<div class="h2bench h2squad">' + [...Array(11).keys()].map(man).join("") + '</div>' +
+      (sub.slot == null ? "" :
+        '<div class="kick" style="margin-top:2px">' + ico('users') + 'On' + '</div>' +
+        '<div class="h2bench h2squad">' + bench.map(b =>
+          '<button class="h2markbtn" style="--ac:' + kit + '" onclick="h2SubSwap(' + b.i + ')">' +
+            '<span class="h2mno">' + (b.p.no || "") + '</span>' +
+            '<span class="h2mnm">' + esc(b.p.n) + '</span>' +
+            '<span class="h2mps">' + esc(b.p.pos || "") + '</span>' +
+          '</button>').join("") + '</div>') +
+      '<button class="bigbtn ghost" onclick="h2SubDecline()">Leave it as it is</button>' +
+      foot;
     return;
   }
 
@@ -9260,6 +9375,9 @@ function h2Render(st){
         ? '<button class="bigbtn' + (H.sel != null ? " ghost" : "") + '" style="margin-top:8px" onclick="h2Shoot()">' +
           'Shoot · ' + TIERS[h2ShotTier(H.at, H.who)].label + '</button>'
         : "") +
+      /* ONLY WITH NOTHING SELECTED. The instant a ball is picked out it is no
+         longer a break in play, and a man cannot be swapped off mid-pass. */
+      (H.sel == null ? h2SubBtn(H.who) : "") +
       '<div class="h2hintline">' + (H.sel == null
         ? "Tap a team mate to see what that ball costs you."
         : "Get it and it is his. Miss it and it is theirs, where you stand.") + '</div>' +
