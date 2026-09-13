@@ -5750,7 +5750,7 @@ function setTheme(t){
   applyTheme();
   render();
 }
-const BUILD = "14 Sep 2026 · 00:34";
+const BUILD = "14 Sep 2026 · 00:48";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five
@@ -8784,6 +8784,241 @@ function copyDaily(){
   catch(e){ toast("Could not copy", true); }
 }
 
+/* ================= THE COMPUTER ================= */
+/* HOW OFTEN IT GETS ONE RIGHT. The whole difficulty of the opponent is these
+   fifteen numbers, written down where anybody can read them rather than buried
+   in an engine. They are also a claim about the tiers: if Extreme is not really
+   harder than Hard, these are wrong in a way a player will feel. */
+const AI_LEVELS = {
+  sunday: {label: "Sunday League", says: "He will miss the ones you would.",
+           p: {easy: .80, normal: .55, hard: .30, extreme: .12, ball: .03}},
+  ere:    {label: "Eredivisie", says: "About as good as your mates.",
+           p: {easy: .90, normal: .70, hard: .45, extreme: .25, ball: .08}},
+  champs: {label: "Champions League", says: "He knows the ones nobody knows.",
+           p: {easy: .95, normal: .85, hard: .65, extreme: .40, ball: .18}},
+};
+/* EACH PERSONALITY IS A POLICY, not an engine. Four paragraphs of football,
+   each one teaching a rule the app never explains out loud. */
+const AI_MEN = {
+  route1: {label: "Route One", shape: "4-4-2", line: "mid",
+           says: "Hits it long and early. If the striker is on, the striker gets it."},
+  bus:    {label: "The Bus", shape: "5-3-2", line: "low",
+           says: "Nothing above Normal. He will invite the press and shoot from the striker only."},
+  tiki:   {label: "Tiki-taka", shape: "4-3-3", line: "high",
+           says: "The shortest ball forward, every time, until the press comes."},
+  press:  {label: "The Pressers", shape: "4-2-3-1", line: "high",
+           says: "Plays the ladder as written and prefers the hard one."},
+};
+const aiOf = w => (S && S.players[w] && S.players[w].ai) || null;
+const aiIsOn = w => !!aiOf(w);
+const aiMan = w => AI_MEN[aiOf(w)] || AI_MEN.route1;
+const aiLevel = w => AI_LEVELS[(S.players[w] || {}).level] || AI_LEVELS.ere;
+/* THE ROLL. One line, and the only thing standing between the computer and a
+   perfect memory. */
+const aiAnswer = (w, tier) => Math.random() < (aiLevel(w).p[tier] != null ? aiLevel(w).p[tier] : .5);
+
+/* ---------- what it does with the ball ---------- */
+/* every man it could legally find, with what the ball would cost */
+function aiOptions(){
+  const H = h2();
+  const out = [];
+  for(let i = 0; i < 11; i++){
+    if(i === H.at || h2IsOff(H.who, i)) continue;
+    out.push({i: i, t: h2Priced(H.at, i), lad: h2TierFor(H.at, i),
+              y: h2Spot(i, H.who).y, line: h2Spot(i, H.who).line});
+  }
+  return out;
+}
+const aiRank = t => H2_ORDER.indexOf(t);
+function aiPass(){
+  const H = h2();
+  const man = aiMan(H.who);
+  const opts = aiOptions();
+  if(!opts.length) return null;
+  const forward = opts.filter(o => o.y < h2Spot(H.at, H.who).y);
+  switch(aiOf(H.who)){
+    case "bus": {
+      /* THE BUS. Nothing above Normal, ever, which means he keeps it at the
+         back and invites the press onto himself. Losing to him teaches you
+         what the press is for. */
+      const safe = opts.filter(o => H2_SAFE.includes(o.t));
+      if(safe.length) return safe.sort((a, b) => a.y - b.y)[0].i;
+      return opts.sort((a, b) => aiRank(a.t) - aiRank(b.t))[0].i;
+    }
+    case "tiki": {
+      /* TIKI-TAKA. The shortest ball that is not backwards, which walks into
+         the press over and over until it learns to commit. */
+      const near = forward.length ? forward : opts;
+      return near.sort((a, b) => (aiRank(a.t) - aiRank(b.t)) || (b.y - a.y))[0].i;
+    }
+    case "press": {
+      /* THE PRESSERS. The ladder as written, leaning to the dear end of what
+         it can afford, which is the closest thing here to playing properly. */
+      const want = forward.length ? forward : opts;
+      const hard = want.filter(o => aiRank(o.t) === 2);
+      if(hard.length) return hard[0].i;
+      return want.sort((a, b) => aiRank(b.t) - aiRank(a.t))[0].i;
+    }
+    default: {
+      /* ROUTE ONE. The front line if the front line is on, whatever it costs,
+         and the furthest man forward otherwise. The simplest policy and the
+         funniest to lose to. */
+      const up = opts.filter(o => o.line === 6);
+      if(up.length) return up[0].i;
+      return opts.sort((a, b) => a.y - b.y)[0].i;
+    }
+  }
+}
+/* WHEN IT SHOOTS. Route One shoots the moment it can; the Bus only from the
+   striker; the other two when the shot is no dearer than the best pass. */
+function aiShoot(){
+  const H = h2();
+  if(!h2CanShoot(H.at)) return false;
+  const shot = h2ShotTier(H.at, H.who);
+  switch(aiOf(H.who)){
+    case "route1": return true;
+    case "bus":    return h2Spot(H.at, H.who).line === 6;
+    default: {
+      const best = aiOptions().sort((a, b) => aiRank(a.t) - aiRank(b.t))[0];
+      return !best || aiRank(shot) <= aiRank(best.t);
+    }
+  }
+}
+/* WHO IT MARKS. Route One marks the two nearest its own goal, the Bus marks
+   the two furthest up, and the other two mark the men who have had the most
+   of the ball, which it learns during the match from the same log the scouting
+   report is written from. */
+function aiMarks(w){
+  const att = h2Other();
+  const live = [];
+  for(let i = 0; i < 11; i++) if(!h2IsOff(att, i)) live.push(i);
+  const by = k => live.slice().sort(k).slice(0, H2_MARKS);
+  switch(aiOf(w)){
+    case "route1": return by((a, b) => h2Spot(a, att).y - h2Spot(b, att).y);
+    case "bus":    return by((a, b) => h2Spot(b, att).y - h2Spot(a, att).y);
+    default: {
+      /* THE MEN HE KEEPS GIVING IT TO. Read off this match's own log, which is
+         the same one the scouting report reads, so the computer is scouting
+         you with exactly the information you get about it. */
+      const rep = S.mid ? h2Report(S.mid) : null;
+      const men = (rep && rep[att] && rep[att].men) || {};
+      const score = i => { const m = h2Man(i, att); const r = m && men[m.n || m.full]; return r ? r.n : 0; };
+      const ranked = live.slice().sort((a, b) => score(b) - score(a));
+      return score(ranked[0]) ? ranked.slice(0, H2_MARKS)
+                              : by((a, b) => h2Spot(b, att).y - h2Spot(a, att).y);
+    }
+  }
+}
+
+/* ---------- the driver ----------
+   One function, called after every render. If what is on screen is the
+   computer's decision, it makes it after a beat so the human sees the choice
+   rather than the screen jumping. Every phase is untouched: the computer taps
+   the buttons a person would. */
+let aiTimer = null;
+/* THE BEAT the computer pauses for, so a human sees what it chose rather than
+   the screen jumping. A variable rather than a constant because a test that
+   plays four hundred questions cannot wait two-thirds of a second for each. */
+let AI_BEAT = 620;
+function aiLater(fn, ms){
+  clearTimeout(aiTimer);
+  aiTimer = setTimeout(() => { try{ fn(); }catch(e){} }, ms == null ? AI_BEAT : ms);
+}
+function aiTick(){
+  if(!S || !isPitch(S.play)) return;
+  if(!aiIsOn(0) && !aiIsOn(1)) return;
+  const H = S.h2h;
+  if(!H) return;
+  const p = S.phase;
+
+  /* ---- before a ball is kicked ---- */
+  if(p === "h_teams"){
+    const slot = H.teams[0] == null ? 0 : 1;
+    if(!aiIsOn(slot)) return;
+    const names = Object.keys(h2Pool() || {}).filter(c => !H.teams.includes(c));
+    if(!names.length) return;
+    return aiLater(() => h2PickTeam(names[Math.floor(Math.random() * names.length)]));
+  }
+  if(p === "h_squad"){
+    const w = H.picking || 0;
+    if(!aiIsOn(w)) return;
+    return aiLater(h2SquadDone);          // the deck's own eleven is already ticked
+  }
+  if(p === "h_shape"){
+    const w = H.shaping || 0;
+    if(!aiIsOn(w)) return;
+    return aiLater(() => { h2SetShape(aiMan(w).shape); h2ShapeDone(); });
+  }
+  if(p === "h_traits"){
+    const w = H.tset || 0;
+    if(!aiIsOn(w)) return;
+    return aiLater(() => {
+      /* spends what it can afford, cheapest first, which is a policy and not a
+         calculation: it is picking a side, not solving one */
+      for(const e of h2Eligible(w))
+        for(const k of e.tr.slice().sort((a, b) => H2_TRAITS[a].cost - H2_TRAITS[b].cost))
+          h2SetTrait(e.i, k);
+      h2TraitsDone();
+    });
+  }
+  if(p === "h_toss"){
+    if(H.tossed) return aiIsOn(H.who) ? aiLater(h2KickOff) : undefined;
+    if(H.flipping) return;
+    /* player 0 calls it, so the computer only calls when it is player 0 */
+    if(aiIsOn(0)) return aiLater(() => h2Call(Math.random() < .5 ? "heads" : "tails"));
+    return;
+  }
+
+  /* h_hand is not here on purpose: the handover is skipped where it is raised,
+     so against a computer it never reaches the screen at all */
+  if(p === "h_mark"){
+    const w = h2Other();
+    if(!aiIsOn(w)) return;
+    return aiLater(() => {
+      if(h2Tactical()) h2SetLine(aiMan(w).line);
+      if(h2TackleOn) for(const i of aiMarks(w)) h2Mark(i);
+      h2MarksDone(!h2TackleOn);
+    });
+  }
+
+  /* ---- on the ball ---- */
+  if(p === "h_pick"){
+    if(!aiIsOn(H.who)) return;
+    return aiLater(() => {
+      if(aiShoot()) return h2Shoot();
+      const to = aiPass();
+      if(to == null) return;
+      h2Select(to);
+      aiLater(h2Play, 420);
+    });
+  }
+  /* ---- and the questions, which are a dice roll ---- */
+  if(p === "h_q" && aiIsOn(H.who))
+    return aiLater(() => { if(S.phase === "h_q") h2Reveal(); });
+  if(p === "h_judge" && aiIsOn(H.who))
+    return aiLater(() => { if(S.phase === "h_judge") h2Judge(aiAnswer(H.who, S.tier)); });
+  if(p === "h_save" && aiIsOn(h2Other()))
+    return aiLater(() => { if(S.phase === "h_save") h2SaveReveal(); });
+  if(p === "h_sjudge" && aiIsOn(h2Other()))
+    return aiLater(() => { if(S.phase === "h_sjudge") h2SaveJudge(aiAnswer(h2Other(), S.tier)); });
+  if(p === "h_tackle" && aiIsOn(h2Other()))
+    return aiLater(() => { if(S.phase === "h_tackle") h2TackleReveal(); });
+  if(p === "h_tjudge" && aiIsOn(h2Other()))
+    return aiLater(() => { if(S.phase === "h_tjudge") h2TackleJudge(aiAnswer(h2Other(), S.tier)); });
+  /* A COMPUTER DOES NOT PANIC. It takes the rescue when it is offered, because
+     declining one is a decision with nothing behind it. */
+  if(p === "h_sub" && H.sub && aiIsOn(H.sub.w)){
+    return aiLater(() => {
+      const b = h2Bench(H.sub.w);
+      if(H.sub.kind === "tactic" || !b.length) return h2SubDecline();
+      h2SubOn(b[0].i);
+    });
+  }
+  if(p === "h_pens" && H.so && aiIsOn(H.who))
+    return aiLater(() => { if(S.phase === "h_pens") h2SoKick(); });
+  if(p === "h_ft") return;
+}
+
 const LOG_KEY = "ball2-outcomes";
 const LOG_MAX = 8000;
 /* WHO IT WAS ABOUT, read at the moment it happened. w is the side the man
@@ -9382,6 +9617,10 @@ function h2Hand(w, next, down){
   /* a fresh possession starts with a blank sheet, never with last time's men
      still ticked */
   if(next === "h_mark"){ H.marks = []; H.relief = false; H.caught = null; }
+  /* NOBODY TO HAND IT TO. A card telling a man alone in his kitchen to pass
+     the phone to Route One makes the whole mode look silly, and auto-tapping
+     it is not the same as never showing it. */
+  if(aiIsOn(w)){ H.hand = null; S.phase = next; return render(); }
   H.hand = {w: w, next: next, down: !!down};
   S.phase = "h_hand";
   render();
@@ -10529,6 +10768,11 @@ function h2Render(st){
 
 function render(){
   renderBug(); mpRenderBar(); save();
+  /* THE COMPUTER PLAYS AFTER THE SCREEN IS DRAWN, so the human sees what it is
+     responding to. It is scheduled rather than run, and every scheduled action
+     re-checks the phase before acting, because a person can tap in the
+     meantime. */
+  try{ aiTick(); }catch(e){}
   const st=$("#stage");
   const P=S ? S.players[S.turn] : null;
 
@@ -11339,6 +11583,26 @@ function render(){
   }
 }
 
+/* WHO IS IN THE SECOND SEAT. null is a human, otherwise a personality id, and
+   the level is how often he gets one right. Remembered like every other setup
+   choice so the solo player does not re-pick it every night. */
+let setupAi = null, setupAiLevel = "ere";
+try{
+  setupAi = localStorage.getItem("ball2-ai") || null;
+  setupAiLevel = localStorage.getItem("ball2-ai-level") || "ere";
+}catch(e){}
+function setAi(id){
+  audio();
+  setupAi = (setupAi === id) ? null : id;
+  try{ localStorage.setItem("ball2-ai", setupAi || ""); }catch(e){}
+  render();
+}
+function setAiLevel(k){
+  audio();
+  setupAiLevel = k;
+  try{ localStorage.setItem("ball2-ai-level", k); }catch(e){}
+  render();
+}
 let setupCount = 3;
 /* No timer by default. The clock is a good mode for a competitive night but a
    bad default for a table that is talking, and the answer being argued about
@@ -11655,6 +11919,19 @@ function renderSetup(st){
                {label:"Multiple choice", on:setupMc, go:"setMc(true)", off:!DECKS[setupMode+"-mc"]}])}
       </div>`:""}
 
+      ${isPitch(setupPlay)?`<div class="mm-sect">
+        <div class="mm-eyebrow">Who is in the other seat</div>
+        <div class="mm-pills">
+          <button class="mm-pill" aria-pressed="${!setupAi}" onclick="setAi(null)">A mate</button>
+          ${Object.keys(AI_MEN).map(id=>`<button class="mm-pill" aria-pressed="${setupAi===id}"
+            onclick="setAi('${id}')">${AI_MEN[id].label}</button>`).join("")}
+        </div>
+        ${setupAi?`<div class="mm-note">${esc(AI_MEN[setupAi].says)} He sets up in a ${esc(AI_MEN[setupAi].shape)} and ${esc(H2_LINES[AI_MEN[setupAi].line].label.toLowerCase())}.</div>
+        <div class="mm-pills">${Object.keys(AI_LEVELS).map(k=>`<button class="mm-pill"
+          aria-pressed="${setupAiLevel===k}" onclick="setAiLevel('${k}')">${AI_LEVELS[k].label}</button>`).join("")}</div>
+        <div class="mm-note">${esc(AI_LEVELS[setupAiLevel].says)} He answers ${Math.round(AI_LEVELS[setupAiLevel].p.hard*100)}% of the Hard ones and ${Math.round(AI_LEVELS[setupAiLevel].p.ball*100)}% of the BALLs.</div>`:""}
+      </div>`:""}
+
       ${setupPlay==="manager"?`<div class="mm-note">Everything One on One is, plus the eleven you picked it with. A ball to a man draws a question from where he actually played, so Cannavaro asks Serie A and van Nistelrooy could ask any of three.</div>`:""}
       ${setupPlay==="pitch"?`<div class="mm-note">Two players, first to ${H2_TARGET} or ${H2_MINUTES} minutes, penalties if it is level. The further up the pitch the ball goes, the harder the question.</div>`:""}
 
@@ -11679,7 +11956,7 @@ function renderSetup(st){
 
       <div class="mm-sect">
         <div class="mm-sheet">
-          ${Array.from({length:(isPitch(setupPlay)?2:(setupRef?2:setupCount))},(_,i)=>`
+          ${Array.from({length:(isPitch(setupPlay)?(setupAi?1:2):(setupRef?2:setupCount))},(_,i)=>`
             <div class="mm-row"><span>${i+1}</span><input id="n${i}" placeholder="${esc(REGULARS[i]||("Player "+(i+1)))}" maxlength="12" autocomplete="off" value="${esc(setupNames[i]||"")}"></div>`).join("")}
           ${setupRef&&!isPitch(setupPlay)?`<div class="mm-row"><span>R</span><input id="n2" placeholder="Referee" maxlength="12" autocomplete="off" value="${esc(setupNames[2]||"")}"></div>`:""}
         </div>
@@ -11727,8 +12004,10 @@ async function freshen(){
 function startGame(){
   if(!setupMode) return;
   audio(); wakeLock();
-  /* the pitch is two men and no referee, whatever the board toggles say */
-  const count = isPitch(setupPlay) ? 2 : (setupRef ? 2 : setupCount);
+  /* the pitch is two men and no referee, whatever the board toggles say, and
+     against the computer it is one man and a name he does not have to type */
+  const solo = isPitch(setupPlay) && !!setupAi;
+  const count = isPitch(setupPlay) ? (solo ? 1 : 2) : (setupRef ? 2 : setupCount);
   const names=Array.from({length:count},(_,i)=>{
     const el=document.getElementById("n"+i);
     const v=el ? el.value.trim() : "";
@@ -11737,10 +12016,18 @@ function startGame(){
   /* One gate instead of four, and it asks about the combination actually about
      to be played rather than about the mode: Premier League read aloud can be
      ready while Premier League multiple choice is still coming down the wire. */
-  if(!modeReady(setupMode, setupPlay, setupMc)){
+  /* PICK ONE, AGAINST A COMPUTER, ALWAYS. It cannot judge a spoken answer, and
+     a human marking his own against a machine is not a game. */
+  const mc = solo ? true : setupMc;
+  if(!modeReady(setupMode, setupPlay, mc)){
     toast("That deck is still loading, give it a second", true); return;
   }
-  S=freshState(names, setupTimed, setupMode, setupTarget, setupPlay, setupMc);
+  if(solo) names.push(AI_MEN[setupAi].label);
+  S=freshState(names, setupTimed, setupMode, setupTarget, setupPlay, mc);
+  if(solo){
+    S.players[1].ai = setupAi;
+    S.players[1].level = setupAiLevel;
+  }
   if(setupRef && !isPitch(setupPlay)){
     const el=document.getElementById("n2");
     S.ref=(el && el.value.trim()) || "The ref";

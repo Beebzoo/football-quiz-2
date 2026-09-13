@@ -131,7 +131,12 @@ const TIERS = ["easy", "normal", "hard", "extreme", "ball"];
   check("and dims it when nothing is loaded",
     ev(app, "(()=>{const k=DECKS.ere,m=DECKS['ere-mc'];delete DECKS.ere;delete DECKS['ere-mc'];" +
             "const r=modeLive('ere');DECKS.ere=k;if(m)DECKS['ere-mc']=m;return r;})()") === false, "lit with no deck");
-  check("starting is gated on the combination", html.indexOf("modeReady(setupMode, setupPlay, setupMc)") > 0, "no start gate");
+  /* IT ASKS ABOUT THE COMBINATION, not the literal. The third argument stopped
+     being setupMc when the computer arrived, because a match against it is
+     Pick One whether you asked for that or not, and a test that greps for the
+     variable name fails on a rename that changed nothing it cared about. */
+  check("starting is gated on the combination",
+    /modeReady\(setupMode,\s*setupPlay,\s*\w+\)/.test(html), "no start gate");
   check("resuming is gated on the combination", html.indexOf("modeReady(S.mode, S.play, S.mc)") > 0, "no resume gate");
 
   console.log("\n--- a go ---");
