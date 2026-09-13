@@ -5667,7 +5667,7 @@ function setTheme(t){
   applyTheme();
   render();
 }
-const BUILD = "13 Sep 2026 · 23:44";
+const BUILD = "14 Sep 2026 · 00:00";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five
@@ -7136,14 +7136,26 @@ const H2_SHAPES = {
 const H2_SHAPE_DEFAULT = "4-2-3-1";
 /* which shape a side is in. One on One and the board never change it, so they
    are always the 4-2-3-1 the whole game was tuned on. */
+/* THE SHAPE THEY ACTUALLY PLAYED, where the app has one of ours that matches.
+   The deck records the real shape off the match report, and five of the app's
+   formations are common enough that most sides land on one. It is only a
+   DEFAULT: the picker is still a picker, and a manager who wants Italy in a
+   4-3-3 can have it. */
+function h2RealShape(w){
+  const q = h2Squad(w);
+  const id = q && q.xiShape;
+  return (id && H2_SHAPES[id]) ? id : null;
+}
 function h2Shape(w){
   const H = S && S.h2h;
-  const id = (h2Tactical() && H && H.form && H.form[w]) || H2_SHAPE_DEFAULT;
+  const id = (h2Tactical() && H && H.form && H.form[w]) ||
+             (h2Tactical() && h2RealShape(w)) || H2_SHAPE_DEFAULT;
   return (H2_SHAPES[id] || H2_SHAPES[H2_SHAPE_DEFAULT]).slots;
 }
 const h2ShapeId = w => {
   const H = S && S.h2h;
-  return (h2Tactical() && H && H.form && H.form[w]) || H2_SHAPE_DEFAULT;
+  return (h2Tactical() && H && H.form && H.form[w]) ||
+         (h2Tactical() && h2RealShape(w)) || H2_SHAPE_DEFAULT;
 };
 /* the shape of whoever "mine" means, which is how the drawing asks */
 const h2ShapeV = mine => h2Shape(h2Side(mine));
@@ -7640,6 +7652,18 @@ function h2Order(t){
   return t;
 }
 const h2Squad = w => { const t = h2Team(w), p = h2Pool(); return (t && p && p[t]) ? h2Order(p[t]) : null; };
+/* WHICH ELEVEN THIS IS. The deck no longer sorts a squad list by shirt number
+   and calls it a team: it carries the side that started that country's last
+   match at the tournament, with the date and the opponent. Saying so is worth
+   a line, because "the eleven that started the final against France" is a
+   different thing to be handed than a list of names. */
+function h2XiSays(w){
+  const q = h2Squad(w);
+  if(!q || !q.xiVs) return "";
+  const when = String(q.xiWhen || "");
+  const yr = when.slice(0, 4);
+  return "The eleven that started against " + q.xiVs + (yr ? " in " + yr : "");
+}
 /* where this quiz keeps its badges, and what they are called */
 const h2Badge = code => { const r = S && QUIZZES[S.mode]; return r && code ? r.flags + code + r.ext : null; };
 /* TWO FRAMES, and keeping them apart is the whole trick.
@@ -9493,7 +9517,9 @@ function h2Render(st){
     st.innerHTML =
       '<div class="kick">' + ico('clipboard') + 'The Dugout \u00b7 ' + esc(h2Team(w) || picker.name) + '</div>' +
       '<div class="h2big">' + esc(picker.name) + ', name your eleven.</div>' +
-      '<div class="h2hintline" style="margin-top:0">A ball to a man asks a question from a league he played in, ' +
+      '<div class="h2hintline" style="margin-top:0">' +
+        (h2XiSays(w) ? esc(h2XiSays(w)) + ' is already ticked. ' : '') +
+        'A ball to a man asks a question from a league he played in, ' +
         'so this is you choosing the decks. One of them has to be a goalkeeper.</div>' +
       '<div class="h2bench h2squad">' + pool.map((p, i) => {
         const on = sel.indexOf(i) > -1;
@@ -9527,7 +9553,11 @@ function h2Render(st){
     st.innerHTML =
       '<div class="kick">' + ico('clipboard') + 'The Dugout \u00b7 ' + esc(h2Team(w) || picker.name) + '</div>' +
       '<div class="h2big">' + esc(picker.name) + ', how are you setting up?</div>' +
-      '<div class="h2hintline" style="margin-top:0">Only the distances matter. Push a man up and every ball to him ' +
+      '<div class="h2hintline" style="margin-top:0">' +
+        (h2RealShape(w) && mine === h2RealShape(w)
+          ? 'They played ' + esc(h2RealShape(w)) + ' that day, so that is where this starts. '
+          : '') +
+        'Only the distances matter. Push a man up and every ball to him ' +
         'costs more and every ball from him costs less, so the shape IS the ladder.</div>' +
       '<div class="h2shapes">' + Object.keys(H2_SHAPES).map(id =>
         '<button class="bigbtn ghost h2shapeb' + (mine === id ? ' sel' : '') + '" style="--ac:' + kit +
@@ -9610,6 +9640,8 @@ function h2Render(st){
         }
         return '<div class="h2sheet-s">' +
           '<div class="h2sheet-h">' + esc(h2Team(w) || S.players[w].name) + '</div>' +
+          (h2XiSays(w) ? '<div class="h2sheet-r"><i>Eleven</i><b>' +
+            esc("v " + (h2Squad(w).xiVs || "")) + '</b></div>' : "") +
           '<div class="h2sheet-r"><i>Shape</i><b>' + esc(h2ShapeId(w)) + '</b></div>' +
           '<div class="h2sheet-r"><i>Line</i><b>' + esc(H2_LINES[h2Line(w)].label) + '</b></div>' +
           '<div class="h2sheet-r"><i>Traits</i><b>' +

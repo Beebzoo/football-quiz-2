@@ -126,14 +126,24 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   await start();
   await place(0, GK);
   check("the keeper is van der Sar", ev(app, "h2Who(0,0)") === "van der Sar", ev(app, "h2Who(0,0)"));
-  check("the striker is van Nistelrooy", ev(app, "h2Who(9,0)") === "van Nistelrooy", ev(app, "h2Who(9,0)"));
-  check("the ten is van der Vaart", ev(app, "h2Who(7,0)") === "van der Vaart", ev(app, "h2Who(7,0)"));
+  /* NOT A NAMED MAN IN A NAMED SLOT. The deck carries the eleven who actually
+     started that country's last match now, so van Nistelrooy is not the
+     striker: he was left out against Portugal. What these lines were really
+     asserting is that the slots hold real men from the real squad, so that is
+     what they ask. */
+  const dutch = new Set(WC["Netherlands"].xi.concat(WC["Netherlands"].bench || []).map(m => m.n));
+  check("every slot holds a man from the Dutch squad",
+    [...Array(11).keys()].every(i => dutch.has(ev(app, "h2Who(" + i + ",0)"))),
+    [...Array(11).keys()].map(i => ev(app, "h2Who(" + i + ",0)")).join(", "));
+  check("and no man is in two slots",
+    new Set([...Array(11).keys()].map(i => ev(app, "h2Who(" + i + ",0)"))).size === 11,
+    "somebody is on twice");
   check("Italy is the other side", ev(app, "h2Who(0,1)") === "Buffon", ev(app, "h2Who(0,1)"));
   check("the kit is the country's", ev(app, "h2Kit(0)") === WC["Netherlands"].kit, ev(app, "h2Kit(0)"));
   check("the men wear their names", stage(app).includes("van Bronckhorst"), "no names on the pitch");
   run(app, 'h2Select(' + SIX + ')'); await tick(150);
-  check("and the pass is named after the man",
-    stage(app).includes("Landzaat"), "the pass still talks about positions");
+  check("and the pass is named after the man, whoever he is",
+    stage(app).includes(ev(app, "h2Who(" + SIX + ",0)")), "the pass still talks about positions");
 
   console.log("\n--- the toss ---");
   await start();
@@ -158,7 +168,8 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   check("twenty two men are out", (stage(app).match(/class="h2man/g) || []).length === 22,
     (stage(app).match(/class="h2man/g) || []).length);
   run(app, `h2Select(${SIX})`); await tick(150);
-  check("tapping one shows who the ball is going to", stage(app).includes("Landzaat"), "no confirm bar");
+  check("tapping one shows who the ball is going to",
+    stage(app).includes(ev(app, "h2Who(" + SIX + ",0)")), "no confirm bar");
   check("and names the level", stage(app).includes("Hard"), "no tier on the bar");
   run(app, "h2Play()"); await tick(160);
   check("playing it deals that level", ev(app, "S.tier") === "hard", ev(app, "S.tier"));
@@ -345,8 +356,8 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
     "the striker is missing parts");
   check("the keeper wears the other country's kit",
     scene.includes("--kit:" + WC["Italy"].kit), "wrong keeper kit");
-  check("and they are named", scene.includes("Buffon") && scene.includes("van Nistelrooy"),
-    "the men are anonymous");
+  check("and they are named", scene.includes(ev(app, "h2Who(0,1)")) &&
+    scene.includes(ev(app, "h2Who(9,0)")), "the men are anonymous");
 
   run(app, "h2SaveReveal()"); await tick(130);
   run(app, "h2SaveJudge(false)"); await tick(220);

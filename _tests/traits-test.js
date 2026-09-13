@@ -80,8 +80,10 @@ const check = (n, c, x) => {
   /* ================================================================ */
   console.log("\n--- earned, not chosen ---");
   start("manager", "Netherlands", "Italy");
-  const vn = slotOf("van Nistelrooy", 0);
-  check("van Nistelrooy is in the Dutch eleven", vn > -1, vn);
+  /* WHOEVER IS ELIGIBLE, not a named man. The deck carries real elevens now,
+     so van Nistelrooy is not in the Dutch side that went out to Portugal. */
+  const vn = [...Array(11).keys()].find(i => ((ev(app, "h2Man(" + i + ",0)") || {}).tr || []).indexOf("poacher") > -1);
+  check("somebody in the Dutch eleven scored in Germany", vn != null, vn);
   run(app, "S.h2h.tset = 0; h2SetTrait(" + vn + ", 'poacher');"); await tick(100);
   check("he can be a Poacher, because he scored", ev(app, "h2TraitOf(" + vn + ",0)") === "poacher",
     ev(app, "h2TraitOf(" + vn + ",0)"));
@@ -129,8 +131,14 @@ const check = (n, c, x) => {
   console.log("\n--- what each one actually does ---");
   start("manager", "Netherlands", "Italy");
   run(app, "S.h2h.tset = 0; S.h2h.who = 0; S.h2h.at = 0;");
-  /* POACHER: route one is BALL from anywhere, and Extreme to him */
-  const st = slotOf("van Nistelrooy", 0);
+  /* POACHER: route one is BALL from anywhere, and Extreme to him.
+     Found by what the man is eligible for and by where he stands, because the
+     deck carries real elevens and the man who was up front in one match was
+     dropped for the next. */
+  const st = [...Array(11).keys()].find(i =>
+    ev(app, "h2Shape(0)[" + i + "].line") === 6 &&
+    (((ev(app, "h2Man(" + i + ",0)") || {}).tr) || []).indexOf("poacher") > -1);
+  check("somebody in the front line scored in Germany", st != null, st);
   const beforeRoute = ev(app, "h2TierFor(1," + st + ")");
   check("route one is BALL to begin with", beforeRoute === "ball", beforeRoute);
   run(app, "h2SetTrait(" + st + ", 'poacher');"); await tick(100);

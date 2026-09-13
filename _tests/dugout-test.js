@@ -97,9 +97,20 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   check("a Costa Rican defender has no leagues", lg(LCB, 0) === null, JSON.stringify(lg(LCB, 0)));
   check("so his ball is the classic bank", qd() === null, qd());
   check("and the card names no league", !/Serie A|La Liga|Premier League/.test(stage(app)), "a league was named");
-  /* Costa Rica's XI puts Gomez in the striker's slot, not on the wing */
-  await passTo(EIGHT, ST);
-  check("but Gomez, who played in Spain, draws La Liga", qd() === "laliga", qd() + " / " + JSON.stringify(lg(ST, 0)));
+  /* A MAN WHO DID GO ABROAD. Found by looking rather than named, because the
+     deck carries real elevens now and the eleven that started Costa Rica's
+     last match is not the one sorted by shirt number. */
+  const abroad = [...Array(11).keys()].find(i => (lg(i, 0) || []).length);
+  check("somebody in the Costa Rican eleven played abroad", abroad != null,
+    [...Array(11).keys()].map(i => JSON.stringify(lg(i, 0))).join(" "));
+  if(abroad != null){
+    await passTo(EIGHT, abroad);
+    /* NOT A NAMED LEAGUE. He may carry two and the draw shuffles them on
+       purpose, so asserting which one comes out is asserting a coin toss. */
+    check("and a ball to him draws one of HIS leagues, not the bank",
+      qd() != null && (lg(abroad, 0) || []).indexOf(qd()) > -1,
+      qd() + " / " + JSON.stringify(lg(abroad, 0)));
+  }
 
   console.log("\n--- One on One is not touched ---");
   start("pitch", "Italy", "Costa Rica");
