@@ -132,6 +132,150 @@
    "q": "Which club is known as Barca?",
    "a": "Barcelona",
    "cat": "records"
+  },
+  {
+   "q": "Which Spanish club is known as Los Blancos?",
+   "a": "Real Madrid",
+   "cat": "stories"
+  },
+  {
+   "q": "Which Madrid club is known as Los Colchoneros?",
+   "a": "Atletico Madrid",
+   "sub": "The Mattress Makers, after their red and white striped shirts.",
+   "cat": "stories"
+  },
+  {
+   "q": "Which Madrid club plays in red and white stripes?",
+   "a": "Atletico Madrid",
+   "cat": "stories"
+  },
+  {
+   "q": "Which Brazilian playmaker joined Barcelona from Paris Saint-Germain in 2003?",
+   "a": "Ronaldinho",
+   "cat": "transfers",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which English midfielder joined Real Madrid from Manchester United in 2003?",
+   "a": "David Beckham",
+   "cat": "transfers",
+   "club": "real-madrid"
+  },
+  {
+   "q": "Which German midfielder joined Real Madrid from Bayern Munich in 2014?",
+   "a": "Toni Kroos",
+   "cat": "transfers",
+   "club": "real-madrid"
+  },
+  {
+   "q": "Which Belgian goalkeeper joined Real Madrid from Chelsea in 2018?",
+   "a": "Thibaut Courtois",
+   "cat": "transfers",
+   "club": "real-madrid"
+  },
+  {
+   "q": "Which Polish striker joined Barcelona from Bayern Munich in 2022?",
+   "a": "Robert Lewandowski",
+   "cat": "transfers",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which French forward left Atletico Madrid for Barcelona in 2019?",
+   "a": "Antoine Griezmann",
+   "cat": "transfers",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which Brazilian joined Barcelona from Liverpool in January 2018?",
+   "a": "Philippe Coutinho",
+   "cat": "transfers",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which French striker joined Real Madrid from Paris Saint-Germain in 2024?",
+   "a": "Kylian Mbappe",
+   "cat": "transfers",
+   "club": "real-madrid"
+  },
+  {
+   "q": "Which Brazilian winger joined Real Madrid from Flamengo in 2018?",
+   "a": "Vinicius Junior",
+   "cat": "transfers",
+   "club": "real-madrid"
+  },
+  {
+   "q": "Which Brazilian did Real Madrid sign from Santos in 2005?",
+   "a": "Robinho",
+   "cat": "transfers",
+   "club": "real-madrid"
+  },
+  {
+   "q": "Which Frenchman did Real Madrid sign for a world record fee in 2001?",
+   "a": "Zinedine Zidane",
+   "cat": "transfers",
+   "club": "real-madrid"
+  },
+  {
+   "q": "Which Dutchman managed Barcelona from 1997 to 2000?",
+   "a": "Louis van Gaal",
+   "cat": "managers",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which club did Diego Simeone play for before he came back to manage them?",
+   "a": "Atletico Madrid",
+   "cat": "managers"
+  },
+  {
+   "q": "Which Barcelona defender captained the side to the treble in 2008-09?",
+   "a": "Carles Puyol",
+   "cat": "records",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which goalkeeper captained Real Madrid for years before joining Porto in 2015?",
+   "a": "Iker Casillas",
+   "cat": "records",
+   "club": "real-madrid"
+  },
+  {
+   "q": "Which defender captained Real Madrid before joining Paris Saint-Germain in 2021?",
+   "a": "Sergio Ramos",
+   "cat": "transfers",
+   "club": "real-madrid"
+  },
+  {
+   "q": "Which Spanish club won the Champions League five times between 2014 and 2022?",
+   "a": "Real Madrid",
+   "cat": "europe"
+  },
+  {
+   "q": "Which club won the 2014 Champions League after Sergio Ramos equalised in stoppage time?",
+   "a": "Real Madrid",
+   "sub": "Atletico were two minutes from the title.",
+   "cat": "europe"
+  },
+  {
+   "q": "Which club won the 2020-21 La Liga under Diego Simeone?",
+   "a": "Atletico Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "By the end of 2024-25, which club had won La Liga more times than any other?",
+   "a": "Real Madrid",
+   "cat": "champions"
+  },
+  {
+   "q": "Which club plays at the Ciutat de Valencia and shares the city with Valencia?",
+   "a": "Levante",
+   "cat": "grounds",
+   "club": "valencia"
+  },
+  {
+   "q": "Which Dutch midfielder joined Barcelona from Ajax in 2019?",
+   "a": "Frenkie de Jong",
+   "cat": "transfers",
+   "club": "barcelona"
   }
  ],
  "normal": [
@@ -244,6 +388,159 @@
    "q": "Which club finished second in the 2025-26 La Liga?",
    "a": "Real Madrid",
    "cat": "champions"
+  },
+  {
+   "q": "Who scored 50 La Liga goals in 2011-12, a record for a single season?",
+   "a": "Lionel Messi",
+   "cat": "scorers"
+  },
+  {
+   "q": "Who won the Pichichi as La Liga's top scorer in 2013-14?",
+   "a": "Cristiano Ronaldo",
+   "cat": "scorers"
+  },
+  {
+   "q": "Who won the Pichichi as La Liga's top scorer in 2018-19?",
+   "a": "Lionel Messi",
+   "cat": "scorers"
+  },
+  {
+   "q": "Who won the Pichichi as La Liga's top scorer in 2021-22?",
+   "a": "Karim Benzema",
+   "cat": "scorers"
+  },
+  {
+   "q": "Who won the Pichichi as La Liga's top scorer in 2022-23?",
+   "a": "Robert Lewandowski",
+   "cat": "scorers"
+  },
+  {
+   "q": "Which club won the 2018-19 Copa del Rey, beating Barcelona in the final?",
+   "a": "Valencia",
+   "cat": "cups",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which club won the 2020-21 Copa del Rey, beating Athletic Bilbao 4-0?",
+   "a": "Barcelona",
+   "cat": "cups",
+   "club": "athletic"
+  },
+  {
+   "q": "Which club won the 2022-23 Copa del Rey, beating Osasuna in the final?",
+   "a": "Real Madrid",
+   "cat": "cups",
+   "club": "osasuna"
+  },
+  {
+   "q": "Which Basque club won the 2023-24 Copa del Rey on penalties?",
+   "a": "Athletic Bilbao",
+   "sub": "Their first major trophy since 1984.",
+   "cat": "cups"
+  },
+  {
+   "q": "Which club won the 2013-14 Copa del Rey after a solo goal by Gareth Bale?",
+   "a": "Real Madrid",
+   "cat": "cups"
+  },
+  {
+   "q": "Which Spaniard managed Valencia to La Liga titles in 2001-02 and 2003-04?",
+   "a": "Rafael Benitez",
+   "cat": "managers",
+   "club": "valencia"
+  },
+  {
+   "q": "Which Dutchman was Barcelona manager when they won the 1998-99 title?",
+   "a": "Louis van Gaal",
+   "cat": "managers",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which Italian managed Real Madrid to the 2021-22 La Liga title?",
+   "a": "Carlo Ancelotti",
+   "cat": "managers",
+   "club": "real-madrid"
+  },
+  {
+   "q": "Which former Barcelona midfielder managed them to the 2022-23 La Liga title?",
+   "a": "Xavi",
+   "cat": "managers",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which German managed Barcelona to the 2024-25 La Liga title?",
+   "a": "Hansi Flick",
+   "cat": "managers",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which club did Real Madrid sign Ronaldo from in 2002?",
+   "a": "Inter Milan",
+   "cat": "transfers",
+   "club": "real-madrid"
+  },
+  {
+   "q": "Which club did Luis Figo leave for Real Madrid in 2000?",
+   "a": "Barcelona",
+   "sub": "A pig's head was thrown at him on his return.",
+   "cat": "transfers",
+   "club": "real-madrid"
+  },
+  {
+   "q": "Which club did Barcelona sign Dani Alves from in 2008?",
+   "a": "Sevilla",
+   "cat": "transfers",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which club did Atletico Madrid sign goalkeeper Jan Oblak from in 2014?",
+   "a": "Benfica",
+   "cat": "transfers"
+  },
+  {
+   "q": "Which German club did Barcelona sign Marc-Andre ter Stegen from in 2014?",
+   "a": "Borussia Monchengladbach",
+   "cat": "transfers",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which Brazilian club did Barcelona sign Neymar from in 2013?",
+   "a": "Santos",
+   "cat": "transfers",
+   "club": "barcelona"
+  },
+  {
+   "q": "Which Argentine winger did Real Madrid sign from Benfica in 2010?",
+   "a": "Angel Di Maria",
+   "cat": "transfers",
+   "club": "real-madrid"
+  },
+  {
+   "q": "Which Spanish club won the UEFA Cup in both 2006 and 2007?",
+   "a": "Sevilla",
+   "cat": "europe"
+  },
+  {
+   "q": "Which Spanish club won the Europa League in 2021 under Unai Emery?",
+   "a": "Villarreal",
+   "sub": "The shootout went to twenty two penalties.",
+   "cat": "europe"
+  },
+  {
+   "q": "Which Italian club did Sevilla beat in the 2020 Europa League final?",
+   "a": "Inter Milan",
+   "cat": "europe",
+   "club": "sevilla"
+  },
+  {
+   "q": "Which Andalusian club was relegated from La Liga in 2017-18?",
+   "a": "Malaga",
+   "cat": "relegation"
+  },
+  {
+   "q": "Which club left the Vicente Calderon behind when it moved ground in 2017?",
+   "a": "Atletico Madrid",
+   "cat": "grounds"
   }
  ],
  "hard": [
