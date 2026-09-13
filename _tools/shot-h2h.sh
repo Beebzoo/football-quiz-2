@@ -17,11 +17,18 @@
 #             up and are caught by luck, as they always were.
 #
 #   scale   1.0 to inspect detail, .6 to see a whole phone screen
-#   state   menu | modes | board | qcard
-#           teams | toss | flip | landed | pick | sel | nl | it | flat
-#           att | shot | strike | save | goal | mcq
-#           sub | subgk | ft | pens | penq | over | pensend
-#           run | runw | runlost
+#   state   the menu:    menu modes setup setupb board qcard clubs clubpitch
+#           kicking off: teams toss flip landed pick sel att flat nl it
+#           the tackle:  hand mark chal chalgo chalfar chalflat foul cards
+#           the press:   heat press
+#           a ball:      inflight run runw runlost
+#           a shot:      shot strike save goal
+#           the bench:   sub subgk
+#           the end:     ft pens penq over pensend
+#           pick one:    mcq
+#
+#           press is the three-short-balls contest; chal* is the mark-based
+#           tackle. Two different rules that both land on h_tackle.
 #
 # WHY THIS EXISTS. One on One is the only thing in the repo that cannot be
 # checked by reading it. Four separate bugs in this mode were invisible in the
@@ -95,7 +102,11 @@ const setups={
   nl:    `${nl} S.h2h.who=0; S.h2h.at=0; S.phase="h_pick"; render(); h2Select(7);`,
   it:    `${nl} S.h2h.who=1; S.h2h.at=0; S.phase="h_pick"; render(); h2Select(7);`,
   heat:  `${nl} S.h2h.who=0; S.h2h.at=5; S.h2h.safe=3; S.phase="h_pick"; render(); h2Select(6);`,
-  tackle:`${nl} S.h2h.who=0; S.h2h.at=5; S.h2h.safe=3; S.phase="h_pick"; render(); h2Select(6); h2Play();`,
+  /* THE PRESS (three short balls draw a man), which is not the tackle: the
+     mark-based one is chal / chalgo / chalfar / chalflat / foul. This state
+     was called `tackle` back when the press was, and cost somebody a trip
+     looking for a challenge in it. */
+  press: `${nl} S.h2h.who=0; S.h2h.at=5; S.h2h.safe=3; S.phase="h_pick"; render(); h2Select(6); h2Play();`,
   inflight:`${nl} S.h2h.who=0; S.h2h.at=0; S.phase="h_pick"; render(); setTimeout(()=>{ h2Select(5); h2Play(); h2Reveal(); h2Judge(true); }, 2500);`,
   shot:  `${nl} S.h2h.who=0; S.h2h.at=9; S.phase="h_pick"; render(); h2Shoot(); h2Reveal(); h2Judge(true);`,
   strike:`${nl} S.h2h.who=0; S.h2h.at=9; S.phase="h_pick"; render(); h2Shoot(); h2Reveal(); h2Judge(true); h2SaveReveal(); setTimeout(()=>h2SaveJudge(false), 3700);`,
