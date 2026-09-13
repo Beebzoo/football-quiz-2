@@ -195,6 +195,14 @@ setups.album = `mine().album.packs = 4; mineSave(); openAlbum();`;
 setups.albumpage = `(() => { const t = TEAMS.wc2006.Netherlands, a = mine().album; const men = [...(t.xi||[]), ...(t.bench||[])]; men.slice(0, 14).forEach(m => a.have[(t.slug) + "/" + m.no] = 1); a.have[(t.slug) + "/" + men[0].no] = 3; a.have[(t.slug) + "/" + men[1].no] = 2; a.have[(t.slug) + "/" + men[2].no] = 2; mineSave(); })(); openAlbum("Netherlands");`;
 setups.albumpack = `mine().album.packs = 3; mineSave(); albumOpen();`;
 
+/* the Cup: the picker, a nation's card, the group table, and the wall chart */
+setups.cup = `openCup();`;
+setups.cuppick = `cupLook("Trinidad and Tobago");`;
+setups.cupgroup = `cupStart("Trinidad and Tobago"); render();`;
+setups.cupchart = `cupStart("Trinidad and Tobago"); cupFiled(3,0); cupFiled(2,0); cupFiled(1,0); render();`;
+setups.cupout = `cupStart("Togo"); cupFiled(0,2); cupFiled(0,2); cupFiled(1,2); render();`;
+setups.cupwon = `cupStart("Trinidad and Tobago"); cupFiled(3,0); cupFiled(2,0); cupFiled(1,0); for(let i=0;i<4;i++) cupFiled(2,1); render();`;
+
 const SHOT_SHAPES = ["4-2-3-1", "4-4-2", "4-3-3", "3-5-2", "5-3-2"];
 const SHOT_LINES = ["high", "mid", "low"];
 const dug = `S=freshState(["Martijn","Bram"],false,"classic",0,"manager",false); h2TackleOn=false; h2Start(); h2PickTeam("Netherlands"); h2PickTeam("Italy"); S.h2h.tossed=true;`;

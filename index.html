@@ -2037,7 +2037,9 @@
   body.pixel .h2dline{border-top-style:solid;border-top-width:3px}
   /* the flags are PNGs and pixelating them is the whole treatment they need */
   body.pixel .sb-flag, body.pixel .h2flag, body.pixel .tflag,
-  body.pixel .h2handbadge{image-rendering:pixelated}
+  body.pixel .h2handbadge,
+  body.pixel .cupme img, body.pixel .cupch img,
+  body.pixel .cupside img, body.pixel .cuptab td.cn img{image-rendering:pixelated}
   /* shadows: a flat dark slab, no blur */
   body.pixel .h2man .h2sh{filter:none;border-radius:0;background:rgba(0,0,0,.38);height:3px;width:18px}
   body.pixel .h2bsh{filter:none;border-radius:0;background:rgba(0,0,0,.38);height:3px;width:12px}
@@ -2664,6 +2666,71 @@
   .dd-r i{display:block;font-style:normal;font-size:.6rem;opacity:.6;text-transform:uppercase}
   .dd-go{background:var(--green-fill);color:var(--green-ink);border-radius:999px;
          padding:7px 14px;font-weight:800;font-size:.8rem}
+  /* THE CUP. A wall chart on a phone is a column of ties rather than a tree:
+     the tree only reads at A3, and what somebody actually wants to know is who
+     is next and who is waiting. */
+  .logrow.cupwon{border-color:var(--gold)}
+  .cupme{display:flex;align-items:center;gap:11px;background:var(--panel);
+         border:1px solid var(--line);border-left:4px solid var(--kc);
+         border-radius:12px;padding:10px 12px;margin:10px 0}
+  .cupme img{width:34px;height:24px;object-fit:cover;border-radius:3px;flex-shrink:0}
+  .cupme.big img{width:54px;height:38px}
+  .cupme b{display:block;font-size:1rem;font-weight:800}
+  .cupme i{display:block;font-style:normal;font-size:.72rem;opacity:.62;margin-top:2px}
+  .cupgrp{margin:12px 0}
+  .cupgrp h3{margin:0 0 6px;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;opacity:.5}
+  .cupg4{display:grid;grid-template-columns:repeat(2,1fr);gap:6px}
+  .cupodds{display:grid;gap:5px;margin:10px 0}
+  .cupodds div{display:flex;align-items:center;gap:8px;font-size:.8rem;
+               background:var(--panel);border:1px solid var(--line);border-radius:9px;padding:8px 10px}
+  .cupodds i{margin-left:auto;font-style:normal;font-size:.68rem;opacity:.55;text-align:right}
+  .cupdot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+  .cupdot.hot{background:#d9534f}
+  .cupdot.warm{background:#d99b2e}
+  .cupdot.cold{background:#5a9e63}
+  .cupcard{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--kc);
+           border-radius:12px;padding:11px 13px;margin:10px 0}
+  .cupch{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .cupch img{width:38px;height:27px;object-fit:cover;border-radius:3px}
+  .cupch b{display:block;font-size:1.02rem;font-weight:800}
+  .cupch i{display:block;font-style:normal;font-size:.68rem;opacity:.55;
+           letter-spacing:.07em;text-transform:uppercase;margin-top:1px}
+  .cupcl{display:flex;justify-content:space-between;gap:10px;font-size:.78rem;padding:3px 0}
+  .cupcl span{opacity:.5}
+  .cupsay{font-size:.74rem;opacity:.6;margin-top:7px;border-top:1px solid var(--line);padding-top:7px}
+  .cuptab{margin:12px 0}
+  .cuptab h3,.cupround h3,.cuprec h3{margin:0 0 6px;font-size:.7rem;letter-spacing:.1em;
+          text-transform:uppercase;opacity:.5}
+  .cuptab table{width:100%;border-collapse:collapse;font-size:.78rem}
+  .cuptab th{font-size:.62rem;opacity:.45;font-weight:600;padding:2px 3px;text-align:center}
+  .cuptab td{padding:5px 3px;text-align:center;border-top:1px solid var(--line)}
+  .cuptab td.cn{text-align:left;display:flex;align-items:center;gap:6px;
+                overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .cuptab td.cn img{width:20px;height:14px;object-fit:cover;border-radius:2px;flex-shrink:0}
+  .cuptab tr.thru td{background:rgba(90,158,99,.1)}
+  .cuptab tr.me td{font-weight:800}
+  .cupchart{margin:12px 0}
+  .cupround{margin:0 0 12px}
+  .cuptie{border:1px solid var(--line);border-radius:9px;overflow:hidden;margin-bottom:5px}
+  .cuptie.mine{border-color:var(--gold)}
+  .cupside{display:flex;align-items:center;gap:7px;padding:6px 9px;font-size:.78rem;opacity:.62}
+  .cupside+.cupside{border-top:1px solid var(--line)}
+  .cupside img{width:20px;height:14px;object-fit:cover;border-radius:2px;flex-shrink:0}
+  .cupside .sw{width:20px;height:14px;border-radius:2px;background:var(--line);flex-shrink:0}
+  .cupside span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .cupside b{margin-left:auto;font-weight:800}
+  .cupside.w{opacity:1}
+  .cupside.me{opacity:1;font-weight:800}
+  .cupround.now .cupside{opacity:.8}
+  .cuprec{margin:12px 0}
+  .cuprl{display:flex;align-items:center;gap:9px;font-size:.78rem;padding:6px 2px;
+         border-top:1px solid var(--line)}
+  .cuprr{font-size:.62rem;opacity:.45;letter-spacing:.06em;text-transform:uppercase;
+         min-width:74px;flex-shrink:0}
+  .cuprv{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .cuprl b{margin-left:auto;font-weight:800}
+  .cuprl b.w{color:var(--green-ink)}
+  .cuprl b.l{opacity:.5}
   /* the album: pages, then slots. A gap is a drawn sticker with the ink taken
      out of it, because the number and the name still being there is the whole
      feeling. */
@@ -5774,7 +5841,7 @@ function setTheme(t){
   applyTheme();
   render();
 }
-const BUILD = "14 Sep 2026 · 01:03";
+const BUILD = "14 Sep 2026 · 01:15";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five
@@ -8580,7 +8647,7 @@ function h2Book(w, i){
    renderer and a renderer that has to guard is a renderer with a bug in it. */
 const MINE_KEY = "ball2-mine";
 const MINE_BLANK = {daily: null, streak: {played: 0, half: 0, last: null},
-                    album: {have: {}, packs: 0, foils: []}, cup: null};
+                    album: {have: {}, packs: 0, foils: []}, cup: null, cups: []};
 let MINE = null;
 function mine(){
   if(MINE) return MINE;
@@ -8591,6 +8658,7 @@ function mine(){
   if(!MINE.album || typeof MINE.album !== "object") MINE.album = {have: {}, packs: 0, foils: []};
   if(!MINE.album.have) MINE.album.have = {};
   if(!MINE.streak) MINE.streak = {played: 0, half: 0, last: null};
+  if(!Array.isArray(MINE.cups)) MINE.cups = [];
   return MINE;
 }
 function mineSave(){
@@ -8613,6 +8681,16 @@ function exportMine(){
     try{ const v = localStorage.getItem(k); if(v != null) out.data[k] = v; }catch(e){}
   }
   return JSON.stringify(out);
+}
+/* PASTING IT BACK IS THE ONE ACTION HERE THAT CAN DESTROY SOMETHING, so it
+   asks, it says what it is about to overwrite, and importMine refuses anything
+   that is not plainly one of our own files. */
+function askImportMine(){
+  const text = prompt("Paste the BALL file you copied. This replaces the album, the streak and the record book on this phone.");
+  if(text == null) return;
+  const t = String(text).trim();
+  if(!t) return;
+  importMine(t);
 }
 function copyMine(){
   const text = exportMine();
@@ -8946,6 +9024,12 @@ function aiMarks(w){
    a game somebody has parked, and closing it must put them back where they
    were. */
 let ALBUM_VIEW = null;
+/* THE CUP IS NOT A MATCH EITHER. It sits in front of the menu, so a game
+   somebody has parked is still parked when they close it. */
+let CUP_VIEW = null;
+function openCup(){ audio(); CUP_VIEW = {}; ALBUM_VIEW = null; render(); }
+function closeCup(){ audio(); CUP_VIEW = null; render(); }
+function cupLook(side){ audio(); CUP_VIEW = {pick: side || null}; render(); }
 function openAlbum(side){
   audio();
   ALBUM_VIEW = {side: side || null};
@@ -9057,6 +9141,261 @@ function aiTick(){
     return aiLater(() => { if(S.phase === "h_pens") h2SoKick(); });
   if(p === "h_ft") return;
 }
+
+/* ================= THE CUP ================= */
+const CUP_POOL = "wc2006";
+/* THE TOURNAMENT ITSELF, fetched like every other deck. Four kilobytes, and
+   the Cup simply is not offered until it lands. */
+let CUP = null;
+fetch("assets/cup/2006.json").then(r => r.ok ? r.json() : null).then(j => {
+  if(!j) return;
+  CUP = j;
+  if(CUP_VIEW || !S || S.phase === "setup") render();
+}).catch(()=>{});
+const cupReady = () => !!(CUP && TEAMS[CUP_POOL]);
+const cupBook = () => TEAMS[CUP_POOL] || {};
+/* THE CUP IS NOT A MATCH, so its flag cannot come from h2Badge: that reads the
+   pool off S, and the wall chart is looked at with no match on. */
+const cupFlag = side => { const t = cupBook()[side]; return t && t.flag ? "assets/natflags/" + t.flag + ".png" : null; };
+const cupKit  = side => (cupBook()[side] || {}).kit || "#8a8a8a";
+const cupSides = () => CUP ? [].concat.apply([], "ABCDEFGH".split("").map(g => CUP.groups[g].sides)) : [];
+const cupGroupOf = side => CUP ? ("ABCDEFGH".split("").find(g => CUP.groups[g].sides.indexOf(side) > -1) || null) : null;
+
+/* HOW FAR EACH SIDE REALLY WENT, 7 for the winners down to 1 for a side that
+   went home bottom of its group. It decides two things, and both of them are
+   the same judgement: how hard the computer plays, and who wins a tie that
+   2006 never staged. */
+const cupRank  = side => (CUP && CUP.rank[side]) || 1;
+const cupLevel = side => cupRank(side) >= 6 ? "champs" : cupRank(side) >= 4 ? "ere" : "sunday";
+const CUP_SAYS = {7: "won it", 6: "lost the final", 5: "lost the semi-final",
+                  4: "went out in the quarter-final", 3: "went out in the last sixteen",
+                  2: "finished third in their group", 1: "finished bottom of their group"};
+/* THE FOUR PEOPLE WILL RECOGNISE get the side they deserve; everybody else is
+   drawn out of the hat by name, so the same country always plays the same way
+   and two runs against Ecuador feel like the same Ecuador. */
+const CUP_STYLE = {Italy: "bus", Brazil: "tiki", England: "route1", Germany: "press"};
+function cupStyle(side){
+  if(CUP_STYLE[side]) return CUP_STYLE[side];
+  const ids = Object.keys(AI_MEN);
+  let h = 0;
+  for(let i = 0; i < side.length; i++) h = (h * 31 + side.charCodeAt(i)) >>> 0;
+  return ids[h % ids.length];
+}
+const CUP_ROUNDS = ["group", "r16", "qf", "sf", "final"];
+const CUP_ROUND_NAME = {group: "the group", r16: "the last sixteen", qf: "the quarter-final",
+                        sf: "the semi-final", final: "the final"};
+const CUP_ROUND_SHORT = {group: "Group", r16: "Last 16", qf: "Quarter-final",
+                         sf: "Semi-final", final: "Final"};
+
+/* ---------- the run ---------- */
+const cupRun = () => { const c = mine().cup; return (c && c.nation) ? c : null; };
+function cupBlank(){ mine().cup = null; mineSave(); }
+/* ONE RUN AT A TIME. Two saved runs is two wall charts and a screen asking
+   which one you meant, and nobody has ever wanted that. */
+function cupStart(side){
+  audio();
+  if(!cupReady()) return toast("The tournament is still loading.", true);
+  const g = cupGroupOf(side);
+  if(!g) return toast("That side is not in the 2006 draw.", true);
+  const played = CUP.groups[g].played;
+  const run = {year: CUP.year, nation: side, group: g, round: "group", n: 0,
+               alive: true, won: false, out: null, results: [], table: {},
+               /* your three, in the order the fixture list had them */
+               fixtures: played.filter(m => m.a === side || m.b === side)
+                               .map(m => m.a === side ? m.b : m.a),
+               line: null, at: 0, chart: []};
+  for(const t of CUP.groups[g].sides) run.table[t] = {p: 0, w: 0, d: 0, l: 0, gf: 0, ga: 0, pts: 0};
+  /* THE OTHER THREE HAVE ALREADY PLAYED EACH OTHER, with the real scores. The
+     group you walk into is the group that happened, minus your results, and by
+     the end of your third match the table is the real 2006 table with yours
+     swapped in. No dice anywhere in it. */
+  for(const m of played) if(m.a !== side && m.b !== side) cupRow(run, m.a, m.b, m.f, m.g);
+  mine().cup = run;
+  mineSave();
+  CUP_VIEW = {};
+  render();
+}
+function cupRow(run, a, b, f, g){
+  const ta = run.table[a], tb = run.table[b];
+  if(!ta || !tb) return;
+  ta.p++; ta.gf += f; ta.ga += g;
+  tb.p++; tb.gf += g; tb.ga += f;
+  if(f > g){ ta.w++; ta.pts += 3; tb.l++; }
+  else if(f < g){ tb.w++; tb.pts += 3; ta.l++; }
+  else { ta.d++; tb.d++; ta.pts++; tb.pts++; }
+}
+/* POINTS, GOAL DIFFERENCE, GOALS SCORED, which is how 2006 was settled, and
+   then the order the group really finished in. That last one is a tie-break
+   rather than a thumb on the scale: it only ever separates two sides who are
+   level on all three, which in 2006 itself happened to nobody. */
+function cupTable(run){
+  const real = CUP ? CUP.groups[run.group].sides : [];
+  return Object.keys(run.table).map(k => Object.assign({side: k}, run.table[k]))
+    .sort((a, b) => (b.pts - a.pts) || ((b.gf - b.ga) - (a.gf - a.ga)) || (b.gf - a.gf) ||
+                    (real.indexOf(a.side) - real.indexOf(b.side)));
+}
+/* WHO IS NEXT: the next of the three in the group, and after that whoever the
+   bracket has put in the slot beside yours. */
+function cupNext(){
+  const c = cupRun();
+  if(!c || !c.alive) return null;
+  if(c.round === "group") return c.fixtures[c.n] || null;
+  return c.line ? c.line[c.at ^ 1] : null;
+}
+/* ---------- the sixteen ---------- */
+function cupBuildLine(run){
+  const t = cupTable(run);
+  run.line = CUP.slots.map(sl => {
+    const g = sl[0], n = +sl[1];
+    return g === run.group ? t[n - 1].side : CUP.groups[g].sides[n - 1];
+  });
+  run.at = run.line.indexOf(run.nation);
+}
+const cupWinner = m => m.f > m.g ? m.a : m.f < m.g ? m.b : ((m.pf || 0) > (m.pg || 0) ? m.a : m.b);
+/* A TIE YOU ARE NOT IN. If 2006 staged it, 2006 settles it, which is why
+   France keep knocking Brazil out. Only the ties that exist because you are in
+   the draw and somebody else is not come down to how far each side went, and
+   even those get enough of a wobble to be a football match. */
+function cupDecide(a, b){
+  for(const m of (CUP.ko || [])){
+    if(m.a === a && m.b === b) return {w: cupWinner(m), f: m.f, g: m.g, pf: m.pf, pg: m.pg, real: true};
+    if(m.a === b && m.b === a) return {w: cupWinner(m), f: m.g, g: m.f, pf: m.pg, pg: m.pf, real: true};
+  }
+  const w = (cupRank(a) + Math.random() * 3) >= (cupRank(b) + Math.random() * 3) ? a : b;
+  const hi = 1 + Math.floor(Math.random() * 2), lo = Math.floor(Math.random() * hi);
+  return w === a ? {w: w, f: hi, g: lo} : {w: w, f: lo, g: hi};
+}
+
+/* ---------- a result comes back ----------
+   Called from endGame, which is the one place every ending goes through: the
+   whistle, the mercy rule and the shootout. */
+function cupFiled(f, g, pens){
+  const c = cupRun();
+  if(!c || !c.alive) return;
+  const them = cupNext();
+  if(!them) return;
+  const row = {round: c.round, v: them, f: f, g: g};
+  if(pens){ row.pf = pens[0]; row.pg = pens[1]; }
+  c.results.push(row);
+
+  if(c.round === "group"){
+    cupRow(c, c.nation, them, f, g);
+    c.n += 1;
+    if(c.n >= 3){
+      /* TWO GO THROUGH, and third with a good record is still a flight home. */
+      const t = cupTable(c);
+      const where = t.findIndex(r => r.side === c.nation);
+      c.place = where + 1;
+      if(where > 1){ c.alive = false; c.out = "the group"; cupFile(c); }
+      else { cupBuildLine(c); c.round = "r16"; cupPay(2, "topping the group"); }
+    } else if(f > g) cupPay(1, "the win");
+    mineSave();
+    return;
+  }
+
+  /* A KNOCKOUT CANNOT END LEVEL: h2AfterWhistle sends it to penalties, and
+     pens is what came back from it. */
+  const beaten = pens ? pens[0] < pens[1] : f < g;
+  if(beaten){
+    c.alive = false; c.out = CUP_ROUND_NAME[c.round];
+    c.chart.push(cupChartRow(c, them, f, g, pens));
+    cupFile(c);
+    mineSave();
+    return;
+  }
+  /* YOU WON IT, so the other seven ties of the round are resolved and the
+     bracket folds in half. */
+  c.chart.push(cupChartRow(c, them, f, g, pens));
+  const next = [];
+  const mine_ = c.at & ~1;
+  for(let i = 0; i < c.line.length; i += 2){
+    if(i === mine_){ next.push(c.nation); continue; }
+    const a = c.line[i], b = c.line[i + 1];
+    const r = cupDecide(a, b);
+    next.push(r.w);
+    c.chart.push({round: c.round, a: a, b: b, f: r.f, g: r.g, pf: r.pf, pg: r.pg});
+  }
+  c.line = next; c.at = c.at >> 1;
+  if(c.round === "final"){
+    c.alive = false; c.won = true;
+    cupFile(c);
+    cupCrown(c.nation);
+  } else {
+    c.round = CUP_ROUNDS[CUP_ROUNDS.indexOf(c.round) + 1];
+    cupPay(2, "the win");
+  }
+  mineSave();
+}
+/* your own tie, written the way the chart reads it rather than the way you
+   played it: the chart is a bracket and a bracket has a left-hand side */
+function cupChartRow(c, them, f, g, pens){
+  const mineFirst = c.line[c.at] === c.nation;
+  const row = mineFirst ? {a: c.nation, b: them, f: f, g: g} : {a: them, b: c.nation, f: g, g: f};
+  if(pens){ row.pf = mineFirst ? pens[0] : pens[1]; row.pg = mineFirst ? pens[1] : pens[0]; }
+  row.round = c.round; row.you = true;
+  return row;
+}
+const cupPay = (n, why) => albumGive(n, why);
+/* THE LINE ON THE TABLE, written once, when the run stops. It has to be its
+   own list rather than a field on the run, because the next run overwrites the
+   run and this is the part somebody wants to point at in a year. */
+function cupFile(c){
+  const last = c.results[c.results.length - 1] || null;
+  const m = mine();
+  m.cups = m.cups || [];
+  m.cups.push({ts: Date.now(), year: c.year, nation: c.nation, won: !!c.won,
+               out: c.won ? null : c.out, played: c.results.length,
+               f: last ? last.f : 0, g: last ? last.g : 0,
+               pf: last && last.pf != null ? last.pf : null,
+               pg: last && last.pg != null ? last.pg : null,
+               v: last ? last.v : null});
+  if(m.cups.length > 40) m.cups.splice(0, m.cups.length - 40);
+}
+/* what it says, in the words somebody would use */
+function cupLine(r){
+  const score = r.f + "-" + r.g + (r.pf != null ? ", " + r.pf + "-" + r.pg + " on penalties" : "");
+  if(r.won) return "Won the " + r.year + " World Cup with " + r.nation +
+    ", " + score + " against " + r.v + " in the final.";
+  return r.nation + " out in " + r.out + " of " + r.year +
+    (r.v ? ", " + score + " against " + r.v : "") + ".";
+}
+/* WINNING IT FINISHES YOUR PAGE. Twenty-three stickers of the country you took
+   all the way, which is a foil, which is their bench in The Dugout for every
+   match after it. Seven matches for a squad you keep. */
+function cupCrown(side){
+  const men = albumMen(side);
+  let stuck = 0;
+  for(const m of men) if(!albumHas(albumId(side, m))){ albumStick(albumId(side, m)); stuck++; }
+  albumCheckPage(side);
+  albumGive(5, "the World Cup");
+  if(stuck) toast(side + " complete: " + stuck + " sticker" + (stuck === 1 ? "" : "s") + " for winning it.");
+}
+
+/* ---------- kicking one off ---------- */
+function cupPlay(){
+  audio();
+  const c = cupRun(), them = cupNext();
+  if(!c || !c.alive || !them) return;
+  if(!cupReady()) return toast("The tournament is still loading.", true);
+  if(!modeReady("classic", "manager", true)) return toast("The deck is still loading, give it a second", true);
+  CUP_VIEW = null;
+  /* BOTH SIDES ARE NAMED AFTER THE COUNTRY, so the scorebug and the final
+     whistle read like a match report rather than like you against Route One.
+     Which of the four he is belongs on the card before kick-off and on the
+     team sheet, where a manager would read it. */
+  S = freshState([c.nation, them], false, "classic", 0, "manager", true);
+  S.pool = CUP_POOL;
+  S.cup = {round: c.round, v: them};
+  S.players[1].ai = cupStyle(them);
+  S.players[1].level = cupLevel(them);
+  h2Start();
+  h2PickTeam(c.nation);
+  h2PickTeam(them);
+  render();
+}
+/* A GROUP MATCH IS ALLOWED TO END LEVEL. Everything else on the pitch goes to
+   penalties, and a Cup knockout tie still does. */
+const cupGroupMatch = () => !!(S && S.cup && S.cup.round === "group");
 
 /* ================= THE ALBUM ================= */
 /* THE ALBUM IS ONE POOL, and it is the 2006 World Cup, because that is the one
@@ -9654,7 +9993,7 @@ function h2Whistle(){
 /* out of the full-time screen: the results, or the shootout if it is level */
 function h2AfterWhistle(){
   audio();
-  if(S.players[0].score === S.players[1].score) return h2Shootout();
+  if(S.players[0].score === S.players[1].score && !cupGroupMatch()) return h2Shootout();
   stopTimer(); endGame();
 }
 
@@ -10961,6 +11300,7 @@ function render(){
   /* THE ALBUM IS NOT A MATCH AND NOT THE MENU. It sits in front of both, so a
      game somebody has parked is still parked when they close it. */
   if(ALBUM_VIEW) return renderAlbum(st);
+  if(CUP_VIEW) return renderCup(st);
   if(!S || S.phase==="setup"){ return showBoard ? renderBoard(st) : renderSetup(st); }
 
   /* One on One owns the whole screen from the toss to the final whistle, so
@@ -11740,10 +12080,11 @@ function render(){
         <div class="hint" style="text-align:center">No BIG LOSERS today. The shots stay optional. Boring, honestly.</div>`}
       ${h2ReportHTML()}
       <div class="spacer"></div>
-      <div class="row2">
+      ${S.cup ? `<button class="bigbtn" onclick="fullReset(); openCup()">Back to the Cup</button>
+        <button class="bigbtn ghost" onclick="fullReset()">Leave it</button>` : `<div class="row2">
         <button class="bigbtn" onclick="rematch()">Rematch</button>
         <button class="bigbtn ghost" onclick="fullReset()">New players</button>
-      </div>
+      </div>`}
       <button class="bigbtn ghost" style="padding:10px;font-size:.95rem" onclick="fullReset(); openBoard()">${ico('trophy')}See the table</button>`;
     return;
   }
@@ -11926,7 +12267,9 @@ function loadNames(){
 const setupNames = loadNames();
 function rememberNames(){ try{ localStorage.setItem(NAMES_KEY, JSON.stringify(setupNames)); }catch(e){} }
 let showBoard=false, boardMode="";
-function openBoard(){ showBoard=true; boardMode=""; render(); }
+/* THE TABLE IS A SCREEN, not an overlay, so it closes the two that are. A
+   parked match is still parked; those views are not a match. */
+function openBoard(){ showBoard=true; boardMode=""; ALBUM_VIEW=null; CUP_VIEW=null; render(); }
 function closeBoard(){ showBoard=false; render(); }
 function saveCrew(){
   const el=document.getElementById("crewin");
@@ -11945,6 +12288,23 @@ function askClearRecords(){
 }
 function doClearRecords(){ closeSheet(); clearHistory(); render(); toast("Record book wiped."); }
 
+/* THE RUNS, newest first, above the match log. They are this phone's own: a
+   shared table is a table of matches, and somebody else's World Cup is not a
+   match anybody at your table played. */
+function cupRunsHTML(){
+  const runs = (mine().cups || []).slice().reverse();
+  if(!runs.length) return "";
+  return '<div class="kick" style="margin-top:4px">The Cup</div>' +
+    runs.slice(0, 12).map(r =>
+      '<div class="logrow' + (r.won ? " cupwon" : "") + '">' +
+      '<div class="logtop">' +
+        new Date(r.ts).toLocaleDateString("en-GB", {day: "numeric", month: "short"}) +
+        ' \u00b7 ' + r.played + ' match' + (r.played === 1 ? "" : "es") + '</div>' +
+      '<div class="logsc">' + (r.won ? "\ud83c\udfc6 " : "") + esc(cupLine(r)) + '</div>' +
+    '</div>').join("") +
+    (runs.length > 12 ? '<div class="hint" style="text-align:center">Showing the last 12 of ' +
+      runs.length + '.</div>' : "");
+}
 function renderBoard(st){
   const all=books();
   const rows=tally(boardMode);
@@ -11979,6 +12339,7 @@ function renderBoard(st){
         </div>
         <div class="lbsub">best ${r.best} · worst ${r.worst}${r.cards?` · 🟨 ${r.cards}`:""}${r.shots?` · 🥃 BIG LOSER ×${r.shots}`:""}</div>`).join("")}
     `:`<div class="hint" style="text-align:center">Nothing recorded${boardMode?` in ${matchLabel({mode:boardMode})}`:""} yet. Play a match to the final whistle and it lands here.</div>`}
+    ${cupRunsHTML()}
     ${log.length?`
       <div class="kick" style="margin-top:4px">Match log</div>
       ${log.slice(0,30).map(m=>{
@@ -11999,6 +12360,12 @@ function renderBoard(st){
           the raw material for re-tiering the bank from what people actually
           got, and it only accumulates from the day it starts being kept */""}
     <button class="bigbtn ghost tinybtn" onclick="copyOutcomes()">Copy every judged question to the clipboard</button>
+    <!-- THE ONLY BACKUP ANY OF THIS WILL EVER HAVE. There is no server and
+         there never will be, so a cleared browser or a new phone takes the
+         album, the streak and the record book with it unless somebody has
+         pasted this into a note. -->
+    <button class="bigbtn ghost tinybtn" onclick="copyMine()">Copy everything this phone remembers</button>
+    <button class="bigbtn ghost tinybtn" onclick="askImportMine()">Paste it back in</button>
     ${all.length?`<button class="bigbtn ghost" style="padding:10px;font-size:.95rem" onclick="askClearRecords()">Wipe the record book</button>`:""}`;
 }
 
@@ -12026,8 +12393,224 @@ function dailyCardHTML(){
       '<span class="dd-s">' + esc(said) + '</span></span>' +
     (st.played ? '<span class="dd-r"><b>' + st.played + '</b><i>day' +
       (st.played === 1 ? "" : "s") + '</i></span>' : '<span class="dd-r dd-go">Play</span>') +
-    '</button>' + albumRow + '</div>';
+    '</button>' + albumRow + cupRow_() + '</div>';
 }
+/* THE FRONT DOOR SAYS WHERE THE RUN IS, because a run is seven matches over
+   days and the first thing it has to answer is "where was I". */
+function cupRow_(){
+  if(!cupReady()) return "";
+  const c = cupRun();
+  const said = !c ? "Take a nation through 2006"
+    : c.won ? "Champions of the world"
+    : !c.alive ? "Out in " + c.out
+    : c.round === "group" ? esc(c.nation) + " \u00b7 group match " + (c.n + 1) + " of 3"
+    : esc(c.nation) + " \u00b7 " + CUP_ROUND_NAME[c.round];
+  return '<button class="mm-daily cuprow" onclick="openCup()">' +
+    '<span class="dd-l"><span class="dd-t">The Cup</span>' +
+      '<span class="dd-s">' + said + '</span></span>' +
+    (c && c.alive
+      ? '<span class="dd-r dd-go">Play</span>'
+      : c && c.won ? '<span class="dd-r"><b>\ud83c\udfc6</b><i>won</i></span>'
+      : '<span class="dd-r dd-go">Start</span>') +
+    '</button>';
+}
+
+/* ---------- the screens ---------- */
+function renderCup(st){
+  if(!cupReady()){
+    st.innerHTML = '<div class="h2big">The tournament is still loading.</div>' +
+      '<button class="bigbtn ghost" onclick="closeCup()">Back</button>';
+    return;
+  }
+  const c = cupRun();
+
+  /* ===== nobody has a run ===== */
+  if(!c) return cupPickScreen(st);
+
+  /* ===== it is over, one way or the other ===== */
+  if(!c.alive){
+    st.innerHTML =
+      '<div class="kick">' + ico('trophy') + 'The Cup \u00b7 ' + c.year + '</div>' +
+      '<h1 class="title">' + (c.won
+        ? esc(c.nation) + '<br><span class="gold">win the World Cup</span>'
+        : esc(c.nation) + '<br><span class="gold">out in ' + esc(c.out) + '</span>') + '</h1>' +
+      (c.won
+        ? '<div class="h2hintline">Seven matches. Their page in the album is finished, ' +
+          'which means their bench is yours in The Dugout from now on.</div>'
+        : '<div class="h2hintline">' + cupEpitaph(c) + '</div>') +
+      cupResultsHTML(c) +
+      (c.line ? cupChartHTML(c) : cupTableHTML(c)) +
+      '<button class="bigbtn" onclick="cupLook()">Take another nation</button>' +
+      '<button class="bigbtn ghost" onclick="closeCup()">Back</button>';
+    return;
+  }
+
+  /* ===== a run in progress ===== */
+  const them = cupNext();
+  st.innerHTML =
+    '<div class="kick">' + ico('trophy') + 'The Cup \u00b7 ' + c.year + '</div>' +
+    '<div class="cupme" style="--kc:' + cupKit(c.nation) + '">' +
+      (cupFlag(c.nation) ? '<img src="' + cupFlag(c.nation) + '" alt="">' : '') +
+      '<div><b>' + esc(c.nation) + '</b><i>' +
+        (c.round === "group"
+          ? "Group " + c.group + " \u00b7 match " + (c.n + 1) + " of 3"
+          : CUP_ROUND_SHORT[c.round]) + '</i></div>' +
+    '</div>' +
+    (them ? cupCardHTML(c, them) : "") +
+    (them ? '<button class="bigbtn" onclick="cupPlay()">Play ' + esc(them) + '</button>' : "") +
+    (c.round === "group" ? cupTableHTML(c) : cupChartHTML(c)) +
+    cupResultsHTML(c) +
+    '<button class="bigbtn ghost" onclick="closeCup()">Back</button>' +
+    '<button class="bigbtn ghost tinybtn" onclick="askCupQuit()">Abandon the run</button>';
+}
+
+/* ---------- picking a nation ----------
+   Eight groups, in the order they were drawn, because that is how anybody who
+   has ever held a wall chart looks for a country. What each side actually did
+   is printed on it: the whole joke of taking Togo is knowing what Togo did. */
+function cupPickScreen(st){
+  const pick = CUP_VIEW.pick;
+  if(pick){
+    const g = cupGroupOf(pick);
+    st.innerHTML =
+      '<div class="kick">' + ico('flag') + 'Group ' + g + '</div>' +
+      '<div class="cupme big" style="--kc:' + cupKit(pick) + '">' +
+        (cupFlag(pick) ? '<img src="' + cupFlag(pick) + '" alt="">' : '') +
+        '<div><b>' + esc(pick) + '</b><i>In 2006 they ' + CUP_SAYS[cupRank(pick)] + '</i></div>' +
+      '</div>' +
+      '<div class="h2hintline">Three group matches against ' +
+        CUP.groups[g].sides.filter(x => x !== pick).map(x => esc(x)).join(", ") +
+        '. Finish in the top two and you are in the last sixteen, ' +
+        'in the slot the draw actually gave whoever finished there.</div>' +
+      '<div class="cupodds">' + CUP.groups[g].sides.filter(x => x !== pick).map(x =>
+        '<div><span class="cupdot ' + cupHard(x) + '"></span>' + esc(x) +
+        '<i>' + AI_LEVELS[cupLevel(x)].label + ' \u00b7 ' + AI_MEN[cupStyle(x)].label + '</i></div>').join("") +
+      '</div>' +
+      '<button class="bigbtn" onclick="cupStart(' + JSON.stringify(pick).replace(/"/g, "&quot;") + ')">' +
+        'Take ' + esc(pick) + ' to Germany</button>' +
+      '<button class="bigbtn ghost" onclick="cupLook()">Somebody else</button>';
+    return;
+  }
+  st.innerHTML =
+    '<div class="kick">' + ico('trophy') + 'The Cup \u00b7 ' + CUP.year + '</div>' +
+    '<h1 class="title">Pick a<br><span class="gold">nation</span></h1>' +
+    '<div class="h2hintline">Seven matches, saved as you go. The real groups, the real draw, ' +
+      'and the ties that really happened end the way they really ended.</div>' +
+    "ABCDEFGH".split("").map(g =>
+      '<div class="cupgrp"><h3>Group ' + g + '</h3><div class="cupg4">' +
+      CUP.groups[g].sides.map(side =>
+        '<button class="h2teambtn" style="--kc:' + cupKit(side) + '" onclick="cupLook(' +
+        JSON.stringify(side).replace(/"/g, "&quot;") + ')">' +
+        (cupFlag(side) ? '<img class="h2flag" src="' + cupFlag(side) + '" alt="">'
+                       : '<span class="sw" style="background:' + cupKit(side) + '"></span>') +
+        '<span>' + esc(side) + '</span></button>').join("") +
+      '</div></div>').join("") +
+    '<button class="bigbtn ghost" onclick="closeCup()">Back</button>';
+}
+/* three words for how hard a side is, which is the same judgement as the level
+   the computer plays them at */
+const cupHard = side => cupRank(side) >= 6 ? "hot" : cupRank(side) >= 4 ? "warm" : "cold";
+
+/* ---------- the card before kick-off ---------- */
+function cupCardHTML(c, them){
+  const lv = AI_LEVELS[cupLevel(them)], st_ = AI_MEN[cupStyle(them)];
+  return '<div class="cupcard" style="--kc:' + cupKit(them) + '">' +
+    '<div class="cupch">' + (cupFlag(them) ? '<img src="' + cupFlag(them) + '" alt="">' : '') +
+      '<div><b>' + esc(them) + '</b><i>' +
+      (c.round === "group" ? "Group " + c.group : CUP_ROUND_SHORT[c.round]) + '</i></div></div>' +
+    '<div class="cupcl"><span>Form</span>' + esc(lv.label) + '</div>' +
+    '<div class="cupcl"><span>Style</span>' + esc(st_.label) + '</div>' +
+    '<div class="cupcl"><span>In 2006</span>They ' + CUP_SAYS[cupRank(them)] + '</div>' +
+    '<div class="cupsay">' + esc(st_.says) + '</div>' +
+  '</div>';
+}
+
+/* ---------- the group table ---------- */
+function cupTableHTML(c){
+  const rows = cupTable(c);
+  return '<div class="cuptab"><h3>Group ' + c.group + '</h3><table>' +
+    '<tr><th></th><th>P</th><th>W</th><th>D</th><th>L</th><th>GD</th><th>Pts</th></tr>' +
+    rows.map((r, i) =>
+      '<tr class="' + (r.side === c.nation ? "me " : "") + (i < 2 ? "thru" : "") + '">' +
+      '<td class="cn">' + (cupFlag(r.side) ? '<img src="' + cupFlag(r.side) + '" alt="">' : '') +
+        esc(r.side) + '</td><td>' + r.p + '</td><td>' + r.w + '</td><td>' + r.d + '</td>' +
+      '<td>' + r.l + '</td><td>' + (r.gf - r.ga > 0 ? "+" : "") + (r.gf - r.ga) + '</td>' +
+      '<td><b>' + r.pts + '</b></td></tr>').join("") +
+  '</table></div>';
+}
+
+/* ---------- the wall chart ----------
+   Every tie of every round played so far, yours picked out, and the ones still
+   to come drawn empty. Looking at who is waiting on the other side of it is
+   half of what a tournament is for. */
+function cupChartHTML(c){
+  if(!c.line) return "";
+  const done = {};
+  for(const m of (c.chart || [])) (done[m.round] = done[m.round] || []).push(m);
+  const at = CUP_ROUNDS.indexOf(c.round);
+  const out = [];
+  for(let r = 1; r < CUP_ROUNDS.length; r++){
+    const id = CUP_ROUNDS[r];
+    const ties = done[id];
+    if(ties){
+      out.push('<div class="cupround"><h3>' + CUP_ROUND_SHORT[id] + '</h3>' +
+        ties.map(m => cupTieHTML(c, m.a, m.b, m)).join("") + '</div>');
+    } else if(r === at){
+      /* the round on the table: your tie is live and the rest are drawn */
+      const ties2 = [];
+      for(let i = 0; i < c.line.length; i += 2)
+        ties2.push(cupTieHTML(c, c.line[i], c.line[i + 1], null));
+      out.push('<div class="cupround now"><h3>' + CUP_ROUND_SHORT[id] + '</h3>' + ties2.join("") + '</div>');
+    }
+  }
+  return '<div class="cupchart">' + out.join("") + '</div>';
+}
+function cupTieHTML(c, a, b, m){
+  const line = (side, f, pf, won) =>
+    '<div class="cupside' + (side === c.nation ? " me" : "") + (won ? " w" : "") + '">' +
+      (cupFlag(side) ? '<img src="' + cupFlag(side) + '" alt="">' : '<span class="sw"></span>') +
+      '<span>' + esc(side) + '</span>' +
+      (f == null ? '' : '<b>' + f + (pf != null ? ' <small>(' + pf + ')</small>' : '') + '</b>') +
+    '</div>';
+  const w = m ? cupWinner({a: a, b: b, f: m.f, g: m.g, pf: m.pf, pg: m.pg}) : null;
+  return '<div class="cuptie' + (m && m.you ? " mine" : "") + '">' +
+    line(a, m ? m.f : null, m ? m.pf : null, w === a) +
+    line(b, m ? m.g : null, m ? m.pg : null, w === b) + '</div>';
+}
+
+/* ---------- what has happened so far ---------- */
+function cupResultsHTML(c){
+  if(!c.results || !c.results.length) return "";
+  return '<div class="cuprec"><h3>The run</h3>' + c.results.map(r =>
+    '<div class="cuprl"><span class="cuprr">' + CUP_ROUND_SHORT[r.round] + '</span>' +
+    '<span class="cuprv">' + esc(r.v) + '</span>' +
+    '<b class="' + (r.pf != null ? (r.pf > r.pg ? "w" : "l") : r.f > r.g ? "w" : r.f < r.g ? "l" : "d") + '">' +
+      r.f + '-' + r.g + (r.pf != null ? ' <small>(' + r.pf + '-' + r.pg + ')</small>' : '') +
+    '</b></div>').join("") + '</div>';
+}
+/* WHAT ACTUALLY KNOCKED YOU OUT, said plainly, because "out in the group" on
+   its own is not a thing anybody wants to read about their own run. */
+function cupEpitaph(c){
+  if(c.out === "the group"){
+    const t = cupTable(c), me = t.find(r => r.side === c.nation), second = t[1];
+    return 'Finished ' + (t.indexOf(me) + 1) + (t.indexOf(me) === 2 ? "rd" : "th") +
+      ' on ' + me.pts + ' point' + (me.pts === 1 ? "" : "s") + '. ' +
+      esc(second.side) + ' went through on ' + second.pts + '.';
+  }
+  const last = c.results[c.results.length - 1];
+  return last ? 'Beaten by ' + esc(last.v) + ' in ' + c.out + '.' : "";
+}
+function askCupQuit(){
+  const c = cupRun();
+  if(!c) return;
+  sheet('<h2>Abandon the run?</h2>' +
+    '<p>Throws away ' + esc(c.nation) + ' after ' + c.results.length + ' match' +
+    (c.results.length === 1 ? "" : "es") + '. The results stay on the Table. No way back into the run.</p>' +
+    '<button class="bigbtn bad" onclick="cupQuit()">Bin the run</button>' +
+    '<button class="bigbtn ghost" onclick="closeSheet()">Keep it</button>');
+}
+function cupQuit(){ closeSheet(); cupBlank(); CUP_VIEW = {}; render(); toast("Run abandoned."); }
+
 /* THE STICKER, drawn rather than fetched: the app's own shirt polygon in the
    country's kit colour with his number on it, his name under it, and his
    position. 736 of them and not one image, so they improve whenever the
@@ -13009,6 +13592,13 @@ function albumAfterMatch(){
 }
 function endGame(){
   albumAfterMatch();
+  /* A CUP MATCH FILES ITS RESULT INTO THE RUN as well as onto the Table, and
+     it does it here because this is the one door every ending goes through:
+     the whistle, the mercy rule and the end of a shootout. */
+  try{
+    if(S && S.cup && cupRun())
+      cupFiled(S.players[0].score, S.players[1].score, S.pens || null);
+  }catch(e){}
   closeSheet(); stopTimer(); S.phase="results"; recordMatch(); render();
   if(Math.max(...S.players.map(p=>p.score))>=0) confetti(48);
 }
