@@ -169,6 +169,13 @@ const setups={
    The line states leave the attacker on a normal line, set the DEFENDER to
    the one being looked at, and select a long ball, so the price the bar shows
    is the price the line moved. */
+/* the results screen with a scouting report on it: play six balls, three of
+   them lost, then blow the whistle */
+setups.report = `S=freshState(["Martijn","Bram"],false,"classic",0,"manager",false); h2TackleOn=false; h2Start(); h2PickTeam("Netherlands"); h2PickTeam("Italy"); S.h2h.tossed=true; S.h2h.subs=[3,3];
+  const ball=(from,to,ok)=>{ S.h2h.who=0; S.h2h.at=from; S.h2h.sel=null; S.h2h.marks=[]; S.h2h.markedAgainst=0; S.phase="h_pick"; render(); h2Select(to); h2Play(); h2Reveal(); h2Judge(ok); };
+  ball(5,7,false); ball(5,7,false); ball(5,7,false); ball(5,7,true); ball(5,9,true); ball(5,9,true);
+  S.players[0].score=1; S.phase="results"; render();`;
+
 const SHOT_SHAPES = ["4-2-3-1", "4-4-2", "4-3-3", "3-5-2", "5-3-2"];
 const SHOT_LINES = ["high", "mid", "low"];
 const dug = `S=freshState(["Martijn","Bram"],false,"classic",0,"manager",false); h2TackleOn=false; h2Start(); h2PickTeam("Netherlands"); h2PickTeam("Italy"); S.h2h.tossed=true;`;
