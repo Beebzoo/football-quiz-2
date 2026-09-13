@@ -302,6 +302,35 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
     ev(app, "S.phase") === "h_pick", ev(app, "S.phase"));
 
   /* ---------------------------------------------------------------- */
+  console.log("\n--- the shot reads his line ---");
+  start("manager", "Italy", "Netherlands");
+  const SHOOTER = [...Array(11).keys()].find(i => ev(app, "H2_SHOT_AT(" + i + ",0)"));
+  check("somebody in the shape can shoot", SHOOTER != null, SHOOTER);
+  const base = ev(app, "H2_SHOT_AT(" + SHOOTER + ",0)");
+  const at = k => { run(app, 'S.h2h.line = S.h2h.line || {}; S.h2h.line[1] = ' + JSON.stringify(k) + ';');
+                    return ev(app, "h2ShotTier(" + SHOOTER + ",0)"); };
+  const idx = t => ev(app, "H2_ORDER").indexOf(t);
+  check("a normal line leaves the shot where the shape put it", at("mid") === base, at("mid") + " vs " + base);
+  /* pushed up means grass in front of the keeper, so hitting it is cheaper */
+  check("a high press makes the shot a tier cheaper", idx(at("high")) === idx(base) - 1,
+    at("high") + " from " + base);
+  /* a low block is eleven men between the ball and the net */
+  check("a low block makes it a tier dearer", idx(at("low")) === idx(base) + 1,
+    at("low") + " from " + base);
+  run(app, 'S.h2h.line[1] = "high";');
+  check("and the button says the price it will really be",
+    (() => { run(app, 'S.h2h.who=0; S.h2h.at=' + SHOOTER + '; S.h2h.sel=null; S.phase="h_pick"; render();');
+             return stage(app).indexOf("Shoot \u00b7 " + ev(app, "TIERS[h2ShotTier(" + SHOOTER + ",0)].label")) > -1; })(),
+    "button does not match");
+
+  /* One on One has no lines to set, so the shot must be exactly the shape's */
+  start("pitch", "Italy", "Netherlands");
+  run(app, 'S.h2h.line = {0:"high", 1:"high"};');
+  check("One on One prices the shot off the shape alone",
+    ev(app, "h2ShotTier(" + SHOOTER + ",0)") === ev(app, "H2_SHOT_AT(" + SHOOTER + ",0)"),
+    ev(app, "h2ShotTier(" + SHOOTER + ",0)"));
+
+  /* ---------------------------------------------------------------- */
   console.log("\n--- a dry league falls through to his other one, not to the bank ---");
   start("manager", "Netherlands", "Italy");
   /* a man with more than one league, so there is something to fall through TO.

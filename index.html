@@ -5379,7 +5379,7 @@ function setTheme(t){
   applyTheme();
   render();
 }
-const BUILD = "13 Sep 2026 · 22:33";
+const BUILD = "13 Sep 2026 · 22:42";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five
@@ -6873,6 +6873,17 @@ const H2_LADDER = [
    now, because a 4-4-2 has two shooters and a 4-2-3-1 has four, so it cannot
    be a table of slot numbers any more. */
 const H2_SHOT_AT = (i, w) => { const p = h2Shape(w)[i]; return (p && p.shot) || null; };
+/* WHAT A SHOT FROM HERE ACTUALLY COSTS. The shape says what it is off the
+   ladder; his line says what it is tonight. A shot goes past the defence to
+   the keeper, so it takes the LONG shift, the one that prices a ball in
+   behind: pushed up is a tier cheaper, a low block a tier dearer. Public, so
+   the button can say it, which is the only way the instruction is worth
+   setting. */
+function h2ShotTier(i, w){
+  const t = H2_SHOT_AT(i, w);
+  if(!t) return null;
+  return h2Shift(t, (H2_LINES[h2Line(h2Other())] || H2_LINES.mid).long);
+}
 
 /* ============================== THE TACKLE ==============================
 
@@ -7740,9 +7751,13 @@ function h2Shoot(){
      does not find one, so it takes the possession's one tier of relief if it
      is still going. Marking men while the ball is already in range is a
      gamble, which is exactly right. */
-  let t = H2_SHOT_AT(H.at, H.who);
+  const base = H2_SHOT_AT(H.at, H.who);
   const relieved = !!(h2TackleOn && H.marks && H.marks.length && H.relief);
-  if(relieved) t = h2Cheaper(t, H2_MISS_RELIEF);
+  /* ONE NUMBER, CLAMPED ONCE, like every other ball. His line is public and
+     the relief is not, so the button showed only the first of the two and
+     this is where the second joins it. */
+  let t = h2Shift(base, (H2_LINES[h2Line(h2Other())] || H2_LINES.mid).long +
+                        (relieved ? H2_MISS_RELIEF : 0));
   if(!h2Draw(t, H.at, H.who)){ toast("No " + TIERS[t].label + " questions left", true); return; }
   if(relieved) H.relief = false;   // spent on a shot that is actually taken
   H.shooting = true; H.sel = null;
@@ -8982,7 +8997,7 @@ function h2Render(st){
       lineBar + heat + bar +
       (canShoot
         ? '<button class="bigbtn' + (H.sel != null ? " ghost" : "") + '" style="margin-top:8px" onclick="h2Shoot()">' +
-          'Shoot · ' + TIERS[H2_SHOT_AT(H.at, H.who)].label + '</button>'
+          'Shoot · ' + TIERS[h2ShotTier(H.at, H.who)].label + '</button>'
         : "") +
       '<div class="h2hintline">' + (H.sel == null
         ? "Tap a team mate to see what that ball costs you."
@@ -9017,7 +9032,7 @@ function h2Render(st){
        A penalty and a contested ball keep their own label: both are announced
        out loud anyway, and a penalty priced off H2_SHOT would be a lie. */
     const priced = (H.pen || H.contest || !t) ? t
-      : (TIERS[H.shooting ? H2_SHOT_AT(H.at, H.who) : h2Priced(H.at, H.sel == null ? H.at : H.sel)] || t);
+      : (TIERS[H.shooting ? h2ShotTier(H.at, H.who) : h2Priced(H.at, H.sel == null ? H.at : H.sel)] || t);
     st.innerHTML =
       h2ScoreHTML() + (H.so ? h2GoalSceneHTML("set") : h2PitchHTML(false)) +
       '<div class="qcard" style="--dc:' + priced.color + '">' +
