@@ -2384,6 +2384,36 @@
   .h2trbtn[disabled]{opacity:.35}
   .h2trc{display:inline-block;margin-left:5px;font-size:.66rem;opacity:.7}
   .h2trbtn.on .h2trc{opacity:.85}
+  /* THE LINE OF CONFRONTATION. Chalk, like the halfway line, and flat on the
+     grass: no translateZ, so it lies down with the pitch in 3D instead of
+     standing up like a wall. */
+  .h2dline{position:absolute;left:2.5%;right:2.5%;height:0;pointer-events:none;
+           border-top:2px dashed rgba(255,255,255,.34)}
+  /* THE LEAN, and it is only a lean. The men do not move, because nothing in
+     the rules moves them; this says which way the side is leaning and lets the
+     price on the bar say what that is worth. */
+  .h2dline.high{border-top-color:rgba(255,225,150,.6)}
+  .h2dline.low{border-top-color:rgba(150,205,255,.55)}
+  .h2dline.high::after, .h2dline.low::after{
+    content:"";position:absolute;left:0;right:0;height:26px;
+    background:linear-gradient(to top, rgba(255,225,150,.16), transparent)}
+  .h2dline.high::after{top:-26px}
+  .h2dline.low::after{top:0;background:linear-gradient(to bottom, rgba(150,205,255,.14), transparent)}
+  /* why the price on the bar is not the price on the ladder */
+  .h2cwhy{display:block;margin:-2px 0 8px;font-size:.74rem;letter-spacing:.02em;opacity:.82}
+  .h2cwhy.up{color:#8FD9A8}
+  .h2cwhy.down{color:#E8A87C}
+  /* the team sheet: two columns, four rows, nothing shouting. It is the last
+     thing anybody reads before a ball is kicked and it should read like a
+     programme rather than a dashboard. */
+  .h2sheet{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 4px}
+  .h2sheet-s{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:9px 10px;min-width:0}
+  .h2sheet-h{font-weight:800;font-size:.82rem;margin-bottom:5px;
+             white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .h2sheet-r{display:block;margin:3px 0;font-size:.72rem;line-height:1.34}
+  .h2sheet-r i{display:block;font-style:normal;opacity:.52;letter-spacing:.06em;
+               text-transform:uppercase;font-size:.62rem}
+  .h2sheet-r b{font-weight:600}
   .h2repbox{margin:14px 0 4px}
   .h2rep{background:var(--panel);border:1px solid var(--line);border-radius:12px;
          padding:10px 12px;margin:8px 0}
@@ -5414,7 +5444,7 @@ function setTheme(t){
   applyTheme();
   render();
 }
-const BUILD = "13 Sep 2026 · 23:22";
+const BUILD = "13 Sep 2026 · 23:26";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five
@@ -8821,6 +8851,29 @@ function h2MarksDone(none){
 }
 
 /* ---------- the pitch ---------- */
+/* WHERE THEIR BACK LINE IS STANDING, in view space, read off the men who are
+   actually on the pitch rather than off a table. A sent-off defender does not
+   hold a line, so he is not counted, and the mark moves up when a side plays
+   three at the back and down when it plays five. */
+function h2DLineHTML(){
+  const H = S && S.h2h;
+  if(!H || H.who == null) return "";
+  const them = h2Other();
+  const shape = h2Shape(them);
+  const back = [];
+  for(let i = 0; i < 11; i++)
+    if(!h2IsOff(them, i) && (shape[i].line === 1 || shape[i].line === 2)) back.push(i);
+  if(!back.length) return "";
+  /* THEY ARE DRAWN IN THE OTHER FRAME. mine is false for them, and the deepest
+     of their back line in view space is the smallest y, because the defending
+     side is drawn at the top of the screen. */
+  const y = Math.min.apply(null, back.map(i => h2VY(i, false)));
+  /* the lean, which is the instruction and not the position. Their line is
+     public, so there is nothing to leak. */
+  const k = h2Tactical() ? h2Line(them) : "mid";
+  return '<div class="h2dline' + (k === "high" ? " high" : k === "low" ? " low" : "") +
+    '" style="top:' + y.toFixed(2) + '%"></div>';
+}
 function h2PitchHTML(tappable){
   const H = h2();
   const A = h2Anim; h2Anim = null;          // one render, then it is spent
@@ -8846,7 +8899,7 @@ function h2PitchHTML(tappable){
     (cele ? " cele" : "") + (C ? " chal" : "") + '">' +
     '<div class="h2box t"></div><div class="h2box b"></div>' +
     '<div class="h2six t"></div><div class="h2six b"></div>' +
-    '<div class="h2circle"></div><div class="h2spot"></div>';
+    '<div class="h2circle"></div><div class="h2spot"></div>' + h2DLineHTML();
 
   // the ball being considered, drawn on the grass so it lies in the same plane
   if(tappable && H.sel != null){
@@ -9250,6 +9303,36 @@ function h2Render(st){
   if(S.phase === "h_toss"){
     const caller = S.players[0].name;
     const face = H.coin ? (H.coin === "heads" ? "H" : "T") : "?";
+    /* THE TEAM SHEET. Only in The Dugout, because in One on One there are no
+       decisions to print: both sides are the same shape, hold the same line
+       and carry no traits, and a panel saying so three times would be noise. */
+    const sheet = !h2Tactical() ? "" : (() => {
+      const col = w => {
+        const lg = {};
+        for(let i = 0; i < 11; i++)
+          for(const id of ((h2Man(i, w) || {}).lg || [])) lg[id] = (lg[id] || 0) + 1;
+        const top = Object.entries(lg).sort((a, b) => b[1] - a[1]).slice(0, 3)
+          .map(e => ((QUIZZES[e[0]] || {}).label || e[0]) + " " + e[1]);
+        const tr = Object.entries((H.traits && H.traits[w]) || {});
+        const named = [];
+        for(const [key, k] of tr){
+          for(let i = 0; i < 11; i++){
+            const m = h2Man(i, w);
+            if(h2TraitKey(m) === key){ named.push(m.n + " " + H2_TRAITS[k].label); break; }
+          }
+        }
+        return '<div class="h2sheet-s">' +
+          '<div class="h2sheet-h">' + esc(h2Team(w) || S.players[w].name) + '</div>' +
+          '<div class="h2sheet-r"><i>Shape</i><b>' + esc(h2ShapeId(w)) + '</b></div>' +
+          '<div class="h2sheet-r"><i>Line</i><b>' + esc(H2_LINES[h2Line(w)].label) + '</b></div>' +
+          '<div class="h2sheet-r"><i>Traits</i><b>' +
+            (named.length ? esc(named.join(", ")) : "none") + '</b></div>' +
+          '<div class="h2sheet-r"><i>Asks</i><b>' +
+            (top.length ? esc(top.join(", ")) : "the classic bank") + '</b></div>' +
+        '</div>';
+      };
+      return '<div class="h2sheet">' + col(0) + col(1) + '</div>';
+    })();
     st.innerHTML =
       '<div class="kick">' + ico('users') + h2Name() + ' · first to ' + H2_TARGET + ' or ' + H2_MINUTES + ' minutes</div>' +
       '<div class="h2vs">' +
@@ -9276,6 +9359,7 @@ function h2Render(st){
         '</div>' +
         (h2Flag(1) ? '<img class="tflag' + (H.tossed && H.who === 1 ? " won" : "") + '" src="' + h2Flag(1) + '" alt="">' : "") +
       '</div>' +
+      sheet +
       (H.tossed
         ? '<div class="h2big" style="font-size:1.15rem;font-style:normal">' +
             'It is ' + H.coin + '. ' + esc(S.players[H.who].name) + ' kicks off.</div>' +
@@ -9537,10 +9621,21 @@ function h2Render(st){
       /* the press counts LADDER balls, not priced ones: a short ball pushed to
          Hard by a high press is still him knocking it about. */
       const contested = H2_SAFE.includes(h2TierFor(H.at, H.sel)) && safe >= H2_PRESS_AT;
+      /* WHY IT IS NOT THE LADDER PRICE. Two functions, the same two the bar
+         already calls, and the difference between them named out loud. It is
+         exact and per pass, which the grass can never be, and it can only ever
+         say something the attacker is entitled to know: the line is public and
+         the relief is not read here at all. */
+      const lad = h2TierFor(H.at, H.sel);
+      const moved = H2_ORDER.indexOf(tk) - H2_ORDER.indexOf(lad);
+      const why = moved === 0 ? "" :
+        '<span class="h2cwhy' + (moved < 0 ? " up" : " down") + '">' +
+        (moved < 0 ? "a tier cheaper" : "a tier dearer") + ", their line</span>";
       bar = '<div class="h2confirm' + (contested ? " contested" : "") + '" style="--dc:' +
               (contested ? "#e04a34" : tt.color) + '">' +
               '<div class="h2cline"><span class="h2cwhat">' + h2PassName(H.at, H.sel) + '</span>' +
               '<span class="h2ctier">' + (contested ? "Contested" : tt.label) + '</span></div>' +
+              (contested ? "" : why) +
               (contested ? '<div class="h2hintline" style="margin:0 0 8px">' + esc(them.name) +
                 ' gets a ' + TIERS[H2_PRESS_TIER].label + ' question to take it off you first.</div>' : "") +
               '<button class="bigbtn" onclick="h2Play()">Play it</button></div>';

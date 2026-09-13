@@ -182,6 +182,9 @@ setups.change = `S=freshState(["Martijn","Bram"],false,"classic",0,"manager",fal
 /* the traits screen, where the budget is spent */
 setups.traits = `S=freshState(["Martijn","Bram"],false,"classic",0,"manager",false); h2TackleOn=false; h2Start(); h2PickTeam("Netherlands"); h2PickTeam("Italy"); S.h2h.picking=null; S.h2h.shaping=null; S.h2h.tset=0; S.phase="h_traits"; render();`;
 
+/* the toss, as a team sheet: four decisions each, side by side */
+setups.sheet = `S=freshState(["Martijn","Bram"],false,"classic",0,"manager",false); h2TackleOn=false; h2Start(); h2PickTeam("Netherlands"); h2PickTeam("Italy"); S.h2h.picking=null; S.h2h.shaping=null; S.h2h.tset=0; S.h2h.form=["4-3-3","5-3-2"]; S.h2h.line=["high","low"]; h2SetTrait(9,"poacher"); S.h2h.tset=1; h2SetTrait(0,"keeper"); S.h2h.tset=null; S.phase="h_toss"; S.h2h.tossed=true; S.h2h.coin="heads"; S.h2h.who=0; render();`;
+
 const SHOT_SHAPES = ["4-2-3-1", "4-4-2", "4-3-3", "3-5-2", "5-3-2"];
 const SHOT_LINES = ["high", "mid", "low"];
 const dug = `S=freshState(["Martijn","Bram"],false,"classic",0,"manager",false); h2TackleOn=false; h2Start(); h2PickTeam("Netherlands"); h2PickTeam("Italy"); S.h2h.tossed=true;`;
