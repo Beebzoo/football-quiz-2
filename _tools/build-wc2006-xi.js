@@ -130,6 +130,24 @@ const ALIAS = {
   "Carlos Sánchez (Colombian footballer)": "Carlos Sánchez",
   "Alberto Junior Rodríguez": "Alberto Rodríguez",
   "Gabriel Enrique Gómez": "Gabriel Gómez",
+  /* 2014. The squad pages drop the apostrophe and the first name; the match
+     reports keep both. Each checked against assets/wc2014/index.json. */
+  "Nicolas N'Koulou": "Nicolas Nkoulou",
+  "Óscar Boniek García": "Boniek García",
+  "Eduardo da Silva": "Eduardo",
+  "Carlos Armando Gruezo Arboleda": "Carlos Gruezo",
+  /* TWO ROJAS IN ONE TOURNAMENT, Chile's and Ecuador's, and the deck holds
+     both under the surname. Wikipedia tells them apart by birth year, which
+     is information the side does better. */
+  "José Rojas (footballer, born 1983)": {n: "José Manuel Rojas", side: "Chile"},
+  /* 2010. North Korea took two Pak Nam-chols and the squad page numbers them
+     I and II while Wikipedia dates them; the match reports give the born-1985
+     man shirt 4, and shirt 4 in the deck is the first of them. */
+  "Pak Nam-chol (footballer, born 1985)": "Pak Nam-chol I",
+  "Ki Sung-yong": "Ki Sung-yueng",
+  "Ignacio María González": "Ignacio González",
+  "Nikos Spiropoulos": "Nikos Spyropoulos",
+  "Walter Julián Martínez": "Walter Martínez",
 };
 /* COUNTRY NAMES DIFFER between the kit titles and the deck keys. Checked one
    at a time against the deck rather than guessed. */
@@ -139,22 +157,47 @@ const SIDE_ALIAS = {
   "Trinidad & Tobago": "Trinidad and Tobago", "Czechia": "Czech Republic",
 };
 
-function manIn(side, name) {
+function manIn(side, name, no) {
   const t = sides[side];
   if (!t) return null;
-  let raw = String(name).replace(/\s*\([^)]*\)\s*$/, "").trim();
-  if (ALIAS[raw]) raw = ALIAS[raw];
+  /* THE TABLE SEES THE TITLE FIRST, brackets and all. Stripping them before
+     the lookup means a disambiguated title can never be aliased, which is the
+     one case where the bracket is the whole point: North Korea took two Pak
+     Nam-chols in 2010 and Wikipedia dates them apart.
+     AN ALIAS MAY ALSO NAME A SIDE, for the two Rojas of 2014. manIn already
+     knows which side it is looking at, so here the name is all that is taken. */
+  let raw = String(name).trim();
+  for (const key of [raw, raw.replace(/\s*\([^)]*\)\s*$/, "").trim()]) {
+    if (!Object.prototype.hasOwnProperty.call(ALIAS, key)) continue;
+    if (ALIAS[key] === null) return null;
+    raw = typeof ALIAS[key] === "string" ? ALIAS[key] : ALIAS[key].n;
+    break;
+  }
+  raw = raw.replace(/\s*\([^)]*\)\s*$/, "").trim();
   const n = norm(raw);
   const all = [...(t.xi || []), ...(t.bench || [])];
+  /* THE SHIRT DECIDES when the name is anywhere near. One man in a squad wears
+     a number, so a spelling that is ambiguous is not ambiguous at all. */
+  const shirt = no != null ? all.filter(m => String(m.no) === String(no)) : [];
+  const near = m => {
+    const f = norm(m.full), sh = norm(m.n);
+    return f === n || sh === n || f.indexOf(n + " ") === 0 || n.indexOf(f + " ") === 0 ||
+           n.indexOf(" " + sh) > -1 || f.indexOf(" " + n) > -1;
+  };
+  if (shirt.length === 1 && near(shirt[0])) return shirt[0];
   let hit = all.filter(m => norm(m.full) === n);
   if (hit.length === 1) return hit[0];
   hit = all.filter(m => norm(m.n) === n);
   if (hit.length === 1) return hit[0];
+  /* THE SURNAME RULE, AND ITS VETO. Matching on the last word alone is what
+     put Ricardo Carvalho in goal for Portugal in 2010, because their keeper's
+     article is Eduardo Carvalho. If the row named a shirt and the man it found
+     is not wearing it, that is not him. */
   const last = n.split(" ").slice(-1)[0];
   hit = all.filter(m => norm(m.n) === last);
-  if (hit.length === 1) return hit[0];
+  if (hit.length === 1 && (no == null || String(hit[0].no) === String(no))) return hit[0];
   hit = all.filter(m => norm(m.full).indexOf(n + " ") === 0 || n.indexOf(norm(m.full) + " ") === 0);
-  if (hit.length === 1) return hit[0];
+  if (hit.length === 1 && (no == null || String(hit[0].no) === String(no))) return hit[0];
   return null;
 }
 
@@ -250,10 +293,34 @@ function shapeOf(lineup) {
   return def + "-" + mid + "-" + fwd;
 }
 
+
+/* ---------- the matches that got their own article ----------
+   The round's page carries a stub and a {{main|...}} pointing at the real
+   report, so the extras are read off the pages already fetched rather than
+   typed into a table that only ever covers the tournament somebody last
+   looked at. A title of the shape "... (<year> FIFA World Cup)" is a match
+   report and nothing else is. */
+function extraPages(text, had){
+  const out = [];
+  const rx = new RegExp("\\{\\{\\s*main\\s*\\|\\s*([^}|]*\\(" + YEAR + " FIFA World Cup\\))\\s*\\}\\}", "gi");
+  let m;
+  while ((m = rx.exec(text))) {
+    const t = m[1].trim();
+    if (out.indexOf(t) < 0 && had.indexOf(t) < 0) out.push(t);
+  }
+  return out;
+}
+
 (async () => {
   console.log("reading " + PAGES.length + " match pages for " + YEAR + "...");
   let text = "";
   for (const p of PAGES) text += "\n" + await wikitext(p);
+  const extra = extraPages(text, PAGES);
+  if (extra.length) {
+    console.log("  following " + extra.length + " match" + (extra.length === 1 ? "" : "es") +
+      " with a page of its own: " + extra.join(", "));
+    for (const p of extra) text += "\n" + await wikitext(p);
+  }
   console.log("  " + Math.round(text.length / 1024) + "KB\n");
 
   /* ---------- every match, in order ---------- */
@@ -294,7 +361,11 @@ function shapeOf(lineup) {
     if (halves.length < 3) continue;
     const rowsIn = t => {
       const out = [];
-      for (const m of t.matchAll(/^\|\s*([A-Z]{2,3})\s*\|\|\s*'''(\d+)'''\s*\|\|\s*\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/gm))
+      /* THE POSITION IS SOMETIMES A TOOLTIP. Every page writes a bare code
+         except the 2014 final, which wraps it in {{abbr}} so a reader can
+         hover it, and that is the only place Germany's and Argentina's real
+         elevens exist. */
+      for (const m of t.matchAll(/^\|\s*(?:\{\{\s*abbr\s*\|\s*)?([A-Z]{2,3})(?:\s*\|[^}]*\}\})?\s*\|\|\s*'''(\d+)'''\s*\|\|\s*\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/gm))
         out.push({ pos: m[1], no: parseInt(m[2], 10), name: m[3] });
       return out;
     };
@@ -345,14 +416,19 @@ function shapeOf(lineup) {
       const men = [];
       let missed = null;
       for (const row of info.line) {
-        const m = manIn(side, row.name);
+        const m = manIn(side, row.name, row.no);
         if (!m) { missed = row.name; break; }
         /* THE POSITION HE PLAYED THAT DAY, not the one the squad list gave him */
         men.push({ n: m.n, full: m.full, no: m.no, pos: row.pos, lg: m.lg, tr: m.tr,
                    g: m.g, y: m.y, r: m.r, app: m.app, cap: m.cap });
       }
-      if (men.length !== 11) {
-        if (info === played[side][0]) lost.push(side + ": " + missed);
+      /* ELEVEN NAMES IS NOT ELEVEN MEN. Two rows resolving to the same man
+         used to pass as a complete eleven and put him on the pitch twice, so
+         the count is of distinct shirts. */
+      const distinct = new Set(men.map(m => m.no)).size;
+      if (men.length !== 11 || distinct !== 11) {
+        if (info === played[side][0])
+          lost.push(side + ": " + (missed || "two rows resolved to one man"));
         continue;                       // try the match before it
       }
       if (info !== played[side][0]) walked.push(side + " (back to " + info.when + ")");

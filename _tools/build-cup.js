@@ -88,17 +88,45 @@ async function wikitext(title) {
 const deck = JSON.parse(fs.readFileSync(DECK, "utf8"));
 const BY_CODE = {};
 for (const [name, t] of Object.entries(deck)) if (t.abbr) BY_CODE[t.abbr] = name;
+/* THE SAME COUNTRY UNDER TWO CODES. Wikipedia's flag module answers to more
+   than one alias per country and the 2022 pages use both: the sports tables
+   say ESP and the match boxes say SPA. Each one checked against the deck by
+   hand, because a wrong entry here silently files one side's results under
+   another. */
+const CODE_ALIAS = { SPA: "ESP", HOL: "NED", NGR: "NGA" };
 const unknown = new Set();
 const side = code => {
-  const n = BY_CODE[String(code || "").toUpperCase()];
+  const up = String(code || "").toUpperCase();
+  const n = BY_CODE[CODE_ALIAS[up] || up];
   if (!n) unknown.add(code);
   return n || null;
 };
 
+/* ---------- one side, however it is written ----------
+   {{fb|NED}}, {{fb-rt|USA}}, {{fb|FRA|1974}} for the older kit, and from 2022
+   {{#invoke:flagg|main|unpe|avar=fb|NED}} or {{#invoke:flag|fb|QAT}}. All of
+   them are a three letter code in a template, and which template it is has
+   never meant anything. */
+const CODE_RX = /\{\{\s*(?:fb(?:-rt|-big)?\s*\|\s*([A-Za-z]{3})(?:\s*\|[^}]*)?|#invoke:\s*flagg?\s*\|[^}]*?\|\s*([A-Za-z]{3})\s*)\}\}/g;
+function codeHits(str) {
+  const out = [];
+  CODE_RX.lastIndex = 0;
+  let m;
+  while ((m = CODE_RX.exec(str)))
+    out.push({ code: (m[1] || m[2]).toUpperCase(), end: m.index + m[0].length });
+  return out;
+}
+const codesIn = str => codeHits(str).map(h => h.code);
+
 /* ---------- the group tables ----------
-   Sports table puts the four sides in finishing order as team1..team4, which
-   is the table itself rather than something to be recomputed from results. */
+   Sports table holds the four sides in the order the group finished, which is
+   the table itself rather than something to recompute from results. It writes
+   that order as team1..team4 up to 2018 and as one team_order= line from 2022,
+   and from 2022 the whole thing lives on a template page the group article
+   transcludes. */
 function standings(t) {
+  const order = t.match(/\|\s*team_order\s*=\s*([A-Za-z, ]+)/);
+  if (order) return order[1].split(",").map(x => side(x.trim())).filter((x, i) => i < 4);
   const out = [];
   for (let i = 1; i <= 4; i++) {
     const m = t.match(new RegExp("\\|\\s*team" + i + "\\s*=\\s*([A-Za-z]{3})"));
@@ -106,24 +134,45 @@ function standings(t) {
   }
   return out;
 }
+/* WHERE THE TABLE ACTUALLY IS. From 2022 the group page carries a one line
+   transclusion and the eight tables live together on a template. */
+const tablesPage = t => {
+  const m = t.match(/\{\{\s*(\d{4} FIFA World Cup group tables)\s*\|\s*Group\s*([A-H])/i);
+  return m ? { page: "Template:" + m[1], group: m[2].toUpperCase() } : null;
+};
+const groupSection = (t, g) => {
+  /* THE NEXT SECTION, NOT THE NEXT MENTION. Cutting at the next "|Group " lands
+     inside Group A, because its own class_rules link reads
+     [[...#Tiebreakers|Group stage tiebreakers]]. Only "|Group X=" starts a
+     section. */
+  const heads = [...t.matchAll(/\|Group ([A-H])=/g)];
+  const at = heads.findIndex(h => h[1] === g);
+  if (at < 0) return t;
+  const from = heads[at].index;
+  const to = heads[at + 1] ? heads[at + 1].index : t.length;
+  return t.slice(from, to);
+};
+
 /* ---------- the matches ----------
-   A football box is |team1={{fb-rt|USA}} |score=...|0-3}} |team2={{fb|CZE}},
-   and the dash in the score is an en dash rather than a hyphen. Extra time and
-   penalties only happen in the knockout, where the score shown is the one at
-   the end of extra time with the shootout in brackets after it. */
+   A football box is team1, a score and team2, and the dash in the score is an
+   en dash rather than a hyphen. Extra time and penalties only happen in the
+   knockout, where the score shown is the one at the end of extra time with the
+   shootout in brackets after it. */
 const DASH = "[\\u2013\\u2014-]";
 function boxes(t) {
   const out = [];
-  const re = /\{\{#invoke:Football box\|main([\s\S]*?)\n\}\}/g;
+  /* WITH AND WITHOUT THE WRAPPER: {{#invoke:Football box|main}} up to 2018,
+     {{Football box}} from 2022, which is the same module either way. */
+  const re = /\{\{\s*(?:#invoke:\s*)?Football box\s*(?:\|\s*main)?([\s\S]*?)\n\}\}/gi;
   let m;
   while ((m = re.exec(t))) {
     const b = m[1];
-    const t1 = b.match(/\|\s*team1\s*=\s*\{\{fb[^|}]*\|\s*([A-Za-z]{3})/);
-    const t2 = b.match(/\|\s*team2\s*=\s*\{\{fb[^|}]*\|\s*([A-Za-z]{3})/);
+    const t1 = codesIn((b.match(/\|\s*team1\s*=([^\n]*)/) || ["", ""])[1])[0];
+    const t2 = codesIn((b.match(/\|\s*team2\s*=([^\n]*)/) || ["", ""])[1])[0];
     const sc = b.match(new RegExp("\\|\\s*score\\s*=[^\\n]*?(\\d+)\\s*" + DASH + "\\s*(\\d+)"));
     if (!t1 || !t2 || !sc) continue;
     const pen = b.match(new RegExp("\\|\\s*penaltyscore\\s*=[^\\n]*?(\\d+)\\s*" + DASH + "\\s*(\\d+)"));
-    const row = { a: side(t1[1]), b: side(t2[1]), f: +sc[1], g: +sc[2] };
+    const row = { a: side(t1), b: side(t2), f: +sc[1], g: +sc[2] };
     if (pen) { row.pf = +pen[1]; row.pg = +pen[2]; }
     out.push(row);
   }
@@ -152,28 +201,20 @@ function bracket(t) {
      the two sides are found first and the number after each of them is read
      off, which is far steadier than matching a whole row at once. */
   for (const line of body.split("\n")) {
-    if (!/^\|.*\{\{fb/.test(line)) continue;
-    const codes = [];
-    const cre = /\{\{fb\|([A-Za-z]{3})(?:\|\d+)?\}\}/g;
-    let cm;
-    while ((cm = cre.exec(line))) codes.push(cm[1]);
-    if (codes.length !== 2) continue;
-    const scores = [];
-    let rest = line;
-    rest = line;
-    for (const c of codes) {
-      const at = rest.indexOf("{{fb|" + c);
-      const after = rest.slice(rest.indexOf("}}", at) + 2);
-      const s = after.match(/^[^|]*\|[^\d|]*(\d+)/);
-      scores.push(s ? +s[1] : null);
-      rest = after;
-    }
-    if (scores.some(s => s == null)) continue;
-    const shoot = [];
-    const sre = /\((\d+)\)/g;
-    let sm;
-    while ((sm = sre.exec(line))) shoot.push(+sm[1]);
-    const row = { a: side(codes[0]), b: side(codes[1]), f: scores[0], g: scores[1] };
+    if (!/^\|/.test(line)) continue;
+    const hits = codeHits(line);
+    if (hits.length !== 2) continue;
+    /* THE SCORE IS THE FIRST NUMBER IN THE CELL AFTER EACH SIDE. Reading it
+       that way rather than by splitting the row keeps the bold quotes, the
+       {{aet}} marker and the shootout brackets out of it, all of which sit
+       inside the cells. */
+    const scores = hits.map(h => {
+      const after = line.slice(h.end).match(/^[^|]*\|[^\d|]*(\d+)/);
+      return after ? +after[1] : null;
+    });
+    if (scores.some(x => x == null)) continue;
+    const shoot = [...line.matchAll(/\((\d+)\)/g)].map(x => +x[1]);
+    const row = { a: side(hits[0].code), b: side(hits[1].code), f: scores[0], g: scores[1] };
     if (shoot.length === 2) { row.pf = shoot[0]; row.pg = shoot[1]; }
     out.push(row);
   }
@@ -185,8 +226,13 @@ function bracket(t) {
   for (const g of GROUPS) {
     const t = await wikitext(YEAR + " FIFA World Cup Group " + g);
     if (!t) throw new Error("no page for group " + g);
-    groups[g] = { sides: standings(t), played: boxes(t) };
-  }
+    /* THE TABLE MAY BE SOMEWHERE ELSE. From 2022 the group page transcludes
+       one template that holds all eight, so the transclusion is followed and
+       only that group's section is read. */
+    let table = t;
+    const where = tablesPage(t);
+    if (where) table = groupSection(await wikitext(where.page), where.group);
+    groups[g] = { sides: standings(table), played: boxes(t) };  }
   const ko = bracket(await wikitext(YEAR + " FIFA World Cup knockout stage"));
 
   /* ---------- the draw, read back off the bracket ----------

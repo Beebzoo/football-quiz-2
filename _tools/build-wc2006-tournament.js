@@ -73,6 +73,12 @@ const SQUADS = YEAR + " FIFA World Cup squads";
    better than comparing 2022 to 2006 and calling the difference a bug. */
 const PUBLISHED_BY_YEAR = {
   "2006": { goals: 147, yellows: 345, reds: 28 },
+  /* 2010: 145, and the harvest lands on it exactly, which is the strongest
+     evidence there is that the goal reader is right. */
+  "2010": { goals: 145 },
+  /* 2014: the goal total equalled the 1998 record and is not in dispute. The
+     card counts are deliberately absent rather than typed from memory. */
+  "2014": { goals: 171 },
   "2018": { goals: 169, yellows: 219, reds: 4 },
   "2022": { goals: 172, yellows: 227, reds: 4 },
 };
@@ -148,6 +154,24 @@ const ALIAS = {
   "Carlos Sánchez (Colombian footballer)": {n: "Carlos Sánchez", side: "Colombia"},
   "Alberto Junior Rodríguez": "Alberto Rodríguez",
   "Gabriel Enrique Gómez": "Gabriel Gómez",
+  /* 2014. The squad pages drop the apostrophe and the first name; the match
+     reports keep both. Each checked against assets/wc2014/index.json. */
+  "Nicolas N'Koulou": "Nicolas Nkoulou",
+  "Óscar Boniek García": "Boniek García",
+  "Eduardo da Silva": "Eduardo",
+  "Carlos Armando Gruezo Arboleda": "Carlos Gruezo",
+  /* TWO ROJAS IN ONE TOURNAMENT, Chile's and Ecuador's, and the deck holds
+     both under the surname. Wikipedia tells them apart by birth year, which
+     is information the side does better. */
+  "José Rojas (footballer, born 1983)": {n: "José Manuel Rojas", side: "Chile"},
+  /* 2010. North Korea took two Pak Nam-chols and the squad page numbers them
+     I and II while Wikipedia dates them; the match reports give the born-1985
+     man shirt 4, and shirt 4 in the deck is the first of them. */
+  "Pak Nam-chol (footballer, born 1985)": "Pak Nam-chol I",
+  "Ki Sung-yong": "Ki Sung-yueng",
+  "Ignacio María González": "Ignacio González",
+  "Nikos Spiropoulos": "Nikos Spyropoulos",
+  "Walter Julián Martínez": "Walter Martínez",
   /* on the pitch in Germany, not among the twenty-three their country's squad
      page lists. Two articles disagreeing, not something to paper over. */
   "Hussein Sulaimani": null,
@@ -224,10 +248,34 @@ function goalsIn(tpl) {
   return { n: n, own: own };
 }
 
+
+/* ---------- the matches that got their own article ----------
+   The round's page carries a stub and a {{main|...}} pointing at the real
+   report, so the extras are read off the pages already fetched rather than
+   typed into a table that only ever covers the tournament somebody last
+   looked at. A title of the shape "... (<year> FIFA World Cup)" is a match
+   report and nothing else is. */
+function extraPages(text, had){
+  const out = [];
+  const rx = new RegExp("\\{\\{\\s*main\\s*\\|\\s*([^}|]*\\(" + YEAR + " FIFA World Cup\\))\\s*\\}\\}", "gi");
+  let m;
+  while ((m = rx.exec(text))) {
+    const t = m[1].trim();
+    if (out.indexOf(t) < 0 && had.indexOf(t) < 0) out.push(t);
+  }
+  return out;
+}
+
 (async () => {
   console.log("reading " + PAGES.length + " match pages for " + YEAR + "...");
   let text = "";
   for (const p of PAGES) { text += "\n" + await wikitext(p); }
+  const extra = extraPages(text, PAGES);
+  if (extra.length) {
+    console.log("  following " + extra.length + " match" + (extra.length === 1 ? "" : "es") +
+      " with a page of its own: " + extra.join(", "));
+    for (const p of extra) text += "\n" + await wikitext(p);
+  }
   console.log("  " + Math.round(text.length / 1024) + "KB of wikitext");
 
   /* ---------- goals ---------- */
@@ -240,12 +288,14 @@ function goalsIn(tpl) {
     if (man) { man.g += n; man.og += own; }
   }
   console.log("goals: " + goalEvents + " credited, " + ownEvents + " own goals" +
-    (PUBLISHED ? "   (the tournament had " + PUBLISHED.goals + " in all)" : ""));
+    (PUBLISHED && PUBLISHED.goals ? "   (the tournament had " + PUBLISHED.goals + " in all)" : ""));
 
   /* ---------- cards and appearances, off the line-up tables ---------- */
   /* a line-up row:  |CM ||'''6''' ||[[Danny Fonseca]] || || {{yel|30}}  */
   let yel = 0, red = 0, rows = 0;
-  for (const m of text.matchAll(/^\|\s*[A-Z]{2,3}\s*\|\|[^\n]*?\[\[([^\]|]+)(?:\|[^\]]*)?\]\]([^\n]*)$/gm)) {
+  /* THE POSITION IS SOMETIMES A TOOLTIP: see the note in build-wc2006-xi.js.
+     Without this the 2014 final's cards and appearances are not counted. */
+  for (const m of text.matchAll(/^\|\s*(?:\{\{\s*abbr\s*\|\s*)?[A-Z]{2,3}(?:\s*\|[^}]*\}\})?\s*\|\|[^\n]*?\[\[([^\]|]+)(?:\|[^\]]*)?\]\]([^\n]*)$/gm)) {
     const man = find(m[1]);
     rows++;
     if (!man) continue;
@@ -256,7 +306,8 @@ function goalsIn(tpl) {
     man.y += ys; man.r += rs; yel += ys; red += rs;
   }
   console.log("line-up rows: " + rows + ", yellows " + yel + ", reds " + red +
-    (PUBLISHED ? "   (the tournament had " + PUBLISHED.yellows + " and " + PUBLISHED.reds + ")" : ""));
+    (PUBLISHED && PUBLISHED.yellows != null
+      ? "   (the tournament had " + PUBLISHED.yellows + " and " + PUBLISHED.reds + ")" : ""));
 
   /* ---------- the armband, off the squads page ---------- */
   const sq = await wikitext(SQUADS);

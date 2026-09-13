@@ -5710,6 +5710,12 @@ const POOLS = {
   wc2006: {label:"World Cup 2006", group:"World Cups", of:"classic",
            file:"assets/wc2006/index.json", flags:"assets/natflags/", ext:".png",
            blurb:"Thirty-two nations, and the eleven each of them actually started their last match with."},
+  wc2010: {label:"World Cup 2010", group:"World Cups", of:"classic",
+           file:"assets/wc2010/index.json", flags:"assets/natflags/", ext:".png",
+           blurb:"South Africa. Thirty-two nations, and the eleven each of them started their last match with."},
+  wc2014: {label:"World Cup 2014", group:"World Cups", of:"classic",
+           file:"assets/wc2014/index.json", flags:"assets/natflags/", ext:".png",
+           blurb:"Brazil. Thirty-two nations, and the eleven each of them started their last match with."},
   wc2018: {label:"World Cup 2018", group:"World Cups", of:"classic",
            file:"assets/wc2018/index.json", flags:"assets/natflags/", ext:".png",
            blurb:"Russia. Thirty-two nations, and the eleven each of them started their last match with."},
@@ -5866,7 +5872,7 @@ function setTheme(t){
   applyTheme();
   render();
 }
-const BUILD = "14 Sep 2026 · 01:35";
+const BUILD = "14 Sep 2026 · 01:56";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five
@@ -9235,7 +9241,7 @@ function aiTick(){
 /* EVERY TOURNAMENT THE APP HAS A POOL FOR. Four kilobytes each, fetched like
    every other deck, and a year is simply not offered until both its table and
    its squads have landed. */
-const CUP_YEARS = ["2006", "2018"];
+const CUP_YEARS = ["2006", "2010", "2014", "2018", "2022"];
 const cupPool = y => "wc" + y;
 const CUPS = {};
 let CUP_YEAR = CUP_YEARS[0];

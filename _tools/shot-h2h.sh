@@ -208,6 +208,9 @@ setups.cupwon = `cupStart("Trinidad and Tobago"); cupFiled(3,0); cupFiled(2,0); 
 /* and the second tournament */
 setups.cup2018 = `cupSetYear("2018");`;
 setups.cup2018group = `cupSetYear("2018"); cupStart("Panama"); render();`;
+setups.cup2010 = `cupSetYear("2010");`;
+setups.cup2014 = `cupSetYear("2014");`;
+setups.cup2022 = `cupSetYear("2022");`;
 
 const SHOT_SHAPES = ["4-2-3-1", "4-4-2", "4-3-3", "3-5-2", "5-3-2"];
 const SHOT_LINES = ["high", "mid", "low"];
