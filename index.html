@@ -880,77 +880,11 @@
     letter-spacing:-.03em;text-wrap:balance;
   }
   h1.title .gold{color:var(--turf)}
-  h1.title.ballhero, body.careermode h1.title.ballhero{
-    position:relative;text-transform:uppercase;
-    display:flex;align-items:center;justify-content:center;
-    font-size:clamp(4.1rem,25vw,6.4rem);letter-spacing:.06em;
-    /* room for the half of the ball that stands above the letters */
-    padding:.40em 0 .08em;
-    color:#e9b84c;
-    filter:drop-shadow(0 0 26px rgba(233,184,76,.45)) drop-shadow(0 4px 12px rgba(0,0,0,.5));
-  }
-  /* THE BALL SITS BEHIND THE WORD. It used to stand next to it, which made the
-     two things a row of two things. Behind it, and bigger than the cap height,
-     they read as one mark: the ball shows above and below the letters and the
-     letters cross it. It is off centre on purpose, tucked under the back half,
-     because dead centre reads as an accident rather than a decision. */
-  .ballhero .bwrap{position:relative;display:inline-block;line-height:1}
-  .ballhero .ballimg{
-    position:absolute;z-index:0;pointer-events:none;
-    width:1.3em;height:1.3em;
-    /* high and to the right, so the top of it clears the letters and only its
-       lower left is behind them. Dead centre buries it. */
-    left:63%;top:34%;transform:translate(-50%,-50%);
-    /* knocked back, not blacked out: it still has to look like a football */
-    filter:brightness(.86) saturate(.92) drop-shadow(0 8px 20px rgba(0,0,0,.65));
-  }
-  /* A SCRIM BETWEEN THE TWO. Without it the gold has to survive whatever panel
-     of the ball happens to be under each letter, and the darkest stop in the
-     gradient is #b8860b, which does not survive white. */
-  .ballhero .bwrap::after{
-    content:"";position:absolute;z-index:1;pointer-events:none;
-    inset:-6% -10%;
-    /* a band rather than a disc: it only has to darken the line the letters
-       actually sit on, so the ball keeps its shape above and below */
-    background:radial-gradient(70% 44% at 56% 54%,
-      rgba(5,20,12,.55), rgba(5,20,12,.3) 56%, rgba(5,20,12,0) 84%);
-  }
-  /* and the letters on top of both, with a thin edge rather than a cloud */
-  /* A HALO THAT FOLLOWS THE LETTERS. text-shadow casts into a box and turns
-     gold to mud; drop-shadow works off the glyph alpha, so each letter carries
-     its own dark edge and the gradient still reads where it crosses the white
-     panels of the ball. */
-  .ballhero .goldtext{position:relative;z-index:2;
-    filter:drop-shadow(0 0 2px rgba(5,20,12,.95)) drop-shadow(0 2px 6px rgba(5,20,12,.8));}
-  h1.title.ballhero{cursor:pointer;-webkit-tap-highlight-color:transparent}
-  .ballhero .goldtext{
-    display:inline-block;
-    background:var(--gold-metal);
-    background-size:250% 100%;
-    -webkit-background-clip:text;background-clip:text;
-    -webkit-text-fill-color:transparent;color:transparent;
-    animation:goldshimmer 11s linear infinite;
-  }
+  /* the title's gold sweep. It used to live at the bottom of a block of hero
+     rules that no longer exist, so it sits with the rule that uses it. */
   @keyframes goldshimmer{from{background-position:200% 0}to{background-position:-200% 0}}
-  .ballhero .sp{
-    position:absolute;font-style:normal;pointer-events:none;
-    color:#fff8dc;font-size:.32em;line-height:1;
-    -webkit-text-fill-color:#fff8dc;
-    filter:drop-shadow(0 0 6px #ffe9a8);
-    animation:twinkle 2.2s ease-in-out infinite;
-  }
-  .ballhero .sp.s1{top:-2%;left:8%;animation-delay:0s}
-  .ballhero .sp.s2{top:10%;right:4%;animation-delay:.55s;font-size:.24em}
-  .ballhero .sp.s3{bottom:2%;left:26%;animation-delay:1.1s;font-size:.2em}
-  .ballhero .sp.s4{top:-10%;right:30%;animation-delay:1.65s;font-size:.28em}
-  @keyframes twinkle{
-    0%,100%{opacity:0;transform:scale(.2) rotate(0deg)}
-    50%{opacity:1;transform:scale(1) rotate(45deg)}
-  }
   @media (prefers-reduced-motion:reduce){
-    .ballhero .goldtext,.lbrow.top .fn{animation:none;background-position:50% 0}
-    .ballhero .ballimg{animation:none}
-    .ballhero .sp{animation:none;opacity:.7;transform:scale(.8)}
+    .lbrow.top .fn{animation:none;background-position:50% 0}
   }
   .sub{color:var(--chalk-dim);max-width:36ch}
 
