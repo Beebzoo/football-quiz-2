@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 /* THE REAL TOURNAMENT, AS A TABLE.
  *
- *     node _tools/build-cup.js            dry run, read what it found
- *     node _tools/build-cup.js --write    write assets/cup/2006.json
+ *     node _tools/build-cup.js                      dry run, read what it found
+ *     node _tools/build-cup.js --write              write assets/cup/2006.json
  *     node _tools/build-cup.js --year 2022 --write
+ *     node _tools/build-cup.js --comp euro --year 2004 --write
  *
  * The Cup in the app is a run through a real World Cup, which means it needs
  * the real thing: eight groups in the order they actually finished, all
@@ -14,7 +15,7 @@
  * and twenty-four scores, and a table typed from memory is wrong in exactly
  * the places nobody checks: third and fourth in a group nobody remembers, and
  * the goal difference that separated them. All of it is already in the cache
- * this repo built for build-wc2006-tournament.js, so this reads the same nine
+ * this repo built for build-tournament.js, so this reads the same nine
  * pages and asks them.
  *
  * WHAT COMES OUT AND WHY EACH PIECE IS THERE:
@@ -49,10 +50,11 @@ const https = require("https");
 const crypto = require("crypto");
 
 const REPO = path.join(__dirname, "..");
-const YEAR = (i => (i > -1 && /^\d{4}$/.test(process.argv[i + 1] || "")) ? process.argv[i + 1] : "2006")(process.argv.indexOf("--year"));
-const POOL = "wc" + YEAR;
+const T = require("./_tournament.js").argsOf(process.argv);
+const YEAR = T.year;
+const POOL = T.pool;
 const DECK = path.join(REPO, "assets", POOL, "index.json");
-const OUT = path.join(REPO, "assets", "cup", YEAR + ".json");
+const OUT = path.join(REPO, "assets", "cup", POOL.replace(/^wc/, "") + ".json");
 const CACHE = path.join(__dirname, "_models");
 const UA = "ball2-cup/1.0 (personal quiz project)";
 const WRITE = process.argv.includes("--write");
@@ -62,12 +64,12 @@ const WRITE = process.argv.includes("--write");
    third places, and a round of thirty-two, so the slots and the bracket this
    file builds do not describe it. It stops rather than writing something that
    looks like a tournament and is not. */
-if (+YEAR >= 2026) {
-  console.error("The Cup reads eight groups and a bracket of sixteen. " + YEAR +
-    " has twelve groups and a round of thirty-two, which is a different tournament.");
+if (T.groups.length !== 8) {
+  console.error("The Cup reads eight groups and a bracket of sixteen. " + T.title +
+    " has " + T.groups.length + ", which is a different tournament.");
   process.exit(1);
 }
-const GROUPS = "ABCDEFGH".split("");
+const GROUPS = T.groups;
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 
 if (!fs.existsSync(CACHE)) fs.mkdirSync(CACHE, { recursive: true });
@@ -103,7 +105,7 @@ async function get(url) {
     }
   }
 }
-/* THE SAME CACHE KEY build-wc2006-tournament.js uses, so a repo that has run
+/* THE SAME CACHE KEY build-tournament.js uses, so a repo that has run
    that tool does not fetch a single page to run this one. */
 async function wikitext(title) {
   const key = "wct-" + crypto.createHash("sha1").update(title).digest("hex").slice(0, 16) + ".json";
@@ -184,7 +186,7 @@ function standings(t) {
 /* WHERE THE TABLE ACTUALLY IS. From 2022 the group page carries a one line
    transclusion and the eight tables live together on a template. */
 const tablesPage = t => {
-  const m = t.match(/\{\{\s*(\d{4} FIFA World Cup group tables)\s*\|\s*Group\s*([A-H])/i);
+  const m = t.match(/\{\{\s*((?:\d{4} FIFA World Cup|UEFA Euro \d{4}) group tables)\s*\|\s*Group\s*([A-L])/i);
   return m ? { page: "Template:" + m[1], group: m[2].toUpperCase() } : null;
 };
 const groupSection = (t, g) => {
@@ -271,7 +273,9 @@ function bracket(t) {
 /* the matches a page points at rather than carries */
 function extraPages(text) {
   const out = [];
-  const rx = new RegExp("\\{\\{\\s*main\\s*\\|\\s*([^}|]*\\(" + YEAR + " FIFA World Cup\\))\\s*\\}\\}", "gi");
+  const esc = x => x.replace(/[.*+?^${}()|[\]\\]/g, "\\" + "$" + "&");
+  const rx = new RegExp("\\{\\{\\s*main\\s*\\|\\s*([^}|]*\\(" + esc(T.title) +
+    "\\))\\s*\\}\\}", "gi");
   let m;
   while ((m = rx.exec(text))) { const t = m[1].trim(); if (out.indexOf(t) < 0) out.push(t); }
   return out;
@@ -280,7 +284,7 @@ function extraPages(text) {
 (async () => {
   const groups = {};
   for (const g of GROUPS) {
-    const t = await wikitext(YEAR + " FIFA World Cup Group " + g);
+    const t = await wikitext(T.title + " Group " + g);
     if (!t) throw new Error("no page for group " + g);
     /* THE TABLE MAY BE SOMEWHERE ELSE. From 2022 the group page transcludes
        one template that holds all eight, so the transclusion is followed and
@@ -293,7 +297,14 @@ function extraPages(text) {
     let text = t;
     for (const extra of extraPages(t)) text += "\n" + await wikitext(extra);
     groups[g] = { sides: standings(table), played: boxes(text) };  }
-  const ko = bracket(await wikitext(YEAR + " FIFA World Cup knockout stage"));
+  /* BOTH SPELLINGS OF THE KNOCKOUT PAGE: "stage" at a World Cup and at the
+     older Euros, "phase" at the newer ones, and there is no rule to it. */
+  let koText = "";
+  for (const k of require("./_tournament.js").KNOCKOUT) {
+    koText = await wikitext(T.title + " " + k);
+    if (koText) break;
+  }
+  const ko = bracket(koText);
 
   /* ---------- the draw, read back off the bracket ----------
      Which bracket position each side occupied is not written down anywhere as

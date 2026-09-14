@@ -145,9 +145,14 @@ console.log(men.length + " men across " + Object.keys(sides).length + " sides");
 /* THE SQUAD PAGE FOR THIS POOL. Resolution goes through the article the squad
    page links each man from, which is the whole reason this harvest is exact
    rather than a name search, so it has to be that tournament's own page. */
-const SQUAD_PAGES = [
-  /^wc\d{4}$/.test(POOL) ? POOL.slice(2) + " FIFA World Cup squads" : null,
-].filter(Boolean);
+/* A POOL ID IS A COMPETITION AND A YEAR: wc2006, euro2004. The titles live in
+   _tournament.js so this file and the three harvesters cannot drift apart. */
+const SQUAD_PAGES = (() => {
+  const m = /^(wc|euro)(\d{4})$/.exec(POOL);
+  if (!m) return [];
+  const COMPS = require("./_tournament.js").COMPS;
+  return [COMPS[m[1]].title(m[2]) + " squads"];
+})();
 async function wikitext(title){
   const key = "mlw-" + require("crypto").createHash("sha1").update(title).digest("hex").slice(0, 16) + ".json";
   const hit = cacheRead(key);

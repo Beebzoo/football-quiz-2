@@ -3,7 +3,7 @@
  *     node _tools/build-clubs.js [league...] [--dry] [--force]
  *
  * One file per league: assets/<dir>/clubs.json, shaped exactly like the 2006
- * World Cup deck build-wc2006.js writes, so h2Squad cannot tell them apart.
+ * World Cup deck build-squads.js writes, so h2Squad cannot tell them apart.
  *
  * WHY IT IS HARVESTED AND NOT TYPED. Six leagues is a hundred and twelve clubs
  * and well over twelve hundred players in the elevens alone, and this repo has
@@ -39,7 +39,7 @@
  * WHICH ELEVEN. A squad list is not a team sheet, so there is no starting XI
  * in the data to read. Players are picked by SHIRT NUMBER within each
  * position, lowest first, which is deterministic and checkable and is the same
- * rule build-wc2006.js uses. It is not a claim about who started on Saturday.
+ * rule build-squads.js uses. It is not a claim about who started on Saturday.
  * Shape is 1 GK, 4 DF, 3 MF, 3 FW, which is what the pitch wants.
  *
  * THE BENCH is kept too, twelve more by the same rule, because a substitution
@@ -87,7 +87,7 @@ const LEAGUES = {
 };
 
 /* ---------- being polite to Wikipedia ----------
-   The same lesson build-wc2006.js records: the damage from being throttled is
+   The same lesson build-squads.js records: the damage from being throttled is
    not a crash, it is a build that "succeeds" and writes a deck full of nulls. */
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const once = (url, headers) => new Promise((res, rej) => {
@@ -318,7 +318,7 @@ function parseSquad(w) {
     /* Split on | at depth zero. BOTH kinds of bracket have to be counted: the
        obvious nested template, and name=[[Some Player]] ([[Captain|c]]) whose
        pipe lives inside [[...]]. Counting only braces cut every captain in
-       half when build-wc2006.js first tried it. */
+       half when build-squads.js first tried it. */
     let depth = 0, cur = "";
     for (const ch of m[1]) {
       if (ch === "{" || ch === "[") depth++;
@@ -559,7 +559,7 @@ function codes(names) {
          8F1E32, Chelsea 14349B, Everton 0000ff.
 
          A white shirt with coloured sleeves reads better as the sleeve
-         colour, which is the same rule build-wc2006.js uses. */
+         colour, which is the same rule build-squads.js uses. */
       let kit = kitFromInfobox(w);
       const hit = m.byName.get(key) || m.byName.get(keyBare) ||
                   m.byName.get(slugify(page)) || m.byName.get(slugify(bare(page)));
@@ -643,7 +643,7 @@ function codes(names) {
     }
 
     /* REFUSE TO WRITE A DECK THAT IS KNOWN TO BE WRONG, the same rule
-       build-wc2006.js learned the hard way when a throttled run wrote a deck
+       build-squads.js learned the hard way when a throttled run wrote a deck
        full of nulls and invented country codes and called itself a success. */
     const problems = [];
     if (names.length !== row.teams) problems.push("found " + names.length + " clubs, the league has " + row.teams);

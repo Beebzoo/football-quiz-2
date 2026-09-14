@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 /* THE ELEVEN WHO ACTUALLY STARTED.
  *
- *     node _tools/build-wc2006-xi.js              dry run, read the elevens
- *     node _tools/build-wc2006-xi.js --write      stamp them onto the deck
- *     node _tools/build-wc2006-xi.js --who Italy
+ *     node _tools/build-elevens.js              dry run, read the elevens
+ *     node _tools/build-elevens.js --write      stamp them onto the deck
+ *     node _tools/build-elevens.js --who Italy
  *
- * There is no starting eleven in a squad list, so build-wc2006.js picked one
+ * There is no starting eleven in a squad list, so build-squads.js picked one
  * by shirt number within position and said so in its own comment. That is a
  * reasonable eleven and it is not anybody's eleven. It puts Robben on the
  * Dutch bench and Landzaat in the side, and it has Zaccardo at right-back for
@@ -42,8 +42,9 @@ const REPO = path.join(__dirname, "..");
    every World Cup back to 1930, so the year is the only thing that changes.
    2006 is the default because it is the one whose data has been checked by
    hand, man by man, and it stays the default until another one has been. */
-const YEAR = (i => (i > -1 && /^\d{4}$/.test(process.argv[i + 1] || "")) ? process.argv[i + 1] : "2006")(process.argv.indexOf("--year"));
-const POOL = "wc" + YEAR;
+const T = require("./_tournament.js").argsOf(process.argv);
+const YEAR = T.year;
+const POOL = T.pool;
 const OUT = path.join(REPO, "assets", POOL, "index.json");
 const CACHE = path.join(__dirname, "_models");
 const UA = "ball2-xi/1.0 (personal quiz project)";
@@ -62,13 +63,11 @@ const WHO = (i => i > -1 ? process.argv[i + 1] : null)(process.argv.indexOf("--w
 const EXTRAS = {
   "2006": ["Battle of Nuremberg (2006 FIFA World Cup)"],
 };
-/* TWELVE GROUPS FROM 2026: forty-eight sides, so the group pages run A to L.
-   Read eight of them and everybody whose only matches were in I, J, K or L
-   comes back with no line-up at all. */
-const GROUP_LETTERS = (+YEAR >= 2026 ? "ABCDEFGHIJKL" : "ABCDEFGH").split("");
-const PAGES = GROUP_LETTERS.map(g => YEAR + " FIFA World Cup Group " + g)
-  .concat([YEAR + " FIFA World Cup knockout stage", YEAR + " FIFA World Cup final"])
-  .concat(EXTRAS[YEAR] || []);
+/* EVERY PAGE THIS TOURNAMENT KEEPS, from _tournament.js: the groups (eight
+   at a World Cup, twelve from 2026, four or six at a Euro), both spellings of
+   the knockout page, and the final. A title that does not exist comes back
+   empty and costs one fetch. */
+const PAGES = T.pages.concat(EXTRAS[YEAR] || []);
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const norm = x => String(x || "").normalize("NFD").replace(/[̀-ͯ]/g, "")
@@ -208,6 +207,19 @@ const ALIAS = {
   "Danilo (footballer, born 2001)": {n: "Danilo Santos", side: "Brazil"},
   "Éderson (footballer, born 1999)": {n: "Éderson Silva", side: "Brazil"},
 
+  /* the European Championships */
+  "Georgios Tzavelas": "Georgios Tzavellas",
+  "Frank Leboeuf": "Frank Lebœuf",
+  "Lasse Schøne": "Lasse Schöne",
+  "Artem Besyedin": "Artem Besedin",
+  "Maksym Talovyerov": "Maksym Talovierov",
+  /* TWO EDERS AT EURO 2016, and it was Portugal’s who scored the winner in
+     the final, so the side has to be named. */
+  "Éder (footballer, born 1986)": {n: "Éder", side: "Italy"},
+  "Eder (footballer, born 1987)": {n: "Eder", side: "Portugal"},
+  /* in Sweden’s Euro 2000 line-up and not in their squad list */
+  "Tomas Antonelius": null,
+
   /* 2002. The deck spells him as one word, the reports as three. */
   "Selim Ben Achour": "Benachour",
   /* IN THE LINE-UP AND NOT IN THE SQUAD, which is two Wikipedia articles
@@ -242,8 +254,16 @@ function manIn(side, name, no) {
     break;
   }
   raw = raw.replace(/\s*\([^)]*\)\s*$/, "").trim();
-  const n = norm(raw);
+  /* AN ALIAS FOR ONE TOURNAMENT MUST NOT BREAK ANOTHER. The table is flat
+     across every harvest, so a correction written for South Africa 2010 is
+     applied to Euro 2008 as well, where the squad page spells him the other
+     way round. If the aliased name finds nobody, the name as written is tried,
+     which means an alias can only ever help. */
   const all = [...(t.xi || []), ...(t.bench || [])];
+  const plain = String(name).trim().replace(/\s*\([^)]*\)\s*$/, "").trim();
+  if (norm(raw) !== norm(plain) && !all.some(m => norm(m.full) === norm(raw) || norm(m.n) === norm(raw)))
+    raw = plain;
+  const n = norm(raw);
   /* THE SHIRT DECIDES when the name is anywhere near. One man in a squad wears
      a number, so a spelling that is ambiguous is not ambiguous at all. */
   const shirt = no != null ? all.filter(m => String(m.no) === String(no)) : [];
@@ -415,7 +435,21 @@ function extraPages(text, had){
 (async () => {
   console.log("reading " + PAGES.length + " match pages for " + YEAR + "...");
   let text = "";
-  for (const p of PAGES) text += "\n" + await wikitext(p);
+  /* THE SAME ARTICLE UNDER TWO NAMES. The knockout page is "stage" at a World
+     Cup and at the older Euros and "phase" at the newer ones, so both are
+     offered and one is expected to come back empty. At several Euros one is a
+     REDIRECT to the other and neither does, and the harvest read the knockout
+     twice: Euro 2016 came out with 146 goals against a tournament that had
+     108, which is its knockout stage counted again. */
+  const readAlready = new Set();
+  for (const p of PAGES) {
+    const w = await wikitext(p);
+    if (!w) continue;
+    const sig = w.length + "|" + w.slice(0, 300);
+    if (readAlready.has(sig)) continue;
+    readAlready.add(sig);
+    text += "\n" + w;
+  }
   const extra = extraPages(text, PAGES);
   if (extra.length) {
     console.log("  following " + extra.length + " match" + (extra.length === 1 ? "" : "es") +

@@ -2632,7 +2632,11 @@
   /* the pool switcher: a quiet row of segments above the sides, because it is
      a question about the question rather than the answer */
   .h2poolrow{display:flex;gap:6px;flex-wrap:wrap;margin:2px 0 8px}
-  .h2poolb{flex:1 1 auto;background:var(--panel);border:1px solid var(--line);color:inherit;
+  .h2poolg{font-size:.62rem;letter-spacing:.1em;text-transform:uppercase;opacity:.45;margin:6px 0 2px}
+  /* SIZED TO THE WORD, not stretched to the row: with sixteen pools the last
+     two of a group used to balloon across the whole width and read as a
+     different kind of control from the six above them. */
+  .h2poolb{flex:0 1 auto;background:var(--panel);border:1px solid var(--line);color:inherit;
            border-radius:999px;padding:7px 12px;font:inherit;font-size:.8rem;cursor:pointer;opacity:.75}
   .h2poolb.on{background:var(--green-fill);border-color:var(--on-line);color:var(--green-ink);
               opacity:1;font-weight:700}
@@ -5707,33 +5711,58 @@ const SPEC_META = {
    club pool gets crests and a national pool gets flags without a second
    table. */
 const POOLS = {
-  wc2006: {label:"World Cup 2006", group:"World Cups", of:"classic",
+  wc2006: {label:"World Cup 2006", short:"2006", group:"World Cups", of:"classic",
            file:"assets/wc2006/index.json", flags:"assets/natflags/", ext:".png",
            blurb:"Thirty-two nations, and the eleven each of them actually started their last match with."},
-  wc1998: {label:"World Cup 1998", group:"World Cups", of:"classic",
+  wc1998: {label:"World Cup 1998", short:"1998", group:"World Cups", of:"classic",
            file:"assets/wc1998/index.json", flags:"assets/natflags/", ext:".png",
            blurb:"France. Thirty-two nations, twenty-two men each, and the eleven each of them started their last match with."},
-  wc2002: {label:"World Cup 2002", group:"World Cups", of:"classic",
+  wc2002: {label:"World Cup 2002", short:"2002", group:"World Cups", of:"classic",
            file:"assets/wc2002/index.json", flags:"assets/natflags/", ext:".png",
            blurb:"Korea and Japan. Thirty-two nations, and the eleven each of them started their last match with."},
-  wc2010: {label:"World Cup 2010", group:"World Cups", of:"classic",
+  wc2010: {label:"World Cup 2010", short:"2010", group:"World Cups", of:"classic",
            file:"assets/wc2010/index.json", flags:"assets/natflags/", ext:".png",
            blurb:"South Africa. Thirty-two nations, and the eleven each of them started their last match with."},
-  wc2014: {label:"World Cup 2014", group:"World Cups", of:"classic",
+  wc2014: {label:"World Cup 2014", short:"2014", group:"World Cups", of:"classic",
            file:"assets/wc2014/index.json", flags:"assets/natflags/", ext:".png",
            blurb:"Brazil. Thirty-two nations, and the eleven each of them started their last match with."},
-  wc2018: {label:"World Cup 2018", group:"World Cups", of:"classic",
+  wc2018: {label:"World Cup 2018", short:"2018", group:"World Cups", of:"classic",
            file:"assets/wc2018/index.json", flags:"assets/natflags/", ext:".png",
            blurb:"Russia. Thirty-two nations, and the eleven each of them started their last match with."},
   /* FORTY-EIGHT SIDES and twenty-six men each, which is why it has a pool and
      no Cup: 2026 is twelve groups, the eight best third places and a round of
      thirty-two, and the Cup reads eight groups and a bracket of sixteen. */
-  wc2026: {label:"World Cup 2026", group:"World Cups", of:"classic",
+  wc2026: {label:"World Cup 2026", short:"2026", group:"World Cups", of:"classic",
            file:"assets/wc2026/index.json", flags:"assets/natflags/", ext:".png",
            blurb:"North America, and forty-eight of them. The eleven each side started their last match with."},
-  wc2022: {label:"World Cup 2022", group:"World Cups", of:"classic",
+  wc2022: {label:"World Cup 2022", short:"2022", group:"World Cups", of:"classic",
            file:"assets/wc2022/index.json", flags:"assets/natflags/", ext:".png",
            blurb:"Thirty-two nations from Qatar, twenty-six men each, and the eleven each of them last put out."},
+  /* THE EUROPEAN CHAMPIONSHIPS. Sixteen sides until 2016 and twenty-four
+     after, and the best career coverage of any pool in the app: a European
+     tournament is played almost entirely by men from the six leagues the
+     decks are written for. */
+  euro2000: {label:"Euro 2000", short:"2000", group:"Euros", of:"classic",
+           file:"assets/euro2000/index.json", flags:"assets/natflags/", ext:".png",
+           blurb:"Belgium and the Netherlands. Sixteen nations, and the eleven each of them started their last match with."},
+  euro2004: {label:"Euro 2004", short:"2004", group:"Euros", of:"classic",
+           file:"assets/euro2004/index.json", flags:"assets/natflags/", ext:".png",
+           blurb:"Portugal, and Greece. Sixteen nations, and the eleven each of them started their last match with."},
+  euro2008: {label:"Euro 2008", short:"2008", group:"Euros", of:"classic",
+           file:"assets/euro2008/index.json", flags:"assets/natflags/", ext:".png",
+           blurb:"Austria and Switzerland. Sixteen nations, and the eleven each of them started their last match with."},
+  euro2012: {label:"Euro 2012", short:"2012", group:"Euros", of:"classic",
+           file:"assets/euro2012/index.json", flags:"assets/natflags/", ext:".png",
+           blurb:"Poland and Ukraine. Sixteen nations, and the eleven each of them started their last match with."},
+  euro2016: {label:"Euro 2016", short:"2016", group:"Euros", of:"classic",
+           file:"assets/euro2016/index.json", flags:"assets/natflags/", ext:".png",
+           blurb:"France, and Portugal. Twenty-four nations, and the eleven each of them started their last match with."},
+  euro2020: {label:"Euro 2020", short:"2020", group:"Euros", of:"classic",
+           file:"assets/euro2020/index.json", flags:"assets/natflags/", ext:".png",
+           blurb:"Played in 2021, across the continent. Twenty-four nations, and the eleven each of them started their last match with."},
+  euro2024: {label:"Euro 2024", short:"2024", group:"Euros", of:"classic",
+           file:"assets/euro2024/index.json", flags:"assets/natflags/", ext:".png",
+           blurb:"Germany. Twenty-four nations, and the eleven each of them started their last match with."},
   /* FORTY REAL STARTING ELEVENS, from Brazil 1970 to Argentina 2022. No bench,
      because a final's line-up is eleven men and some of these predate
      substitutes; no careers, so every man asks the quiz's own bank, which is
@@ -5884,7 +5913,7 @@ function setTheme(t){
   applyTheme();
   render();
 }
-const BUILD = "14 Sep 2026 · 02:53";
+const BUILD = "14 Sep 2026 · 03:21";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five
@@ -7869,6 +7898,32 @@ function h2Pools(){
   const mine = (QUIZZES[S.mode] || {}).pool;
   void mine;
   return Object.keys(POOLS).filter(id => h2PoolOk(id) && TEAMS[id]);
+}
+/* SIXTEEN POOLS IS NOT A ROW, IT IS A LIST. The registry has carried a group
+   on every pool since it was written and nothing read it until there were
+   eight World Cups and seven Euros. Inside a group the shared word comes off:
+   "World Cup 1998" under a heading that says World Cups is just 1998. */
+function h2PoolPickHTML(){
+  const ids = h2Pools();
+  if(ids.length < 2) return "";
+  const by = {}, order = [];
+  for(const id of ids){
+    const g = POOLS[id].group || "";
+    if(!by[g]){ by[g] = []; order.push(g); }
+    by[g].push(id);
+  }
+  /* IN ORDER INSIDE A GROUP, which for a shelf of tournaments is the year.
+     The registry is in the order the pools were added, which is the order
+     somebody built them and no use to anybody reading it. */
+  for(const g of order) if(by[g].every(id => POOLS[id].short))
+    by[g].sort((a, b) => POOLS[a].short < POOLS[b].short ? -1 : 1);
+  const one = g => '<div class="h2poolrow">' + by[g].map(id =>
+    '<button class="h2poolb' + (h2PoolId() === id ? " on" : "") +
+    '" onclick="h2SetPool(' + JSON.stringify(id).replace(/"/g, "&quot;") + ')">' +
+    esc((by[g].length > 1 && POOLS[id].short) || POOLS[id].label) + '</button>').join("") + '</div>';
+  return order.map(g => (g && by[g].length > 1
+    ? '<div class="h2poolg">' + esc(g) + '</div>' + one(g)
+    : one(g))).join("");
 }
 function h2SetPool(id){
   audio();
@@ -10905,10 +10960,7 @@ function h2Render(st){
       /* WHICH SET OF SIDES, when there is more than one to choose from. It sits
          above the grid because it is the same question one level up. */
       ((h2Pools().length > 1 && !picked.length)
-        ? '<div class="h2poolrow">' + h2Pools().map(id =>
-            '<button class="h2poolb' + (h2PoolId() === id ? " on" : "") +
-            '" onclick="h2SetPool(' + JSON.stringify(id).replace(/"/g, "&quot;") + ')">' +
-            esc(POOLS[id].label) + '</button>').join("") + '</div>' +
+        ? h2PoolPickHTML() +
           (POOLS[h2PoolId()] && POOLS[h2PoolId()].blurb
             ? '<div class="h2hintline" style="margin-top:0">' + esc(POOLS[h2PoolId()].blurb) + '</div>' : "")
         : "") +

@@ -185,6 +185,10 @@ console.log("\n--- the finals, by name ---");
     "wc2014/Argentina": ["Romero", "Zabaleta", "Demichelis", "Garay", "Rojo", "Mascherano", "Biglia", "Pérez", "Messi", "Higuaín", "Lavezzi"],
     "wc2018/France":    ["Lloris", "Pavard", "Varane", "Umtiti", "Hernandez", "Kanté", "Pogba", "Mbappé", "Griezmann", "Matuidi", "Giroud"],
     "wc2022/Argentina": ["Martínez", "Molina", "Romero", "Otamendi", "Tagliafico", "De Paul", "Fernández", "Mac Allister", "Messi", "Álvarez", "Di María"],
+    "euro2004/Greece":   ["Nikopolidis", "Seitaridis", "Dellas", "Kapsis", "Fyssas", "Zagorakis", "Katsouranis", "Basinas", "Giannakopoulos", "Charisteas", "Vryzas"],
+    "euro2004/Portugal": ["Ricardo", "Miguel", "Andrade", "Carvalho", "Valente", "Costinha", "Maniche", "Deco", "Figo", "Ronaldo", "Pauleta"],
+    "euro2016/Portugal": ["Patrício", "Cédric", "Pepe", "Fonte", "Guerreiro", "Carvalho", "Sanches", "Mário", "Nani", "Ronaldo", "Silva"],
+    "euro2020/Italy":    ["Donnarumma", "Emerson", "Bonucci", "Chiellini", "Di Lorenzo", "Jorginho", "Verratti", "Barella", "Insigne", "Immobile", "Chiesa"],
   };
   const norm = x => String(x || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z]/g, "");
   for (const [where, want] of Object.entries(XI)) {

@@ -2,12 +2,12 @@
 /* WHAT EACH MAN ACTUALLY DID IN GERMANY.
  *
  * RUN IT AFTER THE ELEVENS. The pipeline is squads, then the real elevens,
- * then this, then the careers: build-wc2006-xi.js rewrites every position to
+ * then this, then the careers: build-elevens.js rewrites every position to
  * the one the man actually played, and the traits below read positions.
  *
- *     node _tools/build-wc2006-tournament.js            dry run, read the table
- *     node _tools/build-wc2006-tournament.js --write    stamp it onto the deck
- *     node _tools/build-wc2006-tournament.js --who "Klose"
+ *     node _tools/build-tournament.js            dry run, read the table
+ *     node _tools/build-tournament.js --write    stamp it onto the deck
+ *     node _tools/build-tournament.js --who "Klose"
  *
  * The Dugout wants traits, and a trait has to come from somewhere. Typing one
  * out of memory is how a quiz ends up telling a room that somebody was a
@@ -45,8 +45,9 @@ const REPO = path.join(__dirname, "..");
    every World Cup back to 1930, so the year is the only thing that changes.
    2006 is the default because it is the one whose data has been checked by
    hand, man by man, and it stays the default until another one has been. */
-const YEAR = (i => (i > -1 && /^\d{4}$/.test(process.argv[i + 1] || "")) ? process.argv[i + 1] : "2006")(process.argv.indexOf("--year"));
-const POOL = "wc" + YEAR;
+const T = require("./_tournament.js").argsOf(process.argv);
+const YEAR = T.year;
+const POOL = T.pool;
 const OUT = path.join(REPO, "assets", POOL, "index.json");
 const CACHE = path.join(__dirname, "_models");
 const UA = "ball2-tournament/1.0 (personal quiz project)";
@@ -60,14 +61,12 @@ const WHO = (i => i > -1 ? process.argv[i + 1] : null)(process.argv.indexOf("--w
 const EXTRAS = {
   "2006": ["Battle of Nuremberg (2006 FIFA World Cup)"],
 };
-/* TWELVE GROUPS FROM 2026: forty-eight sides, so the group pages run A to L.
-   Read eight of them and everybody whose only matches were in I, J, K or L
-   comes back with no line-up at all. */
-const GROUP_LETTERS = (+YEAR >= 2026 ? "ABCDEFGHIJKL" : "ABCDEFGH").split("");
-const PAGES = GROUP_LETTERS.map(g => YEAR + " FIFA World Cup Group " + g)
-  .concat([YEAR + " FIFA World Cup knockout stage", YEAR + " FIFA World Cup final"])
-  .concat(EXTRAS[YEAR] || []);
-const SQUADS = YEAR + " FIFA World Cup squads";
+/* EVERY PAGE THIS TOURNAMENT KEEPS, from _tournament.js: the groups (eight
+   at a World Cup, twelve from 2026, four or six at a Euro), both spellings of
+   the knockout page, and the final. A title that does not exist comes back
+   empty and costs one fetch. */
+const PAGES = T.pages.concat(EXTRAS[YEAR] || []);
+const SQUADS = T.title + " squads";
 
 /* what the published tournament totals were, so the harvest can be checked
    against something rather than against itself */
@@ -75,21 +74,32 @@ const SQUADS = YEAR + " FIFA World Cup squads";
    something outside itself rather than against its own arithmetic. A year
    with no row here simply prints its counts and claims nothing, which is
    better than comparing 2022 to 2006 and calling the difference a bug. */
+/* KEYED BY POOL, not by year: there is a 2004 European Championship and there
+   will be a 2030 World Cup, and a table keyed on the number alone would put
+   one tournament’s totals against another. */
 const PUBLISHED_BY_YEAR = {
-  "2006": { goals: 147, yellows: 345, reds: 28 },
+  "wc2006": { goals: 147, yellows: 345, reds: 28 },
   /* 1998: 171, the record until 2014 equalled it. */
-  "1998": { goals: 171 },
-  "2002": { goals: 161 },
+  "wc1998": { goals: 171 },
+  /* the European Championships, goal totals only: the card counts are not
+     typed from memory. */
+  "euro2000": { goals: 85 },
+  "euro2004": { goals: 77 },
+  "euro2008": { goals: 77 },
+  "euro2012": { goals: 76 },
+  "euro2016": { goals: 108 },
+  "euro2020": { goals: 142 },
+  "wc2002": { goals: 161 },
   /* 2010: 145, and the harvest lands on it exactly, which is the strongest
      evidence there is that the goal reader is right. */
-  "2010": { goals: 145 },
+  "wc2010": { goals: 145 },
   /* 2014: the goal total equalled the 1998 record and is not in dispute. The
      card counts are deliberately absent rather than typed from memory. */
-  "2014": { goals: 171 },
-  "2018": { goals: 169, yellows: 219, reds: 4 },
-  "2022": { goals: 172, yellows: 227, reds: 4 },
+  "wc2014": { goals: 171 },
+  "wc2018": { goals: 169, yellows: 219, reds: 4 },
+  "wc2022": { goals: 172, yellows: 227, reds: 4 },
 };
-const PUBLISHED = PUBLISHED_BY_YEAR[YEAR] || null;
+const PUBLISHED = PUBLISHED_BY_YEAR[POOL] || null;
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 const norm = x => String(x || "").normalize("NFD").replace(/[̀-ͯ]/g, "")
@@ -234,6 +244,19 @@ const ALIAS = {
   "Danilo (footballer, born July 1991)": {n: "Danilo Luiz", side: "Brazil"},
   "Danilo (footballer, born 2001)": {n: "Danilo Santos", side: "Brazil"},
   "Éderson (footballer, born 1999)": {n: "Éderson Silva", side: "Brazil"},
+
+  /* the European Championships */
+  "Georgios Tzavelas": "Georgios Tzavellas",
+  "Frank Leboeuf": "Frank Lebœuf",
+  "Lasse Schøne": "Lasse Schöne",
+  "Artem Besyedin": "Artem Besedin",
+  "Maksym Talovyerov": "Maksym Talovierov",
+  /* TWO EDERS AT EURO 2016, and it was Portugal’s who scored the winner in
+     the final, so the side has to be named. */
+  "Éder (footballer, born 1986)": {n: "Éder", side: "Italy"},
+  "Eder (footballer, born 1987)": {n: "Eder", side: "Portugal"},
+  /* in Sweden’s Euro 2000 line-up and not in their squad list */
+  "Tomas Antonelius": null,
   "Selim Ben Achour": "Selim Benachour",
   "Mohammed Al-Jahani": null,
 
@@ -261,6 +284,11 @@ function find(name, side, no) {
     break;
   }
   raw = raw.replace(/\s*\([^)]*\)\s*$/, "").trim();
+  /* AN ALIAS FOR ONE TOURNAMENT MUST NOT BREAK ANOTHER. The table is flat
+     across every harvest, so if the aliased name matches nobody in this deck,
+     the name as written is tried instead. An alias can only ever help. */
+  const plain = String(name).trim().replace(/\s*\([^)]*\)\s*$/, "").trim();
+  if (norm(raw) !== norm(plain) && !byFull[norm(raw)] && !bySur[norm(raw)]) { raw = plain; want = null; }
   /* a side named in the alias is as good as one named by the caller, and the
      callers below read a concatenated page and have none */
   if (want) side = want;
@@ -354,7 +382,21 @@ function goalsPlain(tail) {
 (async () => {
   console.log("reading " + PAGES.length + " match pages for " + YEAR + "...");
   let text = "";
-  for (const p of PAGES) { text += "\n" + await wikitext(p); }
+  /* THE SAME ARTICLE UNDER TWO NAMES. The knockout page is "stage" at a World
+     Cup and at the older Euros and "phase" at the newer ones, so both are
+     offered and one is expected to come back empty. At several Euros one is a
+     REDIRECT to the other and neither does, and the harvest read the knockout
+     twice: Euro 2016 came out with 146 goals against a tournament that had
+     108, which is its knockout stage counted again. */
+  const readAlready = new Set();
+  for (const p of PAGES) {
+    const w = await wikitext(p);
+    if (!w) continue;
+    const sig = w.length + "|" + w.slice(0, 300);
+    if (readAlready.has(sig)) continue;
+    readAlready.add(sig);
+    text += "\n" + w;
+  }
   const extra = extraPages(text, PAGES);
   if (extra.length) {
     console.log("  following " + extra.length + " match" + (extra.length === 1 ? "" : "es") +
@@ -380,7 +422,7 @@ function goalsPlain(tail) {
   /* ---------- cards and appearances, off the line-up tables ---------- */
   /* a line-up row:  |CM ||'''6''' ||[[Danny Fonseca]] || || {{yel|30}}  */
   let yel = 0, red = 0, rows = 0;
-  /* THE POSITION IS SOMETIMES A TOOLTIP: see the note in build-wc2006-xi.js.
+  /* THE POSITION IS SOMETIMES A TOOLTIP: see the note in build-elevens.js.
      Without this the 2014 final's cards and appearances are not counted. */
   /* A REAL SHIRT NUMBER, which keeps the technical staff out: 2026 books
      assistant coaches under "Other disciplinary actions" with an em dash where

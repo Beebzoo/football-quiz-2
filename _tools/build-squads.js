@@ -1,6 +1,9 @@
 /* The 2006 World Cup squads, for One on One's team picker.
  *
- *     node _tools/build-wc2006.js [--dry]
+ *     node _tools/build-squads.js                       the 2006 World Cup
+ *     node _tools/build-squads.js --year 2018
+ *     node _tools/build-squads.js --comp euro --year 2004
+ *     node _tools/build-squads.js --dry                  read it, write nothing
  *
  * WHY IT IS HARVESTED AND NOT TYPED. Thirty-two squads is 352 names in the
  * elevens alone, and this repo has learned twice over that a name typed from
@@ -35,8 +38,9 @@ const REPO = path.join(__dirname, "..");
    every World Cup back to 1930, so the year is the only thing that changes.
    2006 is the default because it is the one whose data has been checked by
    hand, man by man, and it stays the default until another one has been. */
-const YEAR = (i => (i > -1 && /^\d{4}$/.test(process.argv[i + 1] || "")) ? process.argv[i + 1] : "2006")(process.argv.indexOf("--year"));
-const POOL = "wc" + YEAR;
+const T = require("./_tournament.js").argsOf(process.argv);
+const YEAR = T.year;
+const POOL = T.pool;
 const OUT = path.join(REPO, "assets", POOL, "index.json");
 const DRY = process.argv.includes("--dry");
 /* THE USER AGENT IS NOT DECORATION, it is the difference between a build that
@@ -94,6 +98,21 @@ async function get(url, tries = 4) {
     }
   }
 }
+
+/* A NAME IS NOT ALWAYS A LINK. {{sortname|Paulo|Ferreira}} is a template that
+   exists so a table sorts on the family name, and the Euro pages use it freely
+   where the World Cup pages use a plain link. It takes a first name, a family
+   name, and optionally the article to link to. */
+const sortnames = t => String(t)
+  /* {{sortname|Paulo|Ferreira}} is a first name and a family name */
+  /* EITHER HALF MAY BE EMPTY: {{sortname||Cédric|Cédric Soares}} is a man with
+     one name, and requiring both left Portugal a number 21 called nothing. */
+  .replace(/\{\{\s*sortname\s*\|\s*([^|}]*)\s*\|\s*([^|}]*)(?:\s*\|[^}]*)?\}\}/gi,
+    (m, a, b) => (a.trim() + " " + b.trim()).trim())
+  /* {{sort|Eder|[[Éder (footballer, born 1986)|Éder]]}} is a sort key and a
+     display value, and the display value is the name, link and all. Italy went
+     to Euro 2016 with a number 17 called nothing at all. */
+  .replace(/\{\{\s*sort\s*\|[^|}]*\|([\s\S]*?)\}\}/gi, (m, a) => a.trim());
 
 /* [[Álvaro Mesén]] -> Álvaro Mesén ; [[Luis Marín Murillo|Luis Marín]] -> Luis Marín */
 function unlink(t) {
@@ -177,7 +196,10 @@ function parseSquads(wikitext) {
            behind, plus the sentence after it: Serbia and Montenegro shipped
            a bench man called "squad." whose full name was four hundred
            characters of UEFA citation. Cut first, clean second. */
-        name: unlink(String(f.name).split(/<ref|{{/)[0]),
+        /* THE TEMPLATE FIRST, then the split: splitting at the first {{ is
+           how the reference templates that trail a name are thrown away, and
+           on a sortname it threw away the name. */
+        name: unlink(sortnames(String(f.name)).split(/<ref|{{/)[0]),
         caps: parseInt(f.caps, 10) || 0,
         club: unlink(f.club || ""),
       });
@@ -225,14 +247,17 @@ function pickXI(players) {
 (async () => {
   console.log("fetching the squads...");
   const raw = await get("https://en.wikipedia.org/w/api.php?action=parse" +
-    "&page=" + encodeURIComponent(YEAR + " FIFA World Cup squads") + "&prop=wikitext&format=json&formatversion=2");
+    "&page=" + encodeURIComponent(T.title + " squads") + "&prop=wikitext&redirects=1&format=json&formatversion=2");
   const wikitext = JSON.parse(raw).parse.wikitext;
 
   const teams = parseSquads(wikitext);
   /* HOW MANY SIDES A WORLD CUP HAS. Thirty-two from 1998 to 2022, and
      forty-eight from 2026. Printed rather than asserted, because a harvest
      that finds forty-seven is worth looking at whichever year it is. */
-  const EXPECTED = +YEAR >= 2026 ? 48 : 32;
+  /* HOW MANY SIDES, from the groups this competition has rather than from a
+     number typed here: four a group, and the group letters live in
+     _tournament.js because they are the thing that differs. */
+  const EXPECTED = T.groups.length * 4;
   console.log("squads parsed: " + teams.length + " (expected " + EXPECTED + ")");
   if (teams.length !== 32) console.log("  !! not 32, check the article's headings");
 
