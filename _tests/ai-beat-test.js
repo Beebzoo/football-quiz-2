@@ -161,6 +161,13 @@ const check = (n, c, x) => {
     ["setting a shape", fresh + 'S.h2h.shaping = 1; S.phase = "h_shape"; render();'],
     ["spending the traits", fresh + 'S.h2h.tset = 1; S.phase = "h_traits"; render();'],
     ["calling the toss", fresh + 'S.players[0].ai = "route1"; S.h2h.tossed = false; S.h2h.flipping = false; S.phase = "h_toss"; render();'],
+    /* THE TOSS IS TWO DECISIONS NOW, not one. A computer that calls and spins
+       in the same instant swallows the only thing worth watching, so the call
+       draws the screen and stops and the coin is booked behind it like any
+       other beat. This is that second half: he has called, the coin is still in
+       his hand, and it has its own timer to go stale. */
+    ["throwing the coin up", fresh + 'S.players[0].ai = "route1"; S.h2h.tossed = false; S.h2h.flipping = false; ' +
+      'S.h2h.call = "heads"; S.h2h.result = "tails"; S.phase = "h_toss"; render();'],
     ["kicking off", fresh + 'S.h2h.tossed = true; S.h2h.who = 1; S.phase = "h_toss"; render();'],
     ["marking two of them", onThePitch("manager", 0) + 'S.h2h.markedAgainst = 1; S.phase = "h_mark"; render();'],
     ["reading his question", onThePitch("pitch", 1) + 'S.phase = "h_q"; render();'],

@@ -91,7 +91,13 @@ const check = (n, c, x) => {
           case "h_save": case "h_sjudge": case "h_tackle": case "h_tjudge": return H.who === 1;
           case "h_sub": return H.sub && H.sub.w === 0;
           case "h_ft": return true;
-          case "h_pens": return H.who === 0;
+          /* THE NEXT TAKER, not the last one. H.who at this screen is still
+             whoever took the previous kick, which is why the driver used to
+             read it and tap the wrong man's button. The driver reads h2SoNext
+             now, so the human's half of the rule has to move with it: leave it
+             on H.who and the pair of them cover nothing between the computer's
+             kick and the human's, and the shootout sits there forever. */
+          case "h_pens": return H.so ? (H.so.first + H.so.n) % 2 === 0 : H.who === 0;
           default: return false;
         }
       };

@@ -1129,6 +1129,25 @@
       0 12px 30px rgba(0,0,0,.5);
     overflow:hidden;
   }
+  /* THE CARD ARRIVES, and it arrives the same way whoever is answering. It used
+     to simply be there, on your question and on his alike, which sounds like
+     nothing until you play a solo match: his card appears in the same frame his
+     reading beat ends, so the two land on top of each other and the card reads
+     as the screen redrawing rather than as something being put in front of you.
+     Yours was no better, it was just never noticed, because you had your thumb
+     on the button that caused it.
+     A one-render class rather than a rule on .qcard, because the reveal is a
+     redraw of the SAME question: a card carrying the animation outright played
+     the whole entrance again the moment the answer was shown. The flag is set
+     where a question is actually drawn, in h2Draw, and spent by the first card
+     made out of it. The spectacular round already does this with speccardin,
+     which is where the timing came from. */
+  .qcard.qin{animation:qcardin .34s cubic-bezier(.2,.9,.3,1.05) both}
+  @keyframes qcardin{
+    from{opacity:0;transform:translateY(18px) scale(.985)}
+    to{opacity:1;transform:none}
+  }
+  @media (prefers-reduced-motion: reduce){ .qcard.qin{animation:none} }
   /* the same dot grid and scanlines the board carries. Without them the card
      was the board's colour but not its surface, which is most of why the two
      screens did not feel like one machine. Decoration only, never taps. */
@@ -1945,6 +1964,60 @@
     0%,100%{transform:translate(-50%,50%) scale(1);opacity:.95}
     50%{transform:translate(-50%,50%) scale(1.18);opacity:.55}
   }
+  /* THE EYE HAS TO LAND. The camera swings for .8s and, until this went in, the
+     next screen was already sitting there and the computer was already deciding
+     on top of it, so the swing read as a wipe between two screens rather than as
+     the moment the ball changed hands.
+     So the pitch holds. .landing is on it for the swing plus a beat: nothing is
+     tappable, his own men are not awake yet, and the ring under the man on the
+     ball gets one deliberate pulse instead of its endless breathing, which is
+     the only thing on the screen saying who has it. Then .lit arrives on the
+     next render and the men he can find come up.
+     Both are one-render flags in the JS, the way the challenge and the flight
+     already are, because a class carrying an animation replays the whole thing
+     every time the screen redraws, and this screen redraws constantly.
+     The fade rides on the CHILDREN and not on the man, for the reason written
+     out at .h2man.them above: opacity below 1 forces transform-style flat and
+     lays the whole eleven down in the grass. */
+  .h2pitch.landing .h2man:not(.them):not(.hold) > *{opacity:.7}
+  .h2pitch.landing .h2ring{animation:h2ringland var(--land,1320ms) cubic-bezier(.3,.9,.35,1) both}
+  @keyframes h2ringland{
+    0%{transform:translate(-50%,50%) scale(.55);opacity:0}
+    58%{transform:translate(-50%,50%) scale(1.24);opacity:1}
+    100%{transform:translate(-50%,50%) scale(1);opacity:.95}
+  }
+  /* and the beat after it. A transition would be the obvious way to do this and
+     it does nothing at all here: the stage is written with innerHTML, so every
+     man is a brand new element with no previous value to travel from. */
+  .h2pitch.lit .h2man.can .fig.pm .f-torso{animation:h2lightup .34s ease-out both}
+  @keyframes h2lightup{
+    from{box-shadow:0 0 0 1px rgba(255,255,255,0)}
+    to{box-shadow:0 0 0 1px rgba(255,255,255,.32)}
+  }
+  /* and the one line on this screen that has to be read at a glance. It is the
+     same caption the screen a beat later carries, asked for in a heavier voice
+     for the one render where it is the only thing being said. */
+  .h2where.h2land{font-weight:700;opacity:1}
+  .h2where.h2land b{color:#f7e3a6}
+  /* REDUCED MOTION. Every track here is decoration over a hold that still
+     happens in the JS, so killing them costs nothing that matters: the pitch is
+     simply already turned, the ring is already there, the men are already lit,
+     and a person is still given the beat to see whose ball it is. The endless
+     ring goes with them, because a marker that breathes forever is exactly the
+     thing the setting is asked for. */
+  @media (prefers-reduced-motion: reduce){
+    .h2pitch.turned,
+    .h2pitch.lit .h2man.can .fig.pm .f-torso{animation:none}
+    /* THE RING IS CENTRED BY ITS OWN ANIMATION AND BY NOTHING ELSE. The base
+       rule has left:50% and no transform at all: the translate(-50%,50%) that
+       puts the marker under the man's feet lives only inside the keyframes, so
+       animation:none on its own leaves it half its width to the right of the
+       man it is marking and a few pixels high. The coin's shadow fifteen
+       hundred lines down is the same shape done right: .cshadow carries its own
+       translateX(-50%) and its keyframes only repeat it. Put it back here. */
+    .h2ring,.h2pitch.landing .h2ring{animation:none;transform:translate(-50%,50%)}
+    .h2pitch.landing .h2man:not(.them):not(.hold) > *{opacity:1}
+  }
   .h2man.hold .fig.pm{filter:drop-shadow(0 0 9px #f5dd9a) drop-shadow(0 3px 4px rgba(0,0,0,.6))
     brightness(1.08)}
   .h2man.hold .h2lb{color:#f7e3a6;text-shadow:0 1px 3px rgba(0,0,0,.98),0 0 8px rgba(245,221,150,.5)}
@@ -2066,6 +2139,20 @@
   body.pixel .h2man.can .fig.pm .f-torso{box-shadow:0 0 0 var(--ow) var(--o),
     inset calc(var(--px) * -1) 0 0 0 rgba(0,0,0,.28),
     0 0 0 calc(var(--ow) + 1px) rgba(255,255,255,.5)}
+  /* AND THE MEN LIGHTING UP AFTER THE SWING DO NOT UNDO IT. h2lightup ends on
+     the night look's box-shadow, and an animation beats a plain declaration
+     whatever the specificity says, so with both-fill holding that last frame
+     the hard rim above was replaced by the soft white one for as long as .lit
+     sat on the pitch, which is the whole time somebody is choosing a pass. The
+     rim is the sprite's own way of saying a man can be found, so the sprite
+     keeps it and does without the fade, the way .h2ring and the scorebug halo
+     already do.
+     The .lit qualifier is deliberately left off. The animation only exists
+     under .lit in the first place, and pixel-test reads its class names out of
+     the rendered markup, where the flag is written as " lit" with a leading
+     space and so never lands in that corpus. A selector naming it here would
+     read as dead and fail the block's own test. */
+  body.pixel .h2pitch .h2man.can .fig.pm .f-torso{animation:none}
 
   /* ---------------- SPRITES STEP ----------------
      The keyframes are untouched. Only the timing changes, and only here: a
@@ -2161,6 +2248,7 @@
   body.pixel .sb-flag{border-radius:0;box-shadow:0 0 0 1px #0b0b0b}
   body.pixel .sb-mid s{border-radius:0}
   body.pixel .sb-t.on::after{box-shadow:none;animation:none}
+  body.pixel .sb-dots s{border-radius:0;width:2px;height:2px}
   body.pixel .h2ctier{border-radius:0}
 
   /* ---------------- the ground the pitch sits on ----------------
@@ -2938,6 +3026,32 @@
   .sb-names em{font-style:normal;color:var(--text-dim);opacity:.6;font-size:.58rem;letter-spacing:.14em;
     align-self:center}
   .sb-names span.on{opacity:1;color:var(--pick-ink)}
+  /* HE IS DECIDING. Three dots next to his name for exactly as long as a beat
+     is running, because the one thing a solo player cannot see is that it is
+     not his turn: the screen changing is what happens when it IS his turn, so
+     it cannot also be the tell that it is not. Without this he looks away on
+     the computer's ball and misses the half of the match he came for.
+
+     They tick off the beat itself rather than off a made-up duration, which
+     matters more now that the pauses come out of a band table instead of one
+     number. A BALL question he sits on for three seconds gets three seconds of
+     dots and a country he is only naming gets one, so the wait has a length
+     you can see rather than a spinner that means nothing. */
+  .sb-dots{display:inline-flex;gap:3px;margin-left:5px;vertical-align:middle}
+  /* THE SLOT IS ALWAYS THERE, ticking or not. .sb-names is space-between over
+     three children, so a name that grows by three dots shoves the clock
+     sideways, and against a computer that would happen at both ends of every
+     beat for the whole match. The dots are drawn on every render and turned on
+     with a class, which costs one class and buys a bar that holds still. */
+  .sb-dots s{width:3px;height:3px;border-radius:50%;background:currentColor;
+    text-decoration:none;opacity:0}
+  .sb-dots.go s{opacity:.25;animation:sbthink var(--tk,900ms) ease-in-out infinite}
+  .sb-dots.go s:nth-child(2){animation-delay:calc(var(--tk,900ms) / 6)}
+  .sb-dots.go s:nth-child(3){animation-delay:calc(var(--tk,900ms) / 3)}
+  @keyframes sbthink{0%,70%,100%{opacity:.25}35%{opacity:1}}
+  /* NOT TO ZERO. A man who cannot take the blinking still has to be told whose
+     turn it is, so the dots stay on the screen and stop moving. */
+  @media (prefers-reduced-motion: reduce){ .sb-dots.go s{animation:none;opacity:.7} }
   .sb-mid{flex:none;display:flex;align-items:center;gap:8px;padding:0 11px;
     background:rgba(0,0,0,.42);box-shadow:inset 1px 0 0 rgba(255,255,255,.08), inset -1px 0 0 rgba(255,255,255,.08)}
   .sb-mid b{font:800 1.72rem var(--ui);font-variant-numeric:tabular-nums;color:#f7e3a6;
@@ -3005,6 +3119,14 @@
     background:rgba(255,255,255,.94);color:#17301f;border-color:rgba(255,255,255,.6);
     font-weight:800;
   }
+  /* HIS HALF-MINUTE, WITH NOTHING ON IT TO TOUCH. The same card as the
+     handover, because it is the same moment of the possession and the kit
+     colour is how that reads, but shorter and quieter: nobody is being asked
+     to pick the phone up, and a full-height shout that clears itself after a
+     beat is a screen that teaches you to tap at it. */
+  .h2hand.h2wait{min-height:38vh;gap:10px}
+  .h2hand.h2wait .h2handwho{font-size:clamp(1.5rem,8vw,2.2rem)}
+  .h2hand.h2wait .h2handbadge{width:clamp(64px,19vw,92px);height:clamp(64px,19vw,92px)}
 
   /* ---------- picking the men you are marking ---------- */
   .h2marks{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:8px 0 10px}
@@ -3378,6 +3500,14 @@
     42%{transform:translateX(-50%) scale(.52);opacity:.16}
     84%{transform:translateX(-50%) scale(1);opacity:.5}
     100%{transform:translateX(-50%) scale(1);opacity:.5}}
+  /* REDUCED MOTION AT THE TOSS. The coin still lands, because the toss is a
+     result and not decoration. Killing the spin leaves .h2coin on its base
+     transform, which is rotateX(--end), which is already the face it was always
+     going to land on, so the screen goes straight to the answer and h2CoinMs
+     holds for a shorter beat instead of for two seconds. */
+  @media (prefers-reduced-motion: reduce){
+    .h2coin.flip,.h2coin.landed,.cshadow.flip{animation:none}
+  }
   .h2call{display:flex;gap:10px;margin-top:10px}
   .h2call .bigbtn{flex:1}
 
@@ -8265,6 +8395,81 @@ function h2CrowdStart(){
 function h2CrowdStop(){ try{ if(h2CrowdEl) h2CrowdEl.pause(); }catch(e){} }
 
 let h2Turn = false;            // set for one render when the camera should swing
+/* THE SWING'S LENGTH LIVES IN TWO PLACES and there is no way round it: the CSS
+   owns the animation and the JS owns the hold that waits for it. .h2pitch.turned
+   is .8s, so this is 800, and if one of them moves the other has to. */
+const H2_SWING_MS   = 800;
+const H2_LAND_MS    = 520;    // the beat the eye gets on top of the swing
+const H2_COIN_MS    = 2000;   // .h2coin.flip, the same deal
+const H2_COIN_FLOOR = 700;    // long enough to read the face, short enough not to stare
+/* REDUCED MOTION IS NOT NO MOTION. With the swing killed there is nothing left
+   to wait for, so the hold drops to the beat on its own. It does not drop to
+   zero: the entire point of the hold is that a person sees the ball became
+   somebody else's, and that is a courtesy rather than an animation.
+   It asks aiStill, which is the driver's own reader of the setting, rather than
+   opening a second conversation with the browser. One place asks, everything
+   that has to slow down asks that place, and the answer cannot come out two
+   different ways on the same screen.
+   AND THE TEST DOOR IS THE ONE THE BEATS ALREADY USE. AI_BEAT stopped being a
+   pause when the band table landed; it is the reference the bands are measured
+   against, so dividing by AI_NORMAL is what "the same fraction as everything
+   else he does" means now. A harness that sets AI_BEAT to four squeezes the
+   hold by the same hundred and fiftieth it squeezes the bands, and AI_BEAT at
+   zero collapses it exactly the way it collapses a band.
+   THE TEMPO DIAL IS DELIBERATELY NOT APPLIED, and that is the one asymmetry in
+   here worth reading twice. The swing is .8s of CSS and no stylesheet reads
+   that dial, so a hold scaled to twice the speed would run out with the pitch
+   still turning and the men would light up mid-camera-move. The dial is about
+   how long he thinks, not about how fast the ground spins. */
+const h2LandMs = () => Math.round((aiStill() ? H2_LAND_MS : H2_SWING_MS + H2_LAND_MS) * (AI_BEAT / AI_NORMAL));
+/* the coin is not scaled at all, because it never was: two seconds of spinning
+   is the animation's own length and the one place in the mode where the app
+   waits on a clock nobody can hurry. Reduced motion is the only thing that
+   shortens it, and it shortens it to a beat you can still read a face in. */
+const h2CoinMs = () => aiStill() ? H2_COIN_FLOOR : H2_COIN_MS;
+/* THE PITCH TURNED, AND NOW IT HOLDS. Four things in the match change
+   possession: a lost pass, a lost tackle, a save and a goal. All four used to
+   set h2Turn and go straight on, so the camera swung and the next screen was
+   already underneath it, live. Against a person that is merely quick. Against
+   the computer it is the single worst moment in the mode, because his beat
+   starts on the same frame and the screen has changed again before you have
+   found the ball.
+   So the flag is armed here and spent by the hold: h2Landing keeps everything
+   still, h2Lit is the one render afterwards where the men come up. Both live
+   out here rather than on S, because they are properties of the screen and not
+   of the match: a game parked mid-swing and picked up tomorrow is picked up on
+   a pitch that has already turned. */
+let h2Landing = false;         // the pitch is holding on the turn
+let h2Lit = false;             // ... and this is the one render the men come up on
+let h2LandTimer = null;
+function h2Swing(){
+  h2Turn = true;
+  /* SOLO ONLY, for the same reason the caption is. Against a person the phone
+     crossing the table has already marked the seam and said whose ball it is,
+     and a beat on top of the handover card is a pause in a game two people are
+     playing at each other. Alone, nothing else marks it at all. */
+  h2Landing = aiIsOn(0) || aiIsOn(1);
+  h2Lit = false;
+  clearTimeout(h2LandTimer);
+  h2LandTimer = null;
+}
+/* IS THE SCREEN ACTUALLY HOLDING, asked in one place because three of them ask
+   it and a hold that the driver believes in and the screen does not is a match
+   with nothing on it to tap and nobody left to move it on.
+   The flag on its own is not the answer. It is armed at the turnover and the
+   clock only starts when the turned pitch is drawn, so between the two sits the
+   private half-minute, where a hold would be waiting on a timer nobody has
+   booked. And the swing does not always reach h_pick: a goal that wins the
+   match swings the camera into the full-time whistle. So a hold is a hold when
+   there is something on its way to end it, which is either the swing being
+   drawn on this very render or the timer already running. */
+const h2Holding = swinging =>
+  !!(h2Landing && S && S.phase === "h_pick" && (swinging || h2Turn || h2LandTimer));
+/* A QUESTION HAS JUST BEEN DRAWN, so the card made out of it is allowed to
+   arrive rather than simply be there. Spent by the first card built from it,
+   which is what stops the reveal playing the entrance a second time. */
+let h2Qnew = false;
+const h2Qin = () => { const n = h2Qnew; h2Qnew = false; return n ? " qin" : ""; };
 let h2Cele = false;            // ... and when the scoring side should celebrate
 let h2Lost = null;             // the man who just gave it away, for one render
 /* Where the defender was standing, shown once the pass has resolved. The
@@ -8350,6 +8555,12 @@ function h2PassName(a, b){
 }
 
 function h2Start(){
+  /* A NEW MATCH HAS NOT BEEN ANNOUNCED YET. h2Opened lives outside S so it
+     survives a reload, which also means it survives the last match: without
+     this, a second solo match whose first possession falls to the same man as
+     the previous one's opens in silence, and the opening ball is the screen
+     that most needs telling. */
+  h2Opened = null;
   S.h2h = {who:0, at:0, sel:null, call:null, coin:null, flipping:false,
            shooting:false, tossed:false, teams:[null,null], safe:0,
            /* The tackle. marks are the men being marked THIS POSSESSION, and
@@ -8384,6 +8595,11 @@ function h2Start(){
            /* the man holding a spot he ran to, if there is one: {w, i, x, y,
               line}, in his own attacking frame like H2_SQUAD */
            adv:null};
+  /* the screen's flags and not the match's, so they are cleared where a match
+     begins rather than carried in the state: a game parked mid-swing would
+     otherwise come back holding on a camera move that already happened. */
+  h2Landing = false; h2Lit = false; h2Qnew = false;
+  clearTimeout(h2LandTimer); h2LandTimer = null;
   S.phase = "h_teams";
 }
 /* Both men pick before a ball is kicked, and they cannot pick the same side:
@@ -8415,9 +8631,25 @@ function h2Call(side){
      before it starts, or the animation cannot end on the right face. */
   H.call = side;
   H.result = Math.random() < .5 ? "heads" : "tails";
+  /* WHAT HE CALLED, SAID BEFORE THE COIN GOES UP. A person does not need
+     telling what he just tapped, so for him the call and the spin are the same
+     instant and always were. The computer taps the same function, and for him
+     that instant swallowed the only thing worth watching: the coin went up and
+     you never found out what he had called until it came back down.
+     So the spin is its own function. When the caller is a computer the screen
+     is drawn on the call and the driver books the flip for a beat later, like
+     any other decision it makes. */
+  if(aiIsOn(0)) return render();
+  h2Flip();
+}
+/* the coin itself, and the two seconds it is in the air. Split off from the
+   call so that a call can be heard before it goes up. */
+function h2Flip(){
+  const H = S && S.h2h;
+  if(!H || H.flipping || H.tossed || !H.call) return;
   H.flipping = true; H.coin = null;
   render();
-  setTimeout(h2Land, 2000);     // the length of the coin animation
+  setTimeout(h2Land, h2CoinMs());   // the length of the coin animation, or its floor
 }
 function h2Land(){
   const H = h2();
@@ -8527,6 +8759,9 @@ function h2Draw(t, i, w){
     S.qi = pool[Math.floor(Math.random() * pool.length)];
     S.qspec = his.length ? spec : null;
     used.push(S.qi);
+    /* a question exists that did not a moment ago, so the card it turns into is
+       allowed its entrance. Spent by the first card drawn out of it. */
+    h2Qnew = true;
     return true;
   };
   for(const id of mine){ if(take(id)){ S.qfall = null; return true; } }
@@ -8651,7 +8886,7 @@ function h2TackleJudge(won){
     H.safe = 0;
     h2Fly(h2BX(lostAt, false), h2BY(lostAt, false), h2BX(H.at, true), h2BY(H.at, true), null, H.at,
           undefined, target == null ? undefined : h2TierFor(lostAt, target));
-    h2Turn = true;
+    h2Swing();
     h2Lost = lostAt;
     h2Showmark = null;              // the camera has swung; the mark belonged to the old view
     flashBad();
@@ -8756,6 +8991,14 @@ function h2McPlayOn(){
   const H = h2();
   const right = H.pick === q().k;
   H.pick = null;
+  /* AND THE ROLL BEHIND IT IS SPENT TOO. In Pick One this is the only way out
+     of a question, the computer's included, so it is the only place that can
+     promise H.said never outlives the question it was thrown for. It matters
+     because a human can reach over and tap Play on on the computer's judge
+     screen before its own beat lands, which is harmless for the verdict (the
+     option it took is already sitting on H.pick) but would otherwise leave its
+     answer lying around for h2AiSaid to find later. */
+  H.said = null;
   if(S.phase === "h_judge") return h2Judge(right);
   if(S.phase === "h_sjudge") return h2SaveJudge(right);
   if(S.phase === "h_tjudge") return h2TackleJudge(right);
@@ -8764,10 +9007,19 @@ function h2McPlayOn(){
 function h2McOptionsHTML(shown){
   const H = h2();
   const Q = q();
+  /* NOT YOURS TO TAP. When the screen is waiting on the computer the options
+     are shown and dead. They were live, which used to cost nothing much: a tap
+     jumped the screen to the judge and he still rolled his own dice there. Now
+     that the roll is spent at the reveal and held on H.pick, the same tap
+     would be a human choosing the computer's answer for it, which is a cheat
+     with one thumb and the end of the difficulty setting. They stay on the
+     screen rather than being hidden, because watching the four he is choosing
+     between is most of what makes his answer worth waiting for. */
+  const his = aiIsOn(h2ActorOf(S.phase));
   return '<div class="h2mc">' + Q.o.map((o, i) => {
     const cls = !shown ? "" : i === Q.k ? " right" : (i === H.pick ? " wrong" : " dim");
-    return '<button class="h2opt' + cls + '"' + (shown ? " disabled" : "") +
-      (shown ? "" : ' onclick="h2McPick(' + i + ')"') + '>' +
+    return '<button class="h2opt' + cls + '"' + (shown || his ? " disabled" : "") +
+      (shown || his ? "" : ' onclick="h2McPick(' + i + ')"') + '>' +
       '<span class="k">' + "ABCD"[i] + '</span><span class="t">' + esc(o) + '</span></button>';
   }).join("") + '</div>';
 }
@@ -9357,15 +9609,33 @@ const AI_LEVELS = {
 /* EACH PERSONALITY IS A POLICY, not an engine. Four paragraphs of football,
    each one teaching a rule the app never explains out loud. */
 const AI_MEN = {
-  route1: {label: "Route One", shape: "4-4-2", line: "mid",
+  route1: {label: "Route One", side: "England", shape: "4-4-2", line: "mid",
            says: "Hits it long and early. If the striker is on, the striker gets it."},
-  bus:    {label: "The Bus", shape: "5-3-2", line: "low",
+  bus:    {label: "The Bus", side: "Italy", shape: "5-3-2", line: "low",
            says: "Nothing above Normal. He will invite the press and shoot from the striker only."},
-  tiki:   {label: "Tiki-taka", shape: "4-3-3", line: "high",
+  tiki:   {label: "Tiki-taka", side: "Spain", shape: "4-3-3", line: "high",
            says: "The shortest ball forward, every time, until the press comes."},
-  press:  {label: "The Pressers", shape: "4-2-3-1", line: "high",
+  press:  {label: "The Pressers", side: "Germany", shape: "4-2-3-1", line: "high",
            says: "Plays the ladder as written and prefers the hard one."},
 };
+/* WHAT HE WOULD RATHER BE PLAYING AS, said on the setup screen where a manager
+   would read it and only where it can actually come true. The note renders for
+   any pitch-mode setup, and a league pool is clubs: England are never in the
+   hat there, so promising somebody that he takes them would be a sentence about
+   a thing that cannot happen. The pool a match opens on is the chosen quiz's
+   own default, which is knowable here, and a pool switched by hand mid-match is
+   switched long after this line has left the screen. Anything missing, a deck
+   still on the wire included, and the sentence simply is not said. */
+function aiFavLine(id){
+  const m = AI_MEN[id];
+  if(!m || !m.side) return "";
+  try{
+    const pool = (QUIZZES[setupMode] || {}).pool;
+    const T = pool && TEAMS[pool];
+    if(!T || !T[m.side]) return "";
+  }catch(e){ return ""; }
+  return " He takes " + m.side + " when they are going.";
+}
 const aiOf = w => (S && S.players[w] && S.players[w].ai) || null;
 const aiIsOn = w => !!aiOf(w);
 const aiMan = w => AI_MEN[aiOf(w)] || AI_MEN.route1;
@@ -9465,6 +9735,60 @@ function aiMarks(w){
                               : by((a, b) => h2Spot(b, att).y - h2Spot(a, att).y);
     }
   }
+}
+
+/* ---------- HE ANSWERS OUT LOUD ----------
+   His question is drawn and shown already, and then the screen changed and the
+   ball moved, which is not an answer: it is a result. The roll was being made
+   at the judge, a beat after the question screen had been and gone, so there
+   was never a moment where he had said anything.
+
+   So the roll moves to the reveal and, in Pick One, is spent on one of the
+   four options: right means his option, wrong means one of the other three.
+   From there the screen he is already drawing does the rest, because
+   h2McOptionsHTML paints H.pick as the wrong one and the key as the right one
+   whoever set it, and the caption reads the option straight back out.
+
+   The wrong one is drawn at random from the other three rather than being the
+   first of them. A computer that is always wrong in option order is a computer
+   you can read off the letters, and by the third time you see him take A you
+   are not playing him any more, you are playing the bug. */
+function h2AiSay(w){
+  const H = h2(), Q = q();
+  const right = aiAnswer(w, S.tier);
+  /* kept for spoken mode, where there is no option to hold the answer and the
+     verdict still has to be the same roll the thinking beat was spent on */
+  H.said = right;
+  if(!h2IsMC() || !Q || !Q.o){ H.pick = null; return right; }
+  if(right){ H.pick = Q.k; return right; }
+  const wrong = [];
+  for(let i = 0; i < Q.o.length; i++) if(i !== Q.k) wrong.push(i);
+  H.pick = wrong.length ? wrong[Math.floor(Math.random() * wrong.length)] : null;
+  return right;
+}
+/* WHAT HE SAID, or a roll made here if he never got the chance to say it. The
+   dice are thrown at the end of the reading beat now, and that beat can be
+   missed: a timed match can run the clock out on his question and walk him
+   straight to the judge with nothing on H.pick. Rolling here in that one case
+   keeps the rule this whole section rests on, which is that the length of his
+   pause and the verdict at the end of it come off the same roll rather than
+   off two. */
+function h2AiSaid(w){
+  const H = h2();
+  return H.said == null ? h2AiSay(w) : H.said;
+}
+/* AND THE VERDICT COMES BACK OFF WHAT HE SAID. In Pick One that is h2McPlayOn,
+   the very door a human's tap goes through, so there is no second path out of
+   a question that could ever get out of step with the first one. */
+function h2AiVerdict(w){
+  const H = h2();
+  if(h2IsMC()){ H.said = null; return h2McPlayOn(); }
+  const said = H.said;
+  H.said = null;
+  const ok = said == null ? aiAnswer(w, S.tier) : said;
+  if(S.phase === "h_judge")  return h2Judge(ok);
+  if(S.phase === "h_sjudge") return h2SaveJudge(ok);
+  if(S.phase === "h_tjudge") return h2TackleJudge(ok);
 }
 
 /* ---------- the driver ----------
@@ -9612,19 +9936,52 @@ function beat(kind, arg, slow){
   if(aiStill()) ms = lo;
   return Math.round(ms * (AI_BEAT / AI_NORMAL) / AI_TEMPO);
 }
+/* IS A BEAT RUNNING, AND HOW LONG IS IT. The three dots in the scorebug are the
+   only thing on the screen that says he is deciding rather than the app being
+   wedged, so they have to go out the moment he stops. Two things stop him and
+   neither one is a phase change: a hold like the goal or the strike runs on its
+   own timer with nobody choosing anything, and a human who reaches over and
+   taps one of his buttons takes the decision off him mid-beat. aiTick runs
+   before every screen is drawn, so it puts the flag out and whoever schedules
+   something puts it back, which is what stops a branch that returns early from
+   leaving it on.
+
+   THE LENGTH IS KEPT WITH IT, because the dots tick at the speed of the
+   decision they belong to and the decisions are no longer all the same length.
+   A BALL question is worth three seconds of sitting there and naming a country
+   is worth one, so a fixed blink would be the last thing on the screen still
+   claiming otherwise. AI_BEAT is no use for this now: it is the reference the
+   bands are measured against rather than the pause itself, so what goes to CSS
+   is the pause that was actually scheduled, tempo dial and all. */
+let aiPending = false, aiPendingMs = 0;
 function aiLater(fn, ms){
   clearTimeout(aiTimer);
   const cue = aiCue();
+  const wait = ms == null ? beat("think") : ms;
+  aiPending = true;
+  aiPendingMs = wait;
   aiTimer = setTimeout(() => {
+    aiPending = false;
     /* the screen moved under it, so whatever this was about to do belongs to a
        game state that is gone */
     if(aiCue() !== cue) return;
     try{ fn(); }catch(e){}
-  }, ms == null ? beat("think") : ms);
+  }, wait);
 }
 function aiTick(){
+  aiPending = false;
   if(!S || !isPitch(S.play)) return;
   if(!aiIsOn(0) && !aiIsOn(1)) return;
+  /* NOT WHILE THE EYE IS STILL LANDING. The camera has just swung and the pitch
+     is holding on the turn; a decision taken on top of that is the exact thing
+     the hold exists to stop, because the screen would change again before
+     anybody had found the ball. Only on h_pick, because that is the one screen
+     the turned pitch is drawn on: the private half-minute that sits in front of
+     it has no pitch and nothing to wait for.
+     Nothing is booked and nothing is left armed, so the dots the line above put
+     out stay out, which is right: during a hold he is not deciding anything.
+     The render that ends the hold comes back through here and he starts then. */
+  if(h2Holding()) return;
   const H = S.h2h;
   if(!H) return;
   const p = S.phase;
@@ -9635,7 +9992,14 @@ function aiTick(){
     if(!aiIsOn(slot)) return;
     const names = Object.keys(h2Pool() || {}).filter(c => !H.teams.includes(c));
     if(!names.length) return;
-    return aiLater(() => h2PickTeam(names[Math.floor(Math.random() * names.length)]), beat("think"));
+    /* HIS SIDE, NOT A SIDE. Route One drawing Togo out of the hat is a computer
+       picking at random and it looks like one; Route One taking England every
+       time is a person with a team. He only gets it when it is actually in the
+       pool and still going, which is most of the point: Italy are not in 2018,
+       so the Bus takes pot luck there the way anybody would. */
+    const fav = aiMan(slot).side;
+    const pick = names.indexOf(fav) > -1 ? fav : names[Math.floor(Math.random() * names.length)];
+    return aiLater(() => h2PickTeam(pick), beat("think"));
   }
   if(p === "h_squad"){
     const w = H.picking || 0;
@@ -9666,7 +10030,14 @@ function aiTick(){
     if(H.tossed) return aiIsOn(H.who) ? aiLater(h2KickOff, beat("think")) : undefined;
     if(H.flipping) return;
     /* player 0 calls it, so the computer only calls when it is player 0 */
-    if(aiIsOn(0)) return aiLater(() => h2Call(Math.random() < .5 ? "heads" : "tails"), beat("think"));
+    if(!aiIsOn(0)) return;
+    /* TWO BEATS RATHER THAN ONE: the call, then the coin. h2Call draws the
+       screen and stops when the caller is a computer, so this is the second
+       half of it, booked the same way and out of the same band as every other
+       decision he makes. It also picks a parked match back up, where the call
+       is already on the state and the coin never went up. */
+    if(H.call) return aiLater(h2Flip, beat("think"));
+    return aiLater(() => h2Call(Math.random() < .5 ? "heads" : "tails"), beat("think"));
     return;
   }
 
@@ -9721,26 +10092,44 @@ function aiTick(){
      answer: a man about to get one wrong sits on it a quarter longer than a
      man about to get it right, and that hesitation is the only tell a dice
      roll can possibly have. */
+  /* AND THE ROLL MOVES ONE BEAT FURTHER FORWARD AGAIN, off the answering beat
+     and onto the end of the reading one, because the pause was never the only
+     thing that wanted to know the answer. The screen wanted it too. His
+     question was drawn and shown, and then the ball simply moved, which is a
+     result and not an answer: there was no moment anywhere in a possession
+     where he had said anything.
+
+     So h2AiSay throws the dice at the end of the reading beat and spends the
+     roll on one of the four options, which is what lets the next screen name
+     it out loud, and h2AiVerdict reads the verdict back off that same option
+     rather than throwing a second dice at it. One roll, one answer, one
+     result, and no way for the three of them to disagree.
+
+     The answering beat still asks how it went before it decides how long to
+     sit there, because a wrong one coming out slower is the only tell a dice
+     roll has. It just asks him what he already said instead of making
+     something up, and h2AiSaid rolls only in the case where the reading beat
+     never got to. */
   if(p === "h_q" && aiIsOn(H.who))
-    return aiLater(h2Reveal, beat("read", aiReadLen()));
+    return aiLater(() => { h2AiSay(H.who); h2Reveal(); }, beat("read", aiReadLen()));
   if(p === "h_judge" && aiIsOn(H.who)){
-    const got = aiAnswer(H.who, S.tier);
-    return aiLater(() => h2Judge(got), beat("answer", S.tier, !got));
+    const got = h2AiSaid(H.who);
+    return aiLater(() => h2AiVerdict(H.who), beat("answer", S.tier, !got));
   }
   /* THE SAVE IS NOT A READ. He is a keeper setting himself, and 900 to 1800 is
      a shorter look at the same question than an open-play one gets, which is
      the right way round: he has a ball coming at him. */
   if(p === "h_save" && aiIsOn(h2Other()))
-    return aiLater(h2SaveReveal, beat("save"));
+    return aiLater(() => { h2AiSay(h2Other()); h2SaveReveal(); }, beat("save"));
   if(p === "h_sjudge" && aiIsOn(h2Other())){
-    const got = aiAnswer(h2Other(), S.tier);
-    return aiLater(() => h2SaveJudge(got), beat("answer", S.tier, !got));
+    const got = h2AiSaid(h2Other());
+    return aiLater(() => h2AiVerdict(h2Other()), beat("answer", S.tier, !got));
   }
   if(p === "h_tackle" && aiIsOn(h2Other()))
-    return aiLater(h2TackleReveal, beat("tackle"));
+    return aiLater(() => { h2AiSay(h2Other()); h2TackleReveal(); }, beat("tackle"));
   if(p === "h_tjudge" && aiIsOn(h2Other())){
-    const got = aiAnswer(h2Other(), S.tier);
-    return aiLater(() => h2TackleJudge(got), beat("answer", S.tier, !got));
+    const got = h2AiSaid(h2Other());
+    return aiLater(() => h2AiVerdict(h2Other()), beat("answer", S.tier, !got));
   }
   /* A COMPUTER DOES NOT PANIC. It takes the rescue when it is offered, because
      declining one is a decision with nothing behind it. */
@@ -9751,7 +10140,14 @@ function aiTick(){
       h2SubOn(b[0].i);
     }, beat("sub"));
   }
-  if(p === "h_pens" && H.so && aiIsOn(H.who))
+  /* NOT H.who. The tally is pushed and the phase comes back here before the
+     next taker is worked out, so H.who at this screen is still whoever took
+     the last kick and this read the wrong man every time: the computer tapped
+     "Martijn steps up" for him, then sat there while the human had to tap
+     "Route One steps up" back. h2SoNext is what the screen itself prints on
+     the button, so the driver and the button now agree about whose kick it
+     is. */
+  if(p === "h_pens" && H.so && aiIsOn(h2SoNext(H.so)))
     return aiLater(h2SoKick, beat("think"));
   if(p === "h_ft") return;
 }
@@ -9900,7 +10296,12 @@ const CUP_SAYS = {7: "won it", 6: "lost the final", 5: "lost the semi-final",
 /* THE FOUR PEOPLE WILL RECOGNISE get the side they deserve; everybody else is
    drawn out of the hat by name, so the same country always plays the same way
    and two runs against Ecuador feel like the same Ecuador. */
-const CUP_STYLE = {Italy: "bus", Brazil: "tiki", England: "route1", Germany: "press"};
+/* Spain is in here because Tiki-taka's favourite side is Spain, and a country
+   whose style came out of the name hash while the style named after it would
+   rather be them is the sort of small disagreement nobody can put a finger on
+   and everybody feels. Brazil stays tiki: two sides can play the same way, and
+   the two tables were never inverses of each other. */
+const CUP_STYLE = {Italy: "bus", Brazil: "tiki", Spain: "tiki", England: "route1", Germany: "press"};
 function cupStyle(side){
   if(CUP_STYLE[side]) return CUP_STYLE[side];
   const ids = Object.keys(AI_MEN);
@@ -10471,7 +10872,7 @@ function h2Settle(ok){
     h2Fly(h2BX(lostAt, false), h2BY(lostAt, false), h2BX(H.at, true), h2BY(H.at, true), null, H.at,
           run ? H2_RUN_MS : undefined, S.tier);
     if(run) h2Run = {x: run.x, y: run.y, rx: h2RunBX(run.x), ry: run.y, runner: meant, runnerMine: false, taker: H.at};
-    h2Turn = true;
+    h2Swing();
     h2Lost = lostAt;
     h2Showmark = null;            // the camera has swung; the marks belonged to the old view
     flashBad();
@@ -10574,7 +10975,7 @@ function h2AfterStrike(){
   if(H.result === "saved"){
     toast("SAVED! " + S.players[keeper].name + " has it on his goal line.");
     H.who = keeper; H.at = h2Restart(keeper); H.safe = 0;
-    h2Turn = true;
+    h2Swing();
     return h2Next();
   }
   S.players[H.who].score += 1;
@@ -10596,7 +10997,7 @@ function h2KickOn(){
   const keeper = h2Other();
   if(S.players[H.scorer].score >= H2_TARGET){ stopTimer(); endGame(); return; }
   H.who = keeper; H.at = h2Restart(keeper); H.safe = 0;
-  h2Turn = true;
+  h2Swing();
   S.round++;
   h2Next();
 }
@@ -11104,6 +11505,40 @@ function h2PitchHTML(tappable){
   const H = h2();
   const A = h2Anim; h2Anim = null;          // one render, then it is spent
   const turn = h2Turn; h2Turn = false;
+  const lit = h2Lit; h2Lit = false;
+  /* AND THE HOLD IS h_pick'S, NOBODY ELSE'S. h2Swing arms the flag the moment
+     possession changes, but the swing is not always DRAWN on the screen that
+     wants a hold: a goal that wins it or runs the clock out swings the camera
+     and then the whistle goes, so the full-time pitch is the render that spends
+     the turn. Left alone it came up with the eleven dimmed to .7 and the ring
+     doing its landing pulse, and because the timer below refuses to re-render
+     anything but h_pick, nothing ever took the dimming off again. Five matches
+     in six, measured.
+     So a swing drawn somewhere else abandons the hold rather than half-running
+     it: there is no eye to land on a screen that is not asking for a pass. */
+  if(turn && h2Landing && !(S && S.phase === "h_pick")) h2Landing = false;
+  const holding = h2Holding(turn);
+  /* THE HOLD STARTS WHEN THE SWING IS DRAWN, not when it was asked for, and
+     that distinction earned itself the hard way. h2Swing is called the moment
+     possession changes, but between there and the turned pitch sits the private
+     half-minute where the defender sets his line, which draws no pitch at all.
+     Starting the clock at the turnover spent most of the hold behind a screen
+     nobody was looking at a pitch on, and the swing then ran against a beat
+     that was already half gone. So the flag is armed there and the clock starts
+     here, on the one render that actually puts the turned pitch in front of
+     somebody. */
+  if(turn && holding && !h2LandTimer)
+    h2LandTimer = setTimeout(() => {
+      h2LandTimer = null;
+      h2Landing = false;
+      /* ONLY THE SCREEN THE HOLD WAS HOLDING, and this one cost a celebration
+         to find out. A render fired into whatever phase happens to be up spends
+         that phase's one-render flags: the goal sets h2Cele and the very next
+         h2PitchHTML eats it, so a hold expiring mid-celebration drew the pitch
+         again with nobody celebrating on it. The hold belongs to h_pick and so
+         does the render that ends it. */
+      if(S && isPitch(S.play) && S.phase === "h_pick"){ h2Lit = true; render(); }
+    }, h2LandMs());
   const cele = h2Cele; h2Cele = false;
   const lost = h2Lost; h2Lost = null;
   const R = h2Run; h2Run = null;              // the run, one render like the flight
@@ -11122,7 +11557,11 @@ function h2PitchHTML(tappable){
   const C = h2Contest() || foul;
 
   let out = '<div class="h2stage' + tilt + '"><div class="h2pitch' + tilt + (turn ? " turned" : "") +
-    (cele ? " cele" : "") + (C ? " chal" : "") + '">' +
+    (cele ? " cele" : "") + (C ? " chal" : "") +
+    (holding ? " landing" : "") + (lit ? " lit" : "") +
+    /* the hold's length rides on the element so the ring's one pulse and the
+       timer waiting on it cannot drift apart, reduced motion included */
+    '" style="--land:' + h2LandMs() + 'ms">' +
     '<div class="h2box t"></div><div class="h2box b"></div>' +
     '<div class="h2six t"></div><div class="h2six b"></div>' +
     '<div class="h2circle"></div><div class="h2spot"></div>' + h2DLineHTML();
@@ -11356,8 +11795,135 @@ function h2ReportHTML(){
   if(!blocks) return "";
   return '<div class="h2repbox"><div class="kick">' + ico('clipboard') + 'How it went</div>' + blocks + '</div>';
 }
+/* ================= WHOSE TURN IT IS =================
+   Against a person the seams of a possession are the phone crossing the table:
+   you know it is not your go because you are not holding it. Against the
+   computer there is nothing to hand over, so the only thing marking the seam
+   was the screen changing, and the screen changing is also exactly what
+   happens when it IS your go. Nothing said "his ball now", nothing said "he is
+   thinking", the camera swung and the next screen was simply there.
+
+   One function answers it and every screen he can act on asks. */
+
+/* WHOSE DECISION THE SCREEN IS WAITING ON, phase by phase. This table has to
+   agree with aiTick's, because the two of them answer the same question from
+   opposite ends: aiTick asks "is this one mine to tap", this asks "whose name
+   goes on the line". If they drift apart the computer taps a screen that says
+   the human is thinking, which is the one thing this whole section exists to
+   stop. h_hand, h_strike, h_goal and h_ft are not decisions at all, they are
+   holds on their own timers with nobody choosing anything, so nobody is named
+   on them and the dots stay off. */
+function h2ActorOf(ph){
+  const H = S && S.h2h;
+  if(!H) return null;
+  switch(ph){
+    case "h_teams":  return (H.teams && H.teams[0] == null) ? 0 : 1;
+    case "h_squad":  return H.picking || 0;
+    case "h_shape":  return H.shaping || 0;
+    case "h_traits": return H.tset || 0;
+    /* player 0 always calls it; once it is called the winner starts it */
+    case "h_toss":   return H.tossed ? H.who : 0;
+    /* the private half-minute belongs to the man who is NOT on the ball */
+    case "h_mark":   return h2Other();
+    case "h_pick": case "h_q": case "h_judge": return H.who;
+    /* the keeper and the man coming in for it are the same side: the other one */
+    case "h_save": case "h_sjudge": case "h_tackle": case "h_tjudge": return h2Other();
+    case "h_sub":    return H.sub ? H.sub.w : H.who;
+    /* the next taker, not H.who, which is still the man who took the last one */
+    case "h_pens":   return H.so ? h2SoNext(H.so) : H.who;
+    default: return null;
+  }
+}
+/* what he is doing on the private screen, in one place, so the card and the
+   caption can never end up saying different things about the same beat */
+const h2AiSets = () => (h2Tactical() && h2TackleOn) ? "sets his line, and marks two of yours"
+                     : h2Tactical() ? "sets his line" : "marks two of yours";
+/* THE LINE ITSELF, as plain text rather than markup, so the one place that
+   knows the wording is this one and a test can read it without picking a
+   string apart.
+
+   It names the computer and nobody else. A human does not need telling that he
+   is the one holding the phone, and a caption on every screen saying so is the
+   kind of chatter that stops being read somewhere in the first half, which
+   would take the computer's lines down with it. The one exception is the beat
+   his possession comes back, because that is the seam the handover card used
+   to mark and there is now nothing else marking it. */
+function h2TurnLine(ph){
+  if(!S || !S.h2h) return null;
+  const H = S.h2h, p = ph || S.phase;
+  const w = h2ActorOf(p);
+  if(w == null) return null;
+  const ai = aiIsOn(w), A = S.players[w].name;
+  /* SOLO ONLY. Against a person the put-it-down card has just told him whose
+     ball it is and a second telling is worse than one. */
+  const solo = aiIsOn(0) || aiIsOn(1);
+  const out = (line, open) => ({w: w, ai: ai, line: line, open: !!open});
+  if(p === "h_pick")
+    return out(A + " has it on " + h2Of(H.at, H.who), solo && h2Opened !== H.who);
+  if(!ai) return null;
+  switch(p){
+    case "h_teams":  return out(A + " is picking a side...");
+    case "h_squad":  return out(A + " is naming his eleven...");
+    case "h_shape":  return out(A + " is setting them up...");
+    case "h_traits": return out(A + " is reading his own team sheet...");
+    case "h_toss":   return out(H.tossed ? A + " kicks off..." : A + " is calling it...");
+    case "h_mark":   return out(A + " " + h2AiSets());
+    /* HE HAS TO READ IT TOO, which is the whole reason the question screen
+       holds for a beat before he answers instead of flashing past. */
+    case "h_q": case "h_save": case "h_tackle": return out(A + " is reading it...");
+    /* AND HERE HE HAS ANSWERED IT. In Pick One the option he took is already
+       sitting on H.pick by the time this screen is drawn, so the line is the
+       answer itself and the card underneath stamps the verdict on it. Spoken,
+       there is nothing said yet and he is still thinking about it. */
+    case "h_judge": case "h_sjudge": case "h_tjudge": {
+      const Q = q();
+      return out((h2IsMC() && Q && Q.o && H.pick != null)
+        ? A + " says: " + Q.o[H.pick] + "."
+        : A + " is thinking...");
+    }
+    case "h_sub":    return out(A + " is looking at his bench...");
+    case "h_pens":   return out(A + " is stepping up...");
+  }
+  return null;
+}
+/* WHICH POSSESSION HAS ALREADY BEEN OPENED. Kept here rather than in S because
+   it is a property of the screen and not of the match: reloading mid-possession
+   says "Your ball" one extra time, which is the right answer to having just
+   looked away anyway. */
+let h2Opened = null;
+/* The class is a parameter because the held screen after a camera swing says
+   the same sentence as the screen a beat later and needs it read louder: on the
+   hold it is the only thing on the page, and a beat later it is the quiet line
+   under a pitch somebody is choosing a pass on. One wording, two weights, and
+   no second copy of the sentence to go out of step with this one. */
+function h2TurnHTML(cls){
+  const t = h2TurnLine();
+  if(!t) return "";
+  if(S.phase === "h_pick") h2Opened = S.h2h.who;    // said once, then it is old news
+  const body = esc(t.line);
+  return '<div class="h2where' + (cls ? " " + cls : "") + '">' +
+    (t.open ? (t.ai ? '<b>' + body + '</b>' : '<b>Your ball.</b> ' + body) : body) + '</div>';
+}
+/* WHOSE DOTS ARE TICKING, which is not the same question as whose screen it
+   is: on a hold the screen is still his and nothing is being decided, and
+   three dots over a celebration would be a lie. So it asks the beat. */
+function h2Thinking(){
+  if(!aiPending || !S || !S.h2h) return null;
+  const w = h2ActorOf(S.phase);
+  return (w != null && aiIsOn(w)) ? w : null;
+}
 function h2ScoreHTML(){
   const H = h2();
+  /* THE DOTS RIDE ON THE NAME, not on the flag half of the bar, because the
+     name is the personality and the flag is the country he happens to be
+     playing as. The tick length is the pause that is actually running rather
+     than any fixed number, so a BALL question he has to sit and think about
+     reads as a longer wait than a country he is only naming, and the tempo
+     dial moves the dots along with everything else it moves. */
+  const think = h2Thinking();
+  const nm = i => '<span' + (H.who === i ? ' class="on"' : '') + '>' + esc(S.players[i].name) +
+    '<i class="sb-dots' + (think === i ? ' go' : '') + '" style="--tk:' +
+      Math.max(240, aiPendingMs) + 'ms"><s></s><s></s><s></s></i></span>';
   const side = (i, away) => {
     const flag = h2Flag(i);
     return '<div class="sb-t' + (away ? " away" : "") + (H.who === i ? " on" : "") +
@@ -11371,11 +11937,23 @@ function h2ScoreHTML(){
       '<div class="sb-mid"><b>' + S.players[0].score + '</b><s></s><b>' + S.players[1].score + '</b></div>' +
       side(1, true) +
     '</div>' +
-    '<div class="sb-names">' +
-      '<span' + (H.who === 0 ? ' class="on"' : '') + '>' + esc(S.players[0].name) + '</span>' +
-      '<em>' + h2ClockLabel() + '</em>' +
-      '<span' + (H.who === 1 ? ' class="on"' : '') + '>' + esc(S.players[1].name) + '</span>' +
-    '</div>';
+    '<div class="sb-names">' + nm(0) + '<em>' + h2ClockLabel() + '</em>' + nm(1) + '</div>';
+}
+/* THE FOUR THINGS THAT ARE NOT ABOUT THE MATCH. View, sound, tackles and the
+   skin are chrome: they say nothing about who has the ball and they are on
+   every screen where the pitch is live. They are lifted out here because the
+   held screen after a swing draws them too, and it has to: a row of buttons
+   that appears a beat after the pitch does pushes the whole pitch down the
+   phone at the exact moment the eye is trying to find a ball on it. Same row,
+   same height, both renders, and the only difference between the two screens is
+   everything that asks for a decision. */
+function h2TogglesHTML(){
+  return '<div class="h2toggles">' +
+    '<button class="h2view" onclick="h2ToggleView()">' + (h2Tilt ? "Flat view" : "3D view") + '</button>' +
+    '<button class="h2view" onclick="h2ToggleSound()">' + (h2Sound ? "Sound off" : "Sound on") + '</button>' +
+    '<button class="h2view" onclick="h2ToggleTackle()">' + (h2TackleOn ? "Tackles off" : "Tackles on") + '</button>' +
+    '<button class="h2view" onclick="h2TogglePixel()">' + (h2Pixel ? "Night look" : "16-bit") + '</button>' +
+  '</div>';
 }
 
 /* ================= THE PICKER, LAID OUT AS THE TOURNAMENT WAS =================
@@ -11526,7 +12104,7 @@ function h2Render(st){
     const rows = h2TeamRows(pool, h2PoolId());
     st.innerHTML =
       '<div class="kick">' + ico('users') + h2Name() + ' · pick your ' + h2Kind(S.mode).one + '</div>' +
-      '<div class="h2big">' + esc(turn.name) + ', who are you?</div>' +
+      '<div class="h2big">' + esc(turn.name) + ', who are you?</div>' + h2TurnHTML() +
       /* WHICH SET OF SIDES, when there is more than one to choose from. It sits
          above the grid because it is the same question one level up. */
       ((h2Pools().length > 1 && !picked.length)
@@ -11588,7 +12166,7 @@ function h2Render(st){
     const carry = Object.entries(carried).sort((a, b) => b[1] - a[1]);
     st.innerHTML =
       '<div class="kick">' + ico('clipboard') + 'The Dugout \u00b7 ' + esc(h2Team(w) || picker.name) + '</div>' +
-      '<div class="h2big">' + esc(picker.name) + ', name your eleven.</div>' +
+      '<div class="h2big">' + esc(picker.name) + ', name your eleven.</div>' + h2TurnHTML() +
       '<div class="h2hintline" style="margin-top:0">' +
         (h2XiSays(w) ? esc(h2XiSays(w)) + ' is already ticked. ' : '') +
         'A ball to a man asks a question from a league he played in, ' +
@@ -11624,7 +12202,7 @@ function h2Render(st){
     const kit = h2Kit(w);
     st.innerHTML =
       '<div class="kick">' + ico('clipboard') + 'The Dugout \u00b7 ' + esc(h2Team(w) || picker.name) + '</div>' +
-      '<div class="h2big">' + esc(picker.name) + ', how are you setting up?</div>' +
+      '<div class="h2big">' + esc(picker.name) + ', how are you setting up?</div>' + h2TurnHTML() +
       '<div class="h2hintline" style="margin-top:0">' +
         (h2RealShape(w) && mine === h2RealShape(w)
           ? 'They played ' + esc(h2RealShape(w)) + ' that day, so that is where this starts. '
@@ -11658,7 +12236,7 @@ function h2Render(st){
     const chosen = Object.entries((H.traits && H.traits[w]) || {});
     st.innerHTML =
       '<div class="kick">' + ico('clipboard') + 'The Dugout \u00b7 ' + esc(h2Team(w) || picker.name) + '</div>' +
-      '<div class="h2big">' + esc(picker.name) + ', what are they good at?</div>' +
+      '<div class="h2big">' + esc(picker.name) + ', what are they good at?</div>' + h2TurnHTML() +
       '<div class="h2hintline" style="margin-top:0">Every one of these was earned in Germany. ' +
         'You have ' + H2_TRAIT_BUDGET + ' points and both of you have the same ' + H2_TRAIT_BUDGET + ', ' +
         'so a better squad does not mean more of them.</div>' +
@@ -11757,6 +12335,11 @@ function h2Render(st){
           '<button class="bigbtn" onclick="h2KickOff()">Kick off</button>'
         : H.flipping
           ? '<div class="h2hintline">' + esc(caller) + ' called ' + H.call + '. In the air...</div>'
+          /* CALLED, AND THE COIN STILL IN HIS HAND. Only ever on screen when a
+             computer is the one calling: a person taps Heads and the coin goes
+             up on the same frame, because he already knows what he called. */
+          : H.call
+            ? '<div class="h2hintline">' + esc(caller) + ' calls ' + H.call + '.</div>'
           : '<div class="h2hintline">' + esc(caller) + ', call it.</div>' +
             '<div class="h2call">' +
               '<button class="bigbtn" onclick="h2Call(\'heads\')">Heads</button>' +
@@ -11784,6 +12367,42 @@ function h2Render(st){
           : "Pick it up. Nobody else looks.") + '</div>' +
         '<button class="bigbtn h2handbtn" onclick="h2HandGo()">' +
           (hd.down ? "Put it down" : "I have got it") + '</button>' +
+      '</div>';
+    return;
+  }
+
+  /* ---------- the same half-minute, with nobody to hand the phone to ----------
+     Against a computer h2Hand has nothing to show, so it dropped the human
+     straight onto the DEFENDER's screen and left him sitting on it for the
+     whole beat with everything on it live. Three things were wrong with that,
+     and only the first is the one you notice.
+
+       The marks were tappable. A thumb on any of them wrote into the set the
+       computer was a beat away from choosing, so a human could pick his own
+       markers and then know exactly where they were, which is the one secret
+       the mode has.
+
+       The line buttons were live too, so he could set the computer's line for
+       it, and "Make a change" opened the computer's bench and offered its
+       substitutes to whoever was holding the phone.
+
+       And the words were addressed to the wrong man: "Mark two of them", "He
+       only finds out where you were when he loses it", all of it written for
+       the defender and read by the attacker.
+
+     So the whole screen goes and a card takes its place for the one beat: his
+     colour, his badge, what he is doing, and nothing at all to touch. The
+     scorebug stays because the dots tick there, and they are what says the
+     beat is running rather than the app being stuck. */
+  if(S.phase === "h_mark" && aiIsOn(h2Other())){
+    const w = h2Other();
+    const kit = h2Kit(w), badge = h2Flag(w);
+    st.innerHTML =
+      h2ScoreHTML() +
+      '<div class="h2hand h2wait" style="--hk:' + kit + ';--hi:' + kitInk(kit) + '">' +
+        (badge ? '<img class="h2handbadge" src="' + badge + '" alt="">' : '') +
+        '<div class="h2handwho">' + esc(them.name) + '</div>' +
+        '<div class="h2handsub">He ' + h2AiSets() + '.</div>' +
       '</div>';
     return;
   }
@@ -11872,7 +12491,7 @@ function h2Render(st){
     };
     st.innerHTML =
       h2ScoreHTML() + h2PitchHTML(false) +
-      '<div class="h2big">' + esc(owner.name) + ', make a change.</div>' +
+      '<div class="h2big">' + esc(owner.name) + ', make a change.</div>' + h2TurnHTML() +
       '<div class="h2hintline" style="margin-top:0">' +
         (sub.slot == null
           ? "Nothing has gone wrong. Take a man off because you want to, and the man who comes on faces no question. It costs five minutes."
@@ -11902,7 +12521,7 @@ function h2Render(st){
     const isSave = sub.kind === "save";
     st.innerHTML =
       h2ScoreHTML() + (isSave ? h2GoalSceneHTML("set") : h2PitchHTML(false)) +
-      '<div class="h2big">' + esc(owner.name) + ', a change?</div>' +
+      '<div class="h2big">' + esc(owner.name) + ', a change?</div>' + h2TurnHTML() +
       '<div class="h2hintline" style="margin-top:0">' + esc(off) + (isSave ? ' is beaten.' : ' got it wrong.') +
         ' Bring a man on and he faces a fresh ' + (t ? t.label : "") + ' question for the same ' +
         (isSave ? 'shot' : H.pen ? 'penalty' : H.shooting ? 'shot' : 'ball') + '. ' +
@@ -11949,7 +12568,7 @@ function h2Render(st){
     const next = S.players[h2SoNext(so)];
     st.innerHTML =
       h2ScoreHTML() +
-      '<div class="h2big">Penalties.</div>' +
+      '<div class="h2big">Penalties.</div>' + h2TurnHTML() +
       '<div class="h2hintline" style="margin-top:0">' + (prev == null
         ? 'Level after ' + H2_MINUTES + ' minutes. ' + esc(next.name) + ' goes first.'
         : esc(S.players[prev].name) + (so.kicks[prev].slice(-1)[0] ? ' scores. ' : ' misses. ') +
@@ -11978,6 +12597,24 @@ function h2Render(st){
   }
 
   if(S.phase === "h_pick"){
+    /* THE BEAT AFTER THE SWING. One screen, for one beat, with nothing on it to
+       decide: the pitch has just turned and the eye has to find the ball before
+       it is asked to choose a pass. Deliberately the same scorebug, the same
+       toggles, the same pitch and the same caption as the screen a beat later,
+       so nothing on it moves when the beat ends; what is missing is everything
+       that invites a decision, which is the men lighting up, the scouting line,
+       the press, the confirm bar, the shot and the bench.
+       The caption is the one the screen already carries. It comes through
+       h2TurnLine like every other line in the mode, which is also what puts
+       "Your ball." on the front of it exactly once, here, on the hold rather
+       than on the screen after it. Somebody looking away at the wrong moment
+       gets told once, loudly, and then the line goes back to being the quiet
+       one it is the rest of the time. */
+    if(h2Holding()){
+      st.innerHTML = h2ScoreHTML() + h2TogglesHTML() + h2PitchHTML(false) +
+                     h2TurnHTML("h2land") + foot;
+      return;
+    }
     const canShoot = h2CanShoot(H.at);
     /* WHO PICKS IT UP IF HE LOSES IT. Same function the turnover itself uses,
        so the warning and the punishment can never disagree. It is read off the
@@ -12039,14 +12676,9 @@ function h2Render(st){
     }
     st.innerHTML =
       h2ScoreHTML() +
-      '<div class="h2toggles">' +
-        '<button class="h2view" onclick="h2ToggleView()">' + (h2Tilt ? "Flat view" : "3D view") + '</button>' +
-        '<button class="h2view" onclick="h2ToggleSound()">' + (h2Sound ? "Sound off" : "Sound on") + '</button>' +
-        '<button class="h2view" onclick="h2ToggleTackle()">' + (h2TackleOn ? "Tackles off" : "Tackles on") + '</button>' +
-        '<button class="h2view" onclick="h2TogglePixel()">' + (h2Pixel ? "Night look" : "16-bit") + '</button>' +
-      '</div>' +
+      h2TogglesHTML() +
       h2PitchHTML(true) +
-      '<div class="h2where">' + esc(me.name) + ' has it on ' + esc(h2Of(H.at, H.who)) + '</div>' +
+      h2TurnHTML() +
       '<div class="h2scout">Lose it here and <b>' + esc(h2Of(collector, h2Other())) +
         '</b> picks it up</div>' +
       lineBar + heat + bar +
@@ -12093,7 +12725,8 @@ function h2Render(st){
       : (TIERS[H.shooting ? h2ShotTier(H.at, H.who) : h2Priced(H.at, H.sel == null ? H.at : H.sel)] || t);
     st.innerHTML =
       h2ScoreHTML() + (H.so ? h2GoalSceneHTML("set") : h2PitchHTML(false)) +
-      '<div class="qcard" style="--dc:' + priced.color + '">' +
+      h2TurnHTML() +
+      '<div class="qcard' + h2Qin() + '" style="--dc:' + priced.color + '">' +
         '<div class="kick">' + esc(head) + ' · ' + esc(me.name) + ' · ' + priced.label + h2League() + '</div>' +
         '<div class="qtext">' + esc(q().q) + '</div>' +
         (shown && !h2IsMC() ? '<div class="atext"><span class="lbl">Answer</span>' + esc(q().a) + '</div>' : "") +
@@ -12104,7 +12737,9 @@ function h2Render(st){
             ? '<button class="bigbtn" onclick="h2McPlayOn()">' +
                 (H.pick === q().k ? (H.shooting ? "Strike it" : "Play on") : "Play on") + '</button>' +
               '<div class="h2hintline">' + (H.pick === q().k ? "Right." : H.pick == null ? "Out of time." : "Not that one.") + '</div>'
-            : '<div class="h2hintline">Tap the one you think it is. Nobody has to judge anything.</div>')
+            : '<div class="h2hintline">' + (aiIsOn(H.who)
+            ? esc(me.name) + ' has one tap to find it.'
+            : 'Tap the one you think it is. Nobody has to judge anything.') + '</div>')
         : (shown
             ? '<div class="row2">' +
                 '<button class="bigbtn ok" onclick="h2Judge(true)">' + (H.shooting ? "Struck it" : "Got it") + '</button>' +
@@ -12134,12 +12769,12 @@ function h2Render(st){
     const on = H.caught == null ? "" : h2Of(H.caught, H.who);
     const pen = H.caught != null && h2Shape(H.who)[H.caught].line === 6;
     st.innerHTML =
-      h2ScoreHTML() + h2PitchHTML(false) +
+      h2ScoreHTML() + h2PitchHTML(false) + h2TurnHTML() +
       '<div class="h2big tackle">' + (isTackle
         ? esc(them.name) + ' read it'
         : esc(them.name) + ' comes in for it') + '</div>' +
       (isTackle ? '<div class="h2hintline" style="margin-top:0">He was marking ' + esc(on) + '.</div>' : "") +
-      '<div class="qcard" style="--dc:' + t.color + '">' +
+      '<div class="qcard' + h2Qin() + '" style="--dc:' + t.color + '">' +
         '<div class="kick">' + (isTackle ? "THE TACKLE" : "CLOSED DOWN") + ' · ' + esc(them.name) + ' · ' + t.label + h2League() + '</div>' +
         '<div class="qtext">' + esc(q().q) + '</div>' +
         (shown && !h2IsMC() ? '<div class="atext"><span class="lbl">Answer</span>' + esc(q().a) + '</div>' : "") +
@@ -12171,9 +12806,9 @@ function h2Render(st){
   if(S.phase === "h_save" || S.phase === "h_sjudge"){
     const shown = S.phase === "h_sjudge";
     st.innerHTML =
-      h2ScoreHTML() + h2GoalSceneHTML("set") +
+      h2ScoreHTML() + h2GoalSceneHTML("set") + h2TurnHTML() +
       '<div class="h2big">' + esc(me.name) + ' shoots!</div>' +
-      '<div class="qcard" style="--dc:' + t.color + '">' +
+      '<div class="qcard' + h2Qin() + '" style="--dc:' + t.color + '">' +
         '<div class="kick">THE SAVE · ' + esc(them.name) + ' in goal · ' + t.label + h2League() + '</div>' +
         '<div class="qtext">' + esc(q().q) + '</div>' +
         (shown && !h2IsMC() ? '<div class="atext"><span class="lbl">Answer</span>' + esc(q().a) + '</div>' : "") +
@@ -14122,7 +14757,7 @@ function renderSetup(st){
           ${Object.keys(AI_MEN).map(id=>`<button class="mm-pill" aria-pressed="${setupAi===id}"
             onclick="setAi('${id}')">${AI_MEN[id].label}</button>`).join("")}
         </div>
-        ${setupAi?`<div class="mm-note">${esc(AI_MEN[setupAi].says)} He sets up in a ${esc(AI_MEN[setupAi].shape)} and ${esc(H2_LINES[AI_MEN[setupAi].line].label.toLowerCase())}.</div>
+        ${setupAi?`<div class="mm-note">${esc(AI_MEN[setupAi].says)} He sets up in a ${esc(AI_MEN[setupAi].shape)} and ${esc(H2_LINES[AI_MEN[setupAi].line].label.toLowerCase())}.${esc(aiFavLine(setupAi))}</div>
         <div class="mm-pills">${Object.keys(AI_LEVELS).map(k=>`<button class="mm-pill"
           aria-pressed="${setupAiLevel===k}" onclick="setAiLevel('${k}')">${AI_LEVELS[k].label}</button>`).join("")}</div>
         <div class="mm-note">${esc(AI_LEVELS[setupAiLevel].says)} He answers ${Math.round(AI_LEVELS[setupAiLevel].p.hard*100)}% of the Hard ones and ${Math.round(AI_LEVELS[setupAiLevel].p.ball*100)}% of the BALLs.</div>
