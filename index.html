@@ -3010,6 +3010,42 @@
   .alpg.foil{border-color:var(--gold);background:linear-gradient(120deg,rgba(201,154,46,.16),transparent)}
   .alpn{font-size:.78rem;font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
   .alpc{font-size:.7rem;opacity:.6;flex-shrink:0}
+  /* ---------------- THE SHELF ----------------
+     Covers, not pills. A flat colour, the year big, a bar under it and a count,
+     and a gold spine down the side of the one your packs come from, which is
+     the only thing on this screen that is about a choice rather than a total. */
+  .alshelf{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin:12px 0 16px}
+  .alcov{padding:0;border:0;background:none;color:inherit;font:inherit;cursor:pointer;
+    display:flex;flex-direction:column;gap:6px;text-align:left}
+  .alcov-b{position:relative;display:flex;flex-direction:column;align-items:center;gap:4px;
+    padding:10px 8px 8px;background:var(--cov);border-radius:var(--r2);overflow:hidden;
+    box-shadow:inset 0 0 0 1px rgba(0,0,0,.35)}
+  /* the spine is the whole switcher, so it is the one gold thing here */
+  .alcov.coll .alcov-b{box-shadow:inset 0 0 0 1px rgba(0,0,0,.35), inset 5px 0 0 0 var(--gold-hi)}
+  .alcov.on .alcov-b{outline:2px solid var(--ink);outline-offset:2px}
+  .alcov-k{font:400 7px/1 var(--px16);letter-spacing:.16em;text-transform:uppercase;
+    color:rgba(255,255,255,.62);align-self:flex-start;margin-left:4px}
+  .alcov-t{font:800 17px/1.05 var(--ui);color:#fff;text-align:center;text-wrap:balance}
+  .alcov-r{position:absolute;top:9px;right:-22px;transform:rotate(38deg);background:var(--gold-hi);
+    color:#241B08;font:400 7px/1 var(--px16);letter-spacing:.1em;text-transform:uppercase;padding:3px 22px}
+  .alcov-bar{display:block;height:4px;background:var(--line-soft);border-radius:2px;overflow:hidden}
+  .alcov-bar i{display:block;height:100%;background:var(--gold-hi)}
+  .alcov-n{font:600 11px/1 var(--ui);color:var(--ink-dim)}
+  .alcov-n b{color:var(--gold-hi);font-weight:700}
+
+  /* ---------------- THE BOOK, WHICH IS PAPER ----------------
+     A sticker album is a paper object and that is most of why anybody wants
+     one. The slots keep the app's dark ground because a sticker is printed on
+     a dark card, but the sheet they sit on is the page. */
+  .alsheet{background:#EFE7D2;border-radius:var(--r2);padding:12px 10px 8px;margin:10px 0;
+    box-shadow:0 10px 26px rgba(0,0,0,.35)}
+  .alsheet-h{display:flex;align-items:center;gap:9px;padding-bottom:9px;
+    border-bottom:2px solid rgba(36,27,8,.18)}
+  .alsheet-h img{width:26px;height:18px;object-fit:cover;border-radius:2px;flex:none}
+  .alsheet-h b{flex:1;font:800 17px/1 var(--ui);letter-spacing:.04em;text-transform:uppercase;color:#241B08}
+  .alsheet-h s{text-decoration:none;font:600 12px/1 var(--ui);color:#6A5B33}
+  .alsheet-f{display:flex;justify-content:space-between;padding-top:8px;
+    font:400 8px/1 var(--px16);letter-spacing:.14em;text-transform:uppercase;color:#8A7A4E}
   .alpage{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:10px 0}
   .alslot{padding:0;border:0;background:none;color:inherit;font:inherit}
   .alslot.want{cursor:pointer}
@@ -3023,6 +3059,16 @@
         padding:8px 4px;text-align:center}
   .alst.foil{border-color:var(--gold);background:linear-gradient(120deg,rgba(201,154,46,.2),transparent)}
   .alst.empty{opacity:.34;filter:grayscale(1)}
+  /* ON THE PAGE THE GAP IS A HOLE IN THE PAPER. A dimmed card still reads as a
+     thing you own, and the whole feeling of an album is that the space is
+     empty and has his name printed under it. */
+  .alsheet .alst{background:rgba(36,27,8,.05);border-color:rgba(36,27,8,.16)}
+  .alsheet .alst.empty{opacity:1;filter:none;background:none;
+    border:1px dashed rgba(36,27,8,.34)}
+  .alsheet .alst.empty .alsn{color:#6A5B33}
+  .alsheet .alst.empty .alsp{color:#9A8A5E}
+  .alsheet .alsn{color:#241B08}
+  .alsheet .alsp{color:#6A5B33}
   .alst.empty .xshirt{background:transparent;border:1px dashed var(--line);color:var(--ink-dim)}
   .alst.dupe{opacity:.6}
   .alst .xshirt{width:34px;height:32px;font-size:.8rem}
@@ -15077,24 +15123,41 @@ function albumStickerHTML(book, side, m, has, dupe){
    classes, because it is the same question asked in the same shape, and
    because a class written here would have to be unwritten when the covers
    arrive. */
+/* SIX ALBUM COLOURS AND A NAVY FOR THE FINALS. ALBUM-PLAN wants the host
+   nation's colour on each cover, and no file in this repo knows who staged
+   which tournament: the pools carry sides, kits and flags and stop there.
+   Typing fifteen host countries in from memory would be the one thing this
+   project does not do, so the cover takes its place in the shelf order against
+   a fixed set instead. Every book gets a distinct spine and nothing is claimed.
+   The finals book is navy because the plan says navy. */
+const ALBUM_COVERS = ["#17552C", "#C9A227", "#A8272F", "#16606B", "#4A2B6B", "#8A4A1E"];
+const albumCover = (id, i) => id === "finals" ? "#1B3A6B" : ALBUM_COVERS[i % ALBUM_COVERS.length];
+
+/* THE SHELF, which is a row of objects you own rather than a row of filters.
+   The pills it used to borrow from the pool picker were honest plumbing and
+   said nothing: a cover with a year on it, a bar under it and a spine on the
+   one your packs come from says the whole thing without a sentence. */
 function albumShelfHTML(now){
   const ids = albumBooks();
   if(ids.length < 2) return "";
-  const by = {}, order = [];
-  for(const id of ids){
-    const g = POOLS[id].group || "";
-    if(!by[g]){ by[g] = []; order.push(g); }
-    by[g].push(id);
-  }
-  for(const g of order) if(by[g].every(id => POOLS[id].short))
-    by[g].sort((a, b) => POOLS[a].short < POOLS[b].short ? -1 : 1);
-  const one = g => '<div class="h2poolrow">' + by[g].map(id =>
-    '<button class="h2poolb' + (id === now ? " on" : "") +
-    '" onclick="openAlbum(' + JSON.stringify(id).replace(/"/g, "&quot;") + ')">' +
-    esc((by[g].length > 1 && POOLS[id].short) || POOLS[id].label) + '</button>').join("") + '</div>';
-  return order.map(g => (g && by[g].length > 1
-    ? '<div class="h2poolg">' + esc(g) + '</div>' + one(g)
-    : one(g))).join("");
+  return '<div class="alshelf">' + ids.map((id, i) => {
+    const c = albumCount(id), cover = albumCover(id, i);
+    const done = albumBookIsDone(id);
+    const pc = c.all ? Math.round(c.have / c.all * 100) : 0;
+    return '<button class="alcov' + (id === now ? " on" : "") + (id === albumCollecting() ? " coll" : "") +
+      '" style="--cov:' + cover + '" onclick="openAlbum(' +
+      JSON.stringify(id).replace(/"/g, "&quot;") + ')">' +
+      '<span class="alcov-b">' +
+        '<span class="alcov-k">Sticker album</span>' +
+        (done ? '<span class="alcov-r">Complete</span>' : "") +
+        '<span class="alcov-t">' + esc(POOLS[id].label || id) + '</span>' +
+        h2FigHTML("", "#FFFFFF", 46, null) +
+      '</span>' +
+      '<span class="alcov-bar"><i style="width:' + pc + '%"></i></span>' +
+      '<span class="alcov-n">' + c.have + ' / ' + c.all +
+        (id === albumCollecting() ? ' <b>Collecting</b>' : "") + '</span>' +
+    '</button>';
+  }).join("") + '</div>';
 }
   /* ---------- THE ALBUM ----------
      One book at a time, one page a country, twenty-three slots a page. A
@@ -15137,13 +15200,20 @@ function renderAlbum(st){
       const got = men.filter(m => albumHas(albumId(bid, side, m))).length;
       const dupes = albumDupes(bid).length;
       st.innerHTML =
-        '<div class="kick">' + ico('users') + esc(side) + ' · ' + esc(label) +
+        '<div class="kick">' + ico('trophy') + esc(label) +
           (albumFoil(bid, side) ? ' · complete' : '') + '</div>' +
-        '<div class="h2big">' + got + ' of ' + men.length + '</div>' +
         (albumFoil(bid, side)
           ? '<div class="h2hintline" style="margin-top:0">Their bench is yours in The Dugout.</div>'
           : '<div class="h2hintline" style="margin-top:0">Finish the page and their bench is yours in The Dugout. ' +
             (dupes >= 3 ? 'Tap a gap to swap three doubles for him.' : 'You need three doubles to swap.') + '</div>') +
+        '<div class="alsheet"><div class="alsheet-h">' +
+          /* h2Badge resolves against the pool you are PLAYING, and the book on
+             the table is not that, so the page builds its own. The finals book
+             carries no flags at all, which is why this is guarded rather than
+             assumed. */
+          ((POOLS[bid] && POOLS[bid].flags && book[side].flag)
+            ? '<img src="' + POOLS[bid].flags + book[side].flag + POOLS[bid].ext + '" alt="">' : "") +
+          '<b>' + esc(side) + '</b><s>' + got + ' of ' + men.length + '</s></div>' +
         '<div class="alpage">' + men.map(m => {
           const id = albumId(bid, side, m), has = albumHas(id);
           const can = !has && dupes >= 3;
@@ -15152,6 +15222,8 @@ function renderAlbum(st){
                  albumStickerHTML(bid, side, m, has, false) +
                  (can ? '</button>' : '</div>');
         }).join("") + '</div>' +
+        '<div class="alsheet-f"><span>' + (book[side].group ? 'Group ' + esc(book[side].group) : "") +
+          '</span><span>Page ' + (albumSides(bid).indexOf(side) + 1) + '</span></div></div>' +
         '<button class="bigbtn ghost" onclick="openAlbum(' +
           JSON.stringify(bid).replace(/"/g, "&quot;") + ')">All the pages</button>';
       return;
