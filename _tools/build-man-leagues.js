@@ -2,6 +2,8 @@
  *
  *     node _tools/build-man-leagues.js --dry      look, report, write nothing
  *     node _tools/build-man-leagues.js --write    stamp lg onto the deck
+ *     node _tools/build-man-leagues.js --qids     resolve the men to Wikidata
+ *                                                 items, write the map, stop
  *
  * WHY. The Dugout's flagship rule is that a ball to a man draws a question
  * from where he played: van Nistelrooy pulls Eredivisie, Premier League or La
@@ -397,7 +399,37 @@ async function entities(ids) {
   }
 
   const qids = [...new Set(men.map(m => m.qid).filter(Boolean))];
-  console.log("\nasking Wikidata for club spells of " + qids.length + " players...");
+
+  /* THE MAP THIS TOOL JUST PAID FOR, written out so nothing else has to pay
+     for it again. Turning 736 men into 736 Wikidata items is the expensive
+     half of this file: a squad page, a round of redirect following, a
+     sitelinks lookup, a text search for whoever the squad page did not link,
+     a scoring pass over the candidates and a SPARQL rescue for the ones the
+     search could not place. Every stage of that caches, so a second run is
+     free, but the ANSWER was not being written down anywhere, so the next
+     tool that wants "which item is this man" either re-implements all of it
+     or guesses from his name.
+
+     build-careers.js --spells is the first tool to want it, for the club path
+     on the back of an album card. It reads this file and says so out loud if
+     it is not there. Keyed on the side and the full name because that pair is
+     unique in every pool on disk, where the shirt number is not: three Euro
+     2020 squads took two men wearing the same number.
+
+     It lives in _models because it is derived and re-creatable, not shipped. */
+  cacheWrite("mlqid-" + POOL + ".json",
+    Object.fromEntries(men.filter(m => m.qid).map(m => [m.side + "|" + m.full, m.qid])));
+  console.log("\nitems for " + qids.length + " of " + men.length + " men, written to _models/mlqid-" + POOL + ".json");
+
+  /* --qids STOPS HERE. Everything above this line is cached from the last run
+     and costs nothing; the club-spell query below is keyed on the exact set of
+     items in each group of sixty, so a single man resolving differently than
+     he did last time misses the cache and goes to the network. That is the
+     right behaviour when you want the leagues, and a pointless round trip when
+     all you wanted was the map. */
+  if (process.argv.includes("--qids")) return;
+
+  console.log("asking Wikidata for club spells of " + qids.length + " players...");
   const clubsOf = {};
   const countries = {};
   for (const group of chunk(qids, 60)) {

@@ -140,6 +140,45 @@ function keyOf(s) {
     .replace(/ /g, "-");
 }
 
+/* ---------- what kind of team is this ----------
+   These four sat inside the build for a long time because the build was the
+   only thing that needed them. --spells needs exactly the same judgement about
+   exactly the same items, so they have moved up here rather than been written
+   out a second time slightly differently, which is how two tools end up
+   disagreeing about whether Barcelona B is a club. They close over nothing. */
+const RESERVE = /(\b(ii|iii|reserves?|youth|academy|amateurs?|juniors?)\b\s*$)|\bunder-?\d|\bu-?(1[5-9]|2[0-3])\b|\b[bc]\s*(team|elftal)?\s*$|\batletic$|\bcastilla$|^jong\b|\bnext\s*gen$|\bjuvenil|\b(women|femenino|femeni|feminine?|feminin|vrouwen|damen|ladies|wfc)\b/i;
+/* a youth or B international side, as opposed to the senior one that dates a
+   career: "Portugal national under-21 football team", "England ... B team" */
+const YOUTHNAT = /under-?\d|\bu-?\d{2}\b|youth|olympic|amateur|\bb\b\s*team\s*$/i;
+const plain = v => (v.title || v.en || "").normalize("NFD").replace(/[̀-ͯ]/g, "")
+  .replace(/\s+\(.*\)$/, "").replace(/\s+(F\.?C\.?|FC)$/i, "");
+
+/* THE SAME TRIM, WITH THE ACCENTS LEFT ON. plain() takes them off because
+   everything it feeds is a regex test where "Atletico" and "Atlético" have to
+   match, and nothing it feeds is ever shown to anybody. The moment a club name
+   goes on a card it is a name again, and printing Gremio for Grêmio, Raa IF
+   for Råå IF or Besiktas for Beşiktaş is the repo doing by accident the thing
+   it has a rule against doing on purpose. The disambiguator in brackets goes
+   because "Everton (Chile)" is Wikipedia's problem and not the card's, and a
+   trailing FC or CF goes because Real Madrid CF is nobody's idea of that
+   club's name, and those two are ninety-four of the 962 names in one pool
+   alone. Nothing else goes. The tails past those two are SC, SV, S.K., BK and
+   IF, and every one of them is how the club is actually written: Råå IF is not
+   Råå and Högaborgs BK is not Högaborgs. Stripping the FC off the FRONT of FC
+   Barcelona while leaving Parma Calcio 1913 alone would be the same guess in
+   the other direction, and it is wrong about as often as it is right. */
+const clubName = v => String(v.title || v.en || "")
+  .replace(/\s+\(.*\)$/, "").replace(/\s+(F\.?C\.?|C\.?F\.?)$/i, "").trim();
+
+/* CLUB, NATIONAL or RESERVE. Only the last two may be dropped from a route;
+   a CLUB that cannot find its crest kills the career instead. */
+function kind(v) {
+  if (!v) return "UNKNOWN";
+  if (v.nat) return YOUTHNAT.test(plain(v)) ? "YOUTHNAT" : "NATIONAL";
+  if (RESERVE.test(plain(v))) return "RESERVE";
+  return "CLUB";
+}
+
 /* The senior clubs out of an "infobox football biography", in order. Youth
    clubs are a separate field and stay out of it; loan arrows and (loan) notes
    are stripped because a loan is still a club you can be asked about. */
@@ -179,7 +218,242 @@ function readCareers(html) {
    the ends, because that is how the deck already writes them. */
 const nameKey = n => n.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z ]/g, "").replace(/\s+/g, " ").trim();
 
+/* ============================== --spells ==============================
+   The club path on the back of an album card, as ALBUM-PLAN.md section 3 asks
+   for it: the clubs a man played for, in order, each with a dot coloured by
+   the league it sits in.
+
+     node _tools/build-careers.js --spells --pool wc2006
+     node _tools/build-careers.js --spells --all
+     node _tools/build-careers.js --spells --all --dry
+
+   WHY IT LIVES IN THIS FILE. The hard part is not fetching anything, it is
+   deciding what a P54 "member of sports team" claim actually is. This file
+   already knows: the national side, the under-21s, the B team and the academy
+   all sit in the same list as the first team, and the header at the top spells
+   out at length why the obvious class tests get that wrong in both directions.
+   Writing that judgement out a second time in a new file is how two tools end
+   up quietly disagreeing, so the mode is here and it calls kind().
+
+   WHY IT IS NOT THE CAREER PATH DECK. Career Path needs a crest per club, a
+   route of three to nine, and a man famous enough to guess; a career with one
+   unmatched crest is thrown away whole because a hole in the route makes the
+   question wrong. A card back needs none of that. It prints names, so a club
+   with no crest in the library is fine, and a one-club man and a fourteen-club
+   journeyman are both just what it says on the card. So the reach here is much
+   wider than CAREERS, and the two are not substitutes: CAREERS is crests with
+   no years, this is names with years and a league.
+
+   WHERE EVERY PIECE COMES FROM, all of it already on disk:
+
+     _models/careers-spells.json    7,782 men, their P54 spells, from and to
+     _models/careers-clubs2.json    5,483 team items: nat, league, every name
+     _models/mlc-*.json             the club spell SPARQL build-man-leagues
+                                    ran, which carries each club's COUNTRY
+     _models/mlqid-<pool>.json      which man in the pool is which item,
+                                    written by build-man-leagues.js --qids
+
+   COUNTRY, NOT LEAGUE, for the dot, which is build-man-leagues.js's rule and
+   its reasoning applies here unchanged: Wikidata's P118 is the league a club
+   is in TODAY, so a card for a 2006 man would put Parma in Serie B. Where he
+   played does not change when his club goes down. Six countries have a deck in
+   this app and therefore an accent colour to draw the dot in; everything else
+   gets no dot, which is honest rather than invented.                       */
+async function spellsMode() {
+  const POOLS = ["wc1998", "wc2002", "wc2006", "wc2010", "wc2014", "wc2018", "wc2022", "wc2026",
+    "euro2000", "euro2004", "euro2008", "euro2012", "euro2016", "euro2020", "euro2024"];
+  const one = arg("--pool");
+  const want = process.argv.includes("--all") ? POOLS : (one ? [one] : ["wc2006"]);
+
+  const spells = cacheRead("careers-spells.json");
+  const clubs = cacheRead("careers-clubs2.json");
+  if (!spells || !clubs) {
+    console.error("no careers-spells.json or careers-clubs2.json in _models. Run the full build once to fill them.");
+    process.exit(1);
+  }
+  console.log(`${Object.keys(spells).length} men with spells, ${Object.keys(clubs).length} team items`);
+
+  /* THE COUNTRY OF EVERY CLUB, out of a query somebody else already paid for.
+     build-man-leagues.js asks Wikidata for each pool man's club spells and
+     selects ?club, ?clubLabel and ?countryLabel, so its cache is a club item
+     to country map for every club any man in any pool ever played for. It is
+     joined on the item id and not on the label, because "Real Madrid CF" and
+     "Real Madrid" are the same club under two names and a label join loses
+     half of them.
+
+     A handful of items carry two countries, which is either a club that moved
+     when its state did (Tavriya Simferopol is Soviet and then Ukrainian) or a
+     stray claim (Benfica has fourteen rows saying Angola against five hundred
+     saying Portugal). The one the most rows agree on wins. */
+  const country = {};
+  let mlc = 0;
+  for (const f of fs.readdirSync(MODELS)) {
+    if (!/^mlc-[0-9a-f]{16}\.json$/.test(f)) continue;
+    mlc++;
+    for (const r of (cacheRead(f) || [])) {
+      if (!r.club || !r.countryLabel) continue;
+      const q = r.club.value.split("/").pop();
+      (country[q] = country[q] || {})[r.countryLabel.value] = (country[q][r.countryLabel.value] || 0) + 1;
+    }
+  }
+  const countryOf = q => {
+    const c = country[q];
+    return c ? Object.keys(c).sort((a, b) => c[b] - c[a])[0] : null;
+  };
+  console.log(`${mlc} club-spell caches read, ${Object.keys(country).length} club items have a country\n`);
+
+  /* the six countries with a deck, and therefore with an accent colour the
+     app can draw a dot in. Same table build-man-leagues.js maps lg with. */
+  const DECK_FOR = {
+    "Netherlands": "ere", "England": "premier", "Spain": "laliga",
+    "Germany": "bundesliga", "Italy": "seriea", "Belgium": "belgian",
+  };
+  /* THE UNITED KINGDOM IS FOUR COUNTRIES and one of them has the deck, so the
+     country alone cannot answer for a British club. build-man-leagues.js
+     settles it with the list of every side that has played in the Premier
+     League since 1992, which is fifty-two names and will not grow by much, and
+     that list is read straight out of that file rather than copied here so
+     there is only ever one of it. */
+  const PL = fs.readFileSync(path.join(__dirname, "build-man-leagues.js"), "utf8");
+  const plAt = PL.indexOf("const PL_CLUBS = [");
+  const plBlock = plAt < 0 ? "" : PL.slice(plAt, PL.indexOf("];", plAt) + 2);
+  const PL_CLUBS = plBlock ? eval(plBlock.replace("const PL_CLUBS =", "")) : null;
+  /* SAY SO RATHER THAN CARRY ON WITH HALF A LIST. Slicing a literal out of
+     another file is only safe while it stays a literal, and the failure it
+     would otherwise have is silent: every English club loses its dot and the
+     run still reports a number that looks fine. */
+  if (!Array.isArray(PL_CLUBS) || PL_CLUBS.length < 40) {
+    console.error("could not read PL_CLUBS out of build-man-leagues.js. It is the list that decides which " +
+      "British clubs are Premier League ones, and without it no English club gets a league dot.");
+    process.exit(1);
+  }
+  const isPremier = c => PL_CLUBS.some(p => String(c).toLowerCase().startsWith(p.toLowerCase()));
+  const leagueOf = v => {
+    const c = countryOf(v.qid);
+    if (!c) return null;
+    if (/United Kingdom/i.test(c)) return isPremier(v.title || v.en) ? "premier" : null;
+    return DECK_FOR[c] || null;
+  };
+
+  const yr = t => t ? +String(t).slice(1, 5) : null;
+  const careerNames = new Set(readCareers(fs.readFileSync(HTML, "utf8")).list.map(c => nameKey(c.n)));
+
+  let gMen = 0, gQid = 0, gPath = 0, gUndated = 0, gNone = 0, gRows = 0, gDot = 0, gInCareers = 0;
+  const perLg = {};
+  for (const pool of want) {
+    const deckAt = path.join(REPO, "assets", pool, "index.json");
+    if (!fs.existsSync(deckAt)) { console.log(pool.padEnd(9) + " no deck on disk, skipped"); continue; }
+    const qidAt = "mlqid-" + pool + ".json";
+    const qidOf = cacheRead(qidAt);
+    if (!qidOf) {
+      console.log(pool.padEnd(9) + " NO ITEM MAP. Run:  node _tools/build-man-leagues.js --pool " + pool + " --qids");
+      continue;
+    }
+    const deck = JSON.parse(fs.readFileSync(deckAt, "utf8"));
+
+    /* TWO MEN, ONE ITEM, AND NO WAY TO TELL WHICH ONE IS WRONG.
+       A pool now and then hands the same Wikidata item to two different men,
+       and it is always the same shape of name: the Eduardo who kept goal for
+       Portugal and the Eduardo who played up front for Croatia, Uruguay's
+       Carlos Sánchez and Colombia's, the two Emiliano Martínezes of 2026, the
+       two Riccardos of 2002, and North Korea's Pak Nam-chol I and Pak Nam-chol
+       II, who really are two men. One of each pair has somebody else's career,
+       and from in here there is nothing to say which. Seven pairs across the
+       fifteen pools, so both come out. A card that prints the wrong man's
+       clubs under the right man's name is worse than a card with no clubs row,
+       and it is the kind of wrong that nobody ever notices. */
+    const twice = {};
+    for (const [k, q] of Object.entries(qidOf)) (twice[q] = twice[q] || []).push(k);
+    const shared = new Set(Object.entries(twice).filter(([, v]) => v.length > 1).map(([q]) => q));
+    if (shared.size) {
+      const who = Object.entries(twice).filter(([, v]) => v.length > 1).map(([, v]) => v.join(" and "));
+      console.log(pool.padEnd(9) + " " + shared.size + " item(s) claimed by two men, both dropped: " + who.join("; "));
+    }
+
+    /* THE KEY IS THE SIDE AND THE SHIRT, which is what the card has in its
+       hand when it turns over, except in the three Euro 2020 squads that took
+       two men wearing the same number. Those get the short name on the end,
+       so the lookup is "side/no, and if that misses, side/no/name". Three men
+       across fifteen pools, and the alternative was inventing an id the album
+       does not already have or quietly losing them. */
+    const out = {};
+    let men = 0, qid = 0, made = 0, undated = 0, none = 0, rows = 0, dot = 0, inCareers = 0;
+    for (const [side, t] of Object.entries(deck)) {
+      const nos = {};
+      for (const k of ["xi", "bench"]) for (const p of (t[k] || [])) nos[p.no] = (nos[p.no] || 0) + 1;
+      for (const k of ["xi", "bench"]) for (const p of (t[k] || [])) {
+        men++;
+        const q = qidOf[side + "|" + p.full];
+        if (!q || shared.has(q)) continue;
+        qid++;
+        const v = spells[q];
+        if (!v || !(v.sp || []).length) { none++; continue; }
+        const his = v.sp.filter(s => { const k2 = kind(clubs[s.q]); return k2 === "CLUB" || k2 === "UNKNOWN"; });
+        if (!his.length) { none++; continue; }
+        /* A PATH IS THE ORDER, so a spell nobody dated cannot go in it, and a
+           path with one spell left out is a hole rather than a short career.
+           Same ruling the deck build makes two hundred lines down, same
+           reason: Lukas Nmecha's item dates one club of three, and a sort that
+           tolerates that opens his career at Anderlecht and closes it at the
+           academy he had already left. The man is dropped and counted. */
+        if (his.some(s => !s.from)) { undated++; continue; }
+        const dated = his.map((s, i) => ({ ...s, i, y: yr(s.from) })).sort((a, b) => a.y - b.y || a.i - b.i);
+        const route = [];
+        for (const d of dated) {
+          const item = clubs[d.q];
+          if (!item) continue;
+          const name = clubName(item);
+          if (!name) continue;
+          const last = route[route.length - 1];
+          /* a contract and the loan inside it are two statements about one
+             spell, and a man who leaves and comes back is two spells, so only
+             neighbours collapse. The later end date wins, because the pair is
+             one stay at one club. */
+          if (last && last.c === name) { const e = yr(d.to); if (e && (!last.t || e > last.t)) last.t = e; continue; }
+          const row = { c: name };
+          const lg = leagueOf({ qid: d.q, title: item.title, en: item.en });
+          if (lg) row.lg = lg;
+          row.f = d.y;
+          const e = yr(d.to);
+          if (e) row.t = e;
+          route.push(row);
+        }
+        if (!route.length) { none++; continue; }
+        made++; rows += route.length;
+        for (const r of route) if (r.lg) { dot++; perLg[r.lg] = (perLg[r.lg] || 0) + 1; }
+        if (careerNames.has(nameKey(p.full)) || careerNames.has(nameKey(p.n))) inCareers++;
+        out[side + "/" + p.no + (nos[p.no] > 1 ? "/" + p.n : "")] = route;
+      }
+    }
+    const pc = (a, b) => (a / Math.max(1, b) * 100).toFixed(1) + "%";
+    console.log(pool.padEnd(9) +
+      " men " + String(men).padStart(4) +
+      "  item " + String(qid).padStart(4) + " (" + pc(qid, men) + ")" +
+      "  path " + String(made).padStart(4) + " (" + pc(made, men) + ")" +
+      "  no spells " + String(none).padStart(4) +
+      "  undated " + String(undated).padStart(3) +
+      "  clubs " + String(rows).padStart(5) +
+      "  dots " + pc(dot, rows));
+    gMen += men; gQid += qid; gPath += made; gUndated += undated; gNone += none;
+    gRows += rows; gDot += dot; gInCareers += inCareers;
+    if (DRY) continue;
+    const at = path.join(REPO, "assets", pool, "spells.json");
+    fs.writeFileSync(at, JSON.stringify(out));
+    console.log("          wrote " + path.relative(REPO, at) + "  (" + (fs.statSync(at).size / 1024).toFixed(1) + " KB)");
+  }
+  const pc = (a, b) => (a / Math.max(1, b) * 100).toFixed(1) + "%";
+  console.log("\n" + gMen + " men, " + gQid + " are a Wikidata item (" + pc(gQid, gMen) + "), " +
+    gPath + " have a club path (" + pc(gPath, gMen) + ")");
+  console.log("  " + gNone + " are not in careers-spells.json at all, " + gUndated + " had a spell nobody dated");
+  console.log("  " + gRows + " clubs drawn, " + gDot + " of them in a deck league (" + pc(gDot, gRows) + ")");
+  console.log("  per league: " + Object.entries(perLg).sort((a, b) => b[1] - a[1]).map(([k, v]) => k + " " + v).join("  "));
+  console.log("  " + gInCareers + " of the men with a path are also in CAREERS, where the crests are");
+  if (DRY) console.log("\n--dry, nothing written");
+}
+
 (async () => {
+  if (process.argv.includes("--spells")) return spellsMode();
+
   const html = fs.readFileSync(HTML, "utf8");
   const { list: existing } = readCareers(html);
   const have = new Set(existing.map(c => nameKey(c.n)));
@@ -283,21 +557,6 @@ const nameKey = n => n.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().re
     if (!k) continue;
     keyCount[k] = (keyCount[k] || 0) + 1;
     if (!byKey[k]) byKey[k] = s;
-  }
-  const RESERVE = /(\b(ii|iii|reserves?|youth|academy|amateurs?|juniors?)\b\s*$)|\bunder-?\d|\bu-?(1[5-9]|2[0-3])\b|\b[bc]\s*(team|elftal)?\s*$|\batletic$|\bcastilla$|^jong\b|\bnext\s*gen$|\bjuvenil|\b(women|femenino|femeni|feminine?|feminin|vrouwen|damen|ladies|wfc)\b/i;
-  /* a youth or B international side, as opposed to the senior one that dates a
-     career: "Portugal national under-21 football team", "England ... B team" */
-  const YOUTHNAT = /under-?\d|\bu-?\d{2}\b|youth|olympic|amateur|\bb\b\s*team\s*$/i;
-  const plain = v => (v.title || v.en || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "")
-    .replace(/\s+\(.*\)$/, "").replace(/\s+(F\.?C\.?|FC)$/i, "");
-
-  /* CLUB, NATIONAL or RESERVE. Only the last two may be dropped from a route;
-     a CLUB that cannot find its crest kills the career instead. */
-  function kind(v) {
-    if (!v) return "UNKNOWN";
-    if (v.nat) return YOUTHNAT.test(plain(v)) ? "YOUTHNAT" : "NATIONAL";
-    if (RESERVE.test(plain(v))) return "RESERVE";
-    return "CLUB";
   }
 
   /* WHICH NAME TO TRUST. A club answers to a dozen names across the languages

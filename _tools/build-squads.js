@@ -4,6 +4,8 @@
  *     node _tools/build-squads.js --year 2018
  *     node _tools/build-squads.js --comp euro --year 2004
  *     node _tools/build-squads.js --dry                  read it, write nothing
+ *     node _tools/build-squads.js --cards --year 2010    the card back, onto a
+ *                                                        pool already on disk
  *
  * WHY IT IS HARVESTED AND NOT TYPED. Thirty-two squads is 352 names in the
  * elevens alone, and this repo has learned twice over that a name typed from
@@ -28,10 +30,40 @@
  * infoboxes and which already carries 174 senior national sides. Anything that
  * cannot be matched is REPORTED rather than guessed at, because a made-up
  * colour is exactly the sort of quiet wrongness this file exists to avoid.
+ *
+ * THE BACK OF THE STICKER. ALBUM-PLAN.md turns the sticker over and wants the
+ * club he was at that summer, his caps and his international goals as they
+ * stood, his date of birth and how old he was. Every one of those was already
+ * sitting in the template this file has always split, and four of the five
+ * were being thrown away a line after they were parsed:
+ *
+ *   |caps=130          his caps BEFORE the tournament, not after it
+ *   |goals=0           the goals inside those caps, absent before roughly 2008
+ *   |club=[[Fulham]]   where he was contracted that summer
+ *   |age={{birth date and age2|df=y|2006|6|9|1970|10|29}}
+ *
+ * That last one is two dates in one template, the day the article counts his
+ * age to and the day he was born, in that order, so the birthday and the age
+ * that summer both fall out of it with no arithmetic that needs a calendar
+ * from anywhere else. They land on the man as club, caps, capg, dob and age.
+ * capg rather than the obvious g because g is already taken on these men: it
+ * is what he scored AT the tournament, which build-tournament.js stamps, and
+ * two fields called goals that mean different things is a bug waiting to be
+ * written by somebody reading fast.
+ *
+ * --cards EXISTS BECAUSE A FULL RUN WOULD THROW AWAY BETTER DATA. By the time
+ * a pool has shipped, build-elevens.js has replaced the shirt-number eleven
+ * with the one that actually took the field, build-tournament.js has stamped
+ * appearances, cards and goals on every man, build-groups.js has added the
+ * group and retier.js has sharpened the positions. None of that is in this
+ * file's gift and all of it lives in the same index.json. So --cards reads the
+ * deck that is there, stamps the five card-back fields onto the men in it, and
+ * writes it back. Same parse, same article, nothing else touched.
  */
 const fs = require("fs");
 const path = require("path");
 const https = require("https");
+const crypto = require("crypto");
 
 const REPO = path.join(__dirname, "..");
 /* WHICH TOURNAMENT. Wikipedia has used the same squad and match templates for
@@ -43,6 +75,17 @@ const YEAR = T.year;
 const POOL = T.pool;
 const OUT = path.join(REPO, "assets", POOL, "index.json");
 const DRY = process.argv.includes("--dry");
+const CARDS = process.argv.includes("--cards");
+/* WHERE THE ARTICLE IS ALREADY SITTING. build-tournament.js, build-elevens.js
+   and build-man-leagues.js all read Wikipedia through a helper that files the
+   wikitext under a sha1 of the article title, and the squads page is one of
+   the pages they read. This file used to fetch it fresh every time, which is
+   one 160KB request per pool per run and a 429 waiting to happen on the
+   sixteenth. Same key, same folder, same {t: "..."} shape, so a run that finds
+   the page there costs nothing and a run that does not fills it in for the
+   others. The folder is gitignored, so a clean checkout still fetches. */
+const MODELS = path.join(__dirname, "_models");
+const wctKey = title => "wct-" + crypto.createHash("sha1").update(title).digest("hex").slice(0, 16) + ".json";
 /* THE USER AGENT IS NOT DECORATION, it is the difference between a build that
    works and one that 429s on every single call.
 
@@ -140,6 +183,58 @@ function shortName(full) {
 /* the eleven slots the pitch draws, in order */
 const SHAPE = ["GK", "DF", "DF", "DF", "DF", "MF", "MF", "MF", "FW", "FW", "FW"];
 
+/* A COUNT THAT IS REALLY ZERO IS NOT A COUNT THAT IS MISSING. |caps=0 is a man
+   who had never played for his country before that summer, which is a fact the
+   card back should print, and |goals= with nothing after it is a column the
+   article does not carry at all, which is a row the card back should leave
+   out. parseInt handles both as 0 and loses the difference, so this returns
+   null for absent and a number for present, and the caller decides. */
+/* A FOOTNOTE MARKER IS NOT PART OF THE NUMBER. The 1998 article gives Ulf
+   Kirsten caps=32* and Olaf Marschall caps=7*, and the note the star points at
+   is not anywhere in the article any more, so there is nothing to read and
+   nothing to guess at. What the column prints is 32 and 7, so that is what the
+   card prints. Two men out of 9,717, and the alternative was leaving both of
+   them with no caps row for the sake of a dangling asterisk. */
+function count(raw) {
+  const s = String(raw == null ? "" : raw).split(/<ref|\{\{/)[0]
+    .replace(/[,\s]/g, "").replace(/[*†‡]+$/, "");
+  return /^\d+$/.test(s) ? +s : null;
+}
+
+/* TWO DATES IN ONE TEMPLATE, and the order is the thing to get right.
+   {{birth date and age2|df=y|2006|6|9|1972|12|24}} renders as "24 December
+   1972 (aged 33)": the FIRST triple is the day the article is counting to,
+   which is that tournament's own date, and the SECOND is the day he was born.
+   Every one of the 9,717 men across the fifteen cached squad pages carries
+   this same template and no other, so there is no second form to support.
+
+   The reference date is read per man rather than assumed for the pool, because
+   it is not always the same inside one article: the 1998 page dates Taffarel
+   to 8 May and Cafu to 10 June, and whether that is an editor's slip or a
+   deliberate squad-submission date, the age it renders is the age the article
+   shows and the age the card should show.
+
+   df=y and mf=yes carry no bare integers, so pulling the plain numbers out in
+   order is enough and no positional parsing is needed. Anything that does not
+   come back as six plausible numbers returns null and is counted, because a
+   date silently off by a decade is worse than a row the card leaves out. */
+function bornAndAge(raw) {
+  const m = /\{\{\s*birth[ _]date[ _]and[ _]age2\s*\|([^}]*)\}\}/i.exec(String(raw || ""));
+  if (!m) return null;
+  const n = m[1].split("|").map(s => s.trim()).filter(s => /^\d{1,4}$/.test(s)).map(Number);
+  if (n.length < 6) return null;
+  const [ty, tm, td, by, bm, bd] = n;
+  if (!(ty >= 1930 && ty <= 2030) || !(by >= 1900 && by <= 2020)) return null;
+  if (!(tm >= 1 && tm <= 12 && td >= 1 && td <= 31 && bm >= 1 && bm <= 12 && bd >= 1 && bd <= 31)) return null;
+  /* the birthday-has-happened-yet test, written out rather than done with Date
+     objects, because a Date is a timezone and this is a calendar */
+  let age = ty - by;
+  if (tm < bm || (tm === bm && td < bd)) age -= 1;
+  if (age < 14 || age > 50) return null;
+  const pad = x => String(x).padStart(2, "0");
+  return { dob: by + "-" + pad(bm) + "-" + pad(bd), age: age };
+}
+
 /* every {{name|...}} in the text, returned as its raw inside, found by
    counting braces rather than by hoping the line ends politely */
 function templates(body, name) {
@@ -201,12 +296,43 @@ function parseSquads(wikitext) {
            on a sortname it threw away the name. */
         name: unlink(sortnames(String(f.name)).split(/<ref|{{/)[0]),
         caps: parseInt(f.caps, 10) || 0,
-        club: unlink(f.club || ""),
+        /* A CLUB ENDS WHERE THE FIRST FOOTNOTE BEGINS, exactly as a name does,
+           and for exactly the same reason: unlink throws the <ref> tags away
+           and leaves what was inside them behind. 101 of the 9,717 men across
+           the fifteen cached squad pages carry one, and until the split was
+           here Zidane's club read "Real MadridZidane retired from football
+           following the tournament." and Samuel Eto'o's was four lines of ESPN
+           citation. None of the 9,717 club fields begins with a template, so
+           cutting at the first {{ costs nothing and catches the bare {{cite}}
+           that sometimes trails a ref that was never closed. */
+        club: unlink(String(f.club || "").split(/<ref|\{\{/)[0]),
+        /* the card back's five, kept apart from the four above because these
+           are read straight out of the template and may legitimately be
+           absent, where a man with no name or no shirt number is a parse that
+           went wrong. capsAt is the same field as caps one line up, read again
+           so that a real zero survives; caps stays as it is because the XI
+           picker has always treated it as a number and nothing reads it. */
+        capsAt: count(f.caps),
+        goalsAt: count(f.goals),
+        born: bornAndAge(f.age),
       });
     }
     if (players.length >= 11) teams.push({ name: h.name, players });
   });
   return teams;
+}
+
+/* The five fields the card back draws, as they sit on a man in the deck. A key
+   is left out entirely rather than written empty, because ALBUM-PLAN.md's rule
+   for the back is that a row with no data for a man is a row that is not
+   drawn, and the cheapest way to say "not drawn" in JSON is "not there". */
+function cardBack(p) {
+  const b = {};
+  if (p.club) b.club = p.club;
+  if (p.capsAt != null) b.caps = p.capsAt;
+  if (p.goalsAt != null) b.capg = p.goalsAt;
+  if (p.born) { b.dob = p.born.dob; b.age = p.born.age; }
+  return b;
 }
 
 function pickXI(players) {
@@ -228,7 +354,7 @@ function pickXI(players) {
     }
     if (!pick) return null;
     used.add(pick);
-    xi.push({ n: shortName(pick.name), full: pick.name, no: pick.no, pos: pick.pos });
+    xi.push({ n: shortName(pick.name), full: pick.name, no: pick.no, pos: pick.pos, ...cardBack(pick) });
   }
   /* THE BENCH, the other twelve, by the same rule. A substitution that says
      "Sneijder replaces Landzaat" needs a Sneijder to name, and until this the
@@ -240,17 +366,114 @@ function pickXI(players) {
      all started matches in Qatar and none of them was in the deck, because they
      wore high numbers. A squad is a squad. */
   const bench = players.filter(p => !used.has(p)).sort((a, b) => a.no - b.no)
-    .map(p => ({ n: shortName(p.name), full: p.name, no: p.no, pos: p.pos }));
+    .map(p => ({ n: shortName(p.name), full: p.name, no: p.no, pos: p.pos, ...cardBack(p) }));
   return { xi, bench };
 }
 
 (async () => {
-  console.log("fetching the squads...");
-  const raw = await get("https://en.wikipedia.org/w/api.php?action=parse" +
-    "&page=" + encodeURIComponent(T.title + " squads") + "&prop=wikitext&redirects=1&format=json&formatversion=2");
-  const wikitext = JSON.parse(raw).parse.wikitext;
+  /* CACHE FIRST, and say which it was. A run that quietly went to the network
+     when it did not have to is the run that gets throttled halfway through the
+     fifteenth pool, and there is no way to tell from the output afterwards. */
+  const title = T.title + " squads";
+  const at = path.join(MODELS, wctKey(title));
+  let wikitext = "";
+  if (fs.existsSync(at)) {
+    try { wikitext = JSON.parse(fs.readFileSync(at, "utf8")).t || ""; } catch (e) { wikitext = ""; }
+  }
+  if (wikitext) {
+    console.log("squads out of the cache: " + wctKey(title) + "  (" + (wikitext.length / 1024).toFixed(0) + "KB)");
+  } else {
+    console.log("fetching the squads...");
+    const raw = await get("https://en.wikipedia.org/w/api.php?action=parse" +
+      "&page=" + encodeURIComponent(title) + "&prop=wikitext&redirects=1&format=json&formatversion=2");
+    wikitext = JSON.parse(raw).parse.wikitext;
+    try { fs.mkdirSync(MODELS, { recursive: true }); fs.writeFileSync(at, JSON.stringify({ t: wikitext })); } catch (e) {}
+  }
 
   const teams = parseSquads(wikitext);
+
+  /* ---------- --cards: the back of the sticker, onto the deck that is there ----------
+     Deliberately before every other stage in this file. Nothing below needs to
+     happen to stamp five fields onto men who are already in the pool, and the
+     kit bank, the flag downloads and the two SPARQL code lists between here
+     and the write are all network. */
+  if (CARDS) {
+    if (!fs.existsSync(OUT)) {
+      console.error("no pool at " + path.relative(REPO, OUT) + ". --cards stamps a deck that exists; build it first.");
+      process.exit(1);
+    }
+    const deck = JSON.parse(fs.readFileSync(OUT, "utf8"));
+    /* MATCH ON THE FULL NAME, because the shirt number is not unique. Three
+       Euro 2020 squads took two men wearing the same number (Switzerland had
+       Omlin and Kobel both on 21), which is the same collision that stops that
+       tournament being a book under the album's slug/number sticker id. The
+       full name in the deck was written by the parse two functions up from
+       here, off this same article, so an exact hit is the normal case and the
+       normalised one is for the years where an editor has since fixed an
+       accent. */
+    const norm = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "")
+      .toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+    const byName = new Map();
+    for (const t of teams) byName.set(t.name, t);
+    let sides = 0, hit = 0, missed = 0, noSide = [];
+    const gaps = { club: 0, caps: 0, capg: 0, dob: 0 };
+    const orphans = [];
+    for (const [side, t] of Object.entries(deck)) {
+      const src = byName.get(side);
+      if (!src) { noSide.push(side); continue; }
+      sides++;
+      const exact = new Map(), loose = new Map();
+      for (const p of src.players) {
+        if (!exact.has(p.name)) exact.set(p.name, p);
+        if (!loose.has(norm(p.name))) loose.set(norm(p.name), p);
+      }
+      for (const key of ["xi", "bench"]) {
+        for (const man of (t[key] || [])) {
+          const p = exact.get(man.full) || loose.get(norm(man.full)) ||
+                    src.players.find(x => x.no === man.no && norm(shortName(x.name)) === norm(man.n));
+          if (!p) { missed++; if (orphans.length < 8) orphans.push(side + " #" + man.no + " " + man.n); continue; }
+          hit++;
+          const b = cardBack(p);
+          /* A REBUILD HAS TO BE ABLE TO TAKE A FIELD AWAY AGAIN. Stamping only
+             what is present would leave last run's value sitting there after
+             the article dropped the column, and nothing would ever say so. */
+          for (const f of ["club", "caps", "capg", "dob", "age"]) delete man[f];
+          Object.assign(man, b);
+          if (!b.club) gaps.club++;
+          if (b.caps == null) gaps.caps++;
+          if (b.capg == null) gaps.capg++;
+          if (!b.dob) gaps.dob++;
+        }
+      }
+    }
+    const men = hit + missed;
+    console.log("sides matched: " + sides + "/" + Object.keys(deck).length +
+      (noSide.length ? "   NOT IN THE ARTICLE: " + noSide.join(", ") : ""));
+    console.log("men matched:   " + hit + "/" + men +
+      (missed ? "   MISSED: " + orphans.join(", ") + (missed > orphans.length ? " ...and " + (missed - orphans.length) + " more" : "") : ""));
+    const pc = n => (n / Math.max(1, hit) * 100).toFixed(1) + "%";
+    console.log("club " + (hit - gaps.club) + "/" + hit + " (" + pc(hit - gaps.club) + ")   " +
+                "caps " + (hit - gaps.caps) + "/" + hit + " (" + pc(hit - gaps.caps) + ")   " +
+                "capg " + (hit - gaps.capg) + "/" + hit + " (" + pc(hit - gaps.capg) + ")   " +
+                "dob and age " + (hit - gaps.dob) + "/" + hit + " (" + pc(hit - gaps.dob) + ")");
+    /* THE GOALS COLUMN ARRIVED LATE and not everywhere at once. 1998 through
+       2006, 2014, Euro 2000 and Euro 2004 do not have it at all, which is
+       clean: no card in those books draws the row. 2010 is the awkward one.
+       Six of its 736 men have a goals figure, five of them Portuguese, because
+       somebody filled in one section and stopped, so six cards in that book
+       would carry a row the other 730 do not. That is what the article says
+       and it is not this file's place to invent the other 730, but it is
+       worth knowing before the row is wired up. */
+    const got = hit - gaps.capg;
+    if (!got) console.log("  no goals column on this article at all, so no capg row on any card in this book");
+    else if (got < hit * 0.1) console.log("  ONLY " + got + " men of " + hit + " have a goals figure. The article carries the " +
+      "column for a handful of sections and not the rest, so the card back may want to leave the row out of this book entirely.");
+    if (DRY) { console.log("\n--dry, nothing written"); return; }
+    fs.writeFileSync(OUT, JSON.stringify(deck));
+    console.log("wrote " + path.relative(REPO, OUT) + "  (" + (fs.statSync(OUT).size / 1024).toFixed(1) + " KB)");
+    return;
+  }
+
   /* HOW MANY SIDES A WORLD CUP HAS. Thirty-two from 1998 to 2022, and
      forty-eight from 2026. Printed rather than asserted, because a harvest
      that finds forty-seven is worth looking at whichever year it is. */
