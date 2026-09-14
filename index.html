@@ -335,7 +335,6 @@
     --flood:rgba(255,246,196,.07);
     --chalkline:rgba(248,241,221,.10);
     --chalkline-soft:rgba(248,241,221,.07);
-    --kicker-ink:var(--gold);
     --head-rule:1px;
   }
   :root[data-theme="light"]{
@@ -383,7 +382,6 @@
     /* gold on cream has nowhere near the contrast it has at night, so the
        kicker goes forest green, and a hairline on paper reads as a mistake
        rather than a rule, so the header rule doubles. */
-    --kicker-ink:var(--green);
     --head-rule:2px;
   }
   /* what the rest of the app already asks for, answered in the new palette */
@@ -1416,15 +1414,11 @@
      A fixture list, two segmented controls and a team sheet. Radii are all
      --r2, the press is a scale and never a colour flash, and hovers darken a
      border rather than lightening a fill. */
-  .mm-head.mm-banner{display:block;padding-bottom:14px}
-  .mm-head.mm-banner .mm-kicker{margin-bottom:8px}
-  .mm-head.mm-banner .mm-tag{margin-top:10px}
+  /* the banner is the whole head, so it is a block rather than the flex row a
+     wordmark and a sprite needed, and it keeps a little air under it */
+  .mm-head.mm-banner{display:block;padding-bottom:12px}
   .mm-head{padding:22px 2px 16px;display:flex;align-items:flex-end;justify-content:space-between;gap:12px;
     border-bottom:var(--head-rule) solid var(--line-head)}
-  .mm-kicker{font:700 11px/1 var(--ui);letter-spacing:.3em;text-transform:uppercase;color:var(--kicker-ink)}
-  .mm-word{font:700 clamp(48px,14vw,58px)/.86 var(--ui);letter-spacing:-.01em;color:var(--ink);margin-top:6px;
-    cursor:pointer;-webkit-tap-highlight-color:transparent}
-  .mm-tag{font:400 12px/1.3 var(--serif);font-style:italic;color:var(--ink-dim);margin-top:7px}
   /* THE HERO. One thing makes a hard-edged sprite belong next to soft type,
      and it is not a border or a glow, it is a floor. The canvas paints its own
      ground shadow, and the negative bottom margin eats the head's 16px of
@@ -15770,12 +15764,10 @@ function renderSetup(st){
 
   st.innerHTML = `
     <div class="mm-head mm-banner">
-      <div class="mm-kicker">Friday night</div>
       <div class="banner" onclick="goHome()" title="Back to the start">
         <div class="words"><h1>Ball</h1></div>
         <canvas id="bnstage" width="600" height="246" aria-hidden="true"></canvas>
       </div>
-      <div class="mm-tag">One phone, three of you, nobody googling</div>
     </div>
 
     <div class="mm-page">
