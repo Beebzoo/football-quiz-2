@@ -9491,13 +9491,136 @@ function closeAlbum(){ audio(); ALBUM_VIEW = null; render(); }
 function albumSwapTo(id){ albumSwap(id); }
 
 let aiTimer = null;
-/* THE BEAT the computer pauses for, so a human sees what it chose rather than
-   the screen jumping. A variable rather than a constant because a test that
-   plays four hundred questions cannot wait two-thirds of a second for each. */
-let AI_BEAT = 620;
+/* WHAT THE ONE TIMER WAS ARMED FOR. There is a single timer for the whole
+   driver and for a long time there was nothing on it but a function: whatever
+   had been scheduled ran when the clock came round, whether or not the screen
+   it was scheduled for was still there. The six question branches knew that
+   and each re-checked S.phase by hand on the way in. The other eleven did not,
+   and the hole is not theoretical. Tap a country off the grid while he is
+   picking his own and you fill HIS slot, the phase walks on to the squad
+   screen, and a beat later his pick lands, takes the only empty slot left,
+   and you are playing a side you never chose. Same shape on the mark screen:
+   "Let him play" is a live button while he is deciding what to mark, and the
+   beat that lands after it drags a possession you had already started back to
+   h_pick with two marks on it.
+
+   So the re-check moved into the scheduler, where it covers every call site
+   at once including the ones section 2 has not written yet. The cue is more
+   than the phase because the team grid changes no phase at all and still
+   invalidates the pick: it is everything the decision was about to be made
+   from. Dropping a stale beat is always the right answer, never a missed
+   turn, because every one of those state changes went through render(), and
+   render() ends in aiTick(), which arms the beat that is actually current. */
+const aiCue = () => {
+  const H = S && S.h2h;
+  if(!S || !H) return "";
+  return [S.phase, S.tier, S.qi, H.who, H.at, H.sel, (H.teams || []).join("/"), H.picking, H.shaping,
+          H.tset, H.tossed, H.flipping, H.markedAgainst, (H.marks || []).join(","),
+          H.sub && H.sub.w].join("|");
+};
+/* HOW LONG HE TAKES, which is most of the difference between a person and a
+   tick. One number for every decision was a machine: naming a country,
+   choosing a pass and "answering" a BALL all cost the same 620ms and then the
+   screen changed.
+
+   A band with a "top" leans on the ladder. lo..hi is what it costs at Easy,
+   top[0]..top[1] is what it costs at BALL, and the three rungs between are
+   interpolated, which is how a dearer ball gets a longer look and a BALL
+   question gets a longer think, off one table instead of five.
+
+   "read" is the odd one out because it is not a band he draws from at all, it
+   is the length of the thing in front of him: 12ms a character past the first
+   sixty-five, clamped into 1200..3000. Against a computer the match is always
+   Pick One (startGame forces it), so what he reads is the question AND its
+   four options: over the 1,000 in assets/mc that is a median of 109
+   characters, a p90 of 139 and a longest of 207, which puts the ordinary
+   question at 1.7 seconds and only the top 3% at the three second ceiling. */
+const AI_BEATS = {
+  think:  {lo: 900,  hi: 1400},                       // a manager deciding: a side, a shape, a line
+  pass:   {lo: 700,  hi: 860, top: [1340, 1500]},     // a longer ball is a bigger decision
+  read:   {lo: 1200, hi: 3000, from: 65, per: 12},    // he has to read it too
+  answer: {lo: 600,  hi: 1200, top: [1500, 3500]},    // hesitation is how a person shows difficulty
+  save:   {lo: 900,  hi: 1800},                       // a keeper set himself
+  tackle: {lo: 800,  hi: 1400},                       // he has already committed
+  sub:    {lo: 1200, hi: 1200},                       // a bench decision, and not a dithered one
+};
+/* THE DIAL, 0.5 to 2. It divides rather than multiplies because the word is
+   tempo: turn it up and he plays quicker. The plan settles which way round it
+   goes, "if it runs longer, AI_TEMPO goes up, not the bands". Remembered the
+   way the sound toggle is, under a key that sits next to the other two things
+   you choose about him, ball2-ai and ball2-ai-level. */
+let AI_TEMPO = 1;
+try{ AI_TEMPO = Math.min(2, Math.max(.5, parseFloat(localStorage.getItem("ball2-ai-tempo")) || 1)); }catch(e){}
+/* THREE PILLS RATHER THAN A SLIDER, because a slider is a fiddly thing under a
+   thumb and nobody wants 1.37. One word each, because a pill is a third of a
+   phone wide and the note underneath is where the talking happens, which is
+   how the level row above it already works. The middle one is the bands as
+   written. */
+const AI_PACE = [
+  {v: .5, label: "Slower",  says: "Twice as long over everything, which is the closest he gets to a man who is actually thinking about it."},
+  {v: 1,  label: "Normal",  says: "The pauses he was built with. A match is about a pot of tea."},
+  {v: 2,  label: "Quicker", says: "Half the pause on every decision. For a second match, or a short evening."},
+];
+function setAiTempo(v){
+  audio();
+  AI_TEMPO = Math.min(2, Math.max(.5, v));
+  try{ localStorage.setItem("ball2-ai-tempo", String(AI_TEMPO)); }catch(e){}
+  render();
+}
+/* THE REFERENCE BEAT, and still the way a test turns him into a machine gun.
+   AI_BEAT used to be the pause itself; it is now what the bands are measured
+   against, so ai-test.js setting it to 4 squeezes the whole table to about a
+   hundred and fiftieth of itself and a four hundred question match still runs
+   in seconds, and setting it to 0 collapses every band to 0 exactly as it
+   always did. Every floor and clamp below is applied in real milliseconds
+   first and scaled at the very end, which is what makes that hold. */
+const AI_NORMAL = 620;
+let AI_BEAT = AI_NORMAL;
+/* A MAN WHO ASKED FOR LESS MOVEMENT still needs to see that it was somebody
+   else's turn, so reduced motion takes the floor of each band rather than
+   zero. Bare matchMedia in a try, because this also runs in a test harness
+   that is not a browser. */
+const aiStill = () => { try{ return matchMedia("(prefers-reduced-motion: reduce)").matches; }catch(e){ return false; } };
+/* WHAT HE HAS TO READ: the question, plus the four options when they are on
+   the screen, which against a computer they always are because startGame
+   forces Pick One on a solo match. Nothing is drawn on most phases, and a
+   missing question is zero characters, which is the floor. */
+const aiReadLen = () => {
+  try{
+    const x = q();
+    if(!x) return 0;
+    return String(x.q || "").length + (h2IsMC() && x.o ? x.o.join(" ").length : 0);
+  }catch(e){ return 0; }
+};
+function beat(kind, arg, slow){
+  const b = AI_BEATS[kind] || AI_BEATS.think;
+  let lo = b.lo, hi = b.hi, ms;
+  if(b.top){
+    /* where the ball or the question sits on the ladder, 0 at Easy and 1 at
+       BALL, with anything the ladder does not know about read as the cheap end */
+    const r = Math.max(0, H2_ORDER.indexOf(arg)) / (H2_ORDER.length - 1);
+    lo += (b.top[0] - lo) * r;
+    hi += (b.top[1] - hi) * r;
+  }
+  ms = b.per ? Math.min(hi, lo + Math.max(0, (arg || 0) - b.from) * b.per)
+             : lo + Math.random() * (hi - lo);
+  /* A WRONG ONE COMES OUT SLOWER. He does not know he is wrong, he is a dice
+     roll, but the roll has already been made by the time this is called, and
+     that is exactly why it is now rolled before the pause instead of inside
+     it: a pause cannot be shaped by an answer it has not got yet. */
+  if(slow) ms *= 1.25;
+  if(aiStill()) ms = lo;
+  return Math.round(ms * (AI_BEAT / AI_NORMAL) / AI_TEMPO);
+}
 function aiLater(fn, ms){
   clearTimeout(aiTimer);
-  aiTimer = setTimeout(() => { try{ fn(); }catch(e){} }, ms == null ? AI_BEAT : ms);
+  const cue = aiCue();
+  aiTimer = setTimeout(() => {
+    /* the screen moved under it, so whatever this was about to do belongs to a
+       game state that is gone */
+    if(aiCue() !== cue) return;
+    try{ fn(); }catch(e){}
+  }, ms == null ? beat("think") : ms);
 }
 function aiTick(){
   if(!S || !isPitch(S.play)) return;
@@ -9512,17 +9635,17 @@ function aiTick(){
     if(!aiIsOn(slot)) return;
     const names = Object.keys(h2Pool() || {}).filter(c => !H.teams.includes(c));
     if(!names.length) return;
-    return aiLater(() => h2PickTeam(names[Math.floor(Math.random() * names.length)]));
+    return aiLater(() => h2PickTeam(names[Math.floor(Math.random() * names.length)]), beat("think"));
   }
   if(p === "h_squad"){
     const w = H.picking || 0;
     if(!aiIsOn(w)) return;
-    return aiLater(h2SquadDone);          // the deck's own eleven is already ticked
+    return aiLater(h2SquadDone, beat("think"));   // the deck's own eleven is already ticked
   }
   if(p === "h_shape"){
     const w = H.shaping || 0;
     if(!aiIsOn(w)) return;
-    return aiLater(() => { h2SetShape(aiMan(w).shape); h2ShapeDone(); });
+    return aiLater(() => { h2SetShape(aiMan(w).shape); h2ShapeDone(); }, beat("think"));
   }
   if(p === "h_traits"){
     const w = H.tset || 0;
@@ -9534,13 +9657,16 @@ function aiTick(){
         for(const k of e.tr.slice().sort((a, b) => H2_TRAITS[a].cost - H2_TRAITS[b].cost))
           h2SetTrait(e.i, k);
       h2TraitsDone();
-    });
+    }, beat("think"));
   }
   if(p === "h_toss"){
-    if(H.tossed) return aiIsOn(H.who) ? aiLater(h2KickOff) : undefined;
+    /* the kick-off tap is not a decision, but he still gets the manager's beat
+       for it: a computer that kicks off the instant the coin settles reads as
+       the coin having been rigged */
+    if(H.tossed) return aiIsOn(H.who) ? aiLater(h2KickOff, beat("think")) : undefined;
     if(H.flipping) return;
     /* player 0 calls it, so the computer only calls when it is player 0 */
-    if(aiIsOn(0)) return aiLater(() => h2Call(Math.random() < .5 ? "heads" : "tails"));
+    if(aiIsOn(0)) return aiLater(() => h2Call(Math.random() < .5 ? "heads" : "tails"), beat("think"));
     return;
   }
 
@@ -9553,33 +9679,69 @@ function aiTick(){
       if(h2Tactical()) h2SetLine(aiMan(w).line);
       if(h2TackleOn) for(const i of aiMarks(w)) h2Mark(i);
       h2MarksDone(!h2TackleOn);
-    });
+    }, beat("think"));
   }
 
   /* ---- on the ball ---- */
   if(p === "h_pick"){
     if(!aiIsOn(H.who)) return;
+    /* HE DECIDES FIRST AND SHOWS IT AFTER, which is the other way round from
+       how this used to read. aiShoot and aiPass are both pure reads of the
+       state, so moving them in front of the pause changes nothing about what
+       he does, and it is the only way the pause can be about what he chose:
+       the price of the ball is not knowable until the man is, and a BALL over
+       the top deserves a longer look than a five yard square one. One draw
+       covers the whole move and is split at the highlight, two thirds of it
+       finding the man and the last third with the man lit up, so the eye gets
+       to see who is about to be found before the ball leaves. */
+    const shot = aiShoot();
+    const to = shot ? null : aiPass();
+    if(!shot && to == null) return;
+    const ms = beat("pass", shot ? h2ShotTier(H.at, H.who) : h2Priced(H.at, to));
     return aiLater(() => {
-      if(aiShoot()) return h2Shoot();
-      const to = aiPass();
-      if(to == null) return;
-      h2Select(to);
-      aiLater(h2Play, 420);
-    });
+      if(shot) return h2Shoot();
+      /* ONLY IF HE HAS NOT ALREADY GOT THE MAN. h2Select toggles, so a second
+         call on the same man puts the highlight out, and there is a second
+         call available: any render while he is on the ball (a view toggle, a
+         sound toggle) re-enters aiTick, which re-arms the look and clears the
+         ball behind it. The look then lands, unselects, and h2Play fires into
+         a null selection, returns without rendering and re-arms nothing. That
+         is a dead match on the computer's own possession, with no button on
+         the screen for the human. */
+      if(H.sel !== to) h2Select(to);
+      aiLater(h2Play, Math.round(ms * .35));
+    }, Math.round(ms * .65));
   }
-  /* ---- and the questions, which are a dice roll ---- */
+  /* ---- and the questions, which are a dice roll ----
+     TWO THINGS MOVED HERE. The hand-written "is it still h_q" checks are gone
+     because aiLater does that for every call site now, and doing it twice only
+     teaches the next person that it is optional. And the roll happens before
+     the pause rather than inside it. Nothing about the odds changes, aiAnswer
+     is one Math.random and no state, but the pause is now allowed to know the
+     answer: a man about to get one wrong sits on it a quarter longer than a
+     man about to get it right, and that hesitation is the only tell a dice
+     roll can possibly have. */
   if(p === "h_q" && aiIsOn(H.who))
-    return aiLater(() => { if(S.phase === "h_q") h2Reveal(); });
-  if(p === "h_judge" && aiIsOn(H.who))
-    return aiLater(() => { if(S.phase === "h_judge") h2Judge(aiAnswer(H.who, S.tier)); });
+    return aiLater(h2Reveal, beat("read", aiReadLen()));
+  if(p === "h_judge" && aiIsOn(H.who)){
+    const got = aiAnswer(H.who, S.tier);
+    return aiLater(() => h2Judge(got), beat("answer", S.tier, !got));
+  }
+  /* THE SAVE IS NOT A READ. He is a keeper setting himself, and 900 to 1800 is
+     a shorter look at the same question than an open-play one gets, which is
+     the right way round: he has a ball coming at him. */
   if(p === "h_save" && aiIsOn(h2Other()))
-    return aiLater(() => { if(S.phase === "h_save") h2SaveReveal(); });
-  if(p === "h_sjudge" && aiIsOn(h2Other()))
-    return aiLater(() => { if(S.phase === "h_sjudge") h2SaveJudge(aiAnswer(h2Other(), S.tier)); });
+    return aiLater(h2SaveReveal, beat("save"));
+  if(p === "h_sjudge" && aiIsOn(h2Other())){
+    const got = aiAnswer(h2Other(), S.tier);
+    return aiLater(() => h2SaveJudge(got), beat("answer", S.tier, !got));
+  }
   if(p === "h_tackle" && aiIsOn(h2Other()))
-    return aiLater(() => { if(S.phase === "h_tackle") h2TackleReveal(); });
-  if(p === "h_tjudge" && aiIsOn(h2Other()))
-    return aiLater(() => { if(S.phase === "h_tjudge") h2TackleJudge(aiAnswer(h2Other(), S.tier)); });
+    return aiLater(h2TackleReveal, beat("tackle"));
+  if(p === "h_tjudge" && aiIsOn(h2Other())){
+    const got = aiAnswer(h2Other(), S.tier);
+    return aiLater(() => h2TackleJudge(got), beat("answer", S.tier, !got));
+  }
   /* A COMPUTER DOES NOT PANIC. It takes the rescue when it is offered, because
      declining one is a decision with nothing behind it. */
   if(p === "h_sub" && H.sub && aiIsOn(H.sub.w)){
@@ -9587,10 +9749,10 @@ function aiTick(){
       const b = h2Bench(H.sub.w);
       if(H.sub.kind === "tactic" || !b.length) return h2SubDecline();
       h2SubOn(b[0].i);
-    });
+    }, beat("sub"));
   }
   if(p === "h_pens" && H.so && aiIsOn(H.who))
-    return aiLater(() => { if(S.phase === "h_pens") h2SoKick(); });
+    return aiLater(h2SoKick, beat("think"));
   if(p === "h_ft") return;
 }
 
@@ -13963,7 +14125,10 @@ function renderSetup(st){
         ${setupAi?`<div class="mm-note">${esc(AI_MEN[setupAi].says)} He sets up in a ${esc(AI_MEN[setupAi].shape)} and ${esc(H2_LINES[AI_MEN[setupAi].line].label.toLowerCase())}.</div>
         <div class="mm-pills">${Object.keys(AI_LEVELS).map(k=>`<button class="mm-pill"
           aria-pressed="${setupAiLevel===k}" onclick="setAiLevel('${k}')">${AI_LEVELS[k].label}</button>`).join("")}</div>
-        <div class="mm-note">${esc(AI_LEVELS[setupAiLevel].says)} He answers ${Math.round(AI_LEVELS[setupAiLevel].p.hard*100)}% of the Hard ones and ${Math.round(AI_LEVELS[setupAiLevel].p.ball*100)}% of the BALLs.</div>`:""}
+        <div class="mm-note">${esc(AI_LEVELS[setupAiLevel].says)} He answers ${Math.round(AI_LEVELS[setupAiLevel].p.hard*100)}% of the Hard ones and ${Math.round(AI_LEVELS[setupAiLevel].p.ball*100)}% of the BALLs.</div>
+        <div class="mm-pills">${AI_PACE.map(p=>`<button class="mm-pill"
+          aria-pressed="${AI_TEMPO===p.v}" onclick="setAiTempo(${p.v})">${p.label}</button>`).join("")}</div>
+        <div class="mm-note">${esc((AI_PACE.filter(p=>p.v===AI_TEMPO)[0]||AI_PACE[1]).says)}</div>`:""}
       </div>`:""}
 
       ${setupPlay==="manager"?`<div class="mm-note">Everything One on One is, plus the eleven you picked it with. A ball to a man draws a question from where he actually played, so Cannavaro asks Serie A and van Nistelrooy could ask any of three.</div>`:""}
