@@ -1901,7 +1901,16 @@
   .h2pitch.tilt .h2man .h2lb{transform-origin:50% 0;
     transform:rotateX(-46deg) translateZ(3px)}
 
-  .h2man.them{opacity:.72;z-index:1}
+  /* THE FADE RIDES ON THE CHILDREN, NOT THE MAN. Opacity below 1 is a
+     grouping property: it forces transform-style:flat on whatever carries it,
+     which cancelled the preserve-3d above and with it the counter-rotation
+     that stands a figure up off a pitch tilted 46 degrees away. Their eleven
+     were drawn lying in the grass at half their height, in both looks, for as
+     long as this rule has existed. It read as depth on a soft night figure and
+     as a brick on a hard-edged sprite, which is the only reason it surfaced
+     when it did. */
+  .h2man.them{z-index:1}
+  .h2man.them > *{opacity:.72}
   .h2man.them .h2lb{display:none}
   .h2man.can{cursor:pointer}
   .h2man .fig.pm{transition:transform .18s,filter .18s}
@@ -3006,12 +3015,19 @@
 
   /* everyone who is not in it gets out of the way. One line, and it turns
      twenty-two men into three. */
-  .h2pitch.chal .h2man:not(.key){opacity:.26}
+  /* ON THE CHILDREN, for the reason spelled out at .h2man.them: a dimmed man
+     who keeps his opacity on the container lies down for the tackle, and
+     during a challenge that was every man on the pitch but two. */
+  .h2pitch.chal .h2man:not(.key) > *{opacity:.26}
   .h2pitch.chal .h2man:not(.key) .h2lb{opacity:0}
   .h2pitch.chal .h2man{transition:opacity .3s ease}
 
   /* ---------- THE HELD POSE. This IS the freeze. ---------- */
   .h2man.down{opacity:1;z-index:4}
+  /* AND HIS PARTS WITH HIM. He is always one of theirs, so the fade now
+     reaches him through the children and setting the man himself back to one
+     no longer cancels anything. The whole freeze is about him. */
+  .h2man.down > *{opacity:1}
   /* THE SEAT. Their men are bottom-anchored and ours are centre-anchored once
      the pitch tilts, so at the same coordinate their boots sit a whole figure
      below our man's boots. Left alone the challenge lands short and touches
@@ -5937,7 +5953,7 @@ function setTheme(t){
   applyTheme();
   render();
 }
-const BUILD = "14 Sep 2026 · 08:58";
+const BUILD = "14 Sep 2026 · 09:24";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five
