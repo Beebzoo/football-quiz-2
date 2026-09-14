@@ -8338,6 +8338,10 @@ function h2Fly(fx, fy, tx, ty, from, to, dur, tier){
    there, and comes back to his own spot with it. The animation and the rule
    agree about who has the ball because the rule is the only one deciding. */
 let h2Run = null;
+/* WHOSE HANDS ARE ON IT. True only while a decision the computer booked earlier
+   is actually running, which is the one case where a screen that belongs to the
+   computer is allowed to be acted on. See h2Mine. */
+let h2AiActing = false;
 /* Men standing somewhere other than where they were a moment ago: the one
    running out onto a ball played into space, and the one dropping back into
    the shape behind it. Both are the same idea, so both are one flag and one
@@ -8932,6 +8936,7 @@ function h2Start(){
 /* Both men pick before a ball is kicked, and they cannot pick the same side:
    two identical kits on one pitch is unreadable before it is unsporting. */
 function h2PickTeam(country){
+  if(!h2Mine()) return;                  // not your screen
   audio();
   const H = h2();
   /* THREE OF A COUNTRY THE FIRST TIME YOU PLAY AS THEM, from that country only.
@@ -10514,6 +10519,15 @@ function beat(kind, arg, slow){
    bands are measured against rather than the pause itself, so what goes to CSS
    is the pause that was actually scheduled, tempo dial and all. */
 let aiPending = false, aiPendingMs = 0;
+/* EVERYTHING THE COMPUTER DOES GOES THROUGH HERE, which is what makes this the
+   right place for the exemption rather than a second argument on every setter.
+   Restores rather than clears, so a nested call cannot hand the phone back to a
+   human halfway through the computer's own turn. */
+function h2AsActor(fn){
+  const was = h2AiActing;
+  h2AiActing = true;
+  try{ return fn(); }finally{ h2AiActing = was; }
+}
 function aiLater(fn, ms){
   clearTimeout(aiTimer);
   const cue = aiCue();
@@ -10525,7 +10539,7 @@ function aiLater(fn, ms){
     /* the screen moved under it, so whatever this was about to do belongs to a
        game state that is gone */
     if(aiCue() !== cue) return;
-    try{ fn(); }catch(e){}
+    try{ h2AsActor(fn); }catch(e){}
   }, wait);
 }
 function aiTick(){
@@ -11121,8 +11135,11 @@ function cupPlay(){
   S.players[1].ai = cupStyle(them);
   S.players[1].level = cupLevel(them);
   h2Start();
-  h2PickTeam(c.nation);
-  h2PickTeam(them);
+  /* BOTH SIDES AT ONCE, which is the one place in the app that is neither seat.
+     h2PickTeam now refuses a pick that belongs to the computer, and the second
+     of these two is exactly that, so the Cup borrows the computer's own
+     exemption rather than the gate growing a special case for it. */
+  h2AsActor(() => { h2PickTeam(c.nation); h2PickTeam(them); });
   render();
 }
 /* A GROUP MATCH IS ALLOWED TO END LEVEL. Everything else on the pitch goes to
@@ -11716,7 +11733,16 @@ function h2Settle(ok){
        is picked up along the grass, a lost raking one drops out of the air */
     const run = meant != null && h2Runs(meant, lostWho) && !h2IsOff(lostWho, meant) ? h2RunSpot(meant, lostWho, false) : null;
     h2Fly(h2BX(lostAt, false), h2BY(lostAt, false), h2BX(H.at, true), h2BY(H.at, true), null, H.at,
-          run ? H2_RUN_MS : undefined, S.tier);
+          run ? H2_RUN_MS : undefined,
+          /* THE TIER IT WAS, NOT THE TIER IT WAS DRAWN AT. S.tier is what the
+             question ended up being asked at, and a raking ball relieved from
+             Hard down to Normal is still a raking ball. The successful pass
+             forty lines down already recomputes this with h2TierFor and says
+             why at length; the lost pass was left reading S.tier, so the same
+             ball rolled along the grass when you lost it and dropped out of the
+             sky when you found your man. A shot has no intended man to price,
+             so it keeps the drawn tier. */
+          meant != null ? h2TierFor(lostAt, meant) : S.tier);
     if(run) h2Run = {x: run.x, y: run.y, rx: h2RunBX(run.x), ry: run.y, runner: meant, runnerMine: false, taker: H.at};
     h2Swing();
     h2Lost = lostAt;
@@ -12292,6 +12318,7 @@ function h2Eligible(w){
 const h2AnyTrait = w => h2Eligible(w).length > 0;
 /* switch one on or off, refusing anything the budget cannot cover */
 function h2SetTrait(i, k){
+  if(!h2Mine()) return;                  // not your screen
   audio();
   const H = h2(), w = H.tset || 0;
   const m = h2Man(i, w), key = h2TraitKey(m);
@@ -12321,6 +12348,7 @@ function h2TraitsDone(){
   render();
 }
 function h2SetShape(id){
+  if(!h2Mine()) return;                  // not your screen
   audio();
   const H = h2();
   if(!H2_SHAPES[id] || !h2Tactical()) return;
@@ -12363,6 +12391,7 @@ function h2SquadPick(i){
 const h2SquadGks = w => h2Draft(w).filter(i => (h2TwentyThree(w)[i] || {}).pos === "GK").length;
 const h2SquadOk = w => h2Draft(w).length === 11 && h2SquadGks(w) === 1;
 function h2SquadDone(){
+  if(!h2Mine()) return;                  // not your screen
   audio();
   const H = h2(), w = H.picking || 0;
   if(!h2SquadOk(w)) return;
@@ -12381,6 +12410,7 @@ function h2SquadDone(){
   render();
 }
 function h2ShapeDone(){
+  if(!h2Mine()) return;                  // not your screen
   audio();
   const H = h2();
   if((H.shaping || 0) === 0){ H.shaping = 1; render(); return; }
@@ -12604,6 +12634,15 @@ function h2PitchHTML(tappable){
       /* the passer, the man he found and the man who went through him: the
          three the eye needs. Everyone else dims out of the way. */
       key: !!C && (C.on === i || i === H.at),
+      /* ALWAYS FALSE TODAY, AND IT HAS TO STAY. h2Run is only ever written from
+         the turnover, where the camera has just swung and the man still running
+         onto it belongs to the side that has become "theirs", so runnerMine is
+         written false every time. That makes this branch unreachable, and a
+         sweep for dead code will find it and want it gone. It is not dead, it is
+         the guard: both loops walk indices nought to ten of their OWN shape, so
+         without the side test a man of yours wearing the same shape index as the
+         runner would light up and set off running on the spot. Our own men run
+         through H.adv rather than through here, which is why nothing writes true. */
       run: !!R && R.runnerMine && R.runner === i,
       step: !!R && R.taker === i,
       moved: movedFor(i, true),
@@ -13806,6 +13845,23 @@ function h2ActorOf(ph){
     case "h_pens":   return H.so ? h2SoNext(H.so) : H.who;
     default: return null;
   }
+}
+/* IS THIS SCREEN MINE?
+   h2ActorOf has always known who a phase belongs to and was only ever asked by
+   things that draw. The setup screens are the ones that needed it: the computer
+   picks its side, its shape, its squad and its traits on a think delay, and for
+   the length of that delay every control on the screen was still live and still
+   calling the setter. Tapping during the pause picked the computer's team for
+   it.
+
+   A phase nobody owns returns null and is nobody's to refuse, which is how the
+   screens with no actor stay open. A game between two people never refuses
+   anything, because neither seat is the computer's: pass and play is untouched
+   by all of this. */
+function h2Mine(ph){
+  if(h2AiActing) return true;
+  const w = h2ActorOf(ph == null ? (S && S.phase) : ph);
+  return w == null || !aiIsOn(w);
 }
 /* what he is doing on the private screen, in one place, so the card and the
    caption can never end up saying different things about the same beat */
@@ -17959,9 +18015,16 @@ function rematch(){
   const names=S.players.map(p=>p.name);
   const used=S.used; // keep used questions so a rematch gets fresh ones
   const usedC=S.usedC, ref=S.ref, usedM=S.usedM, usedX=S.usedX, usedT=S.usedT;
+  /* AND THE LEAGUE DECKS, which were the one list not carried. usedQ is the
+     per-deck map The Dugout writes, one list per league per tier, and dropping
+     it meant the classic bank stayed spent across a rematch while every league
+     deck started clean and could ask the same question twice in an evening.
+     Carrying the lists at all is a statement that a rematch is the same
+     evening, so it has to carry all of them. */
+  const usedQ=S.usedQ;
   const rr=S.rr;
   S=freshState(names, S.timed, S.mode, S.target, S.play, S.mc); S.used=used; S.usedC=usedC; S.ref=ref;
-  S.usedM=usedM||[]; S.usedX=usedX||[]; S.usedT=usedT||[];
+  S.usedM=usedM||[]; S.usedX=usedX||[]; S.usedT=usedT||[]; S.usedQ=usedQ||{};
   if(rr){                              // a Rainbow Road rematch is another Rainbow Road
     S.rr=true; S.rrTurn=0;
     modeIntro(MODE_LABEL.rr);

@@ -67,7 +67,7 @@ const AI = "Route One";
     quiet();
     run(app, 'S = freshState(["Martijn","' + AI + '"], false, "classic", 0, "' + (play || "pitch") + '", true); ' +
              'S.players[1].ai = "route1"; S.players[1].level = "ere"; h2Start(); ' +
-             'h2PickTeam("Netherlands"); h2PickTeam("Italy"); ' +
+             'h2AsActor(() => { h2PickTeam("Netherlands"); h2PickTeam("Italy"); }); ' +
              'S.h2h.tossed = true; S.h2h.who = 0; S.h2h.at = ' + GK + '; S.h2h.markedAgainst = 0;');
     await tick(60);
   };
@@ -147,7 +147,7 @@ const AI = "Route One";
   /* two humans are left exactly as they were */
   quiet();
   run(app, 'S = freshState(["Martijn","Bram"], false, "classic", 0, "pitch", true); h2Start(); ' +
-           'h2PickTeam("Netherlands"); h2PickTeam("Italy"); S.h2h.tossed = true; ' +
+           'h2AsActor(() => { h2PickTeam("Netherlands"); h2PickTeam("Italy"); }); S.h2h.tossed = true; ' +
            'S.h2h.who = 0; S.h2h.at = ' + GK + '; S.h2h.markedAgainst = 0; S.phase = "h_pick"; h2Opened = 1; render();');
   await tick(60);
   check("a match between two people is not told whose ball it is",
@@ -320,6 +320,63 @@ const AI = "Route One";
     tk != null && Number(tk) >= 240 && Number(tk) === ev(app, "Math.max(240, aiPendingMs)"),
     tk + " against " + ev(app, "aiPendingMs"));
   run(app, "AI_BEAT = 4;");
+  quiet();
+
+  console.log("\n--- and a screen that is his cannot be tapped by you ---");
+  /* THE SETUP SCREENS WERE THE ONES WITHOUT A GATE. The answering screen has
+     always disabled itself on his turn; the four screens in front of it never
+     did, and they are the ones with the longest pause sitting in front of them.
+     The computer picks its side on a think delay, and for the whole of that
+     delay every country on the screen was still live and still calling the
+     setter, so tapping during the pause picked his team for him. */
+  await solo("manager");
+  run(app, 'clearTimeout(aiTimer); S.h2h.teams = ["Netherlands", null]; S.phase = "h_teams";');
+  run(app, 'h2PickTeam("Italy");');
+  check("you cannot pick his side for him", ev(app, "S.h2h.teams[1]") === null,
+    ev(app, "S.h2h.teams[1]"));
+  /* AND HE STILL GETS PAST HIS OWN GATE, which is the half of this that a
+     guard like it usually ships broken: everything he does is booked through
+     aiLater, so the exemption rides on that rather than on a second argument
+     five onclicks would have to remember to pass. */
+  run(app, 'h2AsActor(() => h2PickTeam("Italy"));');
+  check("but he can, because it is his", ev(app, "S.h2h.teams[1]") === "Italy",
+    ev(app, "S.h2h.teams[1]"));
+  /* the flag is restored rather than cleared, so the gate is back up the
+     instant his decision has finished running */
+  check("and the exemption does not stay behind him", ev(app, "h2AiActing") === false,
+    ev(app, "h2AiActing"));
+
+  /* The other four setters, refused on his screens and open on yours. Each row
+     is the phase, the state that makes it his, and the call a tap would make. */
+  const SETUPS = [
+    ["h_squad",  "S.h2h.picking = 1;", "h2SquadDone()",           "S.h2h.picking"],
+    ["h_shape",  "S.h2h.shaping = 1;", 'h2SetShape("4-4-2")',     "S.h2h.shaping"],
+    ["h_traits", "S.h2h.tset = 1;",    "h2SetTrait(9, 'poacher')", "S.h2h.tset"],
+  ];
+  for (const [ph, set, call, read] of SETUPS) {
+    run(app, 'S.phase = ' + JSON.stringify(ph) + '; ' + set);
+    const before = ev(app, read);
+    run(app, "try{ " + call + "; }catch(e){}");
+    check(ph + " is refused while it is his", ev(app, read) === before, ev(app, read));
+    check(ph + " knows it is not yours", ev(app, "h2Mine(" + JSON.stringify(ph) + ")") === false,
+      ev(app, "h2Mine(" + JSON.stringify(ph) + ")"));
+  }
+
+  /* A PHASE NOBODY OWNS IS NOBODY'S TO REFUSE, which is how every screen
+     without an actor stays open. */
+  check("a phase with no actor is always yours", ev(app, 'h2Mine("h_goal")') === true,
+    ev(app, 'h2Mine("h_goal")'));
+
+  /* AND PASS AND PLAY NEVER REFUSES ANYTHING, because neither seat is his.
+     This is the row that would catch a gate keyed on the phase alone. */
+  quiet();
+  run(app, 'S = freshState(["Martijn","Bram"], false, "classic", 0, "pitch", true); h2Start(); ' +
+           'h2PickTeam("Netherlands"); h2PickTeam("Italy");');
+  check("two people at one phone still pick both sides",
+    ev(app, 'JSON.stringify(S.h2h.teams)') === '["Netherlands","Italy"]',
+    ev(app, 'JSON.stringify(S.h2h.teams)'));
+  check("and every phase is yours", ev(app, 'h2Mine("h_squad") && h2Mine("h_teams") && h2Mine("h_traits")') === true,
+    "a phase was refused in a two-human game");
   quiet();
 
   console.log("\n" + (fails ? fails + " FAILED" : "ALL PASS"));

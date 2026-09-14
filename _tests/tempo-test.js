@@ -282,7 +282,7 @@ const HUMAN = {
      the branch is real, it is just not on any road today. */
   run(app, 'S = freshState(["It","You"], false, "classic", 0, "pitch", true); ' +
            'S.players[0].ai = "route1"; S.players[0].level = "ere"; h2Start(); ' +
-           'h2PickTeam("Netherlands"); h2PickTeam("Italy"); S.phase = "h_toss"; render();');
+           'h2AsActor(() => { h2PickTeam("Netherlands"); h2PickTeam("Italy"); }); S.phase = "h_toss"; render();');
   check("it calls one of them", spin(() => !!ev(app, "S.h2h.call")) &&
     ["heads", "tails"].indexOf(ev(app, "S.h2h.call")) > -1, ev(app, "S.h2h.call"));
   check("and the coin has not moved yet", ev(app, "S.h2h.flipping") === false, ev(app, "S.h2h.flipping"));
@@ -298,7 +298,7 @@ const HUMAN = {
      so for him the call and the spin are still one instant, exactly as before. */
   run(app, 'S = freshState(["You","It"], false, "classic", 0, "pitch", true); ' +
            'S.players[1].ai = "route1"; S.players[1].level = "ere"; h2Start(); ' +
-           'h2PickTeam("Netherlands"); h2PickTeam("Italy"); S.phase = "h_toss"; render(); h2Call("heads");');
+           'h2AsActor(() => { h2PickTeam("Netherlands"); h2PickTeam("Italy"); }); S.phase = "h_toss"; render(); h2Call("heads");');
   check("your own coin goes up on the tap", ev(app, "S.h2h.flipping") === true, ev(app, "S.h2h.flipping"));
 
   /* =================== the favourite =================== */
@@ -349,7 +349,7 @@ const HUMAN = {
   console.log("\n--- his name is the personality and his flag is the country ---");
   run(app, 'S = freshState(["Martijn","Route One"], false, "classic", 0, "manager", true); ' +
            'S.players[1].ai = "route1"; S.players[1].level = "ere"; h2Start(); ' +
-           'h2PickTeam("Netherlands"); h2PickTeam("Italy"); S.h2h.tossed = true; S.phase = "h_pick"; render();');
+           'h2AsActor(() => { h2PickTeam("Netherlands"); h2PickTeam("Italy"); }); S.h2h.tossed = true; S.phase = "h_pick"; render();');
   const bug = ev(app, "h2ScoreHTML()");
   check("the name in the bug is his personality", bug.indexOf("Route One") > -1, bug.slice(0, 300));
   check("the badge is Italy's and not a default",
@@ -362,7 +362,7 @@ const HUMAN = {
   const board = w => run(app,
     'S = freshState(["Martijn","Route One"], false, "classic", 0, "manager", true); ' +
     'S.players[1].ai = "route1"; S.players[1].level = "ere"; h2Start(); ' +
-    'h2PickTeam("Netherlands"); h2PickTeam("Italy"); S.h2h.tossed = true; ' +
+    'h2AsActor(() => { h2PickTeam("Netherlands"); h2PickTeam("Italy"); }); S.h2h.tossed = true; ' +
     'S.h2h.who = ' + w + '; S.h2h.at = 0; S.h2h.markedAgainst = ' + w + '; ' +
     'h2Landing = false; h2Lit = false; clearTimeout(h2LandTimer); h2LandTimer = null; ' +
     'S.phase = "h_pick"; render();');
