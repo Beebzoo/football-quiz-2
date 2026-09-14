@@ -3061,30 +3061,251 @@
   .alslot.want{cursor:pointer}
   /* a man already in the eleven is still shown in the list, lit, because
      scrolling back up to see who you have picked is the one thing a squad
-     screen must never make anybody do */
-  .alslot.in .alst{border-color:var(--gold);background:linear-gradient(120deg,rgba(201,154,46,.22),transparent)}
+     screen must never make anybody do. THE GOLD WASH THAT USED TO DO IT HAS
+     GONE, because the card is a block of kit colour now and a gold film laid
+     over a red one leaves you with neither the gold nor the red. A rim and a
+     halo say the same thing on top of any colour a pool can hand over, which
+     is the move every state on this card has had to make. */
+  .alslot.in .alst{border-color:var(--gold-hi);box-shadow:0 0 0 2px rgba(227,180,83,.42)}
   .dreambtn{width:100%;margin-bottom:6px;border-color:var(--gold)}
   .alpack{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
-  .alst{background:var(--panel);border:1px solid var(--line);border-radius:8px;
-        padding:8px 4px;text-align:center}
-  .alst.foil{border-color:var(--gold);background:linear-gradient(120deg,rgba(201,154,46,.2),transparent)}
-  .alst.empty{opacity:.34;filter:grayscale(1)}
-  /* ON THE PAGE THE GAP IS A HOLE IN THE PAPER. A dimmed card still reads as a
-     thing you own, and the whole feeling of an album is that the space is
-     empty and has his name printed under it. */
-  .alsheet .alst{background:rgba(36,27,8,.05);border-color:rgba(36,27,8,.16)}
-  .alsheet .alst.empty{opacity:1;filter:none;background:none;
-    border:1px dashed rgba(36,27,8,.34)}
-  .alsheet .alst.empty .alsn{color:#6A5B33}
-  .alsheet .alst.empty .alsp{color:#9A8A5E}
-  .alsheet .alsn{color:#241B08}
-  .alsheet .alsp{color:#6A5B33}
-  .alst.empty .xshirt{background:transparent;border:1px dashed var(--line);color:var(--ink-dim)}
+  /* ---------------- THE STICKER IS THE KIT BLOCK ----------------
+     ALBUM-PLAN section 1 settles what this card is and the wording leaves
+     nothing to pick: the kit colour is the card, a huge faint shirt number,
+     the name standing on end, the man in the corner, number and country
+     top-left, flag top-right. This is that, built. What it replaces is a grey
+     panel carrying a small shirt, which is the version of the card where the
+     kit, the one fact every side in all sixteen books has, is the smallest
+     thing on it.
+
+     ONE PIECE OF PAPERWORK DISAGREES AND SOMEBODY WILL FIND IT LATER, so it is
+     written down here rather than left as a surprise. DESIGN-TODO's header
+     says direction A is the sticker and C is the foil. ALBUM-PLAN section 1,
+     written the same day and the file that actually owns the album, says the
+     sticker is direction C, the kit block, and then spells the card out field
+     by field. The document that describes the card in full is the one built
+     here, and that header is worth a minute of Martijn's time rather than a
+     guess in a comment.
+
+     EVERY MEASUREMENT INSIDE IS A SHARE OF THE CARD'S OWN WIDTH, and that is
+     the whole of how one drawing survives being the most reused object in the
+     app. The same builder renders at roughly sixty in the album grid and on
+     Your XI, seventy-six on the daily's card, a hundred and four on the daily
+     done screen, a hundred and thirteen in an opened pack and a hundred and
+     thirty in the swap window, which is a factor of just over two. The card
+     declares itself the container and its children measure against it, so
+     there are no per-screen numbers anywhere to drift apart.
+
+     THE BORDER AND THE CORNER RADIUS STAY IN PIXELS ON PURPOSE. A rim is a
+     hairline at every size, and a rim that scales is a frame by the time the
+     card is a hundred and thirty wide. The radius has a second reason: the
+     daily card lays .dmveil over the sticker as six strips clipped to an 8px
+     radius, so a radius that moved would part company with the veil on the one
+     screen where the two are stacked.
+
+     TYPE HAS A FLOOR, AND THE FLOOR IS WHERE THE SCALING STOPS AND THE DESIGN
+     STARTS. DESIGN-TODO item 7 says the sticker at small sizes is a design job
+     and not a scaling job, and a drawing made entirely of shares of the width
+     is precisely the scaling job: it hands the album grid a five point seven
+     pixel position code and calls it fluid. So the number, the name, the
+     country and the position are each max(px, cqw). They grow with the card
+     until they reach the size a phone can still read, and then they hold while
+     the furniture goes on scaling around them. At sixty wide that is eleven,
+     nine, eight and seven pixels. The faint number gets no floor, because it
+     is texture rather than information and nothing is lost if it is merely
+     large. */
+  .alst{position:relative;container-type:inline-size;overflow:hidden;
+        aspect-ratio:5/7;border-radius:8px;color:var(--kink,#fff);
+        border:2px solid color-mix(in srgb,var(--kink,#fff) 36%,transparent);
+        background:linear-gradient(168deg,var(--kit,#888888),
+          color-mix(in srgb,var(--kit,#888888) 74%,#0B0B0B))}
+  /* A HUNDRED AND EIGHTEEN OF THE FOUR HUNDRED AND FORTY-EIGHT SIDES IN THE
+     BOOKS COME BACK #FFFFFF, counted off the pool files rather than remembered,
+     so a white card is not an edge case to be patched later. It is a quarter of
+     the shelf and it has to come out right from the same rules as everything
+     else. Three things answer it and not one of them is a list of exceptions.
+
+     The ink is whatever kitInk returns. That helper is already the app's answer
+     to whether type on a given kit should be dark, it is asked once here, and
+     every word on the card inherits the answer, so white on white cannot
+     happen anywhere on it.
+
+     The border is that same ink at just over a third strength, so a white card
+     draws itself a dark edge and a navy one draws a pale edge, and neither
+     edge is written down anywhere as a colour. That matters most on the
+     country page, where a white sticker sits on a cream sheet and would
+     otherwise have no outside at all.
+
+     And the ground is not flat: it falls away towards the kit's own colour
+     mixed into near-black, which gives a white card a body and a bottom
+     instead of a hole in the page, and costs nothing on a kit that was never
+     in trouble. DO NOT BE TEMPTED TO SOLVE THIS BY MOVING THE kitShorts GATE
+     instead, tempting as the shape of it is. That gate answers a different
+     question, its two return values are pinned by pixel-test, and it names
+     exactly the two kits that fuse with white shorts rather than the hundred
+     and eighteen that are white. */
+  /* STUCK DOWN, which on paper is a shadow and not a panel. The sheet no
+     longer repaints the sticker at all: a sticker in an album is still printed
+     in the kit, and the thing that changes when it goes on the page is that it
+     is now lying on something.
+
+     IT IS THE FIRST OF THE EQUAL-WEIGHT RULES RATHER THAN THE LAST, and that
+     is load-bearing. It carries (0,2,0), which is exactly what .alst.empty,
+     .alst.fresh, .alst.shut and .alst.foil carry further down, so order is the
+     only thing separating them. A hole in the paper is not lying on the page
+     and a card you have just been given wants its own halo, so both of those
+     have to be able to take this shadow away, and they can only do it by
+     coming afterwards. */
+  .alsheet .alst{box-shadow:0 1px 2px rgba(36,27,8,.26)}
   .alst.dupe{opacity:.6}
-  .alst .xshirt{width:34px;height:32px;font-size:.8rem}
-  .alsn{font-size:.64rem;font-weight:700;margin-top:3px;overflow:hidden;
-        text-overflow:ellipsis;white-space:nowrap}
-  .alsp{font-size:.56rem;opacity:.5;letter-spacing:.06em}
+  /* ON THE PAGE THE GAP IS STILL A HOLE IN THE PAPER, and now that an owned
+     sticker is a block of kit colour the gap has further to fall, which is the
+     good news. A faded kit block would still read as a thing you own. So the
+     gap keeps nothing of the card except what a real album prints in an empty
+     slot: the number, the name, and a dashed outline where the sticker goes.
+     The kit never arrives, the man and the flag are never built, and the ink
+     becomes the sheet's own brown, which is the one thing this rule has to say
+     because the builder wrote no --kink for it to argue with.
+
+     THE COUNTRY PAGE IS THE ONLY PLACE A GAP IS EVER DRAWN. Six of the seven
+     calls to the builder pass has:true; the seventh is the twenty-three slots
+     in renderAlbum, and those are inside .alsheet. So these rules are written
+     for paper and say so, rather than pretending to be a general empty state
+     that no screen in the app actually renders. */
+  .alst.empty{--kink:#6A5B33;background:none;box-shadow:none;
+              border:2px dashed rgba(36,27,8,.36)}
+  /* THE FAINT NUMBER IS THE CARD'S TEXTURE AND NOT ITS TYPE, which is why it
+     can be enormous and nearly gone at the same time. It is the ink at fifteen
+     per cent, so it comes out of the same single kitInk decision as everything
+     else and is dark on a white kit and pale on a dark one without being told
+     which it is on. On a gap it comes up to twenty-six, because there it is one
+     of only two things printed in the slot, and an empty slot in an album still
+     has its number on it. It is aria-hidden in the markup because it is the
+     same digits the corner already carries, and a card that reads out "ten ten
+     Italy Totti" is worse than one that reads out "ten Italy Totti". */
+  .alsbg{position:absolute;right:4%;top:18%;z-index:0;pointer-events:none;
+         font:800 74cqw/.78 var(--ui);letter-spacing:-.05em;
+         color:color-mix(in srgb,var(--kink,#fff) 15%,transparent)}
+  .alst.empty .alsbg{color:color-mix(in srgb,var(--kink,#fff) 26%,transparent)}
+  /* NUMBER AND COUNTRY TOP-LEFT, the country in the three letters the harvest
+     already carries, because the finals book calls its sides things like a
+     country and a final in one thirty-character string. */
+  .alsno{position:absolute;left:6%;top:3.5%;max-width:56%;display:flex;
+         align-items:baseline;gap:.3em;white-space:nowrap;overflow:hidden}
+  .alsno b{font:800 max(11px,15cqw)/1 var(--ui);font-variant-numeric:tabular-nums}
+  .alsno s{text-decoration:none;font:700 max(8px,10cqw)/1 var(--ui);
+           letter-spacing:.09em;opacity:.76}
+  /* FLAG TOP-RIGHT, with a hairline of the card's own ink around it, so that a
+     flag with white in it still has a shape on a white kit. */
+  .alsfl{position:absolute;right:5%;top:6%;width:20cqw;height:14cqw;
+         object-fit:cover;border-radius:1px;
+         box-shadow:0 0 0 1px color-mix(in srgb,var(--kink,#fff) 34%,transparent)}
+  /* THE NAME STANDS ON END up the left edge and reads from the bottom, which
+     is writing-mode plus a half turn, because vertical-rl on its own runs top
+     to bottom and a spine is read the other way round. The honest argument for
+     it is not that it fits more letters: at sixty pixels the run up the side
+     and the run across the face come out within a few pixels of each other. It
+     is that a name laid across the face of the card would have to be given the
+     face, and the face is the kit, the number and the man. On end it costs one
+     column and leaves the card whole, and it is also simply what the spine of
+     a sticker looks like.
+
+     WHERE IT STARTS IS NOT A ROUND NUMBER AND SHOULD NOT BE TIDIED. The lane
+     begins at 21 per cent because the shirt number above it is floored at
+     eleven pixels, and eleven pixels of digit hanging off a top of 3.5 per
+     cent reaches about 16.5 per cent of an eighty-four pixel card. At 13 per
+     cent, which is where the lane sat while this was being drawn, the first
+     letter of the surname sits under the bottom of the digits by about three
+     pixels, and because both are shares of the same height it does not go away
+     when the card grows.
+
+     WHAT THE LANE COSTS, COUNTED RATHER THAN GUESSED. It is sixty per cent of
+     the card's height, which at the album grid's sixty pixels is about fifty
+     pixels against nine pixel caps, so somewhere around nine or ten letters
+     before the ellipsis. Above the floor the type and the lane grow together,
+     so that letter count barely moves at any width, which is the useful half
+     of the answer: the card clips the same names on the pack screen as on the
+     grid rather than getting worse as it shrinks. A sweep of all ten thousand
+     one hundred and fifty-seven men in the sixteen books says seven hundred
+     and ninety-four of them carry a surname over ten characters and three
+     hundred and seventy-four over twelve, and Giovanni van Bronckhorst at
+     twenty-four is the longest man in the album. Where exactly the cut falls
+     needs a browser rather than arithmetic, so if it reads short in the hand
+     the lane is the thing to widen. */
+  .alsn{position:absolute;left:4%;top:21%;bottom:19%;margin:0;
+        writing-mode:vertical-rl;transform:rotate(180deg);
+        font:800 max(9px,14cqw)/1 var(--ui);text-transform:uppercase;
+        white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  /* THE POSITION IS THE BASE THE CARD STANDS ON. It used to be a fifth line of
+     small grey type under the name; here it is a band across the foot of the
+     card holding two or three letters, and the band earns its place several
+     ways over. It gives the man something to stand on rather than float above.
+     It gives a white kit a dark edge along the bottom, where the card would
+     otherwise run straight into a cream sheet. And it is a surface the news
+     can repaint, which is what lets the tick and the star live somewhere they
+     can never collide with the flag in the opposite corner.
+
+     IT IS A BLACK FILM RATHER THAN A SHADE OF THE KIT, and that is deliberate.
+     A band mixed out of the kit would need its own ink decision, and asking
+     kitInk about the mixture rather than about the kit puts two different
+     answers on one card. Black at forty per cent over any kit in the app is
+     dark enough for one near-white to sit on it, so the band asks nobody
+     anything and is the same band on all four hundred and forty-eight sides. */
+  .alsp{position:absolute;left:0;right:0;bottom:0;z-index:1;height:16%;
+        display:flex;align-items:center;padding:0 6%;
+        background:rgba(11,11,11,.42);color:#F2EFE6;
+        font:700 max(7px,9cqw)/1 var(--ui);letter-spacing:.14em;
+        text-transform:uppercase}
+  .alst.empty .alsp{background:none;color:#9A8A5E}
+  /* THE MAN IN THE CORNER IS THE PITCH'S MAN, built by h2FigHTML, so with the
+     sixteen-bit toggle on he becomes the sprite on the sticker at the same
+     moment he becomes it on the pitch, and nothing in the album has to know
+     that happened. The one thing the card adds is an outline in its own ink in
+     place of the figure's drop shadow, because a white kit on a white card is
+     a man cut out of the card and a shadow underneath him does not fix that.
+
+     IT IS THE SAME SHADOW TWICE AND THAT IS THE POINT. Stacking a second pass
+     over the first darkens the same silhouette rather than widening it, so on
+     the hundred and eighteen white sides the man keeps a real edge without a
+     navy one growing a halo. body.pixel .fig takes the filter back to none by
+     specificity rather than by source order, which is the right answer,
+     because the sprite already carries a hard black outline of its own. */
+  .alsfig{position:absolute;right:5%;bottom:16%;z-index:2;line-height:0}
+  .alsfig .fig{filter:drop-shadow(0 0 1px var(--kink,#fff))
+                      drop-shadow(0 0 1px var(--kink,#fff))}
+  /* THE BADGE, which is this card at twenty-four and therefore not this card.
+     The argument for what survives is up with albumBadgeHTML. What belongs
+     here is that it beats .xshirt on weight rather than on position: that rule
+     is set eighteen hundred lines up the file for the pitch, where the man is
+     forty wide, and two classes on one element beat it wherever either of them
+     ends up, which source order alone would not. This file has lost a day to
+     that four separate times. The dimming is the badge doing work rather than
+     decorating: on the Dugout the eleven you have named are the eleven wearing
+     the shirt. */
+  .xshirt.alsbadge{width:24px;height:23px;margin:0;flex:none;font-size:.62rem}
+  .h2markbtn:not(.on) .alsbadge{opacity:.48}
+  /* A FOIL IS A LIGHT EFFECT AND NOT A COLOUR, which the old rule could get
+     away with not knowing because it was washing gold over a grey panel. Wash
+     gold over a kit and you have neither of them: gold over Italy's blue is
+     mud, and gold over Brazil's yellow is nothing happening at all. Real foil
+     is one rake of light across a surface, so this is a single diagonal pass
+     carrying a bright edge, a gold body and a dark trailing line. The dark
+     line is what makes it read on a white kit and the bright edge is what
+     makes it read on a black one, and every colour the harvest can hand over
+     sits between those two, so one sheen covers all four hundred and forty
+     eight sides. It is one pass rather than a repeating band on purpose: a
+     repeat at this angle puts a stripe every fifteen pixels at the album
+     grid's width, and a striped card is fabric rather than foil.
+
+     IT IS ::before SO THAT THE NEWS KEEPS ::after, and it sits above the
+     number and above the man because a sheen is on the surface of a card
+     rather than printed into it. */
+  .alst.foil{border-color:var(--gold-hi)}
+  .alst.foil::before{content:"";position:absolute;inset:0;z-index:3;
+    pointer-events:none;
+    background:linear-gradient(112deg,rgba(255,255,255,0) 14%,
+      rgba(255,255,255,.34) 26%,rgba(255,226,147,.30) 33%,
+      rgba(92,64,12,.26) 39%,rgba(255,255,255,0) 52%)}
   /* THE NEWS GOES ON THE STICKER, NOT UNDER IT. Three cards come out of a pack
      and a line of text underneath tells you how many of them were new, which is
      a receipt. What a person actually does is look at the three cards, so the
@@ -3094,23 +3315,38 @@
      sizes of luck and a player who cannot tell them apart at a glance has been
      told nothing.
 
-     THESE FOUR RULES SIT AT THE BOTTOM OF THE ALBUM BLOCK ON PURPOSE, and like
-     the .alcov.plate.coll rule further up they are held in place by source order
-     rather than by weight. .alsheet .alst repaints every sticker to paper and
-     carries exactly the weight these two carry, and .alst.dupe and .alst.foil
-     carry exactly the weight .alsgo .alst carries, so being last is the only
-     thing keeping the green alive on a country page and on the swap pile. An
-     alphabetiser would kill all of them and the shelf spine with them, and
-     nothing anywhere would fail, which is how this project has lost a day four
-     separate times. */
-  .alst.fresh{position:relative;border-color:#3E6B52;
-              background:linear-gradient(120deg,rgba(62,107,82,.34),transparent)}
-  .alst.shut{position:relative;border-color:var(--gold-hi);
-             background:linear-gradient(120deg,rgba(227,180,83,.34),transparent)}
-  .alst.fresh::after{content:"\2713";position:absolute;top:3px;right:4px;
-                     font:700 10px/1 var(--ui);color:#7FD4A3}
-  .alst.shut::after{content:"\2605";position:absolute;top:2px;right:4px;
-                    font:700 12px/1 var(--ui);color:var(--gold-hi)}
+     THE RIM AND THE BASE CARRY IT NOW, not a wash, for the same reason the
+     foil stopped being one: the middle of the card is spoken for by the kit.
+     So a lit card takes a coloured rim and a halo, the band along its foot
+     goes green or goes black and gold, and the tick or the star sits at the
+     right-hand end of that band. That last part is not a detail. The flag is
+     top-right and the news used to be four pixels away from it, so on any lit
+     sticker carrying a flag the two were stacked on each other. Putting the
+     news in the base means the two pieces of the card that can both turn up at
+     once are at opposite ends of it, and neither has to move or hide to make
+     room for the other.
+
+     THESE RULES SIT AT THE BOTTOM OF THE ALBUM BLOCK ON PURPOSE, and like the
+     .alcov.plate.coll rule further up they are held in place by source order
+     rather than by weight. .alsheet .alst puts the stuck-down shadow on every
+     sticker and .alst.empty takes it off a hole, and both of those carry
+     exactly the weight .alst.fresh and .alst.shut carry, while .alst.dupe
+     carries exactly the weight .alsgo .alst carries. So the whole run from
+     .alsheet .alst down to .alsgo is a ladder of rungs at the same height held
+     up by nothing but the order they are written in, and being last is the
+     only thing that keeps the green alive on a country page and on the swap
+     pile. An alphabetiser would kill all of them and the shelf spine with
+     them, and nothing anywhere would fail, which is how this project has lost
+     a day four separate times. */
+  .alst.fresh{border-color:#5F9B78;box-shadow:0 0 0 2px rgba(95,155,120,.5)}
+  .alst.shut{border-color:var(--gold-hi);box-shadow:0 0 0 2px rgba(227,180,83,.5)}
+  .alst.fresh .alsp{background:#2C5A43}
+  .alst.shut .alsp{background:#3B2B08}
+  .alst.fresh::after,.alst.shut::after{position:absolute;z-index:4;
+    right:5%;bottom:0;height:16%;display:flex;align-items:center;
+    font:700 max(10px,12cqw)/1 var(--ui)}
+  .alst.fresh::after{content:"\2713";color:#BEF0D4}
+  .alst.shut::after{content:"\2605";color:var(--gold-hi)}
   /* ---------------- PAYING FOR ONE ----------------
      One sticker on its own and centred, which is the man the swap screen is
      about. Borrowing .alpack for him would drop him in its left third looking
@@ -3122,9 +3358,11 @@
      completed page would be the same card. Chosen goes green and gets its
      brightness back, which is the one direction nothing else on this screen
      moves in: every card here is a double and every one of them is drawn
-     dimmed, so the three that light up are the three that are leaving. */
-  .alsgo .alst{opacity:1;border-color:#3E6B52;
-    background:linear-gradient(120deg,rgba(62,107,82,.34),transparent)}
+     dimmed, so the three that light up are the three that are leaving. It is a
+     rim and a halo rather than a green wash for the reason every state on this
+     card has had to become one: the middle of it belongs to the kit now, and a
+     film laid over the kit gives you a card that is neither. */
+  .alsgo .alst{opacity:1;border-color:#5F9B78;box-shadow:0 0 0 2px rgba(95,155,120,.5)}
   /* HOW DEEP THE STACK IS, printed under the card. The pile is sorted deepest
      first so the men you can most afford to lose are the ones under your thumb,
      and a sort nobody can see is a rule the player has to take on trust. Three
@@ -14232,7 +14470,32 @@ return {
 /* One footballer, built once and used for the two captains at the toss. */
 function h2FigHTML(cls, kit, h, no){
   return '<div class="fig ' + cls + '" style="--kit:' + kit + ';--ink:' + kitInk(kit) +
-    ';--pxshorts:' + kitShorts(kit) + ';--h:' + h + 'px">' +
+    ';--pxshorts:' + kitShorts(kit) +
+    /* h IS A NUMBER OF PIXELS OR A CSS LENGTH, AND THE STRING CASE IS THE ONLY
+       REASON THE STICKER CAN BE ONE DRAWING. Every caller that existed before
+       the album card hands over a number and gets back exactly the markup it
+       always got, because a man on the pitch, a captain at the toss and the
+       white player on a shelf cover all stand in boxes whose size is known in
+       pixels at the moment the markup is written. The sticker is not one of
+       those. The same card renders at five widths between sixty and a hundred
+       and thirty, so the man on it has to be a share of the card rather than a
+       measurement, and a share of the card is 66cqw, which is a length and not
+       a number. Appending px to that gives 66cqwpx and a man with no height at
+       all, so the builder asks once which of the two it was handed. Nothing
+       else about him changes: --h is still the single lever, the night look is
+       still percentages of it, and the sixteen-bit skin still divides it by
+       twenty-two.
+
+       WHAT THAT LAST ONE MEANS IS WORTH SAYING OUT LOUD, because it is the one
+       thing in this patch nobody here could put in front of a browser.
+       body.pixel .fig computes --px as round(var(--h) / 22, 0.5px), and with
+       the toggle on the sticker now hands round() a cqw numerator. Both
+       operands are lengths so it is legal, and that rule declares a plain
+       calc() immediately before it as the fallback, so the worst case is a
+       sprite whose grid lands on fractions rather than a man who fails to
+       draw. Somebody should still look at a sticker on a phone with the skin
+       switched on before this is called finished. */
+    ';--h:' + (typeof h === "number" ? h + "px" : h) + '">' +
     '<span class="f-head"></span>' +
     '<span class="f-arm l"></span><span class="f-arm r"></span>' +
     '<span class="f-torso">' + (no ? '<i>' + no + '</i>' : '') + '</span>' +
@@ -14801,7 +15064,27 @@ function h2Render(st){
         return '<button class="h2markbtn' + (on ? ' on' : '') + '" style="--ac:' + kit +
           '" onclick="h2SquadPick(' + i + ')"' +
           (!on && left <= 0 ? ' disabled' : '') + '>' +
-          '<span class="h2mno">' + (p.no || "") + '</span>' +
+          /* THE NUMBER PUTS THE SHIRT ON. This screen was three spans
+             of type per man and the first of them was a bare number, which is
+             the one item in a squad list that already has a picture attached
+             to it. DESIGN-TODO item 7 wants the sticker here at twenty-four
+             wide and this is where it belongs: twenty-three men, one kit, and
+             the number read off the shirt it is printed on rather than off a
+             grey line above a name. The other four screens that build an
+             h2markbtn keep their plain h2mno, because a tackle and a
+             substitution are asking about a position on the pitch rather than
+             about who somebody is, and a kit badge on eleven men who are all
+             in the same kit and all already on the field says nothing there.
+             The Off list is a second reason to leave them alone: it falls back
+             to the slot's number out of the shape when a man has none, and a
+             badge is a promise that the number in it is his shirt.
+
+             AND IT DOES A JOB RATHER THAN DECORATING ONE. The badge dims on
+             anybody left out, so the eleven who are in are the eleven wearing
+             the shirt, which is the same state the button border already
+             carries said a second time in a way that survives being looked at
+             from the other side of a table. */
+          albumBadgeHTML(kit, p.no) +
           '<span class="h2mnm">' + esc(p.n) + '</span>' +
           '<span class="h2mps">' + esc(p.pos || "") + (ls.length ? ' \u00b7 ' + ls.length : '') + '</span>' +
         '</button>';
@@ -17036,6 +17319,61 @@ function dailyManHTML(d, big){
 /* THE ONE STICKER, drawn identically on every screen that uses it: the packet,
    the page, Your XI twice over and the daily card.
 
+   IT IS THE KIT BLOCK NOW, which ALBUM-PLAN section 1 settles in one sentence:
+   the kit colour is the card, a huge faint shirt number, the name standing on
+   end, the man in the corner, number and country top-left, flag top-right.
+   What that replaces is a grey panel carrying a thirty-four pixel shirt, which
+   is the version of this card where the kit, the one fact every side in all
+   sixteen books carries, is the smallest object on it, and a player has to
+   read a name to find out which country he is holding. The kit is already in
+   the pool file next to that name, and a card printed in it has answered the
+   question before anybody has read a word.
+
+   THE MAN IS h2FigHTML'S MAN, the same builder the twenty-two on the pitch and
+   the captains at the toss are made of, so section 1's other promise, that the
+   sticker and the pitch and the pack are one drawing, holds by construction
+   rather than by two drawings being kept in step by hand. He is asked for at a
+   height in cqw rather than in pixels, which is the whole reason that builder
+   learned to take a string: this card renders at five widths between sixty and
+   a hundred and thirty, and a man forty-six pixels tall on all five of them is
+   the wrong man on four.
+
+   HE IS ONLY DRAWN ON A STICKER YOU HAVE, and so is the flag, and those are
+   the same guard for the same reason. On a country page a slot you have not
+   filled is a hole in the paper with his number and his name printed in it,
+   which is what an album prints in an empty slot and is the whole feeling of
+   the thing. A full-colour footballer standing in the hole turns it into a
+   card you own and merely dislike, and twenty-three full-colour Italian flags
+   down an Italy page you have not started say Italy twenty-three times in the
+   one place the page is trying to say nothing at all.
+
+   THE FLAG'S OTHER HALF IS GUARDED THE WAY THE PAGE HEADER GUARDS IT down in
+   renderAlbum. The finals book carries flags:null in POOLS and forty sides
+   whose own flag field is null, counted rather than remembered, so both halves
+   have to be asked before an img is built or one book in sixteen goes looking
+   for four hundred and forty images that were never harvested.
+
+   AND IT IS THE ABBREVIATION RATHER THAN THE SIDE NAME in that corner, because
+   the finals book keys its sides by country and final in one string of about
+   thirty characters, and no type size puts thirty characters in the corner of
+   a sixty pixel card. A census of all sixteen books says every one of the four
+   hundred and forty-eight sides carries a three-letter abbr, so the key is
+   only the fallback for a harvest that lands without one.
+
+   THE KIT IS VALIDATED RATHER THAN DEFAULTED, which is two characters more
+   than t.kit || "#888888" and catches a different failure. A missing kit is
+   what the old fallback caught. A malformed one sails past it into kitInk and
+   kitShorts, both of which parseInt the tail with no guard and hand back a
+   confident answer about a colour nobody wrote. Measured before changing it:
+   all four hundred and forty-eight sides carry a six-digit hex today, so this
+   is belt rather than braces, and the reason to spend two characters on it now
+   is that the card passes that same string on to h2FigHTML, so the fallback
+   has three readers where it used to have one. Widening it from "#888" to
+   "#888888" is the same argument and was measured the same way: kitInk and
+   kitShorts give identical answers for the two, so nothing on any screen moves
+   today, and the three-digit version was only ever right by luck, since 0x888
+   is a very dark blue rather than a grey.
+
    lit is the news, and it is a number rather than a pair of booleans because the
    two states are ranks of one thing and can never both be true. 1 is a man you
    did not have. 2 is the man who just closed somebody's page. The screens with
@@ -17045,18 +17383,83 @@ function dailyManHTML(d, big){
    IT GOES ON THE END OF THE CLASS LIST AND HAS TO STAY THERE. album-test reads
    the literal string "alst empty" out of a country page and counts twenty-three
    of them, so any modifier that gets in front of empty breaks a test that is
-   really asking whether twenty-three gaps are still twenty-three gaps. */
+   really asking whether twenty-three gaps are still twenty-three gaps. Nothing
+   may be appended after fresh or shut either, because the same file matches
+   those two words with the attribute's closing quote attached, which is also
+   why the style attribute below is built as its own string rather than fused
+   into that literal the way it used to be.
+
+   AND NO CLASS ADDED IN HERE MAY BEGIN WITH THE FOUR LETTERS alst, which is a
+   sharper rule than it looks and is why the top-left block is called alsno and
+   not alstop. album-test counts every class attribute on a country page that
+   opens with those four letters and expects twenty-three, so a second element
+   whose class merely starts the same way would report forty-six slots on a
+   page that has twenty-three, and the failure would read as a bug in the album
+   rather than in a class name.
+
+   A GAP IS WRITTEN WITH NO KIT AND NO INK AT ALL. Painting one and then
+   arguing it back out of the stylesheet is the version that goes wrong: an
+   inline custom property is the one thing a rule cannot take back, so the
+   empty card would need a layer of indirection between the two names the
+   builder writes and the two the rules read, existing purely so that one rule
+   could say this is not a kit, it is a hole. Writing nothing lets the hole
+   fall to the stylesheet's own fallbacks, and .alst.empty then only has to say
+   what colour the ink on the paper is. */
 function albumStickerHTML(book, side, m, has, dupe, lit){
   const t = (albumBook(book) || {})[side] || {};
-  const kit = t.kit || "#888";
+  const kit = /^#[0-9a-fA-F]{6}$/.test(t.kit || "") ? t.kit : "#888888";
+  const p = POOLS[book] || {};
   return '<div class="alst' + (has ? "" : " empty") + (dupe ? " dupe" : "") +
     (albumFoil(book, side) && has ? " foil" : "") +
-    (lit === 2 ? " shut" : lit ? " fresh" : "") +
-    '" style="--kit:' + kit + ';--kink:' + kitInk(kit) + '">' +
-    '<div class="xshirt">' + (m.no || "") + '</div>' +
+    (lit === 2 ? " shut" : lit ? " fresh" : "") + '"' +
+    (has ? ' style="--kit:' + kit + ';--kink:' + kitInk(kit) + '"' : "") + '>' +
+    '<i class="alsbg" aria-hidden="true">' + (m.no || "") + '</i>' +
+    '<div class="alsno"><b>' + (m.no || "") + '</b><s>' + esc(t.abbr || side) + '</s></div>' +
+    ((has && p.flags && t.flag)
+      ? '<img class="alsfl" src="' + esc(p.flags + t.flag + (p.ext || "")) + '" alt="">' : "") +
     '<div class="alsn">' + esc(m.n || "") + '</div>' +
     '<div class="alsp">' + esc(m.pos || "") + '</div>' +
+    (has ? '<div class="alsfig">' + h2FigHTML("", kit, "66cqw", null) + '</div>' : "") +
   '</div>';
+}
+/* THE SAME STICKER AT TWENTY-FOUR PIXELS, WHICH IS NOT THE SAME DRAWING.
+   DESIGN-TODO item 7 asks for the card at sixty in the album grid and at
+   twenty-four as a badge on the team screen, and says in the same row that
+   this is a design job and not a scaling job. Take it at its word, because at
+   twenty-four the card has nothing left to be. The name on end would be four
+   pixels of type. The flag would be a smudge the width of a fingernail. The
+   faint number is texture, and texture at that size is dirt. So the badge is
+   not the card made small, it is the two things the card would keep if it were
+   allowed only two, and item 7 names that pair itself when it says the shirt
+   polygon and the number have to survive.
+
+   IT BORROWS .xshirt, the polygon Your XI already draws its eleven with, so
+   this is not a fourth way of saying kit either. The honest complaint about
+   reusing it is that the shape is tight: measured off the real clip path, the
+   torso runs from 22 to 78 per cent, which at twenty-four wide leaves 13.4
+   pixels between the sleeves, and two tabular digits at .62rem come to
+   something close to twelve. It fits, with about a pixel either side, and the
+   highest shirt number in any of the sixteen books is 26, so three digits are
+   not a case this has to carry. A squarer badge with the collar notched into
+   it would give the number more room and the argument for it is a good one,
+   but it puts a second shirt silhouette two taps away from the first, and one
+   drawing everywhere is the promise the rest of this card is built on.
+
+   THE COLOUR GOES IN THROUGH THE TWO PROPERTIES THAT POLYGON ALREADY READS,
+   and the ink comes out of kitInk for the reason it does everywhere else here:
+   a hundred and eighteen of the four hundred and forty-eight sides in the
+   books come back #FFFFFF from the harvest, counted off the pool files, and a
+   white number on a white shirt is a blank badge a quarter of the time.
+
+   IT TAKES A KIT AND A NUMBER RATHER THAN A BOOK AND A SIDE, because the
+   screen it is built for is a match screen where an eleven is a shape and a
+   kit and was never a page in any book. It validates that kit the way the card
+   does, since h2Kit can hand back a side's own colour out of a pool file as
+   easily as one of the two written into the app. */
+function albumBadgeHTML(kit, no){
+  const k = /^#[0-9a-fA-F]{6}$/.test(kit || "") ? kit : "#888888";
+  return '<span class="xshirt alsbadge" style="--kit:' + k + ';--kink:' + kitInk(k) + '">' +
+    (no == null || no === "" ? "" : no) + '</span>';
 }
 /* THE SPINE STRIP, which is as much of ALBUM-PLAN's shelf as belongs to this
    stage. The shelf proper is section 5 and it is a drawing: covers, a year in

@@ -167,6 +167,86 @@ const check = (n, c, x) => {
     (stage(app).match(/alst empty/g) || []).length === 23,
     (stage(app).match(/alst empty/g) || []).length);
   check("with the name still in the gap", /Cannavaro/.test(stage(app)), "no names on the gaps");
+  /* AND WITH NOTHING ELSE IN IT. The card is the country's kit colour now, so a
+     gap has further to fall than it used to: everything that says Italy has to
+     be absent rather than turned down, and the builder does that by writing no
+     kit at all and by building neither the man nor the flag. The flag is the one
+     that got away once already, in the draft this was cut from. A page nobody
+     had started drew twenty-three full-colour Italian flags into twenty-three
+     holes, which is the loudest way an empty page could possibly say Italy, and
+     no test in here had an opinion about it. */
+  check("a gap is painted no colour at all", !/class="alst empty" style/.test(stage(app)),
+    (stage(app).match(/class="alst empty" style="[^"]*"/g) || []).slice(0, 2).join(" | "));
+  check("and nobody is standing in it", (stage(app).match(/alsfig/g) || []).length === 0,
+    (stage(app).match(/alsfig/g) || []).length);
+  check("and it does not fly the flag", (stage(app).match(/alsfl/g) || []).length === 0,
+    (stage(app).match(/alsfl/g) || []).length);
+  /* AND NO CHILD OF A SLOT MAY BE NAMED alst-SOMETHING, because the count six
+     checks up is a substring count. A card carrying a child class that merely
+     begins the same way would report forty-six slots on a page that has
+     twenty-three, and the failure would read as a bug in the album rather than
+     as a bug in a class name. */
+  check("nothing inside a slot opens with those four letters",
+    (stage(app).match(/class="alst[a-z]/g) || []).length === 0,
+    (stage(app).match(/class="alst[a-z-]+/g) || []).slice(0, 3).join(" | "));
+  /* ONE STUCK IN, which is the other half of the same question. The card you
+     own is the country's colour, the man on it is built by the pitch's own
+     builder rather than by a second drawing kept in step by hand, and he is
+     asked for as a share of the card instead of in pixels, which is the only
+     reason one drawing survives the five widths this component renders at. */
+  run(app, '(() => { const b = albumBookState("wc2006"), men = albumMen("wc2006", "Italy"); ' +
+    'b.have[albumId("wc2006", "Italy", men[0])] = 1; mineSave(); ' +
+    'openAlbum("wc2006", "Italy"); })();'); await tick(150);
+  check("the one you have is the country's colour",
+    /class="alst" style="--kit:#0048BA;--kink:#fff"/.test(stage(app)), "the kit is not on the card");
+  check("and twenty-two holes are left around him",
+    (stage(app).match(/alst empty/g) || []).length === 22,
+    (stage(app).match(/alst empty/g) || []).length);
+  check("the man on it is the pitch's man, sized by the card",
+    /class="alsfig"><div class="fig " style="[^"]*--h:66cqw"/.test(stage(app)),
+    "the sticker and the pitch are two drawings again");
+  check("and the only flag on the page is his",
+    (stage(app).match(/alsfl/g) || []).length === 1, (stage(app).match(/alsfl/g) || []).length);
+  /* A WHITE KIT IS A QUARTER OF THE COLLECTION. 118 of the 448 sides across the
+     sixteen books come back #FFFFFF from the harvest and eight of the
+     thirty-two in this one do, England among them, read out of
+     assets/wc2006/index.json rather than remembered. So the ink on the card is
+     a contract and not a detail: every word on it inherits one kitInk answer,
+     and if that ever stops being asked, a quarter of the shelf goes blank. */
+  check("a white kit is written on in dark ink",
+    ev(app, 'albumStickerHTML("wc2006", "England", albumMen("wc2006", "England")[0], true, false)')
+      .indexOf("--kink:#17301f") > -1, "white on white");
+  /* THE BOOK WITH NO FLAGS AT ALL. Forty sides in the finals book and every one
+     of them carrying flag:null, with POOLS.finals carrying flags:null to match,
+     so an unguarded concatenation puts four hundred and forty broken images on
+     one book in sixteen. It is deleted again afterwards because a sixteenth
+     book on the shelf is not what the rest of this file is written against. */
+  run(app, "TEAMS.finals = " + JSON.stringify(R("assets/finals/index.json")) + ";");
+  run(app, 'openAlbum("finals", Object.keys(TEAMS.finals)[0]); render();'); await tick(150);
+  check("the book with no flags asks for none", !/alsfl/.test(stage(app)), "broken images");
+  check("and a side still names itself in three letters", /<s>BRA<\/s>/.test(stage(app)),
+    "the thirty-character key got printed into the corner");
+  run(app, 'delete TEAMS.finals; openAlbum("wc2006", "Italy"); render();'); await tick(140);
+  /* THE SAME STICKER AT TWENTY-FOUR, where both class names are load-bearing.
+     .xshirt is the polygon Your XI draws its eleven with and is where the shape
+     and the colour come from; .alsbadge is what resizes it, and it can only win
+     that because two classes on one element outweigh the one class on a rule
+     set eighteen hundred lines earlier. Drop either name and the badge is a
+     forty pixel shirt in a twenty-four pixel row. */
+  check("the badge is that polygon, resized on weight rather than on position",
+    /^<span class="xshirt alsbadge" style="--kit:#0048BA;--kink:#fff">10<\/span>$/
+      .test(ev(app, 'albumBadgeHTML("#0048BA", 10)')), ev(app, 'albumBadgeHTML("#0048BA", 10)'));
+  check("and it asks kitInk the same question the card does",
+    ev(app, 'albumBadgeHTML("#FFFFFF", 7)').indexOf("--kink:#17301f") > -1,
+    ev(app, 'albumBadgeHTML("#FFFFFF", 7)'));
+  /* AND A KIT THAT IS NOT SIX DIGITS NEVER REACHES THE COLOUR HELPERS. Nothing
+     in the harvest is malformed today, all 448 sides checked, so this is the
+     guard rather than the bug: kitInk and kitShorts both parseInt the tail
+     without looking, and a three-digit kit comes back as a confident answer
+     about a colour nobody wrote. */
+  check("a malformed kit is replaced rather than parsed",
+    ev(app, 'albumBadgeHTML("#888", 7)').indexOf("--kit:#888888") > -1,
+    ev(app, 'albumBadgeHTML("#888", 7)'));
   run(app, "closeAlbum(); render();"); await tick(130);
   check("and closing it goes back", !/alpages/.test(stage(app)), "still on the album");
 
