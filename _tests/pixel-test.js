@@ -126,11 +126,27 @@ const fig = html.slice(html.indexOf("function h2FigHTML"), html.indexOf("functio
 for (const p of PARTS)
   check("the builder still emits " + p, fig.indexOf('"' + p + '"') > -1, "missing");
 /* THE ONE LINE THAT WOULD KILL THEM ALL. The draft forced transform:none on
-   every part, which is right for a still photograph and fatal in a game: every
-   limb animation is a transform on one of those seven elements. */
-check("and nothing in the block forces transform:none on them",
-  !/body\.pixel[^{]*\.fig[^{]*\{[^}]*transform:\s*none/.test(noComments),
-  "transform:none is back");
+   EVERY part at once, which is right for a still photograph and fatal in a
+   game. That blanket rule is what this guards, and it is now named by shape
+   rather than approximated. The old version was a regex over the whole block,
+   so it also vetoed the one targeted use that turned out to be necessary:
+   straightening the arms out of the night look's 8 degree rest, which leaks in
+   through .f-arm.l and has no arithmetic to hide in the way the head's offset
+   did. Naming the blanket shape costs nothing and stops the guard refusing a
+   fix it was never written about. */
+check("the blanket child rule still forces no transform",
+  !/body\.pixel\s+\.fig\s*>\s*\*[^{]*\{[^}]*transform:\s*none/.test(noComments),
+  "transform:none is back on every part at once");
+/* AND THE REASON THE EXCEPTION IS SAFE, tested rather than asserted. A static
+   transform never beats a running animation, so the run and the slide cannot
+   be reached from here at all; what could be reached is the four static poses,
+   and they survive only because each carries four classes where the pixel arm
+   rule carries three. If one of them ever loses its rotation the keeper stands
+   like an outfield player and nothing else in the suite would say so. */
+for (const [sel, deg] of [[".fig.gk .f-arm.l", "34"], [".fig.str .f-arm.l", "26"],
+                          [".h2man.down .f-arm.l", "34"], [".h2man.caught .f-arm.l", "46"]])
+  check("the pose " + sel + " keeps its rotation",
+    html.indexOf(sel + "{transform:rotate(" + deg + "deg)}") > -1, "gone");
 
 console.log("\n--- sprites step ---");
 check("the run is stepped", /body\.pixel[\s\S]{0,400}?animation-timing-function:steps\(2\)/.test(noComments),
@@ -187,6 +203,60 @@ const tick = (ms = 200) => new Promise(r => setTimeout(r, ms));
   check("and the shot does too",
     ev(app, "H2_SHOT_AT(9,0)") === ev(app, "H2_SHOT_AT(9,0)"), "n/a");
   run(app, "h2TogglePixel();");
+
+  /* ---------- a light kit keeps a waist ---------- */
+  console.log("\n--- a white kit still has a waist ---");
+  check("the figure carries its own shorts colour",
+    /--pxshorts:' \+ kitShorts\(kit\)/.test(html), "h2FigHTML does not emit it");
+  check("and the sprite reads it for the shorts and the sock band",
+    /\.f-shorts\{[^}]*background:var\(--pxshorts/.test(noComments)
+    && /linear-gradient\(180deg,var\(--pxshorts/.test(noComments), "hardcoded again");
+  /* the off-white is allowed to survive, but only as the fallback. Unlike
+     --ink this property is not a :root token, so that fallback is real. */
+  const offwhite = (noComments.match(/#f4f1ea/g) || []).length;
+  const asFallback = (noComments.match(/var\(--pxshorts,#f4f1ea\)/g) || []).length;
+  check("with the old off-white left only as a fallback",
+    offwhite === 2 && asFallback === 2, offwhite + " uses, " + asFallback + " of them fallbacks");
+
+  /* EVERY KIT IN THE APP. 22 pools carry them and the club pools keep theirs in
+     clubs.json rather than index.json, which is how a sweep of index.json
+     misses two thirds of them. */
+  const allKits = new Set();
+  const walkKits = d => { for (const e of fs.readdirSync(d, { withFileTypes: true })) {
+    const p = path.join(d, e.name);
+    if (e.isDirectory()) { walkKits(p); continue; }
+    if (!e.name.endsWith(".json")) continue;
+    let j; try { j = JSON.parse(fs.readFileSync(p, "utf8")); } catch (err) { continue; }
+    const scan = o => { if (!o || typeof o !== "object") return;
+      if (Array.isArray(o)) return o.forEach(scan);
+      if (typeof o.kit === "string" && /^#[0-9a-fA-F]{6}$/.test(o.kit)) allKits.add(o.kit.toUpperCase());
+      for (const k of Object.keys(o)) if (typeof o[k] === "object") scan(o[k]); };
+    scan(j); } };
+  walkKits(path.join(REPO, "assets"));
+  check("there are kits to sweep", allKits.size > 90, allKits.size);
+
+  const flipped = [], marginal = [];
+  for (const k of allKits) {
+    const c = parseInt(k.slice(1), 16), r = c >> 16 & 255, g = c >> 8 & 255, b = c & 255;
+    const lum = 0.299 * r + 0.587 * g + 0.114 * b, spread = Math.max(r, g, b) - Math.min(r, g, b);
+    const dark = ev(app, 'kitShorts("' + k + '")') !== "#f4f1ea";
+    if (dark) flipped.push(k);
+    /* how much room is left either side of the decision */
+    if (dark ? (lum < 220 || spread > 30) : (lum > 195 && spread < 60)) marginal.push(k);
+  }
+  check("only the two kits that fuse with white shorts get dark ones",
+    flipped.length === 2 && flipped.indexOf("#FFFFFF") > -1,
+    flipped.join(" ") + "  of " + allKits.size);
+  /* THE ONE THAT WOULD CATCH THE TEMPTING MISTAKE. Yellow is light by
+     luminance and reads perfectly well against off-white by hue, so a gate
+     built on luminance alone repaints it. If these ever go dark the gate has
+     been widened, whatever the count above says. */
+  for (const y of ["#FFE80B", "#FFDF00", "#FFFF00", "#98C6EB", "#75AADB"])
+    if (allKits.has(y))
+      check("and " + y + " keeps its white ones", ev(app, 'kitShorts("' + y + '")') === "#f4f1ea",
+        "repainted");
+  check("no kit in the app sits near the edge of that decision", marginal.length === 0,
+    marginal.join(" "));
 
   /* ---------- the font ---------- */
   console.log("\n--- the pixel face ships with the app ---");

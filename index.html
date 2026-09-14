@@ -1964,8 +1964,16 @@
   body.pixel .fig > *, body.pixel .fig > *::before, body.pixel .fig > *::after{
     border-radius:0 !important;background-image:none !important;
     box-shadow:0 0 0 var(--ow) var(--o)}
-  /* head: four wide, rows 0-3, hair on the top two, eyes on row 2 */
-  body.pixel .fig .f-head{left:calc(var(--px) * 3);top:0;width:calc(var(--px) * 4);
+  /* head: columns 3-6 of ten, rows 0-3, hair on the top two, eyes on row 2.
+     THE OFFSET IS FIVE, NOT THREE, and that is not an off-by-two. The night
+     rule centres the head with translateX(-50%) and nothing here cancels it,
+     so the browser takes off half a head width, two columns, from whatever is
+     written here. Five minus two is three. Writing three put the head on
+     columns 1-4 of a man whose torso is 2-7, which is a head sitting on his
+     left shoulder, and it had been that way since the skin was written.
+     Absorbing the translate instead of cancelling it keeps transform:none out
+     of this block, which the guard downstairs cares about. */
+  body.pixel .fig .f-head{left:calc(var(--px) * 5);top:0;width:calc(var(--px) * 4);
     height:calc(var(--px) * 4);background:#e3b58c}
   body.pixel .fig .f-head::after{left:0;right:0;top:0;height:calc(var(--px) * 2);
     background:#2a1c12;box-shadow:none}
@@ -1978,17 +1986,40 @@
     box-shadow:0 0 0 var(--ow) var(--o),inset calc(var(--px) * -1) 0 0 0 rgba(0,0,0,.28)}
   body.pixel .fig .f-torso::before{left:calc(var(--px) * 2);width:calc(var(--px) * 2);
     height:var(--px);top:calc(var(--px) * -1);background:#e3b58c;box-shadow:none}
-  body.pixel .fig .f-torso i{font-size:calc(var(--px) * 3.2);opacity:1;letter-spacing:0;
+  /* four units, not 3.2, so the number is a whole number of pixels high: 8 on
+     our men and 6 on theirs instead of 6.4 and 4.8. Silkscreen has no size
+     that comes out crisp down here, its digit ink is 11/16 of an em and the
+     advance is half, so there is nothing to land on and the only lever is more
+     ink. Two digits measure 1.2em, which is 9.6px inside a 12px torso and
+     7.2px inside a 9px one, so both still fit with room. */
+  body.pixel .fig .f-torso i{font-size:calc(var(--px) * 4);opacity:1;letter-spacing:0;
     margin-top:0;text-shadow:none;font-family:"Silkscreen","Courier New",monospace;font-weight:400}
   /* arms: two wide, sleeve rows 5-9, forearm 10-12 */
   body.pixel .fig .f-arm{top:calc(var(--px) * 5);width:calc(var(--px) * 2);
     height:calc(var(--px) * 8);background:color-mix(in srgb,var(--kit) 80%,#000)}
+  /* AND THE SAME LEAK ON THE ARMS. The night look rests them at 8 degrees,
+     which is the one soft anti-aliased shape on a figure made of hard edges,
+     and straightening it needs a transform. So this is the deliberate
+     exception the guard in _tests/pixel-test.js now names by shape.
+     It cancels the resting tilt and nothing else. Every pose that carries
+     meaning has four classes against this rule's three and still wins: the
+     keeper at 34 degrees, the striker, the man brought down, the man caught.
+     Animations beat a static declaration outright whatever the specificity, so
+     the run, the slide and the through-ball never notice. */
+  body.pixel .fig .f-arm{transform:none}
   body.pixel .fig .f-arm.l{left:0}
   body.pixel .fig .f-arm.r{right:0}
   body.pixel .fig .f-arm::after{height:calc(var(--px) * 3);background:#e3b58c;box-shadow:none}
-  /* shorts: rows 13-15, with the gap between the legs on the last two */
+  /* and the keeper keeps his gloves. ".fig.gk .f-arm::after" is (0,3,1) and the
+     rule above is (0,3,2), so the generic one was painting skin over them and
+     leaving an outfield player standing in a keeper's pose. */
+  body.pixel .fig.gk .f-arm::after{background:#1d2630}
+  /* shorts: rows 13-15, with the gap between the legs on the last two. The
+     colour comes from kitShorts, which hands back the same off-white these
+     have always been for all but two kits in the app. Unlike --ink this
+     property is not a :root token, so the fallback is a real one. */
   body.pixel .fig .f-shorts{left:calc(var(--px) * 2);top:calc(var(--px) * 13);
-    width:calc(var(--px) * 6);height:calc(var(--px) * 3);background:#f4f1ea}
+    width:calc(var(--px) * 6);height:calc(var(--px) * 3);background:var(--pxshorts,#f4f1ea)}
   body.pixel .fig .f-shorts::after{left:calc(var(--px) * 2.5);right:calc(var(--px) * 2.5);
     top:var(--px);bottom:0;background:var(--o);box-shadow:none}
   /* legs: two wide, rows 16-21, socks 18-20 with a turnover, boot on row 21 */
@@ -1998,7 +2029,7 @@
   body.pixel .fig .f-leg.r{right:calc(var(--px) * 2)}
   body.pixel .fig .f-leg::before{top:calc(var(--px) * 2);bottom:var(--px);left:0;right:0;
     background:var(--kit);box-shadow:none;
-    background-image:linear-gradient(180deg,#f4f1ea 0 var(--px),transparent var(--px)) !important}
+    background-image:linear-gradient(180deg,var(--pxshorts,#f4f1ea) 0 var(--px),transparent var(--px)) !important}
   body.pixel .fig .f-leg::after{left:calc(var(--px) * -1);right:0;bottom:0;height:var(--px);
     background:#2b2b2b;box-shadow:0 0 0 var(--ow) var(--o)}
   body.pixel .fig .f-leg.r::after{left:0;right:calc(var(--px) * -1)}
@@ -2008,8 +2039,17 @@
   body.pixel .h2man .fig.pm{filter:none;transition:transform .18s}
   body.pixel .h2man.sel .fig.pm{transform:scale(1.26);filter:none}
   body.pixel .h2man.hold .fig.pm{filter:none}
+  /* A RING, NOT A WASH. At twice the outline's spread and half opacity this
+     was painting 50% white over everything the torso is drawn on top of, and
+     the builder emits the head and both arms before the torso: grey at the
+     neck, grey at both shoulders, and the sleeve shading that
+     color-mix(kit 80%, #000) exists to give gone with it. On a yellow kit the
+     sleeve went from 1.59:1 against the shirt to 1.12:1. A single device
+     pixel past the outline leaves a hard rim instead, which is the same cue
+     in the sprite's own language and stops at the edge of the man. */
   body.pixel .h2man.can .fig.pm .f-torso{box-shadow:0 0 0 var(--ow) var(--o),
-    inset calc(var(--px) * -1) 0 0 0 rgba(0,0,0,.28), 0 0 0 calc(var(--ow) * 2) rgba(255,255,255,.5)}
+    inset calc(var(--px) * -1) 0 0 0 rgba(0,0,0,.28),
+    0 0 0 calc(var(--ow) + 1px) rgba(255,255,255,.5)}
 
   /* ---------------- SPRITES STEP ----------------
      The keyframes are untouched. Only the timing changes, and only here: a
@@ -2035,6 +2075,11 @@
   body.pixel .h2man.thru .fig.pm,
   body.pixel .h2man.slide .fig.pm,
   body.pixel .h2man.felled .fig.pm{animation-timing-function:steps(4)}
+  /* h2balance starts and ends at the 8 degrees the sprite no longer rests at,
+     so the passer's arm would snap out and back for half a second. Same swing,
+     from zero. The keyframe itself lives with the other keyframes and is left
+     alone, because the night look still wants the original. */
+  body.pixel .h2man.from .fig.pm .f-arm.l{animation-name:h2balance16}
 
   /* ---------------- the ground ----------------
      Flat two-tone grass in hard bands, solid chalk with no softness, no
@@ -2154,6 +2199,10 @@
   @keyframes h2plant{0%,100%{transform:rotate(0)}44%{transform:rotate(-9deg)}}
   .h2man.from .fig.pm .f-arm.l{animation:h2balance .5s ease-out}
   @keyframes h2balance{0%,100%{transform:rotate(8deg)}46%{transform:rotate(42deg)}}
+  /* the same swing for the sprite, whose arms rest straight. Out here with the
+     other keyframes rather than in the skin block, because a keyframe's
+     percentages read as selectors to the scoping test. */
+  @keyframes h2balance16{0%,100%{transform:rotate(0deg)}46%{transform:rotate(42deg)}}
   /* the man taking it */
   .h2man.to .fig.pm{animation:h2settle .5s .4s cubic-bezier(.25,1.5,.4,1) both}
   @keyframes h2settle{0%,100%{transform:translateY(0)}40%{transform:translateY(-2px)}}
@@ -6165,6 +6214,21 @@ function xiSpots(f){
   return out;
 }
 const kitInk = k => { const c=parseInt(k.slice(1),16); return (0.299*(c>>16&255)+0.587*(c>>8&255)+0.114*(c&255))>150 ? "#17301f" : "#fff"; };
+/* WHITE SHORTS ARE RIGHT FOR ALMOST EVERYONE AND THEY STAY. Only a kit that is
+   both very light AND near-neutral fuses with them, because the sixteen-bit
+   figure paints the shirt from the kit and the shorts from a fixed off-white.
+   Two kits in the whole app do it, #FFFFFF and #EDE6DC, and the next nearest
+   is five times clearer with nothing in between, so both ends of this gate sit
+   in an empty eighteen-point gap and neither is a number anyone has to tune.
+   DO NOT REUSE kitInk FOR THIS, tempting as it is, because its cut at
+   luminance 150 answers a different question: whether a shirt NUMBER should be
+   dark. A yellow shirt is light by luminance while reading perfectly well
+   against off-white by hue, so borrowing that cut repaints 250 sides to fix
+   160 and takes Brazil and Argentina with it. Luminance alone cannot tell
+   yellow on white from white on white. The channel spread can, so both are
+   asked, and the pair of them name exactly the two kits that are broken. */
+const kitShorts = k => { const c=parseInt(k.slice(1),16), r=c>>16&255, g=c>>8&255, b=c&255;
+  return (0.299*r+0.587*g+0.114*b) > 200 && Math.max(r,g,b)-Math.min(r,g,b) < 40 ? "#465642" : "#f4f1ea"; };
 function xiTap(i){
   if(S.phase!=="x_play" || S.xi.got[i]!==null) return;
   S.xi.pick = S.xi.pick===i ? null : i;
@@ -10981,7 +11045,7 @@ function h2PitchHTML(tappable){
 /* One footballer, built once and used for both men in the goal scene. */
 function h2FigHTML(cls, kit, h, no){
   return '<div class="fig ' + cls + '" style="--kit:' + kit + ';--ink:' + kitInk(kit) +
-    ';--h:' + h + 'px">' +
+    ';--pxshorts:' + kitShorts(kit) + ';--h:' + h + 'px">' +
     '<span class="f-head"></span>' +
     '<span class="f-arm l"></span><span class="f-arm r"></span>' +
     '<span class="f-torso">' + (no ? '<i>' + no + '</i>' : '') + '</span>' +
