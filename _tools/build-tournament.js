@@ -444,20 +444,54 @@ function goalsPlain(tail) {
   /* ---------- the armband, off the squads page ---------- */
   const sq = await wikitext(SQUADS);
   let caps = 0;
-  /* TWO SPELLINGS OF THE ARMBAND. 2006 puts the link after the name and 2022
-     gives it a field of its own, and both articles carry exactly thirty-two,
-     so finding none is a parser problem rather than a tournament without
-     captains. */
-  const capRx = [
-    /name\s*=\s*\[\[([^\]|]+)(?:\|[^\]]*)?\]\]\s*\(\s*\[\[Captain/g,
-    /name\s*=\s*\[\[([^\]|]+)(?:\|[^\]]*)?\]\][^\n}]*?\bother\s*=\s*\[\[Captain/g,
-  ];
+  /* THE ARMBAND IS SPELLED FOUR WAYS AND THIS KNEW TWO. 2006 puts the link in
+     brackets after the name and 2022 gives it a field of its own, and every one
+     of these articles carries exactly one per side, so a side that comes back
+     without a captain is a pattern that cannot read that article rather than a
+     side that walked out without one. Three Euros were coming back short,
+     euro2004 fifteen of sixteen, euro2016 thirteen of twenty-four, euro2024
+     eighteen of twenty-four, and reading the rows that went missing turned up
+     two more spellings and one accident.
+
+       name={{sortname|Hugo|Lloris}} instead of name=[[Hugo Lloris]]. Every Euro
+       from 2004 on mixes the two freely inside a single group, and a pattern
+       that insists on the wikilink throws away whoever happens to be written
+       the other way round. That alone cost euro2016 eleven of its sides.
+
+       other=[[List of Scotland national football team captains|captain]]. The
+       link still says captain, it just does not point at the same article, and
+       the old pattern tested where the link went rather than what it said.
+
+       And the old pattern only ever reached "other=" when no closing brace
+       stood between it and the name, which was never a rule about captains, it
+       was an accident of writing [^\n}] to keep the match on one line. Half the
+       squad rows carry an {{age}} template in between, and that brace shut them
+       all out.
+
+     So the two halves are independent now: the name is a wikilink or a
+     sortname, the armband is any wikilink whose VISIBLE text is c or captain,
+     and anything at all may sit between them so long as it stays on the one
+     line the template occupies.
+
+     READING WHAT THE LINK SAYS RATHER THAN WHERE IT GOES IS LOAD-BEARING, and
+     it is the half that would otherwise have quietly broken a pool that already
+     worked. 2018 Argentina writes Mascherano as other=[[Captain (association
+     football)|vice-captain]], the same target as Messi, and the de-dupe below is
+     per MAN rather than per side, so a pattern matching on the target hands
+     Argentina two captains. It only looks safe in the old code because the brace
+     rule was accidentally shutting that row out. Belgium the same year is why
+     the C is taken in either case: theirs reads |Captain]] with a capital.
+
+     Measured across all fifteen tournament pools this is one captain on every
+     one of the 408 sides, and it takes nobody’s armband away. */
+  const capRx = /name\s*=\s*(?:\[\[([^\]|\n]+?)(?:\|[^\]\n]*)?\]\]|\{\{\s*sortname\s*\|\s*([^|}\n]+?)\s*\|\s*([^|}\n]+?)\s*[|}])[^\n]*?\[\[[^\]\n]*?\|\s*[Cc](?:aptain)?\s*\]\]/g;
   const seenCap = new Set();
-  for (const rx of capRx)
-    for (const m of sq.matchAll(rx)) {
-      const man = find(m[1]);
-      if (man && !seenCap.has(man)) { man.cap = true; seenCap.add(man); caps++; }
-    }
+  for (const m of sq.matchAll(capRx)) {
+    /* a sortname hands over the given name and the family name as two fields,
+       and joining them with a space is exactly what the template renders */
+    const man = find(m[1] || (m[2] + " " + m[3]));
+    if (man && !seenCap.has(man)) { man.cap = true; seenCap.add(man); caps++; }
+  }
   console.log("captains: " + caps + "/" + Object.keys(sides).length);
 
   if (missed.length) {

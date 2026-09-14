@@ -3263,6 +3263,40 @@
   /* picking a country: thirty two of them, so a two column list with the kit
      colour as the swatch, which is also the thing you will see on the pitch */
   .h2teams{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px;padding:2px}
+  /* THE SAME GRID BROKEN INTO THE TOURNAMENT'S OWN ROWS. The 2px is the same
+     2px .h2teams carries, so the two layouts sit on the same left edge. Top
+     margin is 6px rather than 12 because the wrapper's own padding stops the
+     first row's 9px collapsing through it, which puts 17px above the grid
+     against the flat one's 12. A little more air, which a list broken into
+     rows wants anyway. */
+  .h2grps{margin-top:6px;padding:2px}
+  /* .cupgrp and .cupg4 are the Cup's own nation picker, defined up in the Cup
+     block, and they are lifted whole rather than copied. This is the one
+     variant the team picker needs on top: THE GROUP LETTER SITS IN A GUTTER
+     down the left of the four rather than on a line of its own above them,
+     because here the label is a single character and eight headings each
+     taking a whole line pushes Group H onto a second screen for no information
+     at all. The Cup keeps its heading above, since its label is the two words
+     "Group A" and they do not fit in sixteen pixels.
+
+     TWO ACROSS, NOT FOUR, and the sum is worth writing down because it was
+     measured rather than guessed. A 360px phone gives #stage 328px inside its
+     16px padding; the wrapper's 2px takes 4 of that, the gutter and its gap
+     take 23, so each of the two columns comes out near 147px against the 158px
+     the flat grid gives. A .h2teambtn spends 68 of that on its two borders,
+     its side padding, the 34px flag and the gap after it, which leaves 79px
+     for the name instead of 90: about two characters in Barlow Semi Condensed
+     at .82rem, and the long ones wrapped to a second line before this change
+     as well. Four columns would leave 70px a button and the flag alone eats 68
+     of them, so the country's name would have to come off, and a flag with no
+     name under it is unreadable for exactly the half of the field somebody
+     needs the help with. */
+  .cupgrp.letter{display:flex;align-items:center;gap:7px;margin:9px 0}
+  .cupgrp.letter h3{flex:none;width:16px;margin:0;text-align:center;
+    font-size:.82rem;font-weight:800;letter-spacing:0;opacity:.55}
+  /* the grid is a flex item in here, and a grid's own min-width:auto will
+     happily push itself wider than the row it is sitting in */
+  .cupgrp.letter .cupg4{flex:1 1 0;min-width:0;gap:7px}
   .h2teambtn{display:flex;align-items:center;gap:9px;padding:9px 10px;border-radius:10px;
     border:1px solid var(--edge-soft);border-left:4px solid var(--kc,transparent);
     background:rgba(255,255,255,.045);color:inherit;
@@ -9939,7 +9973,29 @@ function albumMen(side){
   if(!t) return [];
   return [...(t.xi || []), ...(t.bench || [])];
 }
-const albumSides = () => Object.keys(albumBook() || {}).sort();
+/* PAGE ORDER IS THE TOURNAMENT'S, not the alphabet's: groups in letter order,
+   and inside a group the order the file already has, which is the order the
+   squads page lists them in and the order the group table was drawn in. Page
+   fourteen is Brazil in 2006 and stays Brazil in 2006, which is most of what
+   an album is for, and it is what ALBUM-PLAN asks for on the book.
+
+   Object.keys hands back the file's own insertion order and Array.sort has
+   been stable by spec since ES2019, so sorting on the letter alone leaves the
+   four inside a group exactly where the harvest put them. That also means no
+   points sort, ever: it would reproduce FIFA's tie-break and not UEFA's, which
+   is head to head, so every Euro book would come out quietly wrong with
+   nothing on the screen to say so.
+
+   A book whose sides carry no group falls back to the alphabet, because the
+   album is one pool today and will not be forever. */
+const albumSides = () => {
+  const book = albumBook() || {};
+  const keys = Object.keys(book);
+  if(!keys.some(k => book[k].group)) return keys.sort();
+  /* "~" sorts after every letter, so a side the harvest somehow missed lands
+     at the back of the shelf rather than in front of Group A. */
+  return keys.sort((a, b) => (book[a].group || "~").localeCompare(book[b].group || "~"));
+};
 const albumHas = id => (mine().album.have[id] || 0) > 0;
 /* A PAGE IS DONE when every man on it is stuck in. The bench is part of the
    page on purpose: eleven out of twenty-three is not an album page. */
@@ -11144,6 +11200,138 @@ function h2ScoreHTML(){
     '</div>';
 }
 
+/* ================= THE PICKER, LAID OUT AS THE TOURNAMENT WAS =================
+   Thirty-two flags in ABC order is a list. The same thirty-two in eight rows of
+   four is the tournament, and somebody who watched it looks for his side where
+   it stood rather than under its first letter: Costa Rica next to Germany says
+   something, Costa Rica next to Croatia says nothing.
+
+   All of this is display. The pick still goes through h2PickTeam with the
+   pool's own key, so a row is the same buttons in a different order and
+   nothing downstream can tell the difference. */
+
+/* WHERE THE LETTER COMES FROM: the pool file, not the Cup. The harvester
+   stamps a plain group:"A" onto every side of the fifteen tournament pools,
+   and reading it here rather than out of cupOf() is the only thing that lets
+   the eight pools with no Cup behind them group at all. 2026 settles the
+   argument on its own: forty-eight sides in twelve groups, where cupGroupOf
+   will only ever look through ABCDEFGH.
+
+   Do not be tempted to sort the four inside a row by how they finished. A
+   points sort reproduces FIFA's tie-break and not UEFA's, which is head to
+   head, so every Euro row would come out quietly wrong with nothing on the
+   screen to say so. The file's order is the group table's order and that is
+   what gets drawn. */
+function h2GroupRows(pool){
+  const rows = {}, letters = [], loose = [];
+  for(const name of Object.keys(pool)){
+    const g = pool[name].group;
+    if(!g){ loose.push(name); continue; }
+    if(!rows[g]){ rows[g] = []; letters.push(g); }
+    rows[g].push({n: name, lb: name});
+  }
+  /* NOBODY HAS A GROUP, so this is a league, or a pool the harvester has not
+     been run over yet, and either way it goes back to the alphabet unchanged. */
+  if(!letters.length) return null;
+  letters.sort();
+  const out = letters.map(g => ({label: g, tight: true, sides: rows[g]}));
+  /* A HALF-STAMPED POOL still puts everybody on the screen. It should not
+     happen, groups-test walks all fifteen files to make sure it does not, but
+     quietly dropping a side would be a country you cannot pick on a screen
+     that looks perfectly fine, which is the sort of bug nobody ever reports. */
+  if(loose.length)
+    out.push({label: "", tight: false, sides: loose.sort().map(n => ({n: n, lb: n}))});
+  return out;
+}
+
+/* "Brazil · World Cup final 1970" is the key and the key has to stay the
+   key, because it is what h2PickTeam is handed and what H.teams stores. On a
+   grouped row the heading overhead has already said World Cup and already said
+   the seventies, so the button itself says "Brazil 1970": one line at 147px
+   instead of wrapping to three, which is the difference between a list you can
+   scan and a column of paragraphs. Anything whose key is not in two halves
+   keeps its key. */
+const h2FinalLabel = (name, yr) => {
+  const who = name.split(" · ")[0];
+  return (who && who !== name) ? who + " " + yr : name;
+};
+
+/* THE FORTY FAMOUS FINALS have no draw to belong to, so they group by what was
+   being played for and when it was played for. Both facts are already on the
+   file: every slug in assets/finals/index.json reads <competition><year>-<who>,
+   wc1970-brazil through copa2021-argentina, and all forty of them parse, so
+   this row costs no harvest at all.
+
+   THE EUROPEAN CUP AND THE CHAMPIONS LEAGUE KEEP THEIR OWN NAMES here because
+   the slug already keeps them apart and the trophies really were lifted under
+   different ones: Barcelona won a European Cup in 1992, Ajax won a Champions
+   League in 1995. They sit next to each other in the list, in date order,
+   which is as joined up as they need to be. */
+const FINALS_POOL = "finals";
+const FINALS_COMPS = [
+  {re: /^wc\d/,   name: "World Cup"},
+  {re: /^euro\d/, name: "Euro"},
+  {re: /^ec\d/,   name: "European Cup"},
+  {re: /^cl\d/,   name: "Champions League"},
+  {re: /^copa\d/, name: "Copa América"},
+];
+function h2FinalRows(pool){
+  const bucket = {}, order = [];
+  for(const name of Object.keys(pool)){
+    const slug = pool[name].slug || "";
+    const ci = FINALS_COMPS.findIndex(c => c.re.test(slug));
+    const yr = +((slug.match(/(\d{4})/) || [])[1] || 0);
+    /* ONE SLUG THAT WILL NOT PARSE and the whole pool goes back to the
+       alphabet, because half a grouping is worse than none: the sides that did
+       parse would look like the entire list. */
+    if(ci < 0 || !yr) return null;
+    const dec = Math.floor(yr / 10) * 10;
+    const key = ci + ":" + dec;
+    if(!bucket[key]){ bucket[key] = {ci: ci, dec: dec, sides: []}; order.push(key); }
+    bucket[key].sides.push({n: name, yr: yr, lb: h2FinalLabel(name, yr)});
+  }
+  const spread = {};
+  for(const k of order) spread[bucket[k].ci] = (spread[bucket[k].ci] || 0) + 1;
+  return order.map(k => bucket[k])
+    .sort((a, b) => a.ci - b.ci || a.dec - b.dec)
+    .map(b => ({
+      /* A COMPETITION THAT ONLY EVER SPANS ONE DECADE loses the decade off its
+         heading. Copa América is one side and one row, and "Copa América,
+         2020-29" over a single flag reads like a filing cabinet. The span is
+         written 1970-79 rather than "the 1970s" because .cupgrp h3 uppercases
+         what it is given and "1970S" looks like a typo. If more Copa finals
+         ever land, the decades come back on their own. */
+      label: FINALS_COMPS[b.ci].name +
+        (spread[b.ci] > 1 ? " · " + b.dec + "-" + String(b.dec + 9).slice(2) : ""),
+      tight: false,
+      /* DATE ORDER, which the file's own order is not: Netherlands 2010 sits
+         after Euro 2020 in the JSON because it landed in a later harvest. */
+      sides: b.sides.sort((x, y) => x.yr - y.yr || x.n.localeCompare(y.n)),
+    }));
+}
+
+/* Which shape the grid gets. The pool decides and the mode does not, which is
+   what makes One on One and The Dugout agree without either of them having to
+   ask: both land on h_teams, and h_teams calls this. */
+function h2TeamRows(pool, id){
+  if(!pool || !Object.keys(pool).length) return null;
+  return id === FINALS_POOL ? h2FinalRows(pool) : h2GroupRows(pool);
+}
+/* One button, drawn the same whether it is sitting in a group row or in the
+   flat alphabetical grid, so the two layouts cannot drift apart. The class list
+   is left exactly as it was on purpose: h2h-test counts class="h2teambtn" to
+   know all thirty-two sides are being offered. */
+function h2TeamBtnHTML(pool, s, taken){
+  const t = pool[s.n];
+  return '<button class="h2teambtn" style="--kc:' + t.kit + '" onclick="h2PickTeam(' +
+    JSON.stringify(s.n).replace(/"/g, "&quot;") + ')"' + (taken ? " disabled" : "") + '>' +
+      (t.flag
+        ? '<img class="h2flag" src="' + h2Badge(t.flag) + '" alt="">'
+        : '<span class="sw" style="background:' + t.kit + '"></span>') +
+      '<span>' + esc(s.lb) + '</span>' +
+    '</button>';
+}
+
 function h2Render(st){
   const H = h2();
   const me = S.players[H.who], them = S.players[h2Other()];
@@ -11155,6 +11343,9 @@ function h2Render(st){
     const turn = S.players[picked.length] || S.players[1];
     const pool = h2Pool() || {};
     const names = Object.keys(pool).sort();
+    /* null when the pool has no shape of its own, and then the alphabet below
+       is what gets drawn, exactly as it always was */
+    const rows = h2TeamRows(pool, h2PoolId());
     st.innerHTML =
       '<div class="kick">' + ico('users') + h2Name() + ' · pick your ' + h2Kind(S.mode).one + '</div>' +
       '<div class="h2big">' + esc(turn.name) + ', who are you?</div>' +
@@ -11178,15 +11369,21 @@ function h2Render(st){
           '<span class="sw" style="background:' + DREAM_KIT + '"></span>' +
           '<span>' + DREAM_SIDE + '</span></button>'
         : "") +
-      '<div class="h2teams">' + names.map(c =>
-        '<button class="h2teambtn" style="--kc:' + pool[c].kit + '" onclick="h2PickTeam(' +
-        JSON.stringify(c).replace(/"/g, "&quot;") + ')"' + (H.teams.includes(c) ? " disabled" : "") + '>' +
-          (pool[c].flag
-            ? '<img class="h2flag" src="' + h2Badge(pool[c].flag) + '" alt="">'
-            : '<span class="sw" style="background:' + pool[c].kit + '"></span>') +
-          '<span>' + esc(c) + '</span>' +
-        '</button>').join("") +
-      '</div>' + foot;
+      /* THE GRID. The tournament's own rows when the pool knows what shape it
+         was, the old two-column alphabet when it does not. The Your XI button
+         above stays exactly where it was, outside both: it was in nobody's
+         group and a row would swallow it. */
+      (rows
+        ? '<div class="h2grps">' + rows.map(r =>
+            '<div class="cupgrp' + (r.tight ? " letter" : "") + '">' +
+              (r.label ? '<h3>' + esc(r.label) + '</h3>' : "") +
+              '<div class="cupg4">' +
+                r.sides.map(s => h2TeamBtnHTML(pool, s, H.teams.includes(s.n))).join("") +
+              '</div>' +
+            '</div>').join("") + '</div>'
+        : '<div class="h2teams">' +
+            names.map(c => h2TeamBtnHTML(pool, {n: c, lb: c}, H.teams.includes(c))).join("") +
+          '</div>') + foot;
     return;
   }
 
