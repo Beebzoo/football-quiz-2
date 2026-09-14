@@ -77,8 +77,13 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   check("a ball to Cannavaro draws one of his leagues",
     (lg(CANNA, 0) || []).includes(qd()), qd() + " / " + JSON.stringify(lg(CANNA, 0)));
   check("he has two to draw from", (lg(CANNA, 0) || []).length === 2, JSON.stringify(lg(CANNA, 0)));
+  /* AND THE SAME FUNCTION FOR THE POSITIVE. Proving the label was somewhere on
+     screen is satisfied by a question that happens to mention that league,
+     whether or not the card named it, so this was passing for the wrong reason
+     in precisely the runs where the negative one failed. */
   check("the card names whichever it was",
-    stage(app).indexOf(ev(app, "QUIZZES[S.qd].label")) !== -1, "not named: " + qd());
+    ev(app, "h2League()").indexOf(ev(app, "QUIZZES[S.qd].label")) !== -1,
+    "not named: " + qd() + " / " + ev(app, "h2League()"));
   check("and the question really came out of that deck",
     ev(app, "DECKS[S.qd][S.tier].indexOf(q()) !== -1") === true, "not in the " + qd() + " deck");
 
@@ -96,7 +101,15 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   await passTo(EIGHT, LCB);
   check("a Costa Rican defender has no leagues", lg(LCB, 0) === null, JSON.stringify(lg(LCB, 0)));
   check("so his ball is the classic bank", qd() === null, qd());
-  check("and the card names no league", !/Serie A|La Liga|Premier League/.test(stage(app)), "a league was named");
+  /* ASK THE FUNCTION THAT NAMES IT, not the screen it is printed on. The
+     question is on that screen too, and forty-two of the classic rows mention
+     one of these three leagues in their own text, so this used to call a
+     question about the Premier League a leak and did it about one ball in
+     twenty-seven. h2League is what writes the deck onto the kick line and it
+     has two call sites, both of them that line. */
+  check("and the card names no league",
+    !/Serie A|La Liga|Premier League/.test(ev(app, "h2League()")),
+    "named: " + ev(app, "h2League()"));
   /* A MAN WHO DID GO ABROAD. Found by looking rather than named, because the
      deck carries real elevens now and the eleven that started Costa Rica's
      last match is not the one sorted by shirt number. */
