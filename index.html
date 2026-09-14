@@ -2286,6 +2286,52 @@
       repeating-linear-gradient(180deg,rgba(255,255,255,.5) 0 1px,transparent 1px 7px);
     background-size:7px 7px}
   body.pixel .g3-keeper .fig, body.pixel .g3-striker .fig{filter:none}
+
+  /* ---------------- the referee, and the armband ----------------
+     Both are pseudo-elements on parts the sprite already owns, so the grid
+     does all the work: the badge is one unit by two on the chest and the
+     armband is a single row across the sleeve, which is the only place a band
+     CAN go on a man who is ten units wide. The night look's shapes leak in
+     through .fig.ref and .fig.cap and are wrong here for the usual reason,
+     per cent of a box instead of units of the grid, so both get their
+     geometry again in units. Not their corners: the blanket child rule at the
+     top of this block already squares every pseudo-element with !important,
+     which is one of the few times that hammer has saved a line. */
+  body.pixel .fig.ref .f-torso::after{left:var(--px);top:calc(var(--px) * 2);
+    width:var(--px);height:calc(var(--px) * 2);opacity:1;box-shadow:none}
+  body.pixel .fig.cap .f-arm.l::before{left:calc(var(--px) * -0.5);
+    right:calc(var(--px) * -0.5);top:calc(var(--px) * 4);height:var(--px);box-shadow:none}
+  /* A SPRITE GETS ITS SHAPES FROM TONE, NOT FROM OUTLINES. Everywhere else
+     one unit of #0b0b0b between an arm and a torso is plenty, because the kit
+     is a colour and the outline is not. On the referee they are nearly the
+     same thing and he came out a black brick with a face on it. A step up on
+     the sleeve is what sixteen bits actually did about a black kit. */
+  body.pixel .fig.ref .f-arm{background:#3c424b}
+  /* AND HIS SHORTS, because kitShorts hands him the off-white it hands every
+     dark kit in the app. That is right for a footballer and wrong for a
+     referee, who is black from collar to boot. h2FigHTML writes the property
+     on the element, so an ordinary rule loses to it and an author !important
+     is the one thing that beats an inline declaration. It is overruling a
+     value this figure should never have been handed rather than a decision,
+     and it takes the sock turnover with it, which is the same answer to the
+     same question. */
+  body.pixel .fig.ref{--pxshorts:#191d22 !important}
+  /* the grass and the chalk under the three of them: the same flat two-tone
+     and the same solid white .h2pitch gets, because it is the same pitch */
+  body.pixel .h2toss3{border-radius:0;box-shadow:4px 4px 0 #061a0c;
+    background:repeating-linear-gradient(180deg,#3aa04a 0 9%,#2f8a3f 9% 18%)}
+  body.pixel .h2tcirc{border:3px solid #f2f6ee;border-radius:50%;background:none}
+  /* the names, in the face the pitch already uses for exactly this job */
+  body.pixel .h2toss3 .h2lb{font:400 8px/1 "Silkscreen","Courier New",monospace;
+    letter-spacing:0;text-shadow:1px 1px 0 #0b0b0b;color:#f2f6ee}
+  /* THE DROPPED HEAD CANNOT BE A ROTATION HERE. Thirteen degrees on a
+     twenty-pixel head is exactly the anti-aliased edge this skin exists to
+     avoid, and it would be the only soft thing on the screen. A sprite drops
+     its head by moving it down two rows, which is how the era drew a beaten
+     man, and h2drop16 lives out with the other keyframes the way
+     h2balance16 does, so that nothing in this block declares one. */
+  body.pixel .h2toss3.done .tossman.lost .fig .f-head{animation-name:h2drop16;
+    animation-timing-function:steps(2)}
   /* the boot going through it, and the man who collects it */
   /* the man playing it */
   .h2man.from .fig.pm{animation:h2lean .5s cubic-bezier(.3,1.1,.4,1)}
@@ -2637,6 +2683,31 @@
   .fig.str .f-arm.r{transform:rotate(-17deg)}
   .fig.str .f-leg.l{transform:rotate(-15deg)}
   .fig.str .f-leg.r{transform:rotate(12deg)}
+
+  /* the man in the middle. Same seven parts, a kit that happens to be black,
+     and one badge on the chest, which is all a referee has ever been. The kit
+     arrives on --kit like everybody else's, so --ink lands on white by itself
+     and the badge has a colour without anybody choosing one. */
+  .fig.ref .f-torso::after{content:"";position:absolute;left:15%;top:19%;
+    width:22%;height:27%;background:var(--ink,#fff);opacity:.9;
+    border-radius:2px 2px 52% 52%;box-shadow:none}
+  /* his shirt is nearly the colour of the night behind him, so the modelling
+     that is quite enough to carry an outfield player's arms has to work
+     harder here. The forearm is skin either way, which is the part that
+     actually reads when the arm goes up with the coin in it. */
+  .fig.ref .f-arm{background-image:linear-gradient(180deg,rgba(255,255,255,.26),rgba(0,0,0,.2))}
+
+  /* THE ARMBAND, AND WHY IT IS --ink RATHER THAN A COLOUR OF ITS OWN. Every
+     figure already carries --ink, the one colour kitInk has decided reads
+     against this kit, because the shirt number is painted in it. A thin band
+     across a sleeve is the same question asked again, and answering it twice
+     means two answers to disagree on a kit nobody has looked at, which across
+     22 pools is most of them. It goes on the left arm because that is where a
+     captain wears it, and the away man is mirrored as a whole so his comes out
+     on the far side, which is what facing each other looks like. */
+  .fig.cap .f-arm.l::before{content:"";position:absolute;left:-7%;right:-7%;
+    top:45%;height:13%;background:var(--ink,#fff);border-radius:2px;
+    box-shadow:0 1px 2px rgba(0,0,0,.45)}
 
   /* the man in the way */
   .g3-keeper{position:absolute;left:50%;bottom:37%;z-index:4;transform:translateX(-50%)}
@@ -3456,7 +3527,160 @@
 
   /* the toss */
   .h2big{text-align:center;font-size:clamp(1.4rem,6.5vw,1.9rem);font-weight:800;font-style:italic;margin:6px 0}
-  .h2tossrow{display:flex;align-items:center;justify-content:center;gap:20px;
+  /* ---------- THE TOSS, ON A CENTRE CIRCLE ----------
+     It used to be two flags and a coin, which is a menu with a coin on it. It
+     is the centre circle now: the two captains in their kits facing each
+     other, a referee between them in black, and the same coin leaving his hand
+     instead of hanging in the middle of the screen.
+
+     .h2tossrow is gone and this took its place, which is why the rule at the
+     bottom of this block still ends on the line that used to close it. There
+     is no flex row left to be in: everything here is absolutely positioned
+     against one 196px box, and the numbers are not arbitrary. A man is
+     --h:104, so he is 43.7 wide, and his right hand, which is .f-arm at top
+     16.5% height 32% with the forearm on its bottom third, comes out 17px
+     right of his centre and 109px down from the top of the box. That is where
+     the coin rests, and it is the whole reason the wrapper carries a left
+     offset and a transform-origin rather than sitting in the middle like
+     everything else on this screen. They want one look in a browser: they are
+     derived from the figure's own percentages, not measured off a screenshot.
+
+     THE COIN MOVES ON THE WRAPPER AND NEVER ON THE COIN. h2spin owns transform
+     on .h2coin and always has, so flying the coin across the screen from there
+     would mean rewriting the spin to carry a translate it has no business
+     knowing about, or finding a third animatable property. Neither is needed:
+     .h2coinwrap was already position:relative, already the coin's containing
+     block, and had nothing animating it at all, so the launch rides on the
+     wrapper, the spin carries on underneath it, and the two compose for free.
+     That also carries the coin's shadow, which is the one thing that turns out
+     not to be wanted, see below. */
+  .h2toss3 .h2lb{font-size:10.5px;margin-top:7px}
+  .h2tcirc{position:absolute;left:50%;bottom:14px;width:76%;max-width:262px;height:64px;
+    transform:translateX(-50%);border:2px solid rgba(255,255,255,.3);border-radius:50%;
+    background:radial-gradient(ellipse at 50% 50%,rgba(255,255,255,.05),transparent 72%)}
+  /* THE FLAGS GO TO THE TOP CORNERS rather than either side of the men. At the
+     bottom a 58px flag and a 44px man are asked to share the same 290px of
+     phone and one of them loses; up there they read as a scoreboard and
+     .tflag.won still does exactly the lighting up it always did, which is the
+     payoff this screen already had and there is no reason to throw away. */
+  .h2toss3 .tflag{position:absolute;top:6px}
+  .h2toss3 .tflag.home{left:0}
+  .h2toss3 .tflag.away{right:0}
+  .tossman{position:absolute;bottom:28px;width:88px;text-align:center;
+    transform:translateX(-50%)}
+  .tossman.home{left:22%}
+  .tossman.ref{left:50%;z-index:3}
+  /* HE FACES THE OTHER ONE, and the mirror is on the MAN and not on the
+     figure. The figure is the thing that leans, hops and sinks, and every one
+     of those writes transform, which would throw a mirror written there away
+     the moment it ran. The name has to come back the right way round, which is
+     the one line the mirror actually costs. */
+  .tossman.away{left:78%;transform:translateX(-50%) scaleX(-1)}
+  .tossman.away .h2lb{transform:scaleX(-1)}
+  /* and so does the number on his chest, for the same reason and with a display
+     alongside it because a transform does nothing to an inline box */
+  .tossman.away .fig .f-torso i{display:inline-block;transform:scaleX(-1)}
+  .h2toss3 .fig{margin:0 auto;transform-origin:50% 100%}
+  /* the coin at his side, small, until somebody calls */
+  .h2toss3 .h2coinwrap{position:absolute;left:calc(50% + 17px);top:49px;margin-left:-52px;
+    transform-origin:50% 60px;transform:scale(.34);z-index:5}
+  /* A COIN IN A MAN'S HAND DOES NOT CAST A SHADOW ON THE GRASS UNDER IT. The
+     shadow was right when the coin sat on the floor of its own little box. A
+     hundred pixels up a referee's arm it is a dark smudge on his thigh, and it
+     is the one part of the old staging that does not survive the move. */
+  .h2toss3 .cshadow{display:none}
+  .h2toss3.up .h2coinwrap{animation:h2tossup 2s cubic-bezier(.22,.62,.3,1) forwards}
+  /* the same 42% and 84% h2arcup and h2cshadow already use, so the wrapper's
+     arc and the coin's own lift add up to one throw instead of two bounces,
+     and the coin is back in his hand at the moment the shadow says it is */
+  @keyframes h2tossup{
+    0%,84%,100%{transform:scale(.34)}
+    42%{transform:translate(-16px,-64px) scale(.56)}}
+  /* the reveal: out of his hand, into the middle, big, as it always was. The
+     100% keyframe is left implicit on purpose, the way h2moved does it, so the
+     rule above is the only copy of where it ends up. */
+  .h2toss3.done .h2coinwrap{transform:translate(-17px,-55px) scale(1);
+    animation:h2tossshow .42s cubic-bezier(.3,1.5,.5,1)}
+  @keyframes h2tossshow{from{transform:scale(.34)}}
+  /* HIS ARM, which is the same trick h2balance plays: one part of the figure
+     rotating about the shoulder .f-arm already hinges on. It ends on the exact
+     angle the .done pose holds, so the animation and the pose hand over at two
+     seconds without a jump. It beats the sixteen-bit skin's flat
+     transform:none on the arms the way every other pose does, on four classes
+     against three, which is the arrangement _tests/pixel-test.js names. */
+  .h2toss3.up .fig.ref .f-arm.r{animation:h2tossarm 2s cubic-bezier(.3,.7,.4,1) both}
+  @keyframes h2tossarm{
+    0%{transform:rotate(-8deg)}
+    16%{transform:rotate(-134deg)}
+    44%{transform:rotate(-108deg)}
+    84%{transform:rotate(-142deg)}
+    100%{transform:rotate(-146deg)}}
+  .h2toss3.done .fig.ref .f-arm.r{transform:rotate(-146deg)}
+  /* the two of them lean in as it comes down, which is h2lean off the pitch at
+     the delay that puts it under the catch, and the referee left out of it
+     because he is the one throwing */
+  .h2toss3.up .tossman:not(.ref) .fig{animation:h2lean .55s 1.42s cubic-bezier(.3,1.1,.4,1) both}
+  /* h2bob is the celebration bob and it is 1.5px, tuned on a 48px man on the
+     pitch. On a 104px one standing still it is not a hop, it is a flicker. */
+  .h2toss3.done .tossman.won .fig{animation:h2tosshop .62s .12s cubic-bezier(.3,1.1,.4,1)}
+  @keyframes h2tosshop{
+    0%,100%{transform:translateY(0)}
+    38%{transform:translateY(-11px)}
+    62%{transform:translateY(-1px)}
+    78%{transform:translateY(-4px)}}
+  /* AND THE ONE WHO LOST IT DROPS HIS HEAD, which is not the two lines it
+     looks like. Nothing animates .f-head today and three separate things have
+     to be true before anything can.
+
+     The head is centred with translateX(-50%) and that translate has to be
+     carried through every keyframe or he steps half a head sideways off his
+     own neck as he drops it. It has no transform-origin, so left alone it
+     pivots about its own middle, which reads as a tilt and not as a drop; the
+     neck is the bottom edge. And a head that falls on shoulders that do not is
+     a broken doll, so the man goes down three pixels under it. The sink is a
+     pure translate on purpose, because rotating a whole figure is what costs a
+     sprite its edges and this has to be right in both looks.
+
+     That is the cheap half. The other half is that the rotation itself cannot
+     cross into the sixteen-bit skin at all, which is h2drop16 below and the
+     rule that switches to it inside the block. */
+  .h2toss3.done .tossman.lost .fig{animation:h2sink .5s .12s ease-out both}
+  @keyframes h2sink{to{transform:translateY(3px)}}
+  .h2toss3.done .tossman.lost .fig .f-head{transform-origin:50% 96%;
+    animation:h2drop .5s .12s cubic-bezier(.3,1.2,.5,1) both}
+  @keyframes h2drop{to{transform:translateX(-50%) rotate(13deg)}}
+  /* the sprite's answer to the same thing, named out here with the rest of the
+     keyframes and switched on from inside the skin, exactly the way
+     h2balance16 is. Two whole units down, so both halves of the steps(2) land
+     on a real pixel, and --px is inherited from the figure. */
+  @keyframes h2drop16{to{transform:translateX(-50%) translateY(calc(var(--px,5px) * 2))}}
+  /* REDUCED MOTION: the coin still lands, the men do not move. The spin and
+     the arc are deliberately not in here, because the coin IS the result and
+     the result has to arrive. Everything the staging added goes, except the
+     pose that survives as a static declaration: the referee's palm is still
+     up, because .h2toss3.done .fig.ref .f-arm.r writes the angle rather than
+     animating to it. The loser's head is NOT still down, and that is worth
+     saying out loud rather than discovering. The drop lives only in h2drop,
+     the blanket rule above matches .f-head because it is a direct child of
+     .fig, and there is no static rotate underneath it to fall back on. Giving
+     him one would cost two rules, not one, since thirteen degrees on a sprite
+     head is the exact edge h2drop16 exists to avoid.
+
+     The wrapper cannot merely lose its animation. The small coin in his hand
+     is an animation END STATE, and without one it would spin unreadably at his
+     hip instead of landing somewhere a person can see it, so it is parked
+     where the reveal puts it and this screen is the menu it used to be with
+     three men standing on it. */
+  @media (prefers-reduced-motion: reduce){
+    .h2toss3 .tossman .fig,.h2toss3 .tossman .fig > *{animation:none !important}
+    .h2toss3 .h2coinwrap{animation:none !important;transform:translate(-17px,-55px) scale(1)}
+  }
+  .h2toss3{position:relative;height:196px;border-radius:10px;
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.05), 0 10px 24px rgba(0,0,0,.45);
+    background:
+      radial-gradient(ellipse 78% 62% at 50% 50%,transparent 44%,rgba(0,0,0,.4) 100%),
+      repeating-linear-gradient(180deg,rgba(255,255,255,.032) 0 9%,transparent 9% 18%),
+      linear-gradient(180deg,#0d3a1c,#17552c 58%,#0d3a1c);
     width:100%;margin:14px 0 8px}
   .tflag{width:58px;height:39px;object-fit:cover;border-radius:4px;flex:none;
     opacity:.42;transition:opacity .4s,transform .4s,box-shadow .4s;
@@ -7542,6 +7766,14 @@ function qVisual(revealed){
 
 const H2_TARGET = 2;                       // first to this many goals
 const H2_KITS   = ["#e04a34", "#3d7ae8"];  // home red, away blue
+/* THE REFEREE'S KIT, and it is a charcoal rather than a true black. He is
+   drawn by the same h2FigHTML as the twenty-two, so his shirt, his sleeves,
+   his shorts and his socks all come off --kit together. At #000 every one of
+   them is the same ink as the outline the sixteen-bit skin draws round them
+   and what comes out is a man-shaped hole with a face on it. This reads black
+   on a phone, keeps kitInk on white so the badge has a contrast colour without
+   a second constant, and leaves the sleeve a step to sit on. */
+const H2_REF_KIT = "#26292e";
 const H2_SAVE   = "hard";                  // what a keeper always faces
 
 /* ---------- KNOCKING IT ABOUT ----------
@@ -8499,6 +8731,37 @@ const h2Abbr  = w => { const q = h2Squad(w); return (q && q.abbr) ||
   (S.players[w] ? S.players[w].name.slice(0, 3).toUpperCase() : "???"); };
 const h2Flag  = w => { const q = h2Squad(w); return q && q.flag ? h2Badge(q.flag) : null; };
 const h2Kit   = w => { const q = h2Squad(w); return (q && q.kit) || H2_KITS[w]; };
+/* WHICH MAN STANDS AT THE CENTRE CIRCLE FOR THIS SIDE, and why it is not
+   simply "the one with cap on him".
+
+   build-tournament.js reads the armband off the tournament's SQUAD table, the
+   (c) next to a name in the twenty-three, and writes cap on that man. The
+   eleven is a different fact from a different article: the side that actually
+   started that country's last match at the tournament. The two agree 361 times
+   across the sixteen tournament and finals pools and disagree 87 times, where
+   the captain was rested, injured, suspended or simply came on later, and for
+   those 87 cap is sitting on a man on the bench.
+
+   A man on the bench is not on the pitch, so he does not stand at the centre
+   circle either. The keeper stands in, which is the most ordinary arrangement
+   in football and is also what the six club pools and Your XI were always
+   going to get, since no squad list behind them carries an armband at all. One
+   rule instead of two, and it invents nothing: a stand-in rule that promoted
+   the oldest or most-capped man in the eleven would be putting a claim on the
+   screen that no file anywhere backs up.
+
+   What it costs is that 87 sides show their keeper where a squad list would
+   show somebody else, and in every one of those cases the man it is not
+   showing genuinely did not start. If those are ever wanted back the fix is in
+   the harvest and not here: the armband on the day is in the match report,
+   which is a different page from the one cap comes off.
+
+   Slot 0 is the keeper in every shape in H2_SHAPES, which is what makes the
+   fallback a number rather than a search. */
+const h2TossCap = w => {
+  for(let i = 0; i < 11; i++){ const m = h2Man(i, w); if(m && m.cap) return i; }
+  return 0;
+};
 /* the name under the shirt: the man who wore it in 2006, or the position */
 function h2Who(i, w){
   const m = h2Man(i, w);
@@ -12269,7 +12532,15 @@ function h2Render(st){
 
   if(S.phase === "h_toss"){
     const caller = S.players[0].name;
-    const face = H.coin ? (H.coin === "heads" ? "H" : "T") : "?";
+    /* THE THREE MEN, AND WHICH OF THEM IS HAVING HIS AFTERNOON SPOILED. Both
+       flags already read H.tossed and H.who and nothing else; so does all of
+       this. The staging is a function of the result rather than a thing that
+       happens on the way to one, which is what lets render() run as many times
+       as it likes on this screen without the coin changing its mind. */
+    const stage3 = H.tossed ? "done" : H.flipping ? "up" : "";
+    const cap0 = h2TossCap(0), cap1 = h2TossCap(1);
+    const st0 = H.tossed ? (H.who === 0 ? "won" : "lost") : "";
+    const st1 = H.tossed ? (H.who === 1 ? "won" : "lost") : "";
     /* THE TEAM SHEET. Only in The Dugout, because in One on One there are no
        decisions to print: both sides are the same shape, hold the same line
        and carry no traits, and a panel saying so three times would be noise. */
@@ -12317,8 +12588,21 @@ function h2Render(st){
           '<i>' + esc(S.players[1].name) + '</i>' +
         '</div>' +
       '</div>' +
-      '<div class="h2tossrow">' +
-        (h2Flag(0) ? '<img class="tflag' + (H.tossed && H.who === 0 ? " won" : "") + '" src="' + h2Flag(0) + '" alt="">' : "") +
+      '<div class="h2toss3 ' + stage3 + '">' +
+        '<div class="h2tcirc"></div>' +
+        (h2Flag(0) ? '<img class="tflag home' + (H.tossed && H.who === 0 ? " won" : "") + '" src="' + h2Flag(0) + '" alt="">' : "") +
+        /* the two of them and the man between them. He is emitted before the
+           coin so the coin paints over his hand rather than behind it, and he
+           gets no number and no name: a referee is not on either team sheet. */
+        '<div class="tossman home ' + st0 + '">' +
+          h2FigHTML("cap", h2Kit(0), 104, h2No(cap0, 0)) +
+          '<span class="h2lb">' + esc(h2Who(cap0, 0)) + '</span>' +
+        '</div>' +
+        '<div class="tossman ref">' + h2FigHTML("ref", H2_REF_KIT, 104, "") + '</div>' +
+        '<div class="tossman away ' + st1 + '">' +
+          h2FigHTML("cap", h2Kit(1), 104, h2No(cap1, 1)) +
+          '<span class="h2lb">' + esc(h2Who(cap1, 1)) + '</span>' +
+        '</div>' +
         '<div class="h2coinwrap">' +
           '<div class="h2coin' + (H.flipping ? " flip" : H.tossed ? " landed" : "") +
             '" style="--end:' + (H.result === "tails" ? 180 : 0) + 'deg">' +
@@ -12326,12 +12610,18 @@ function h2Render(st){
           '</div>' +
           '<span class="cshadow' + (H.flipping ? " flip" : "") + '"></span>' +
         '</div>' +
-        (h2Flag(1) ? '<img class="tflag' + (H.tossed && H.who === 1 ? " won" : "") + '" src="' + h2Flag(1) + '" alt="">' : "") +
+        (h2Flag(1) ? '<img class="tflag away' + (H.tossed && H.who === 1 ? " won" : "") + '" src="' + h2Flag(1) + '" alt="">' : "") +
       '</div>' +
       sheet +
       (H.tossed
         ? '<div class="h2big" style="font-size:1.15rem;font-style:normal">' +
-            'It is ' + H.coin + '. ' + esc(S.players[H.who].name) + ' kicks off.</div>' +
+            /* NO SQUAD, NO NAME. h2Who falls through to the position
+               abbreviation when the pool has not landed, so this line could
+               announce that GK has won the toss, with GK standing under both
+               men as well. There is no captain to name in that case, so the
+               sentence starts at the country instead. */
+            (h2Squad(H.who) ? esc(h2Who(H.who === 0 ? cap0 : cap1, H.who)) + ' wins it. ' : '') +
+            esc(h2Team(H.who) || S.players[H.who].name) + ' kick off.</div>' +
           '<button class="bigbtn" onclick="h2KickOff()">Kick off</button>'
         : H.flipping
           ? '<div class="h2hintline">' + esc(caller) + ' called ' + H.call + '. In the air...</div>'
