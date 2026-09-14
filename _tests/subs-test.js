@@ -176,9 +176,9 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   await place(0, ST);
   run(app, "h2Shoot()"); await tick(150);
   run(app, "h2Reveal(); h2Judge(true)"); await tick(160);
-  check("struck, and the keeper is asked", phase() === "h_save", phase());
+  check("struck, and he has a corner to pick", phase() === "h_aim", phase());
   const gk0 = ev(app, "h2Who(0, 1)");
-  run(app, "h2SaveReveal(); h2SaveJudge(false)"); await tick(160);
+  run(app, "h2Aim('tl'); h2HandGo(); h2Dive('br')"); await tick(160);
   check("beaten, and his bench is NOT offered", phase() !== "h_sub", phase());
   check("it is a goal, watched before it counts", phase() === "h_strike" && H("result") === "scored",
     phase() + "/" + H("result"));
@@ -257,8 +257,8 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   await place(0, ST);
   run(app, "h2Shoot()"); await tick(150);
   run(app, "h2Reveal(); h2Judge(true)"); await tick(160);
-  check("a shot at ninety still gets its save", phase() === "h_save" && H("min") === 90, phase() + "/" + H("min"));
-  run(app, "h2SaveReveal(); h2SaveJudge(true)"); await tick(160);
+  check("a shot at ninety still gets its duel", phase() === "h_aim" && H("min") === 90, phase() + "/" + H("min"));
+  run(app, "h2Aim('tl'); h2HandGo(); h2Dive('tl')"); await tick(160);
   run(app, "h2AfterStrike()"); await tick(180);
   check("and the save is the dead ball that ends it", phase() === "h_ft", phase());
 
@@ -267,7 +267,7 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   await place(0, ST);
   run(app, "h2Shoot()"); await tick(150);
   run(app, "h2Reveal(); h2Judge(true)"); await tick(160);
-  run(app, "h2SaveReveal(); h2SaveJudge(false)"); await tick(160);
+  run(app, "h2Aim('tl'); h2HandGo(); h2Dive('br')"); await tick(160);
   run(app, "h2AfterStrike()"); await tick(180);
   check("a late equaliser is celebrated", phase() === "h_goal" && ev(app, "S.players[0].score") === 1, phase());
   check("and the button already knows it is penalties", stage(app).includes("Full time. Penalties"), "wrong button");
@@ -299,8 +299,9 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   run(app, "h2SoKick()"); await tick(160);
   check("Bram's kick", H("who") === 1 && H("at") === ST, H("who") + "/" + H("at"));
   run(app, "h2Reveal(); h2Judge(true)"); await tick(160);
-  check("struck, and the keeper is asked", phase() === "h_save" && tier() === "hard", phase() + "/" + tier());
-  run(app, "h2SaveReveal(); h2SaveJudge(false)"); await tick(160);
+  check("struck, and it is a corner each", phase() === "h_aim", phase());
+  check("the keeper is not asked anything", !stage(app).includes("qcard"), "a question was drawn");
+  run(app, "h2Aim('tl'); h2HandGo(); h2Dive('br')"); await tick(160);
   check("beaten, and no keeper change either", phase() === "h_strike" && H("result") === "scored", phase() + "/" + H("result"));
   run(app, "h2AfterStrike()"); await tick(160);
   check("one each side taken, Bram in front", JSON.stringify(H("so.kicks")) === "[[0],[1]]", JSON.stringify(H("so.kicks")));
@@ -329,7 +330,7 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   check("nought from three, Bram two from two, still on (he could miss two)", phase() === "h_pens", phase());
   run(app, "h2SoKick()"); await tick(120);
   run(app, "h2Reveal(); h2Judge(true)"); await tick(120);
-  run(app, "h2SaveReveal(); h2SaveJudge(false)"); await tick(120);
+  run(app, "h2Aim('tl'); h2HandGo(); h2Dive('br')"); await tick(120);
   run(app, "h2AfterStrike()"); await tick(200);
   check("three from three against nought from three, with two left, is over", phase() === "results", phase());
   check("the tally is on the record", JSON.stringify(ev(app, "S.pens")) === "[0,3]", JSON.stringify(ev(app, "S.pens")));

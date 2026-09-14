@@ -88,7 +88,8 @@ const check = (n, c, x) => {
           case "h_hand": return (H.hand && H.hand.w) === 0;
           case "h_mark": return H.who === 1;
           case "h_pick": case "h_q": case "h_judge": return H.who === 0;
-          case "h_save": case "h_sjudge": case "h_tackle": case "h_tjudge": return H.who === 1;
+          case "h_aim": return H.who === 0;
+          case "h_dive": case "h_tackle": case "h_tjudge": return H.who === 1;
           case "h_sub": return H.sub && H.sub.w === 0;
           case "h_ft": return true;
           /* THE NEXT TAKER, not the last one. H.who at this screen is still
@@ -115,8 +116,8 @@ const check = (n, c, x) => {
         "case 'h_pick': { for(let i=0;i<11;i++) if(i !== H.at && !h2IsOff(H.who,i)){ h2Select(i); h2Play(); return; } return; }" +
         "case 'h_q': return h2Reveal();" +
         "case 'h_judge': return h2Judge(Math.random() < .5);" +
-        "case 'h_save': return h2SaveReveal();" +
-        "case 'h_sjudge': return h2SaveJudge(Math.random() < .5);" +
+        "case 'h_aim': return h2Aim(H2_CORNERS[Math.floor(Math.random() * 4)]);" +
+        "case 'h_dive': return h2Dive(H2_CORNERS[Math.floor(Math.random() * 4)]);" +
         "case 'h_tackle': return h2TackleReveal();" +
         "case 'h_tjudge': return h2TackleJudge(Math.random() < .5);" +
         "case 'h_sub': return h2SubDecline();" +

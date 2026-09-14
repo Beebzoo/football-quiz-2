@@ -359,8 +359,9 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   check("and they are named", scene.includes(ev(app, "h2Who(0,1)")) &&
     scene.includes(ev(app, "h2Who(9,0)")), "the men are anonymous");
 
-  run(app, "h2SaveReveal()"); await tick(130);
-  run(app, "h2SaveJudge(false)"); await tick(220);
+  run(app, "h2Aim('tl')"); await tick(130);
+  run(app, "h2HandGo()"); await tick(130);
+  run(app, "h2Dive('br')"); await tick(220);
   check("a goal puts the scene in its scored state",
     /class="g3 scored"/.test(stage(app)), "not scored");
   run(app, "h2AfterStrike()"); await tick(260);
@@ -467,10 +468,15 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   check("the shot is on", ev(app, "S.h2h.shooting") === true, ev(app, "S.h2h.shooting"));
   run(app, "h2Reveal()"); await tick(130);
   run(app, "h2Judge(true)"); await tick(190);
-  check("a clean strike brings the keeper out", phase() === "h_save", phase());
-  check("who always faces the same level", ev(app, "S.tier") === "hard", ev(app, "S.tier"));
-  run(app, "h2SaveReveal()"); await tick(130);
-  run(app, "h2SaveJudge(true)"); await tick(220);
+  check("a clean strike sends him to a corner", phase() === "h_aim", phase());
+  check("all four of them are on the goal", (stage(app).match(/class="h2gmc /g) || []).length === 4,
+    (stage(app).match(/class="h2gmc /g) || []).length);
+  run(app, "h2Aim('tr')"); await tick(150);
+  check("and the phone goes across the table", phase() === "h_hand", phase());
+  run(app, "h2HandGo()"); await tick(150);
+  check("the keeper gets the same four", phase() === "h_dive" &&
+    (stage(app).match(/class="h2gmc /g) || []).length === 4, phase());
+  run(app, "h2Dive('tr')"); await tick(220);
   /* Neither outcome lands until the strike has been watched: the camera drops
      behind the striker and you see the ball hit the net or the keeper. */
   check("the camera goes behind the striker", phase() === "h_strike", phase());
@@ -489,8 +495,9 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
     run(app, "h2Shoot()"); await tick(160);
     run(app, "h2Reveal()"); await tick(130);
     run(app, "h2Judge(true)"); await tick(160);
-    run(app, "h2SaveReveal()"); await tick(130);
-    run(app, "h2SaveJudge(false)"); await tick(240);
+    run(app, "h2Aim('bl')"); await tick(130);
+    run(app, "h2HandGo()"); await tick(130);
+    run(app, "h2Dive('tr')"); await tick(240);
     run(app, "h2AfterStrike()"); await tick(260);
   };
   const kickOn = async () => { run(app, "h2KickOn()"); await tick(280); };
@@ -500,10 +507,11 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   run(app, "h2Shoot()"); await tick(160);
   run(app, "h2Reveal()"); await tick(130);
   run(app, "h2Judge(true)"); await tick(160);
-  check("the keeper is asked over the goal, not the tactics board",
-    stage(app).includes("g3-net") && !stage(app).includes("h2pitch"), "wrong view for the save");
-  run(app, "h2SaveReveal()"); await tick(130);
-  run(app, "h2SaveJudge(false)"); await tick(240);
+  check("the corner is picked over the goal, not the tactics board",
+    stage(app).includes("g3-net") && !stage(app).includes("h2pitch"), "wrong view for the shot");
+  run(app, "h2Aim('bl')"); await tick(130);
+  run(app, "h2HandGo()"); await tick(130);
+  run(app, "h2Dive('tr')"); await tick(240);
   check("a goal is watched before it is counted",
     phase() === "h_strike" && ev(app, "S.players[0].score") === 0,
     phase() + "/" + ev(app, "S.players[0].score"));

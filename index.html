@@ -2494,7 +2494,19 @@
      the striker and you watch it from there. The goal is a real box in 3D:
      a back plane, two sides and a roof, each one a net, standing in a frame.
      Nothing here is an image. */
-  .g3{position:relative;width:100%;max-width:400px;margin:2px auto 0;aspect-ratio:10/8.2;
+  /* THE MOUTH, WRITTEN DOWN ONCE. The frame and the corner picker are drawn
+     off the same four numbers, because the picker is only worth anything if
+     tapping the top left of it is tapping the top left of THAT goal. Move one
+     and both move. */
+  .g3{--gmL:11%;--gmR:11%;--gmT:17%;--gmH:44%;
+    /* where the ball is going and where he is diving, written on by
+       h2GoalSceneHTML out of the two corners that were picked. The values
+       standing here are the ones the keyframes used to carry hard-coded, so a
+       scene with no duel behind it, a shootout put over the bar or the still
+       shot on the question screen, draws exactly what it always drew. */
+    --gx:66%;--gy:31%;--gmx:56%;--gmy:36%;--gsx:47%;--gsy:44%;--gbx:22%;--gby:64%;
+    --kdx:-4%;--kdy:2%;--kdr:46deg;
+    position:relative;width:100%;max-width:400px;margin:2px auto 0;aspect-ratio:10/8.2;
     perspective:540px;perspective-origin:50% 34%;overflow:hidden;border-radius:14px;
     background:linear-gradient(180deg,#04120b 0%,#071d11 24%,#143f20 27%,#0e3319 100%);
     box-shadow:0 16px 34px rgba(0,0,0,.55);user-select:none}
@@ -2508,7 +2520,7 @@
   .g3-line{position:absolute;left:12%;right:12%;top:62%;height:2px;
     background:rgba(255,255,255,.3);border-radius:2px}
 
-  .g3-goal{position:absolute;left:11%;right:11%;top:17%;height:44%;z-index:3;
+  .g3-goal{position:absolute;left:var(--gmL);right:var(--gmR);top:var(--gmT);height:var(--gmH);z-index:3;
     transform-style:preserve-3d}
   .g3-net{position:absolute;background-color:rgba(4,20,10,.42);
     background-image:
@@ -2680,13 +2692,27 @@
     text-shadow:0 1px 3px rgba(0,0,0,.95)}
   /* he goes the wrong way on a goal, and the right way on a save */
   .g3-keeper{transform-origin:50% 88%}
-  .g3.scored .g3-keeper{animation:g3wrong 1.1s cubic-bezier(.3,.8,.4,1) both}
+  /* HE GOES WHERE HE SAID HE WAS GOING. There used to be two of these, one
+     for the save and one for being beaten, and they flung him right and left
+     respectively whatever had happened. That was honest enough when the save
+     was a question, because there was no direction in it to be wrong about.
+     Now he has named a corner, and a keeper thrown the other way would be the
+     screen calling the man who just tapped it a liar. One animation, one
+     destination, and whether it was the right one is told by where the ball
+     is rather than by which way he went. */
+  .g3.scored .g3-keeper,.g3.saved .g3-keeper{animation:g3go .9s cubic-bezier(.25,1.05,.4,1) both}
+  @keyframes g3go{
+    0%{transform:translateX(-50%) translateY(0) rotate(0)}
+    62%{transform:translateX(var(--kdx)) translateY(var(--kdy)) rotate(var(--kdr))}
+    100%{transform:translateX(var(--kdx)) translateY(var(--kdy)) rotate(var(--kdr))}
+  }
+  /* THE ONE THAT KEEPS ITS OLD FLAIL is the shootout put over the bar, and it
+     keeps it because nobody picked anything: the ball never reached the duel,
+     so there is no corner to send him to and no corner he can be wrong about.
+     He has gone for a ball that is in the stand, which is what this looks
+     like. */
   @keyframes g3wrong{0%{transform:translateX(-50%) rotate(0)}
     100%{transform:translateX(-104%) translateY(10%) rotate(-58deg)}}
-  .g3.saved .g3-keeper{animation:g3dive .85s cubic-bezier(.25,1.1,.4,1) both}
-  @keyframes g3dive{0%{transform:translateX(-50%) rotate(0)}
-    55%{transform:translateX(-4%) translateY(4%) rotate(52deg)}
-    100%{transform:translateX(-12%) translateY(2%) rotate(46deg)}}
 
   /* the man taking it, close to the camera and mostly out of shot */
   .g3-striker{position:absolute;left:21%;bottom:-13%;z-index:6;transform:translateX(-50%)}
@@ -2709,16 +2735,16 @@
   .g3.scored .g3-ball{animation:g3in .95s cubic-bezier(.3,.55,.5,1) both}
   @keyframes g3in{
     0%{left:34%;top:78%;transform:translate(-50%,-50%) scale(1.5)}
-    55%{left:56%;top:36%;transform:translate(-50%,-50%) scale(.85)}
-    100%{left:66%;top:31%;transform:translate(-50%,-50%) scale(.52)}
+    55%{left:var(--gmx);top:var(--gmy);transform:translate(-50%,-50%) scale(.85)}
+    100%{left:var(--gx);top:var(--gy);transform:translate(-50%,-50%) scale(.52)}
   }
   /* stopped: it reaches him and comes back off the gloves */
   .g3.saved .g3-ball{animation:g3stop 1s cubic-bezier(.3,.6,.45,1) both}
   @keyframes g3stop{
     0%{left:34%;top:78%;transform:translate(-50%,-50%) scale(1.5)}
-    48%{left:47%;top:44%;transform:translate(-50%,-50%) scale(.78)}
-    62%{left:46%;top:45%;transform:translate(-50%,-50%) scale(.82)}
-    100%{left:22%;top:64%;transform:translate(-50%,-50%) scale(1.05)}
+    48%{left:var(--gsx);top:var(--gsy);transform:translate(-50%,-50%) scale(.78)}
+    62%{left:var(--gsx);top:var(--gsy);transform:translate(-50%,-50%) scale(.82)}
+    100%{left:var(--gbx);top:var(--gby);transform:translate(-50%,-50%) scale(1.05)}
   }
   /* the net takes it: the back of the goal bulges where the ball hits */
   .g3-bulge{position:absolute;left:60%;top:26%;width:52px;height:44px;z-index:4;
@@ -2776,6 +2802,69 @@
   .g3.missed .g3-striker .f-leg.r{animation:g3boot .5s cubic-bezier(.3,1.2,.4,1) both}
   .g3.missed .g3-cry{color:#ffc4b8;text-shadow:0 2px 0 #5a1d14,0 0 20px rgba(255,140,120,.55);
     animation:g3cry .6s .75s cubic-bezier(.2,1.6,.3,1) both}
+
+  /* ---------- THE FOUR CORNERS ----------
+     Pinned to the same four numbers the frame is drawn from, so this is not a
+     control sitting under a picture of a goal, it is the inside of the goal
+     with a cross through it. Two hairlines rather than eight borders: four
+     cells each carrying their own edge double up down the middle and the whole
+     thing reads as a grid of buttons, which is the one thing it must not.
+
+     It sits above the keeper and below the shout, so the man standing there
+     shows through the bottom two. Nothing says the low corners are harder and
+     nothing needs to: he is standing in them. */
+  .h2gm{position:absolute;left:var(--gmL);right:var(--gmR);top:var(--gmT);height:var(--gmH);
+    z-index:7;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr}
+  .h2gm::before,.h2gm::after{content:"";position:absolute;pointer-events:none;
+    background:rgba(255,255,255,.32)}
+  .h2gm::before{left:6%;right:6%;top:50%;height:1px}
+  .h2gm::after{top:6%;bottom:6%;left:50%;width:1px}
+  .h2gmc{appearance:none;-webkit-appearance:none;border:0;border-radius:0;cursor:pointer;
+    background:rgba(255,255,255,.04);display:flex;padding:7px 9px;
+    font:800 9.5px/1.15 var(--ui);letter-spacing:.06em;text-transform:uppercase;
+    color:rgba(255,255,255,.9);text-shadow:0 1px 3px rgba(0,0,0,.95);
+    transition:background .12s ease, box-shadow .12s ease}
+  /* the word goes in the corner it names, so the label points at itself */
+  .h2gmc.tl{align-items:flex-start;justify-content:flex-start;text-align:left}
+  .h2gmc.tr{align-items:flex-start;justify-content:flex-end;text-align:right}
+  .h2gmc.bl{align-items:flex-end;justify-content:flex-start;text-align:left}
+  .h2gmc.br{align-items:flex-end;justify-content:flex-end;text-align:right}
+  .h2gmc:hover{background:rgba(255,255,255,.12)}
+  .h2gmc:active{background:rgba(255,255,255,.22)}
+  .h2gmc:focus-visible{outline:2px solid #f7e3a6;outline-offset:-3px}
+  /* the first of a keeper's two, already spent */
+  .h2gmc.on{background:rgba(247,227,166,.22);box-shadow:inset 0 0 0 2px #f7e3a6}
+  .h2gmc.on span{color:#fff}
+  @media (prefers-reduced-motion: reduce){ .h2gmc{transition:none} }
+
+  /* what the two of them chose, read together once it is over */
+  .h2duel{margin:8px auto 0;max-width:400px;text-align:center;font-size:.92rem;line-height:1.45}
+  .h2duel p{margin:2px 0}
+  .h2duel b{font-weight:800}
+  .h2duel .h2grz{margin-top:5px;font-style:italic;opacity:.85}
+
+  /* ---------- THE SCENE, HELD STILL ----------
+     There was no reduced-motion rule over the goal at all. That was a gap
+     rather than a decision, and it has become a bigger one: the flight is now
+     the only thing on the screen that says WHERE he put it, so switching the
+     animation off has to leave the frame it was going to end on rather than
+     the frame it started from. animation:none on its own would park the ball
+     on his boot and the keeper on his line under a caption saying GOAL. */
+  @media (prefers-reduced-motion: reduce){
+    .g3.scored .g3-ball,.g3.saved .g3-ball,.g3.missed .g3-ball,
+    .g3.scored .g3-keeper,.g3.saved .g3-keeper,.g3.missed .g3-keeper,
+    .g3.scored .g3-striker,.g3.saved .g3-striker,.g3.missed .g3-striker,
+    .g3.scored .g3-striker .f-leg.r,.g3.saved .g3-striker .f-leg.r,.g3.missed .g3-striker .f-leg.r,
+    .g3.scored .g3-back,.g3.scored .g3-net,.g3.scored .g3-goal,.g3.scored .g3-bulge,
+    .g3.scored .g3-cry,.g3.saved .g3-cry,.g3.missed .g3-cry,
+    .g3.scored .g3-flash i{animation:none}
+    .g3.scored .g3-ball{left:var(--gx);top:var(--gy);transform:translate(-50%,-50%) scale(.52)}
+    .g3.saved .g3-ball{left:var(--gbx);top:var(--gby);transform:translate(-50%,-50%) scale(1.05)}
+    .g3.missed .g3-ball{left:58%;top:1%;transform:translate(-50%,-50%) scale(.42);opacity:.45}
+    .g3.scored .g3-keeper,.g3.saved .g3-keeper{
+      transform:translateX(var(--kdx)) translateY(var(--kdy)) rotate(var(--kdr))}
+    .g3.missed .g3-keeper{transform:translateX(-104%) translateY(10%) rotate(-58deg)}
+  }
 
   /* the shootout board: a row a side, a pip a kick, the next man lit */
   .h2so{display:flex;flex-direction:column;gap:8px;margin:10px 0}
@@ -7034,7 +7123,16 @@ function mpStatePayload(){
      Safe to blank outright. The only thing that reads them is the marking grid,
      which is the host's own screen, and the end-of-possession reveal is a toast
      built on the host from a local variable that was never in S anyway. */
-  if(S && isPitch(S.play) && S.h2h) return {...S, h2h:{...S.h2h, marks:[]}};
+  /* AND NEITHER DOES THE CORNER, for exactly the same reason and with exactly
+     the same timing. The marks are blanked for the whole match because they
+     stand; the striker's corner only has to be hidden while it is still his
+     secret, which is the aim, the handover and the dive. After that both men
+     are looking at it anyway, and a mirror that blanked it there would draw
+     the ball into a different corner from the one the host is showing. */
+  if(S && isPitch(S.play) && S.h2h){
+    const secret = S.phase === "h_aim" || S.phase === "h_hand" || S.phase === "h_dive";
+    return {...S, h2h:{...S.h2h, marks:[], shot: secret ? null : S.h2h.shot}};
+  }
   return S;
 }
 function mpQueueState(){
@@ -7797,8 +7895,10 @@ function qVisual(revealed){
    FINISHING. From the ten or the front three you can shoot instead of pass.
    How hard the chance is depends on where you are hitting it from, so the
    striker's is a Hard question and a winger's tight angle is an Extreme. Put
-   that away and the other man's keeper gets ONE question to keep it out. That
-   is what stops the opponent ever being a spectator for long. */
+   that away and it is still not over: you pick a corner, the phone goes across
+   the table, and his keeper picks one blind. Same corner and it is saved, any
+   other and it is in. That is what stops the opponent ever being a spectator
+   for long, and it is the one thing in the mode nobody can revise for. */
 
 const H2_TARGET = 2;                       // first to this many goals
 const H2_KITS   = ["#e04a34", "#3d7ae8"];  // home red, away blue
@@ -7810,7 +7910,81 @@ const H2_KITS   = ["#e04a34", "#3d7ae8"];  // home red, away blue
    on a phone, keeps kitInk on white so the badge has a contrast colour without
    a second constant, and leaves the sleeve a step to sit on. */
 const H2_REF_KIT = "#26292e";
-const H2_SAVE   = "hard";                  // what a keeper always faces
+/* ---------- THE CORNER DUEL ----------
+
+   THE KEEPER USED TO GET A QUESTION. A Hard one in open play, an Extreme one
+   at a penalty or with an outfield man deputising, a Hard one in the shootout,
+   and whoever was in goal simply answered it. The trouble with that was never
+   the difficulty, it was that the two men were doing the same thing twice in a
+   row: the striker answered a question to strike it and the keeper answered a
+   question to stop it, and at no point was either of them playing the other.
+   Nobody at the table ever got to be wrong about the man sitting opposite.
+
+   So the shot is a duel. The striker still answers his question to earn the
+   strike, and then he puts it in one of four corners; the phone goes across
+   the table; the keeper picks a corner blind. Same corner and it is saved, any
+   other and it is in. Nothing in front of it changes and nothing behind it
+   changes: h2SaveSettle still takes a plain boolean, and the strike, the goal,
+   the restart and the clock all run exactly as they always did.
+
+   BOTH MEN READ THE SAME DIAGRAM AND IT IS THE STRIKER'S. A keeper really is
+   facing the other way, so his own left is the striker's right, and modelling
+   that would mean the app mirroring one man's taps and not the other's. That
+   is a bug waiting to be written, and worse than the bug: the first time
+   somebody's bottom left came back as a save when he was certain he had gone
+   the other way, he would stop believing the mechanic rather than admire it.
+   One diagram, one set of words, and one line on the keeper's screen telling
+   him whose left it is.
+
+   WHAT A KEEPER IS WORTH, now there is no tier left to make cheaper. The old
+   table said three different things about the man in goal and all three are
+   kept, translated into corners rather than dropped:
+
+     A KEEPER GOES TO TWO OF THEM. The trait bought him Hard down to Normal,
+     which on the bank's own published bands (_tools/retier.js) is about
+     forty-seven per cent up to about sixty-eight: twenty-one points of save
+     rate for one point of the budget. Two corners against one is twenty-five
+     up to fifty, twenty-five points for the same one point. The trait is worth
+     what it was worth, at the price it already cost, and it cannot be read off
+     the striker because he still does not know WHICH two.
+
+     A PENALTY IS MEANT TO GO IN, and so is a shot at a centre-half who has had
+     to go in goal. Both of those faced Extreme rather than Hard, which is
+     roughly half the save rate. There is no half a corner, so they get the
+     other half of the idea instead: he goes where he chose, and if the ball is
+     there he still has to hold on to it. Half the time he does not, and the
+     screen says so, because "he got a hand to it" is the honest description of
+     a save that was not one.
+
+     A SHOOTOUT IS ITS OWN GAME and was Hard for everybody, so it is one
+     corner for everybody, held, whoever happens to be standing there.
+
+   Which leaves 12.5, 25 and 50 per cent where the old tiers gave roughly 26,
+   47 and 68. Every shot is likelier to go in than it was, and that is the
+   mechanic and not an accident of arithmetic: four corners is four corners.
+   H2_TARGET is the dial if a night of 4-3s turns out to be too many goals. */
+const H2_CORNERS = ["tl", "tr", "bl", "br"];
+/* what each one is called, and the words are identical on both men's screens */
+const H2_CORNER_SAYS = {tl: "top left", tr: "top right", bl: "bottom left", br: "bottom right"};
+/* how often a man who is not really in a position to save it keeps hold of the
+   one he got to: the penalty, and the outfield man in goal */
+const H2_HOLD_ODDS = .5;
+/* WHERE EACH CORNER IS, as percentages of the goal scene's own box, so the
+   ball is drawn going where he actually put it rather than where the keyframe
+   used to send it. The mouth runs 11% to 89% across and 17% to 61% down; the
+   back of the net sits inside that again because it stands 104px further from
+   the camera, which is why these are held well in off the frame. */
+const H2_CORNER_AT = {
+  tl: {x: 22, y: 27}, tr: {x: 78, y: 27},
+  bl: {x: 24, y: 52}, br: {x: 76, y: 52},
+};
+/* AND WHERE THE KEEPER GOES FOR EACH OF THEM, in the units the scene's own
+   keyframes were already written in: a percentage of his own width off a
+   standing translateX(-50%), a nudge up or down, and a lean. */
+const H2_DIVE_AT = {
+  tl: {x: -112, y: -12, r: -66}, tr: {x: 8,  y: -12, r: 64},
+  bl: {x: -104, y: 8,  r: -56},  br: {x: -2, y: 8,  r: 54},
+};
 
 /* ---------- KNOCKING IT ABOUT ----------
    The ladder was supposed to trade speed against risk. It did not. Playing
@@ -8073,12 +8247,14 @@ function h2ShotTier(i, w){
    him so the ladder has a hole in it, and if he was one of the four who can
    shoot then that shot is gone. Lose the six and the middle route is gone;
    lose the ten and it is wide or route one. Lose the keeper and an outfield
-   man goes in goal, so saves are H2_SAVE_NOGK instead of H2_SAVE.
+   man goes in goal, and he picks his corner like anybody else but only holds
+   what he gets to half the time, which is h2Holds.
 
    A failed tackle on one of the front three is a PENALTY rather than a free
    kick, which makes a last-ditch lunge at the striker exactly as frightening
-   as it should be. It is priced to go in: the taker gets an Easy and the
-   keeper an Extreme.
+   as it should be. It is priced to go in: the taker gets an Easy, and the
+   keeper picks his corner knowing he will only hold half of the ones he
+   reaches.
 
    BEHIND A FLAG on purpose. The rule is unplayed, and the mode it changes is
    the one the app is for, so both rule sets stay live and the toggle sits next
@@ -8156,7 +8332,7 @@ const H2_TRAITS = {
   enforcer: {cost: 1, label: "Enforcer", from: "Booked twice, or sent off",
              says: "His tackle is a tier cheaper, until he is in the book himself."},
   keeper:   {cost: 1, label: "Keeper", from: "Started in goal",
-             says: "His save is a tier cheaper."},
+             says: "He goes to two corners instead of one, in open play."},
 };
 /* WHO HAS WHAT, keyed on the man rather than the slot. The key is his shirt
    number and short name together, because two men in one squad can share
@@ -8177,8 +8353,6 @@ function h2TraitSpend(w){
 }
 const H2_REDS        = 2;            // yellows on ONE man before he goes
 const H2_PEN_TAKER   = "easy";       // a penalty is meant to go in
-const H2_PEN_KEEPER  = "extreme";
-const H2_SAVE_NOGK   = "extreme";    // an outfield man in goal
 /* the ladder as a list, so a tier can be made cheaper without a lookup table */
 const H2_ORDER = ["easy", "normal", "hard", "extreme", "ball"];
 const h2Cheaper = (t, n) => H2_ORDER[Math.max(0, H2_ORDER.indexOf(t) - (n === undefined ? 1 : n))] || t;
@@ -8191,8 +8365,11 @@ const h2Cheaper = (t, n) => H2_ORDER[Math.max(0, H2_ORDER.indexOf(t) - (n === un
    man who came off is gone for the match, and the bench is the real one, so
    Robben comes on for van Persie and not "a substitute".
 
-   Your own men only: the passer, the shooter, the taker, and the keeper who
-   has just been beaten. The contests are not covered. A tackle is one man's
+   Your own men only, and only the one who has just missed a pass. The keeper
+   is not among them: the shot is settled by a corner each and there is nothing
+   to re-take, and a beaten keeper being swapped for a fresh one while the ball
+   is travelling past him was never a substitution anyway. The contests are not
+   covered either. A tackle is one man's
    lunge, and a sub who retakes a lunge that has already been mistimed is a
    fiction too far; the defender's cover for a bad read is the free kick it
    costs him, not his bench. A shootout has no subs either: a miss is a miss. */
@@ -8239,13 +8416,13 @@ const h2Line  = w => (h2Tactical() && S.h2h && S.h2h.line && S.h2h.line[w]) || "
    gets its save, and a penalty is still taken. H2_TARGET stays underneath it
    as the mercy rule: two goals ends it early.
 
-   Level at the whistle is penalties. The taker faces H2_SO_TAKER and the
-   keeper H2_SO_KEEPER, H2_SO_KICKS each and then sudden death, and the record
-   files it as a draw won on penalties, not as a goal nobody scored. */
+   Level at the whistle is penalties. The taker faces H2_SO_TAKER and then the
+   pair of them play the corner duel exactly as they would in open play, one
+   corner each, H2_SO_KICKS each and then sudden death, and the record files it
+   as a draw won on penalties rather than as a goal nobody scored. */
 const H2_MINUTES   = 90;
 const H2_PER_Q     = 5;
 const H2_SO_TAKER  = "normal";
-const H2_SO_KEEPER = "hard";
 const H2_SO_KICKS  = 5;
 
 /* sent off, booked, and whether a side still has a keeper */
@@ -9286,7 +9463,10 @@ function h2McPick(i){
   audio();
   const H = h2();
   if(S.phase === "h_q"){ H.pick = i; stopTimer(); S.phase = "h_judge"; render(); return; }
-  if(S.phase === "h_save"){ H.pick = i; stopTimer(); S.phase = "h_sjudge"; render(); return; }
+  /* THE KEEPER IS NOT PICKING AN OPTION any more, he is picking a corner, and
+     that goes through h2Dive rather than through here. Pick One changes what a
+     QUESTION looks like and the duel is not one, which is why the shot screen
+     still has its four options and the two screens after it do not. */
   if(S.phase === "h_tackle"){ H.pick = i; stopTimer(); S.phase = "h_tjudge"; render(); }
 }
 function h2McPlayOn(){
@@ -9302,7 +9482,6 @@ function h2McPlayOn(){
      answer lying around for h2AiSaid to find later. */
   H.said = null;
   if(S.phase === "h_judge") return h2Judge(right);
-  if(S.phase === "h_sjudge") return h2SaveJudge(right);
   if(S.phase === "h_tjudge") return h2TackleJudge(right);
 }
 /* Four options, with the outcome shown once it has been called. */
@@ -10289,8 +10468,33 @@ function h2AiVerdict(w){
   H.said = null;
   const ok = said == null ? aiAnswer(w, S.tier) : said;
   if(S.phase === "h_judge")  return h2Judge(ok);
-  if(S.phase === "h_sjudge") return h2SaveJudge(ok);
   if(S.phase === "h_tjudge") return h2TackleJudge(ok);
+}
+/* ---------- WHERE THE COMPUTER PUTS IT ----------
+
+   A FLAT FOUR-WAY ROLL, as the striker and as the keeper, for all four
+   personalities, and that is a decision rather than a shrug.
+
+   The four men in AI_MEN are policies about things that can be read off the
+   pitch: Route One hits the striker whatever it costs, the Bus will not go
+   above Normal, the Pressers lean to the dear end of the ladder. Every one of
+   those is a rule you are supposed to work out and play against, and every one
+   of them is visible in the ball while it is happening. A corner is the one
+   decision in the mode with nothing to read, so a lean there would not be a
+   personality, it would be a tell: the same policy that makes the Bus fun to
+   play against would make his keeper worth exactly one experiment.
+
+   And the numbers do not leave room for a lean to be both. A match is first to
+   two goals inside eighteen questions, so it holds a handful of duels. A lean
+   strong enough to feel like a character inside one evening is strong enough
+   to be counted and beaten in the next; a lean weak enough to survive being
+   counted is too weak to notice. So there is no lean, and this is the single
+   function to put one in if a season of real rows ever says otherwise. */
+function aiCorner(taken){ return h2RandCorner(taken); }
+/* he spends whatever corners he has, in one go, and commits on the last */
+function h2AiDive(){
+  let guard = 0;
+  while(S.phase === "h_dive" && guard++ < H2_CORNERS.length) h2Dive(aiCorner(h2().dive));
 }
 
 /* ---------- the driver ----------
@@ -10621,15 +10825,17 @@ function aiTick(){
     const got = h2AiSaid(H.who);
     return aiLater(() => h2AiVerdict(H.who), beat("answer", S.tier, !got));
   }
-  /* THE SAVE IS NOT A READ. He is a keeper setting himself, and 900 to 1800 is
-     a shorter look at the same question than an open-play one gets, which is
-     the right way round: he has a ball coming at him. */
-  if(p === "h_save" && aiIsOn(h2Other()))
-    return aiLater(() => { h2AiSay(h2Other()); h2SaveReveal(); }, beat("save"));
-  if(p === "h_sjudge" && aiIsOn(h2Other())){
-    const got = h2AiSaid(h2Other());
-    return aiLater(() => h2AiVerdict(h2Other()), beat("answer", S.tier, !got));
-  }
+  /* WHERE HE PUTS IT is a decision about a ball, so it comes out of the band
+     the passes come out of, and it takes the SHOT's price the way a pass takes
+     its own: a tap-in is hit as fast as he can see it and a thirty-yarder gets
+     the long end of the band. */
+  if(p === "h_aim" && aiIsOn(H.who))
+    return aiLater(() => h2Aim(aiCorner()), beat("pass", h2ShotTier(H.at, H.who)));
+  /* THE DIVE IS NOT A READ, and the band it was already using says so in as
+     many words: "a keeper set himself". It was measuring how long he sat on a
+     question; it is measuring the thing it was named after now. */
+  if(p === "h_dive" && aiIsOn(h2Other()))
+    return aiLater(h2AiDive, beat("save"));
   if(p === "h_tackle" && aiIsOn(h2Other()))
     return aiLater(() => { h2AiSay(h2Other()); h2TackleReveal(); }, beat("tackle"));
   if(p === "h_tjudge" && aiIsOn(h2Other())){
@@ -11459,6 +11665,43 @@ function logOutcome(kind, ok, who){
     localStorage.setItem(LOG_KEY, JSON.stringify(log));
   }catch(e){}
 }
+/* THE DUEL, WHICH IS NOT A QUESTION. logOutcome cannot be used for it and
+   should not be bent into being able to: its whole job is to tie an outcome to
+   the question that produced it, and there is no question here. So this writes
+   the one row a question-less outcome can honestly carry.
+
+   IT IS STILL kind:"save", because h2Report counts saves and goals conceded
+   off that string and the report is about the keeper rather than about the
+   bank. What it does not carry is tier, qi or the question key, and
+   _tools/retier.js drops any row missing either of the first and the last
+   before it tallies a thing, so these rows can never move a question between
+   tiers. That is the guarantee, and it is enforced at both ends.
+
+   The corners go on the row because they are the only record of how the rule
+   plays once it is out of here: whether people favour a side, whether the
+   twenty-five per cent is really twenty-five, and whether a keeper with the
+   trait really does save half. There is no server, so the file on The Table
+   is the only way any of that ever gets looked at. */
+function logDuel(saved){
+  if(!S) return;
+  try{
+    const H = h2();
+    const log = JSON.parse(localStorage.getItem(LOG_KEY) || "[]");
+    const row = {t: Date.now(), mode: S.mode, mc: !!S.mc, kind: "save", ok: !!saved,
+                 shot: H.shot || null, dive: (H.dive || []).join("+") || null,
+                 graze: !!H.graze};
+    if(S.mid) row.mid = S.mid;
+    const who = h2LogWho(h2Other(), 0);
+    /* h2LogWho reads S.qd for the deck a question came out of, and the only
+       question in the air belongs to the man who struck it. Blanked rather
+       than inherited: this row is the keeper's. */
+    who.lg = null;
+    Object.assign(row, who);
+    log.push(row);
+    if(log.length > LOG_MAX) log.splice(0, log.length - LOG_MAX);
+    localStorage.setItem(LOG_KEY, JSON.stringify(log));
+  }catch(e){}
+}
 /* THIS MATCH'S BALLS, side by side. Everything the report says is counted
    here and nothing is inferred anywhere else, so a claim on the screen can
    always be traced to rows in the log. */
@@ -11530,10 +11773,16 @@ function h2ReportLines(s, them){
 function outcomesTSV(){
   let log = [];
   try{ log = JSON.parse(localStorage.getItem(LOG_KEY) || "[]"); }catch(e){}
-  return "time\tmatch\tmode\tmc\ttier\tqi\tkind\tok\tside\tslot\tman\tspot\tleague\tvline\tshape\n" +
-    log.map(r => [new Date(r.t).toISOString(), r.mid || "", r.mode, r.mc ? 1 : 0, r.tier, r.qi,
+  /* TIER AND QI ARE EMPTY ON A DUEL, not the word "undefined". Every row used
+     to have a question behind it so the blank case never came up; the corner
+     duel files an outcome with no question at all, and a column reading
+     "undefined" in a spreadsheet is worse than a column reading nothing. */
+  return "time\tmatch\tmode\tmc\ttier\tqi\tkind\tok\tside\tslot\tman\tspot\tleague\tvline\tshape\tshot\tdive\n" +
+    log.map(r => [new Date(r.t).toISOString(), r.mid || "", r.mode, r.mc ? 1 : 0,
+      r.tier || "", r.qi == null ? "" : r.qi,
       r.kind, r.ok ? 1 : 0, r.w == null ? "" : r.w, r.i == null ? "" : r.i,
-      r.who || "", r.pos || "", r.lg || "", r.line || "", r.form || ""].join("\t")).join("\n");
+      r.who || "", r.pos || "", r.lg || "", r.line || "", r.form || "",
+      r.shot || "", r.dive || ""].join("\t")).join("\n");
 }
 /* THE WHOLE LOG AS A FILE, because there is no server and there is not going
    to be one: this is how the data gets to a laptop, where several phones'
@@ -11574,7 +11823,7 @@ function h2Judge(ok){
   /* ONLY ON A PASS. A change is a break in play and a shot is not one, so a
      man who has just struck it at goal takes what he gets. H.shooting covers
      the shot, the penalty and the shootout kick alike. */
-  if(!ok && !H.subQ && !H.shooting && h2CanSub(H.who, H.at)) return h2SubOffer("q");
+  if(!ok && !H.subQ && !H.shooting && h2CanSub(H.who, H.at)) return h2SubOffer();
   H.subQ = false;
   h2Settle(ok);
 }
@@ -11667,30 +11916,120 @@ function h2Settle(ok){
   h2Next();
 }
 
-/* ---------- the shot ---------- */
+/* ---------- the shot, and the duel at the end of it ---------- */
+/* Every route in: the shot from open play, the penalty, the shootout kick.
+   Nothing is drawn, because nothing is asked. S.tier and S.qi are deliberately
+   left holding the STRIKER's question all the way through the duel, which is
+   what makes it impossible for anything downstream to file a keeper's answer
+   against a question the keeper was never shown. */
 function h2ToSave(){
   const H = h2();
-  /* A penalty is meant to go in, so the keeper is asked something unfair. An
-     outfield man in goal is asked something unfair for the opposite reason:
-     he is not a keeper and it should show. */
-  let tier = H.so ? H2_SO_KEEPER : H.pen ? H2_PEN_KEEPER : h2NoGk(h2Other()) ? H2_SAVE_NOGK : H2_SAVE;
-  /* A REAL KEEPER SAVES BETTER, but not from the spot: a penalty is meant to
-     go in and a shootout is its own game, so the trait is worth nothing in
-     either. It buys him the shots from open play, which is where a keeper
-     earns his money anyway. */
-  if(!H.so && !H.pen && h2Has(0, h2Other(), "keeper")) tier = h2Cheaper(tier, 1);
-  if(!h2Draw(tier, 0, h2Other())) h2Draw(S.tier, 0, h2Other());   // his keeper, and his keeper's career
-  S.timeUp = false; S.phase = "h_save";
+  H.shot = null; H.dive = null; H.graze = false;
+  S.timeUp = false; S.phase = "h_aim";
   render();
 }
-function h2SaveReveal(){ stopTimer(); S.phase = "h_sjudge"; render(); }
-function h2SaveTimeUp(){ if(S.phase === "h_save"){ if(h2IsMC()) h2().pick = null; h2SaveReveal(); } }
+/* HOW MANY CORNERS THE MAN IN GOAL MAY GO TO. One, unless he is a keeper, and
+   then two, and not from the spot: a penalty is meant to go in and a shootout
+   is its own game, so the trait is worth nothing in either, exactly as it was
+   worth nothing in either when it was buying him a cheaper question.
 
-/* the same door as h2Judge: a beaten keeper can be pulled for a fresh save */
+   AND NOT ONCE HE HAS BEEN SENT OFF. h2Has reads the trait off whoever holds
+   the slot, and a red card does not empty the slot, so without h2NoGk here the
+   centre-half standing in goal spends the trait of the man he replaced: two
+   corners AND the half-hold, which is 25 per cent, which is an ordinary fit
+   keeper. The side that has just lost its keeper would be no worse off than
+   the side that has not. */
+const h2Keeps = () => (!h2().so && !h2().pen && !h2NoGk(h2Other()) && h2Has(0, h2Other(), "keeper")) ? 2 : 1;
+/* AND WHETHER GETTING THERE IS ENOUGH. It is, unless he is taking a penalty
+   off somebody or he is a centre-half who has had to go in goal, and then he
+   holds H2_HOLD_ODDS of the ones he reaches and the rest squirm past him. */
+function h2Holds(){
+  const H = h2();
+  if(H.so) return true;
+  if(H.pen) return false;
+  return !h2NoGk(h2Other());
+}
+/* a corner nobody in this duel has taken yet, drawn flat */
+function h2RandCorner(taken){
+  const left = H2_CORNERS.filter(c => (taken || []).indexOf(c) < 0);
+  return left[Math.floor(Math.random() * left.length)] || H2_CORNERS[0];
+}
+/* HE PUTS IT SOMEWHERE. One tap and it is struck, with no confirm bar, because
+   there is nothing to confirm: he is not pricing a ball, he is hitting one.
+   The handover is the app's own h2Hand, the same card the defender gets when
+   he has finished setting his marks, and it skips itself against a computer
+   the way it always has. */
+function h2Aim(c){
+  audio();
+  const H = h2();
+  if(S.phase !== "h_aim" || H2_CORNERS.indexOf(c) < 0) return;
+  stopTimer();
+  H.shot = c;
+  /* NOTHING TO HIDE WHEN THE COMPUTER STRUCK IT, which is the other end of the
+     rule h2Hand already keeps at its own door: it skips the card when it is
+     handing TO a computer. Handing FROM one wants the same answer. There is
+     one human in a solo match and he is the keeper, so the phone has not
+     moved, the aim screen he was just looking at never drew a picker, and a
+     card telling him to pick up the phone he is holding is a tap charged for
+     protecting a secret that was never on the screen. */
+  if(aiIsOn(H.who)){ H.hand = null; S.phase = "h_dive"; return render(); }
+  h2Hand(h2Other(), "h_dive");
+}
+/* HE RAN OUT OF TIME, so the app strikes it for him and does it at random.
+   A fixed default corner would be the one thing in here worth learning: sit on
+   the clock as the keeper, wait for the buzzer, and go and stand in it. Random
+   costs a dithering striker exactly what dithering should cost, which is the
+   chance to read the man opposite, and nothing else. */
+function h2AimTimeUp(){ if(S.phase === "h_aim") h2Aim(h2RandCorner()); }
+/* AND HE GOES. He commits on the tap that spends his last corner, so a keeper
+   with one picks in one tap and a keeper with two picks in two, and neither of
+   them ever sees a Done button. Tapping a corner he has already taken does
+   nothing rather than double-spending it. */
+function h2Dive(c){
+  const H = h2();
+  if(S.phase !== "h_dive" || H2_CORNERS.indexOf(c) < 0) return;
+  audio();
+  const now = (H.dive || []).slice();
+  if(now.indexOf(c) > -1) return;
+  now.push(c);
+  H.dive = now;
+  if(now.length < h2Keeps()) return render();
+  stopTimer();
+  /* HE HAS TO BE RIGHT, AND SOMETIMES THAT IS NOT ENOUGH. The graze is kept on
+     the state rather than worked out again at the reveal, because it is a
+     dice roll: asking twice would let the screen and the scoreline disagree. */
+  const met = now.indexOf(H.shot) > -1;
+  H.graze = met && !h2Holds() && Math.random() >= H2_HOLD_ODDS;
+  h2SaveJudge(met && !H.graze);
+}
+/* the same rule as the aim: the corners he never got round to picking are
+   picked flat, so running the clock down changes nothing about the odds */
+function h2DiveTimeUp(){
+  let guard = 0;
+  while(S.phase === "h_dive" && guard++ < H2_CORNERS.length) h2Dive(h2RandCorner(h2().dive));
+}
+/* THE DOOR OUT OF THE DUEL, and it is the same door it always was, so
+   everything downstream is untouched: the clock, the strike, the goal scene,
+   the restart. */
 function h2SaveJudge(saved){
   const H = h2();
   stopTimer();
-  logOutcome("save", saved, h2LogWho(h2Other(), 0));
+  /* NO QUESTION WAS ASKED, SO NONE IS FILED. This used to be a logOutcome
+     against S.tier and S.qi, which fed the calibration bank in _tools/retier.js
+     and re-tiered real questions out of it. S.tier at this moment is the
+     STRIKER's question, still sitting there from h2Judge, so leaving the call
+     alone would have filed every keeper's guess as evidence about a question
+     somebody else had already answered. The row still goes in the log, because
+     the match report counts saves off it and because the corners are the only
+     record of how the new rule actually plays, but it carries no tier, no
+     index and no question key, which is exactly what retier.js drops on the
+     floor before it counts anything. */
+  logDuel(saved);
+  /* THE CLOCK STILL TICKS. Five minutes is a passage of play rather than
+     literally a question, and a shot plus a save has cost ten minutes since
+     the mode was written. Stopping it here would quietly make every match
+     longer by however many shots are in it, which is a rebalance nobody asked
+     for riding on the back of one that was. */
   h2Clock();
   /* AND NEVER IN GOAL. This used to offer the beaten keeper's side its bench
      so a fresh keeper could re-take the save, which is a man running on while
@@ -11792,14 +12131,16 @@ function h2SubInit(H){
   if(!H.subbed) H.subbed = [{}, {}];
   if(!H.benchUsed) H.benchUsed = [[], []];
 }
-/* The offer. kind says which door it came through: "q" is the man on the
-   ball (a pass, a shot, a penalty), "save" is the keeper who has just been
-   beaten. slot is the man who would come off. */
-function h2SubOffer(kind){
+/* The offer, and there is one door into it: the man on the ball who has just
+   missed a pass. It used to take a kind, because a beaten keeper was once
+   offered his bench as well, and that road was closed when the save was made
+   to stand. The parameter outlived the second caller by a good while and was
+   still steering three branches that nothing could reach, one of which set a
+   phase that does not exist any more. */
+function h2SubOffer(){
   const H = h2();
   h2SubInit(H);
-  const w = kind === "save" ? h2Other() : H.who;
-  H.sub = {kind: kind, w: w, slot: kind === "save" ? 0 : H.at};
+  H.sub = {kind: "q", w: H.who, slot: H.at};
   S.phase = "h_sub";
   render();
 }
@@ -11874,7 +12215,6 @@ function h2SubDecline(){
   /* A CHANGE HE CHANGED HIS MIND ABOUT costs nothing and settles nothing,
      because there was no miss underneath it to settle. */
   if(kind === "tactic"){ S.phase = back || "h_pick"; return render(); }
-  if(kind === "save") return h2SaveSettle(false);
   h2Settle(false);
 }
 /* Bench man bi comes on for the slot in the offer and faces one fresh
@@ -11897,7 +12237,7 @@ function h2SubOn(bi){
     if(H.subbed && H.subbed[sub.w]){ if(had === undefined) delete H.subbed[sub.w][sub.slot]; else H.subbed[sub.w][sub.slot] = had; }
     toast("No " + (t ? TIERS[t].label + " " : "") + "questions left, so the miss stands.", true);
     H.sub = null; H.subQ = false;
-    return sub.kind === "save" ? h2SaveSettle(false) : h2Settle(false);
+    return h2Settle(false);
   }
   const off = h2Who(sub.slot, sub.w);
   H.subs[sub.w] -= 1;
@@ -11906,7 +12246,7 @@ function h2SubOn(bi){
   H.sub = null; H.subQ = true; H.pick = null;
   toast(b.p.n + " on for " + off + ". Same ball, fresh question.");
   S.timeUp = false;
-  S.phase = sub.kind === "save" ? "h_save" : "h_q";
+  S.phase = "h_q";
   render();
 }
 
@@ -11987,6 +12327,7 @@ function h2SoAfter(){
   so.kicks[H.who].push(H.result === "scored" ? 1 : 0);
   so.n += 1;
   H.pen = false; H.shooting = false; S.tier = null; S.qi = null;
+  H.shot = null; H.dive = null; H.graze = false;
   if(h2SoDecided(so) != null) return h2SoEnd();
   S.phase = "h_pens";
   render();
@@ -12001,6 +12342,10 @@ function h2Next(){
   const H = h2();
   S.tier = null; S.qi = null; S.qd = null; S.qfall = null; S.qspec = null; S.timeUp = false;
   H.pen = false; H.subQ = false;
+  /* the two corners, which belong to the shot that has just been watched. The
+     reveal has been and gone by the time anything reaches here: h2AfterStrike
+     is the only road in from a strike and it draws the scene before it moves. */
+  H.shot = null; H.dive = null; H.graze = false;
   /* THE HOLD BELONGS TO WHOEVER IS ON THE BALL, so anything that moved the
      ball puts him back in the shape, and he jogs there rather than being
      teleported. One rule covering the turnover, the tackle, the foul, the free
@@ -12414,10 +12759,13 @@ function h2PitchHTML(tappable){
     });
   });
 
-  /* While a shot is being judged the ball belongs in the goal mouth, not back
-     on the boot it left. */
+  /* While a shot is being settled the ball belongs in the goal mouth, not back
+     on the boot it left. Neither half of the duel draws the pitch, so this is
+     a belt-and-braces rule rather than one you can see working, but leaving it
+     pointing at two phases that no longer exist is how a rule quietly stops
+     being true. */
   let bx = h2BX(H.at, true), by = h2BY(H.at, true);
-  if(S.phase === "h_save" || S.phase === "h_sjudge"){ bx = 50; by = H2_MOUTH; }
+  if(S.phase === "h_aim" || S.phase === "h_dive"){ bx = 50; by = H2_MOUTH; }
   /* IN A CHALLENGE THE BALL DIES ON HIS BOOT, short of the man it was played
      to. It never arrives, and that is the whole tension of the freeze: the
      question is what decides whether it ever does. */
@@ -12482,9 +12830,51 @@ function h2FigHTML(cls, kit, h, no){
   '</div>';
 }
 
-function h2GoalSceneHTML(state){
+function h2GoalSceneHTML(state, over){
   const H = h2();
   const kit = h2Kit(H.who), ink = kitInk(kit);
+  /* WHERE THE TWO OF THEM CHOSE, handed to the CSS as numbers rather than
+     worked out in a calc() chain. The keyframes used to have one hard-coded
+     destination each, which was fine when the ball always went to the same
+     top corner and the keeper always flung himself the same way. Now the shot
+     has an address, and a reveal that drew it anywhere else would be the app
+     contradicting the screen the striker tapped thirty seconds earlier.
+
+     The midpoint is computed here too. It is where the old keyframe's 55%
+     frame sat relative to its own destination, seven tenths of the way across
+     and eighty-five hundredths of the way up, which is what gives the flight
+     its rise: away fast, then holding as it shrinks.
+
+     AND NOT WHILE IT IS STILL A SECRET, which is the half of this that is not
+     decoration. The keeper's screen draws this very scene with the picker over
+     it, so writing the striker's corner into its style attribute would put the
+     answer in the markup of the one screen that exists in order not to have
+     it. "set" is every screen before the verdict: the aim, the dive, and a
+     penalty still waiting to be struck. The corners go on once, at the reveal,
+     when both men are looking at the same thing anyway.
+
+     With nothing to write, every one of these falls back to exactly the
+     numbers the keyframes used to carry, so a shootout put over the bar and
+     the still scene under a question draw what they always drew. */
+  const told = state !== "set";
+  const at = (told && H2_CORNER_AT[H.shot]) || {x: 66, y: 31};
+  const BX = 34, BY = 78;                       // where it sits on his boot
+  /* one decimal, because a style attribute reading 38.050000000000004% is a
+     float landing in the markup and it is in the markup of every render */
+  const pc = (a, b, f) => Math.round((a + (b - a) * f) * 10) / 10;
+  const mx = pc(BX, at.x, .7), my = pc(BY, at.y, .85);
+  /* stopped short of the line, then off the gloves and away to the other side */
+  const sx = pc(BX, at.x, .84), sy = pc(BY, at.y, .84);
+  const bx = at.x > 50 ? 20 : 80;
+  /* THE ONE HE IS SEEN GOING TO. A keeper with the trait picked two, and only
+     one of them can be drawn: the one that met the ball if either did, and
+     otherwise the first he committed to. */
+  const dive = told ? (H.dive || []) : [];
+  const went = dive.indexOf(H.shot) > -1 ? H.shot : (dive[0] || null);
+  const k = H2_DIVE_AT[went] || {x: -4, y: 2, r: 46};
+  const aim = ';--gx:' + at.x + '%;--gy:' + at.y + '%;--gmx:' + mx + '%;--gmy:' + my + '%' +
+              ';--gsx:' + sx + '%;--gsy:' + sy + '%;--gbx:' + bx + '%;--gby:64%' +
+              ';--kdx:' + k.x + '%;--kdy:' + k.y + '%;--kdr:' + k.r + 'deg';
   const gkKit = h2Kit(h2Other());
   const striker = h2Who(H.at, H.who), keeper = h2Who(0, h2Other());
   /* Fixed positions, not random: a crowd that reshuffles itself on every
@@ -12494,7 +12884,7 @@ function h2GoalSceneHTML(state){
   const flashes = FLASHES.map((f, i) =>
     '<i style="left:' + f[0] + '%;top:' + f[1] + '%;animation-delay:' + (i * 137 % 900) + 'ms"></i>').join("");
 
-  return '<div class="g3 ' + state + '">' +
+  return '<div class="g3 ' + state + '" style="' + aim.slice(1) + '">' +
     '<div class="g3-sky"></div>' +
     '<div class="g3-stand"></div>' +
     '<div class="g3-flash">' + flashes + '</div>' +
@@ -12517,7 +12907,42 @@ function h2GoalSceneHTML(state){
     '<div class="g3-ball"><img class="b" src="assets/ball.png" alt=""></div>' +
     '<div class="g3-striker">' + h2FigHTML("str", kit, 168, h2No(H.at, H.who)) +
       '<span class="g3-name">' + esc(striker) + '</span></div>' +
+    (over || "") +
     '<div class="g3-cry">' + (state === "scored" ? "GOAL" : state === "saved" ? "SAVED" : state === "missed" ? "OVER" : "") + '</div>' +
+  '</div>';
+}
+/* THE MOUTH, DIVIDED IN FOUR, and it is the goal itself rather than four
+   buttons under a picture of one: the overlay is pinned to the same four
+   percentages the frame is drawn from, so tapping top left is tapping the
+   inside of the top left of that goal. Both men get this markup, both men get
+   these words, and neither screen can be told apart from the other at a
+   glance, which is the point: the keeper is choosing a place in the striker's
+   goal, not a mirror image of his own.
+
+   go is the function name the tap calls, so the same component serves the aim
+   and the dive. on is the corners already spent, which is only ever the first
+   of a keeper's two. */
+function h2CornersHTML(go, on){
+  const got = on || [];
+  return '<div class="h2gm" role="group" aria-label="The four corners">' +
+    H2_CORNERS.map(c =>
+      '<button class="h2gmc ' + c + (got.indexOf(c) > -1 ? ' on' : '') + '"' +
+        ' aria-pressed="' + (got.indexOf(c) > -1 ? 'true' : 'false') + '"' +
+        ' onclick="' + go + '(\'' + c + '\')">' +
+        '<span>' + H2_CORNER_SAYS[c] + '</span></button>').join("") +
+  '</div>';
+}
+/* WHAT THE TWO OF THEM DID, read together off one screen once it is over. It
+   is the only moment either man learns what the other chose, so it says both
+   out loud rather than leaving them to infer it off an animation. */
+function h2DuelHTML(){
+  const H = h2();
+  if(!H.shot) return "";
+  const went = (H.dive || []).map(c => H2_CORNER_SAYS[c]).join(" and ");
+  return '<div class="h2duel">' +
+    '<p><b>' + esc(S.players[H.who].name) + '</b> hit it ' + H2_CORNER_SAYS[H.shot] + '.</p>' +
+    '<p><b>' + esc(S.players[h2Other()].name) + '</b> went ' + (went || "nowhere") + '.</p>' +
+    (H.graze ? '<p class="h2grz">He got a hand to it. It went in anyway.</p>' : "") +
   '</div>';
 }
 
@@ -12581,8 +13006,10 @@ function h2ActorOf(ph){
     /* the private half-minute belongs to the man who is NOT on the ball */
     case "h_mark":   return h2Other();
     case "h_pick": case "h_q": case "h_judge": return H.who;
+    /* the aim belongs to the man who struck it, like the question before it */
+    case "h_aim":    return H.who;
     /* the keeper and the man coming in for it are the same side: the other one */
-    case "h_save": case "h_sjudge": case "h_tackle": case "h_tjudge": return h2Other();
+    case "h_dive": case "h_tackle": case "h_tjudge": return h2Other();
     case "h_sub":    return H.sub ? H.sub.w : H.who;
     /* the next taker, not H.who, which is still the man who took the last one */
     case "h_pens":   return H.so ? h2SoNext(H.so) : H.who;
@@ -12625,12 +13052,17 @@ function h2TurnLine(ph){
     case "h_mark":   return out(A + " " + h2AiSets());
     /* HE HAS TO READ IT TOO, which is the whole reason the question screen
        holds for a beat before he answers instead of flashing past. */
-    case "h_q": case "h_save": case "h_tackle": return out(A + " is reading it...");
+    case "h_q": case "h_tackle": return out(A + " is reading it...");
+    /* THE DUEL HAS NOTHING TO READ, so neither line says he is reading. One
+       man is choosing where to hit it and the other is choosing where to go,
+       and they are the only two decisions in the mode taken blind. */
+    case "h_aim":  return out(A + " is picking his spot...");
+    case "h_dive": return out(A + " is setting himself...");
     /* AND HERE HE HAS ANSWERED IT. In Pick One the option he took is already
        sitting on H.pick by the time this screen is drawn, so the line is the
        answer itself and the card underneath stamps the verdict on it. Spoken,
        there is nothing said yet and he is still thinking about it. */
-    case "h_judge": case "h_sjudge": case "h_tjudge": {
+    case "h_judge": case "h_tjudge": {
       const Q = q();
       return out((h2IsMC() && Q && Q.o && H.pick != null)
         ? A + " says: " + Q.o[H.pick] + "."
@@ -13303,13 +13735,12 @@ function h2Render(st){
     const bench = h2Bench(sub.w);
     const off = h2Who(sub.slot, sub.w);
     const left = h2SubsLeft(sub.w);
-    const isSave = sub.kind === "save";
     st.innerHTML =
-      h2ScoreHTML() + (isSave ? h2GoalSceneHTML("set") : h2PitchHTML(false)) +
+      h2ScoreHTML() + h2PitchHTML(false) +
       '<div class="h2big">' + esc(owner.name) + ', a change?</div>' + h2TurnHTML() +
-      '<div class="h2hintline" style="margin-top:0">' + esc(off) + (isSave ? ' is beaten.' : ' got it wrong.') +
+      '<div class="h2hintline" style="margin-top:0">' + esc(off) + ' got it wrong.' +
         ' Bring a man on and he faces a fresh ' + (t ? t.label : "") + ' question for the same ' +
-        (isSave ? 'shot' : H.pen ? 'penalty' : H.shooting ? 'shot' : 'ball') + '. ' +
+        (H.pen ? 'penalty' : H.shooting ? 'shot' : 'ball') + '. ' +
         left + (left === 1 ? ' change' : ' changes') + ' left, and ' + esc(off) + ' is gone for good.</div>' +
       '<div class="h2bench">' + bench.map(b =>
         '<button class="h2markbtn" onclick="h2SubOn(' + b.i + ')">' +
@@ -13317,7 +13748,7 @@ function h2Render(st){
           '<span class="h2mnm">' + esc(b.p.n) + '</span>' +
           '<span class="h2mps">' + esc(b.p.pos || "") + '</span>' +
         '</button>').join("") + '</div>' +
-      '<button class="bigbtn ghost" onclick="h2SubDecline()">' + (isSave ? "No. It is in." : "No. He has lost it.") + '</button>' +
+      '<button class="bigbtn ghost" onclick="h2SubDecline()">No. He has lost it.</button>' +
       foot;
     return;
   }
@@ -13360,8 +13791,8 @@ function h2Render(st){
           (so.n >= H2_SO_KICKS * 2 ? 'Sudden death. ' : '') + esc(next.name) + ' next.') + '</div>' +
       '<div class="h2so">' + row(0) + row(1) + '</div>' +
       '<button class="bigbtn" onclick="h2SoKick()">' + esc(next.name) + ' steps up</button>' +
-      '<div class="h2hintline">' + TIERS[H2_SO_TAKER].label + ' to score it, ' + TIERS[H2_SO_KEEPER].label +
-        ' to keep it out. ' + H2_SO_KICKS + ' each, then sudden death.</div>' +
+      '<div class="h2hintline">' + TIERS[H2_SO_TAKER].label + ' to strike it, then a corner each. ' +
+        H2_SO_KICKS + ' each, then sudden death.</div>' +
       foot;
     return;
   }
@@ -13539,7 +13970,7 @@ function h2Render(st){
 
   if(S.phase === "h_strike"){
     st.innerHTML =
-      h2ScoreHTML() + h2GoalSceneHTML(H.result) +
+      h2ScoreHTML() + h2GoalSceneHTML(H.result) + h2DuelHTML() +
       '<button class="bigbtn ghost" style="margin-top:10px" onclick="h2AfterStrike()">Get on with it</button>' +
       foot;
     return;
@@ -13588,31 +14019,39 @@ function h2Render(st){
     return;
   }
 
-  if(S.phase === "h_save" || S.phase === "h_sjudge"){
-    const shown = S.phase === "h_sjudge";
+  /* ---------- he has struck it, and now he has to put it somewhere ---------- */
+  if(S.phase === "h_aim"){
+    const ai = aiIsOn(H.who);
     st.innerHTML =
-      h2ScoreHTML() + h2GoalSceneHTML("set") + h2TurnHTML() +
+      h2ScoreHTML() + h2GoalSceneHTML("set", ai ? "" : h2CornersHTML("h2Aim", [])) + h2TurnHTML() +
       '<div class="h2big">' + esc(me.name) + ' shoots!</div>' +
-      '<div class="qcard' + h2Qin() + '" style="--dc:' + t.color + '">' +
-        '<div class="kick">THE SAVE · ' + esc(them.name) + ' in goal · ' + t.label + h2League() + '</div>' +
-        '<div class="qtext">' + esc(q().q) + '</div>' +
-        (shown && !h2IsMC() ? '<div class="atext"><span class="lbl">Answer</span>' + esc(q().a) + '</div>' : "") +
-        (h2IsMC() ? h2McOptionsHTML(shown) : "") +
-      '</div>' +
-      (h2IsMC()
-        ? (shown
-            ? '<button class="bigbtn" onclick="h2McPlayOn()">' +
-                (H.pick === q().k ? "He gets a hand to it" : "See it in") + '</button>'
-            : '<div class="h2hintline">' + esc(them.name) + ' has one tap to keep it out.</div>')
-        : shown
-        ? '<div class="row2">' +
-            '<button class="bigbtn ok" onclick="h2SaveJudge(true)">Saved it</button>' +
-            '<button class="bigbtn bad" onclick="h2SaveJudge(false)">It is in</button>' +
-          '</div>'
-        : '<button class="bigbtn" onclick="h2SaveReveal()">Reveal the answer</button>' +
-          '<div class="h2hintline">' + esc(them.name) + ' has one question to keep it out.</div>') +
+      '<div class="h2hintline" style="margin-top:0">' + (ai
+        ? esc(me.name) + ' is picking his corner. He does not get to see yours either.'
+        : 'Put it in a corner. ' + esc(them.name) + ' never sees which.') + '</div>' +
       foot;
-    if(!shown && S.timed) startTimer(15, h2SaveTimeUp, clockKey());
+    if(S.timed) startTimer(15, h2AimTimeUp, clockKey());
+    return;
+  }
+  /* ---------- and the other man has to guess where ----------
+     THE BALL IS ALREADY GONE by the time this screen is drawn, which is why
+     there is nothing on it about the strike: he is not judging a shot, he is
+     choosing a place to be. The one line he gets that the striker does not is
+     whose left is whose, because that is the only thing about this diagram
+     that is not obvious from looking at it. */
+  if(S.phase === "h_dive"){
+    const ai = aiIsOn(h2Other());
+    const n = h2Keeps(), got = H.dive || [];
+    st.innerHTML =
+      h2ScoreHTML() + h2GoalSceneHTML("set", ai ? "" : h2CornersHTML("h2Dive", got)) + h2TurnHTML() +
+      '<div class="h2big">' + esc(them.name) + ' in goal</div>' +
+      '<div class="h2hintline" style="margin-top:0">' + (ai
+        ? esc(them.name) + ' is choosing his corner.'
+        : 'Left is his left. ' + (n > 1
+            ? (got.length ? 'One corner left.' : 'You are a keeper, so you get two of them.')
+            : 'Pick the one you think he has hit.') +
+          (h2Holds() ? '' : ' Get there and you still have to hold it.')) + '</div>' +
+      foot;
+    if(S.timed) startTimer(15, h2DiveTimeUp, clockKey());
     return;
   }
 
@@ -16036,6 +16475,30 @@ function resumeGame(){
     if(H.markedAgainst === undefined) H.markedAgainst = null;
     if(H.relief === undefined) H.relief = false;
     if(H.caught === undefined) H.caught = null;
+    /* A MATCH PARKED ON THE OLD KEEPER'S QUESTION. Those two phases have no
+       screen behind them now, so a resume would have dropped through every
+       branch to the "Carry on" fallback and quietly eaten a shot that was in
+       the air. The ball is still going in, so it comes back on the aim and the
+       two of them play the duel out. */
+    if(H.shot === undefined){ H.shot = null; H.dive = null; H.graze = false; }
+    if(S.phase === "h_save" || S.phase === "h_sjudge"){
+      H.shot = null; H.dive = null; H.graze = false;
+      S.phase = "h_aim";
+    }
+    /* AND PARKED MID-DUEL-HANDOVER, which is the likeliest place in the whole
+       mode to be parked, because it is the one screen that exists while the
+       phone is physically crossing the table. The generic h_hand rule below
+       reads every handover as the tackle one: in a classic match it drops to
+       h_pick and eats the ball that was in the air, and with tackles on it
+       rewrites next to "h_mark" and puts the keeper on a marking screen for a
+       possession that is already over. Caught here, before that runs, and sent
+       back to the aim for the same reason the old parked save is: the corner
+       was in one man's head and the phone has been shut since. */
+    if(S.phase === "h_hand" && (H.shot || (H.hand && H.hand.next === "h_dive"))){
+      H.shot = null; H.dive = null; H.graze = false;
+      H.hand = null;
+      S.phase = "h_aim";
+    }
     /* A save from when one man was marked before every pass. His mark carries
        over as the first of the new two, and markedAgainst has to be stamped
        with whoever is on the ball: leaving it null makes h2Next read the

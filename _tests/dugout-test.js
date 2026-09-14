@@ -133,10 +133,22 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   run(app, "h2TackleOn = false;");
 
   start("manager", "Italy", "Netherlands");
-  run(app, `S.h2h.who=0; S.h2h.at=${ST}; S.phase="h_pick"; render(); h2Shoot(); h2Reveal(); h2Judge(true);`);
+  run(app, `S.h2h.who=0; S.h2h.at=${ST}; S.phase="h_pick"; render(); h2Shoot();`);
   await tick(150);
-  check("the save comes from the keeper's career, and he is one of THEIRS",
-    (lg(GK, 1) || []).includes(qd()) || qd() === null, qd() + " / theirs GK: " + JSON.stringify(lg(GK, 1)));
+  check("the shot itself comes from the striker's own career",
+    (lg(ST, 0) || []).includes(qd()) || qd() === null, qd() + " / his ST: " + JSON.stringify(lg(ST, 0)));
+  const shotDeck = qd();
+  run(app, "h2Reveal(); h2Judge(true);");
+  await tick(150);
+  /* AND THE SAVE AFTER IT COMES FROM NOWHERE, which is the one thing The
+     Dugout loses to the corner duel and is worth saying out loud rather than
+     letting a check quietly stop meaning anything. The keeper used to be asked
+     something out of his own career, which was the mode at its best: Buffon
+     being asked about Serie A to keep a shot out. There is no question in a
+     corner duel, so there is no deck for it to come out of, and the striker's
+     is left loaded underneath it untouched. */
+  check("and the save after it draws nothing, because there is nothing to draw",
+    ev(app, "S.phase") === "h_aim" && qd() === shotDeck, ev(app, "S.phase") + " / " + qd());
 
   console.log("\n--- the indexes never cross decks ---");
   start("manager", "Italy", "Netherlands");

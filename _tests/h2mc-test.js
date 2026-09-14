@@ -139,12 +139,17 @@ const GK = 0, LCB = 1, SIX = 5, EIGHT = 6, TEN = 7, ST = 9;
   check("four ways to hit it", opts() === 4, opts());
   run(app, `h2McPick(${right()})`); await tick(160);
   run(app, "h2McPlayOn()"); await tick(220);
-  check("a clean strike brings the keeper out", phase() === "h_save", phase());
-  check("who gets four of his own", opts() === 4, opts());
-  const sk = right();
-  run(app, `h2McPick(${(sk + 1) % 4})`); await tick(160);
-  run(app, "h2McPlayOn()"); await tick(240);
-  check("a keeper who taps the wrong one is beaten", phase() === "h_strike", phase());
+  check("a clean strike sends him to a corner", phase() === "h_aim", phase());
+  check("and the corners are not a question", !stage(app).includes("h2opt"), "options on the aim");
+  check("four of them, on the goal", (stage(app).match(/class="h2gmc /g) || []).length === 4,
+    (stage(app).match(/class="h2gmc /g) || []).length);
+  run(app, "h2Aim('tl')"); await tick(160);
+  run(app, "h2HandGo()"); await tick(160);
+  check("the keeper gets four corners, not four answers",
+    (stage(app).match(/class="h2gmc /g) || []).length === 4 && !stage(app).includes("h2opt"),
+    stage(app).includes("h2opt") ? "options" : (stage(app).match(/class="h2gmc /g) || []).length);
+  run(app, "h2Dive('br')"); await tick(240);
+  check("a keeper who goes to the wrong one is beaten", phase() === "h_strike", phase());
   check("and it is watched before it counts",
     ev(app, "S.h2h.result") === "scored" && ev(app, "S.players[0].score") === 0,
     ev(app, "S.h2h.result") + "/" + ev(app, "S.players[0].score"));
@@ -156,8 +161,9 @@ const GK = 0, LCB = 1, SIX = 5, EIGHT = 6, TEN = 7, ST = 9;
   run(app, "h2Shoot()"); await tick(170);
   run(app, `h2McPick(${right()})`); await tick(160);
   run(app, "h2McPlayOn()"); await tick(220);
-  run(app, `h2McPick(${right()})`); await tick(160);
-  run(app, "h2McPlayOn()"); await tick(240);
+  run(app, "h2Aim('br')"); await tick(160);
+  run(app, "h2HandGo()"); await tick(160);
+  run(app, "h2Dive('br')"); await tick(240);
   check("saved", ev(app, "S.h2h.result") === "saved", ev(app, "S.h2h.result"));
   run(app, "h2AfterStrike()"); await tick(260);
   check("and the keeper has it on his line", who() === 1 && pos() === GK, who() + "/" + pos());

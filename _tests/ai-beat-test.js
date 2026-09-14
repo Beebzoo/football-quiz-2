@@ -182,8 +182,11 @@ const check = (n, c, x) => {
     ["marking two of them", onThePitch("manager", 0) + 'S.h2h.markedAgainst = 1; S.phase = "h_mark"; render();'],
     ["reading his question", onThePitch("pitch", 1) + 'S.phase = "h_q"; render();'],
     ["answering it", onThePitch("pitch", 1) + 'S.phase = "h_judge"; render();'],
-    ["the save", onThePitch("pitch", 0) + 'S.phase = "h_save"; render();'],
-    ["judging the save", onThePitch("pitch", 0) + 'S.phase = "h_sjudge"; render();'],
+    /* THE DUEL IS TWO DECISIONS ON TWO SIDES. Picking a corner is his while he
+       is on the ball, and going to one is his while the other man is, so the
+       two cases are set up from opposite ends of the same pitch. */
+    ["picking his corner", onThePitch("pitch", 1) + 'S.phase = "h_aim"; render();'],
+    ["going to one", onThePitch("pitch", 0) + 'S.phase = "h_dive"; render();'],
     ["the tackle", onThePitch("pitch", 0) + 'S.phase = "h_tackle"; render();'],
     ["judging the tackle", onThePitch("pitch", 0) + 'S.phase = "h_tjudge"; render();'],
     ["the bench", onThePitch("pitch", 1) + 'S.h2h.sub = {kind:"q", w:1, slot:0}; S.phase = "h_sub"; render();'],

@@ -97,7 +97,12 @@ function fakeClock(ctx){
 const HUMAN = {
   h_teams: 9000, h_squad: 14000, h_shape: 6000, h_traits: 9000, h_toss: 3000,
   h_hand: 2000, h_mark: 11000, h_pick: 9000,
-  h_q: 12000, h_judge: 4000, h_save: 12000, h_sjudge: 4000,
+  /* THE DUEL IS THE QUICKEST PAIR OF SCREENS IN THE MODE, because neither of
+     them has anything on it to work out. Five seconds to put it somewhere, six
+     for the keeper because a man guessing dithers and a man answering does
+     not. Between them they replace a twelve second question and its judge, and
+     they add an h_hand to every shot, which is the phone crossing the table. */
+  h_q: 12000, h_judge: 4000, h_aim: 5000, h_dive: 6000,
   h_tackle: 12000, h_tjudge: 4000, h_sub: 8000, h_pens: 9000, h_ft: 3000,
 };
 
@@ -147,8 +152,8 @@ const HUMAN = {
     "case 'h_pick': { for(let i=0;i<11;i++) if(i !== H.at && !h2IsOff(H.who,i)){ h2Select(i); h2Play(); return; } return; }" +
     "case 'h_q': return h2Reveal();" +
     "case 'h_judge': return h2Judge(Math.random() < .5);" +
-    "case 'h_save': return h2SaveReveal();" +
-    "case 'h_sjudge': return h2SaveJudge(Math.random() < .5);" +
+    "case 'h_aim': return h2Aim(H2_CORNERS[Math.floor(Math.random() * 4)]);" +
+    "case 'h_dive': return h2Dive(H2_CORNERS[Math.floor(Math.random() * 4)]);" +
     "case 'h_tackle': return h2TackleReveal();" +
     "case 'h_tjudge': return h2TackleJudge(Math.random() < .5);" +
     "case 'h_sub': return h2SubDecline();" +
@@ -176,7 +181,8 @@ const HUMAN = {
         case "h_hand":   return true;
         case "h_mark":   return H.who === 1;
         case "h_pick": case "h_q": case "h_judge": return H.who === 0;
-        case "h_save": case "h_sjudge": case "h_tackle": case "h_tjudge": return H.who === 1;
+        case "h_aim":    return H.who === 0;
+        case "h_dive": case "h_tackle": case "h_tjudge": return H.who === 1;
         case "h_sub":    return !!H.sub && H.sub.w === 0;
         case "h_ft":     return true;
         case "h_pens":   return H.so ? (H.so.first + H.so.n) % 2 === 0 : H.who === 0;

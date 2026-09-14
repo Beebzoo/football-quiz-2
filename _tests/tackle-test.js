@@ -186,8 +186,8 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   check("the attacker is shooting", H("shooting") === true, H("shooting"));
   check("and it is priced to go in", tier() === ev(app, "H2_PEN_TAKER"), tier());
   run(app, "h2Reveal(); h2Judge(true);"); await tick(200);
-  check("put away, the keeper gets one to stop it", phase() === "h_save", phase());
-  check("and his is the unfair one", tier() === ev(app, "H2_PEN_KEEPER"), tier());
+  check("put away, and the pair of them pick corners", phase() === "h_aim", phase());
+  check("and a penalty keeper does not get to hold it", ev(app, "h2Holds()") === false, ev(app, "h2Holds()"));
 
   /* ---------------------------------------------------------------- */
   console.log("\n--- a second yellow on the same man is a red ---");
@@ -229,11 +229,14 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
            `S.h2h.marks = []; S.h2h.markedAgainst = 0; S.phase = "h_pick"; render(); ` +
            `h2Shoot(); h2Reveal(); h2Judge(true);`);
   await tick(200);
-  check("the save is asked at the outfielder's tier", tier() === ev(app, "H2_SAVE_NOGK"), tier());
-  /* and when the outfielder makes the save, the restart cannot go to the
-     keeper, because there is no keeper: both restarts used to write H.at = 0
-     unconditionally and put the ball on a man who is not drawn */
-  run(app, "h2SaveReveal(); h2SaveJudge(true);"); await tick(2100);   // h2AfterStrike fires at 1.9s
+  check("an outfield man in goal does not get to hold it either",
+    phase() === "h_aim" && ev(app, "h2Holds()") === false, phase() + "/" + ev(app, "h2Holds()"));
+  /* and when the outfielder DOES keep hold of one, the restart cannot go to
+     the keeper, because there is no keeper: both restarts used to write
+     H.at = 0 unconditionally and put the ball on a man who is not drawn. The
+     duel's own coin is not what is under test here, so the outcome is given
+     through the same door it always settles through. */
+  run(app, "h2Aim('tl'); h2HandGo(); h2SaveJudge(true);"); await tick(2100);   // h2AfterStrike fires at 1.9s
   check("a save with the keeper off restarts on a man who is actually on the pitch",
     ev(app, "S.h2h.who") === 1 && ev(app, `S.h2h.at !== ${GK}`) && ev(app, "!h2IsOff(1, S.h2h.at)"),
     "who " + ev(app, "S.h2h.who") + " at " + ev(app, "S.h2h.at"));
