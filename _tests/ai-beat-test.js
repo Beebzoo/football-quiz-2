@@ -82,10 +82,20 @@ const check = (n, c, x) => {
   band("an Easy answer", "answer", "easy", 600, 1200);
   band("a Hard answer", "answer", "hard", 1050, 2350);
   band("a BALL answer", "answer", "ball", 1500, 3500);
-  const right = draws("answer", "hard"), wrong = draws("answer", "hard", true);
+  /* TWO THOUSAND, NOT A HUNDRED, AND THE REAL MULTIPLIER RATHER THAN "LONGER".
+     beat() multiplies a wrong answer by exactly 1.25. Sampling a hundred draws
+     from a band 1300 wide and asking whether the means are 1.15 apart puts the
+     test 2.7 standard deviations from failing, which is once in roughly two
+     hundred and fifty runs, and a suite that goes red that often teaches you to
+     run it again rather than to read it. At two thousand draws both bounds are
+     eleven deviations out, and naming the multiplier means the check notices if
+     somebody quietly makes it 1.4. */
+  const right = draws("answer", "hard", false, 2000), wrong = draws("answer", "hard", true, 2000);
   const mean = a => a.reduce((s, v) => s + v, 0) / a.length;
-  check("a wrong one is a shade longer than a right one", mean(wrong) > mean(right) * 1.15,
-    Math.round(mean(right)) + " right, " + Math.round(mean(wrong)) + " wrong");
+  const ratio = mean(wrong) / mean(right);
+  check("a wrong one takes the quarter longer beat() says it does",
+    ratio > 1.15 && ratio < 1.35,
+    Math.round(mean(right)) + " right, " + Math.round(mean(wrong)) + " wrong, ratio " + ratio.toFixed(3));
   check("and never past the band and a quarter", Math.max(...wrong) <= 2350 * 1.25, Math.max(...wrong));
 
   console.log("\n--- reading is the length of the thing he is reading ---");
