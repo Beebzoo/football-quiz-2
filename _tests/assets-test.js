@@ -108,6 +108,22 @@ console.log("\n--- the squad pools ---");
     .map(m => ({id: m[1], file: m[2], flags: m[3] === "null" ? null : m[3].slice(1, -1), ext: m[4]}));
   check("the pool registry parses", rows.length >= 3, rows.length + " pools found");
 
+  /* MEASURED, NOT CHOSEN. Every one of these is what the pool actually carries
+     today, less about eight points of tolerance. The spread is real: sixteen
+     European squads in 2000 were almost all inside the five leagues this repo
+     has data for, and forty-eight squads in 2026 reach a long way past them.
+
+     finals is zero deliberately, stated in _tools/build-finals-pool.js:26, and
+     it is checked for EQUALITY below rather than as a floor, because a floor of
+     zero is satisfied by every number there is and would have guarded nothing.
+     A gap nothing guards reads the same as a gap nobody noticed. */
+  const LG_FLOOR = {
+    euro2000: 80, euro2004: 70, euro2008: 70, euro2012: 75,
+    euro2016: 70, euro2020: 65, euro2024: 55,
+    wc1998: 60, wc2002: 60, wc2006: 60, wc2010: 65,
+    wc2014: 65, wc2018: 60, wc2022: 60, wc2026: 45,
+    finals: 0,
+  };
   for(const row of rows){
     const p = path.join(REPO, row.file);
     if(!fs.existsSync(p)){ check(row.id + ": the file is on disk", false, row.file); continue; }
@@ -143,9 +159,29 @@ console.log("\n--- the squad pools ---");
       const k = String(t.kit || "").toUpperCase();
       if(k) kits[k] = (kits[k] || 0) + 1;
     }
+    const lgPc = Math.round(withLg / Math.max(1, men) * 100);
     console.log("      " + row.id + ": " + sides.length + " sides, " + men + " men, " +
-      Math.round(withLg / Math.max(1, men) * 100) + "% with a career" +
+      lgPc + "% with a career" +
       (plain.length ? ", " + plain.length + " with no badge" : ""));
+    /* AND NOW IT IS ASSERTED, not only printed. lg is what routes a ball in The
+       Dugout to a league deck, so a harvest that collapsed on one pool would
+       not fail anything: the mode would go on working and quietly become the
+       classic bank with extra steps. Floors are today's measured numbers less
+       about eight points, so a re-harvest that moves a few men is fine and one
+       that broke is not. They only ever move downward, because finding more
+       careers never trips a floor. */
+    /* AN EQUALITY FOR THE ONE POOL THAT IS MEANT TO HAVE NONE, and a floor for
+       the rest. A floor of zero is satisfied by every number there is, so
+       writing finals: 0 into the table and calling it a guard would have been a
+       comment describing something that was not happening. Finals carries no
+       careers on purpose, build-finals-pool.js:26 says so, and the day that
+       changes this line is the one that should say hello. */
+    if(row.id === "finals")
+      check(row.id + ": still has no careers, which is the deliberate part",
+        lgPc === 0, lgPc + "% now, so raise LG_FLOOR.finals off zero and give it a real floor");
+    else if(LG_FLOOR[row.id] !== undefined)
+      check(row.id + ": the careers harvest still covers the squad",
+        lgPc >= LG_FLOOR[row.id], lgPc + "% against a floor of " + LG_FLOOR[row.id] + "%");
     check(row.id + ": every side is eleven men and one keeper", bad.length === 0,
       bad.slice(0, 3).join("; "));
     if(row.flags) check(row.id + ": every badge it names is on disk", broken.length === 0,
