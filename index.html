@@ -2954,12 +2954,50 @@
   .alcov-k{font:400 7px/1 var(--px16);letter-spacing:.16em;text-transform:uppercase;
     color:rgba(255,255,255,.62);align-self:flex-start;margin-left:4px}
   .alcov-t{font:800 17px/1.05 var(--ui);color:#fff;text-align:center;text-wrap:balance}
-  .alcov-r{position:absolute;top:9px;right:-22px;transform:rotate(38deg);background:var(--gold-hi);
-    color:#241B08;font:400 7px/1 var(--px16);letter-spacing:.1em;text-transform:uppercase;padding:3px 22px}
+  /* DARK GROUND, GOLD LETTERS, AND NEITHER FOLLOWS THE THEME. Two of the seven
+     cover colours are golds, and this ribbon used to be painted in --gold-hi on
+     top of them, so on those two it was a shade rather than a contrast and the
+     seven pixels of type inside it could not be read at all. It stayed that way
+     because until the plate landed nobody had ever finished a book, so the one
+     marking a done cover carried was the one marking you could not see.
+
+     Fixed hexes rather than tokens because the cover under it is fixed too:
+     ALBUM_COVERS is seven literals, the same on paper as at night, so a ribbon
+     that went pale in the light theme would be solving for a ground that never
+     moves. Same argument as the yellow card being yellow in both looks. */
+  .alcov-r{position:absolute;top:9px;right:-22px;transform:rotate(38deg);background:#241B08;
+    color:#E3B453;font:400 7px/1 var(--px16);letter-spacing:.1em;text-transform:uppercase;padding:3px 22px}
   .alcov-bar{display:block;height:4px;background:var(--line-soft);border-radius:2px;overflow:hidden}
   .alcov-bar i{display:block;height:100%;background:var(--gold-hi)}
   .alcov-n{font:600 11px/1 var(--ui);color:var(--ink-dim)}
   .alcov-n b{color:var(--gold-hi);font-weight:700}
+  /* A FINISHED BOOK IS A THING YOU WON, and the Complete ribbon on its own only
+     says that the counting is over. A ribbon is a status. What a shelf wants at
+     the end of six hundred packs is an object that visibly changed, so the cover
+     plates itself: two pixels of gold all the way round with a warm bleed
+     inwards, and the little white player in the middle of it is replaced by the
+     cup. That last part is the whole idea. Every other cover on the shelf has a
+     man on it because a man is what you are still out hunting, and the one you
+     finished has the thing the hunting was for. You can tell which book it is
+     from across the room without reading a word of it.
+
+     The trophy keeps the figure's exact 46 pixels of height so that a done book
+     and an unfinished one sitting in the same row of the grid still line up.
+     Nothing about a reward should make the shelf jump. */
+  .alcov.plate .alcov-b{box-shadow:inset 0 0 0 2px var(--gold-hi),inset 0 0 26px rgba(227,180,83,.34)}
+  /* AND THE NEXT RULE IS LOAD BEARING, so nobody tidies it away. The spine on
+     the book your packs come from is a box-shadow too, and .alcov.coll .alcov-b
+     weighs exactly what .alcov.plate .alcov-b weighs, so the plate landing later
+     in the file overwrites it outright: finish the book you are collecting and
+     the gold stripe telling you where your packs come from silently vanishes,
+     with nothing anywhere failing. Naming both classes in one selector buys a
+     third class of weight and says both sentences at once, which is the normal
+     state of affairs for about ten seconds after a last page closes and is a
+     state somebody can then sit in for a season. */
+  .alcov.plate.coll .alcov-b{box-shadow:inset 0 0 0 2px var(--gold-hi),
+    inset 5px 0 0 0 var(--gold-hi),inset 0 0 26px rgba(227,180,83,.34)}
+  .alcov-c{display:flex;align-items:center;justify-content:center;height:46px;color:var(--gold-hi)}
+  .alcov-c .ic{width:38px;height:38px;margin:0;stroke-width:1.6}
 
   /* ---------------- THE BOOK, WHICH IS PAPER ----------------
      A sticker album is a paper object and that is most of why anybody wants
@@ -3003,6 +3041,53 @@
   .alsn{font-size:.64rem;font-weight:700;margin-top:3px;overflow:hidden;
         text-overflow:ellipsis;white-space:nowrap}
   .alsp{font-size:.56rem;opacity:.5;letter-spacing:.06em}
+  /* THE NEWS GOES ON THE STICKER, NOT UNDER IT. Three cards come out of a pack
+     and a line of text underneath tells you how many of them were new, which is
+     a receipt. What a person actually does is look at the three cards, so the
+     card is where the news has to be. The one you did not have goes green with a
+     tick on it, and the one that just finished somebody's page goes gold with a
+     star. Two grades rather than one, because those are two genuinely different
+     sizes of luck and a player who cannot tell them apart at a glance has been
+     told nothing.
+
+     THESE FOUR RULES SIT AT THE BOTTOM OF THE ALBUM BLOCK ON PURPOSE, and like
+     the .alcov.plate.coll rule further up they are held in place by source order
+     rather than by weight. .alsheet .alst repaints every sticker to paper and
+     carries exactly the weight these two carry, and .alst.dupe and .alst.foil
+     carry exactly the weight .alsgo .alst carries, so being last is the only
+     thing keeping the green alive on a country page and on the swap pile. An
+     alphabetiser would kill all of them and the shelf spine with them, and
+     nothing anywhere would fail, which is how this project has lost a day four
+     separate times. */
+  .alst.fresh{position:relative;border-color:#3E6B52;
+              background:linear-gradient(120deg,rgba(62,107,82,.34),transparent)}
+  .alst.shut{position:relative;border-color:var(--gold-hi);
+             background:linear-gradient(120deg,rgba(227,180,83,.34),transparent)}
+  .alst.fresh::after{content:"\2713";position:absolute;top:3px;right:4px;
+                     font:700 10px/1 var(--ui);color:#7FD4A3}
+  .alst.shut::after{content:"\2605";position:absolute;top:2px;right:4px;
+                    font:700 12px/1 var(--ui);color:var(--gold-hi)}
+  /* ---------------- PAYING FOR ONE ----------------
+     One sticker on its own and centred, which is the man the swap screen is
+     about. Borrowing .alpack for him would drop him in its left third looking
+     like the first of three that never turned up. */
+  .alswant{width:36%;margin:12px auto 2px}
+  /* PICKED TO GO, and it cannot be the gold that .alslot.in uses over on Your
+     XI. On a book you are nearly through, most of the pile you are paying out of
+     is already foiled, and foil is gold, so a chosen card and a card off a
+     completed page would be the same card. Chosen goes green and gets its
+     brightness back, which is the one direction nothing else on this screen
+     moves in: every card here is a double and every one of them is drawn
+     dimmed, so the three that light up are the three that are leaving. */
+  .alsgo .alst{opacity:1;border-color:#3E6B52;
+    background:linear-gradient(120deg,rgba(62,107,82,.34),transparent)}
+  /* HOW DEEP THE STACK IS, printed under the card. The pile is sorted deepest
+     first so the men you can most afford to lose are the ones under your thumb,
+     and a sort nobody can see is a rule the player has to take on trust. Three
+     copies and two copies are genuinely different things to give away. This is
+     nine characters of type instead of a second screen explaining the order. */
+  .alsx{display:block;margin-top:3px;text-align:center;
+    font:600 10px/1 var(--ui);color:var(--ink-dim)}
   .h2repbox{margin:14px 0 4px}
   .h2rep{background:var(--panel);border:1px solid var(--line);border-radius:12px;
          padding:10px 12px;margin:8px 0}
@@ -10377,7 +10462,47 @@ function openAlbum(book, side){
   render();
 }
 function closeAlbum(){ audio(); ALBUM_VIEW = null; render(); }
-function albumSwapTo(id){ albumSwap(id); }
+/* THE CHOOSER, WHICH IS WHERE A TAP ON A GAP GOES NOW. It used to run the swap
+   on the spot and take the first three doubles off the top of the map, which is
+   the one part of swapsies nobody has ever enjoyed. The whole ritual is deciding
+   what you can bear to lose, and handing that decision to Object.keys threw away
+   the only interesting thing about owning a double. So the gap opens a screen
+   and the player picks. */
+function albumSwapTo(id){
+  audio();
+  if(!ALBUM_VIEW) return;
+  const p = albumParse(id);
+  if(!p) return;
+  if(albumHas(id)) return toast("You already have him.", true);
+  if(albumDupes(p.book).length < 3) return toast("You need three doubles.", true);
+  ALBUM_VIEW = {book: p.book, side: albumSideOf(p.book, p.slug), swap: {want: id, give: []}};
+  render();
+}
+/* A FOURTH TAP REPLACES THE FIRST rather than doing nothing at all. A button
+   that stops answering is a button somebody decides is broken, and on a pile
+   three hundred deep, changing your mind about one of the three is the commonest
+   thing anyone will want to do. Tapping a card that is already chosen takes it
+   back out again, which is the other half of the same idea. */
+function albumSwapPick(id){
+  audio();
+  if(!ALBUM_VIEW || !ALBUM_VIEW.swap) return;
+  const give = ALBUM_VIEW.swap.give;
+  const at = give.indexOf(id);
+  if(at > -1) give.splice(at, 1);
+  else { if(give.length >= 3) give.shift(); give.push(id); }
+  render();
+}
+/* audio() here as well as inside albumSwap, and it is not a duplicated noise:
+   audio() makes no sound at all, it is the one line that unlocks the audio
+   context and it has to be reached from inside a real tap or iOS never lets this
+   tab make a noise again. It is idempotent, every other button in the album
+   opens with it, and the button that spends three of your men is not the one to
+   leave out of the habit. */
+function albumSwapDo(){
+  audio();
+  if(!ALBUM_VIEW || !ALBUM_VIEW.swap) return;
+  albumSwap(ALBUM_VIEW.swap.want, ALBUM_VIEW.swap.give);
+}
 
 let aiTimer = null;
 /* WHAT THE ONE TIMER WAS ARMED FOR. There is a single timer for the whole
@@ -11415,58 +11540,239 @@ function albumStick(id){
   have[id] = (have[id] || 0) + 1;
   return !dupe;
 }
-/* ONE PACK IS THREE STICKERS, random across the book you are collecting,
-   doubles allowed, because an album without doubles is a checklist. */
+/* ---------- HOW LUCKY THE DRAW IS ALLOWED TO BE ----------
+   A flat pick over 736 men is honest for about three weeks and then it is a
+   wall, and the arithmetic is not close. At half a book the next sticker you
+   pull is even money. At ninety-five per cent it is one in twenty. At 735 of
+   736 it is one in 736 and a pack is three of those, so the last man sits four
+   hundred packs away. Nobody has ever filled the last page of a flat album.
+   That is not a difficulty curve, it is the game quietly ending while the
+   screen still says you are winning.
+
+   So past halfway the book starts helping, and these two numbers say by how
+   much.
+
+   ALBUM_TURN is where the help starts. Halfway, and not a sticker earlier,
+   because the first half of a book needs no help at all: nearly everything you
+   pull is new, the doubles that do turn up are the currency the swap screen
+   runs on, and a player who has been helped since the first packet never finds
+   out what the help was for. Halfway is also far enough in that somebody can
+   feel the change without being told about it, which is the only kind of
+   generosity worth building.
+
+   ALBUM_LUCK is the ceiling, and the ceiling is the whole design. It says a man
+   you are missing may become at most three times as likely to come out of the
+   packet as a man you already have, and the weight ramps to it in a straight
+   line as the book fills, so the help arrives the way the book does rather than
+   as a step somebody would notice. Three, because this album already counts in
+   threes. A packet is three stickers and a man costs three doubles, so a third
+   dial set to the same number is the one nobody ever has to go and look up.
+
+   And three because a CEILING is what keeps this a draw. The obvious fix,
+   weighting by exactly enough to hold the new-sticker rate steady wherever you
+   happen to be, is not a draw at all. It is a delivery with a shuffle on it, and
+   the evening a player notices that the packet always contains what they needed
+   is the evening they stop opening packets. Under a cap of three, somebody at
+   ninety-five per cent goes from one pack in seven carrying something to roughly
+   one in three, and the other two in three are still doubles. That is the
+   difference between a wall and a Friday night, and it is still luck.
+
+   What it deliberately does NOT do is finish the book. The last man is a long
+   shot even at full tilt, because by then you are sitting on a mountain of
+   doubles and the three-for-one swap is the thing that is meant to close him
+   out. The draw carries you to the last handful. You trade for the rest. */
+const ALBUM_TURN = .5;
+const ALBUM_LUCK = 3;
+/* ---------- AND HOW OFTEN ONE PACKET REPEATS ITSELF ----------
+   ALBUM-PLAN section 6 and RETENTION-PLAN both leave the duplicate rate open,
+   and the honest answer is that it was never one number. ALBUM_LUCK above is
+   the rate against your album. This is the other one, the rate against the
+   packet itself, and it is a separate decision because it is a separate
+   feeling.
+
+   The three draws used to be independent, so a packet could hand you the same
+   man twice, and about once in every two hundred and fifty packets it handed
+   him over three times. Nobody has ever opened a real packet of stickers and
+   found the same face in it twice, because they are printed on one sheet and
+   then cut. A double against your album is the game and always has been. A
+   double against the paper it arrived on is a shuffle that went wrong, and it
+   reads as a bug even to somebody who could not say why. One appearance each,
+   and it costs a player nothing they would ever have wanted.
+
+   The rate BELOW halfway gets no dial, and that is a decision too. A flat pick
+   over a book you already hold a quarter of comes back three-quarters new,
+   which is exactly the feeling an opening night is supposed to have. There is
+   nothing there to tune, and a constant nobody will ever move is a constant
+   that should not have been written. */
+const ALBUM_PACK_SAME = 1;
+/* ONE STICKER OUT OF THE BOOK, weighted. The weights are rebuilt for every
+   single draw rather than once per packet, because the first sticker changes
+   what the second one is: pull a man you needed and he is a man you have by the
+   time the next draw looks at him, which is precisely what happens when a
+   person peels them one at a time. */
+function albumPackDraw(all, got, w){
+  let total = 0;
+  for(const x of all){
+    let seen = 0;
+    for(const g of got) if(g.id === x.id) seen++;
+    x.w = seen >= ALBUM_PACK_SAME ? 0 : (albumHas(x.id) ? 1 : w);
+    total += x.w;
+  }
+  if(!(total > 0)) return null;
+  let r = Math.random() * total;
+  for(const x of all){ r -= x.w; if(r < 0) return x; }
+  /* the last man mops up, which is a rounding guard and not a preference: r can
+     only survive the whole walk when the weights add up a hair under the total
+     they were just measured against */
+  return all[all.length - 1];
+}
+/* ONE PACK IS THREE STICKERS out of the book you are collecting, doubles
+   against your album allowed, because an album without doubles is a checklist. */
 function albumOpen(){
   audio();
   const m = mine();
   if(!(m.album.packs > 0)) return;
   const id = albumCollecting(), book = albumBook(id);
   if(!book) return toast("The squads are still loading.", true);
+  /* A MAN WITH NO ID HAS NO SLOT, so he never goes in the packet. albumId hands
+     back null for anybody the harvest landed without a shirt number, and until
+     now the draw could pick him, albumStick would refuse him, and the player
+     would be shown a card for a sticker that had quietly not been given.
+     Filtering here is also what makes the reading below honest: the denominator
+     for "how far through this book am I" has to be the men who can actually be
+     owned and not the men who were printed. */
   const all = [];
-  for(const side of Object.keys(book)) for(const man of albumMen(id, side)) all.push({side: side, m: man});
+  for(const side of Object.keys(book)) for(const man of albumMen(id, side)){
+    const sid = albumId(id, side, man);
+    if(sid) all.push({side: side, m: man, id: sid, w: 0});
+  }
   if(!all.length) return;
   m.album.packs -= 1;
+  let own = 0;
+  for(const x of all) if(albumHas(x.id)) own++;
+  const f = own / all.length;
+  const t = f <= ALBUM_TURN ? 0 : (f - ALBUM_TURN) / (1 - ALBUM_TURN);
+  const w = 1 + (ALBUM_LUCK - 1) * t;
   const got = [];
   for(let i = 0; i < 3; i++){
-    const p = all[Math.floor(Math.random() * all.length)];
-    const sid = albumId(id, p.side, p.m);
-    const isNew = albumStick(sid);
-    got.push({id: sid, book: id, side: p.side, m: p.m, isNew: isNew});
+    const p = albumPackDraw(all, got, w);
+    /* A SHORT PACK, and it earns a sentence because it looks like a bug and is
+       not one. albumPackDraw hands back nothing once every drawable man in the
+       book is already on this sheet, which over 736 men never arrives and over a
+       two-man book arrives on the third draw. Stopping is the honest answer: the
+       only other move is printing the same face twice on one sheet, which is the
+       exact thing ALBUM_PACK_SAME was written to stop. .alpack is three columns
+       wide so a short pack sits short, and it should, because two cards is what
+       a two-man book has to give you. */
+    if(!p) break;
+    const isNew = albumStick(p.id);
+    /* A FINISHED PAGE IS A FOIL, and it is checked here sticker by sticker
+       rather than after all three are in. Three men off the same page can be the
+       last three on it, and the one who actually closed it is the third, not
+       whichever of them a later loop happened to reach first. That answer goes
+       on the card now, so it has to be the right man.
+
+       THE CALL STAYS UNCONDITIONAL AND ONLY THE CREDIT IS GATED. Folding the
+       isNew into the call itself reads like the tidier line and is a permanent
+       bug: albumFirstTime sticks three men and never checks, so a page can sit
+       complete and unfoiled for weeks, and the sticker that eventually walks
+       into that page is very often a double. Ask only on new men and that page
+       never latches and the bench behind it never unlocks, for the life of the
+       save. So it is always asked, and a double is simply never given the star,
+       because a card drawn "dupe shut" would be the screen telling somebody that
+       a man they already owned was the one who closed it. */
+    const closed = albumCheckPage(id, p.side);
+    got.push({id: p.id, book: id, side: p.side, m: p.m, isNew: isNew, shut: isNew && closed});
   }
-  /* A FINISHED PAGE IS A FOIL, and it is checked here rather than on render so
-     it happens once and can say so. */
-  for(const g of got) albumCheckPage(id, g.side);
   m.album.last = got;
   mineSave();
   S = null;
   ALBUM_VIEW = {book: id, open: got};
   render();
 }
+/* A PAGE CLOSES ONCE, and now it says so out loud. Two things need to know
+   which sticker did it rather than merely that it happened: the line under the
+   pack, and the card itself, which has to go gold. So this hands back true only
+   on the draw that actually latched the foil, and false every other time,
+   including on a page that was already finished. Every caller written before the
+   pack screen ignores the answer and is unaffected by it. */
 function albumCheckPage(book, side){
-  if(!albumDone(book, side)) return;
+  if(!albumDone(book, side)) return false;
   const b = albumBookState(book);
-  if(b.foils.indexOf(side) > -1) return;
+  if(b.foils.indexOf(side) > -1) return false;
   b.foils.push(side);
   toast(side + " complete. Their bench is yours.");
   albumCheckBook(book);
+  return true;
 }
+/* WHAT A FINISHED BOOK IS WORTH, and the number comes straight out of what
+   everything else in this game already pays. A win is one pack. Topping a group
+   is two, and so is a knockout tie. Winning the entire World Cup, seven matches
+   and the biggest single payment BALL 2 has ever made, is five or six. Closing a
+   book is thirty-two pages with several hundred matches behind them, so it has
+   to beat winning the World Cup, and it has to beat it by enough that nobody has
+   to sit and work out whether it did. Double the Cup and round it off. Twelve.
+
+   AND IT PAYS IN PACKS BECAUSE PACKS ARE YOURS AND NOT A BOOK'S. That is the
+   entire reason this is the right reward. Anything spent inside the book you
+   just finished would be an anticlimax by definition, since there is nothing
+   left in it to buy. Twelve packs is thirty-six stickers, which against a cold
+   book is a page and a half of men scattered over twenty-four countries: it
+   finishes nothing and starts everything, and it is enough that lifting the next
+   book off the shelf feels like an opening night instead of going back to zero.
+   They follow whatever the player switches to, and they will still be sitting
+   there in a week if they never switch at all.
+
+   ONE TOAST AND NOT TWO. albumGive is handed a falsy reason so that it stays
+   quiet, and the line below says both halves in one breath. toast auto-hides
+   after 2200ms, so two of them fired back to back means the first one is the one
+   nobody reads, and the first one here is the sentence somebody waited a season
+   for. */
+const ALBUM_BOOK_PACKS = 12;
 /* AND A FINISHED BOOK IS A FLAG THAT LATCHES. Section 7 carries done on every
-   book and section 6 says what it pays. The paying is not built yet, but the
-   flag is set by the thing that can see it happen rather than worked out again
-   later off a shelf somebody may by then have half traded away. */
+   book, and the flag is still set by the thing that can see it happen rather
+   than worked out again later off a shelf somebody may by then have half traded
+   away. That matters more now than it did, because the flag is the only thing
+   stopping the twelve packs being paid out a second time. */
 function albumCheckBook(book){
   const b = albumBookState(book);
   if(b.done) return;
   const sides = albumSides(book);
   if(!sides.length || !sides.every(s => b.foils.indexOf(s) > -1)) return;
   b.done = true;
-  toast(((POOLS[book] || {}).label || book) + ", finished. Every page.");
+  albumGive(ALBUM_BOOK_PACKS, null);
+  toast(((POOLS[book] || {}).label || book) + ", finished. Every page. " +
+        ALBUM_BOOK_PACKS + " packs for the next one.");
 }
 /* ---------- doubles ---------- */
 const albumDupes = book => {
   const b = albumBookRead(book);
   return b ? Object.keys(b.have || {}).filter(id => b.have[id] > 1) : [];
+};
+/* WHO AN ID IS, which the swap screen needs and nothing before it ever did:
+   every other screen in the album is already holding the man by the time it
+   draws him. This walks the page rather than keeping a second index, because a
+   page is twenty-three men and the alternative is a map that has to be thrown
+   away the day a squad is re-harvested. It is the right shape for one man and
+   the wrong shape for a list of them, so the chooser walks the book into a
+   lookup of its own once per render and this stays for the single lookups. */
+const albumManOf = id => {
+  const p = albumParse(id);
+  if(!p) return null;
+  const side = albumSideOf(p.book, p.slug);
+  if(!side) return null;
+  return albumMen(p.book, side).find(m => albumId(p.book, side, m) === id) || null;
+};
+/* THE PILE YOU PAY OUT OF, DEEPEST FIRST. Three of a man is a cheaper thing to
+   hand over than two of him, so the ones you can most afford to lose sit at the
+   top of the screen, and anybody who does not care which three go can tap the
+   first three and be done. Ties fall to the id so that the pile does not
+   reshuffle itself under a finger between one tap and the next, which on a
+   three-hundred-deep pile would be unusable. */
+const albumPile = book => {
+  const b = albumBookRead(book);
+  const have = (b && b.have) || {};
+  return albumDupes(book).sort((x, y) => (have[y] - have[x]) || (x < y ? -1 : x > y ? 1 : 0));
 };
 /* THREE DOUBLES FOR ONE YOU CHOOSE, which is the oldest rule in the playground
    and the only one that makes a double worth having.
@@ -11474,8 +11780,16 @@ const albumDupes = book => {
    OUT OF THE SAME BOOK. Every book keeps its own pile, so three spare 2006
    Italians do not buy a Euro 2008 Spaniard: letting them would turn a book you
    had half filled into currency for one you had only just opened, and the
-   point of a shelf is that each book is finishable on its own. */
-function albumSwap(wantId){
+   point of a shelf is that each book is finishable on its own.
+
+   AND THE PLAYER SAYS WHICH THREE. give arrives from the chooser screen and is
+   checked here rather than taken on trust, because it comes off an inline
+   onclick and that is as public as an interface gets: every id in it has to be
+   a double in this book, and no id may appear twice and be counted as two men.
+   Anything that fails that falls back to the top three off the pile, which is
+   what this function did on its own before there was a screen, and is still what
+   happens when album-test calls it with one argument. */
+function albumSwap(wantId, give){
   audio();
   const p = albumParse(wantId);
   if(!p) return;
@@ -11483,15 +11797,22 @@ function albumSwap(wantId){
   if(dupes.length < 3) return toast("You need three doubles.", true);
   if(albumHas(wantId)) return toast("You already have him.", true);
   const b = albumBookState(p.book);
-  for(let i = 0; i < 3; i++){
-    const id = dupes[i];
+  const chosen = Array.isArray(give) && give.length === 3 &&
+                 give.every((id, i) => give.indexOf(id) === i && dupes.indexOf(id) > -1);
+  const pay = chosen ? give : albumPile(p.book).slice(0, 3);
+  for(const id of pay){
     b.have[id] -= 1;
     if(b.have[id] <= 0) delete b.have[id];
   }
   albumStick(wantId);
   const side = albumSideOf(p.book, p.slug);
-  if(side) albumCheckPage(p.book, side);
+  const shut = side ? albumCheckPage(p.book, side) : false;
   mineSave();
+  /* HE IS LIT WHEN THE PAGE COMES BACK, because the one thing anybody wants to
+     see after paying three men for one is the one. The view is rebuilt rather
+     than edited so that the chooser goes away with it, and it is guarded because
+     album-test drives this function with no album open at all. */
+  if(ALBUM_VIEW) ALBUM_VIEW = {book: p.book, side: side || ALBUM_VIEW.side, lit: wantId, shut: shut};
   render();
 }
 
@@ -16388,11 +16709,26 @@ function dailyManHTML(d, big){
     '</div>' +
   '</div>';
 }
-function albumStickerHTML(book, side, m, has, dupe){
+/* THE ONE STICKER, drawn identically on every screen that uses it: the packet,
+   the page, Your XI twice over and the daily card.
+
+   lit is the news, and it is a number rather than a pair of booleans because the
+   two states are ranks of one thing and can never both be true. 1 is a man you
+   did not have. 2 is the man who just closed somebody's page. The screens with
+   no news to carry pass nothing, which is most of them, and undefined is
+   correctly nothing at all.
+
+   IT GOES ON THE END OF THE CLASS LIST AND HAS TO STAY THERE. album-test reads
+   the literal string "alst empty" out of a country page and counts twenty-three
+   of them, so any modifier that gets in front of empty breaks a test that is
+   really asking whether twenty-three gaps are still twenty-three gaps. */
+function albumStickerHTML(book, side, m, has, dupe, lit){
   const t = (albumBook(book) || {})[side] || {};
   const kit = t.kit || "#888";
   return '<div class="alst' + (has ? "" : " empty") + (dupe ? " dupe" : "") +
-    (albumFoil(book, side) && has ? " foil" : "") + '" style="--kit:' + kit + ';--kink:' + kitInk(kit) + '">' +
+    (albumFoil(book, side) && has ? " foil" : "") +
+    (lit === 2 ? " shut" : lit ? " fresh" : "") +
+    '" style="--kit:' + kit + ';--kink:' + kitInk(kit) + '">' +
     '<div class="xshirt">' + (m.no || "") + '</div>' +
     '<div class="alsn">' + esc(m.n || "") + '</div>' +
     '<div class="alsp">' + esc(m.pos || "") + '</div>' +
@@ -16431,13 +16767,19 @@ function albumShelfHTML(now){
     const done = albumBookIsDone(id);
     const pc = c.all ? Math.round(c.have / c.all * 100) : 0;
     return '<button class="alcov' + (id === now ? " on" : "") + (id === albumCollecting() ? " coll" : "") +
+      (done ? " plate" : "") +
       '" style="--cov:' + cover + '" onclick="openAlbum(' +
       JSON.stringify(id).replace(/"/g, "&quot;") + ')">' +
       '<span class="alcov-b">' +
         '<span class="alcov-k">Sticker album</span>' +
         (done ? '<span class="alcov-r">Complete</span>' : "") +
         '<span class="alcov-t">' + esc(POOLS[id].label || id) + '</span>' +
-        h2FigHTML("", "#FFFFFF", 46, null) +
+        /* THE MAN BECOMES THE CUP. Every cover on the shelf carries the little
+           white player because a player is what you are still out looking for.
+           The book you finished carries the trophy instead, which is the one
+           thing here that cannot be mistaken for a progress reading. */
+        (done ? '<span class="alcov-c">' + ico('trophy') + '</span>'
+              : h2FigHTML("", "#FFFFFF", 46, null)) +
       '</span>' +
       '<span class="alcov-bar"><i style="width:' + pc + '%"></i></span>' +
       '<span class="alcov-n">' + c.have + ' / ' + c.all +
@@ -16468,15 +16810,89 @@ function renderAlbum(st){
       st.innerHTML =
         '<div class="kick">' + ico('trophy') + 'Three stickers</div>' +
         '<div class="alpack">' + ALBUM_VIEW.open.map(g =>
-          albumStickerHTML(g.book || bid, g.side, g.m, true, !g.isNew)).join("") + '</div>' +
+          albumStickerHTML(g.book || bid, g.side, g.m, true, !g.isNew,
+            g.shut ? 2 : (g.isNew ? 1 : 0))).join("") + '</div>' +
         '<div class="h2hintline">' +
           (ALBUM_VIEW.open.filter(g => g.isNew).length
             ? ALBUM_VIEW.open.filter(g => g.isNew).length + " new."
             : "All doubles. It happens.") +
+          /* and the page it closed gets named, because a card going gold says
+             that something happened and only the country says what */
+          (ALBUM_VIEW.open.filter(g => g.shut).length
+            ? ' That closed ' + ALBUM_VIEW.open.filter(g => g.shut)
+                .map(g => esc(g.side)).join(" and ") + '.' : "") +
           ' You have ' + A.packs + ' pack' + (A.packs === 1 ? "" : "s") + ' left.</div>' +
         (A.packs > 0 ? '<button class="bigbtn" onclick="albumOpen()">Open another</button>' : "") +
         '<button class="bigbtn ghost" onclick="openAlbum(' +
           JSON.stringify(bid).replace(/"/g, "&quot;") + ')">The album</button>';
+      return;
+    }
+
+    /* CHOOSING WHICH THREE GO. This is its own screen and not a row of tick
+       boxes stapled to the country page, because the two questions are not the
+       same shape. A country page is one squad of twenty-three slots and it fits
+       under a sheet of paper. The pile you are paying out of is the whole book,
+       and on a book you are most of the way through that is three hundred men.
+       Deciding what you can live without IS the swap, and the swap has earned a
+       screen of its own.
+
+       IT SITS ABOVE THE PAGE IN THIS LADDER FOR ONE REASON. ALBUM_VIEW still
+       carries the side you came from, so Back is a real place rather than a
+       guess, and every other route into the album rebuilds the whole object and
+       takes the chooser down with it, which is exactly what should happen to a
+       half-made decision somebody walked away from. The wanted man is resolved
+       once, up here, and the branch tests what came back, so a save that moved
+       under this screen falls through to the page rather than drawing a card for
+       nobody. */
+    const wman = ALBUM_VIEW.swap ? albumManOf(ALBUM_VIEW.swap.want) : null;
+    if(ALBUM_VIEW.swap && wman){
+      const want = ALBUM_VIEW.swap.want, give = ALBUM_VIEW.swap.give || [];
+      const wside = albumSideOf(bid, albumParse(want).slug);
+      /* ONE WALK OF THE BOOK, because the pile is a list of ids and every one of
+         them has to find its man again. Asking albumManOf per id would walk a
+         page for each double and scan every side in the book to find that page,
+         and somebody three hundred spares deep would feel it on every tap, since
+         every tap redraws the whole screen. */
+      const who = {};
+      for(const sd of Object.keys(book)) for(const man of albumMen(bid, sd)){
+        const mid = albumId(bid, sd, man);
+        if(mid) who[mid] = {side: sd, m: man};
+      }
+      const held = (albumBookRead(bid) || {}).have || {};
+      const left = 3 - give.length;
+      st.innerHTML =
+        '<div class="kick">' + ico('trophy') + 'Three for one</div>' +
+        /* HE IS DRAWN AS A MAN YOU HAVE, not as the gap he currently is. On a
+           page a gap reads as a gap because twenty-two filled slots surround it,
+           and a lone card at a third of the width, greyed to a third of its
+           opacity with nothing beside it to be dim against, just reads as a
+           picture that failed to load. This is the shop window. He has to look
+           like the thing somebody is about to pay three men for. */
+        '<div class="alswant">' + albumStickerHTML(bid, wside, wman, true, false) + '</div>' +
+        '<div class="h2hintline" style="margin-top:0">' + esc(wman.n || "") + ', ' +
+          esc(wside || "") + '. ' +
+          /* the line escalates rather than reporting a count back at somebody who
+             can already see the count, and it names the payoff at every step */
+          (left === 3 ? 'Pick any three of your doubles and he is yours. The deepest stacks come first.'
+            : left === 2 ? 'Pick two more and he is yours.'
+            : left === 1 ? 'One more and he is yours.'
+            : 'Tap one again if you want him back.') + '</div>' +
+        '<div class="alpage">' + albumPile(bid).map(pid => {
+          const e = who[pid];
+          if(!e) return "";
+          /* every card here is a double, so every one of them is drawn as one,
+             and the three that are leaving get their brightness back */
+          return '<button class="alslot want' + (give.indexOf(pid) > -1 ? " alsgo" : "") +
+            '" onclick="albumSwapPick(' + JSON.stringify(pid).replace(/"/g, "&quot;") + ')">' +
+            albumStickerHTML(bid, e.side, e.m, true, true) +
+            '<span class="alsx">' + (held[pid] || 0) + ' copies</span></button>';
+        }).join("") + '</div>' +
+        (give.length === 3
+          ? '<button class="bigbtn" onclick="albumSwapDo()">Hand these three over</button>'
+          : "") +
+        '<button class="bigbtn ghost" onclick="openAlbum(' +
+          JSON.stringify(bid).replace(/"/g, "&quot;") + ', ' +
+          JSON.stringify(wside).replace(/"/g, "&quot;") + ')">Back to the page</button>';
       return;
     }
 
@@ -16491,7 +16907,7 @@ function renderAlbum(st){
         (albumFoil(bid, side)
           ? '<div class="h2hintline" style="margin-top:0">Their bench is yours in The Dugout.</div>'
           : '<div class="h2hintline" style="margin-top:0">Finish the page and their bench is yours in The Dugout. ' +
-            (dupes >= 3 ? 'Tap a gap to swap three doubles for him.' : 'You need three doubles to swap.') + '</div>') +
+            (dupes >= 3 ? 'Tap a gap and pick which three doubles go.' : 'You need three doubles to swap.') + '</div>') +
         '<div class="alsheet"><div class="alsheet-h">' +
           /* h2Badge resolves against the pool you are PLAYING, and the book on
              the table is not that, so the page builds its own. The finals book
@@ -16505,7 +16921,15 @@ function renderAlbum(st){
           const can = !has && dupes >= 3;
           return (can ? '<button class="alslot want" onclick="albumSwapTo(' +
                         JSON.stringify(id).replace(/"/g, "&quot;") + ')">' : '<div class="alslot' + (has ? "" : " gap") + '">') +
-                 albumStickerHTML(bid, side, m, has, false) +
+                 /* ALBUM_VIEW.lit is set by a swap and by nothing else, and any
+                    navigation at all rebuilds the view and clears it, so the man
+                    you just paid for is lit exactly once, on the one screen where
+                    you are looking for him. id is null for anybody the harvest
+                    landed without a shirt number and lit is null on most renders,
+                    so the id has to be proved real before the two are compared,
+                    or every numberless slot on the page lights up together. */
+                 albumStickerHTML(bid, side, m, has, false,
+                   (id && id === ALBUM_VIEW.lit) ? (ALBUM_VIEW.shut ? 2 : 1) : 0) +
                  (can ? '</button>' : '</div>');
         }).join("") + '</div>' +
         '<div class="alsheet-f"><span>' + (book[side].group ? 'Group ' + esc(book[side].group) : "") +
@@ -16527,7 +16951,17 @@ function renderAlbum(st){
         ? (A.packs > 0
             ? '<button class="bigbtn" onclick="albumOpen()">Open a pack · ' + A.packs + ' waiting</button>'
             : '<div class="h2hintline" style="margin-top:0">Packs come from playing. One for the daily, one for winning, ' +
-              'and three of a country the first time you play as them.</div>')
+              'and three of a country the first time you play as them.</div>') +
+          /* WHAT FINISHING IT PAYS, SAID OUT LOUD AND SAID TO EVERYBODY. This
+             sits under the whole of the collecting arm rather than inside the
+             empty-drawer half of it, because the one player who must not be the
+             only one told about the prize is the player who has packs waiting
+             and is about to go and open them. It goes quiet on a book that is
+             already finished, where telling somebody to finish it would be the
+             screen asking for something it has already been given. */
+          (albumBookIsDone(bid) ? "" :
+            '<div class="h2hintline" style="margin-top:0">Finish every page of it and ' +
+            ALBUM_BOOK_PACKS + ' more packs land in whichever book you pick up next.</div>')
         /* THE SWITCH IS A DELIBERATE TAP AND IT SAYS WHAT IT COSTS: nothing.
            Every book keeps what is in it, which is the whole promise of a
            shelf, so the button can afford to be plain about it. */
