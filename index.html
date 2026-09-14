@@ -5725,6 +5725,12 @@ const POOLS = {
   wc2018: {label:"World Cup 2018", group:"World Cups", of:"classic",
            file:"assets/wc2018/index.json", flags:"assets/natflags/", ext:".png",
            blurb:"Russia. Thirty-two nations, and the eleven each of them started their last match with."},
+  /* FORTY-EIGHT SIDES and twenty-six men each, which is why it has a pool and
+     no Cup: 2026 is twelve groups, the eight best third places and a round of
+     thirty-two, and the Cup reads eight groups and a bracket of sixteen. */
+  wc2026: {label:"World Cup 2026", group:"World Cups", of:"classic",
+           file:"assets/wc2026/index.json", flags:"assets/natflags/", ext:".png",
+           blurb:"North America, and forty-eight of them. The eleven each side started their last match with."},
   wc2022: {label:"World Cup 2022", group:"World Cups", of:"classic",
            file:"assets/wc2022/index.json", flags:"assets/natflags/", ext:".png",
            blurb:"Thirty-two nations from Qatar, twenty-six men each, and the eleven each of them last put out."},
@@ -5878,7 +5884,7 @@ function setTheme(t){
   applyTheme();
   render();
 }
-const BUILD = "14 Sep 2026 · 02:28";
+const BUILD = "14 Sep 2026 · 02:41";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five

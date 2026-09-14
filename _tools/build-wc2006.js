@@ -229,7 +229,11 @@ function pickXI(players) {
   const wikitext = JSON.parse(raw).parse.wikitext;
 
   const teams = parseSquads(wikitext);
-  console.log("squads parsed: " + teams.length + " (expected 32)");
+  /* HOW MANY SIDES A WORLD CUP HAS. Thirty-two from 1998 to 2022, and
+     forty-eight from 2026. Printed rather than asserted, because a harvest
+     that finds forty-seven is worth looking at whichever year it is. */
+  const EXPECTED = +YEAR >= 2026 ? 48 : 32;
+  console.log("squads parsed: " + teams.length + " (expected " + EXPECTED + ")");
   if (teams.length !== 32) console.log("  !! not 32, check the article's headings");
 
   // kit colours out of the app's own harvested bank
@@ -271,9 +275,12 @@ function pickXI(players) {
         page + "&prop=wikitext&redirects=1&format=json&formatversion=2");
       const w = JSON.parse(raw).parse.wikitext;
       const grab = k => { const m = w.match(new RegExp("\\|\\s*" + k + "\\s*=\\s*([A-Fa-f0-9]{6})")); return m ? "#" + m[1].toUpperCase() : null; };
-      // a white shirt with coloured sleeves reads better as the sleeve colour
+      /* A WHITE SHIRT WITH COLOURED SLEEVES reads better as the sleeve colour,
+         and a shirt with no body colour at all reads as the sleeve for the
+         same reason: Uzbekistan's 2026 shirt is a pattern, so its infobox
+         leaves body1 empty and only the sleeves are stated. */
       const body = grab("body1"), arm = grab("leftarm1");
-      const c = (body === "#FFFFFF" && arm && arm !== "#FFFFFF") ? arm : body;
+      const c = (!body || (body === "#FFFFFF" && arm && arm !== "#FFFFFF")) ? (arm || body) : body;
       if (c) { fetched[name] = c; console.log("  harvested " + name + " -> " + c); return c; }
     } catch (e) { console.log("  could not read a kit for " + name + ": " + e.message); }
     return null;

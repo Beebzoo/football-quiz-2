@@ -60,7 +60,11 @@ const WHO = (i => i > -1 ? process.argv[i + 1] : null)(process.argv.indexOf("--w
 const EXTRAS = {
   "2006": ["Battle of Nuremberg (2006 FIFA World Cup)"],
 };
-const PAGES = "ABCDEFGH".split("").map(g => YEAR + " FIFA World Cup Group " + g)
+/* TWELVE GROUPS FROM 2026: forty-eight sides, so the group pages run A to L.
+   Read eight of them and everybody whose only matches were in I, J, K or L
+   comes back with no line-up at all. */
+const GROUP_LETTERS = (+YEAR >= 2026 ? "ABCDEFGHIJKL" : "ABCDEFGH").split("");
+const PAGES = GROUP_LETTERS.map(g => YEAR + " FIFA World Cup Group " + g)
   .concat([YEAR + " FIFA World Cup knockout stage", YEAR + " FIFA World Cup final"])
   .concat(EXTRAS[YEAR] || []);
 const SQUADS = YEAR + " FIFA World Cup squads";
@@ -222,6 +226,14 @@ const ALIAS = {
   "Juan Carlos Aguilera": {n: "Carlos Aguilera", side: "Spain"},
   /* he played under one name and Wikipedia files him under the other */
   "Preki": "Predrag Radosavljević",
+
+  /* 2022 and 2026 */
+  /* in Saudi Arabia’s line-ups and not in their squad list */
+  "Hassan Al-Tombakti": null,
+  /* Brazil took two Danilos and two Édersons, and Wikipedia dates them apart. */
+  "Danilo (footballer, born July 1991)": {n: "Danilo Luiz", side: "Brazil"},
+  "Danilo (footballer, born 2001)": {n: "Danilo Santos", side: "Brazil"},
+  "Éderson (footballer, born 1999)": {n: "Éderson Silva", side: "Brazil"},
   "Selim Ben Achour": "Selim Benachour",
   "Mohammed Al-Jahani": null,
 
@@ -231,7 +243,7 @@ const ALIAS = {
   "Haminu Dramani": null,
 };
 let missed = [];
-function find(name, side) {
+function find(name, side, no) {
   /* THE QUALIFIER COMES OFF THE RAW TITLE. norm() turns brackets into spaces,
      so by the time it has run there is nothing left to cut and "Ronaldo
      (Brazilian footballer)" is a four-word name nobody has. */
@@ -253,19 +265,23 @@ function find(name, side) {
      callers below read a concatenated page and have none */
   if (want) side = want;
   const n = norm(raw);
-  let hit = byFull[n] || [];
+  /* THE SHIRT SETTLES IT when two men in the tournament share a name and this
+     file, reading every page as one string, has no side to narrow with. */
+  const byShirt = list => (no != null && list.length > 1)
+    ? list.filter(m => String(m.p.no) === String(no)) : list;
+  let hit = byShirt(byFull[n] || []);
   if (hit.length > 1 && side) hit = hit.filter(m => m.side === side);
   if (hit.length === 1) return hit[0];
   const bare = n;
   hit = byFull[bare] || [];
   if (hit.length > 1 && side) hit = hit.filter(m => m.side === side);
   if (hit.length === 1) return hit[0];
-  let s = bySur[bare] || bySur[n] || [];
+  let s = byShirt(bySur[bare] || bySur[n] || []);
   if (s.length > 1 && side) s = s.filter(m => m.side === side);
   if (s.length === 1) return s[0];
   /* the final word, which is how a shown name usually differs */
   const last = bare.split(" ").slice(-1)[0];
-  let l = bySur[last] || [];
+  let l = byShirt(bySur[last] || []);
   if (l.length > 1 && side) l = l.filter(m => m.side === side);
   if (l.length === 1) return l[0];
   /* AN ARTICLE TITLE IS OFTEN LONGER THAN THE SHIRT. "Luis Marín Murillo"
@@ -319,6 +335,22 @@ function extraPages(text, had){
   return out;
 }
 
+/* ---------- a scorer written without the template ----------
+   Accepted ONLY when what follows the name is nothing but minutes, because a
+   group page is full of bulleted links with years in them and one of those
+   counted as a goal is a striker with a two-thousand season. */
+const MINUTES = /^\s*(?:\d{1,3}(?:\s*\+\s*\d{1,2})?\s*[''\u2032]?\s*(?:\(?\s*(?:pen\.?|p\.?|o\.?\s*g\.?|og)\s*\)?)?\s*[,;]?\s*)+$/i;
+function goalsPlain(tail) {
+  const t = String(tail).replace(/<ref[\s\S]*?(?:\/>|<\/ref>)/g, "").replace(/\{\{[^}]*\}\}/g, "").trim();
+  if (!t || !MINUTES.test(t)) return { n: 0, own: 0 };
+  let n = 0, own = 0;
+  for (const part of t.split(/[,;]/)) {
+    if (!/\d/.test(part)) continue;
+    if (/o\.?\s*g\.?|\bog\b/i.test(part)) own++; else n++;
+  }
+  return { n: n, own: own };
+}
+
 (async () => {
   console.log("reading " + PAGES.length + " match pages for " + YEAR + "...");
   let text = "";
@@ -334,8 +366,10 @@ function extraPages(text, had){
   /* ---------- goals ---------- */
   /* a scorer line looks like:  *[[Lukas Podolski]] {{goal|4|71}}  */
   let goalEvents = 0, ownEvents = 0;
-  for (const m of text.matchAll(/^\s*\*+\s*\[\[([^\]|]+)(?:\|[^\]]*)?\]\]\s*(\{\{\s*goal\s*\|[^}]*\}\})/gm)) {
-    const { n, own } = goalsIn(m[2]);
+  for (const m of text.matchAll(/^\s*\*+\s*\[\[([^\]|]+)(?:\|[^\]]*)?\]\]([^\n]*)$/gm)) {
+    const tail = m[2] || "";
+    const { n, own } = /\{\{\s*goal\s*\|/.test(tail) ? goalsIn(tail) : goalsPlain(tail);
+    if (!n && !own) continue;
     goalEvents += n; ownEvents += own;
     const man = find(m[1]);
     if (man) { man.g += n; man.og += own; }
@@ -348,12 +382,15 @@ function extraPages(text, had){
   let yel = 0, red = 0, rows = 0;
   /* THE POSITION IS SOMETIMES A TOOLTIP: see the note in build-wc2006-xi.js.
      Without this the 2014 final's cards and appearances are not counted. */
-  for (const m of text.matchAll(/^\|\s*(?:\{\{\s*abbr\s*\|\s*[A-Z]{2,3}\s*\|[^}\n]*\}\}|[A-Z]{2,3})\s*\|\|[^\n]*?\[\[([^\]|]+)(?:\|[^\]]*)?\]\]([^\n]*)$/gm)) {
-    const man = find(m[1]);
+  /* A REAL SHIRT NUMBER, which keeps the technical staff out: 2026 books
+     assistant coaches under "Other disciplinary actions" with an em dash where
+     the number goes, and a booked assistant is not an appearance. */
+  for (const m of text.matchAll(/^\|\s*(?:\{\{\s*abbr\s*\|\s*[A-Z]{2,3}\s*\|[^}\n]*\}\}|[A-Z]{2,3})\s*\|\|\s*'''(\d+)'''\s*\|\|[^\n]*?\[\[([^\]|]+)(?:\|[^\]]*)?\]\]([^\n]*)$/gm)) {
+    const man = find(m[2], null, m[1]);
     rows++;
     if (!man) continue;
     man.app += 1;
-    const rest = m[2] || "";
+    const rest = m[3] || "";
     const ys = (rest.match(/\{\{\s*yel\b/gi) || []).length;
     const rs = (rest.match(/\{\{\s*(sent ?off|red|yel-red|y-r|dismissed)\b/gi) || []).length;
     man.y += ys; man.r += rs; yel += ys; red += rs;
@@ -379,7 +416,7 @@ function extraPages(text, had){
       const man = find(m[1]);
       if (man && !seenCap.has(man)) { man.cap = true; seenCap.add(man); caps++; }
     }
-  console.log("captains: " + caps + "/32");
+  console.log("captains: " + caps + "/" + Object.keys(sides).length);
 
   if (missed.length) {
     const uniq = [...new Set(missed)];

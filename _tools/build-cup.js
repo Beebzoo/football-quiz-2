@@ -57,6 +57,16 @@ const CACHE = path.join(__dirname, "_models");
 const UA = "ball2-cup/1.0 (personal quiz project)";
 const WRITE = process.argv.includes("--write");
 
+/* EIGHT GROUPS AND A ROUND OF SIXTEEN, which is every World Cup from 1998 to
+   2022. 2026 is not a bigger version of it: twelve groups, the eight best
+   third places, and a round of thirty-two, so the slots and the bracket this
+   file builds do not describe it. It stops rather than writing something that
+   looks like a tournament and is not. */
+if (+YEAR >= 2026) {
+  console.error("The Cup reads eight groups and a bracket of sixteen. " + YEAR +
+    " has twelve groups and a round of thirty-two, which is a different tournament.");
+  process.exit(1);
+}
 const GROUPS = "ABCDEFGH".split("");
 const sleep = ms => new Promise(r => setTimeout(r, ms));
 

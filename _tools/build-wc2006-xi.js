@@ -62,7 +62,11 @@ const WHO = (i => i > -1 ? process.argv[i + 1] : null)(process.argv.indexOf("--w
 const EXTRAS = {
   "2006": ["Battle of Nuremberg (2006 FIFA World Cup)"],
 };
-const PAGES = "ABCDEFGH".split("").map(g => YEAR + " FIFA World Cup Group " + g)
+/* TWELVE GROUPS FROM 2026: forty-eight sides, so the group pages run A to L.
+   Read eight of them and everybody whose only matches were in I, J, K or L
+   comes back with no line-up at all. */
+const GROUP_LETTERS = (+YEAR >= 2026 ? "ABCDEFGHIJKL" : "ABCDEFGH").split("");
+const PAGES = GROUP_LETTERS.map(g => YEAR + " FIFA World Cup Group " + g)
   .concat([YEAR + " FIFA World Cup knockout stage", YEAR + " FIFA World Cup final"])
   .concat(EXTRAS[YEAR] || []);
 
@@ -195,6 +199,14 @@ const ALIAS = {
   "Juan Carlos Aguilera": {n: "Carlos Aguilera", side: "Spain"},
   /* he played under one name and Wikipedia files him under the other */
   "Preki": "Predrag Radosavljević",
+
+  /* 2022 and 2026 */
+  /* in Saudi Arabia’s line-ups and not in their squad list */
+  "Hassan Al-Tombakti": null,
+  /* Brazil took two Danilos and two Édersons, and Wikipedia dates them apart. */
+  "Danilo (footballer, born July 1991)": {n: "Danilo Luiz", side: "Brazil"},
+  "Danilo (footballer, born 2001)": {n: "Danilo Santos", side: "Brazil"},
+  "Éderson (footballer, born 1999)": {n: "Éderson Silva", side: "Brazil"},
 
   /* 2002. The deck spells him as one word, the reports as three. */
   "Selim Ben Achour": "Benachour",
