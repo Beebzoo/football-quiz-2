@@ -3906,7 +3906,7 @@
 
   /* Flags come from the app's own assets/natflags. 29 of the 32 were already
      mapped by the One & Only bank; England and the 1992-2006 Serbia and
-     Montenegro were fetched by _tools/build-wc2006.js from the flag Wikidata
+     Montenegro were fetched by _tools/build-squads.js from the flag Wikidata
      names for that state, which matters because modern Serbia's is a different
      flag to the one that played in 2006. */
   .h2flag{width:34px;height:23px;object-fit:cover;border-radius:3px;flex:none;
@@ -11836,9 +11836,6 @@ function cupLine(r){
   return r.nation + " out in " + r.out + " of " + r.year +
     (r.v ? ", " + score + " against " + r.v : "") + ".";
 }
-/* WINNING IT FINISHES YOUR PAGE. Twenty-three stickers of the country you took
-   all the way, which is a foil, which is their bench in The Dugout for every
-   match after it. Seven matches for a squad you keep. */
 /* WINNING IT FINISHES YOUR PAGE, in the book of the tournament you won. This
    used to read "if the year is not 2006 the prize is six packs", which was the
    honest answer while there was one album and a second one would have been a
@@ -13150,7 +13147,7 @@ function h2DrawOr(t, i, w){
 }
 /* The next man steps up. Every kick is the striker's, or whoever is nearest
    his spot if he has been sent off, and it is priced as a shootout kick
-   rather than off the H2_SHOT table. */
+   rather than off H2_SHOT_AT. */
 function h2SoKick(){
   audio();
   const H = h2(), so = H.so;
@@ -15792,7 +15789,7 @@ function h2Render(st){
        be, and the ladder tells him that honestly.
 
        A penalty and a contested ball keep their own label: both are announced
-       out loud anyway, and a penalty priced off H2_SHOT would be a lie. */
+       out loud anyway, and a penalty priced off H2_SHOT_AT would be a lie. */
     const priced = (H.pen || H.contest || !t) ? t
       : (TIERS[H.shooting ? h2ShotTier(H.at, H.who) : h2Priced(H.at, H.sel == null ? H.at : H.sel)] || t);
     st.innerHTML =
