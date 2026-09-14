@@ -294,6 +294,11 @@
      --turf and the two card colours are NOT theme-aware on purpose. A yellow
      card is yellow, a red card is red, and grass is grass. */
   :root, :root[data-theme="dark"]{
+    /* the banner's goal, lit the way a floodlit one is */
+    --bn-post:#eef3f5; --bn-post-m:#c3d0d4; --bn-post-d:#8d9ea3;
+    --bn-net:rgba(205,232,212,.15); --bn-net-d:rgba(205,232,212,.09);
+    --bn-flash:#fff6c8; --bn-shadow:rgba(5,16,10,.45);
+
     --card:#1C2116;                /* a surface on the night ground */
     --chalk:#F8F1DD;               /* what is written on it */
     --chalk-dim:#9C9478;
@@ -330,6 +335,11 @@
     --head-rule:1px;
   }
   :root[data-theme="light"]{
+    /* and on paper, where a white goal on cream is no goal at all */
+    --bn-post:#6b808a; --bn-post-m:#52656d; --bn-post-d:#3a4950;
+    --bn-net:rgba(45,74,62,.26); --bn-net-d:rgba(45,74,62,.15);
+    --bn-flash:#b8860b; --bn-shadow:rgba(70,58,34,.22);
+
     --card:#FFFCF4;                /* paper, a shade above the ground */
     --chalk:#2A2620;
     --chalk-dim:#5C5344;
@@ -1434,14 +1444,19 @@
      image-rendering is the line that cannot be dropped. crisp-edges first and
      pixelated second, because last valid wins and pixelated is the one that
      promises nearest neighbour. */
+  /* THE APP'S OWN GROUND, not a green rectangle. The canvas clears to
+     transparent and paints only the goal, the man, the ball and their shadows,
+     so the pitch behind them was pure CSS doing nothing the drawing needed, and
+     on a dark menu it read as a block that had been pasted on. Taking --bg also
+     means it follows the theme rather than matching one of them by luck. */
   .banner{position:relative;width:100%;aspect-ratio:600 / 246;overflow:hidden;
-    background:linear-gradient(178deg,#0d3a1c,#17552c);cursor:pointer}
+    background:var(--bg);cursor:pointer}
   #bnstage{position:absolute;inset:0;z-index:2;pointer-events:none;
     image-rendering:crisp-edges;image-rendering:pixelated;width:100%;height:100%}
   .banner .words{position:absolute;inset:0;z-index:1;display:flex;
     align-items:center;justify-content:center;padding-top:10px}
   .banner .words h1{margin:0;font:800 clamp(2.4rem,13vw,4.4rem)/1 var(--ui);
-    letter-spacing:.02em;text-transform:uppercase;color:#f2f0e6}
+    letter-spacing:.02em;text-transform:uppercase;color:var(--ink)}
   .mm-page{display:flex;flex-direction:column;gap:22px;padding-top:18px}
   .mm-eyebrow{font:700 10px/1 var(--ui);letter-spacing:.24em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:8px}
   .mm-sect{display:flex;flex-direction:column;gap:10px}
@@ -15157,7 +15172,7 @@ function renderAlbum(st){
    top level, among them W, line, ball, goal and draw, which is fine on a page
    of its own and is a collision nobody would enjoy finding in here. */
 const BN = (function(){
-const PAL={".":null,"K":"#16130f","w":"#ffffff","W":"#d5d5d0","b":"#2a2620","B":"#5a5a66","g":"#ffffff","G":"#bcc2cb","s":"#b07648","S":"#8d5b36","h":"#2b1f15","H":"#46341f","y":"#f7dc35","Y":"#c9a82a","c":"#f7dc35"};
+const PAL={".":null,"K":"#16130f","w":"#ffffff","W":"#d5d5d0","b":"#3d382f","B":"#5a5a66","g":"#ffffff","G":"#bcc2cb","s":"#b07648","S":"#8d5b36","h":"#2b1f15","H":"#46341f","y":"#f7dc35","Y":"#c9a82a","c":"#f7dc35"};
 const BASE=[
 "................................",
 "................................",
@@ -15428,9 +15443,31 @@ const FOOT_B=()=>({x:MAN_X+21, y:HR+47});   // back foot
    the bar out from under the ball. */
 const BAR={x:26, y:Math.round(topAt(30))+BAR_TH};
 
-const POSTC="#eef3f5", POSTM="#c3d0d4", POSTD="#8d9ea3",
-      NET="rgba(205,232,212,.15)", NETD="rgba(205,232,212,.09)", FLASH="#fff6c8",
-      SHADOW="rgba(5,16,10,.45)";
+/* THE GOAL'S INK COMES OFF THE PAGE. These were picked against a floodlit
+   pitch, which the banner no longer sits on: it takes the app's own ground now,
+   and a near-white post on the cream theme is a goal you cannot see. The
+   fallbacks are the original values, so a build with the tokens missing looks
+   exactly like the spec did. */
+let POSTC="#eef3f5", POSTM="#c3d0d4", POSTD="#8d9ea3",
+    NET="rgba(205,232,212,.15)", NETD="rgba(205,232,212,.09)", FLASH="#fff6c8",
+    SHADOW="rgba(5,16,10,.45)";
+let inkFor=null;
+/* ONLY WHEN THE THEME MOVES. getComputedStyle in a rAF loop forces a style
+   recalculation sixty times a second for a colour that cannot change without a
+   render. Reading one attribute triggers nothing, so that is what is watched. */
+function ink(){
+  let t=null;
+  try{ t=document.documentElement.getAttribute("data-theme"); }catch(e){ return; }
+  if(t===inkFor) return;
+  inkFor=t;
+  try{
+    const cs=getComputedStyle(document.documentElement);
+    const g=(n,d)=>{ const v=cs.getPropertyValue(n).trim(); return v||d; };
+    POSTC=g("--bn-post",POSTC); POSTM=g("--bn-post-m",POSTM); POSTD=g("--bn-post-d",POSTD);
+    NET=g("--bn-net",NET); NETD=g("--bn-net-d",NETD);
+    FLASH=g("--bn-flash",FLASH); SHADOW=g("--bn-shadow",SHADOW);
+  }catch(e){}
+}
 
 /* ---- pre-render the eight poses once, mirrored, number stamped after ---- */
 function gridTo(ctx,rows,ox,oy,pal){
@@ -15603,7 +15640,7 @@ function paint(u, el){
   cv = el || document.getElementById("bnstage");
   if(!cv || !cv.getContext) return false;
   ctx=cv.getContext("2d");
-  ready();
+  ready(); ink();
   draw(u);
   return true;
 }
