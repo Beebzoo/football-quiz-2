@@ -31,8 +31,18 @@ const check = (n, c, x) => { console.log((c ? "  PASS  " : "  FAIL  ") + n + (c 
 
 /* the answer as that phone would render it, so the comparison is against the
    real string and not a guess at it */
-const answerOf = c => ev(c, "S && S.tier!=null && S.qi!=null ? String(q().a) : null");
+const answerOf = c => ev(c, "S && S.tier!=null && S.qi!=null ? esc(String(q().a)) : null");
 const shows = (c, text) => text != null && stage(c).indexOf(text) > -1;
+/* WHERE AN ANSWER IS ACTUALLY PRINTED, which is not the same question as whether
+   the string appears somewhere on the screen. Searching the whole screen made
+   this a test of the question bank: two of the easy questions contain their own
+   answer, and on those draws every phone in the room "read" it because every
+   phone can see the question. The hidden case is the same .atext element wearing
+   hidden-ans, so the negative lookahead is what separates "the answer is here"
+   from "a note saying it is not here yet". */
+const ANSBLOCK = /<div class="(?:atext(?! hidden-ans)|anstext)[^"]*">[\s\S]*?<\/div>/g;
+const reads = (c, text) => text != null &&
+  (stage(c).match(ANSBLOCK) || []).some(b => b.indexOf(text) > -1);
 
 (async () => {
   const host = makeInstance("host");     // Martijn, player 0
@@ -64,17 +74,17 @@ const shows = (c, text) => text != null && stage(c).indexOf(text) > -1;
   const answer = answerOf(host);
   console.log(`      the answer is "${answer}"`);
   check("nobody sees the answer during the question",
-    !shows(host, answer) && !shows(bram, answer) && !shows(ale, answer),
-    [shows(host, answer) && "host", shows(bram, answer) && "bram", shows(ale, answer) && "ale"].filter(Boolean).join(","));
+    !reads(host, answer) && !reads(bram, answer) && !reads(ale, answer),
+    [reads(host, answer) && "host", reads(bram, answer) && "bram", reads(ale, answer) && "ale"].filter(Boolean).join(","));
 
   console.log("\n--- Bram reveals it on his own phone ---");
   run(bram, "mpLockAnswer();");
   await tick(400);
   check("the room is judging Bram", phase(host) === "judge" && ev(host, "answerIdx()") === 1,
     phase(host) + "/" + ev(host, "answerIdx()"));
-  check("Bram sees the answer", shows(bram, answer), "not on his screen");
-  check("Ale does NOT see the answer", !shows(ale, answer), "Ale can read it");
-  check("the host, who is also a player, does NOT see it", !shows(host, answer), "host can read it");
+  check("Bram sees the answer", reads(bram, answer), "not on his screen");
+  check("Ale does NOT see the answer", !reads(ale, answer), "Ale can read it");
+  check("the host, who is also a player, does NOT see it", !reads(host, answer), "host can read it");
   check("Ale is told to wait rather than left blank", /Say nothing yet|calling it/.test(stage(ale)), stage(ale).slice(0, 80));
   check("Ale still sees the question itself", shows(ale, ev(host, "String(q().q)")), "question missing too");
   check("Bram is the only one offered the call", /Your call/.test(stage(bram)) && !/Your call/.test(stage(ale)),
@@ -87,8 +97,8 @@ const shows = (c, text) => text != null && stage(c).indexOf(text) > -1;
   await tick(400);
   check("the question comes loose", phase(host) === "steal_offer", phase(host));
   check("Ale is offered the steal", /STEAL IT/.test(stage(ale)), stage(ale).slice(0, 80));
-  check("and still has not seen the answer", !shows(ale, answer), "Ale read it before stealing");
-  check("the host has not seen it either", !shows(host, answer), "host read it");
+  check("and still has not seen the answer", !reads(ale, answer), "Ale read it before stealing");
+  check("the host has not seen it either", !reads(host, answer), "host read it");
 
   console.log("\n--- Ale steals it ---");
   run(ale, "claimSteal(2);");
@@ -96,17 +106,17 @@ const shows = (c, text) => text != null && stage(c).indexOf(text) > -1;
   check("Ale is on the hook", ev(host, "answerIdx()") === 2, ev(host, "answerIdx()"));
   run(ale, "mpLockAnswer();");
   await tick(400);
-  check("now Ale sees the answer", shows(ale, answer), "not shown to the stealer");
-  check("Bram does not see it during Ale's attempt", !shows(bram, answer), "Bram can read it");
+  check("now Ale sees the answer", reads(ale, answer), "not shown to the stealer");
+  check("Bram does not see it during Ale's attempt", !reads(bram, answer), "Bram can read it");
 
   console.log("\n--- once it is dead, everyone gets it ---");
   run(ale, "judge(false);");
   await tick(400);
   console.log(`      phase is now ${phase(host)}`);
   if (phase(host) === "deadq") {
-    check("the host sees the answer", shows(host, answer), "host still blind");
-    check("Bram sees the answer", shows(bram, answer), "Bram still blind");
-    check("Ale sees the answer", shows(ale, answer), "Ale still blind");
+    check("the host sees the answer", reads(host, answer), "host still blind");
+    check("Bram sees the answer", reads(bram, answer), "Bram still blind");
+    check("Ale sees the answer", reads(ale, answer), "Ale still blind");
   } else {
     check("a failed steal ends the question", ["deadq", "pick"].includes(phase(host)), phase(host));
   }
@@ -117,7 +127,7 @@ const shows = (c, text) => text != null && stage(c).indexOf(text) > -1;
   run(solo, 'S = freshState(["A","B"], false, "classic", 0); pickTier("easy"); reveal();');
   await tick(200);
   const soloAns = answerOf(solo);
-  check("the reader still sees every answer", shows(solo, soloAns), "hidden with no room open");
+  check("the reader still sees every answer", reads(solo, soloAns), "hidden with no room open");
 
   console.log(fails ? `\n${fails} FAILED` : "\nall good");
   process.exit(fails ? 1 : 0);
