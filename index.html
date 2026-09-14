@@ -2007,7 +2007,14 @@
      smooth bob is right for a drawn man and wrong for a sprite, and steps(2)
      on the same keyframes is a two-frame walk for nothing. The fall and the
      slide rotate the whole figure, which costs a sprite its edges, so they
-     snap through four angles instead of sweeping. */
+     snap through four angles instead of sweeping.
+
+     THE FALL IS CALLED .thru, the man who has been put through. .down is the
+     obvious guess and it is a trap: it carries a static transform rather than
+     an animation, so animation-timing-function has nothing to act on. This
+     rule named .fall for a long time, which is no class at all, so the man
+     going down kept sweeping under a skin that had squared off everything
+     around him. */
   body.pixel .h2man.run .fig.pm,
   body.pixel .h2man.step .fig.pm,
   body.pixel .h2man.moved .fig.pm,
@@ -2016,7 +2023,7 @@
   body.pixel .h2man.moved .fig.pm .f-leg,
   body.pixel .h2man.run .fig.pm .f-arm,
   body.pixel .h2man.step .fig.pm .f-arm{animation-timing-function:steps(2)}
-  body.pixel .h2man.fall .fig.pm,
+  body.pixel .h2man.thru .fig.pm,
   body.pixel .h2man.slide .fig.pm,
   body.pixel .h2man.felled .fig.pm{animation-timing-function:steps(4)}
 
@@ -2061,17 +2068,29 @@
   body.pixel .h2man .h2lb{font:400 7px/1 "Silkscreen","Courier New",monospace;
     letter-spacing:0;text-shadow:1px 1px 0 #0b0b0b;color:#f2f6ee}
   body.pixel .h2man.sel .h2lb, body.pixel .h2man.hold .h2lb{color:#ffe540;text-shadow:1px 1px 0 #0b0b0b}
-  body.pixel .h2pitch svg line, body.pixel .h2pitch svg path{stroke:#f2f6ee;
-    stroke-dasharray:none;shape-rendering:crispEdges}
 
   /* ---------------- the chrome round it ----------------
      Square corners and hard shadows, because one soft rounded panel against a
      pixel pitch is the tell. The QUESTION CARD is deliberately left alone: it
      is the reading surface, it carries paragraphs, and pixel type at that
      length is unreadable. */
-  body.pixel .h2scorebug, body.pixel .h2confirm, body.pixel .toast,
+  body.pixel .sb, body.pixel .h2confirm, body.pixel .toast,
   body.pixel .h2heat, body.pixel .h2where, body.pixel .h2scout{border-radius:0}
   body.pixel .h2confirm{box-shadow:4px 4px 0 rgba(0,0,0,.5)}
+  /* THE SCOREBUG IS MORE THAN ITS CORNERS. The group above squares the bar,
+     and that used to be the whole treatment, which left the one panel at the
+     top of every match screen sitting over hard-edged men with a blurred
+     shadow under it, rounded flags, a rounded score separator, and a halo on
+     the lit half that bled sideways and pulsed. The halo gets the same answer
+     .h2ring got: a hard edge that does not breathe.
+
+     THE KIT-COLOUR FADE BEHIND THE LIT HALF STAYS. It is how possession reads
+     and which way round it is, and flattening it would cost the bar its job to
+     save it a gradient. */
+  body.pixel .sb{box-shadow:4px 4px 0 rgba(0,0,0,.5)}
+  body.pixel .sb-flag{border-radius:0;box-shadow:0 0 0 1px #0b0b0b}
+  body.pixel .sb-mid s{border-radius:0}
+  body.pixel .sb-t.on::after{box-shadow:none;animation:none}
   body.pixel .h2ctier{border-radius:0}
 
   /* ---------------- the ground the pitch sits on ----------------
@@ -5918,7 +5937,7 @@ function setTheme(t){
   applyTheme();
   render();
 }
-const BUILD = "14 Sep 2026 · 03:28";
+const BUILD = "14 Sep 2026 · 08:58";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five

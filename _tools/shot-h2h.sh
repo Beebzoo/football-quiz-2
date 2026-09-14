@@ -237,11 +237,25 @@ for (const k of SHOT_LINES)
     ` S.h2h.line=["mid","${k}"]; S.h2h.who=0; S.h2h.at=9; S.h2h.markedAgainst=0; S.phase="h_pick"; render();`;
 /* PIXEL: ON ANY STATE. "pixel:nl" is the nl state in the sixteen-bit look,
    which means every state ever written can be photographed in both without
-   a second copy of any of them. The class goes on before the state runs, so
-   the first frame is already right. */
+   a second copy of any of them. It drives the h2Pixel flag the app itself
+   reads, and its apply, rather than putting the class on the body by hand,
+   because the toggle row reads the variable and not the class: a hand-added
+   class gave a pixel pitch under a button still offering you "16-bit", and no
+   screenshot could ever have caught it, because this tool was producing it.
+
+   NOT h2TogglePixel, which flips whatever localStorage last said, so pixel:
+   would mean the other one rather than on, and which drags an AudioContext
+   and a render() along before the state has built anything.
+
+   NO APOSTROPHES ANYWHERE IN THIS BLOCK. Everything from the node -e above to
+   its closing quote is one single-quoted sh string, so one apostrophe ends it
+   and the script stops parsing two hundred lines early.
+
+   The skin goes on before the state runs, so the first frame is already
+   right. */
 const pixel = /^pixel:/.test(state);
 const st16 = pixel ? state.slice(6) : state;
-setups[st16] = (pixel ? `document.body.classList.add("pixel");` : "") +
+setups[st16] = (pixel ? `h2Pixel = true; h2ApplyPixel();` : "") +
   (setups[st16] || setups.pick);
 state = st16;
 

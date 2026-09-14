@@ -59,6 +59,56 @@ const loose = selectors.filter(sel => sel.indexOf("body.pixel") !== 0);
 check("every selector in the block starts with body.pixel", loose.length === 0,
   loose.slice(0, 6).join("  |  "));
 
+/* ---------- and every selector still matches something ----------
+   The prefix check above stops the skin leaking OUT. This one stops it
+   pointing at nothing: a renamed class leaves a rule that is silent rather
+   than broken, so the night look carries on underneath it and everybody
+   assumes that is what the skin does. Four rules had gone that way before
+   this existed, one of them the scorebug at the top of every match screen.
+
+   Coarse on purpose. A precise check needs a DOM; a class name that appears
+   nowhere else in fourteen thousand lines is dead whatever shape the selector
+   is, and that is the failure worth catching. */
+const rest = html.slice(0, start) + html.slice(end);
+/* THE CORPUS IS THE POINT, not the pattern. Searching the whole file for a
+   class name finds the name in something that is not markup: a plain indexOf
+   called .h2man.fall alive on "--fall", and a whole-word one called it alive
+   on "let fall" and on a line of copy reading "fall short and it costs the
+   same". A class is emitted in exactly three shapes, so those are the corpus,
+   and a token with a space in it cannot be a class. */
+const EMITS = new Set();
+const token = t => { t = t.trim(); if (t && !/[\s${}]/.test(t)) EMITS.add(t); };
+/* class="a b c", the bulk of it, interpolations split the literal parts apart */
+for (const m of rest.matchAll(/class\s*=\s*(["'`])([\s\S]*?)\1/g))
+  for (const part of m[2].split(/\${[^}]*}/)) part.split(/\s+/).forEach(token);
+/* classList.add("x"), and its siblings */
+for (const m of rest.matchAll(/classList\.\w+\(\s*["'`]([\w-]+)["'`]/g)) token(m[1]);
+/* a bare quoted token: the conditional lists the man builder uses, where a
+   class is a string on its own and never inside a class attribute */
+for (const m of rest.matchAll(/["'`]([a-z][\w-]*)["'`]/g)) token(m[1]);
+
+const dead = [];
+for (const sel of new Set(selectors)) {
+  const tail = sel.replace(/^body\.pixel\s*/, "");
+  /* SPLIT, DO NOT PATTERN-MATCH. A selector has a grammar: combinators
+     separate compounds, and a compound is an element or a run of classes and
+     ids with a pseudo tail. Reading names out of it with one regex finds "so"
+     inside f-torso, which is how the first version of this check failed.
+     Elements are skipped: proving <line> is absent from the PITCH, when an
+     icon builds one, needs to know which markup belongs to the pitch, and a
+     check that cannot fail on its own case is worse than none. */
+  for (let compound of tail.split(/[\s>+~]+/)) {
+    compound = compound.split(":")[0].trim();
+    if (!compound || /^[a-z]/.test(compound)) continue;
+    for (const n of (compound.match(/[.#][A-Za-z][\w-]*/g) || [])) {
+      const name = n.slice(1);
+      if (!EMITS.has(name)) dead.push(sel + "   ." + name + " is never emitted");
+    }
+  }
+}
+check("every selector in the block matches markup the app renders",
+  dead.length === 0, "\n           " + dead.slice(0, 8).join("\n           "));
+
 /* ---------- and nothing outside it mentions the class ---------- */
 const outside = html.slice(0, start) + html.slice(end);
 const styleEnd = outside.indexOf("</style>");
