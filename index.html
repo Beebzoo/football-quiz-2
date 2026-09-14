@@ -279,6 +279,7 @@
      touched a second time. */
   :root{
     --r2:6px;                      /* every corner in this direction */
+    --px16:Silkscreen,"Courier New",monospace;   /* numbers only: latin-1 face */
     --sage:#8FB79E;                /* the One on One rule */
     --terracotta:#C4714F;          /* the Dugout rule */
     /* NOT the grass. #pitchbg is the page backdrop behind the whole app, and
@@ -306,7 +307,10 @@
     --ok:#5FBE86;
     --bad:#E8705A;
     --shadow:0 6px 18px rgba(0,0,0,.45);
-    --bg:#14180F;                  /* near-black olive, warm not blue */
+    --bg:#1B2215;                  /* olive, warm not blue. Lifted off near-black
+                                      so the banner has something to stand on:
+                                      its outline is #16130f and at #14180F the
+                                      whole figure lost its edge. */
     --ink:#F8F1DD;                 /* cream, never pure white */
     --ink-soft:#C8C0A6;
     --ink-dim:#9C9478;
@@ -2904,6 +2908,49 @@
             border-bottom:1px solid rgba(0,0,0,.35);
             transition:transform .5s cubic-bezier(.3,.8,.3,1), opacity .4s}
   .dmveil i.off{transform:translateX(-115%);opacity:0}
+  /* ---------------- THE FRONT DOOR, four blocks and a cabinet ----------------
+     Left is what you are in the middle of, right is what you have won, and the
+     difference used to be invisible because all four were the same strip in the
+     same column.
+
+     THE HARD CORNER IS THE WHOLE SIXTEEN-BIT COSTUME. Every other surface in
+     this app is rounded, so a square block reads as another era on its own and
+     nothing has to be dressed up as pixel art to say so. Silkscreen carries the
+     numbers and only the numbers: it is latin-1 only, which is fine for digits
+     and would quietly drop the accent off a name. */
+  .mm-quad{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
+  .mm-quad.solo{grid-template-columns:1fr}
+  .mm-col{display:flex;flex-direction:column;gap:10px;min-width:0}
+  /* the cabinet is a frame with a label sitting on its top edge, which is what
+     makes it read as a case rather than as two more buttons */
+  .mm-case{position:relative;border:1px solid var(--gold);padding:15px 8px 8px;
+    display:flex;flex-direction:column;gap:8px;min-width:0}
+  .mm-case-lab{position:absolute;top:-6px;left:8px;padding:0 5px;background:var(--bg);
+    font:700 8px/1 var(--ui);letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+  .qb{position:relative;display:block;width:100%;text-align:left;cursor:pointer;
+    background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--qc,var(--line));
+    border-radius:0;padding:10px 11px;color:inherit;font:inherit;min-width:0;
+    transition:transform .06s ease,border-color .15s ease}
+  .qb:active{transform:translateY(1px)}
+  .qb .qt{display:block;font:800 15px/1.1 var(--ui);letter-spacing:-.01em}
+  .qb .qs{display:block;font:400 11px/1.35 var(--ui);color:var(--ink-dim);margin-top:3px;
+    overflow:hidden;text-overflow:ellipsis}
+  .qb .qn{display:block;font:400 19px/1 var(--px16);color:var(--ink);margin-top:8px;
+    font-variant-numeric:tabular-nums}
+  .qb .qn s{text-decoration:none;font:400 11px/1 var(--ui);letter-spacing:.02em;
+    color:var(--ink-dim);margin-left:2px}
+  .qb .qgo{display:inline-block;margin-top:8px;padding:5px 10px;background:var(--green-fill);
+    color:var(--green-ink);font:800 10px/1 var(--ui);letter-spacing:.12em;text-transform:uppercase}
+  /* SEGMENTS, NOT A BAR. Eleven notches for eleven men is exactly what the
+     number means, and a smooth bar would round it into a percentage nobody
+     asked for. The album's is twelve because 736 notches is not a bar. */
+  .qb .qseg{display:flex;gap:3px;margin-top:9px}
+  .qb .qseg i{flex:1;height:7px;background:var(--line)}
+  .qb .qseg i.on{background:var(--qc,var(--gold))}
+  .qb.done{opacity:.8}
+  /* in the case, the case is the frame */
+  .mm-case .qb{border-top:0;border-right:0;border-bottom:0;background:transparent;padding-left:10px}
+  .mm-case .qb + .qb{border-top:1px solid var(--line);padding-top:12px}
   /* the card on the front door */
   .mm-daily{display:flex;width:100%;align-items:center;justify-content:space-between;gap:10px;
             background:var(--panel);border:1px solid var(--line);border-radius:14px;
@@ -14701,24 +14748,49 @@ function dailyCardHTML(){
      most of the way through, and the shelf is one tap away for the rest. */
   const cbook = albumCollecting();
   const c = albumCount(cbook);
-  const albumRow = c.all ? '<button class="mm-ghost" onclick="openAlbum()">' +
-    'The album \u00b7 ' +
-    esc((POOLS[cbook] || {}).short || (POOLS[cbook] || {}).label || cbook) +
-    ' \u00b7 ' + c.have + ' of ' + c.all +
-    (A.packs > 0 ? ' \u00b7 ' + A.packs + ' pack' + (A.packs === 1 ? "" : "s") + ' to open' : "") +
+  /* TWELVE NOTCHES FOR SEVEN HUNDRED STICKERS. A notch each is not a bar, and a
+     smooth bar turns a book you are a third of the way through into a
+     percentage. Twelve is enough to feel a page turn and few enough to read. */
+  const seg = (have, all, n) => { const on = all ? Math.min(n, Math.ceil(have / all * n)) : 0;
+    let o = '<span class="qseg">';
+    for (let i = 0; i < n; i++) o += '<i' + (i < on ? ' class="on"' : '') + '></i>';
+    return o + '</span>'; };
+  const albumRow = c.all ? '<button class="qb" style="--qc:var(--gold)" onclick="openAlbum()">' +
+    '<span class="qt">The Album</span>' +
+    '<span class="qs">' +
+      esc((POOLS[cbook] || {}).short || (POOLS[cbook] || {}).label || cbook) +
+      (A.packs > 0 ? ' \u00b7 ' + A.packs + ' pack' + (A.packs === 1 ? "" : "s") + ' to open' : "") +
+    '</span>' +
+    '<span class="qn">' + c.have + ' <s>of ' + c.all + '</s></span>' +
+    seg(c.have, c.all, 12) +
     '</button>' : "";
   /* YOUR XI, once there are eleven men to choose from, counted across every
      book: the eleven can be built out of any of them. */
   const own = albumOwnedTotal();
-  const dreamRow = own >= 11 ? '<button class="mm-ghost" onclick="openDream()">' +
-    'Your XI \u00b7 ' + (dreamOk() ? 'ready' : dreamPicked().length + ' of 11') + '</button>' : "";
-  return '<div class="mm-sect"><button class="mm-daily' + (done ? " done" : "") +
-    '" onclick="dailyStart()">' +
-    '<span class="dd-l"><span class="dd-t">The Daily Ball</span>' +
-      '<span class="dd-s">' + esc(said) + '</span></span>' +
-    (st.played ? '<span class="dd-r"><b>' + st.played + '</b><i>day' +
-      (st.played === 1 ? "" : "s") + '</i></span>' : '<span class="dd-r dd-go">Play</span>') +
-    '</button>' + albumRow + dreamRow + cupRow_() + '</div>';
+  const picked = dreamPicked().length;
+  const dreamRow = own >= 11 ? '<button class="qb" style="--qc:var(--gold)" onclick="openDream()">' +
+    '<span class="qt">Your XI</span>' +
+    '<span class="qs">' + (dreamOk() ? 'Ready to field' : 'Built from every book') + '</span>' +
+    '<span class="qn">' + picked + ' <s>of 11</s></span>' +
+    seg(picked, 11, 11) +
+    '</button>' : "";
+  /* LEFT IS WHAT YOU ARE PLAYING, RIGHT IS WHAT YOU HAVE WON, and the two used
+     to be four identical strips in one column. The cabinet only appears once
+     there is something in it, and with nothing to show the left column takes
+     the whole width rather than leaving a labelled empty frame on the page. */
+  const daily = '<button class="qb' + (done ? " done" : "") +
+    '" style="--qc:var(--sage)" onclick="dailyStart()">' +
+    '<span class="qt">The Daily Ball</span>' +
+    '<span class="qs">' + esc(said) + '</span>' +
+    (st.played
+      ? '<span class="qn">' + st.played + ' <s>day' + (st.played === 1 ? "" : "s") + '</s></span>'
+      : '<span class="qgo">Play</span>') +
+    '</button>';
+  const cab = [albumRow, dreamRow].filter(Boolean).join("");
+  return '<div class="mm-quad' + (cab ? "" : " solo") + '">' +
+    '<div class="mm-col">' + daily + cupRow_() + '</div>' +
+    (cab ? '<div class="mm-case"><span class="mm-case-lab">The cabinet</span>' + cab + '</div>' : "") +
+  '</div>';
 }
 /* THE FRONT DOOR SAYS WHERE THE RUN IS, because a run is seven matches over
    days and the first thing it has to answer is "where was I". */
@@ -14730,13 +14802,11 @@ function cupRow_(){
     : !c.alive ? "Out in " + c.out
     : c.round === "group" ? esc(c.nation) + " " + c.year + " \u00b7 group match " + (c.n + 1) + " of 3"
     : esc(c.nation) + " " + c.year + " \u00b7 " + CUP_ROUND_NAME[c.round];
-  return '<button class="mm-daily cuprow" onclick="openCup()">' +
-    '<span class="dd-l"><span class="dd-t">The Cup</span>' +
-      '<span class="dd-s">' + said + '</span></span>' +
-    (c && c.alive
-      ? '<span class="dd-r dd-go">Play</span>'
-      : c && c.won ? '<span class="dd-r"><b>\ud83c\udfc6</b><i>won</i></span>'
-      : '<span class="dd-r dd-go">Start</span>') +
+  return '<button class="qb" style="--qc:var(--gold-hi)" onclick="openCup()">' +
+    '<span class="qt">The Cup</span>' +
+    '<span class="qs">' + said + '</span>' +
+    (c && c.won ? '<span class="qn">\ud83c\udfc6 <s>won</s></span>'
+      : '<span class="qgo">' + (c && c.alive ? "Play" : "Start") + '</span>') +
     '</button>';
 }
 
@@ -15177,7 +15247,7 @@ function renderAlbum(st){
    top level, among them W, line, ball, goal and draw, which is fine on a page
    of its own and is a collision nobody would enjoy finding in here. */
 const BN = (function(){
-const PAL={".":null,"K":"#16130f","w":"#ffffff","W":"#d5d5d0","b":"#3d382f","B":"#5a5a66","g":"#ffffff","G":"#bcc2cb","s":"#b07648","S":"#8d5b36","h":"#2b1f15","H":"#46341f","y":"#f7dc35","Y":"#c9a82a","c":"#f7dc35"};
+const PAL={".":null,"K":"#16130f","w":"#ffffff","W":"#d5d5d0","b":"#3d382f","B":"#5a5a66","g":"#ffffff","G":"#bcc2cb","s":"#b07648","S":"#8d5b36","h":"#221810","H":"#3a2a17","y":"#f7dc35","Y":"#c9a82a","c":"#f7dc35"};
 const BASE=[
 "................................",
 "................................",
