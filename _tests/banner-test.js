@@ -146,6 +146,152 @@ check("and nothing else in the file starts it",
 check("the frames are not built at parse time",
   !/^const (FRAME|BALLC)\s*=/m.test(html.slice(a0, a1)), "built eagerly");
 
+/* ---------- and the loop follows the viewport, not only the menu ----------
+   THERE IS NO SCROLLING IN HERE, so the honest way to test this is to hand the
+   sandbox its own IntersectionObserver, let bnStart wire itself to it exactly
+   as it does in a browser, and then be the browser: call the callback back with
+   isIntersecting true and false and count the frames that get booked. That
+   tests the wiring rather than a door cut into the side of it, which is why the
+   closure hands out running() and nothing else.
+
+   THE FAILURE THIS IS FOR IS INVISIBLE. Two chains painting the same canvas
+   animate at exactly the right speed and cost twice the battery, so no
+   screenshot and no pair of eyes can catch it. Frames booked can.
+
+   AND THE FRAME HANDLE IS ZERO ON PURPOSE. Zero is a legal requestAnimationFrame
+   handle and zero is falsy, so any guard that reads the handle as a yes or no
+   falls over here. The old bnStart did exactly that. Running the whole sequence
+   against a zero handle is what proves the replacement does not. */
+console.log("\n--- the loop follows the viewport, and there is only ever one ---");
+function rig(reduced){
+  const box = {
+    document:{ createElement:()=>canvasStub(), getElementById:()=>canvasStub() },
+    matchMedia:()=>({ matches:!!reduced }),
+    Math:Math, console:console,
+    booked:0, cancelled:0, queue:[],
+  };
+  /* zero every time: the hostile-but-legal handle */
+  box.requestAnimationFrame = fn => { box.booked++; box.queue.push(fn); return 0; };
+  box.cancelAnimationFrame = () => { box.cancelled++; box.queue.length = 0; };
+  box.IntersectionObserver = function(cb){
+    box.fire = on => cb([{ isIntersecting:on }]);
+    this.observe = () => {};
+    this.disconnect = () => { box.dead = box.dead || []; box.dead.push(box.fire); };
+  };
+  /* one pending frame, delivered the way the browser would deliver it */
+  box.tick = () => { const q = box.queue.splice(0); q.forEach(fn => fn(16)); };
+  return { BN: vm.runInNewContext(html.slice(a0, a1) + ";BN", box), box };
+}
+
+const v = rig(false);
+check("the closure reports whether a chain is alive",
+  typeof v.BN.running === "function", Object.keys(v.BN).join());
+check("and hands out no lever on the flags",
+  v.BN.show === undefined && v.BN.see === undefined, Object.keys(v.BN).join());
+
+const painted = rec.fills;
+v.BN.start();
+check("opening the menu books no frame until the viewport has spoken",
+  v.box.booked === 0 && v.BN.running() === false, v.box.booked + " frames");
+check("but it does paint the still, so the canvas is never blank",
+  rec.fills > painted, "nothing painted");
+
+v.box.fire(true);
+check("the banner coming into view starts him", v.BN.running() === true, v.BN.running());
+check("with exactly one frame booked", v.box.booked === 1, v.box.booked);
+
+/* A scroll fires the observer repeatedly. Every one of these is a chance to
+   start a second chain beside the first. */
+const one = v.box.booked;
+v.box.fire(true); v.box.fire(true); v.BN.start();
+check("and no amount of asking again opens a second loop",
+  v.box.booked === one, (v.box.booked - one) + " extra frames booked");
+
+v.box.fire(false);
+check("scrolling him off the top stops him", v.BN.running() === false, v.BN.running());
+const parked = v.box.booked;
+v.box.tick();
+check("and nothing he had already queued paints its way back in",
+  v.box.booked === parked && v.BN.running() === false, v.box.booked);
+
+v.box.fire(true);
+check("scrolling back brings him round again", v.BN.running() === true, v.BN.running());
+check("with one frame and not two", v.box.booked === parked + 1, v.box.booked - parked);
+
+/* THE ONE THE GENERATION COUNTER IS FOR. cancelAnimationFrame takes a queued
+   callback off the queue, so in practice the parked chain is gone. This holds
+   on to it anyway and delivers it after a restart, which is the only way a
+   second chain could ever be booked, and asserts that the orphan dies. */
+const orphan = v.box.queue[v.box.queue.length - 1];
+v.box.fire(false); v.box.fire(true);
+const alive = v.box.booked;
+orphan(16);
+check("a callback from a chain that was parked cannot book a frame",
+  v.box.booked === alive, (v.box.booked - alive) + " frames from a dead chain");
+check("and the live chain is still the only one running",
+  v.BN.running() === true, v.BN.running());
+
+v.BN.stop();
+check("leaving the menu stops him", v.BN.running() === false, v.BN.running());
+const gone = v.box.booked;
+v.box.fire(true);
+check("and a scroll arriving after that cannot wake him",
+  v.BN.running() === false && v.box.booked === gone, v.box.booked - gone);
+check("the observer was disconnected rather than left on a dead canvas",
+  (v.box.dead || []).length > 0, "never disconnected");
+
+/* reduced motion gets the still and nothing else, on a fresh instance, because
+   the setting is read per start and this one has to answer differently */
+const rm = rig(true);
+rm.BN.start(); rm.box.fire(true); rm.box.fire(true);
+check("reduced motion paints him once and books nothing",
+  rm.box.booked === 0 && rm.BN.running() === false, rm.box.booked + " frames");
+
+/* ---------- the front page's own regressions ----------
+   Source checks, so they need no harness. Each one is a thing that goes back to
+   how it was the moment somebody pastes an older copy of a block over the top. */
+console.log("\n--- the ball on the front door is drawn, not fetched ---");
+check("no kick button carries the 512 pixel photograph",
+  !/class="mm-kick"[^>]*>[\s\S]{0,160}assets\/ball\.png/.test(html), "ball.png is back");
+check("the ball is built out of the banner's own art",
+  /function pxBallHTML\(\)[\s\S]{0,200}BN\.art/.test(html), "a second ball got drawn");
+check("and it is the only ball on the page",
+  (html.match(/pxBallHTML\(\)/g) || []).length === 2,
+  (html.match(/pxBallHTML\(\)/g) || []).length + " call sites");
+/* Run it for real against the live art rather than trusting the regex: the
+   thing that breaks this is the art changing shape, not the function. */
+const px = vm.runInNewContext(
+  html.slice(html.indexOf("function pxBallHTML()"), html.indexOf("\n/* THE ONE TAP THAT FIXES")) +
+  ";pxBallHTML()", { BN: BN });
+check("it draws something, out of a nine by nine grid",
+  px.indexOf('viewBox="0 0 9 9"') > -1 && (px.match(/<rect /g) || []).length > 20,
+  px.slice(0, 80));
+check("every colour in it came out of the banner's palette",
+  (px.match(/fill="([^"]+)"/g) || []).every(f =>
+    Object.values(BN.art.PAL).indexOf(f.slice(6, -1)) > -1), "a colour from nowhere");
+check("and the box is a whole multiple of the grid",
+  /\.mm-kick \.pxball\{width:27px/.test(html), "not 3x9");
+
+console.log("\n--- the secondary buttons are still sentences ---");
+check("the shared secondary rule transforms nothing",
+  !/\.mm-ghost,\.rules summary\{[^}]*text-transform/.test(html), "uppercase is back");
+check("and neither does the quiet one",
+  !/\n  \.mm-quiet\{[^}]*text-transform/.test(html), "uppercase is back");
+check("the rules summary is not a card",
+  !/\.rules summary\{[^}]*border-radius:14px/.test(html), "the card came back");
+check("and the icon inside it brings no margin of its own",
+  /\.rules summary \.ic\{flex:none;margin:0\}/.test(html), "the .3em is back");
+check("flex:1 is not sitting on a summary that can never use it",
+  !/\.mm-ghost,\.rules summary\{flex:/.test(html), "an inert declaration");
+
+console.log("\n--- the app has one name ---");
+check("the title says it",
+  html.indexOf("<title>BALL 2</title>") > -1, "the title still says BALL");
+check("iOS is told the same thing, first in its own order of precedence",
+  /apple-mobile-web-app-title" content="BALL 2"/.test(html), "no apple title");
+check("and the button offering the home screen calls the app by its name",
+  html.indexOf("Add BALL 2 to your home screen") > -1, "still says BALL");
+
 /* ---------- and the fifty-one names stay inside ---------- */
 console.log("\n--- nothing leaked out of the closure ---");
 /* THE SECOND CLOSURE. The shot scene is built the same way and for the same

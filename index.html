@@ -3,7 +3,15 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="theme-color" content="#0b8250">
+<!-- THE FIRST PAINT'S COLOUR, AND ONLY THE FIRST. themeColor() rewrites this
+     off the live --bg the moment applyTheme runs, so what is written here is
+     what the browser chrome shows for the sliver of time between this head
+     being parsed and the script reaching that line. It was #0b8250, a
+     broadcast green that belongs to neither look and has not been a colour in
+     this app since the sweep. The app opens dark unless the phone asks for
+     light, and dark is the pitch green, so the bar starts there and is
+     corrected for a light-theme person before they ever see the page. -->
+<meta name="theme-color" content="#123D24">
 <!-- BOTH LOOKS, DECLARED BEFORE THE STYLESHEET PARSES. Without this the browser
      has no way to know the app has a dark theme, because the theme is switched
      by a data-theme attribute rather than by a media query, and Chrome and Edge
@@ -12,11 +20,23 @@
      headings on olive grass. Here rather than only in the CSS so it holds on the
      first paint too, before applyTheme has stamped the root. -->
 <meta name="color-scheme" content="light dark">
-<title>BALL</title>
+<title>BALL 2</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="assets/ball.png">
 <link rel="apple-touch-icon" href="icons/icon-180.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
+<!-- THE NAME IS BALL 2 IN ALL THREE PLACES A PHONE CAN ASK FOR IT. The
+     manifest has said BALL 2 since it was written, the title said BALL, and
+     this line did not exist at all, which is not a cosmetic mismatch. iOS
+     reads apple-mobile-web-app-title first, falls back to the manifest's
+     short_name on newer Safari, and falls back to the title tag on anything
+     older or on any tap where the manifest has not been fetched and parsed
+     yet. So one build was landing on two phones under two different names, and
+     the Add to Home Screen sheet was offering the short one either way,
+     because that sheet reads the title. Three sources, one answer, and the one
+     with the highest precedence is now stated rather than left to be guessed
+     at. -->
+<meta name="apple-mobile-web-app-title" content="BALL 2">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <style>
   :root{
@@ -519,15 +539,31 @@
     color:rgba(207,224,212,.5);
   }
   body.careermode .bigbtn.ghost.tinybtn:active{transform:none;filter:none;color:rgba(207,224,212,.8)}
-  .rules{margin-top:4px}
-  .rules summary{
-    list-style:none;cursor:pointer;text-align:center;
-    font:700 .9rem var(--ui);color:var(--text-soft);
-    padding:12px;border-radius:14px;
-    background:var(--paper);border:1px solid var(--edge);
-  }
+  /* THE LAST CARD ON THE FRONT PAGE, AND NOW THERE ARE NONE. This one kept the
+     shape the whole app had before the sweep: twelve pixels of padding, a
+     fourteen pixel radius, a paper fill and a border, which is a card, sitting
+     at the bottom of the one page every card was deliberately taken off. It
+     also went neon #3fd685 when open, a colour out of the old look that exists
+     in neither palette. Rules is a secondary action exactly like the bordered
+     buttons above it, so it is dressed as one, and it takes that dress from
+     the same declaration rather than a copy of it, because a copy is how it
+     became a card in the first place. What is left here is only what a summary
+     needs and a button does not.
+     THE ROW IS A FLEX ROW BECAUSE THE LABEL IS AN ICON AND A WORD. .ic carries
+     margin-right:.3em and vertical-align:-.18em from a rule written for an
+     icon sitting inline in running text, and inside a centred button that
+     margin is half a space of dead air on one side of a pair that is supposed
+     to be centred, with a baseline nudge that means nothing once the icon is a
+     flex item. So the row does the centring and the gap, and the icon is told
+     to stop bringing its own.
+     AND .rules{margin-top:4px} IS GONE RATHER THAN ZEROED. .mm-foot is a flex
+     column with a gap of its own, so that margin was four pixels of drift on
+     one child of five, which is the kind of thing that reads as nothing and
+     costs an afternoon when somebody eventually tries to line the foot up. */
+  .rules summary{list-style:none;display:flex;align-items:center;justify-content:center;gap:8px}
+  .rules summary .ic{flex:none;margin:0}
   .rules summary::-webkit-details-marker{display:none}
-  .rules[open] summary{border-color:#3fd685;color:#8df0b8}
+  .rules[open] summary{border-color:var(--on-line);color:var(--on-ink)}
   .rules .hint{padding:10px 4px 2px}
   /* league rush */
   .leaguelist{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0 4px}
@@ -1478,7 +1514,12 @@
     align-items:center;justify-content:center;padding-top:10px}
   .banner .words h1{margin:0;font:800 clamp(2.4rem,13vw,4.4rem)/1 var(--ui);
     letter-spacing:.02em;text-transform:uppercase;color:var(--ink)}
-  .mm-page{display:flex;flex-direction:column;gap:22px;padding-top:18px}
+  /* 26 AND NOT 22. The handoff sets 26 in its stylesheet and says 26 again in
+     writing in the geometry note, and four pixels short on each of seven
+     section boundaries is a whole line of type taken out of the page. It never
+     read as a bug, only as the sections sitting slightly closer than they
+     should, which is precisely why it survived this long. */
+  .mm-page{display:flex;flex-direction:column;gap:26px;padding-top:18px}
   /* THE SECTION RULE, with its label running out of the left end. The rule is
      drawn by the eyebrow itself rather than by an extra element, so every one
      of the seven call sites gets it without being touched. */
@@ -1494,11 +1535,44 @@
   .mm-lb .big{font:700 24px/1 var(--ui);letter-spacing:-.01em;text-transform:uppercase}
   .mm-lb .count{margin-left:auto;font:600 12px/1 var(--ui);opacity:.7}
   .mm-lb[disabled]{opacity:.45}
-  .mm-pair{display:flex;gap:8px}
-  .mm-ghost{flex:1;padding:13px;border-radius:var(--r2);border:1px solid var(--line);background:var(--panel);
-    color:var(--ink-soft);font:700 10px/1 var(--ui);letter-spacing:.2em;text-transform:uppercase;
+  .mm-pair{display:flex;gap:9px}
+  /* THE SECONDARY BUTTONS STOP SHOUTING. This was 700 weight at 10px with .2em
+     of tracking and uppercase forced on top, which is the eyebrow's costume
+     worn by something that is not an eyebrow: smaller and further apart than
+     any other type on the page, on the buttons carrying the longest words.
+     "Cancel match in progress" and "The Table, four matches, Zaterdagavond"
+     are sentences, and a sentence set in tracked-out capitals at ten pixels is
+     spelled out letter by letter rather than read. It was also the one rule on
+     this screen capable of uppercasing a crew name somebody typed in
+     themselves. The handoff's own secondary is 600 at 14px with no tracking
+     and nothing transformed, so that is what these are, and the fill leaves
+     with the capitals: the handoff draws an outline on the page's own ground,
+     and --panel was laying a faint slab behind it at night for nothing.
+     The rules summary at the foot of the page joins the declaration instead of
+     repeating it, because it is the same kind of thing and two copies is how
+     it drifted into a card. flex:1 stays off the shared line and goes on
+     .mm-ghost alone, because the summary is never a flex item: the thing
+     sitting in .mm-foot is the <details> around it, so a flex property up here
+     would do nothing at all while looking for all the world like it did. */
+  .mm-ghost,.rules summary{padding:13px;border-radius:var(--r2);border:1px solid var(--line);
+    background:none;color:var(--ink-soft);font:600 14px/1 var(--ui);
     cursor:pointer;transition:transform .06s ease,border-color .15s ease}
-  .mm-ghost:active{transform:scale(.98)}
+  .mm-ghost{flex:1}
+  .mm-ghost:active,.rules summary:active{transform:scale(.98)}
+  /* AND THE TWO THAT ARE NOT DESTINATIONS. Cancelling the match you parked and
+     putting the app on a home screen are housekeeping. They are on this page
+     because there is nowhere else to put them, not because anybody came here
+     to do them, and a bordered button promises somewhere to go. So they lose
+     the border and the fill and sit in the dim ink, which is the handoff's own
+     third treatment. The one thing not taken from it is the tracked-out
+     uppercase, for the reason written directly above: both of these are
+     sentences. What replaces the border is the underline, because a button
+     with nothing drawn around it still has to look tappable, and one of these
+     two throws a match away. */
+  .mm-quiet{width:100%;padding:11px;border:none;background:none;color:var(--ink-dim);
+    font:600 13px/1.2 var(--ui);cursor:pointer;
+    text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
+  .mm-quiet:active{color:var(--ink-soft)}
 
   /* one bordered box, the chosen half filled */
   .mm-seg{display:flex;border:1px solid var(--line);border-radius:var(--r2);overflow:hidden}
@@ -1524,22 +1598,62 @@
     cursor:pointer;transition:transform .06s ease}
   .mm-kick:active{transform:scale(.98)}
   .mm-kick .big{font:700 26px/1 var(--ui);letter-spacing:-.01em;text-transform:uppercase}
-  .mm-kick img{width:26px;height:26px;border-radius:50%}
+  /* 27 AND NOT 26, because the ball is nine pixels of drawn art and 27 is three
+     of them exactly. There is no image-rendering here and none is wanted: what
+     sits in this box is geometry rather than a bitmap, so there is nothing to
+     resample and no smoothing to switch off. The long version is on
+     pxBallHTML, where the art is turned into rectangles. */
+  .mm-kick .pxball{width:27px;height:27px;flex:none;display:block}
 
-  .mm-foot{display:flex;flex-direction:column;gap:10px;padding-top:10px;border-top:1px solid var(--line-soft)}
-  .mm-last{font:400 13px/1.4 var(--serif);font-style:italic;color:var(--ink-dim);padding-top:6px}
-  .mm-note{font:400 12px/1.45 var(--serif);font-style:italic;color:var(--ink-dim)}
+  .mm-foot{display:flex;flex-direction:column;gap:10px;padding-top:16px;border-top:1px solid var(--line-soft)}
+  /* ONE ITALIC VOICE, NOT TWO. The last match line and the notes under the
+     controls are the same thing, the app speaking in its own voice, and they
+     had drifted to 13px on 1.4 leading with six pixels of padding under one of
+     them and 12px on 1.45 under the other. Nobody would pick that pair on
+     purpose, and with the last match line sitting a few rows below a note it
+     reads as two different people talking. The handoff has one class doing
+     both at 13px on 1.35, so .mm-last is gone and the line it carried wears
+     this. The padding goes with it, because .mm-foot owns the space above that
+     row and was paying for it twice. */
+  .mm-note{font:400 13px/1.35 var(--serif);font-style:italic;color:var(--ink-dim)}
 
   /* Night and day. Small, at the bottom, next to the other thing you only
      touch once: this is a preference, not a feature. */
-  .themerow{display:flex;gap:6px;justify-content:center;margin:14px 0 0;align-self:center;
-    padding:4px;border-radius:999px;background:var(--panel);border:1px solid var(--line)}
+  /* THE LAST ROUND THING ON A PAGE OF HAIRLINES. This was a 999px capsule with
+     a fill and a border, holding two 999px chips, one of which carried an
+     inset shadow nothing else in the app uses. A container with a skin holding
+     a chip with a skin is two boxes doing one box's work, on the same screen
+     where the rules card has just been told it is not a card, so leaving it
+     would have been the one thing a reader caught immediately. 9a draws it as
+     two bordered rectangles joined down the middle with nothing behind them,
+     and that is what this is now: one hairline each, the seam shared, --r2 on
+     the outer corners so the pair reads as a single object rather than as two
+     buttons that happen to touch.
+     DARK AND LIGHT ARE LABELS, SO THEY GET THE LABEL FACE. Every other ten
+     pixel uppercase mark on this page is Silkscreen: the eyebrow above each
+     section, and the ON chip on the chosen mode. These two were the odd pair,
+     set in the interface font at 700 and tracked out by hand to imitate it,
+     which is a worse version of the thing sitting directly above them on the
+     same page. Silkscreen is latin-1 only and the standing rule is that it
+     never touches anything with a name in it, which these do not: they are two
+     hard-coded English words in the markup and they cannot turn into
+     "Dusseldorf" later. The hand tracking goes with the swap, and 9a has none
+     either, because Silkscreen is a fixed-width face already carrying its own
+     air between letters and .16em on top of that pulls the two words apart
+     into single characters.
+     THE PRESS IS AN OPACITY RATHER THAN A SCALE. It was a scale while the two
+     were separate chips with a gap between them; now that they share a seam,
+     shrinking one half pulls it off the other and the pair comes apart in your
+     hand. */
+  .themerow{display:flex;justify-content:center;margin:2px 0 0;align-self:center}
   .themebtn{
-    padding:7px 14px;border-radius:999px;border:none;background:none;color:var(--ink-dim);
-    font:700 10px/1 var(--ui);letter-spacing:.16em;text-transform:uppercase;cursor:pointer;
+    padding:8px 16px;border:1px solid var(--line);background:none;color:var(--ink-dim);
+    font:400 10px/1 var(--px16);text-transform:uppercase;cursor:pointer;
   }
-  .themebtn:active{transform:scale(.98)}
-  .themebtn.on{background:var(--on-fill);color:var(--on-ink);box-shadow:inset 0 0 0 1px var(--on-line)}
+  .themebtn:first-child{border-radius:var(--r2) 0 0 var(--r2)}
+  .themebtn:last-child{border-left:none;border-radius:0 var(--r2) var(--r2) 0}
+  .themebtn:active{opacity:.7}
+  .themebtn.on{border-color:var(--on-line);background:var(--on-fill);color:var(--on-ink)}
 
   /* the build stamp: findable, never in the way, and a tap reloads from the net */
   .buildline{text-align:center;margin:14px 0 2px;padding:6px;cursor:pointer;
@@ -2856,9 +2970,10 @@
   .mm-count{flex:none;display:flex;flex-direction:column;align-items:center;gap:3px}
   .mm-count b{font:700 24px/1 var(--ui);color:var(--gold-hi)}
   .mm-count span{font:400 10px/1 var(--px16);color:var(--ink-dim)}
-  /* SILKSCREEN LIVES HERE AND ON THE EYEBROWS AND NOWHERE ELSE. It is latin-1
-     only, so it is fine for ON and 1 PACK and would quietly drop the accent off
-     anything with a name in it. */
+  /* SILKSCREEN LIVES HERE, ON THE EYEBROWS AND ON THE TWO THEME BUTTONS, AND
+     NOWHERE ELSE. It is latin-1 only, so it is fine for ON, for 1 PACK and for
+     the hard-coded words DARK and LIGHT, and it would quietly drop the accent
+     off anything with a name in it. */
   .mm-chip{flex:none;font:400 10px/1 var(--px16);color:var(--bg);background:var(--gold-hi);
     padding:5px 6px;border-radius:var(--r2)}
   .mm-play{flex:none;padding:9px 15px;border:1px solid var(--gold-hi);border-radius:var(--r2);
@@ -18187,13 +18302,67 @@ function draw(u){
   ctx.drawImage(art,Math.round(b.x),Math.round(b.y)+(b.hit?2:0));
 }
 
-/* ---------------- the menu owns the loop ----------------
+/* ---------------- the menu owns the loop, the viewport owns the menu --------
    A requestAnimationFrame left running through a whole match is a phone
    battery for nothing, so this starts and stops in render() alongside every
    other screen decision. The phase is read off the clock rather than off a
    stored start, because the menu re-renders on every tap and a stored t0 would
-   snap him back to the first touch each time. */
-let raf=null;
+   snap him back to the first touch each time.
+
+   RENDER IS NOT THE ONLY WAY HE GOES AWAY. The front page is a good deal
+   longer than a phone, and everything under the fold, from the fixture list
+   down to the wall of rules, is somewhere a person sits and reads for a while.
+   For all of that time the banner was a screen or two above them, painting
+   sixty frames a second at nobody. Nothing in render() can see that happen,
+   because nothing rendered: the page only scrolled. So the canvas is watched,
+   and the loop runs only while some part of it is genuinely in the viewport. A
+   backgrounded tab needs nothing added, since requestAnimationFrame is simply
+   not called while the page is hidden, and that is why there is no
+   visibilitychange listener in here to fall out of step with this one.
+
+   WANTED IS THE MENU'S ANSWER, SHOWN IS THE VIEWPORT'S, and he moves only when
+   both say yes. Keeping them as two flags is what stops a scroll from waking a
+   banner the menu has already taken off the screen, which is a thing one flag
+   cannot express.
+
+   TWO LOOPS IS THE FAILURE THAT MATTERS HERE, and it is invisible: the ball
+   animates at exactly the right speed while the phone quietly does the work
+   twice, so no screenshot and no pair of eyes can tell you it happened. There
+   are now two callers where there was one, the menu on every tap and the
+   observer on every scroll, and they know nothing about each other, so it is
+   worth saying exactly how this is prevented rather than hoping.
+
+   IT IS NOT PREVENTED BY THE FRAME HANDLE. The old guard was if(raf) return,
+   which takes the number requestAnimationFrame hands back and treats it as a
+   yes or no. It is almost always a positive integer and it is nowhere promised
+   to be one; zero is a legal handle and zero is falsy, and a guard that reads
+   a handle as a boolean is one implementation away from letting a second chain
+   through on a page nobody would think to look at. So a plain flag says
+   whether a chain is alive and the handle only ever says which frame to
+   cancel.
+
+   AND IT IS NOT PREVENTED BY THE CANCEL EITHER. cancelAnimationFrame does take
+   a queued callback off the queue, so in practice a parked chain is gone. But
+   the flag alone only survives that being true: park, start again, and if the
+   parked chain's callback were still delivered it would find the flag set by
+   the new chain, take that as permission, and book a second frame beside it.
+   So every chain carries the generation it was born in, and parking moves the
+   generation on. A callback whose number has come up returns without painting
+   and without booking anything, which makes one loop true by construction
+   rather than by an argument about scheduling that the next person in here
+   would have to reconstruct.
+
+   THE FLAG IS DROPPED AT THE TOP OF EVERY CALLBACK and only set again once the
+   next frame has actually been booked. That is what makes a throw survivable.
+   The old code left the handle set when the loop died, so one exception inside
+   a paint blocked every restart for the rest of the session and the banner sat
+   dead until the app was closed. Here an exception leaves nothing alive and
+   nothing held, and the next tap on the menu starts him again. */
+let raf=null, io=null, gen=0, going=false, wanted=false, shown=true;
+/* Asked per start rather than read once at load, because a person can turn the
+   setting on while the app is open, and a decoration is the last thing that
+   should need a reload to behave. */
+function still(){ try{ return matchMedia("(prefers-reduced-motion:reduce)").matches; }catch(e){ return false; } }
 function paint(u, el){
   cv = el || document.getElementById("bnstage");
   if(!cv || !cv.getContext) return false;
@@ -18202,19 +18371,61 @@ function paint(u, el){
   draw(u);
   return true;
 }
-function bnStart(){
-  if(raf) return;
-  /* reduced motion parks him mid-juggle with the ball up, which is also the
-     still worth using anywhere a still is wanted */
-  let still=false;
-  try{ still=matchMedia("(prefers-reduced-motion:reduce)").matches; }catch(e){}
-  if(still) return void paint(.38);
-  (function loop(now){
-    if(!paint(((now||0)%PERIOD)/PERIOD)) return void (raf=null);
-    raf=requestAnimationFrame(loop);
+function run(){
+  if(going || !wanted || !shown || still()) return;
+  going=true;
+  const mine = ++gen;
+  (function frame(now){
+    raf=null;
+    if(mine!==gen) return;
+    going=false;
+    if(!wanted || !shown) return;
+    if(!paint(((now||0)%PERIOD)/PERIOD)) return;
+    going=true;
+    raf=requestAnimationFrame(frame);
   })(0);
 }
-function bnStop(){ if(raf){ cancelAnimationFrame(raf); raf=null; } }
+function halt(){ gen++; going=false; if(raf!=null){ cancelAnimationFrame(raf); raf=null; } }
+/* THE CANVAS IS A DIFFERENT ELEMENT EVERY TIME THE MENU DRAWS, because
+   renderSetup replaces the whole page with a fresh string, so the observer is
+   rebuilt beside it rather than kept. An observer held over would be watching
+   an element that has left the document and would never fire again, which is
+   the silent version of this entire feature not working. A browser without
+   IntersectionObserver leaves shown true and gets precisely what it got
+   before, which is the right way round: the worst case there is the battery
+   cost we have been paying all along, not a banner that never moves. */
+function watch(on){
+  if(io){ try{ io.disconnect(); }catch(e){} io=null; }
+  if(!on || typeof IntersectionObserver !== "function") return;
+  const el=document.getElementById("bnstage");
+  if(!el) return;
+  try{
+    io=new IntersectionObserver(function(es){
+      shown = !!es[es.length-1].isIntersecting;
+      if(shown) run(); else halt();
+    }, {threshold:0});
+    io.observe(el);
+  }catch(e){ io=null; }
+}
+function bnStart(){
+  wanted=true; shown=true;
+  /* ONE STILL FRAME BEFORE ANYTHING ELSE, so the canvas is never a blank
+     rectangle. An IntersectionObserver reports asynchronously even when the
+     element is sitting in plain sight, and this menu rebuilds itself on every
+     tap, so without this there would be a flicker on the one screen the app
+     opens on. .38 is him mid-juggle with the ball at the top of the highest
+     hop, which is the still worth using anywhere a still is wanted, reduced
+     motion included. It is also the reason the failure mode below is a banner
+     that does not move rather than a hole in the page. */
+  if(!paint(.38)) return void (wanted=false);
+  watch(true);
+  /* With an observer, the observer is the only thing that starts him, and it
+     reports once on observe, so a menu opened already scrolled down never books
+     a frame at all. Without one there is no viewport to consult and he simply
+     runs, exactly as he did before any of this. */
+  if(!io) run();
+}
+function bnStop(){ wanted=false; watch(false); halt(); }
 /* THE WHOLE CYCLE, NOT A SAMPLE OF IT. A screenshot only tests the instant it
    lands on: the spec lost a function in a bulk edit and the page threw on every
    frame after the chip, while three separate screenshots all happened to land
@@ -18229,7 +18440,18 @@ function bnSweep(el, step){
    than regexing the quoted rows out of the source, which means anything that
    parses in the test is exactly what the app draws, and the pose count it
    checks against is the one the code actually uses. */
+/* AND ONE READ ON THE LOOP, WHICH IS ALL THAT GOES OUT. "He stops when he
+   scrolls off" cannot be asserted from outside a browser: a node sandbox has
+   no viewport, and the failure it is guarding against is invisible in a
+   screenshot anyway, since a doubled loop paints at exactly the right speed.
+   So the closure says whether a chain is alive and nothing more. The lever the
+   observer pulls stays private on purpose: banner-test drives the real thing
+   by handing the sandbox its own IntersectionObserver and calling back through
+   it, which tests the wiring rather than a door cut into the side of it, and
+   leaves nobody a writable switch on a private flag that would fight the
+   observer until the next render. */
 return { start:bnStart, stop:bnStop, sweep:bnSweep, paint:paint, poses:LEGS.length,
+         running:function(){ return going; },
          art:{PAL:PAL, BASE:BASE, LEGS:LEGS, BALL:BALL, SQUASH:SQUASH, NUMBER:NUMBER} };
 })();
 
@@ -18238,6 +18460,49 @@ function renderSetup(st){
   /* how deep the chosen quiz is, for the front door's right hand side */
   const qCount = (()=>{ const d = setupMode==="classic" && !setupMc ? BANK : DECKS[setupMc ? setupMode+"-mc" : setupMode];
     if(!d) return null; let n=0; for(const t of ["easy","normal","hard","extreme","ball"]) n += (d[t]||[]).length; return n; })();
+  /* RESUME IS NOT KICK OFF, AND THE FRONT DOOR USED TO SAY THEY WERE. Both were
+     the same green slab wearing the same 26 pixel label and the same ball, one
+     at the top of the page and one at the bottom, so the loudest colour on the
+     screen meant two different things and the size meant nothing at all.
+     Kicking off is an act. Nothing exists until you press it, it is the last
+     thing anybody does on this page, and it is worth a slab. Coming back is
+     not an act, it is a door into something already running, and every other
+     thing on this page that is already running, the daily and the Cup and the
+     album and the XI, is a row on a hairline with a gold pill on the end of
+     it. So Resume goes and stands with its own kind, and green is left meaning
+     one thing, which is that a match starts when you press this.
+     AND A ROW CAN SAY WHAT A SLAB COULD NOT. "Resume" on its own makes you tap
+     to find out what you are resuming, which on a phone that has been in a
+     pocket since Friday is a real question with a real cost, since the other
+     button on offer is the one that throws the match away. The save holds the
+     names, the scores and how deep it got, so the row carries them: what the
+     quiz was on the name line, who is winning and how far in underneath.
+     matchLabel is the record book's own, so a parked match reads on the front
+     page in the same words The Table will use for it once it is finished.
+     EVERYTHING HERE IS DEFENDED, because this is the one thing on the page
+     built out of a file on the disk rather than out of the app's own state. A
+     save written by an older build can be missing anything, a half-written one
+     survives a phone dying mid-write, and JSON.stringify turns a hole in an
+     array into a null that a plain map walks straight into. esc() is a bare
+     .replace, so a name that came back as a number would throw out of here and
+     take the whole menu with it, which is why String() sits in front of it.
+     The index for the fallback name is taken before the nulls are dropped and
+     not after, because otherwise a save missing its first player would sit
+     there calling the second one Martijn. */
+  const parked = !saved ? "" : (()=>{
+    const src = Array.isArray(saved.players) ? saved.players : [];
+    const who = src.map((p,i)=> !p ? "" :
+      esc(String(p.name || REGULARS[i] || ("Player "+(i+1)))) + " " + (p.score||0)).filter(Boolean);
+    const name = String(matchLabel(saved) || "Match in progress");
+    /* playLabel says "One on One" for a pitch match and matchLabel says it too
+       for a legacy save written with mode:"h2h", so the two can land on the
+       same words. One line of the row repeating the other is worse than the
+       row being a word shorter. */
+    const how = String(playLabel(saved) || "");
+    const deep = saved.round > 0 ? "round " + saved.round : "";
+    const bits = [how === name ? "" : how, who.join(" \u00b7 "), deep].filter(Boolean);
+    return bits.length ? bits.join(" \u00b7 ") : "Pick it up where it stopped.";
+  })();
   /* a mode in the fixture list: an accent rule, a name, what it is, and a badge
      on the one that is on */
   /* THE MODE WEARS A KIT. The handoff ships three PNG stand-ins and says in
@@ -18270,8 +18535,16 @@ function renderSetup(st){
 
     <div class="mm-page">
       ${saved?`<div class="mm-sect">
-        <button class="mm-kick" onclick="resumeGame()"><span class="big">Resume</span><img src="assets/ball.png" alt=""></button>
-        <button class="mm-ghost" onclick="askCancelMatch()">Cancel match in progress</button>
+        <div>
+          <div class="mm-eyebrow">Where you left off</div>
+          <div class="mm-list">
+            <button class="mm-item" onclick="resumeGame()">
+              <span class="txt"><span class="nm">${esc(String(matchLabel(saved)||"Match in progress"))}</span><span class="sub">${parked}</span></span>
+              <span class="mm-play">Resume</span>
+            </button>
+          </div>
+        </div>
+        <button class="mm-quiet" onclick="askCancelMatch()">Cancel match in progress</button>
       </div>`:""}
 
       ${dailyCardHTML()}
@@ -18349,17 +18622,17 @@ function renderSetup(st){
             <div class="mm-row"><span>${i+1}</span><input id="n${i}" placeholder="${esc(REGULARS[i]||("Player "+(i+1)))}" maxlength="12" autocomplete="off" value="${esc(setupNames[i]||"")}"></div>`).join("")}
           ${setupRef&&!isPitch(setupPlay)?`<div class="mm-row"><span>R</span><input id="n2" placeholder="Referee" maxlength="12" autocomplete="off" value="${esc(setupNames[2]||"")}"></div>`:""}
         </div>
-        <button class="mm-kick" onclick="startGame()"><span class="big">Kick off</span><img src="assets/ball.png" alt=""></button>
+        <button class="mm-kick" onclick="startGame()"><span class="big">Kick off</span>${pxBallHTML()}</button>
       </div>`}
 
       <div class="mm-foot">
-        ${books().length?`<div class="mm-last">${(h=>{const m=h[h.length-1];return "Last match · "+m.players.map(p=>esc(p.name)+" "+p.score).join(" · ")+(m.winner?" · "+esc(m.winner)+" won":" · drawn");})(books())}</div>
+        ${books().length?`<div class="mm-note">${(h=>{const m=h[h.length-1];return "Last match · "+m.players.map(p=>esc(p.name)+" "+p.score).join(" · ")+(m.winner?" · "+esc(m.winner)+" won":" · drawn");})(books())}</div>
         <button class="mm-ghost" onclick="openBoard()">The Table · ${books().length} match${books().length===1?"":"es"}${crewName()?" · "+esc(crewName()):""}</button>`:""}
         <details class="rules">
           <summary>${ico('book')}Rules</summary>
           <div class="hint"><b>Referee mode:</b> two play, the third holds the phone, reads everything and hands out the points, and the ref's word is final. <b>Let's Ball:</b> the quiz itself, and the one the app opens on. One player picks a difficulty and answers out loud, the rest can steal. 3,800 questions across five levels, from one pointers to the BALL tier nobody sensible gets. <b>Written:</b> everyone types an answer to the same question, then you reveal it and award the points. <b>Career Path:</b> club logos revealed one by one, in career order, and you shout the player's name whenever you dare. Guess on the first logo for +15; every extra logo costs 3 (never below +3). Wrong guess: −2 and you're locked out of that career. <b>Stadium:</b> a photo of a ground appears and you climb as high up the ladder as you can. Name the ground for the full points, the city for a good chunk, the country for a consolation. Easy 3/2/1 · Hard 8/5/3 · BALL 20/12/6, and the reader pays the best rung you reached. 342 grounds from Camp Nou to places only true BALL knowers recognise, steals work like Let's Ball. <b>One &amp; Only:</b> a club crest and a country flag appear, and you name the only player of that nationality ever to play there, from 1,311 real one-offs (Wikidata-sourced; citizenship counts, so the odd surprise is part of the game). The reveal also says what he played, the years he was there and how many games he got, so a name nobody recognised still tells you something. Easy +1 · Medium +2 · Hard +5 · BALL +20. <b>Badge Zoom:</b> a crest appears zoomed right in, and you name the club, 1,437 crests deep. Easy +1 · Normal +2 · Hard +5. BALL crops in hard on clubs you have heard of and cannot place, so it pays on a ladder instead: answer on the tight shot for +20, or pull the camera back for a wider one at +12, and the whole crest at +6. Once you have pulled back you cannot go back in, so decide as a table. <b>Manager Path:</b> the same game as Career Path, played with the men in the dugout: crests appear one by one in the order he took the jobs, and you shout the manager. 227 careers from Ajax to Al-Ettifaq, national teams included, so a run of clubs ending at a country flag is a strong hint. Same scoring as Career Path. <b>League Rush:</b> pick a league and type as many of its clubs as you can in thirty seconds. Type it how you say it: Atleti, Spurs and PSV all count, and accents and full stops never cost you. +1 per club and +10 for naming the whole league, and at the end you see the ones you missed. Thirteen leagues, current season, from the Eredivisie and the Eerste Divisie to MLS. <b>Guess the Kit:</b> a home shirt appears and you name whose it is, from 1,021 kits including 174 national sides. Easy +1 · Normal +2 · Hard +5 · BALL +20, steals work like Let's Ball. Shirts carry less to go on than crests do, so the bank is built to keep any two of them tellable apart, though a few of the originals really are near enough identical, and a plain white one could fairly be Valencia or Marseille. <b>Name the XI:</b> a famous final's line-up appears as eleven shirts on the pitch and the whole table shouts, and the reader taps a shirt when someone names its player and hands out the point, +1 per shirt. <b>Older or Taller:</b> two players's faces appear and you tap the one who is older, or the taller one, whichever it asks. The app knows, so there is nothing to argue about until afterwards. +1 each time, and five in a row pays +10 on top; the first one you get wrong ends your run and passes the phone. 471 players, nobody twice in a run, and no pair closer than two years or three centimetres, because a coin toss is not a question. <b>Timeline:</b> five moments from football history. Drag them into chronological order, earliest on top, and lock it in. The years are revealed and the app pays +1 per event in the right spot, +5 for a perfect five. First to the target score wins, or pick "No limit" and end with the full-time whistle. <b>Rainbow Road:</b> all twelve modes in one match, and you do not get to choose. Each go the app rolls a mode, throws its name up on the screen and deals it, so a career of crests can be followed by a shirt, a crest cropped to bits, five events to drag into order or thirty seconds of typing out a league. Every mode keeps its own scoring, so the same go can be worth one point or twenty, and the same mode never lands twice in a row. Play it to the target and the night decides itself. <b>Play together (beta):</b> one phone hosts and keeps the score, the others join with the room code and play their own turn from their own phone: pick the difficulty, say your answer out loud, then reveal it on your own phone and call it right or wrong yourself. The answer stays hidden on everybody else's phone while you do, because they are the ones about to be offered the steal. Miss it and their phones race for a STEAL IT button, and the phone that steals gets the answer the same way. Once a question is dead every phone shows it. In Written mode everyone types secretly on their own phone. Join with exactly the name the host gave you, otherwise you just watch and buzz. The host's buttons still work for anything if a phone freezes. Internet needed on every phone; the pub's single-phone ritual stays the default. Easy +1 · Normal +2 · Hard +5 · Extreme +10 · BALL +20. <b>The Table:</b> every finished match is filed on the phone that played it and survives the app being closed. Type the same shared table name on all three phones and you keep one table between you, with everybody's matches in it. Leave it empty and the phone keeps its own. Tap ✏️ on a scoreboard tab to fix a score, or the yellow card to book a player.</div>
         </details>
-        ${isStandalone()?"":`<button class="mm-ghost" onclick="installApp()">Get BALL on your home screen</button>`}
+        ${isStandalone()?"":`<button class="mm-quiet" onclick="installApp()">Add BALL 2 to your home screen</button>`}
         <div class="themerow">
           <button class="themebtn${THEME==="dark"?" on":""}" onclick="setTheme('dark')">Dark</button>
           <button class="themebtn${THEME==="light"?" on":""}" onclick="setTheme('light')">Light</button>
@@ -18367,6 +18640,74 @@ function renderSetup(st){
         <div class="buildline" onclick="freshen()" title="Tap to fetch the newest one">${esc(BUILD)}</div>
       </div>
     </div>`;
+}
+
+/* ---------------- THE BALL ON THE BUTTON ----------------
+   assets/ball.png is a 512 by 512 photograph weighing 369,091 bytes, and the
+   front door was painting it into a 26 pixel box with border-radius:50% and no
+   image-rendering at all. Every number in that sentence is wrong in its own
+   way. The browser decodes a quarter of a million pixels, 1,048,576 bytes of
+   bitmap once it is unpacked, to fill a square smaller than a fingernail. It
+   then resamples that nineteen to one with smoothing left on, which is the one
+   thing the whole sixteen-bit costume asks nobody to do, and it was the only
+   smoothed object on a page whose banner a couple of centimetres above it is
+   nearest-neighbour pixel art. And it rounds the corners of a ball that was
+   already round on transparency, so the mask clips nothing and is only
+   evidence that nobody looked.
+
+   A SMALLER PNG WOULD FIX THE WEIGHT AND NOTHING ELSE. It would still be a
+   bitmap resampled to a size it was not drawn at, and it would be one more
+   file to ship, to precache, to name and to keep in step with the art beside
+   it. The ball this page wants already exists: the banner juggles a nine pixel
+   one, drawn by the same hand as the kits in the fixture list, and that
+   closure already hands its art out. So the button takes it, turned into
+   rectangles on a nine by nine viewBox. The two measured against each other:
+   1,815 bytes of markup built on the spot, against 369,091 bytes off the disk
+   and a megabyte of decoded bitmap held for as long as the image is on screen.
+
+   ONE BALL ON THE PAGE. There used to be two, a photograph on the button and
+   nine pixels in the banner above it, in two different styles, in view at the
+   same moment. Now there is one, and the day somebody redraws it they redraw
+   it once. The art is read out of BN rather than copied down here for that
+   same reason: a second copy of nine strings is a second copy that goes stale,
+   which is the argument h2FigHTML already won for the kits.
+
+   ON crispEdges, WHICH IS THE ONE THING IN HERE WORTH A LOOK ON GLASS. This
+   button is a space-between flex row inside a page as wide as whatever phone
+   is holding it, so the element's left edge lands on a fraction of a pixel
+   routinely. crispEdges snaps by coordinate and not by shape, so two rectangles
+   sharing the edge x=3 both snap that edge to the same device pixel and the
+   grid stays whole: there is no gap to open and no seam to show. What can
+   happen at a fractional origin is that one column of drawn pixels comes out a
+   device pixel wider than the column beside it, uniformly down the whole ball.
+   Turning crispEdges off instead would trade that for the renderer blending
+   half a device pixel along every interior boundary, which is smoothing, which
+   is the thing this change exists to stop. So it stays on, and if it ever
+   reads wrong at 27 pixels on a real phone the fix is one word rather than a
+   rethink.
+
+   IT FAILS QUIETLY. If BN never built, this returns an empty string and the
+   button loses its ball, which nobody dies of, where throwing out of here
+   would take the entire menu with it. */
+function pxBallHTML(){
+  const art = (typeof BN !== "undefined" && BN.art) || null;
+  if(!art || !art.BALL || !art.BALL[0]) return "";
+  const g = art.BALL[0];
+  let out = "";
+  /* HORIZONTAL RUNS RATHER THAN A RECT PER PIXEL. The same picture in 31
+     elements instead of 81, and the art is written out in rows anyway, so the
+     run is already sitting there in the string waiting to be counted. */
+  for(let y=0; y<g.length; y++){
+    const row = g[y];
+    for(let x=0; x<row.length;){
+      let n=1; while(row[x+n] === row[x]) n++;
+      const col = art.PAL[row[x]];
+      if(col) out += '<rect x="'+x+'" y="'+y+'" width="'+n+'" height="1" fill="'+col+'"/>';
+      x += n;
+    }
+  }
+  return '<svg class="pxball" viewBox="0 0 '+g[0].length+' '+g.length+'" shape-rendering="crispEdges"'
+       + ' aria-hidden="true" focusable="false">' + out + '</svg>';
 }
 
 /* THE ONE TAP THAT FIXES A STALE PHONE. The app is served network first, so
