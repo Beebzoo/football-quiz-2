@@ -33,7 +33,6 @@
   /* the pixel face, used only by the sixteen-bit pitch */
   @font-face{font-family:'Silkscreen';font-style:normal;font-weight:400;font-display:swap;src:url(assets/fonts/silkscreen-400-latin.woff2) format('woff2');unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD}
 
-
     /* one place for the interface face; everything else says var(--ui) */
     --serif:"Lora",Georgia,"Times New Roman",serif;
     --ui:"Barlow Semi Condensed",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
@@ -307,10 +306,12 @@
     --ok:#5FBE86;
     --bad:#E8705A;
     --shadow:0 6px 18px rgba(0,0,0,.45);
-    --bg:#1B2215;                  /* olive, warm not blue. Lifted off near-black
-                                      so the banner has something to stand on:
-                                      its outline is #16130f and at #14180F the
-                                      whole figure lost its edge. */
+    --bg:#123D24;                  /* the green of the pitch, which is what the
+                                      handoff picked and what the game is played
+                                      on. It also gives the banner something to
+                                      stand on: the sprite's outline is #16130f
+                                      and against near-black the whole figure
+                                      lost its edge and read as floating colour. */
     --ink:#F8F1DD;                 /* cream, never pure white */
     --ink-soft:#C8C0A6;
     --ink-dim:#9C9478;
@@ -331,7 +332,9 @@
     --drop:rgba(0,0,0,.45);
     /* the hero's ground shadow. At night it only has to be darker than the
        olive, so plain black at the alphas the canvas paints it with. */
-    --mow-a:#181C11; --mow-b:#14180F;      /* the faintest mown band */
+    --mow-a:#14422A; --mow-b:#123D24;      /* the faintest mown band, on the
+                                              green the handoff picked, which is
+                                              the green the game is played on */
     --flood:rgba(255,246,196,.07);
     --chalkline:rgba(248,241,221,.10);
     --chalkline-soft:rgba(248,241,221,.07);
@@ -1052,7 +1055,6 @@
     animation-delay:calc(var(--d,0ms) + 90ms)}
   @media (prefers-reduced-motion: reduce){ .lane,.lane .lnum{animation:none} }
 
-
   /* The question card is the scoreboard's material: the pitch's own
      green-black, translucent so the turf shows through it, lit by the same
      floodlight. A white slab was the last thing in the app still fighting
@@ -1461,22 +1463,13 @@
   .banner .words h1{margin:0;font:800 clamp(2.4rem,13vw,4.4rem)/1 var(--ui);
     letter-spacing:.02em;text-transform:uppercase;color:var(--ink)}
   .mm-page{display:flex;flex-direction:column;gap:22px;padding-top:18px}
-  .mm-eyebrow{font:700 10px/1 var(--ui);letter-spacing:.24em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:8px}
+  /* THE SECTION RULE, with its label running out of the left end. The rule is
+     drawn by the eyebrow itself rather than by an extra element, so every one
+     of the seven call sites gets it without being touched. */
+  .mm-eyebrow{display:flex;align-items:center;gap:10px;padding-bottom:10px;margin-bottom:0;
+    font:400 10px/1 var(--px16);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim)}
+  .mm-eyebrow::after{content:"";flex:1;height:1px;background:var(--line)}
   .mm-sect{display:flex;flex-direction:column;gap:10px}
-
-  /* the modes, as a fixture list */
-  .mm-fixtures{display:flex;flex-direction:column;gap:2px}
-  .mm-fix{display:flex;align-items:center;gap:12px;width:100%;padding:15px 4px;border:none;
-    border-bottom:1px solid var(--line-soft);background:none;text-align:left;
-    font-family:var(--ui);cursor:pointer;transition:transform .06s ease}
-  .mm-fix:last-of-type{border-bottom:none}
-  .mm-fix:active{transform:scale(.98)}
-  .mm-fix .rule{width:3px;height:30px;border-radius:2px;flex:none}
-  .mm-fix .txt{display:flex;flex-direction:column;min-width:0}
-  .mm-fix .nm{font:700 18px/1 var(--ui);color:var(--ink)}
-  .mm-fix .sub{font:400 12px/1.3 var(--serif);font-style:italic;color:var(--ink-dim);margin-top:3px}
-  .mm-badge{margin-left:auto;flex:none;font:700 10px/1 var(--ui);letter-spacing:.14em;color:var(--on-ink);
-    border:1px solid var(--on-line);padding:4px 7px;border-radius:3px}
 
   /* the front door, and the two beside it */
   .mm-lb{display:flex;align-items:center;width:100%;padding:18px;border-radius:var(--r2);border:none;
@@ -2912,51 +2905,36 @@
      nothing has to be dressed up as pixel art to say so. Silkscreen carries the
      numbers and only the numbers: it is latin-1 only, which is fine for digits
      and would quietly drop the accent off a name. */
-  .mm-quad{display:grid;grid-template-columns:1fr 1fr;gap:10px;align-items:start}
-  .mm-quad.solo{grid-template-columns:1fr}
-  .mm-col{display:flex;flex-direction:column;gap:10px;min-width:0}
-  /* the cabinet is a frame with a label sitting on its top edge, which is what
-     makes it read as a case rather than as two more buttons */
-  .mm-case{position:relative;border:1px solid var(--gold);padding:15px 8px 8px;
-    display:flex;flex-direction:column;gap:8px;min-width:0}
-  .mm-case-lab{position:absolute;top:-6px;left:8px;padding:0 5px;background:var(--bg);
-    font:700 8px/1 var(--ui);letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
-  .qb{position:relative;display:block;width:100%;text-align:left;cursor:pointer;
-    background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--qc,var(--line));
-    border-radius:0;padding:10px 11px;color:inherit;font:inherit;min-width:0;
-    transition:transform .06s ease,border-color .15s ease}
-  .qb:active{transform:translateY(1px)}
-  .qb .qt{display:block;font:800 15px/1.1 var(--ui);letter-spacing:-.01em}
-  .qb .qs{display:block;font:400 11px/1.35 var(--ui);color:var(--ink-dim);margin-top:3px;
-    overflow:hidden;text-overflow:ellipsis}
-  .qb .qn{display:block;font:400 19px/1 var(--px16);color:var(--ink);margin-top:8px;
-    font-variant-numeric:tabular-nums}
-  .qb .qn s{text-decoration:none;font:400 11px/1 var(--ui);letter-spacing:.02em;
-    color:var(--ink-dim);margin-left:2px}
-  .qb .qgo{display:inline-block;margin-top:8px;padding:5px 10px;background:var(--green-fill);
-    color:var(--green-ink);font:800 10px/1 var(--ui);letter-spacing:.12em;text-transform:uppercase}
-  /* SEGMENTS, NOT A BAR. Eleven notches for eleven men is exactly what the
-     number means, and a smooth bar would round it into a percentage nobody
-     asked for. The album's is twelve because 736 notches is not a bar. */
-  .qb .qseg{display:flex;gap:3px;margin-top:9px}
-  .qb .qseg i{flex:1;height:7px;background:var(--line)}
-  .qb .qseg i.on{background:var(--qc,var(--gold))}
-  .qb.done{opacity:.8}
-  /* in the case, the case is the frame */
-  .mm-case .qb{border-top:0;border-right:0;border-bottom:0;background:transparent;padding-left:10px}
-  .mm-case .qb + .qb{border-top:1px solid var(--line);padding-top:12px}
-  /* the card on the front door */
-  .mm-daily{display:flex;width:100%;align-items:center;justify-content:space-between;gap:10px;
-            background:var(--panel);border:1px solid var(--line);border-radius:14px;
-            padding:12px 14px;color:inherit;font:inherit;cursor:pointer;text-align:left}
-  .mm-daily.done{opacity:.78}
-  .dd-t{display:block;font-weight:800;font-size:1rem}
-  .dd-s{display:block;font-size:.76rem;opacity:.62;margin-top:2px}
-  .dd-r{flex-shrink:0;text-align:center}
-  .dd-r b{display:block;font-size:1.3rem;font-weight:800;line-height:1}
-  .dd-r i{display:block;font-style:normal;font-size:.6rem;opacity:.6;text-transform:uppercase}
-  .dd-go{background:var(--green-fill);color:var(--green-ink);border-radius:999px;
-         padding:7px 14px;font-weight:800;font-size:.8rem}
+  /* ---------------- ROWS, NOT BOXES ----------------
+     A row is a tap target sitting on a hairline. No border, no fill, no radius:
+     the density of this page is what makes boxes fight each other, and the
+     handoff's answer is to take them all away and let the rules carry it.
+     The press is opacity rather than a scale, because a row is the full width
+     of the page and scaling one looks like the page itself flinched. */
+  .mm-list{display:flex;flex-direction:column}
+  .mm-item{display:flex;align-items:center;gap:12px;width:100%;padding:14px 0;border:none;
+    border-bottom:1px solid var(--line-soft);background:none;text-align:left;cursor:pointer;
+    font-family:var(--ui);color:inherit;transition:opacity .15s ease}
+  .mm-item:last-child{border-bottom:none}
+  .mm-item:active{opacity:.7}
+  .mm-item .txt{flex:1;display:flex;flex-direction:column;gap:3px;min-width:0}
+  .mm-item .nm{font:700 20px/1 var(--ui);color:var(--ink)}
+  .mm-item .nm.sm{font-size:18px}
+  .mm-item .sub{font:400 13px/1.3 var(--serif);font-style:italic;color:var(--ink-dim)}
+  .mm-item .val{flex:none;font:600 13px/1 var(--ui);color:var(--ink-dim)}
+  /* the figure is the app's own, at the size the handoff drew its stand-in */
+  .mm-item .fig{flex:none}
+  .mm-item .fig.dim{opacity:.55}
+  .mm-count{flex:none;display:flex;flex-direction:column;align-items:center;gap:3px}
+  .mm-count b{font:700 24px/1 var(--ui);color:var(--gold-hi)}
+  .mm-count span{font:400 10px/1 var(--px16);color:var(--ink-dim)}
+  /* SILKSCREEN LIVES HERE AND ON THE EYEBROWS AND NOWHERE ELSE. It is latin-1
+     only, so it is fine for ON and 1 PACK and would quietly drop the accent off
+     anything with a name in it. */
+  .mm-chip{flex:none;font:400 10px/1 var(--px16);color:var(--bg);background:var(--gold-hi);
+    padding:5px 6px;border-radius:var(--r2)}
+  .mm-play{flex:none;padding:9px 15px;border:1px solid var(--gold-hi);border-radius:var(--r2);
+    background:none;color:var(--gold-hi);font:700 13px/1 var(--ui);letter-spacing:.06em}
   /* THE CUP. A wall chart on a phone is a column of ties rather than a tree:
      the tree only reads at A3, and what somebody actually wants to know is who
      is next and who is waiting. */
@@ -3465,7 +3443,6 @@
     .h2skid.in{opacity:.85}
     .h2pitch.chal .h2man{transition:none}
   }
-
 
   /* the country under a player's name on the scoreline */
   .h2ctry{display:block;font:600 .64rem var(--ui);font-style:normal;opacity:.6;
@@ -14742,49 +14719,42 @@ function dailyCardHTML(){
      most of the way through, and the shelf is one tap away for the rest. */
   const cbook = albumCollecting();
   const c = albumCount(cbook);
-  /* TWELVE NOTCHES FOR SEVEN HUNDRED STICKERS. A notch each is not a bar, and a
-     smooth bar turns a book you are a third of the way through into a
-     percentage. Twelve is enough to feel a page turn and few enough to read. */
-  const seg = (have, all, n) => { const on = all ? Math.min(n, Math.ceil(have / all * n)) : 0;
-    let o = '<span class="qseg">';
-    for (let i = 0; i < n; i++) o += '<i' + (i < on ? ' class="on"' : '') + '></i>';
-    return o + '</span>'; };
-  const albumRow = c.all ? '<button class="qb" style="--qc:var(--gold)" onclick="openAlbum()">' +
-    '<span class="qt">The Album</span>' +
-    '<span class="qs">' +
+  const albumRow = c.all ? '<button class="mm-item" onclick="openAlbum()">' +
+    '<span class="txt"><span class="nm sm">The Album</span></span>' +
+    '<span class="val">' +
       esc((POOLS[cbook] || {}).short || (POOLS[cbook] || {}).label || cbook) +
-      (A.packs > 0 ? ' \u00b7 ' + A.packs + ' pack' + (A.packs === 1 ? "" : "s") + ' to open' : "") +
-    '</span>' +
-    '<span class="qn">' + c.have + ' <s>of ' + c.all + '</s></span>' +
-    seg(c.have, c.all, 12) +
+      ' \u00b7 ' + c.have + ' of ' + c.all + '</span>' +
+    (A.packs > 0 ? '<span class="mm-chip">' + A.packs + ' PACK' +
+      (A.packs === 1 ? "" : "S") + '</span>' : "") +
     '</button>' : "";
   /* YOUR XI, once there are eleven men to choose from, counted across every
      book: the eleven can be built out of any of them. */
   const own = albumOwnedTotal();
   const picked = dreamPicked().length;
-  const dreamRow = own >= 11 ? '<button class="qb" style="--qc:var(--gold)" onclick="openDream()">' +
-    '<span class="qt">Your XI</span>' +
-    '<span class="qs">' + (dreamOk() ? 'Ready to field' : 'Built from every book') + '</span>' +
-    '<span class="qn">' + picked + ' <s>of 11</s></span>' +
-    seg(picked, 11, 11) +
+  const dreamRow = own >= 11 ? '<button class="mm-item" onclick="openDream()">' +
+    '<span class="txt"><span class="nm sm">Your XI</span></span>' +
+    '<span class="val">' + (dreamOk() ? 'Ready' : picked + ' of 11') + '</span>' +
     '</button>' : "";
   /* LEFT IS WHAT YOU ARE PLAYING, RIGHT IS WHAT YOU HAVE WON, and the two used
      to be four identical strips in one column. The cabinet only appears once
      there is something in it, and with nothing to show the left column takes
      the whole width rather than leaving a labelled empty frame on the page. */
-  const daily = '<button class="qb' + (done ? " done" : "") +
-    '" style="--qc:var(--sage)" onclick="dailyStart()">' +
-    '<span class="qt">The Daily Ball</span>' +
-    '<span class="qs">' + esc(said) + '</span>' +
+  /* THE TWO YOU ARE PLAYING COME FIRST AND COME BIGGER. The Daily Ball and the
+     Cup are things with a state that moved since yesterday, so they get the
+     twenty pixel name and a line of the app's own voice under it. The album and
+     Your XI are things you own: they are the same row two points smaller with a
+     number on the right, because what you want from them is the count. */
+  const daily = '<button class="mm-item' + (done ? " done" : "") + '" onclick="dailyStart()">' +
+    '<span class="txt"><span class="nm">The Daily Ball</span>' +
+      '<span class="sub">' + esc(said) + '</span></span>' +
     (st.played
-      ? '<span class="qn">' + st.played + ' <s>day' + (st.played === 1 ? "" : "s") + '</s></span>'
-      : '<span class="qgo">Play</span>') +
+      ? '<span class="mm-count"><b>' + st.played + '</b><span>DAY' +
+        (st.played === 1 ? "" : "S") + '</span></span>'
+      : '<span class="mm-play">Play</span>') +
     '</button>';
-  const cab = [albumRow, dreamRow].filter(Boolean).join("");
-  return '<div class="mm-quad' + (cab ? "" : " solo") + '">' +
-    '<div class="mm-col">' + daily + cupRow_() + '</div>' +
-    (cab ? '<div class="mm-case"><span class="mm-case-lab">The cabinet</span>' + cab + '</div>' : "") +
-  '</div>';
+  return '<div><div class="mm-eyebrow">Your club</div><div class="mm-list">' +
+    daily + cupRow_() + albumRow + dreamRow +
+  '</div></div>';
 }
 /* THE FRONT DOOR SAYS WHERE THE RUN IS, because a run is seven matches over
    days and the first thing it has to answer is "where was I". */
@@ -14796,11 +14766,11 @@ function cupRow_(){
     : !c.alive ? "Out in " + c.out
     : c.round === "group" ? esc(c.nation) + " " + c.year + " \u00b7 group match " + (c.n + 1) + " of 3"
     : esc(c.nation) + " " + c.year + " \u00b7 " + CUP_ROUND_NAME[c.round];
-  return '<button class="qb" style="--qc:var(--gold-hi)" onclick="openCup()">' +
-    '<span class="qt">The Cup</span>' +
-    '<span class="qs">' + said + '</span>' +
-    (c && c.won ? '<span class="qn">\ud83c\udfc6 <s>won</s></span>'
-      : '<span class="qgo">' + (c && c.alive ? "Play" : "Start") + '</span>') +
+  return '<button class="mm-item" onclick="openCup()">' +
+    '<span class="txt"><span class="nm">The Cup</span>' +
+      '<span class="sub">' + said + '</span></span>' +
+    (c && c.won ? '<span class="mm-count"><b>\ud83c\udfc6</b><span>WON</span></span>'
+      : '<span class="mm-play">' + (c && c.alive ? "Play" : "Start") + '</span>') +
     '</button>';
 }
 
@@ -15751,12 +15721,21 @@ function renderSetup(st){
     if(!d) return null; let n=0; for(const t of ["easy","normal","hard","extreme","ball"]) n += (d[t]||[]).length; return n; })();
   /* a mode in the fixture list: an accent rule, a name, what it is, and a badge
      on the one that is on */
-  const fix = (play, rule, name, sub) => `
-      <button class="mm-fix" onclick="setPlay('${play}')" aria-pressed="${setupPlay===play}">
-        <span class="rule" style="background:${rule}"></span>
+  /* THE MODE WEARS A KIT. The handoff ships three PNG stand-ins and says in
+     writing that they are drawn to match h2FigHTML at aspect 0.42, which is the
+     component sitting in this file already, so it draws them rather than
+     shipping three more files to precache and keep in step. The chosen mode is
+     at full opacity with a gold chip and the others are dimmed: nothing moves,
+     which is the handoff's rule for this row. */
+  const fix = (play, kit, name, sub) => {
+    const on = setupPlay === play;
+    return `
+      <button class="mm-item" onclick="setPlay('${play}')" aria-pressed="${on}">
+        ${h2FigHTML(on ? "" : "dim", kit, 30, null)}
         <span class="txt"><span class="nm">${name}</span><span class="sub">${sub}</span></span>
-        ${setupPlay===play?'<span class="mm-badge">ON</span>':""}
+        ${on?'<span class="mm-chip">ON</span>':""}
       </button>`;
+  };
   const seg = (opts) => '<div class="mm-seg">' + opts.map(o =>
       `<button aria-pressed="${!!o.on}" onclick="${o.go}"${o.off?" disabled":""}>${o.label}</button>`).join("") + '</div>';
   const pills = (opts) => '<div class="mm-pills">' + opts.map(o =>
@@ -15778,11 +15757,13 @@ function renderSetup(st){
 
       ${dailyCardHTML()}
 
-      <div class="mm-fixtures">
-        <div class="mm-eyebrow">How you play</div>
-        ${fix("pitch","var(--sage)","One on One","Two of you, a ball, ninety minutes")}
-        ${fix("board","var(--gold)","The Board","The quiz. Pick a tier, take the points")}
-        ${fix("manager","var(--terracotta)","The Dugout","Pick an eleven and they carry the questions")}
+      <div>
+        <div class="mm-eyebrow">Multiplayer</div>
+        <div class="mm-list">
+        ${fix("board","#C9A227","The Board","The quiz. Pick a tier, take the points")}
+        ${fix("pitch","#8FB79E","One on One","Two of you, a ball, ninety minutes")}
+        ${fix("manager","#C4714F","The Dugout","Pick an eleven and they carry the questions")}
+        </div>
       </div>
 
       <div class="mm-sect">
