@@ -9550,6 +9550,12 @@ function h2Used(id, t){
    one shooting, the one being marked. Left out, it is the quiz's own bank,
    which is every mode except this one. */
 function h2Draw(t, i, w){
+  /* WHATEVER THE LAST CLOCK DID, IT IS OVER. logOutcome clears this itself, but
+     it returns early on a row with no question behind it, and a flag left
+     standing would then land on whatever got logged next. A new question is
+     drawn before any new row can be written, so clearing it here bounds a
+     stale flag to nothing. */
+  h2Expired = false;
   /* HIS OWN LEAGUE AND THE QUIZ'S OWN BANK CAN BE THE SAME ARRAY. A Premier
      League man in a Premier League quiz routes to DECKS.premier, and bankFor
      routes to DECKS.premier as well, but the used lists are keyed separately:
@@ -9660,7 +9666,7 @@ function h2Play(){
 }
 
 function h2TackleReveal(){ stopTimer(); S.phase = "h_tjudge"; render(); }
-function h2TackleTimeUp(){ if(S.phase === "h_tackle"){ if(h2IsMC()) h2().pick = null; h2TackleReveal(); } }
+function h2TackleTimeUp(){ if(S.phase === "h_tackle"){ h2Expired = true; if(h2IsMC()) h2().pick = null; h2TackleReveal(); } }
 
 /* Two different things arrive here and they end differently.
 
@@ -9844,7 +9850,7 @@ function h2McOptionsHTML(shown){
 }
 
 function h2Reveal(){ stopTimer(); S.phase = "h_judge"; render(); }
-function h2TimeUp(){ if(S.phase === "h_q"){ if(h2IsMC()) h2().pick = null; h2Reveal(); } }
+function h2TimeUp(){ if(S.phase === "h_q"){ h2Expired = true; if(h2IsMC()) h2().pick = null; h2Reveal(); } }
 
 /* Whoever is nearest to the spot the ball was just lost on.
 
@@ -12435,6 +12441,14 @@ function albumSwap(wantId, give){
   render();
 }
 
+/* THE CLOCK RAN OUT ON THIS ONE. Set by the two timeouts, read by the row they
+   produce. A ball nobody answered and a ball somebody got wrong used to be the
+   same row, which means the re-tier tool has been averaging two opposite
+   signals together: a question nobody finishes in fifteen seconds is hard or
+   long, and a question people answer fast and miss is a question they
+   understood and were wrong about. The second is the better signal and it was
+   being diluted by the first. */
+let h2Expired = false;
 const LOG_KEY = "ball2-outcomes";
 const LOG_MAX = 8000;
 /* WHO IT WAS ABOUT, read at the moment it happened. w is the side the man
@@ -12458,6 +12472,10 @@ function logOutcome(kind, ok, who){
   try{
     const log = JSON.parse(localStorage.getItem(LOG_KEY) || "[]");
     const row = {t: Date.now(), mode: S.mode, mc: !!S.mc, tier: S.tier, qi: S.qi, kind: kind, ok: !!ok};
+    /* READ AND CLEARED HERE, so exactly one row can carry it. Only written when
+       true, because the log is eight thousand rows in localStorage and a column
+       of zeroes is the kind of thing that quietly doubles a file. */
+    if(h2Expired){ row.out = 1; h2Expired = false; }
     /* THE QUESTION'S OWN NAME, which an index is not: append a pack to a tier
        and every row filed before it points at a different question. Plus the
        deck it came out of, because a ball in The Dugout draws from the man's
@@ -12585,10 +12603,16 @@ function outcomesTSV(){
      to have a question behind it so the blank case never came up; the corner
      duel files an outcome with no question at all, and a column reading
      "undefined" in a spreadsheet is worse than a column reading nothing. */
-  return "time\tmatch\tmode\tmc\ttier\tqi\tkind\tok\tside\tslot\tman\tspot\tleague\tvline\tshape\tshot\tdive\n" +
+  /* "out" IS THE CLOCK RUNNING OUT, and it goes next to ok because that is the
+     column it qualifies: a row with ok 0 and out 1 is nobody answering, and a
+     row with ok 0 and out blank is somebody answering wrong. Everything written
+     before tonight has it blank, which is correct rather than missing: those
+     rows were logged when the two were genuinely indistinguishable, so the
+     honest value is nothing rather than a nought. */
+  return "time\tmatch\tmode\tmc\ttier\tqi\tkind\tok\tout\tside\tslot\tman\tspot\tleague\tvline\tshape\tshot\tdive\n" +
     log.map(r => [new Date(r.t).toISOString(), r.mid || "", r.mode, r.mc ? 1 : 0,
       r.tier || "", r.qi == null ? "" : r.qi,
-      r.kind, r.ok ? 1 : 0, r.w == null ? "" : r.w, r.i == null ? "" : r.i,
+      r.kind, r.ok ? 1 : 0, r.out ? 1 : "", r.w == null ? "" : r.w, r.i == null ? "" : r.i,
       r.who || "", r.pos || "", r.lg || "", r.line || "", r.form || "",
       r.shot || "", r.dive || ""].join("\t")).join("\n");
 }

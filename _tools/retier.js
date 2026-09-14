@@ -151,9 +151,15 @@ for (const r of clean) {
   const deck = deckIdOf(r);
   if (ONLY && deck !== ONLY && deck !== ONLY + "-mc") continue;
   const id = deck + "|" + r.tier + "|" + r.k;
-  const t = tally.get(id) || { deck: deck, tier: r.tier, k: r.k, asked: 0, right: 0 };
+  const t = tally.get(id) || { deck: deck, tier: r.tier, k: r.k, asked: 0, right: 0, out: 0, timed: 0 };
   t.asked++;
   if (r.ok) t.right++;
+  /* THE CLOCK RATHER THAN THE ANSWER. out is written by index.html only from
+     tonight, so timed counts the rows that COULD have carried it: a corpus
+     collected before the column existed reports nothing rather than reporting a
+     confident zero, which would be inventing data about balls nobody measured. */
+  if (r.out) t.out++;
+  if (r.out !== undefined || r.ok) t.timed++;
   tally.set(id, t);
 }
 
@@ -197,10 +203,36 @@ if (!moves.length) {
 console.log("\n" + moves.length + " question" + (moves.length === 1 ? "" : "s") + " to move:\n");
 moves.sort((a, b) => a.deck < b.deck ? -1 : a.deck > b.deck ? 1 : a.rate - b.rate);
 for (const m of moves) {
+  /* THE CLOCK'S SHARE OF THE MISSES, printed only when there were misses and
+     only when something in this question's rows could have carried the mark.
+     A question moving down because half its misses were people running out of
+     time is a different repair from one moving down because people answered
+     and were wrong, and the person reading this list is the one who has to
+     decide which. */
+  const missed = m.asked - m.right;
+  const clock = (missed > 0 && m.out > 0) ? "  " + Math.round(m.out / missed * 100) + "% ran out" : "";
   console.log("  " + m.deck.padEnd(12) + m.tier.padEnd(8) + "-> " + m.want.padEnd(8) +
-    String(Math.round(m.rate * 100)).padStart(3) + "% of " + String(m.asked).padStart(3) +
+    String(Math.round(m.rate * 100)).padStart(3) + "% of " + String(m.asked).padStart(3) + clock +
     (m.saw !== m.want ? "  (the numbers say " + m.saw + ", moved one step)" : ""));
   console.log("      " + String(m.q.q || "").slice(0, 92));
+}
+
+/* WHERE THE CLOCK IS DOING THE WORK. More than half the misses being the timer
+   means the question may be in the right tier and simply be too long to read on
+   a phone in fifteen seconds, and shortening it is the repair rather than
+   moving it. Named separately because this list goes to whoever writes the
+   questions, not to whoever runs --write. */
+const wordy = moves.filter(m => {
+  const missed = m.asked - m.right;
+  return m.timed >= MIN && missed >= 3 && m.out / missed > 0.5;
+});
+if (wordy.length) {
+  console.log("\n" + wordy.length + (wordy.length === 1 ? " of those is" : " of those are") +
+    " timing out rather than being got wrong.");
+  console.log("Worth reading before moving: the tier may be right and the question long.\n");
+  for (const m of wordy)
+    console.log("  " + String(Math.round(m.out / (m.asked - m.right) * 100)).padStart(3) + "% ran out  " +
+      String(m.q.q || "").slice(0, 86));
 }
 
 if (!WRITE) {
