@@ -4,6 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#0b8250">
+<!-- BOTH LOOKS, DECLARED BEFORE THE STYLESHEET PARSES. Without this the browser
+     has no way to know the app has a dark theme, because the theme is switched
+     by a data-theme attribute rather than by a media query, and Chrome and Edge
+     on Android will helpfully invert the page for you. They invert backgrounds
+     and skip most saturated colour, which is how you end up reading charcoal
+     headings on olive grass. Here rather than only in the CSS so it holds on the
+     first paint too, before applyTheme has stamped the root. -->
+<meta name="color-scheme" content="light dark">
 <title>BALL</title>
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" href="assets/ball.png">
@@ -294,6 +302,9 @@
      --turf and the two card colours are NOT theme-aware on purpose. A yellow
      card is yellow, a red card is red, and grass is grass. */
   :root, :root[data-theme="dark"]{
+    /* Scrollbars, form controls and the canvas the browser paints behind the
+       page all follow this. It was being worked around by hand before. */
+    color-scheme:dark;
     /* the banner's goal, lit the way a floodlit one is */
     --bn-post:#eef3f5; --bn-post-m:#c3d0d4; --bn-post-d:#8d9ea3;
     --bn-net:rgba(205,232,212,.15); --bn-net-d:rgba(205,232,212,.09);
@@ -341,6 +352,11 @@
     --head-rule:1px;
   }
   :root[data-theme="light"]{
+    /* "only" rather than plain "light", which is the difference between saying
+       which scheme is in use and telling the browser not to second-guess it. The
+       case that broke was the light theme on a phone set to dark, and plain
+       light does not reliably hold there. */
+    color-scheme:only light;
     /* and on paper, where a white goal on cream is no goal at all */
     --bn-post:#6b808a; --bn-post-m:#52656d; --bn-post-d:#3a4950;
     --bn-net:rgba(45,74,62,.26); --bn-net-d:rgba(45,74,62,.15);
