@@ -1444,13 +1444,18 @@
      image-rendering is the line that cannot be dropped. crisp-edges first and
      pixelated second, because last valid wins and pixelated is the one that
      promises nearest neighbour. */
-  /* THE APP'S OWN GROUND, not a green rectangle. The canvas clears to
-     transparent and paints only the goal, the man, the ball and their shadows,
-     so the pitch behind them was pure CSS doing nothing the drawing needed, and
-     on a dark menu it read as a block that had been pasted on. Taking --bg also
-     means it follows the theme rather than matching one of them by luck. */
+  /* NO BACKGROUND, which is not the same as the app's background even though
+     the menu cannot tell them apart. The canvas clears to transparent and paints
+     only the goal, the man, the ball and their shadows, so the green it used to
+     sit on was pure CSS doing nothing the drawing needed. Painting --bg here
+     instead would have been the same picture today and a flat rectangle punched
+     through the first card, sheet or differently coloured section it was ever
+     put on. Nothing means it takes whatever is behind it, anywhere, at any size.
+     The goal's ink still needs its theme tokens: being transparent settles what
+     is behind the posts and says nothing about whether a near-white post can be
+     seen once that turns out to be cream. */
   .banner{position:relative;width:100%;aspect-ratio:600 / 246;overflow:hidden;
-    background:var(--bg);cursor:pointer}
+    cursor:pointer}
   #bnstage{position:absolute;inset:0;z-index:2;pointer-events:none;
     image-rendering:crisp-edges;image-rendering:pixelated;width:100%;height:100%}
   .banner .words{position:absolute;inset:0;z-index:1;display:flex;
