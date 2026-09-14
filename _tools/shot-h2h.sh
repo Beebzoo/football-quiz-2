@@ -216,6 +216,11 @@ setups.cup2018group = `cupSetYear("2018"); cupStart("Panama"); render();`;
 setups.cup2010 = `cupSetYear("2010");`;
 setups.cup2014 = `cupSetYear("2014");`;
 setups.cup2022 = `cupSetYear("2022");`;
+/* Your XI: a phone with a few dozen stickers, and a side half built */
+const someStickers = `(() => { const a = mine().album; let n = 0; for(const side of albumSides()){ for(const m of albumMen(side)){ if(n++ % 9) continue; a.have[albumId(side, m)] = 1; } } mineSave(); })();`;
+setups.dream = someStickers + ` openDream();`;
+setups.dreambuilt = someStickers + ` (() => { const own = dreamOwned(); const gk = own.find(m => m.pos === "GK"); const rest = own.filter(m => m.pos !== "GK").slice(0, 10); mine().dream = {men: [gk.id].concat(rest.map(m => m.id))}; mineSave(); })(); openDream();`;
+setups.dreampick = someStickers + ` (() => { const own = dreamOwned(); const gk = own.find(m => m.pos === "GK"); const rest = own.filter(m => m.pos !== "GK").slice(0, 10); mine().dream = {men: [gk.id].concat(rest.map(m => m.id))}; mineSave(); })(); S=freshState(["Martijn","Bram"],false,"classic",0,"pitch",false); h2Start(); render();`;
 
 const SHOT_SHAPES = ["4-2-3-1", "4-4-2", "4-3-3", "3-5-2", "5-3-2"];
 const SHOT_LINES = ["high", "mid", "low"];

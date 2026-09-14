@@ -2770,6 +2770,11 @@
   .alpage{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:10px 0}
   .alslot{padding:0;border:0;background:none;color:inherit;font:inherit}
   .alslot.want{cursor:pointer}
+  /* a man already in the eleven is still shown in the list, lit, because
+     scrolling back up to see who you have picked is the one thing a squad
+     screen must never make anybody do */
+  .alslot.in .alst{border-color:var(--gold);background:linear-gradient(120deg,rgba(201,154,46,.22),transparent)}
+  .dreambtn{width:100%;margin-bottom:6px;border-color:var(--gold)}
   .alpack{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:14px 0}
   .alst{background:var(--panel);border:1px solid var(--line);border-radius:8px;
         padding:8px 4px;text-align:center}
@@ -5913,7 +5918,7 @@ function setTheme(t){
   applyTheme();
   render();
 }
-const BUILD = "14 Sep 2026 · 03:21";
+const BUILD = "14 Sep 2026 · 03:28";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five
@@ -7983,7 +7988,14 @@ function h2Order(t){
   if(out.every(Boolean)){ t.xi = out; t.bench = bench; }
   return t;
 }
-const h2Squad = w => { const t = h2Team(w), p = h2Pool(); return (t && p && p[t]) ? h2Order(p[t]) : null; };
+/* YOUR XI IS A SIDE. One seam, because everything downstream reads a squad
+   and the one it builds is shaped like a country. */
+const h2Squad = w => {
+  const t = h2Team(w);
+  if(t === DREAM_SIDE){ const d = dreamSquad(); return d ? h2Order(d) : null; }
+  const p = h2Pool();
+  return (t && p && p[t]) ? h2Order(p[t]) : null;
+};
 /* WHICH ELEVEN THIS IS. The deck no longer sorts a squad list by shirt number
    and calls it a team: it carries the side that started that country's last
    match at the tournament, with the date and the opponent. Saying so is worth
@@ -8749,7 +8761,8 @@ function h2Book(w, i){
    renderer and a renderer that has to guard is a renderer with a bug in it. */
 const MINE_KEY = "ball2-mine";
 const MINE_BLANK = {daily: null, streak: {played: 0, half: 0, last: null},
-                    album: {have: {}, packs: 0, foils: []}, cup: null, cups: []};
+                    album: {have: {}, packs: 0, foils: []}, cup: null, cups: [],
+                    dream: {men: []}};
 let MINE = null;
 function mine(){
   if(MINE) return MINE;
@@ -8761,6 +8774,7 @@ function mine(){
   if(!MINE.album.have) MINE.album.have = {};
   if(!MINE.streak) MINE.streak = {played: 0, half: 0, last: null};
   if(!Array.isArray(MINE.cups)) MINE.cups = [];
+  if(!MINE.dream || !Array.isArray(MINE.dream.men)) MINE.dream = {men: []};
   return MINE;
 }
 function mineSave(){
@@ -9430,6 +9444,94 @@ function aiTick(){
     return aiLater(() => { if(S.phase === "h_pens") h2SoKick(); });
   if(p === "h_ft") return;
 }
+
+/* ================= YOUR XI =================
+   Eleven men out of the album, which is the only place they can come from:
+   you can field a man when you have his sticker and not before. */
+const DREAM_SIDE = "Your XI";
+const DREAM_KIT = "#C99A2E";
+/* a man by his sticker id, which is the only name the album keeps */
+function dreamMan(id){
+  const book = albumBook();
+  if(!book || !id) return null;
+  const cut = String(id).lastIndexOf("/");
+  if(cut < 1) return null;
+  const slug = id.slice(0, cut), no = id.slice(cut + 1);
+  for(const side of Object.keys(book)){
+    const t = book[side];
+    if((t.slug || side) !== slug) continue;
+    const m = albumMen(side).find(x => String(x.no) === no);
+    if(!m) return null;
+    /* HIS COUNTRY TRAVELS WITH HIM, because on your own team sheet "Cannavaro"
+       next to "Zidane" wants to say which side each of them came off. */
+    return Object.assign({}, m, {from: side});
+  }
+  return null;
+}
+const dreamOwned = () => {
+  const book = albumBook();
+  if(!book) return [];
+  const out = [];
+  for(const side of Object.keys(book).sort())
+    for(const m of albumMen(side)){
+      const id = albumId(side, m);
+      if(albumHas(id)) out.push(Object.assign({}, m, {from: side, id: id}));
+    }
+  return out;
+};
+const dreamPicked = () => (mine().dream && Array.isArray(mine().dream.men)) ? mine().dream.men : [];
+/* THE ELEVEN CHECKS ITS OWN MEN. The list is only a list, and it can arrive
+   from a file carried off another phone, so the side is built from the men in
+   it you actually have. Nothing upstream can talk this into fielding somebody
+   you have not collected. */
+const dreamHave = () => dreamPicked().filter(id => albumHas(id) && dreamMan(id));
+const dreamHasGk = list => list.map(dreamMan).filter(m => m && m.pos === "GK").length === 1;
+const dreamOk = () => dreamHave().length === 11 && dreamHasGk(dreamHave());
+/* BUILT ONCE PER ELEVEN. h2Squad is read on every render and h2Order sorts a
+   squad the first time it sees the object, so a fresh one every call would
+   re-sort forever. */
+let DREAM_SQ = null, DREAM_SIG = "";
+function dreamSquad(){
+  if(!dreamOk()) return null;
+  const have = dreamHave();
+  const sig = have.join(",");
+  if(DREAM_SQ && DREAM_SIG === sig) return DREAM_SQ;
+  const men = have.map(dreamMan).filter(Boolean);
+  if(men.length !== 11) return null;
+  DREAM_SIG = sig;
+  /* SHAPED EXACTLY LIKE A COUNTRY, so nothing downstream has to know it is
+     not one: the shapes, the ladder, the traits and the report all read a
+     squad and this is a squad. No bench, like the forty famous finals. */
+  DREAM_SQ = {kit: DREAM_KIT, abbr: "XI", flag: null, slug: "your-xi",
+              squad: 11, xi: men, bench: [], xiRule: "yours"};
+  return DREAM_SQ;
+}
+const dreamReady = () => !!(albumBook() && dreamSquad());
+/* ---------- building it ---------- */
+let DREAM_VIEW = null;
+function openDream(){ audio(); DREAM_VIEW = {pos: null}; ALBUM_VIEW = null; CUP_VIEW = null; render(); }
+function closeDream(){ audio(); DREAM_VIEW = null; render(); }
+function dreamFilter(p){ audio(); DREAM_VIEW.pos = (DREAM_VIEW.pos === p) ? null : p; render(); }
+function dreamPick(id){
+  audio();
+  const m = mine();
+  if(!m.dream) m.dream = {men: []};
+  const at = m.dream.men.indexOf(id);
+  if(at > -1){ m.dream.men.splice(at, 1); mineSave(); DREAM_SIG = ""; return render(); }
+  /* YOU CAN ONLY FIELD MEN YOU HAVE COLLECTED, which is the whole feature. */
+  if(!albumHas(id)) return toast("You have not got him yet.", true);
+  if(m.dream.men.length >= 11) return toast("Eleven is eleven. Take one out first.", true);
+  const man = dreamMan(id);
+  /* ONE KEEPER, which is not a style choice: slot 0 of every shape is the
+     goalkeeper and the restart, the save and the shootout all say so. */
+  if(man && man.pos === "GK" && m.dream.men.map(dreamMan).some(x => x && x.pos === "GK"))
+    return toast("You already have a keeper.", true);
+  m.dream.men.push(id);
+  mineSave();
+  DREAM_SIG = "";
+  render();
+}
+function dreamClear(){ audio(); mine().dream = {men: []}; mineSave(); DREAM_SIG = ""; render(); }
 
 /* ================= THE CUP ================= */
 /* EVERY TOURNAMENT THE APP HAS A POOL FOR. Four kilobytes each, fetched like
@@ -10968,6 +11070,15 @@ function h2Render(st){
         ? '<div class="h2hintline">' + esc(S.players[0].name) + ' has ' + esc(H.teams[0]) +
           '. <button class="h2view" style="display:inline;margin:0" onclick="h2ClearTeams()">start again</button></div>'
         : '<div class="h2hintline">' + h2Kind(S.mode).blurb + '</div>') +
+      /* YOUR XI PLAYS ANYBODY, and there is one of it, because there is one
+         album on the phone. It only appears on the pool the album is a book
+         of, since the men in it come from that book. */
+      ((h2PoolId() === ALBUM_POOL && dreamReady() && !H.teams.includes(DREAM_SIDE))
+        ? '<button class="h2teambtn dreambtn" style="--kc:' + DREAM_KIT + '" onclick="h2PickTeam(' +
+          JSON.stringify(DREAM_SIDE).replace(/"/g, "&quot;") + ')">' +
+          '<span class="sw" style="background:' + DREAM_KIT + '"></span>' +
+          '<span>' + DREAM_SIDE + '</span></button>'
+        : "") +
       '<div class="h2teams">' + names.map(c =>
         '<button class="h2teambtn" style="--kc:' + pool[c].kit + '" onclick="h2PickTeam(' +
         JSON.stringify(c).replace(/"/g, "&quot;") + ')"' + (H.teams.includes(c) ? " disabled" : "") + '>' +
@@ -11647,6 +11758,7 @@ function render(){
      game somebody has parked is still parked when they close it. */
   if(ALBUM_VIEW) return renderAlbum(st);
   if(CUP_VIEW) return renderCup(st);
+  if(DREAM_VIEW) return renderDream(st);
   if(!S || S.phase==="setup"){ return showBoard ? renderBoard(st) : renderSetup(st); }
 
   /* One on One owns the whole screen from the toss to the final whistle, so
@@ -12620,7 +12732,7 @@ function rememberNames(){ try{ localStorage.setItem(NAMES_KEY, JSON.stringify(se
 let showBoard=false, boardMode="";
 /* THE TABLE IS A SCREEN, not an overlay, so it closes the two that are. A
    parked match is still parked; those views are not a match. */
-function openBoard(){ showBoard=true; boardMode=""; ALBUM_VIEW=null; CUP_VIEW=null; render(); }
+function openBoard(){ showBoard=true; boardMode=""; ALBUM_VIEW=null; CUP_VIEW=null; DREAM_VIEW=null; render(); }
 function closeBoard(){ showBoard=false; render(); }
 function saveCrew(){
   const el=document.getElementById("crewin");
@@ -12740,13 +12852,18 @@ function dailyCardHTML(){
     'The album \u00b7 ' + c.have + ' of ' + c.all +
     (A.packs > 0 ? ' \u00b7 ' + A.packs + ' pack' + (A.packs === 1 ? "" : "s") + ' to open' : "") +
     '</button>' : "";
+  /* YOUR XI, once there are eleven men to choose from. Before that it is a
+     button that leads to an empty room. */
+  const own = albumBook() ? albumCount().have : 0;
+  const dreamRow = own >= 11 ? '<button class="mm-ghost" onclick="openDream()">' +
+    'Your XI \u00b7 ' + (dreamOk() ? 'ready' : dreamPicked().length + ' of 11') + '</button>' : "";
   return '<div class="mm-sect"><button class="mm-daily' + (done ? " done" : "") +
     '" onclick="dailyStart()">' +
     '<span class="dd-l"><span class="dd-t">The Daily Ball</span>' +
       '<span class="dd-s">' + esc(said) + '</span></span>' +
     (st.played ? '<span class="dd-r"><b>' + st.played + '</b><i>day' +
       (st.played === 1 ? "" : "s") + '</i></span>' : '<span class="dd-r dd-go">Play</span>') +
-    '</button>' + albumRow + cupRow_() + '</div>';
+    '</button>' + albumRow + dreamRow + cupRow_() + '</div>';
 }
 /* THE FRONT DOOR SAYS WHERE THE RUN IS, because a run is seven matches over
    days and the first thing it has to answer is "where was I". */
@@ -12769,6 +12886,55 @@ function cupRow_(){
 }
 
 /* ---------- the screens ---------- */
+/* YOUR XI: the eleven you have filled, and every man you own under them. */
+function renderDream(st){
+  if(!albumBook()){
+    st.innerHTML = '<div class="h2big">The squads are still loading.</div>' +
+      '<button class="bigbtn ghost" onclick="closeDream()">Back</button>';
+    return;
+  }
+  const picked = dreamPicked();
+  const own = dreamOwned();
+  const pos = DREAM_VIEW.pos;
+  const GROUPS = [["GK", "Keepers"], ["DF", "Defenders"], ["MF", "Midfield"], ["FW", "Forwards"]];
+  const bucket = p => /GK/.test(p) ? "GK" : /B$|^CB|^SW|^DF|WB/.test(p) ? "DF"
+    : /^CF|^ST|^FW|^LF|^RF|^LW|^RW|^SS/.test(p) ? "FW" : "MF";
+  const list = own.filter(m => !pos || bucket(m.pos) === pos);
+  const gk = picked.map(dreamMan).filter(m => m && m.pos === "GK").length;
+
+  st.innerHTML =
+    '<div class="kick">' + ico('users') + 'Your XI</div>' +
+    '<div class="h2big">' + picked.length + ' of 11</div>' +
+    '<div class="h2hintline" style="margin-top:0">' +
+      (own.length < 11
+        ? 'You have ' + own.length + ' sticker' + (own.length === 1 ? "" : "s") +
+          '. Eleven and you can put a side out.'
+        : gk !== 1 ? 'Pick exactly one keeper.'
+        : picked.length < 11 ? 'Tap a man to bring him in. Tap him again to leave him out.'
+        : 'Ready. Pick Your XI in The Dugout or One on One.') +
+    '</div>' +
+    (picked.length
+      ? '<div class="alpage">' + picked.map(id => {
+          const m = dreamMan(id);
+          if(!m) return "";
+          return '<button class="alslot want" onclick="dreamPick(' +
+            JSON.stringify(id).replace(/"/g, "&quot;") + ')">' +
+            albumStickerHTML(m.from, m, true, false) + '</button>';
+        }).join("") + '</div>'
+      : '') +
+    (picked.length ? '<button class="bigbtn ghost tinybtn" onclick="dreamClear()">Start again</button>' : '') +
+    '<div class="h2poolrow">' + GROUPS.map(([k, label]) =>
+      '<button class="h2poolb' + (pos === k ? " on" : "") +
+      '" onclick="dreamFilter(' + JSON.stringify(k).replace(/"/g, "&quot;") + ')">' +
+      label + '</button>').join("") + '</div>' +
+    (own.length
+      ? '<div class="alpage">' + list.map(m =>
+          '<button class="alslot want' + (picked.indexOf(m.id) > -1 ? " in" : "") +
+          '" onclick="dreamPick(' + JSON.stringify(m.id).replace(/"/g, "&quot;") + ')">' +
+          albumStickerHTML(m.from, m, true, false) + '</button>').join("") + '</div>'
+      : '<div class="h2hintline">Open a pack and the men you get turn up here.</div>') +
+    '<button class="bigbtn ghost" onclick="closeDream()">Back</button>';
+}
 function renderCup(st){
   if(!cupReady()){
     st.innerHTML = '<div class="h2big">The tournament is still loading.</div>' +
