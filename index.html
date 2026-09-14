@@ -5884,7 +5884,7 @@ function setTheme(t){
   applyTheme();
   render();
 }
-const BUILD = "14 Sep 2026 · 02:41";
+const BUILD = "14 Sep 2026 · 02:47";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five
@@ -8919,6 +8919,10 @@ function dailyPick(i){
 }
 function dailyOn(){
   audio();
+  /* ONLY OUT OF THE JUDGE SCREEN. Without this a second tap pushes a second
+     result for a question that was only asked once, which shows up as a rung
+     that was never played coming back marked. */
+  if(S.phase !== "d_judge") return;
   const d = mine().daily;
   const right = S.dpick === q().k;
   d.got.push(!!right);
@@ -8987,6 +8991,125 @@ function dailyShare(){
   return "The Daily Ball \u00b7 " + day + "\n" + sq + "  " + got +
          (card ? "\n" + card.m.n + " is mine." : "") +
          "\nbeebzoo.github.io/football-quiz-2";
+}
+/* ---------- THE SHARE IMAGE ----------
+   A square pitch, the ladder up it, and the ball where it stopped. Every
+   measurement is a multiple of four so it stays pixel art when a chat app
+   scales it down to a thumbnail. */
+const DSHOT = 600, DPX = 4;
+const dsnap = n => Math.round(n / DPX) * DPX;
+function dailyCanvas(){
+  const d = dailyToday();
+  if(!d || !d.done) return null;
+  let c;
+  try{ c = document.createElement("canvas"); }catch(e){ return null; }
+  if(!c || typeof c.getContext !== "function") return null;
+  const g = c.getContext("2d");
+  if(!g) return null;
+  c.width = DSHOT; c.height = DSHOT;
+  const box = (x, y, w, h, col) => { g.fillStyle = col; g.fillRect(dsnap(x), dsnap(y), dsnap(w), dsnap(h)); };
+
+  /* THE WORDS GET THEIR OWN STRIPS. Laid over the grass they read as
+     accidents, and at thumbnail size the eye wants somewhere flat to land
+     before it takes in the pitch. */
+  const TOP = 88, BOT = DSHOT - 88, ink = "#f2f6ee", L = 4;
+  box(0, 0, DSHOT, DSHOT, "#0b2a14");
+  for(let y = TOP; y < BOT; y += 48) box(0, y, DSHOT, 24, "#0e3319");
+  box(0, 0, DSHOT, TOP, "#0a1f0f");
+  box(0, BOT, DSHOT, DSHOT - BOT, "#0a1f0f");
+  box(0, TOP - L, DSHOT, L, "#16321d");
+  box(0, BOT, DSHOT, L, "#16321d");
+
+  /* the pitch, between the strips: a border, a halfway line, a circle out of
+     blocks, and the two boxes */
+  const m = 28, cx = DSHOT / 2, mid = (TOP + BOT) / 2;
+  box(m, TOP + 12, DSHOT - 2 * m, L, ink);
+  box(m, BOT - 12 - L, DSHOT - 2 * m, L, ink);
+  box(m, TOP + 12, L, BOT - TOP - 24, ink);
+  box(DSHOT - m - L, TOP + 12, L, BOT - TOP - 24, ink);
+  box(m, mid - L / 2, DSHOT - 2 * m, L, ink);
+  const r = 64;
+  for(let a = 0; a < 360; a += 8)
+    box(cx + Math.cos(a * Math.PI / 180) * r - L / 2, mid + Math.sin(a * Math.PI / 180) * r - L / 2, L, L, ink);
+  for(const top of [true, false]){
+    const bw = 240, bh = 72;
+    const bx = cx - bw / 2, by = top ? TOP + 12 : BOT - 12 - bh;
+    box(bx, by, L, bh, ink); box(bx + bw - L, by, L, bh, ink);
+    box(bx, top ? by + bh - L : by, bw, L, ink);
+  }
+
+  /* THE LADDER, keeper to striker, up the middle. Green cleared, red where it
+     was lost, and the ones never reached drawn but emptied, which is the same
+     rule the album's gaps follow. */
+  const rungs = DAILY.length, got = d.got || [];
+  const step = 64, base = BOT - 44;
+  const rungY = i => base - i * step;
+  for(let i = 0; i < rungs; i++){
+    const y = rungY(i);
+    const state = i < got.length ? (got[i] ? "won" : "lost") : "none";
+    /* A RUNG NEVER REACHED IS DRAWN AND EMPTIED, not left out, which is the
+       same rule the album gaps follow: the slot being there is the point. */
+    const col = state === "won" ? "#5a9e63" : state === "lost" ? "#d9534f" : "#1e402a";
+    box(cx - 20, y - 20, 40, 40, "#0a1f0f");
+    box(cx - 16, y - 16, 32, 32, col);
+    if(state === "won"){ box(cx - 8, y - 2, 16, 4, "#0a1f0f"); box(cx - 2, y - 8, 4, 16, "#0a1f0f"); }
+    if(state === "lost"){ box(cx - 10, y - 2, 20, 4, "#4a1414"); box(cx - 2, y - 10, 4, 20, "#4a1414"); }
+  }
+
+  /* THE BALL BESIDE ITS RUNG, not on top of it: sat over the mark it is meant
+     to point at, it hid the one thing the picture is for. */
+  const reached = d.reached || 0;
+  /* ALL THE WAY MEANS THE STRIKER HAS IT, so the ball stands beside his rung
+     rather than floating above the pitch where it clipped the goal line. */
+  const bally = rungY(Math.min(reached, rungs - 1));
+  const ballx = cx + 48;
+  box(ballx - 16, bally - 16, 32, 32, "#0a1f0f");
+  box(ballx - 12, bally - 12, 24, 24, "#f8f1dd");
+  box(ballx - 8, bally - 4, 16, 4, "#0a1f0f");
+  box(ballx - 4, bally - 8, 8, 4, "#0a1f0f");
+  box(ballx - 4, bally + 4, 8, 4, "#0a1f0f");
+
+  /* the words, in the app's own face when it has landed */
+  const face = '"Silkscreen","Courier New",monospace';
+  g.textAlign = "left";
+  g.fillStyle = "#e3b453"; g.font = "22px " + face;
+  g.fillText("THE DAILY BALL", 36, 54);
+  g.textAlign = "right";
+  g.fillStyle = "#c8c0a6"; g.font = "16px " + face;
+  const when = dayFromKey(d.date);
+  g.fillText(when.getDate() + " " + ["JAN","FEB","MAR","APR","MAY","JUN","JUL","AUG","SEP","OCT","NOV","DEC"][when.getMonth()],
+    DSHOT - 36, 54);
+  g.textAlign = "center";
+  g.fillStyle = "#f8f1dd"; g.font = "24px " + face;
+  g.fillText(reached >= rungs ? "ALL THE WAY" : reached === 0 ? "LOST ON THE FIRST PASS"
+    : "GOT TO " + String(DAILY[reached - 1].to).toUpperCase(), cx, BOT + 52);
+  return c;
+}
+/* THE SHARE SHEET FIRST, because it is the one that opens WhatsApp; a
+   download second; and nothing at all if neither exists, since the text line
+   is already there and pastes anywhere. */
+const dailyCanShare = () => {
+  try{ return !!(document.createElement("canvas").getContext); }catch(e){ return false; }
+};
+function shareDailyImage(){
+  audio();
+  const c = dailyCanvas();
+  if(!c) return toast("Could not draw it.", true);
+  const done = () => toast("Pitch saved. Send it on.");
+  try{
+    c.toBlob(blob => {
+      if(!blob) return toast("Could not draw it.", true);
+      const file = new File([blob], "daily-ball.png", {type: "image/png"});
+      if(navigator.canShare && navigator.canShare({files: [file]}))
+        return navigator.share({files: [file], text: dailyShare()}).then(done, ()=>{});
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "daily-ball.png";
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 4000);
+      done();
+    }, "image/png");
+  }catch(e){ toast("Could not draw it.", true); }
 }
 function copyDaily(){
   const t = dailyShare();
@@ -12161,6 +12284,9 @@ function render(){
         '</div>' +
         '<button class="bigbtn" onclick="copyDaily()">' + ico('users') + 'Copy the result</button>' +
         '<div class="h2hintline">Six squares and a line of text. It pastes into anything.</div>' +
+        (dailyCanShare()
+          ? '<button class="bigbtn ghost" onclick="shareDailyImage()">' + ico('flag') +
+            'The pitch, as a picture</button>' : "") +
         '<button class="bigbtn ghost" onclick="toMenu()">Back</button>';
       return;
     }

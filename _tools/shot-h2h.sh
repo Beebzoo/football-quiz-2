@@ -192,13 +192,18 @@ setups.dailydone = `dailyStart(); for(let i=0;i<6;i++){ const Q=q(); dailyPick(i
 /* the peel: half a card, and a whole one */
 setups.dailypeel = `dailyStart(); for(let i=0;i<3;i++){ const Q=q(); dailyPick(Q.k); dailyOn(); }`;
 setups.dailywon = `dailyStart(); for(let i=0;i<6;i++){ const Q=q(); dailyPick(Q.k); dailyOn(); }`;
+/* the share image itself, drawn onto the stage so it can be looked at */
+setups.dailypic = `dailyStart(); for(let i=0;i<6;i++){ const Q=q(); dailyPick(i===4?(Q.k+1)%4:Q.k); dailyOn(); } (() => { const c = dailyCanvas(); const st = document.getElementById("stage"); st.innerHTML = ""; c.style.width = "360px"; c.style.imageRendering = "pixelated"; st.appendChild(c); })();`;
+setups.dailypicwon = `dailyStart(); for(let i=0;i<6;i++){ const Q=q(); dailyPick(Q.k); dailyOn(); } (() => { const c = dailyCanvas(); const st = document.getElementById("stage"); st.innerHTML = ""; c.style.width = "360px"; c.style.imageRendering = "pixelated"; st.appendChild(c); })();`;
 
 /* the album: the whole thing, one page, and a pack being opened */
 setups.album = `mine().album.packs = 4; mineSave(); openAlbum();`;
 setups.albumpage = `(() => { const t = TEAMS.wc2006.Netherlands, a = mine().album; const men = [...(t.xi||[]), ...(t.bench||[])]; men.slice(0, 14).forEach(m => a.have[(t.slug) + "/" + m.no] = 1); a.have[(t.slug) + "/" + men[0].no] = 3; a.have[(t.slug) + "/" + men[1].no] = 2; a.have[(t.slug) + "/" + men[2].no] = 2; mineSave(); })(); openAlbum("Netherlands");`;
 setups.albumpack = `mine().album.packs = 3; mineSave(); albumOpen();`;
 
-/* the Cup: the picker, a nation's card, the group table, and the wall chart */
+/* the Cup: the picker, one card, the group table, and the wall chart.
+   NO APOSTROPHES IN HERE: this whole block is a shell single-quoted
+   string, and one apostrophe ends it two hundred lines early. */
 setups.cup = `openCup();`;
 setups.cuppick = `cupLook("Trinidad and Tobago");`;
 setups.cupgroup = `cupStart("Trinidad and Tobago"); render();`;

@@ -219,6 +219,30 @@ const check = (n, c, x) => {
   check("and the screen says he goes back in the box",
     /back in the box/.test(stage(app)), "no line about him");
 
+  console.log("\n--- the share, when the phone will not draw ---");
+  /* THE HARNESS HAS NO CANVAS, which is the case that matters: a browser that
+     refuses one must still hand over the daily, the text line and the streak.
+     The picture is the extra, and it has to be absent rather than broken. */
+  run(app, 'localStorage.removeItem("ball2-mine"); MINE = null; dailyStart();'); await tick(140);
+  for (let i = 0; i < 6; i++) { run(app, "dailyPick(q().k); dailyOn();"); await tick(110); }
+  check("the text line still works", /Daily Ball/.test(ev(app, "dailyShare()")), ev(app, "dailyShare()"));
+  check("the picture is simply not offered", ev(app, "dailyCanShare()") === false,
+    ev(app, "dailyCanShare()"));
+  check("and the button is not on the screen", !/shareDailyImage/.test(stage(app)),
+    "the button is there with nothing behind it");
+  check("drawing it returns nothing rather than throwing", ev(app, "dailyCanvas()") === null,
+    ev(app, "dailyCanvas()"));
+  run(app, "shareDailyImage();"); await tick(110);
+  check("and asking for it anyway is survivable", ev(app, "!!mine().daily.done") === true,
+    "the daily fell over");
+  /* A SECOND TAP ON PLAY ON must not push a result for a question that was
+     only asked once: a rung never played coming back marked is what put a red
+     cross on the striker in the share image. */
+  const rungs = ev(app, "mine().daily.got.length");
+  run(app, "dailyOn(); dailyOn();"); await tick(110);
+  check("and a second tap on play on adds nothing",
+    ev(app, "mine().daily.got.length") === rungs, ev(app, "mine().daily.got.length"));
+
   console.log("\n--- carrying it to another phone ---");
   /* the app saves on every change; the test has been poking the object
      directly, so it has to write it down before asking for an export */
