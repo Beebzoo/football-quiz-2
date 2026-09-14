@@ -151,7 +151,17 @@ const TIERS = ["easy", "normal", "hard", "extreme", "ball"];
   check("from the Eredivisie deck, not Classic", ev(app, "q().q") === bank.hard[ev(app, "S.qi")].q, "wrong bank");
   const qq = ev(app, "q()");
   check("the question is on screen", stage(app).includes(qq.q.slice(0, 24).replace(/&/g, "&amp;")), "missing");
-  check("the answer is NOT", !stage(app).includes(qq.a), qq.a);
+  /* NOT ANYWHERE THE SCREEN PUT IT, which is not the same as not anywhere at
+     all. One of the 325 hard questions is "PSV and Feyenoord both finished
+     2012-13 on 69 points. Which club took second on goal difference?", and its
+     answer is PSV. The question names both candidates on purpose and separating
+     them is the whole exercise, so the old check failed on it, and because the
+     deal is random it failed one run in three hundred and looked like a flake.
+     The question text is the one place the answer is allowed to be, so it comes
+     out of the haystack before the search. */
+  const qHTML = qq.q.replace(/&/g, "&amp;");
+  const noQ = stage(app).split(qHTML).join(" ").split(qq.q).join(" ");
+  check("the answer is NOT anywhere the screen added it", !noQ.includes(qq.a), qq.a);
   /* drive a crested question onto every screen a question can appear on */
   const ci = bank.hard.findIndex(r => r.club);
   run(app, `S.tier="hard"; S.qi=${ci}; S.phase="question"; render();`);
