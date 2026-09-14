@@ -2062,10 +2062,6 @@
   body.pixel .fig .f-arm.l{left:0}
   body.pixel .fig .f-arm.r{right:0}
   body.pixel .fig .f-arm::after{height:calc(var(--px) * 3);background:#e3b58c;box-shadow:none}
-  /* and the keeper keeps his gloves. ".fig.gk .f-arm::after" is (0,3,1) and the
-     rule above is (0,3,2), so the generic one was painting skin over them and
-     leaving an outfield player standing in a keeper's pose. */
-  body.pixel .fig.gk .f-arm::after{background:#1d2630}
   /* shorts: rows 13-15, with the gap between the legs on the last two. The
      colour comes from kitShorts, which hands back the same off-white these
      have always been for all but two kits in the app. Unlike --ink this
@@ -2222,33 +2218,22 @@
   body.pixel .h2stage{background:none;box-shadow:none;border-radius:0}
 
   /* ---------------- the goal scene ----------------
-     The one screen in the app that is nothing but atmosphere, so it is where
-     this look is earned or not. Everything soft becomes a band: the radial sky
-     is a flat strip, the blurred stand is two rows of blocks, the floodlight
-     pools go entirely, the wash goes, and the net is a hard grid. The flashes
-     stay as hard white pixels, because a crowd taking photographs is the one
-     soft thing here that reads as deliberate rather than as leftover. */
+     THERE IS NOTHING LEFT IN HERE TO RESTYLE, and that is the answer to the
+     question rather than a gap. The shot is a canvas of pixels in both looks
+     now, so the skin has nothing to flatten: the sky, the stand, the
+     floodlight pools, the wash and the net were all soft CSS that the toggle
+     used to harden, and not one of them exists any more.
+
+     WHY BOTH LOOKS GET THE PIXELS. It is the same argument the menu hero was
+     settled on, with one more reason on top. The toggle only exists inside a
+     match, so anything that appears only under body.pixel is invisible to most
+     people who ever open this app, and a scene worth building is not worth
+     hiding behind a switch nobody finds. The extra reason is the picker: two
+     different shot scenes would mean two goals, two sets of geometry and two
+     places for the corner overlay to be pinned to, and keeping those in step
+     is exactly the drift the whole rebuild exists to remove. One scene, drawn
+     once, and the skin takes the frame around it, which is all that is left. */
   body.pixel .g3{border-radius:0;box-shadow:6px 6px 0 #061a0c}
-  body.pixel .g3-sky{background:#1b3350;background-image:none}
-  body.pixel .g3-stand{background:#24201c;background-image:none;filter:none}
-  body.pixel .g3-stand::before{background:#2e2822;background-image:none}
-  /* the crowd, as two rows of blocks rather than a blur */
-  body.pixel .g3-stand::after{content:"";position:absolute;left:0;right:0;bottom:0;height:52%;
-    background-image:
-      repeating-linear-gradient(90deg,#3d3630 0 6px,#4a4239 6px 12px,#332d28 12px 18px,#443c34 18px 24px);
-    background-size:24px 50%;background-repeat:repeat;opacity:.9}
-  body.pixel .g3-flood{display:none}
-  body.pixel .g3-wash{display:none}
-  body.pixel .g3-ads{border-radius:0;filter:none}
-  body.pixel .g3-ads::after{background-image:none;background:rgba(0,0,0,.18)}
-  body.pixel .g3-flash i{border-radius:0;width:2px;height:2px;box-shadow:none;filter:none}
-  /* the net: a hard grid, no blur, no softness at the seams */
-  body.pixel .g3-net{border-radius:0;filter:none;
-    background-image:
-      repeating-linear-gradient(90deg,rgba(255,255,255,.5) 0 1px,transparent 1px 7px),
-      repeating-linear-gradient(180deg,rgba(255,255,255,.5) 0 1px,transparent 1px 7px);
-    background-size:7px 7px}
-  body.pixel .g3-keeper .fig, body.pixel .g3-striker .fig{filter:none}
 
   /* ---------------- the referee, and the armband ----------------
      Both are pseudo-elements on parts the sprite already owns, so the grid
@@ -2491,104 +2476,35 @@
 
   /* ===================== THE SHOT =====================
      A shot is worth leaving the tactics board for, so the camera drops behind
-     the striker and you watch it from there. The goal is a real box in 3D:
-     a back plane, two sides and a roof, each one a net, standing in a frame.
-     Nothing here is an image. */
-  /* THE MOUTH, WRITTEN DOWN ONCE. The frame and the corner picker are drawn
-     off the same four numbers, because the picker is only worth anything if
-     tapping the top left of it is tapping the top left of THAT goal. Move one
-     and both move. */
-  .g3{--gmL:11%;--gmR:11%;--gmT:17%;--gmH:44%;
-    /* where the ball is going and where he is diving, written on by
-       h2GoalSceneHTML out of the two corners that were picked. The values
-       standing here are the ones the keyframes used to carry hard-coded, so a
-       scene with no duel behind it, a shootout put over the bar or the still
-       shot on the question screen, draws exactly what it always drew. */
-    --gx:66%;--gy:31%;--gmx:56%;--gmy:36%;--gsx:47%;--gsy:44%;--gbx:22%;--gby:64%;
-    --kdx:-4%;--kdy:2%;--kdr:46deg;
-    position:relative;width:100%;max-width:400px;margin:2px auto 0;aspect-ratio:10/8.2;
-    perspective:540px;perspective-origin:50% 34%;overflow:hidden;border-radius:14px;
-    background:linear-gradient(180deg,#04120b 0%,#071d11 24%,#143f20 27%,#0e3319 100%);
+     the striker and you watch it from there.
+
+     WHAT IS LEFT OF THIS BLOCK IS THE BOX AND THE TYPE. The goal, the net, the
+     ground, the crowd, the two men and the ball are all painted by G3 onto one
+     canvas, because a scene that has to answer "which corner, from where, and
+     which way did he go" cannot be built out of keyframes: a keyframe does not
+     take an argument. Everything that used to be a .g3-something with an
+     animation on it has gone with them.
+
+     THE FOUR NUMBERS THE PICKER HANGS OFF ARE NOT DECLARED HERE. They used to
+     be, and the frame was drawn from them, which was the right answer while
+     both were CSS. Now the goal is drawn by the canvas, so the canvas is where
+     they come from: h2GoalSceneHTML writes --gmL, --gmR, --gmT and --gmH onto
+     this element out of the same rectangle the posts were painted from, on
+     every render. There is deliberately no fallback value in this stylesheet.
+     A default here would be a second set of numbers for somebody to keep in
+     step with the first, and a picker pinned to a goal that has moved is worse
+     than a picker that has visibly collapsed: one of them you notice. */
+  .g3{position:relative;width:100%;max-width:400px;margin:2px auto 0;
+    overflow:hidden;border-radius:14px;background:#0a1a10;line-height:0;
     box-shadow:0 16px 34px rgba(0,0,0,.55);user-select:none}
-  /* the grass, running away from the camera */
-  .g3-grass{position:absolute;left:-30%;right:-30%;bottom:0;height:74%;
-    background:
-      repeating-linear-gradient(180deg,rgba(255,255,255,.03) 0 9%,transparent 9% 18%),
-      linear-gradient(180deg,#12441f,#1b5c2c 55%,#164f26);
-    transform-origin:50% 100%}
-  /* the six yard line, drawn in the same perspective as the grass */
-  .g3-line{position:absolute;left:12%;right:12%;top:62%;height:2px;
-    background:rgba(255,255,255,.3);border-radius:2px}
-
-  .g3-goal{position:absolute;left:var(--gmL);right:var(--gmR);top:var(--gmT);height:var(--gmH);z-index:3;
-    transform-style:preserve-3d}
-  .g3-net{position:absolute;background-color:rgba(4,20,10,.42);
-    background-image:
-      repeating-linear-gradient(90deg,rgba(255,255,255,.42) 0 1px,transparent 1px 7px),
-      repeating-linear-gradient(0deg,rgba(255,255,255,.42) 0 1px,transparent 1px 7px)}
-  .g3-back{inset:0;transform:translateZ(-104px)}
-  .g3-top{left:0;right:0;top:0;height:104px;transform:rotateX(-90deg);transform-origin:50% 0}
-  .g3-l{left:0;top:0;bottom:0;width:104px;transform:rotateY(90deg);transform-origin:0 50%}
-  .g3-r{right:0;top:0;bottom:0;width:104px;transform:rotateY(-90deg);transform-origin:100% 50%}
-  /* the frame itself, in front of all of it */
-  .g3-bar{position:absolute;background:linear-gradient(180deg,#fff,#d8dcd8 60%,#a8b0a8);
-    border-radius:3px;box-shadow:0 2px 6px rgba(0,0,0,.5)}
-  .g3-cross{left:-1.5%;right:-1.5%;top:-6px;height:7px}
-  .g3-postl{left:-1.5%;top:-6px;bottom:0;width:7px}
-  .g3-postr{right:-1.5%;top:-6px;bottom:0;width:7px}
-
-  /* ---------- THE GROUND AROUND THE GOAL ----------
-     A stand of people behind the net, boards along the back of the pitch, and
-     floodlights washing down onto it. The crowd is not drawn one person at a
-     time: it is four stacked background layers, three grids of dots offset from
-     each other in pale, skin and shirt colours, over a repeating row shadow.
-     At this size a speckle in tiers reads as thousands of people, and it costs
-     one element. */
-  .g3-sky{position:absolute;left:0;right:0;top:0;height:9%;
-    background:linear-gradient(180deg,#04120b,#071d11)}
-  .g3-stand{position:absolute;left:0;right:0;top:6%;height:21%;
-    background-color:#101d17;
-    background-image:
-      radial-gradient(circle,rgba(238,232,220,.68) 0 1.2px,transparent 1.8px),
-      radial-gradient(circle,rgba(214,146,104,.58) 0 1.2px,transparent 1.8px),
-      radial-gradient(circle,rgba(132,170,222,.54) 0 1.2px,transparent 1.8px),
-      repeating-linear-gradient(180deg,rgba(0,0,0,.42) 0 3px,transparent 3px 8px);
-    background-size:7px 8px, 11px 9px, 13px 11px, 100% 8px;
-    background-position:0 0, 3px 4px, 7px 2px, 0 0;
-    box-shadow:inset 0 -10px 16px -6px rgba(0,0,0,.9), inset 0 8px 14px -8px rgba(0,0,0,.9)}
-  /* the roof line and the two towers */
-  .g3-stand::before{content:"";position:absolute;left:0;right:0;top:0;height:14%;
-    background:linear-gradient(180deg,#0c2018,rgba(12,32,24,0))}
-  .g3-flood{position:absolute;top:-2%;width:34%;height:30%;pointer-events:none;z-index:2}
-  .g3-flood.l{left:-6%;background:radial-gradient(ellipse at 30% 0%,rgba(226,242,226,.36),transparent 64%)}
-  .g3-flood.r{right:-6%;background:radial-gradient(ellipse at 70% 0%,rgba(226,242,226,.36),transparent 64%)}
-  .g3-flood i{position:absolute;top:4%;width:26px;height:9px;border-radius:2px;
-    background:linear-gradient(180deg,#f3f7e8,#b9c4a8);
-    box-shadow:0 0 22px 7px rgba(238,248,226,.5)}
-  .g3-flood.l i{left:16%} .g3-flood.r i{right:16%}
-  /* the boards along the back of the pitch. No names on them: an invented
-     sponsor is a lie on a screenshot, and abstract panels read the same. */
-  .g3-ads{position:absolute;left:-4%;right:-4%;top:24.5%;height:4.6%;z-index:2;
-    background:repeating-linear-gradient(90deg,
-      #16324a 0 11%, #1d4f2c 11% 22%, #4a3312 22% 33%, #2a1b46 33% 44%);
-    box-shadow:inset 0 2px 0 rgba(255,255,255,.22), inset 0 -3px 6px rgba(0,0,0,.6),
-               0 3px 8px rgba(0,0,0,.55)}
-  .g3-ads::after{content:"";position:absolute;inset:0;
-    background:linear-gradient(180deg,rgba(255,255,255,.16),transparent 60%)}
-  /* the floodlights falling on the grass */
-  .g3-wash{position:absolute;left:0;right:0;top:26%;bottom:0;pointer-events:none;z-index:1;
-    background:
-      radial-gradient(ellipse 62% 48% at 22% 22%,rgba(228,248,228,.19),transparent 70%),
-      radial-gradient(ellipse 62% 48% at 78% 22%,rgba(228,248,228,.19),transparent 70%),
-      radial-gradient(ellipse 90% 70% at 50% 100%,rgba(0,0,0,.34),transparent 68%)}
-
-  /* camera flashes going off in the stand when it hits the net */
-  .g3-flash{position:absolute;left:0;right:0;top:6%;height:21%;pointer-events:none;z-index:3}
-  .g3-flash i{position:absolute;width:3px;height:3px;border-radius:50%;background:#fff;
-    opacity:0;box-shadow:0 0 7px 3px rgba(255,255,255,.85)}
-  .g3.scored .g3-flash i{animation:g3flash .5s ease-out infinite}
-  @keyframes g3flash{0%{opacity:0;transform:scale(.5)}
-    12%{opacity:1;transform:scale(1.4)}100%{opacity:0;transform:scale(.8)}}
+  /* THE CANVAS SETS THE BOX'S HEIGHT, which is why there is no aspect-ratio on
+     .g3 and nothing on this rule beyond the stretch. A canvas has an intrinsic
+     ratio of its own attributes, so letting it be an ordinary block in the
+     flow means the frame is exactly the picture and cannot come out a few per
+     cent taller than it on somebody's phone, which would slide the corner
+     overlay off the goal by exactly that much. */
+  .g3c{display:block;width:100%;height:auto;
+    image-rendering:crisp-edges;image-rendering:pixelated}
 
   /* ---------- A FOOTBALLER, DRAWN ----------
      Head, arms, shirt, shorts, legs, socks, boots, all absolutely positioned as
@@ -2642,22 +2558,13 @@
     background:#15181a;border-radius:44% 30% 22% 40%}       /* boot */
   .f-leg.r::after{left:-6%;right:-22%;border-radius:30% 44% 40% 22%}
 
-  /* the keeper: set, big, arms out and away from his body */
-  .fig.gk .f-arm.l{transform:rotate(34deg)}
-  .fig.gk .f-arm.r{transform:rotate(-34deg)}
-  .fig.gk .f-leg.l{transform:rotate(7deg)}
-  .fig.gk .f-leg.r{transform:rotate(-7deg)}
-  .fig.gk .f-torso{background-image:
-    linear-gradient(180deg,rgba(255,255,255,.2),rgba(0,0,0,.26)),
-    repeating-linear-gradient(135deg,rgba(0,0,0,.14) 0 4px,transparent 4px 9px)}
-  .fig.gk .f-arm::after{height:40%;background:#1d2630;border-radius:38%}   /* gloves */
-
-  /* the man taking it, seen from behind: one leg back through the ball */
-  .fig.str .f-head::after{height:62%;border-radius:52% 52% 38% 38%}   /* back of the head */
-  .fig.str .f-arm.l{transform:rotate(26deg)}
-  .fig.str .f-arm.r{transform:rotate(-17deg)}
-  .fig.str .f-leg.l{transform:rotate(-15deg)}
-  .fig.str .f-leg.r{transform:rotate(12deg)}
+  /* THE KEEPER'S POSE AND THE STRIKER'S HAVE GONE, along with the two men who
+     wore them. h2FigHTML built both of them for the goal scene and the goal
+     scene is a canvas now, so .fig.gk and .fig.str named nothing: eleven rules
+     bending the arms of a class no markup in the file emits. The builder itself
+     stays exactly where it was, because the two captains at the toss, the men
+     on the pitch and the sticker are all still made of it, and so does .fig.ref
+     standing between them. */
 
   /* the man in the middle. Same seven parts, a kit that happens to be black,
      and one badge on the chest, which is all a referee has ever been. The kit
@@ -2684,124 +2591,36 @@
     top:45%;height:13%;background:var(--ink,#fff);border-radius:2px;
     box-shadow:0 1px 2px rgba(0,0,0,.45)}
 
-  /* the man in the way */
-  .g3-keeper{position:absolute;left:50%;bottom:37%;z-index:4;transform:translateX(-50%)}
-  .g3.scored .g3-keeper .g3-name,.g3.saved .g3-keeper .g3-name{opacity:0;transition:opacity .2s}
-  .g3-name{display:block;text-align:center;margin-top:3px;
-    font:700 8.5px/1.2 var(--ui);letter-spacing:.03em;color:rgba(255,255,255,.72);
-    text-shadow:0 1px 3px rgba(0,0,0,.95)}
-  /* he goes the wrong way on a goal, and the right way on a save */
-  .g3-keeper{transform-origin:50% 88%}
-  /* HE GOES WHERE HE SAID HE WAS GOING. There used to be two of these, one
-     for the save and one for being beaten, and they flung him right and left
-     respectively whatever had happened. That was honest enough when the save
-     was a question, because there was no direction in it to be wrong about.
-     Now he has named a corner, and a keeper thrown the other way would be the
-     screen calling the man who just tapped it a liar. One animation, one
-     destination, and whether it was the right one is told by where the ball
-     is rather than by which way he went. */
-  .g3.scored .g3-keeper,.g3.saved .g3-keeper{animation:g3go .9s cubic-bezier(.25,1.05,.4,1) both}
-  @keyframes g3go{
-    0%{transform:translateX(-50%) translateY(0) rotate(0)}
-    62%{transform:translateX(var(--kdx)) translateY(var(--kdy)) rotate(var(--kdr))}
-    100%{transform:translateX(var(--kdx)) translateY(var(--kdy)) rotate(var(--kdr))}
-  }
-  /* THE ONE THAT KEEPS ITS OLD FLAIL is the shootout put over the bar, and it
-     keeps it because nobody picked anything: the ball never reached the duel,
-     so there is no corner to send him to and no corner he can be wrong about.
-     He has gone for a ball that is in the stand, which is what this looks
-     like. */
-  @keyframes g3wrong{0%{transform:translateX(-50%) rotate(0)}
-    100%{transform:translateX(-104%) translateY(10%) rotate(-58deg)}}
+  /* the two names, left as type over the top for the same reason the shout is:
+     a name has to be read, and reading wants the app's own font rather than a
+     pixel one nobody has drawn */
+  .g3-name{position:absolute;z-index:6;transform:translateX(-50%);
+    pointer-events:none;white-space:nowrap;
+    font:700 8.5px/1.2 var(--ui);letter-spacing:.03em;
+    color:rgba(255,255,255,.72);text-shadow:0 1px 3px rgba(0,0,0,.95)}
+  .g3-striker{bottom:3%;font-size:11px;color:rgba(255,255,255,.85)}
+  /* he is airborne by then, and a caption chasing him is a caption you read
+     instead of watching the save */
+  .g3.scored .g3-keeper,.g3.saved .g3-keeper,.g3.missed .g3-keeper{
+    opacity:0;transition:opacity .2s}
 
-  /* the man taking it, close to the camera and mostly out of shot */
-  .g3-striker{position:absolute;left:21%;bottom:-13%;z-index:6;transform:translateX(-50%)}
-  .g3-striker .g3-name{font-size:11px;color:rgba(255,255,255,.85)}
-  .g3-striker{transform-origin:50% 96%}
-  .g3.scored .g3-striker,.g3.saved .g3-striker{animation:g3swing .5s ease-out both}
-  @keyframes g3swing{0%{transform:translateX(-50%) rotate(0)}
-    30%{transform:translateX(-50%) rotate(-9deg) translateY(4px)}
-    100%{transform:translateX(-50%) rotate(-2deg)}}
-  /* the leg that went through it */
-  .g3.scored .g3-striker .f-leg.r,.g3.saved .g3-striker .f-leg.r{
-    animation:g3boot .5s cubic-bezier(.3,1.2,.4,1) both}
-  @keyframes g3boot{0%{transform:rotate(12deg)}35%{transform:rotate(-34deg)}100%{transform:rotate(4deg)}}
-
-  .g3-ball{position:absolute;left:34%;top:78%;width:20px;height:20px;z-index:5;
-    transform:translate(-50%,-50%) scale(1.5)}
-  .g3-ball .b{display:block;width:100%;height:100%;object-fit:contain;
-    filter:drop-shadow(0 2px 5px rgba(0,0,0,.85)) drop-shadow(0 0 7px rgba(255,255,255,.3))}
-  /* struck: away from the camera, so it shrinks as it goes, into the top corner */
-  .g3.scored .g3-ball{animation:g3in .95s cubic-bezier(.3,.55,.5,1) both}
-  @keyframes g3in{
-    0%{left:34%;top:78%;transform:translate(-50%,-50%) scale(1.5)}
-    55%{left:var(--gmx);top:var(--gmy);transform:translate(-50%,-50%) scale(.85)}
-    100%{left:var(--gx);top:var(--gy);transform:translate(-50%,-50%) scale(.52)}
-  }
-  /* stopped: it reaches him and comes back off the gloves */
-  .g3.saved .g3-ball{animation:g3stop 1s cubic-bezier(.3,.6,.45,1) both}
-  @keyframes g3stop{
-    0%{left:34%;top:78%;transform:translate(-50%,-50%) scale(1.5)}
-    48%{left:var(--gsx);top:var(--gsy);transform:translate(-50%,-50%) scale(.78)}
-    62%{left:var(--gsx);top:var(--gsy);transform:translate(-50%,-50%) scale(.82)}
-    100%{left:var(--gbx);top:var(--gby);transform:translate(-50%,-50%) scale(1.05)}
-  }
-  /* the net takes it: the back of the goal bulges where the ball hits */
-  .g3-bulge{position:absolute;left:60%;top:26%;width:52px;height:44px;z-index:4;
-    border-radius:50%;opacity:0;pointer-events:none;
-    background:radial-gradient(circle,rgba(255,255,255,.7),transparent 66%)}
-  .g3.scored .g3-bulge{animation:g3bulge .8s .8s ease-out both}
-  @keyframes g3bulge{0%{opacity:0;transform:scale(.25)}
-    26%{opacity:1;transform:scale(1.2)}100%{opacity:0;transform:scale(1.7)}}
-
-  /* THE NET TAKES IT. The back of the goal is a plane sitting 104px behind the
-     line, so the ball hitting it is that plane being driven further back and
-     swinging forward again: punch, overshoot, settle. It is the depth that
-     sells it, which is the whole reason the goal is a box and not a picture. */
-  .g3.scored .g3-back{animation:g3punch 1.15s .78s cubic-bezier(.22,.9,.3,1) both}
-  @keyframes g3punch{
-    0%{transform:translateZ(-104px) scale(1)}
-    14%{transform:translateZ(-134px) scale(1.055)}
-    38%{transform:translateZ(-92px) scale(.982)}
-    60%{transform:translateZ(-116px) scale(1.026)}
-    80%{transform:translateZ(-99px) scale(.994)}
-    100%{transform:translateZ(-104px) scale(1)}
-  }
-  /* the mesh itself shivers with it */
-  .g3.scored .g3-net{animation:g3mesh .7s .78s ease-out both}
-  @keyframes g3mesh{
-    0%{background-position:0 0,0 0,0 0,0 0}
-    30%{background-position:1px 2px,2px 1px,0 0,0 0}
-    60%{background-position:-1px 1px,1px -1px,0 0,0 0}
-    100%{background-position:0 0,0 0,0 0,0 0}
-  }
-  /* and the whole frame rattles */
-  .g3.scored .g3-goal{animation:g3shake .55s .8s ease-out both}
-  @keyframes g3shake{0%,100%{transform:translateX(0)}
-    20%{transform:translateX(-3px)}45%{transform:translateX(2.5px)}72%{transform:translateX(-1.2px)}}
-
-  .g3-cry{position:absolute;left:0;right:0;top:6%;text-align:center;z-index:8;pointer-events:none;
+  /* THE SHOUT, AND THE ONE NUMBER THAT CROSSES BETWEEN CANVAS AND CSS. The
+     word stays HTML so it keeps the app's type and needs no pixel font, which
+     means its timing lives out here while everything it is reacting to lives
+     in there. One custom property rather than a chain of calc()s hung off a
+     run-up: h2GoalSceneHTML works the moment out off the same clock the canvas
+     reads and writes the seconds onto the element. Move the strike and this
+     moves with it, because there is nothing else for it to be derived from. */
+  .g3-cry{position:absolute;left:0;right:0;top:6%;text-align:center;z-index:8;
+    pointer-events:none;opacity:0;
     font:900 clamp(1.5rem,8vw,2.2rem)/1 var(--ui);font-style:italic;letter-spacing:.05em}
   .g3.scored .g3-cry{color:#f9e6ae;text-shadow:0 2px 0 #8a6414,0 0 22px rgba(249,221,150,.85);
-    animation:g3cry .7s .9s cubic-bezier(.2,1.6,.3,1) both}
+    animation:g3cry .7s var(--g3cry) cubic-bezier(.2,1.6,.3,1) both}
   .g3.saved .g3-cry{color:#bfe6cf;text-shadow:0 2px 0 #17402a,0 0 20px rgba(120,220,170,.6);
-    animation:g3cry .6s .55s cubic-bezier(.2,1.6,.3,1) both}
-  @keyframes g3cry{0%{transform:scale(2.2);opacity:0}100%{transform:scale(1);opacity:1}}
-  /* over: a shootout miss. He has leathered it over the bar, and the keeper
-     has gone the wrong way for nothing. The bar sits at 17%, so the ball ends
-     above it. */
-  .g3.missed .g3-ball{animation:g3over .9s cubic-bezier(.3,.5,.5,1) both}
-  @keyframes g3over{
-    0%{left:34%;top:78%;transform:translate(-50%,-50%) scale(1.5);opacity:1}
-    60%{left:52%;top:22%;transform:translate(-50%,-50%) scale(.72);opacity:1}
-    100%{left:58%;top:1%;transform:translate(-50%,-50%) scale(.42);opacity:.45}
-  }
-  .g3.missed .g3-keeper{animation:g3wrong 1.1s cubic-bezier(.3,.8,.4,1) both}
-  .g3.missed .g3-keeper .g3-name{opacity:0;transition:opacity .2s}
-  .g3.missed .g3-striker{animation:g3swing .5s ease-out both}
-  .g3.missed .g3-striker .f-leg.r{animation:g3boot .5s cubic-bezier(.3,1.2,.4,1) both}
+    animation:g3cry .6s var(--g3cry) cubic-bezier(.2,1.6,.3,1) both}
   .g3.missed .g3-cry{color:#ffc4b8;text-shadow:0 2px 0 #5a1d14,0 0 20px rgba(255,140,120,.55);
-    animation:g3cry .6s .75s cubic-bezier(.2,1.6,.3,1) both}
+    animation:g3cry .6s var(--g3cry) cubic-bezier(.2,1.6,.3,1) both}
+  @keyframes g3cry{0%{transform:scale(2.2);opacity:0}100%{transform:scale(1);opacity:1}}
 
   /* ---------- THE FOUR CORNERS ----------
      Pinned to the same four numbers the frame is drawn from, so this is not a
@@ -2844,26 +2663,30 @@
   .h2duel .h2grz{margin-top:5px;font-style:italic;opacity:.85}
 
   /* ---------- THE SCENE, HELD STILL ----------
-     There was no reduced-motion rule over the goal at all. That was a gap
-     rather than a decision, and it has become a bigger one: the flight is now
-     the only thing on the screen that says WHERE he put it, so switching the
-     animation off has to leave the frame it was going to end on rather than
-     the frame it started from. animation:none on its own would park the ball
-     on his boot and the keeper on his line under a caption saying GOAL. */
+     Switching the animation off is not the same as not animating, and this
+     scene is the sharpest case of that in the app: the flight is the only
+     thing on the screen that says WHERE he put it, so a man who has asked for
+     less movement has to be left looking at the frame it was going to END on.
+     Stopping it would park the ball on the boot and the keeper on his line
+     under a caption reading GOAL.
+
+     THE CANVAS DOES ITS OWN HALF, because there is no animation to switch off
+     out here any more: G3's mount asks for prefers-reduced-motion itself and,
+     when it is set, paints u = 1 exactly once and never asks for a second
+     frame. Which leaves this block the two things that are still CSS, the
+     shout over the top and the picker's hover fade below. */
+  /* AND THE OVERRIDE HAS TO CARRY THE SAME SELECTORS AS THE RULE IT IS
+     SWITCHING OFF. The shout is animated by ".g3.scored .g3-cry", which is
+     three selectors; a bare ".g3-cry" is one, and a media query adds no
+     specificity of its own, so the short version loses the cascade outright and
+     the shout scales in from nothing after a second and a half for the one
+     person who asked it not to. Chrome under forced reduced motion: animation
+     name g3cry, delay 1.51s, opacity 0.
+     The comment sits OUT here rather than inside the block because two tests
+     match this rule by its text and a comment between the query and the
+     selector is a comment between them as far as a regex is concerned. */
   @media (prefers-reduced-motion: reduce){
-    .g3.scored .g3-ball,.g3.saved .g3-ball,.g3.missed .g3-ball,
-    .g3.scored .g3-keeper,.g3.saved .g3-keeper,.g3.missed .g3-keeper,
-    .g3.scored .g3-striker,.g3.saved .g3-striker,.g3.missed .g3-striker,
-    .g3.scored .g3-striker .f-leg.r,.g3.saved .g3-striker .f-leg.r,.g3.missed .g3-striker .f-leg.r,
-    .g3.scored .g3-back,.g3.scored .g3-net,.g3.scored .g3-goal,.g3.scored .g3-bulge,
-    .g3.scored .g3-cry,.g3.saved .g3-cry,.g3.missed .g3-cry,
-    .g3.scored .g3-flash i{animation:none}
-    .g3.scored .g3-ball{left:var(--gx);top:var(--gy);transform:translate(-50%,-50%) scale(.52)}
-    .g3.saved .g3-ball{left:var(--gbx);top:var(--gby);transform:translate(-50%,-50%) scale(1.05)}
-    .g3.missed .g3-ball{left:58%;top:1%;transform:translate(-50%,-50%) scale(.42);opacity:.45}
-    .g3.scored .g3-keeper,.g3.saved .g3-keeper{
-      transform:translateX(var(--kdx)) translateY(var(--kdy)) rotate(var(--kdr))}
-    .g3.missed .g3-keeper{transform:translateX(-104%) translateY(10%) rotate(-58deg)}
+    .g3.scored .g3-cry,.g3.saved .g3-cry,.g3.missed .g3-cry{animation:none;opacity:1}
   }
 
   /* the shootout board: a row a side, a pip a kick, the next man lit */
@@ -7969,21 +7792,33 @@ const H2_CORNER_SAYS = {tl: "top left", tr: "top right", bl: "bottom left", br: 
 /* how often a man who is not really in a position to save it keeps hold of the
    one he got to: the penalty, and the outfield man in goal */
 const H2_HOLD_ODDS = .5;
-/* WHERE EACH CORNER IS, as percentages of the goal scene's own box, so the
-   ball is drawn going where he actually put it rather than where the keyframe
-   used to send it. The mouth runs 11% to 89% across and 17% to 61% down; the
-   back of the net sits inside that again because it stands 104px further from
-   the camera, which is why these are held well in off the frame. */
+/* WHERE EACH CORNER IS, and it is the same table the drawing reads because
+   there is now only one. It used to be percentages of the old CSS scene's box,
+   which was honest enough while the goal was also CSS and drawn off four
+   percentages sitting a few lines away. The canvas draws its own goal, so a
+   second set of numbers describing where the corners of that goal are would be
+   a second set of numbers for somebody to keep in step with the first, and
+   keeping two sets of numbers in step by hand is the failure this entire
+   screen exists to avoid.
+
+   So a corner is a FRACTION: how far across the mouth, and how far down it.
+   That description outlives a camera change, a resize and a redraw, because it
+   never mentions a pixel or a per cent. G3 multiplies it by whichever goal the
+   camera is painting; the picker multiplies it by nothing at all, because a
+   two by two grid laid over the mouth puts tl in the top left by construction.
+   Held in off the edges, because a ball touching the stanchion reads as a ball
+   that went wide.
+
+   H2_DIVE_AT HAS GONE, and that is worth a sentence rather than a hole. It was
+   where the keeper threw himself for each corner, written in whatever units
+   the old keyframes happened to use, which meant the place he dived to and the
+   place the ball went were two independent tables agreeing by hand. They are
+   one thing now: he is thrown most of the way from where he is standing
+   towards the corner he named, and "most of the way" is the only number left
+   in it, because it is the only part that is a judgement rather than a fact. */
 const H2_CORNER_AT = {
-  tl: {x: 22, y: 27}, tr: {x: 78, y: 27},
-  bl: {x: 24, y: 52}, br: {x: 76, y: 52},
-};
-/* AND WHERE THE KEEPER GOES FOR EACH OF THEM, in the units the scene's own
-   keyframes were already written in: a percentage of his own width off a
-   standing translateX(-50%), a nudge up or down, and a lean. */
-const H2_DIVE_AT = {
-  tl: {x: -112, y: -12, r: -66}, tr: {x: 8,  y: -12, r: 64},
-  bl: {x: -104, y: 8,  r: -56},  br: {x: -2, y: 8,  r: 54},
+  tl: {u: .17, v: .20}, tr: {u: .83, v: .20},
+  bl: {u: .19, v: .82}, br: {u: .81, v: .82},
 };
 
 /* ---------- KNOCKING IT ABOUT ----------
@@ -12818,7 +12653,941 @@ function h2PitchHTML(tappable){
 
    state is "set" while the keeper is still being asked his question, then
    "scored" or "saved" once it has been called. */
-/* One footballer, built once and used for both men in the goal scene. */
+/* ======================== THE SHOT, IN PIXELS ========================
+   The shot used to be a CSS diorama: a goal built out of four rotated planes
+   in a perspective box, two figures made of spans, and a dozen keyframes
+   whose delays were all written down as literals tuned against a ball that
+   left the boot at time zero. It drew one shot beautifully and could not be
+   asked a second question. Where did the ball actually go, what does a man
+   shooting from the angle look like, what does a keeper who picked the BOTTOM
+   left do differently from one who picked the top left. Every one of those is
+   a number in a keyframe somewhere, and there is no keyframe you can write
+   that takes an argument.
+
+   So it is a canvas now, and the whole scene is one function of one number.
+   u runs nought to one across the shot and everything in the frame is read
+   off it: which leg pose he is in, where the ball is, how far the keeper has
+   thrown himself, whether the net has been hit yet. Nothing is scheduled
+   against anything else, so nothing can drift out of step with anything else,
+   which is the failure the old scene's twelve calc()'d delays existed to
+   avoid and only ever half avoided.
+
+   THE ONE CONSTRAINT THAT OUTRANKS EVERYTHING ELSE IN HERE. The corner picker
+   is an HTML overlay pinned to four CSS custom properties, and the whole
+   mechanic rests on tapping the top left of the picker being tapping the top
+   left of the goal you can see. The moment the canvas draws a goal from its
+   own constants and the CSS holds its own four percentages, those two drift
+   apart and the game quietly starts lying to both players. So the four
+   percentages are not written in the stylesheet at all any more. mouth()
+   below converts THIS camera's goal rectangle into them and h2GoalSceneHTML
+   writes them onto the element on every render. One set of numbers, two
+   consumers, and a camera change moves the picker with the posts because it
+   cannot do anything else.
+
+   AND THAT IS WHY EVERY GOAL IN THE CAMERA TABLE IS AN UPRIGHT RECTANGLE. A
+   genuinely angled camera would draw the mouth as a trapezoid, and a
+   trapezoid cannot be described by left, right, top and height, which is all
+   the overlay has. A shot from the touchline is sold by where the SHOOTER is
+   standing and how small the goal is drawn, not by skewing the frame. That is
+   a real limit on how far the camera can swing and it is worth knowing about
+   before somebody tries.
+
+   EVERYTHING IS IN A CLOSURE for the reason the banner is: a page of its own
+   can call things PAL, GOAL, scene, line and flight, and in fifteen thousand
+   lines every one of those is a fight with something.
+
+   AND NOTHING TOUCHES getContext UNTIL THE FIRST PAINT. This file has been
+   killed on load twice by exactly that, once by the menu hero and once by the
+   banner, because the test harness's DOM has no canvas in it and every suite
+   loads the whole app. */
+const G3 = (function(){
+
+/* ---------------- the ink ----------------
+   Three tones a surface, one light from the upper left, everywhere. A flat
+   fill with a black outline reads as a sticker; the same shape with a lit
+   edge and a shaded one reads as an object, and which side gets which is not
+   a per-sprite decision, it is one decision made once for the whole frame. */
+const BASE_PAL = {
+  ".":null, X:"#14110d",                    // outline
+  h:"#2b1f15", H:"#46341f",                 // hair
+  s:"#b07648", S:"#8d5b36",                 // skin
+  m:"#f2f2ee", M:"#c7c7bf",                 // gloves, and the stretched arm
+  b:"#26221c", B:"#55555f",                 // boots
+};
+/* blend two hex colours, so a kit can hand back its own lit edge and its own
+   shadow instead of the art carrying three hard-coded reds */
+const mix = (a, b, t) => "#" + [1,3,5].map(i => {
+  const A = parseInt(a.substr(i,2),16), B = parseInt(b.substr(i,2),16);
+  return Math.round(A + (B-A)*t).toString(16).padStart(2,"0");
+}).join("");
+
+/* ---------------- the man taking it, from behind ----------------
+   36 x 31 of body, with the legs a separate 36 x 9 strip stamped under it, so
+   one torso serves every pose and a new pose costs nine rows rather than
+   forty.
+
+   SOCKS ARE THE WHOLE TRICK. Bare skin from hip to boot is a man in his
+   underwear. Two rows of kit under a white turnover is a footballer and it
+   costs three characters a leg. Same for the sleeve: three rows of kit on the
+   arm before the skin starts and a shirt stops being a rectangle with sticks
+   attached. */
+const STR_BODY = [
+  "............XXXXXXXXXXXX............",
+  "..........XXHHHHhhhhhhhhXX..........",
+  ".........XHHHHhhhhhhhhhhhhX.........",
+  ".........XHHHhhhhhhhhhhhhhX.........",
+  ".........XHHhhhhhhhhhhhhhhX.........",
+  ".......XsXHhhhhhhhhhhhhhhhXSX.......",
+  ".......XsXhhhhhhhhhhhhhhhhXSX.......",
+  ".......XXXhhhhhhhhhhhhhhhhXXX.......",
+  ".........XhhhhhhhhhhhhhhhhX.........",
+  "..........XXhhhhhhhhhhhhXX..........",
+  ".............XssssSSSSX.............",
+  "......XXXXXXXXXXXXXXXXXXXXXXXX......",
+  ".....XjjjkkkkKKKKKKKKKKkkkKKKKX.....",
+  ".....XjjjkkkkkKKKKKKKKkkkkKKKKX.....",
+  ".XjkkXjjjkkkkkkkkkkkkkkkkkKKKKXKKKX.",
+  ".XjkkXjjjkkkkkkkkkkkkkkkkkKKKKXKKKX.",
+  ".XKKKXjjjkkkkkkkkkkkkkkkkkKKKKXKKKX.",
+  ".XsssXjjjkkkkkkkkkkkkkkkkkKKKKXsSSX.",
+  ".XsssXjjjkkkkkkkkkkkkkkkkkKKKKXsSSX.",
+  ".XsssXjjjkkkkkkkkkkkkkkkkkKKKKXsSSX.",
+  ".XsssXjjjkkkkkkkkkkkkkkkkkKKKKXsSSX.",
+  ".XsssXjjjkkkkkkkkkkkkkkkkkKKKKXsSSX.",
+  ".XsssXjjjkkkkkkkkkkkkkkkkkKKKKXsSSX.",
+  "XsssXXjjjkkkkkkkkkkkkkkKKKKKKKXXsSSX",
+  "XsssXXKKKKKKKKKKKKKKKKKKKKKKKKXXsSSX",
+  "XsssXXXXXXXXXXXXXXXXXXXXXXXXXXXXsSSX",
+  "XsssX...XkwwwwwwwwwwwwwwwwKX...XsSSX",
+  "XXXXX...XkwwwwwwwwwwwwwwwwKX...XXXXX",
+  "........XkwwwwwwwXXwwwwwwWKX........",
+  "........XkwwwwwwwXXwwwwwwWKX........",
+  "........XXXXXXXXXXXXXXXXXXXX........"
+];
+/* THE STRIKE, HELD. Four poses: planted, cocked back, through it, and the
+   follow through with the sole showing. The old scene rotated one leg from 12
+   degrees to minus 34 and back in half a second and settled two degrees from
+   where it started, which is a twitch rather than a kick. */
+const STR_LEGS = [
+  // 0 planted, standing over it
+  ["........XsssssSX..XsssssSX..........",
+   "........XsssssSX..XsssssSX..........",
+   "........XwwwwwWX..XwwwwwWX..........",
+   "........XkkkkkKX..XkkkkkKX..........",
+   "........XkkkkkKX..XkkkkkKX..........",
+   "........XKKKKKKX..XKKKKKKX..........",
+   ".......XbbbbbbbbXXbbbbbbbbX.........",
+   ".......XbBBbbbbbXXbBBbbbbbX.........",
+   ".......XXXXXXXXXXXXXXXXXXXX........."],
+  // 1 the plant, kicking leg cocked back and bent
+  ["........XsssssSX..XsssssSX..........",
+   "........XsssssSX..XsssssswwX........",
+   "........XwwwwwWX...XsswkkkkkX.......",
+   "........XkkkkkKX....XXXkkkkKX.......",
+   "........XkkkkkKX......XbbbbbX.......",
+   "........XKKKKKKX......XbBBbbX.......",
+   ".......XbbbbbbbbX.....XXXXXXX.......",
+   ".......XbBBbbbbbX...................",
+   ".......XXXXXXXXXX..................."],
+  // 2 THROUGH IT: the leg has swung and the boot is off the ground
+  ["........XsssssSX..XsssssssssX.......",
+   "........XsssssSX..XsssssswwkkkX.....",
+   "........XwwwwwWX...XXXXXswkkkkkX....",
+   "........XkkkkkKX........XbbbbbbbX...",
+   "........XkkkkkKX........XbBBbbbbX...",
+   "........XKKKKKKX........XXXXXXXXX...",
+   ".......XbbbbbbbbX...................",
+   ".......XbBBbbbbbX...................",
+   ".......XXXXXXXXXX..................."],
+  // 3 follow through, boot high and the sole showing
+  ["........XsssssSX....XssssssX........",
+   "........XsssssSX...XsssssssssX......",
+   "........XwwwwwWX..XbbbbbXkkkwsX.....",
+   "........XkkkkkKX..XbBBbbXXkkwssX....",
+   "........XkkkkkKX..XbbbbbX.XXXXXX....",
+   "........XKKKKKKX..XXXXXXX...........",
+   ".......XbbbbbbbbX...................",
+   ".......XbBBbbbbbX...................",
+   ".......XXXXXXXXXX..................."]
+];
+/* THE RUN-UP, WHICH IS THE ONE THING THE PROTOTYPE DID NOT HAVE. Its four
+   poses are the strike and nothing before it, so the man simply existed,
+   planted, until the leg went back. He starts behind and to the side of the
+   ball now and arrives on it, and the approach is two frames alternating:
+   one boot down, the other lifted behind him. Seen from directly behind, that
+   IS a stride. There is no point drawing a knee lift nobody can see.
+
+   HE DOES NOT GET SMALLER AS HE ARRIVES, and that is a compromise rather than
+   an oversight. A man running towards the camera should grow, but pixel art
+   scales by whole numbers or it turns to porridge, and the only whole number
+   available over twenty pixels of approach is one. So the distance is carried
+   by the shadow instead, which is drawn rather than stamped and can therefore
+   be any size it likes: it starts small and tight and opens out as he
+   arrives. That is most of the cue and it costs nothing. */
+const STR_RUN = [
+  // 0 left boot planted, right boot lifted behind
+  ["........XsssssSX..XsssssSX..........",
+   "........XsssssSX..XsssssSX..........",
+   "........XwwwwwWX..XwwwwwWX..........",
+   "........XkkkkkKX..XkkkkkKX..........",
+   "........XkkkkkKX..XKKKKKKX..........",
+   "........XKKKKKKX..XbbbbbbX..........",
+   ".......XbbbbbbbbX.XbBBbbbX..........",
+   ".......XbBBbbbbbX.XXXXXXXX..........",
+   ".......XXXXXXXXXX..................."],
+  // 1 and the other way round
+  ["........XsssssSX..XsssssSX..........",
+   "........XsssssSX..XsssssSX..........",
+   "........XwwwwwWX..XwwwwwWX..........",
+   "........XkkkkkKX..XkkkkkKX..........",
+   "........XKKKKKKX..XkkkkkKX..........",
+   "........XbbbbbbX..XKKKKKKX..........",
+   "........XbBBbbbX.XbbbbbbbbX.........",
+   "........XXXXXXXX.XbBBbbbbbX.........",
+   ".................XXXXXXXXXX........."]
+];
+
+/* HIS OWN NUMBER, RATHER THAN A SHAPE THAT LOOKS LIKE ONE. The prototype wove
+   a fixed squiggle into the shirt with the letter n, which is fine on a page
+   showing one imaginary player and wrong in a game where the man who just
+   scored has a name and a number on every other screen. Three by five is the
+   smallest a digit can be and still read as a digit; two of them with a column
+   between come to seven, which fits inside a shirt seventeen wide with room
+   either side. It is stamped after the body so it sits ON the kit rather than
+   being part of it, which is also what lets it take kitInk without the shirt
+   grid having to know anything about the colour. */
+const NUM = {
+  "0":["XXX","X.X","X.X","X.X","XXX"], "1":[".X.","XX.",".X.",".X.","XXX"],
+  "2":["XXX","..X","XXX","X..","XXX"], "3":["XXX","..X","XXX","..X","XXX"],
+  "4":["X.X","X.X","XXX","..X","..X"], "5":["XXX","X..","XXX","..X","XXX"],
+  "6":["XXX","X..","XXX","X.X","XXX"], "7":["XXX","..X","..X","..X","..X"],
+  "8":["XXX","X.X","XXX","X.X","XXX"], "9":["XXX","X.X","XXX","..X","XXX"],
+};
+
+/* ---------------- the keeper ----------------
+   32 x 28, three poses, and the third of them is the entire reason this is not
+   just the prototype pasted in.
+
+   FOUR CORNERS NEED FOUR DIVES AND THE PROTOTYPE SHIPPED ONE. It had a single
+   reaching pose which it mirrored, so left and right were covered and top and
+   bottom were not: a keeper who called the bottom left and one who called the
+   top left played the identical frame. In a duel where the whole point is that
+   he named a place out loud, that is the screen calling him a liar half the
+   time.
+
+   WHAT IT COSTS, HAVING TRIED THE CHEAP VERSION FIRST. Translating the
+   existing pose downwards is free and it is wrong, and it is wrong in the one
+   place you are actually looking: the gloves. The reach pose has the arm out
+   at shoulder height, so sliding the whole man down the screen leaves a keeper
+   whose hands are at waist height while the ball is rolling along the floor
+   past his shins. Rotating it is out on its own terms, because rotating pixel
+   art shears it to bits.
+
+   So it is one more pose, drawn low: same man, same build, the arm angled
+   DOWN and the gloves on the grass. Two poses times a mirror is four corners,
+   and the mirror is free. The per-corner vertical nudge still earns its keep
+   on top of that, as a nudge rather than as the whole answer: a high dive is
+   thrown up a little and a low one down a little, off the same two poses.
+
+   AND THE UNMIRRORED SPRITE REACHES LEFT. Worth saying out loud because the
+   prototype's driver did not: the gloves sit at columns two to eight and the
+   head at eighteen to twenty-two, so the man is stretching to OUR left, while
+   the code that drove him threw the unflipped art to the RIGHT for a save. On
+   a page with a scrubber that is a detail. Here the keeper has named a corner
+   and has to be seen going to it, so the flip is bound to the side of the
+   corner and nothing else. */
+const GK = [
+  // 0 set, on his line
+  ["............XXXXXX..............",
+   "..........XXhhhhhhXX............",
+   "..........XhhhhhhhhX............",
+   "..........XhhsssshhX............",
+   "..........XsssssssSX............",
+   "..........XXsssssXX.............",
+   "...........XsssSX...............",
+   "....XXXX..XXXXXXXXXX..XXXX......",
+   "...XmmmX.XXeggggggGXX.XmMMX.....",
+   "...XmmmXXXeggggggggGXXXmMMX.....",
+   "...XmmmXXeggggggggggGXXmMMX.....",
+   "....XXXXXeggggggggggGXXXXX......",
+   ".........XeggggggggGX...........",
+   ".........XGGGGGGGGGX............",
+   ".........XXGGGGGGXX.............",
+   "..........XgwwwwWX..............",
+   "..........XgwXXwWX..............",
+   "..........XssX.XsSX.............",
+   "..........XwwX.XwWX.............",
+   "..........XggX.XgGX.............",
+   ".........XbbbX.XbbbX............",
+   ".........XXXXX.XXXXX............",
+   "................................",
+   "................................",
+   "................................",
+   "................................",
+   "................................",
+   "................................"],
+  // 1 HIGH: full stretch to our left, arm out at shoulder height
+  ["................................",
+   "................................",
+   "................................",
+   "................................",
+   "................................",
+   "..................XXXX..........",
+   ".............XXXXXhhhhX.........",
+   "...XXXX...XXXeeeeehssssX........",
+   "..XmmmXXXXeggggggGGssssX........",
+   "..XmmmmmmeggggggggGXssXX........",
+   "..XmmmXXXXeggggggGGXXX..........",
+   "...XXXX...XXXGGGGGGX............",
+   "............XgwwwwWX............",
+   "...........XgwwwwwwWX...........",
+   "..........XssXXXssssX...........",
+   ".........XggX..XsgggX...........",
+   ".......XXbbX....XggbbX..........",
+   ".......XbbX......XbbbX..........",
+   "........XX........XXX...........",
+   "................................",
+   "................................",
+   "................................",
+   "................................",
+   "................................",
+   "................................",
+   "................................",
+   "................................",
+   "................................"],
+  // 2 LOW: same man, down to our left, gloves on the grass
+  ["................................",
+   "................................",
+   "................................",
+   "................................",
+   "................................",
+   "................................",
+   "................................",
+   "................................",
+   "..................XXXX..........",
+   ".............XXXXXhhhhX.........",
+   "..........XXXeeeeehssssX........",
+   ".........XeggggggGGssssX........",
+   ".......XXXeggggggggGXsXX........",
+   "......XmmXXeggggggGGXX..........",
+   ".....XmmX..XXGGGGGGX............",
+   "....XmmX...XgwwwwWX.............",
+   "...XmmX....XgwwwwwWX............",
+   "..XmmX....XssXXXsssX............",
+   "..XXX.....XggX..XsggX...........",
+   "..........XbbX...XggbX..........",
+   "..........XXXX...XbbbX..........",
+   ".................XXXX...........",
+   "................................",
+   "................................",
+   "................................",
+   "................................",
+   "................................",
+   "................................"]
+];
+
+/* ---------------- the man in the way ----------------
+   30 x 34, and he is this size because the goal is. Apparent height is (real
+   height / camera height) x (feet - horizon), so pulling the goal towards the
+   camera pulls everything in front of it up too. A twenty pixel defender in
+   front of a thirty-two pixel goal is standing behind it. */
+const DEF = [
+  "............XXXXXX............",
+  "..........XXhhhhhhXX..........",
+  "..........XhhhhhhhhX..........",
+  "..........XhhsssshhX..........",
+  "..........XsssssssSX..........",
+  "..........XsssssssSX..........",
+  "..........XXsssssXX...........",
+  "...........XsssSX.............",
+  "......XXXX..XXXXXX..XXXX......",
+  ".....XddddXXddddDDXXdDDDX.....",
+  ".....XddddXXddddDDXXdDDDX.....",
+  ".....XssssXXddddDDXXsSSSX.....",
+  "......XXXX.XddddDDX.XXXX......",
+  "...........XddddDDX...........",
+  "...........XddddDDX...........",
+  "...........XddddDDX...........",
+  "...........XDDDDDDX...........",
+  "...........XXDDDDXX...........",
+  "...........XDwwwwWX...........",
+  "...........XDwwwwWX...........",
+  "...........XDwXXwWX...........",
+  "...........XssX.XsSX..........",
+  "...........XwwX.XwWX..........",
+  "...........XddX.XdDX..........",
+  "...........XDDX.XDDX..........",
+  "..........XbbbX.XbbbX.........",
+  "..........XbBbX.XbBbX.........",
+  "..........XXXXX.XXXXX.........",
+  "..............................",
+  "..............................",
+  "..............................",
+  "..............................",
+  "..............................",
+  ".............................."
+];
+
+/* ---------------- the frame ---------------- */
+const CW = 124, CH = 84, PX = 5;
+const POSTW = 3, BARH = 3;                    // the painted thickness of the frame
+const POST = "#eef3f5", POSTD = "#9fb0b4", NETC = "#7d9c87", NETD = "#5d7d68";
+const STAND = "#241f1b", GRASS = "#1d5a2e", GRASSD = "#17491f";
+const ROOF = "#0b0f12", RAIL = "#1b1714";
+/* A CROWD IS COLOUR, NOT TEXTURE. Two browns read as a dirty wall; a dozen
+   muted shirt colours at one pixel each read as ten thousand people, because
+   one pixel each is all your eye is getting at this size anyway. */
+const CROWD = ["#6b5f52","#8a7c6b","#4a4038","#7a5a52","#5a6070","#8a8478",
+               "#6b4a44","#55504a","#93887a","#4f5a52","#7d6a5e","#3d3730",
+               "#2f3a4a","#6d7a88","#a89b88"];
+/* Hoardings. Real ones carry brands; ours carry blocks of colour, which is all
+   that survives at five pixels tall and is the whole of the effect. */
+const ADS = ["#a83236","#d6d1c4","#23508f","#c9a733","#186344","#8a3a63",
+             "#d6d1c4","#2f6f9c","#a83236"];
+
+/* ---------------- the cameras ----------------
+   The app knows where the shot came from, so it should not be choosing a
+   picture: H.at is the man's index in his own shape and the shape knows his x,
+   his y and his line. cameraFor() below turns that into one of these, and a
+   sixth camera is a table entry rather than a second copy of the scene.
+
+   EVERY GOAL HERE IS CENTRED ON CW/2 ON PURPOSE. It means a shot from the
+   right can be drawn by mirroring the ACTORS about the centre line and leaving
+   the goal, and therefore the corner picker, exactly where it was. Mirror the
+   goal as well and "top left" would have to mirror with it, which would mean
+   the two men's screens no longer name the same place, which is the one thing
+   the duel cannot survive. */
+const CAMS = {
+  /* THE PENALTY, and the shootout, which is the same twelve yards with the
+     whole ground watching. Nobody else is in frame: no defender to bend it
+     round, and the taker is nearer the middle because there is nobody for him
+     to be looking past. */
+  pen: {
+    goal:{l:18, r:106, top:14, base:58, dx:9, dy:7},
+    boot:{x:52, y:70}, bend:null,
+    gk:{x:46, y:30}, man:{x:24, y:44}, box:false, def:null,
+  },
+  /* SIX YARDS, STRAIGHT ON. A tap-in: no bend in it, no defender, and the goal
+     filling the frame because he is nearly on top of it. */
+  close: {
+    goal:{l:18, r:106, top:14, base:58, dx:9, dy:7},
+    boot:{x:36, y:64}, bend:null,
+    gk:{x:46, y:30}, man:{x:8, y:38}, box:false, def:null,
+  },
+  /* FROM THE ANGLE. A winger's shot, and the reason his chance is priced
+     Extreme. He is hard against the left edge of the frame, the goal is drawn
+     smaller because he is further from it, and the ball has to beat a man on
+     the way. The goal stays an upright rectangle: the angle is carried by
+     where he is standing, not by skewing the posts, for the reason at the top
+     of this file. */
+  angle: {
+    goal:{l:22, r:102, top:20, base:55, dx:8, dy:6},
+    boot:{x:20, y:66}, bend:[{x:34,y:60},{x:132,y:34}],
+    gk:{x:50, y:31}, man:{x:-6, y:40}, box:true, def:{x:28, y:40},
+  },
+  /* ROUND THE MAN, FROM THE EDGE OF THE BOX. A defender planted in the only
+     straight line to goal and the ball bent round him and beyond the keeper.
+
+     THE GOAL SETS EVERYTHING ELSE. Apparent height is (real height / camera
+     height) x (feet - horizon). Put the base at 56 with a 32 pixel bar and the
+     horizon lands at 33.7, which is what puts the keeper's feet on the line at
+     55 and the shooter's at 71. Neither of those is a taste decision: move the
+     goal and they both move. The defender is the exception, and deliberately:
+     his feet are pulled forward of the line to say he is nearer, which is the
+     paragraph below.
+
+     TWO CONTROL POINTS, NOT ONE. A single one cannot swing wide early AND come
+     back late, because pulling it out far enough to bend also drags the early
+     part of the path out with it. The second one is what lets the ball leave
+     the boot roughly straight, go out past the far post and come back in.
+
+     AND HERE IS WHAT IT DOES NOT DO, because the prototype's note claimed more
+     than the arithmetic supports and somebody will check. Recomputing the
+     cubic at the defender's own columns, the ball is inside his torso when it
+     crosses them: it does not physically miss him. It is drawn AFTER him, so
+     at this size it reads as going past his shoulder, and that is honestly all
+     it is. Making it genuinely clear him means either starting the ball wider
+     than a man's boot or pushing him off the line the shot is on, and both of
+     those cost more than the illusion is worth.
+
+     HIS HEAD MUST NOT SHARE COLUMNS WITH THE KEEPER'S. Level with each other
+     the two of them read as one crowded blob, and they are both in the same
+     kit because they are on the same side, so colour will not separate them.
+     What does is depth: he is sideways of the keeper AND his feet are seven
+     rows nearer the camera than the goal line, so he stands in FRONT of the
+     goal rather than inside it. At the prototype's y it was three rows, which
+     at this size is level with it, and the two of them read as a pair of
+     keepers standing shoulder to shoulder in the same shirt. */
+  curler: {
+    goal:{l:14, r:110, top:24, base:56, dx:9, dy:7},
+    boot:{x:36, y:58}, bend:[{x:44,y:52},{x:160,y:40}],
+    gk:{x:52, y:34}, man:{x:8, y:32}, box:true, def:{x:38, y:36},
+  },
+};
+
+/* WHERE THE CORNERS ARE is H2_CORNER_AT, and it is deliberately NOT in here.
+   The one thing this whole rebuild is for is that there is a single answer to
+   "where is the top left of the goal", so that table sits next to H2_CORNERS
+   and H2_CORNER_SAYS with the rest of the duel, where anybody reading the
+   mechanic finds it, and this file reads it rather than keeping a copy. A copy
+   would be the drift, whichever file it lived in. */
+
+/* ---------------- the clock ----------------
+   Every moment in the shot as a fraction of u, in one place, because the last
+   version had them spread across a dozen CSS delays all written relative to a
+   ball that left the boot at time zero. Putting a run-up in front of that
+   moved the strike and the net, the bulge, the shake and the shout all had to
+   be moved with it by hand or the goal happened before the shot. Here the run
+   up is simply the first fifth of the same number everything else reads. */
+const T = {
+  arrive: .14,     // he is on the ball
+  cock:   .22,     // leg back
+  hit:    .30,     // contact, and the ball goes
+  thru:   .48,     // follow through
+  land:   .62,     // it reaches the net, or the gloves
+};
+const DUR = 2100;                          // milliseconds for the whole thing
+/* WHERE A SCENE WITH NOTHING HAPPENING IN IT SITS. The aim and dive screens
+   draw this same function with the picker over it, and they must not animate:
+   there is no shot yet, the man is standing over the ball, and a looping
+   run-up under a question is a battery being spent on a decision. So they hold
+   one frame, and the frame is the one just after he has arrived. */
+const STILL = .16;
+
+const lerp = (a,b,t) => a + (b-a)*t;
+const clamp = t => t < 0 ? 0 : t > 1 ? 1 : t;
+const flipG = g => g.map(r => [...r].reverse().join(""));
+
+/* ---------------- the flight ----------------
+   A straight shot is a lerp with a little lift on it. A curler is a cubic
+   through two control points set OUTSIDE the far post, so it genuinely looks
+   like it is missing before it bends back in. */
+function flight(S, t){
+  const a = S.boot, c = S.bend, b = S.target, m = 1-t;
+  if(!c) return {x: lerp(a.x,b.x,t), y: lerp(a.y,b.y,t) - 5*Math.sin(t*Math.PI)};
+  const [p,q] = c, A = m*m*m, B = 3*t*m*m, C = 3*t*t*m, D = t*t*t;
+  return {x: A*a.x + B*p.x + C*q.x + D*b.x,
+          y: A*a.y + B*p.y + C*q.y + D*b.y};
+}
+
+/* ---------------- the goal, as four numbers the overlay can use ----------------
+   THE SINGLE SOURCE OF TRUTH. mouthPx is where the mouth is worked out and
+   every reader of it comes through here: the picker gets it as percentages out
+   of mouth(), the keeper is thrown at a corner of it, and the posts either side
+   of it are painted from the same rectangle. Change a camera's goal and the
+   overlay follows on the next render without anybody having to remember that
+   it should.
+
+   THE RIGHT EDGE IS G.r - POSTW + 1 AND NOT G.r - POSTW, because the right post
+   is painted at G.r-POSTW+1 through G.r, so the first open column is one
+   further in than the arithmetic you would write down first time. That off by
+   one was in here. It was worth exactly one pixel, and it is the shape of the
+   mistake this whole file exists to make impossible: the keeper was being
+   thrown at a corner a pixel away from the corner the picker was offering. It
+   was caught by reading the painted posts either side of the edge the picker
+   had been handed, which is why shot-test reads pixels rather than numbers. */
+function mouthPx(G){
+  return {l: G.l + POSTW, r: G.r - POSTW + 1, t: G.top + BARH, b: G.base};
+}
+function mouth(cam){
+  const m = mouthPx((CAMS[cam] || CAMS.close).goal);
+  const pc = n => Math.round(n * 1000) / 10;      // one decimal, in the markup
+  return {L: pc(m.l/CW), R: pc((CW-m.r)/CW), T: pc(m.t/CH), H: pc((m.b-m.t)/CH),
+          w: CW*PX, h: CH*PX};
+}
+/* WHERE THE TWO NAMES GO. The captions stay HTML for the reason the shout
+   does: they keep the app's own type and need no pixel font, and a name is the
+   one thing in this frame that has to be read rather than felt. But they have
+   to stand over the right men, so their x goes through the same mirror the
+   actors do instead of being guessed at a second time. The striker's is pinned
+   to the bottom of the frame by the stylesheet, because his feet are already
+   off it. */
+function marks(cam, flip){
+  const S = CAMS[cam] || CAMS.close;
+  const ox = (v, w) => flip ? CW - v - w : v;
+  const pc = n => Math.round(n * 1000) / 10;
+  const hold = n => Math.max(8, Math.min(92, n));
+  return {gk:  {x: hold(pc((ox(S.gk.x, 32) + 16) / CW)), y: pc((S.gk.y + 23) / CH)},
+          man: {x: hold(pc((ox(S.man.x, 36) + 18) / CW))}};
+}
+/* WHICH CAMERA THIS SHOT IS, read off the shape rather than chosen. A penalty
+   is a penalty. A man in the front line standing in the middle of the goal is
+   six yards out. A man in the front line out by the touchline is shooting from
+   the angle, which is exactly why the shape prices his chance Extreme. Anybody
+   deeper than the front line is outside the box, which is the curler.
+
+   x is the LOGICAL pitch x of whoever is on the ball, which is also his view x
+   because the view is always drawn from the side in possession, so no
+   conversion is needed and none should be added. */
+function cameraFor(i, w, pen){
+  if(pen) return "pen";
+  let p = null;
+  try { p = h2Spot(i, w); } catch(e){ p = null; }
+  if(!p) return "close";
+  if(p.line < 6) return "curler";
+  return (p.x >= 34 && p.x <= 66) ? "close" : "angle";
+}
+
+/* ================= the drawing =================
+   Nothing below runs until paint() has a context, and paint() is only ever
+   reached from a requestAnimationFrame after the markup has landed. */
+let ctx = null;
+const put = (x,y,c) => { ctx.fillStyle = c; ctx.fillRect(x,y,1,1); };
+const rect = (x,y,w,h,c) => { ctx.fillStyle = c; ctx.fillRect(x,y,w,h); };
+function stamp(art, ox, oy, pal){
+  for(let y=0;y<art.length;y++){ const r = art[y];
+    for(let x=0;x<r.length;x++){ const c = pal[r[x]];
+      if(c){ ctx.fillStyle = c; ctx.fillRect(ox+x, oy+y, 1, 1); } } }
+}
+function line(x0,y0,x1,y1,c){
+  ctx.fillStyle = c;
+  const dx = Math.abs(x1-x0), dy = Math.abs(y1-y0), sx = x0<x1?1:-1, sy = y0<y1?1:-1;
+  let e = dx-dy, x = x0, y = y0;
+  for(;;){ ctx.fillRect(x,y,1,1); if(x===x1 && y===y1) break;
+    const e2 = 2*e; if(e2 > -dy){ e -= dy; x += sx; } if(e2 < dx){ e += dx; y += sy; } }
+}
+/* NOBODY STANDS ON GRASS WITHOUT ONE. A flat ellipse under the boots is the
+   whole difference between standing on a pitch and being pasted on top of it.
+   Solid in the middle, dithered at the rim so it fades instead of stopping.
+   It is drawn rather than stamped, which is what lets it carry the run-up's
+   distance when the sprite itself cannot be scaled. */
+function shade(cx, cy, rx, ry){
+  cx = Math.round(cx); cy = Math.round(cy);
+  rx = Math.max(1, Math.round(rx)); ry = Math.max(1, Math.round(ry));
+  for(let y=-ry;y<=ry;y++) for(let x=-rx;x<=rx;x++){
+    const q = (x*x)/(rx*rx) + (y*y)/(ry*ry);
+    if(q > 1 || (q > .5 && ((cx+x)+(cy+y)) % 2)) continue;
+    put(cx+x, cy+y, "#0e3319");
+  }
+}
+function ballDot(bx, by, sz, dim){
+  for(let y=0;y<sz;y++) for(let x=0;x<sz;x++){
+    const ux = (x-(sz-1)/2)/(sz/2), uy = (y-(sz-1)/2)/(sz/2);
+    if(ux*ux + uy*uy > 1) continue;
+    put(bx+x, by+y, dim ? "#8fa89a" : (ux*ux+uy*uy > .5 ? "#c3c9d2" : "#ffffff"));
+  }
+}
+function ground(G, box){
+  rect(0,0,CW,26,ROOF);
+  rect(0,3,CW,19,STAND);
+  /* A CROWD IS NOISE, NOT A PATTERN. Placing a person every third pixel puts
+     them on a lattice and a lattice reads as woven cloth the moment you step
+     back, which is exactly what it looked like. A hash scatters them; the back
+     rows sink towards the stand shadow so the tier has depth rather than a
+     hard line ruled across it. */
+  for(let y=3;y<21;y++) for(let x=0;x<CW;x++){
+    const h = (x*2654435761 ^ y*40503 ^ (x*y*97)) >>> 0;
+    if(h % 13 === 0) continue;                       // aisles and empty seats
+    /* one in a couple of hundred is a light shirt or a flag. Without them the
+       whole stand sits in one narrow band of value and stops shimmering. */
+    const c = h % 197 === 0 ? "#ded7c6" : CROWD[h % CROWD.length];
+    put(x, y, mix(c, STAND, ((20-y)/17) * 0.7));
+  }
+  for(const y of [8,14]) for(let x=0;x<CW;x++) if((x+y) % 3) put(x,y,RAIL);
+  for(let x=0;x<CW;x++){
+    const panel = ADS[Math.floor((x+5)/13) % ADS.length], seam = (x+5) % 13 === 0;
+    put(x, 21, "#0d0b09");
+    for(let y=22;y<26;y++)
+      put(x, y, seam ? "#0d0b09"
+        : y === 22 ? mix(panel,"#ffffff",.25)
+        : y === 25 ? mix(panel,"#000000",.4) : panel);
+  }
+  rect(0,26,CW,CH-26,GRASS);
+  /* MOW STRIPES CONVERGE. Evenly spaced they flatten the pitch into a ladder;
+     bunched near the goal and opening towards the camera they do more for the
+     depth than anything else in the frame. */
+  for(let k=1;k<14;k++){
+    const y = Math.round(G.base + k*k*0.62);
+    if(y >= CH) break;
+    rect(0, y, CW, Math.max(1, Math.round(k*0.32)), GRASSD);
+  }
+  for(let k=1;k<6;k++){
+    const y = Math.round(G.base - k*k*0.5);
+    if(y < 27) break;
+    rect(0, y, CW, 1, GRASSD);
+  }
+  rect(0, G.base, CW, 1, "#ffffff");
+  /* THE BOX, so "outside it" is a fact on screen and not a caption. Drawn in
+     the same perspective as the goal: narrower where it meets the goal line. */
+  if(box){
+    const fy = 58, fl = 6, fr = 118, nl = G.l-8, nr = G.r+8;
+    line(fl,fy,fr,fy,"#cfe0d4");
+    line(fl,fy,nl,G.base,"#cfe0d4");
+    line(fr,fy,nr,G.base,"#cfe0d4");
+  }
+}
+function netAndFrame(G, bulge, target){
+  const bl = G.l+G.dx, br = G.r-G.dx, bt = G.top+G.dy, bb = G.base-G.dy;
+  for(let x=bl;x<=br;x+=4) for(let y=bt;y<bb;y++) put(x,y,NETD);
+  for(let y=bt;y<bb;y+=4) for(let x=bl;x<=br;x++) put(x,y,NETD);
+  if(bulge > 0 && target){
+    /* r MUST be whole. As a float the loop counters land between pixels and
+       every fillRect silently writes nothing at all, which is twenty minutes
+       of wondering why the net never moves. */
+    const r = Math.round(3 + 7*(1 - bulge*.5)), cx = Math.round(target.x+2), cy = Math.round(target.y+2);
+    for(let y=-r-1;y<=r+1;y++) for(let x=-r-1;x<=r+1;x++){
+      const d = Math.sqrt(x*x + y*y); if(d > r) continue;
+      put(cx+x, cy+y, d > r-2.5 ? "#eefaf1" : (((cx+x)+(cy+y)) % 2 ? "#a8c9b4" : "#cfe3d6"));
+    }
+  }
+  for(const q of [[G.l,G.top,bl,bt],[G.r,G.top,br,bt],[G.l,G.base,bl,bb],[G.r,G.base,br,bb]])
+    line(q[0],q[1],q[2],q[3],NETC);
+  for(let k=1;k<4;k++){ const t = k/4;
+    line(Math.round(G.l+(G.r-G.l)*t), G.top, Math.round(bl+(br-bl)*t), bt, NETD); }
+  rect(G.l, G.top, POSTW, G.base-G.top, POSTD);   rect(G.l, G.top, 1, G.base-G.top, POST);
+  rect(G.r-POSTW+1, G.top, POSTW, G.base-G.top, POSTD); rect(G.r-POSTW+1, G.top, 1, G.base-G.top, POST);
+  rect(G.l, G.top, G.r-G.l+1, BARH, POST);        rect(G.l, G.top+BARH-1, G.r-G.l+1, 1, POSTD);
+}
+
+/* ---------------- what the two of them are doing ----------------
+   THE KEEPER IS NOT GIVEN A DESTINATION BY A TABLE ANY MORE. He is given the
+   corner he named, and where that is on screen is already known, because it is
+   the same fraction of the same mouth the picker divided up. He travels most
+   of the way to it and not all of the way, which is what leaves a goal looking
+   beaten rather than looking like a keeper who simply stood still. */
+const REACH_X = .74, REACH_Y = .58;
+function keeperGo(S, corner){
+  const uv = H2_CORNER_AT[corner];
+  if(!uv) return null;
+  const m = mouthPx(S.goal);
+  const tx = m.l + (m.r-m.l)*uv.u, ty = m.t + (m.b-m.t)*uv.v;
+  const cx = S.gk.x + 16, cy = S.gk.y + 10;        // the middle of him, standing
+  return {dx: Math.round((tx-cx) * REACH_X), dy: Math.round((ty-cy) * REACH_Y),
+          low: uv.v > .5, left: tx < cx};
+}
+function target(S, corner){
+  const G = S.goal, uv = H2_CORNER_AT[corner] || {u:.5, v:.35};
+  const bl = G.l+G.dx, br = G.r-G.dx, bt = G.top+G.dy, bb = G.base-G.dy;
+  return {x: bl + (br-bl)*uv.u, y: bt + (bb-bt)*uv.v};
+}
+
+/* ---------------- one scene function ----------------
+   cfg is everything h2GoalSceneHTML worked out: the camera, the outcome, the
+   two kits, the corner and the dive. It is handed over rather than read off S
+   inside here, which is not fussiness: the dive screen renders this very scene
+   while the striker's corner is still a secret, and a drawing function that
+   reaches into the match state for it is one careless early-return away from
+   painting the answer onto the screen that exists in order not to have it.
+   With nothing passed there is nothing to leak. */
+function scene(cfg, u){
+  const S = CAMS[cfg.cam] || CAMS.close, G = S.goal, out = cfg.out;
+  ctx.setTransform(PX,0,0,PX,0,0);
+  ctx.imageSmoothingEnabled = false;
+  ctx.clearRect(0,0,CW,CH);
+
+  /* mirroring: the camera table is written for a shot from the left, and a
+     shot from the right is the same table with the ACTORS reflected. The goal
+     is centred, so it reflects onto itself and the picker never moves. */
+  const F = !!cfg.flip;
+  const px = v => F ? CW - v : v;                       // a point
+  const ox = (v, w) => F ? CW - v - w : v;              // a sprite's left edge
+  const S2 = {
+    goal: G, box: S.box,
+    boot: {x: px(S.boot.x), y: S.boot.y},
+    bend: S.bend ? S.bend.map(p => ({x: px(p.x), y: p.y})) : null,
+    gk: {x: ox(S.gk.x, 32), y: S.gk.y},
+    man:{x: ox(S.man.x, 36), y: S.man.y},
+    def: S.def ? {x: ox(S.def.x, 30), y: S.def.y} : null,
+  };
+  S2.target = target({goal: G, gk: S2.gk}, cfg.shot);
+
+  ground(G, S.box);
+
+  const hit = T.land;
+  const bulge = out === "scored" && u > hit ? Math.max(0, 1 - (u-hit)/.22) : 0;
+  netAndFrame(G, bulge, S2.target);
+
+  /* THE KEEPER. He goes where he said he was going and the ball is what tells
+     you whether that was right, which is the only version of this that does
+     not make a liar of one of the two men. With no corner to go to, which is a
+     shootout put over the bar and nothing else, he stays on his line: nobody
+     ever named anything for him to be wrong about. */
+  const go = cfg.dive ? keeperGo(S2, cfg.dive) : null;
+  const d = clamp((u - T.hit) / .22);
+  let art = GK[0], gx = S2.gk.x, gy = S2.gk.y;
+  if(go && d > 0){
+    art = GK[go.low ? 2 : 1];
+    /* the art reaches LEFT, so a corner on his right is the mirror of it */
+    if(!go.left) art = flipG(art);
+    gx = Math.round(S2.gk.x + go.dx * d);
+    gy = Math.round(S2.gk.y + go.dy * d);
+  }
+  shade(gx+16, S2.gk.y+21, 9, 3);
+  stamp(art, gx, gy, cfg.gkPal);
+  /* AFTER the keeper. He is nearer, so he occludes the man in the goal, and
+     that overlap is the only thing telling you they are at different depths. */
+  if(S2.def){ shade(S2.def.x+15, S2.def.y+27, 9, 3); stamp(DEF, S2.def.x, S2.def.y, cfg.gkPal); }
+
+  /* ---- the ball ---- */
+  const p = clamp((u - T.hit) / (T.land - T.hit));
+  const START = 9, SHRINK = 5;                 // it goes away from the camera
+  let bx, by, sz;
+  if(u < T.hit){
+    bx = Math.round(S2.boot.x); by = Math.round(S2.boot.y); sz = START;
+  } else if(out === "over"){
+    const q = flight(S2, p);
+    /* AND IT HAS TO STILL BE ON THE FRAME WHEN THE FRAME STOPS. Carried to -12
+       it leaves the picture at about u .61, so the last two fifths of the scene
+       are an empty sky under the word OVER, and that empty sky is exactly what
+       a reduced-motion reader is shown, because that paints u = 1 and nothing
+       else. The old CSS parked it at 1% for this reason and it was right. */
+    bx = Math.round(q.x); by = Math.round(lerp(S2.boot.y, 1, p));
+    sz = Math.max(3, Math.round(START - SHRINK*p));
+  } else if(out === "saved" && p > .72){
+    /* off the gloves and away FROM the man who hit it, and the sign is the
+       whole of it. The camera is behind the taker, so he is the biggest thing
+       in the frame and he is stamped last; pushed his way the rebound goes
+       behind him and there is no ball on the screen at all from the save
+       landing to the end of the scene, which is also the one frame reduced
+       motion paints. Measured on the close camera: nought ball pixels from
+       u .62 to u 1. Sent the other way it clears the taker on all five. */
+    const q = (p-.72)/.28, h = flight(S2, .72);
+    bx = Math.round(lerp(h.x, h.x + (F ? -22 : 22), q));
+    by = Math.round(lerp(h.y, h.y+18, q)); sz = 4 + Math.round(3*q);
+  } else if(out === "scored" && u > hit){
+    /* it has gone in, so it drops out of the net rather than stopping dead in
+       the top corner, which is what the old scene did and it read as a bug */
+    const q = clamp((u-hit)/.32), bb = G.base-G.dy;
+    bx = Math.round(S2.target.x - 4*q);
+    by = Math.round(S2.target.y + (bb-4-S2.target.y)*q*q);
+    sz = Math.max(3, START-SHRINK);
+  } else {
+    /* the trail is what makes a curve read as a curve rather than as a ball
+       that happens to be somewhere else each frame */
+    if(p > 0 && p < 1) for(let k=6;k>=1;k--){
+      const tt = p - k*.045; if(tt <= 0) continue;
+      const q = flight(S2, tt);
+      ballDot(Math.round(q.x), Math.round(q.y),
+              Math.max(2, Math.round(START - SHRINK*tt) - 2), true);
+    }
+    const q = flight(S2, p);
+    bx = Math.round(q.x); by = Math.round(q.y);
+    sz = Math.max(3, Math.round(START - SHRINK*p));
+  }
+  ballDot(bx, by, sz, false);
+
+  /* ---- the man taking it ---- */
+  let legs, mx = S2.man.x, my = S2.man.y, sh = 13;
+  if(u < T.arrive){
+    /* THE APPROACH. He comes from behind and to the side and arrives on the
+       ball as the leg goes back. The shadow opens out as he closes, because it
+       is the only thing in the frame allowed to change size. */
+    const a = u / T.arrive;
+    legs = STR_RUN[Math.floor(u * 15) % 2];
+    mx = Math.round(lerp(S2.man.x + (F ? 20 : -20), S2.man.x, a));
+    my = Math.round(lerp(S2.man.y - 9, S2.man.y, a));
+    sh = Math.round(lerp(8, 13, a));
+  } else {
+    legs = STR_LEGS[u < T.cock ? 0 : u < T.hit ? 1 : u < T.thru ? 2 : 3];
+  }
+  shade(mx+18, my+39, sh, Math.max(2, Math.round(sh/3.2)));
+  stamp(STR_BODY, mx, my, cfg.strPal);
+  number(mx, my, cfg.no, cfg.strPal.n);
+  stamp(legs, mx, my+31, cfg.strPal);
+}
+/* centred on the shirt, one digit or two, and nothing at all for a man with no
+   number, because a blank back reads as distance and a nought reads as a bug */
+function number(mx, my, no, ink){
+  const d = String(no == null ? "" : no).replace(/[^0-9]/g, "").slice(-2);
+  if(!d) return;
+  let x = mx + 18 - Math.floor((d.length * 4 - 1) / 2);
+  for(const ch of d){
+    const g = NUM[ch];
+    if(g) for(let r=0;r<5;r++) for(let c=0;c<3;c++) if(g[r][c] === "X") put(x+c, my+16+r, ink);
+    x += 4;
+  }
+}
+
+/* ================= driving it =================
+   ARMED BY THE MARKUP, DISARMED BY THE RENDER. h2GoalSceneHTML calls arm()
+   while it is building its string, which is before the markup is anywhere near
+   the document, so the actual mount waits a frame. render() calls stop() on
+   its first line the way it already does for the menu hero, so there is
+   exactly one place a screen without a goal on it kills the loop and no call
+   sites to chase.
+
+   THE SIGNATURE IS WHY A RE-RENDER DOES NOT RESTART THE SHOT. A toast, a
+   clock tick or an opponent's move can re-render the same screen halfway
+   through a goal, and the CSS version restarted every animation when that
+   happened. Here the start time is only reset when the thing being drawn has
+   actually changed. */
+let PEND = null, raf = null, t0 = 0, sig = "";
+function arm(cfg){
+  /* ASKED ONCE, NOT SIXTY TIMES A SECOND. matchMedia builds a MediaQueryList
+     every time it is called and the answer cannot change inside one shot, which
+     is the same lesson the banner learned about reading the theme off the page
+     inside its own loop. */
+  cfg.rm = still();
+  PEND = cfg;
+  if(cfg.sig !== sig){ sig = cfg.sig; t0 = 0; }
+  /* ONE CHAIN AT A TIME. render() stops this on its first line before any
+     screen is built, so the normal path is stop, arm, one loop. The guard is
+     for the abnormal one: anything that builds the scene's markup twice
+     without a render between would otherwise leave two loops painting the same
+     canvas at slightly different u, which looks exactly like a dropped frame
+     rate and is not one. */
+  if(raf) return;
+  try { raf = requestAnimationFrame(mount); } catch(e){ raf = null; }
+}
+function canvasEl(){
+  try {
+    const el = document.getElementById("g3c");
+    return (el && el.getContext) ? el : null;
+  } catch(e){ return null; }
+}
+/* PAINT ONE FRAME, and it is public so a test can drive the whole shot through
+   the real drawing code rather than photograph one instant of it. A screenshot
+   only tests the moment it lands on, which is how the banner shipped a frame
+   that threw on every tick after the chip while three screenshots all happened
+   to land before it. */
+function paint(u, el){
+  const cv = el || canvasEl();
+  if(!cv || !cv.getContext || !PEND) return false;
+  ctx = cv.getContext("2d");
+  scene(PEND, u);
+  return true;
+}
+function still(){
+  try { return !!matchMedia("(prefers-reduced-motion:reduce)").matches; }
+  catch(e){ return false; }
+}
+function mount(now){
+  raf = null;
+  if(!PEND) return;
+  /* THE STILL FRAME, AND WHY IT IS THE LAST ONE. Switching the animation off
+     is not the same as not animating: the flight is the only thing on the
+     screen that says WHERE he put it, so a man who asked for less movement has
+     to be shown the frame it was going to END on. Parking it at nought leaves
+     the ball on the boot and the keeper on his line under a caption reading
+     GOAL. */
+  if(PEND.hold || PEND.rm){ paint(PEND.hold ? STILL : 1); return; }
+  if(!t0) t0 = now || 0;
+  const u = clamp(((now || 0) - t0) / DUR);
+  if(!paint(u) || u >= 1) return;
+  try { raf = requestAnimationFrame(mount); } catch(e){ raf = null; }
+}
+function stop(){
+  if(raf){ try { cancelAnimationFrame(raf); } catch(e){} raf = null; }
+}
+/* THE WHOLE SHOT, STEPPED, for the suite. Returns how many frames threw. */
+function sweep(el, step){
+  let bad = 0;
+  for(let u=0; u<=1; u+=(step || .004)){
+    try { if(!paint(u, el)) return -1; } catch(e){ bad++; }
+  }
+  return bad;
+}
+
+return {
+  arm: arm, stop: stop, paint: paint, sweep: sweep,
+  mouth: mouth, marks: marks, cameraFor: cameraFor, mix: mix,
+  size: {CW: CW, CH: CH, PX: PX, dur: DUR, still: STILL}, clock: T,
+  cams: CAMS, art: {PAL: BASE_PAL, BODY: STR_BODY, LEGS: STR_LEGS,
+                    RUN: STR_RUN, GK: GK, DEF: DEF, NUM: NUM},
+};
+})();
+
+/* One footballer, built once and used for the two captains at the toss. */
 function h2FigHTML(cls, kit, h, no){
   return '<div class="fig ' + cls + '" style="--kit:' + kit + ';--ink:' + kitInk(kit) +
     ';--pxshorts:' + kitShorts(kit) + ';--h:' + h + 'px">' +
@@ -12832,83 +13601,89 @@ function h2FigHTML(cls, kit, h, no){
 
 function h2GoalSceneHTML(state, over){
   const H = h2();
-  const kit = h2Kit(H.who), ink = kitInk(kit);
-  /* WHERE THE TWO OF THEM CHOSE, handed to the CSS as numbers rather than
-     worked out in a calc() chain. The keyframes used to have one hard-coded
-     destination each, which was fine when the ball always went to the same
-     top corner and the keeper always flung himself the same way. Now the shot
-     has an address, and a reveal that drew it anywhere else would be the app
-     contradicting the screen the striker tapped thirty seconds earlier.
-
-     The midpoint is computed here too. It is where the old keyframe's 55%
-     frame sat relative to its own destination, seven tenths of the way across
-     and eighty-five hundredths of the way up, which is what gives the flight
-     its rise: away fast, then holding as it shrinks.
-
-     AND NOT WHILE IT IS STILL A SECRET, which is the half of this that is not
+  const kit = h2Kit(H.who), gkKit = h2Kit(h2Other());
+  /* WHAT THE SCENE IS ALLOWED TO KNOW, and this is the half of it that is not
      decoration. The keeper's screen draws this very scene with the picker over
-     it, so writing the striker's corner into its style attribute would put the
-     answer in the markup of the one screen that exists in order not to have
-     it. "set" is every screen before the verdict: the aim, the dive, and a
-     penalty still waiting to be struck. The corners go on once, at the reveal,
-     when both men are looking at the same thing anyway.
+     it, so anything that reaches the canvas before the verdict is something he
+     could be shown. "set" is every screen before the call: the aim, the dive,
+     and a penalty still waiting to be struck. The corners go on once, at the
+     reveal, when both men are looking at the same thing anyway.
 
-     With nothing to write, every one of these falls back to exactly the
-     numbers the keyframes used to carry, so a shootout put over the bar and
-     the still scene under a question draw what they always drew. */
+     It is handed over rather than looked up, too. The drawing code cannot
+     reach into S for the corner, because there is no path from it to S. That
+     is worth more than a comment saying not to. */
   const told = state !== "set";
-  const at = (told && H2_CORNER_AT[H.shot]) || {x: 66, y: 31};
-  const BX = 34, BY = 78;                       // where it sits on his boot
-  /* one decimal, because a style attribute reading 38.050000000000004% is a
-     float landing in the markup and it is in the markup of every render */
-  const pc = (a, b, f) => Math.round((a + (b - a) * f) * 10) / 10;
-  const mx = pc(BX, at.x, .7), my = pc(BY, at.y, .85);
-  /* stopped short of the line, then off the gloves and away to the other side */
-  const sx = pc(BX, at.x, .84), sy = pc(BY, at.y, .84);
-  const bx = at.x > 50 ? 20 : 80;
-  /* THE ONE HE IS SEEN GOING TO. A keeper with the trait picked two, and only
+  const pen = !!(H.pen || H.so);
+  const cam = G3.cameraFor(H.at, H.who, pen);
+  /* WHICH WAY ROUND. The camera table is written for a shot from the left, so
+     a man on the right of the pitch is the same table with the actors
+     reflected. His x is already view x, because the view is always drawn from
+     the side in possession, so there is nothing to convert and nothing should
+     be added that converts it. */
+  let flip = false;
+  if(!pen){ try { flip = h2Spot(H.at, H.who).x > 50; } catch(e){ flip = false; } }
+  const shot = told ? (H.shot || null) : null;
+  /* THE ONE HE IS SEEN GOING TO. A keeper with the trait picked two and only
      one of them can be drawn: the one that met the ball if either did, and
      otherwise the first he committed to. */
-  const dive = told ? (H.dive || []) : [];
-  const went = dive.indexOf(H.shot) > -1 ? H.shot : (dive[0] || null);
-  const k = H2_DIVE_AT[went] || {x: -4, y: 2, r: 46};
-  const aim = ';--gx:' + at.x + '%;--gy:' + at.y + '%;--gmx:' + mx + '%;--gmy:' + my + '%' +
-              ';--gsx:' + sx + '%;--gsy:' + sy + '%;--gbx:' + bx + '%;--gby:64%' +
-              ';--kdx:' + k.x + '%;--kdy:' + k.y + '%;--kdr:' + k.r + 'deg';
-  const gkKit = h2Kit(h2Other());
-  const striker = h2Who(H.at, H.who), keeper = h2Who(0, h2Other());
-  /* Fixed positions, not random: a crowd that reshuffles itself on every
-     render is a crowd nobody believes. */
-  const FLASHES = [[9,14],[17,62],[26,31],[34,78],[41,9],[48,47],[55,88],[62,22],
-                   [69,66],[76,38],[83,80],[90,17],[12,44],[58,6],[95,53]];
-  const flashes = FLASHES.map((f, i) =>
-    '<i style="left:' + f[0] + '%;top:' + f[1] + '%;animation-delay:' + (i * 137 % 900) + 'ms"></i>').join("");
+  const picked = told ? (H.dive || []) : [];
+  const went = picked.indexOf(H.shot) > -1 ? H.shot : (picked[0] || null);
+  const out = state === "saved" ? "saved" : state === "missed" ? "over" : "scored";
+  /* BOTH KITS COME OFF THE MATCH. The art carries letters, not colours: the
+     shirt is k, its shadow K and its lit edge j, and all three are mixed here
+     out of the one colour h2Kit hands back, so a kit nobody has looked at
+     still gets a lit side and a shaded side pointing the same way as
+     everything else in the frame. The number takes kitInk, which is the same
+     answer the shirt on every other screen gets.
 
-  return '<div class="g3 ' + state + '" style="' + aim.slice(1) + '">' +
-    '<div class="g3-sky"></div>' +
-    '<div class="g3-stand"></div>' +
-    '<div class="g3-flash">' + flashes + '</div>' +
-    '<div class="g3-ads"></div>' +
-    '<div class="g3-grass"></div><div class="g3-line"></div>' +
-    '<div class="g3-wash"></div>' +
-    '<div class="g3-flood l"><i></i></div><div class="g3-flood r"><i></i></div>' +
-    '<div class="g3-goal">' +
-      '<div class="g3-net g3-back"></div>' +
-      '<div class="g3-net g3-top"></div>' +
-      '<div class="g3-net g3-l"></div>' +
-      '<div class="g3-net g3-r"></div>' +
-      '<div class="g3-bar g3-cross"></div>' +
-      '<div class="g3-bar g3-postl"></div>' +
-      '<div class="g3-bar g3-postr"></div>' +
-    '</div>' +
-    '<div class="g3-bulge"></div>' +
-    '<div class="g3-keeper">' + h2FigHTML("gk", gkKit, 96, 1) +
-      '<span class="g3-name">' + esc(keeper) + '</span></div>' +
-    '<div class="g3-ball"><img class="b" src="assets/ball.png" alt=""></div>' +
-    '<div class="g3-striker">' + h2FigHTML("str", kit, 168, h2No(H.at, H.who)) +
-      '<span class="g3-name">' + esc(striker) + '</span></div>' +
+     THE KEEPER AND THE DEFENDER SHARE ONE PALETTE because they share a side.
+     They are told apart by the gloves, by the pose and by the overlap, which
+     is what tells you they are at different depths anyway. */
+  const sp = kitShorts(kit), gp = kitShorts(gkKit), P = G3.art.PAL, mix = G3.mix;
+  const strPal = Object.assign({}, P, {
+    k: kit, K: mix(kit, "#000000", .34), j: mix(kit, "#ffffff", .26),
+    n: kitInk(kit), w: sp, W: mix(sp, "#000000", .18)});
+  const gkPal = Object.assign({}, P, {
+    g: gkKit, G: mix(gkKit, "#000000", .34), e: mix(gkKit, "#ffffff", .26),
+    d: gkKit, D: mix(gkKit, "#000000", .34), w: gp, W: mix(gp, "#000000", .18)});
+  const striker = h2Who(H.at, H.who), keeper = h2Who(0, h2Other());
+  G3.arm({
+    cam: cam, flip: flip, out: out, shot: shot, dive: went, hold: !told,
+    no: h2No(H.at, H.who), strPal: strPal, gkPal: gkPal,
+    /* WHAT WOULD MAKE THIS A DIFFERENT SHOT. A toast, a clock tick or the
+       other phone moving can re-render the same screen halfway through a goal,
+       and the CSS version restarted every animation when that happened. The
+       loop only goes back to the first frame when this string changes. */
+    sig: [state, cam, flip ? 1 : 0, shot || "-", went || "-", kit, gkKit].join("|"),
+  });
+  /* THE MOUTH, AND IT IS NOT WRITTEN DOWN IN THE STYLESHEET AT ALL. These four
+     come out of the same goal rectangle the canvas paints the posts from, so
+     the corner picker cannot be pinned to a goal that is no longer there.
+     There is deliberately no fallback in the CSS either: a missing value makes
+     the overlay visibly wrong rather than quietly misaligned, and quietly
+     misaligned is the failure that would cost somebody a match. */
+  const M = G3.mouth(cam), K = G3.marks(cam, flip);
+  const cry = state === "scored" ? "GOAL" : state === "saved" ? "SAVED"
+            : state === "missed" ? "OVER" : "";
+  /* one number for the shout, in seconds, off the same clock the canvas reads.
+     Every delay in the old scene was a literal tuned against a ball that left
+     the boot at time zero, so putting a run-up in front of it moved the strike
+     and left the goal happening before the shot. */
+  const cryAt = (state === "saved" ? .64 : state === "missed" ? .80 : .72) * G3.size.dur / 1000;
+  const alt = told
+    ? (state === "scored" ? "The ball hits the back of the net."
+     : state === "saved" ? "The keeper gets to it." : "It goes over the bar.")
+    : "The goal, seen from behind the man about to shoot.";
+
+  return '<div class="g3 ' + state + '" style="--gmL:' + M.L + '%;--gmR:' + M.R +
+      '%;--gmT:' + M.T + '%;--gmH:' + M.H + '%;--g3cry:' + cryAt.toFixed(2) + 's">' +
+    '<canvas class="g3c" id="g3c" width="' + M.w + '" height="' + M.h +
+      '" role="img" aria-label="' + esc(alt) + '"></canvas>' +
+    '<span class="g3-name g3-keeper" style="left:' + K.gk.x + '%;top:' + K.gk.y + '%">' +
+      esc(keeper) + '</span>' +
+    '<span class="g3-name g3-striker" style="left:' + K.man.x + '%">' + esc(striker) + '</span>' +
     (over || "") +
-    '<div class="g3-cry">' + (state === "scored" ? "GOAL" : state === "saved" ? "SAVED" : state === "missed" ? "OVER" : "") + '</div>' +
+    '<div class="g3-cry">' + cry + '</div>' +
   '</div>';
 }
 /* THE MOUTH, DIVIDED IN FOUR, and it is the goal itself rather than four
@@ -14067,7 +14842,7 @@ function render(){
      it again in the one branch that puts the canvas back, and there are no call
      sites to chase and none to forget. A requestAnimationFrame left running
      through a ninety minute match is a phone battery spent on nothing. */
-  BN.stop();
+  BN.stop(); G3.stop();
   renderBug(); mpRenderBar(); save();
   /* THE COMPUTER PLAYS AFTER THE SCREEN IS DRAWN, so the human sees what it is
      responding to. It is scheduled rather than run, and every scheduled action

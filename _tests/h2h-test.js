@@ -335,28 +335,60 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   run(app, "h2Reveal()"); await tick(130);
   run(app, "h2Judge(true)"); await tick(180);
   const scene = stage(app);
-  check("there is a crowd behind the goal", scene.includes("g3-stand"), "no stand");
-  check("boards along the back of the pitch", scene.includes("g3-ads"), "no boards");
-  check("floodlights over it", (scene.match(/g3-flood/g) || []).length >= 2,
-    (scene.match(/g3-flood/g) || []).length);
-  check("and light falling on the grass", scene.includes("g3-wash"), "no wash");
-  check("camera flashes ready in the stand",
-    (scene.match(/class="g3-flash"/g) || []).length === 1 && scene.includes("animation-delay"),
-    "no flashes");
+  /* THE SCENE IS ONE CANVAS NOW, so there is nothing in the markup to search
+     for a stand or a keeper in, and searching the markup was never much of a
+     test: it proved a div had been written. The drawing is run for real here
+     against a recording context that keeps a framebuffer, and then asked what
+     it actually put where. _tests/shot-test.js does this properly and at
+     length; what follows is the handful of things this file was already
+     claiming, asked again of the pixels.
+
+     THE CONTEXT IS A STUB AND THAT IS ENOUGH. The drawing never reads a pixel
+     back, it only paints, so a framebuffer that records the last colour written
+     to each cell is exactly as good as a browser for every question below. */
+  const shotFrame = (u) => {
+    const W = ev(app, "G3.size.CW"), H = ev(app, "G3.size.CH");
+    const px = []; for (let y = 0; y < H; y++) px.push(new Array(W).fill(null));
+    let cur = "#000";
+    const c = { imageSmoothingEnabled: false,
+      set fillStyle(v) { cur = String(v); }, get fillStyle() { return cur; },
+      setTransform() {}, save() {}, restore() {}, beginPath() {}, ellipse() {}, fill() {},
+      clearRect() { for (let y = 0; y < H; y++) px[y].fill(null); },
+      fillRect(x, y, w, h) {
+        const x0 = Math.round(x), y0 = Math.round(y);
+        for (let j = y0; j < y0 + Math.round(h); j++) for (let i = x0; i < x0 + Math.round(w); i++)
+          if (i >= 0 && i < W && j >= 0 && j < H) px[j][i] = cur; } };
+    app.__can = { width: W * 5, height: H * 5, getContext: () => c };
+    run(app, "G3.paint(" + u + ", __can)");
+    return {
+      band: (a, b) => { const s = new Set();
+        for (let y = a; y <= b; y++) for (let x = 0; x < W; x++) if (px[y][x]) s.add(px[y][x]);
+        return s; },
+      count: col => { let n = 0;
+        for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) if (px[y][x] === col) n++;
+        return n; },
+    };
+  };
+  const f = shotFrame(0.5);
+  check("there is a crowd behind the goal, and it is a crowd rather than a wall",
+    f.band(4, 19).size > 20, f.band(4, 19).size);
+  check("boards along the back of the pitch", f.band(22, 25).size >= 6, f.band(22, 25).size);
+  check("grass in front of them", f.count("#1d5a2e") > 400, f.count("#1d5a2e"));
+  check("and a goal standing on it", f.count("#eef3f5") > 60, f.count("#eef3f5"));
 
   console.log("\n--- the two men ---");
-  check("both are drawn figures, not shirts",
-    (scene.match(/class="fig /g) || []).length === 2,
-    (scene.match(/class="fig /g) || []).length);
-  check("the keeper has a head, arms and legs",
-    /class="fig gk"[\s\S]{0,400}f-head[\s\S]{0,400}f-arm[\s\S]{0,400}f-leg/.test(scene),
-    "the keeper is missing parts");
-  check("so does the man who hit it",
-    /class="fig str"[\s\S]{0,400}f-head[\s\S]{0,400}f-torso[\s\S]{0,400}f-leg/.test(scene),
-    "the striker is missing parts");
-  check("the keeper wears the other country's kit",
-    scene.includes("--kit:" + WC["Italy"].kit), "wrong keeper kit");
-  check("and they are named", scene.includes(ev(app, "h2Who(0,1)")) &&
+  check("the man who hit it is in his own country's kit",
+    f.count(WC["Netherlands"].kit) > 40,
+    WC["Netherlands"].kit + " x" + f.count(WC["Netherlands"].kit));
+  check("and the keeper is in the other country's",
+    f.count(WC["Italy"].kit) > 20, WC["Italy"].kit + " x" + f.count(WC["Italy"].kit));
+  /* the prototype hard-coded a red striker and a blue keeper, which is the one
+     thing that would look completely fine and be completely wrong */
+  check("neither of them is wearing the colours the art was drawn in",
+    f.count("#d8442f") === 0 && f.count("#2f6fd0") === 0, "a hard-coded kit is being painted");
+  check("both have boots on the grass", f.count("#26221c") > 20, f.count("#26221c"));
+  check("and the keeper has gloves on", f.count("#f2f2ee") > 8, f.count("#f2f2ee"));
+  check("and they are named over it", scene.includes(ev(app, "h2Who(0,1)")) &&
     scene.includes(ev(app, "h2Who(9,0)")), "the men are anonymous");
 
   run(app, "h2Aim('tl')"); await tick(130);
@@ -480,8 +512,8 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   /* Neither outcome lands until the strike has been watched: the camera drops
      behind the striker and you see the ball hit the net or the keeper. */
   check("the camera goes behind the striker", phase() === "h_strike", phase());
-  check("there is a goal with a net in it", stage(app).includes("g3-net"), "no net");
-  check("the keeper is in it", stage(app).includes("g3-keeper"), "no keeper");
+  check("there is a goal, painted", stage(app).includes('class="g3c"'), "no canvas");
+  check("the keeper is named over it", stage(app).includes("g3-keeper"), "no keeper");
   check("and so is the man who hit it", stage(app).includes("g3-striker"), "no striker");
   check("it says SAVED", stage(app).includes("SAVED"), "no call");
   check("nothing has changed hands yet", who() === 0, who());
@@ -508,7 +540,7 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   run(app, "h2Reveal()"); await tick(130);
   run(app, "h2Judge(true)"); await tick(160);
   check("the corner is picked over the goal, not the tactics board",
-    stage(app).includes("g3-net") && !stage(app).includes("h2pitch"), "wrong view for the shot");
+    stage(app).includes('class="g3c"') && !stage(app).includes("h2pitch"), "wrong view for the shot");
   run(app, "h2Aim('bl')"); await tick(130);
   run(app, "h2HandGo()"); await tick(130);
   run(app, "h2Dive('tr')"); await tick(240);

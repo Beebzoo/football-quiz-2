@@ -138,9 +138,19 @@ const CORNERS = ["tl", "tr", "bl", "br"];
     (dive.match(/class="h2gmc /g) || []).length === 4 &&
     (dive.match(/aria-pressed="false"/g) || []).length === 4,
     (dive.match(/class="h2gmc /g) || []).length + " buttons");
-  const styles = dive.match(/--gx:[^;"]+/g) || [];
-  check("and the flight written onto the scene is still the default",
-    styles.length === 1 && styles[0] === "--gx:66%", styles.join(","));
+  /* THERE IS NO FLIGHT WRITTEN ONTO THE SCENE ANY MORE, and the check is
+     stronger for it. It used to be that the corner was replaced by a harmless
+     default on this screen, which is a secret kept by remembering to keep it.
+     The goal is painted on a canvas out of a configuration handed straight to
+     the drawing, and h2GoalSceneHTML does not put the corner in that
+     configuration at all while the state is "set", so there is nothing in the
+     document for him to read and nothing anybody has to remember. */
+  check("nothing about where the ball is going is in the markup",
+    !/--g[xy]:/.test(dive) && !/data-(shot|corner|dive)/.test(dive),
+    (dive.match(/--g[a-z]+:[^;"]*/g) || []).join(","));
+  check("and the only corner names on it are the four he is being offered",
+    (dive.match(/\b(tl|tr|bl|br)\b/g) || []).length === 8,
+    (dive.match(/\b(tl|tr|bl|br)\b/g) || []).join(","));
   /* THE OTHER PHONES IN THE ROOM. Pitch mode is a spectator mirror online
      rather than something a guest can act on, but the whole state goes out on
      every render and the corner is in it. The marks have been stripped from
@@ -260,10 +270,43 @@ const CORNERS = ["tl", "tr", "bl", "br"];
   check("and where the keeper went", /went top right/.test(said), "no corner for the keeper");
   check("both men are named on it", said.includes("Martijn") && said.includes("Bram"), "a name is missing");
   check("and the scene knows it was a goal", /class="g3 scored"/.test(said), "wrong scene");
-  check("the ball is sent to the corner he chose",
-    said.includes("--gx:24%") && said.includes("--gy:52%"), "the flight is not his corner");
-  check("and the keeper to the one he chose",
-    said.includes("--kdx:8%") && said.includes("--kdr:64deg"), "the dive is not his corner");
+  /* IT GOES WHERE HE PUT IT AND HE GOES WHERE HE SAID, READ OFF THE PIXELS.
+     These were two string matches on custom properties, which proved the
+     numbers had been written onto the element and nothing whatever about where
+     anything was drawn. The scene is a canvas now, so the honest version is to
+     paint the frame the ball arrives on and look at it: he hit it bottom left,
+     so the ball has to finish in the bottom left of the mouth, and the keeper
+     named top right on his own screen, so the gloves have to finish in the top
+     right of it. A keeper thrown the other way is the app calling the man who
+     just tapped it a liar, and that is the failure worth a test. */
+  {
+    const W = ev(app, "G3.size.CW"), H = ev(app, "G3.size.CH");
+    const px = []; for (let y = 0; y < H; y++) px.push(new Array(W).fill(null));
+    let cur = "#000";
+    const rc = { imageSmoothingEnabled: false,
+      set fillStyle(v) { cur = String(v); }, get fillStyle() { return cur; },
+      setTransform() {}, save() {}, restore() {}, beginPath() {}, ellipse() {}, fill() {},
+      clearRect() { for (let y = 0; y < H; y++) px[y].fill(null); },
+      fillRect(x, y, w, h) { const x0 = Math.round(x), y0 = Math.round(y);
+        for (let j = y0; j < y0 + Math.round(h); j++) for (let i = x0; i < x0 + Math.round(w); i++)
+          if (i >= 0 && i < W && j >= 0 && j < H) px[j][i] = cur; } };
+    app.__can = { width: W * 5, height: H * 5, getContext: () => rc };
+    run(app, "G3.paint(G3.clock.land, __can)");
+    const mid = col => { const p = [];
+      for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) if (px[y][x] === col) p.push([x, y]);
+      return p.length ? { x: p.reduce((a, q) => a + q[0], 0) / p.length,
+                          y: p.reduce((a, q) => a + q[1], 0) / p.length } : null; };
+    const m = ev(app, "G3.mouth(G3.cameraFor(S.h2h.at, S.h2h.who, !!(S.h2h.pen || S.h2h.so)))");
+    const cx = (m.L / 100 * W + (W - m.R / 100 * W)) / 2;
+    const cy = (m.T / 100 * H + m.T / 100 * H + m.H / 100 * H) / 2;
+    const ball = mid("#c3c9d2"), gloves = mid("#f2f2ee");
+    check("the ball is sent to the corner he chose",
+      !!ball && ball.x < cx && ball.y > cy,
+      JSON.stringify(ball) + " about " + Math.round(cx) + "," + Math.round(cy));
+    check("and the keeper to the one he chose",
+      !!gloves && gloves.x > cx && gloves.y < cy,
+      JSON.stringify(gloves) + " about " + Math.round(cx) + "," + Math.round(cy));
+  }
 
   /* ================================================================ */
   console.log("\n--- and nothing about it reaches the question bank ---");
@@ -339,16 +382,34 @@ const CORNERS = ["tl", "tr", "bl", "br"];
   /* ================================================================ */
   console.log("\n--- the picker is a place in the goal, not four buttons ---");
   const src = fs.readFileSync(path.join(REPO, "index.html"), "utf8");
-  check("the mouth is written down once and read twice",
-    /\.g3\{--gmL:11%;--gmR:11%;--gmT:17%;--gmH:44%;/.test(src) &&
-    /\.g3-goal\{position:absolute;left:var\(--gmL\);right:var\(--gmR\);top:var\(--gmT\);height:var\(--gmH\)/.test(src) &&
-    /\.h2gm\{position:absolute;left:var\(--gmL\);right:var\(--gmR\);top:var\(--gmT\);height:var\(--gmH\)/.test(src),
-    "the frame and the picker have drifted apart");
+  /* THE MOUTH IS STILL WRITTEN DOWN ONCE, but it is no longer written down in
+     the stylesheet at all. The canvas draws the goal, so the canvas is where
+     the four numbers come from: G3.mouth() turns whichever camera is in use
+     into percentages and h2GoalSceneHTML puts them on the element. There is
+     deliberately no fallback out here either, because a default would be a
+     second set of numbers to keep in step and a picker quietly pinned to a goal
+     that has moved is worse than one that has visibly collapsed.
+
+     The pixel-level proof that these percentages describe the goal that was
+     actually painted lives in _tests/shot-test.js, which walks them back into
+     canvas space and reads the posts either side of every edge. What is
+     asserted here is the wiring. */
+  const srcFlat = src.replace(/\r\n/g, "\n");
+  const srcCss = srcFlat.slice(0, srcFlat.indexOf("</style>"));
+  check("the mouth is not written down in the stylesheet at all",
+    !/--gm[LRTH]\s*:/.test(srcCss) && !/var\(--gm[LRTH]\s*,/.test(srcCss),
+    (srcCss.match(/--gm[LRTH][^;}]*/g) || []).join(" "));
+  check("and it is written down exactly once in the app",
+    (srcFlat.match(/--gmL:/g) || []).length === 1, (srcFlat.match(/--gmL:/g) || []).length);
+  check("the picker is still pinned to it",
+    /\.h2gm\{position:absolute;left:var\(--gmL\);right:var\(--gmR\);top:var\(--gmT\);height:var\(--gmH\)/.test(srcCss),
+    "the picker has come off the custom properties");
   check("and the picker sits over the keeper rather than under the goal",
-    /\.h2gm\{[^}]*z-index:7/.test(src.replace(/\r\n/g, "\n")), "wrong stacking");
+    /\.h2gm\{[^}]*z-index:7/.test(srcCss), "wrong stacking");
   check("a man who asked for less movement still sees where it finished",
-    /@media \(prefers-reduced-motion: reduce\)\{[\s\S]{0,900}\.g3\.scored \.g3-ball\{left:var\(--gx\)/.test(
-      src.replace(/\r\n/g, "\n")), "no still frame for the goal scene");
+    /if\(PEND\.hold \|\| PEND\.rm\)\{ paint\(PEND\.hold \? STILL : 1\); return; \}/.test(srcFlat) &&
+    /@media \(prefers-reduced-motion: reduce\)\{\n\s*\.g3\.scored \.g3-cry,\.g3\.saved \.g3-cry,\.g3\.missed \.g3-cry\{animation:none;opacity:1\}/.test(srcCss),
+    "no still frame for the goal scene");
   check("and the picker's own transition goes with it",
     /@media \(prefers-reduced-motion: reduce\)\{ \.h2gmc\{transition:none\} \}/.test(src), "the picker still moves");
   /* THE OLD PHASES ARE GONE, so a parked match sitting on one has to be caught

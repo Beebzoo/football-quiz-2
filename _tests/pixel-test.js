@@ -143,8 +143,13 @@ check("the blanket child rule still forces no transform",
    and they survive only because each carries four classes where the pixel arm
    rule carries three. If one of them ever loses its rotation the keeper stands
    like an outfield player and nothing else in the suite would say so. */
-for (const [sel, deg] of [[".fig.gk .f-arm.l", "34"], [".fig.str .f-arm.l", "26"],
-                          [".h2man.down .f-arm.l", "34"], [".h2man.caught .f-arm.l", "46"]])
+/* TWO OF THESE FOUR HAVE GONE WITH THE MEN THEY POSED. .fig.gk and .fig.str
+   were the keeper and the striker in the old goal scene, and the goal scene is
+   a canvas now, so h2FigHTML no longer builds either of them and the rules that
+   bent their arms named a class nothing emits. The two that are left are the
+   men on the pitch, who are still spans, and they are the ones this guard was
+   really about: a static transform that beats a running animation. */
+for (const [sel, deg] of [[".h2man.down .f-arm.l", "34"], [".h2man.caught .f-arm.l", "46"]])
   check("the pose " + sel + " keeps its rotation",
     html.indexOf(sel + "{transform:rotate(" + deg + "deg)}") > -1, "gone");
 
