@@ -226,7 +226,12 @@ const check = (n, c, x) => {
   const later = src.slice(src.indexOf("function aiLater(fn, ms){"));
   check("aiLater compares the cue it was armed with", /aiCue\(\) !== cue/.test(later.slice(0, 400)), "it does not");
   const tickSrc = src.slice(src.indexOf("function aiTick(){"));
-  const body = tickSrc.slice(0, tickSrc.indexOf("\r\n}\r\n"));
+  /* EITHER LINE ENDING. index.html ships CRLF and the house rule for editing
+     it is to normalise to LF and write it back, so for the length of a session
+     this file is LF. Hunting for a literal "\r\n}\r\n" found nothing in that
+     window, sliced to the end of the file instead, and reported a raw
+     setTimeout in the driver that was actually eight thousand lines below it. */
+  const body = tickSrc.slice(0, tickSrc.search(/\r?\n\}\r?\n/));
   check("the driver defers through aiLater and nothing else", !/setTimeout\(/.test(body), "a raw setTimeout is in there");
   /* IF THIS ONE FAILS YOU ADDED A DECISION. Add a case to the list above for
      the phase it is armed in, then put the number up. */

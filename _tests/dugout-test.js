@@ -274,9 +274,9 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
     ev(app, "S.h2h.lineup[0].bench.length") === 12, ev(app, "S.h2h.lineup[0].bench.length"));
   check("and the bench is shut until the album page is finished",
     ev(app, "h2Bench(0).length") === 0, ev(app, "h2Bench(0).length"));
-  run(app, "(() => { const t = TEAMS.wc2006.Netherlands, a = mine().album; " +
-    "for(const m of [...(t.xi||[]), ...(t.bench||[])]) a.have[(t.slug||'x') + '/' + m.no] = 1; " +
-    "a.foils.push('Netherlands'); mineSave(); })();");
+  run(app, "(() => { for(const m of albumMen('wc2006', 'Netherlands')) " +
+    "albumStick(albumId('wc2006', 'Netherlands', m)); " +
+    "albumCheckPage('wc2006', 'Netherlands'); mineSave(); })();");
   check("and open once it is", ev(app, "h2Bench(0).length") === 12, ev(app, "h2Bench(0).length"));
   run(app, "h2SquadDone();"); await tick(120);
   check("and then it asks for a shape", ev(app, "S.phase") === "h_shape", ev(app, "S.phase"));

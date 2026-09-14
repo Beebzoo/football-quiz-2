@@ -170,7 +170,8 @@ const check = (n, c, x) => {
      is two mates playing for different men and comparing squares that no
      longer mean the same thing. */
   const was = man(20260914);
-  run(app, '(() => { const m = dailyMan(20260914); albumStick(albumId(m.side, {no: m.no})); mineSave(); })();');
+  run(app, '(() => { const c = dailyManCard(dailyMan(20260914)); ' +
+    'albumStick(albumId(DAILY_BOOK, c.side, c.m)); mineSave(); })();');
   check("owning him does not move the calendar", man(20260914) === was, man(20260914));
   /* NOBODY TWICE INSIDE TWO YEARS: the album is shuffled once and the calendar
      walks along it, so the only repeat is a full lap. */
@@ -194,7 +195,7 @@ const check = (n, c, x) => {
   check("and it is the top one that goes", /class="off" style="--s:0"/.test(stage(app)),
     "the wrong strip");
   check("and he is not yours yet",
-    ev(app, '(() => { const m = mine().daily.man; return albumHas(albumId(m.side, {no: m.no})); })()') === false,
+    ev(app, '(() => { const c = dailyManCard(mine().daily.man); return albumHas(albumId(DAILY_BOOK, c.side, c.m)); })()') === false,
     "already stuck in");
   /* ALL THE WAY, and he goes straight into the album rather than into a pack */
   for (let i = 0; i < 5; i++) { run(app, "dailyPick(q().k); dailyOn();"); await tick(110); }
@@ -203,7 +204,7 @@ const check = (n, c, x) => {
   check("the card is fully peeled", ev(app, "dailyPeel(mine().daily)") === 6,
     ev(app, "dailyPeel(mine().daily)"));
   check("and he is in the album",
-    ev(app, '(() => { const m = mine().daily.man; return albumHas(albumId(m.side, {no: m.no})); })()') === true,
+    ev(app, '(() => { const c = dailyManCard(mine().daily.man); return albumHas(albumId(DAILY_BOOK, c.side, c.m)); })()') === true,
     "not stuck in");
   check("the share line says so", /is mine\./.test(ev(app, "dailyShare()")), ev(app, "dailyShare()"));
   /* A DAY YOU LOSE KEEPS THE PACK AND LOSES THE MAN, which is the whole point
@@ -214,7 +215,7 @@ const check = (n, c, x) => {
   check("the pack for turning up is still paid", ev(app, "mine().album.packs") === 1,
     ev(app, "mine().album.packs"));
   check("but he is not yours",
-    ev(app, '(() => { const m = mine().daily.man; return albumHas(albumId(m.side, {no: m.no})); })()') === false,
+    ev(app, '(() => { const c = dailyManCard(mine().daily.man); return albumHas(albumId(DAILY_BOOK, c.side, c.m)); })()') === false,
     "stuck in anyway");
   check("and the screen says he goes back in the box",
     /back in the box/.test(stage(app)), "no line about him");

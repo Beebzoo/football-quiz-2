@@ -34,15 +34,17 @@ let fails = 0;
   /* THE DUGOUT'S BENCH IS EARNED. A country whose album page is unfinished
      plays with eleven men and nobody to bring on, so a test that reaches for a
      substitute finishes the page the way a player would. */
+  /* THROUGH THE APP'S OWN FUNCTIONS, never by spelling an id out here. A
+     test that knows the grammar is a second copy of the grammar, and this file
+     was one of six carrying one. */
   const finishBoth = (ctx) => run(ctx, "(() => { for(const w of [0,1]){ " +
-    "const t = TEAMS.wc2006[h2Team(w)]; if(!t) continue; const a = mine().album; " +
-    "for(const m of [...(t.xi||[]), ...(t.bench||[])]) a.have[t.slug + '/' + m.no] = 1; " +
-    "if(a.foils.indexOf(h2Team(w)) < 0) a.foils.push(h2Team(w)); } mineSave(); })();");
-  const finish = (ctx, side) => run(ctx, "(() => { const t = TEAMS.wc2006[" +
-    JSON.stringify(side) + "]; const a = mine().album; " +
-    "for(const m of [...(t.xi||[]), ...(t.bench||[])]) a.have[t.slug + '/' + m.no] = 1; " +
-    "if(a.foils.indexOf(" + JSON.stringify(side) + ") < 0) a.foils.push(" +
-    JSON.stringify(side) + "); mineSave(); })();");
+    "const side = h2Team(w); if(!TEAMS.wc2006[side]) continue; " +
+    "for(const m of albumMen('wc2006', side)) albumStick(albumId('wc2006', side, m)); " +
+    "albumCheckPage('wc2006', side); } mineSave(); })();");
+  const finish = (ctx, side) => run(ctx, "(() => { const side = " +
+    JSON.stringify(side) + "; " +
+    "for(const m of albumMen('wc2006', side)) albumStick(albumId('wc2006', side, m)); " +
+    "albumCheckPage('wc2006', side); mineSave(); })();");
 
 const check = (n, c, x) => {
   console.log((c ? "  PASS  " : "  FAIL  ") + n + (c ? "" : "   <-- got: " + x));

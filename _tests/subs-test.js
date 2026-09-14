@@ -369,12 +369,13 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   /* THE BENCH IN THE DUGOUT IS EARNED. A country whose album page is not
      finished plays with eleven men and nobody to bring on, so a test about
      substitutions has to finish the page the way a player would. */
-  const finish = (side) => run(app, "(() => { const t = TEAMS.wc2006[" +
-    JSON.stringify(side) + "]; const a = mine().album; " +
-    "for(const m of [...(t.xi||[]), ...(t.bench||[])]) a.have[(t.slug||" +
-    JSON.stringify(side) + ") + '/' + m.no] = 1; " +
-    "if(a.foils.indexOf(" + JSON.stringify(side) + ") < 0) a.foils.push(" +
-    JSON.stringify(side) + "); mineSave(); })();");
+  /* THROUGH THE APP'S OWN FUNCTIONS, never by spelling an id out here. A
+     test that knows the grammar is a second copy of the grammar, and this file
+     was one of six carrying one. */
+  const finish = (side) => run(app, "(() => { const side = " +
+    JSON.stringify(side) + "; " +
+    "for(const m of albumMen('wc2006', side)) albumStick(albumId('wc2006', side, m)); " +
+    "albumCheckPage('wc2006', side); mineSave(); })();");
   const mgr = () => { finish("Netherlands"); finish("Italy");
     run(app, 'S = freshState(["Martijn","Bram"], false, "classic", 0, "manager", false); h2Start(); h2PickTeam("Netherlands"); h2PickTeam("Italy"); S.h2h.tossed = true; S.h2h.subs=[3,3]; h2TackleOn = false; render();'); };
 

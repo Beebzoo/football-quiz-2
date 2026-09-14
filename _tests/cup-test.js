@@ -243,9 +243,10 @@ const WC18 = R("assets/wc2018/index.json");
   check("seven matches", c.results.length === 7, c.results.length);
   /* THE PRIZE IS THE PAGE. Twenty-three stickers of the country you took all
      the way, which is a foil, which is their bench in The Dugout. */
-  check("their album page is finished", ev(app, 'albumDone("Trinidad and Tobago")') === true,
-    "not finished");
-  check("and it is a foil", ev(app, 'albumFoil("Trinidad and Tobago")') === true, "no foil");
+  check("their album page is finished",
+    ev(app, 'albumDone("wc2006", "Trinidad and Tobago")') === true, "not finished");
+  check("and it is a foil",
+    ev(app, 'albumFoil("wc2006", "Trinidad and Tobago")') === true, "no foil");
   check("the chart has every tie of every round",
     c.chart.length === 8 + 4 + 2 + 1, c.chart.length);
   check("and one of them is yours in each round",

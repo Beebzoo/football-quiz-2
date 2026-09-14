@@ -142,11 +142,11 @@ for (const rel of ["assets/eredivisie/clubs.json", "assets/finals/index.json"]) 
      and it hangs above the grid, so it has to come before the first row in the
      markup and not inside one. */
   console.log("\n--- Your XI keeps its place above the rows ---");
-  const italy = books.wc2006["Italy"];
-  const ids = italy.xi.map(m => "italy/" + m.no);
-  run(app, "mine().album.have = {}; " + ids.map(i =>
-    "mine().album.have[" + JSON.stringify(i) + "] = 1;").join(" ") +
-    " mine().dream = {men: " + JSON.stringify(ids) + "}; DREAM_SIG = ''; render();");
+  /* BUILT BY THE APP, not spelled out here: the ids carry a book now and a
+     test that writes its own would be a second copy of that grammar. */
+  const ids = ev(app, "albumMen('wc2006', 'Italy').slice(0, 11).map(m => albumId('wc2006', 'Italy', m))");
+  run(app, "(() => { for(const id of " + JSON.stringify(ids) + ") albumStick(id); " +
+    "mine().dream = {men: " + JSON.stringify(ids) + "}; DREAM_SIG = ''; })(); render();");
   await tick(180);
   const xi = stage(app);
   check("the eleven is ready", ev(app, "dreamReady()") === true, ev(app, "dreamOk()"));
@@ -208,7 +208,7 @@ for (const rel of ["assets/eredivisie/clubs.json", "assets/finals/index.json"]) 
     "the key was shortened too");
 
   console.log("\n--- the album's pages follow the groups, not the alphabet ---");
-  const order = ev(app, "JSON.stringify(albumSides())");
+  const order = ev(app, "JSON.stringify(albumSides('wc2006'))");
   check("it is the file's own order, which is the tournament's",
     order === JSON.stringify(Object.keys(books.wc2006)), order);
   check("and not the alphabet",
@@ -219,8 +219,8 @@ for (const rel of ["assets/eredivisie/clubs.json", "assets/finals/index.json"]) 
   for (const k of Object.keys(bare)) delete bare[k].group;
   run(app, "TEAMS.wc2006 = " + JSON.stringify(bare) + ";");
   check("a book with no groups falls back to the alphabet",
-    ev(app, "JSON.stringify(albumSides())") === JSON.stringify(Object.keys(bare).slice().sort()),
-    ev(app, "JSON.stringify(albumSides().slice(0,3))"));
+    ev(app, "JSON.stringify(albumSides('wc2006'))") === JSON.stringify(Object.keys(bare).slice().sort()),
+    ev(app, "JSON.stringify(albumSides('wc2006').slice(0,3))"));
 
   console.log("\n" + (fails ? fails + " FAILED" : "ALL PASS"));
   process.exit(fails ? 1 : 0);

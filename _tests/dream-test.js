@@ -54,19 +54,24 @@ const check = (n, c, x) => {
 
   console.log("\n--- you can only field men you have collected ---");
   /* a phone with one country's page and nothing else */
-  run(app, '(() => { const t = TEAMS.wc2006.Italy, a = mine().album; ' +
-    "for(const m of [...(t.xi||[]), ...(t.bench||[])]) a.have[t.slug + '/' + m.no] = 1; mineSave(); })();");
+  run(app, '(() => { for(const m of albumMen("wc2006", "Italy")) ' +
+    'albumStick(albumId("wc2006", "Italy", m)); mineSave(); })();');
   const owned = ev(app, "dreamOwned().map(m => m.id)");
   check("twenty-three men are collected", owned.length === 23, owned.length);
-  check("and they are all Italians", owned.every(id => id.indexOf("italy/") === 0),
-    owned.filter(id => id.indexOf("italy/") !== 0).slice(0, 3).join(", "));
+  check("and they are all Italians", owned.every(id => id.indexOf("wc2006:italy/") === 0),
+    owned.filter(id => id.indexOf("wc2006:italy/") !== 0).slice(0, 3).join(", "));
   /* A MAN WHO IS NOT IN THE ALBUM CANNOT BE PICKED, whatever id is handed in:
      the id resolves to nobody and nobody is added. */
-  run(app, 'dreamPick("brazil/9");'); await tick(110);
+  run(app, 'dreamPick("wc2006:brazil/9");'); await tick(110);
   check("a man you do not have cannot be fielded",
-    ev(app, 'dreamMan("brazil/9") && albumHas("brazil/9")') === false, "he got in");
+    ev(app, 'dreamMan("wc2006:brazil/9") && albumHas("wc2006:brazil/9")') === false, "he got in");
   check("and picking him is refused outright",
-    ev(app, "dreamPicked().indexOf('brazil/9')") === -1, ev(app, "dreamPicked()"));
+    ev(app, "dreamPicked().indexOf('wc2006:brazil/9')") === -1, ev(app, "dreamPicked()"));
+  /* AND AN ID IN THE OLD GRAMMAR IS NOBODY. This is the shape every saved Your
+     XI on every phone was written in, so it has to resolve to null rather than
+     to the wrong man, and the migration is what stops that mattering. */
+  check("a bookless id off an old save resolves to nobody",
+    ev(app, 'dreamMan("italy/1")') === null, ev(app, 'JSON.stringify(dreamMan("italy/1"))'));
 
   console.log("\n--- one keeper, exactly ---");
   const gks = ev(app, 'dreamOwned().filter(m => m.pos === "GK").map(m => m.id)');

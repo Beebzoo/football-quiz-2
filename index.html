@@ -322,7 +322,6 @@
     --drop:rgba(0,0,0,.45);
     /* the hero's ground shadow. At night it only has to be darker than the
        olive, so plain black at the alphas the canvas paints it with. */
-    --hsdrop:#000;
     --mow-a:#181C11; --mow-b:#14180F;      /* the faintest mown band */
     --flood:rgba(255,246,196,.07);
     --chalkline:rgba(248,241,221,.10);
@@ -360,7 +359,6 @@
     /* on paper the shadow goes warm charcoal. #05100a, which is what the
        sprite was drawn against, is floodlit grass and punches a cold hole in
        the cream. */
-    --hsdrop:#2A2620;
     /* FLAT. Mown bands on cream are streaks and a floodlight on cream is a
        smudge behind the wordmark. Paper is paper: one colour, and the green
        rule under the header does the dividing. */
@@ -1404,6 +1402,9 @@
      A fixture list, two segmented controls and a team sheet. Radii are all
      --r2, the press is a scale and never a colour flash, and hovers darken a
      border rather than lightening a fill. */
+  .mm-head.mm-banner{display:block;padding-bottom:14px}
+  .mm-head.mm-banner .mm-kicker{margin-bottom:8px}
+  .mm-head.mm-banner .mm-tag{margin-top:10px}
   .mm-head{padding:22px 2px 16px;display:flex;align-items:flex-end;justify-content:space-between;gap:12px;
     border-bottom:var(--head-rule) solid var(--line-head)}
   .mm-kicker{font:700 11px/1 var(--ui);letter-spacing:.3em;text-transform:uppercase;color:var(--kicker-ink)}
@@ -1422,8 +1423,25 @@
      smooths the upscale and the whole thing turns to mush. crisp-edges goes
      first and pixelated second on purpose, because last valid wins and
      pixelated is the one that promises nearest neighbour. */
-  #herosprite{display:block;flex:none;margin-bottom:-16px;
-    image-rendering:crisp-edges;image-rendering:pixelated}
+  /* THE BANNER. Goal, wordmark, juggler, all on one canvas except the type,
+     which stays real text so it is selectable, searchable and scales with the
+     viewport rather than being baked into pixels.
+     THE CANVAS SITS ON TOP OF THE TYPE. The ball's whole job is to bow over
+     the wordmark, so a canvas underneath the letters would have it vanish at
+     exactly the moment it is doing the one thing it is there for.
+     The bow is also why this is tall: a ball arcing over a wordmark needs
+     somewhere to arc to, and there is no short version of that idea.
+     image-rendering is the line that cannot be dropped. crisp-edges first and
+     pixelated second, because last valid wins and pixelated is the one that
+     promises nearest neighbour. */
+  .banner{position:relative;width:100%;aspect-ratio:600 / 246;overflow:hidden;
+    background:linear-gradient(178deg,#0d3a1c,#17552c);cursor:pointer}
+  #bnstage{position:absolute;inset:0;z-index:2;pointer-events:none;
+    image-rendering:crisp-edges;image-rendering:pixelated;width:100%;height:100%}
+  .banner .words{position:absolute;inset:0;z-index:1;display:flex;
+    align-items:center;justify-content:center;padding-top:10px}
+  .banner .words h1{margin:0;font:800 clamp(2.4rem,13vw,4.4rem)/1 var(--ui);
+    letter-spacing:.02em;text-transform:uppercase;color:#f2f0e6}
   .mm-page{display:flex;flex-direction:column;gap:22px;padding-top:18px}
   .mm-eyebrow{font:700 10px/1 var(--ui);letter-spacing:.24em;text-transform:uppercase;color:var(--ink-dim);margin-bottom:8px}
   .mm-sect{display:flex;flex-direction:column;gap:10px}
@@ -8806,7 +8824,10 @@ function h2PickTeam(country){
   const H = h2();
   /* THREE OF A COUNTRY THE FIRST TIME YOU PLAY AS THEM, from that country only.
      It is the pack that makes somebody pick a side they have never picked. */
-  if(h2PoolId() === ALBUM_POOL && TEAMS[ALBUM_POOL] && TEAMS[ALBUM_POOL][country]) albumFirstTime(country);
+  /* ANY POOL THAT IS A BOOK, and the stickers come out of that book: play as
+     Angola on the 2010 pool and it is 2010 Angolans you get. A league's clubs
+     are not a book, so nothing happens there. */
+  if(albumIsBook(h2PoolId()) && (TEAMS[h2PoolId()] || {})[country]) albumFirstTime(h2PoolId(), country);
   const slot = H.teams[0] == null ? 0 : 1;
   if(H.teams.includes(country)) return;
   H.teams[slot] = country;
@@ -9350,32 +9371,208 @@ function h2Book(w, i){
    retention features build up lives here so it can be exported as one file:
    without a server, that export is the only backup any of it will ever have.
 
-     { daily:  {date, rung, done, answers[], history[]},
+     { v: 2,
+       daily:  {date, rung, done, answers[], history[]},
        streak: {played, half, last},
-       album:  {have:{"italy/1":2}, packs, foils[]},
+       album:  {collecting: "wc2006",
+                books: {wc2006: {have:{"wc2006:italy/1":2}, foils:[], seen:{}, done:false}},
+                packs, swaps, last[]},
        cup:    {nation, round, group, results, alive} }
 
    A read never throws and never returns undefined, because every caller is a
    renderer and a renderer that has to guard is a renderer with a bug in it. */
+/* ---------- AND WHICH SHAPE IT IS IN ----------
+   Version 1 is every save written before the album became a shelf of books:
+   it has no v at all, which is how it is recognised. Version 2 is this one.
+
+   Until now there was no version on the save at all, only a repair block that
+   filled in whatever field was missing. That is enough while a build only ever
+   ADDS a field, and it is not enough the moment one changes shape, because a
+   repair block cannot tell a field that was never written from a field that
+   means something different now. Hence a number, and the rules it buys:
+
+   A SAVE WITH NO v IS VERSION ONE, not a broken version two. The absence of a
+   field is a fact about when it was written, so it is read as one.
+
+   A SAVE FROM A NEWER BUILD IS LEFT ALONE. If v is a number above MINE_V then
+   this build cannot know what is in it, so it does not migrate it, does not
+   repair it, and above all does not write over it: mineSave goes quiet for the
+   rest of the session and the player is told once. Somebody who opens an old
+   tab on a phone that has already moved on gets an app that looks empty and a
+   save that is still there when they go back, which is the only outcome here
+   that is recoverable.
+
+   AND THE MIGRATOR TOUCHES NOTHING IT DOES NOT RECOGNISE. It moves the fields
+   it was written for and leaves everything else exactly where it was, because
+   a field this build has never heard of is far more likely to belong to a
+   build that has than to be rubbish. */
 const MINE_KEY = "ball2-mine";
-const MINE_BLANK = {daily: null, streak: {played: 0, half: 0, last: null},
-                    album: {have: {}, packs: 0, foils: []}, cup: null, cups: [],
-                    dream: {men: []}};
+const MINE_V = 2;
+/* THE BLANK IS VERSION TWO, so a phone that has never played skips the
+   migrator entirely rather than being migrated from a shape it never had.
+
+   swaps is here because ALBUM-PLAN section 7 puts it here, and nothing spends
+   it yet: the three-doubles trade takes the doubles themselves, which is the
+   playground rule and the one already built. It sits at zero rather than being
+   left out because the repair block would have to create it the day something
+   does spend it, and a field that arrives with the shape is a field nobody has
+   to migrate twice. */
+const MINE_BLANK = {v: MINE_V, daily: null, streak: {played: 0, half: 0, last: null},
+                    album: {collecting: "wc2006", books: {}, packs: 0, swaps: 0},
+                    cup: null, cups: [], dream: {men: []}};
 let MINE = null;
+/* SET WHEN THE SAVE IS FROM A BUILD THAT CAME AFTER THIS ONE. Nothing is
+   written while it is up. */
+let MINE_FOREIGN = false, MINE_TOLD = false;
 function mine(){
   if(MINE) return MINE;
   try{ MINE = JSON.parse(localStorage.getItem(MINE_KEY) || "null"); }catch(e){ MINE = null; }
   if(!MINE || typeof MINE !== "object") MINE = JSON.parse(JSON.stringify(MINE_BLANK));
+  /* FROM THE FUTURE. Hand back something the renderers can draw, refuse to
+     write, and do not touch what is on the disk. */
+  if(typeof MINE.v === "number" && MINE.v > MINE_V){
+    MINE_FOREIGN = true;
+    MINE = JSON.parse(JSON.stringify(MINE_BLANK));
+    return MINE;
+  }
+  MINE_FOREIGN = false;
+  mineMigrate(MINE);
   /* a build that adds a field must not break a phone that has the old shape */
-  for(const k of Object.keys(MINE_BLANK)) if(MINE[k] === undefined) MINE[k] = MINE_BLANK[k];
-  if(!MINE.album || typeof MINE.album !== "object") MINE.album = {have: {}, packs: 0, foils: []};
-  if(!MINE.album.have) MINE.album.have = {};
+  /* AND IT GETS ITS OWN COPY OF IT. Handing over MINE_BLANK's own object would
+     make the blank itself mutable from the save, which is a bug that only
+     shows up on the second phone in one Node process and is unfindable when it
+     does. */
+  for(const k of Object.keys(MINE_BLANK)) if(MINE[k] === undefined)
+    MINE[k] = (MINE_BLANK[k] && typeof MINE_BLANK[k] === "object")
+      ? JSON.parse(JSON.stringify(MINE_BLANK[k])) : MINE_BLANK[k];
+  if(!MINE.album || typeof MINE.album !== "object") MINE.album = {collecting: "wc2006", books: {}, packs: 0, swaps: 0};
+  if(!MINE.album.books || typeof MINE.album.books !== "object") MINE.album.books = {};
   if(!MINE.streak) MINE.streak = {played: 0, half: 0, last: null};
   if(!Array.isArray(MINE.cups)) MINE.cups = [];
   if(!MINE.dream || !Array.isArray(MINE.dream.men)) MINE.dream = {men: []};
+  MINE.v = MINE_V;
   return MINE;
 }
+/* ---------- THE ONE-TIME MOVE, VERSION 1 TO VERSION 2 ----------
+   The album used to be one book, welded to the 2006 World Cup, and a sticker
+   used to be called "italy/10" with nothing in the name saying which
+   tournament's Italy that was. Now there is a shelf, so the id carries the
+   book: "wc2006:italy/10". Everything below moves a version 1 save onto that
+   grammar without losing a sticker.
+
+   WRITTEN AGAINST LITERALS, ON PURPOSE. Not one line of this calls albumId or
+   albumParse or reads ALBUM_HOME. It is a description of a shape that no
+   longer exists anywhere else in the file, and the day somebody changes the id
+   grammar again is exactly the day a migrator built out of the new grammar's
+   helpers would quietly start producing version 3 ids and calling them
+   version 2. It is frozen prose about the past and it stays that way.
+
+   EVERY STEP GUARDS ON THE OLD FIELD, NOT ON THE VERSION. That is what makes
+   it safe to run on a half-migrated save: a step whose old field is already
+   gone has already happened, so it does nothing. The version stamp is written
+   last, by mine(), so a throw anywhere in here leaves the save unstamped and
+   the whole thing runs again next time with the finished steps skipping
+   themselves.
+
+   AND IT RUNS ON AN IMPORT TOO, for free: importMine clears MINE, so a file
+   pasted in off a phone that never saw this build comes through here on the
+   next read. */
+const MINE_V1_BOOK = "wc2006";
+function mineMigrate(M){
+  const A = M.album;
+  if(!A || typeof A !== "object") return;
+  /* the version 1 fields, all four of them. If none is present there is
+     nothing here that predates the shelf and we are done. */
+  const hadHave  = A.have && typeof A.have === "object";
+  const hadFoils = Array.isArray(A.foils);
+  const hadSeen  = A.seen && typeof A.seen === "object";
+  const hadDream = M.dream && Array.isArray(M.dream.men) && M.dream.men.length;
+  if(!hadHave && !hadFoils && !hadSeen && !hadDream && A.collecting) return;
+
+  if(!A.books || typeof A.books !== "object") A.books = {};
+  const needBook = () => {
+    let b = A.books[MINE_V1_BOOK];
+    if(!b || typeof b !== "object") b = A.books[MINE_V1_BOOK] = {};
+    if(!b.have || typeof b.have !== "object") b.have = {};
+    if(!Array.isArray(b.foils)) b.foils = [];
+    if(!b.seen || typeof b.seen !== "object") b.seen = {};
+    if(typeof b.done !== "boolean") b.done = false;
+    return b;
+  };
+  /* the stickers. Counts are kept, because a double is worth three of somebody
+     else and losing the count would be losing the trade.
+
+     MOVED, NEVER ADDED TO WHAT IS ALREADY THERE. If half of these had been
+     moved already and something went wrong before the old map was dropped,
+     adding would hand somebody two of every sticker that had made it across
+     and call them doubles. A key that is already in the book has already been
+     moved; leave it exactly as it is. */
+  if(hadHave){
+    const b = needBook();
+    for(const id of Object.keys(A.have)){
+      const n = A.have[id];
+      if(!(n > 0)) continue;
+      const put = (String(id).indexOf(":") > 0) ? String(id) : MINE_V1_BOOK + ":" + id;
+      if(b.have[put] == null) b.have[put] = n;
+    }
+    delete A.have;
+  }
+  /* the finished pages. These are country names and never were ids, so they
+     move across untouched. */
+  if(hadFoils){
+    const b = needBook();
+    for(const side of A.foils) if(b.foils.indexOf(side) < 0) b.foils.push(side);
+    delete A.foils;
+  }
+  /* WHICH COUNTRIES YOU HAVE ALREADY PLAYED AS, which is the field nothing
+     else in this file creates: albumFirstTime makes it the first time somebody
+     picks a side, so it is absent from the blank and absent from the repair
+     block and a migration that walked the known shape would walk straight past
+     it. Dropping it would hand three free stickers a country to anybody who
+     has ever played, which is not the end of the world and is still somebody's
+     album quietly rewriting itself overnight. */
+  if(hadSeen){
+    const b = needBook();
+    for(const side of Object.keys(A.seen)) b.seen[side] = A.seen[side];
+    delete A.seen;
+  }
+  /* YOUR XI IS A LIST OF STICKER IDS AND NOTHING SAYS SO. mine().dream.men is
+     eleven strings in exactly the album's grammar, stored on the far side of
+     the file from the album, and dreamMan used to read them by cutting at the
+     last slash. Give the id a book and leave this alone and a saved eleven
+     resolves to eleven nobodies: dreamHave drops every one of them, the side
+     stops being a side, and there is no error anywhere to say what happened.
+     This is the step the whole version stamp exists for.
+
+     Guarded per id rather than on a field, so an eleven that is already half
+     moved comes out right too. */
+  if(hadDream) M.dream.men = M.dream.men.map(id =>
+    (typeof id === "string" && id.indexOf(":") > 0) ? id : MINE_V1_BOOK + ":" + id);
+  /* the last pack opened. Nothing reads it today, but it is a list of ids and
+     an id that means one thing in one field and another thing two fields over
+     is how this sort of thing goes wrong the second time. */
+  if(Array.isArray(A.last)) A.last = A.last.map(g => {
+    if(!g || typeof g !== "object" || typeof g.id !== "string" || g.id.indexOf(":") > 0) return g;
+    const out = Object.assign({}, g);
+    out.id = MINE_V1_BOOK + ":" + g.id;
+    out.book = MINE_V1_BOOK;
+    return out;
+  });
+  /* and the shelf opens where the album always was */
+  if(!A.collecting) A.collecting = MINE_V1_BOOK;
+  if(typeof A.packs !== "number") A.packs = 0;
+  if(typeof A.swaps !== "number") A.swaps = 0;
+}
 function mineSave(){
+  if(MINE_FOREIGN){
+    /* SAID ONCE, not on every write, because this fires from inside a render
+       loop and a toast a second is worse than the silence. */
+    if(!MINE_TOLD){
+      MINE_TOLD = true;
+      try{ toast("This phone has a save from a newer BALL. Nothing here will be written over it.", true); }catch(e){}
+    }
+    return;
+  }
   try{ localStorage.setItem(MINE_KEY, JSON.stringify(mine())); }catch(e){}
 }
 
@@ -9503,6 +9700,26 @@ function dailySix(day){
    it, so every phone is playing for the same man on the same day and nobody
    comes round again inside two years. A per-phone skip list was the obvious
    build and it would have quietly broken the only thing the daily is for. */
+/* AND THE CALENDAR IS NAILED TO THE 2006 BOOK, by name, forever. The shuffle
+   is seeded off that book's 736 men sorted by country, so the order is a
+   property of which book it is. Point the daily at "whichever book you happen
+   to be collecting" and the man of the day becomes a different man on every
+   phone, moving the moment anybody switches shelf, and the share line stops
+   meaning anything: six squares somebody else cannot compare with theirs. It
+   is a calendar, not a collection, and a calendar everybody shares is the only
+   kind worth having.
+
+   Its own constant rather than ALBUM_HOME on its own, because the Dugout's
+   bench is pinned to the same book for an entirely different reason and one of
+   those two will move before the other. The sticker he wins goes into the 2006
+   book whichever book you are collecting, which is the same statement read
+   from the other end: he is a 2006 man, so he goes on a 2006 page.
+
+   SPELLED OUT RATHER THAN REFERENCED, for the reason EXPORT_KEYS gives a few
+   hundred lines up: ALBUM_HOME is declared further down the file and a const
+   read out of its temporal dead zone throws on this line, which is a blank app
+   rather than a wrong daily. */
+const DAILY_BOOK = "wc2006";
 const DAILY_EPOCH = Date.UTC(2026, 0, 1) / 86400000;
 /* a date as a plain count of days, from the player's own calendar rather than
    UTC, for the same reason dayKey is local */
@@ -9514,13 +9731,13 @@ const dayFromKey = k => new Date(Math.floor(k / 10000), Math.floor(k / 100) % 10
 let dailyOrder = null;
 function dailyMen(){
   if(dailyOrder) return dailyOrder;
-  const book = albumBook();
+  const book = albumBook(DAILY_BOOK);
   if(!book) return null;
   const all = [];
   /* sorted before the shuffle, because Object.keys order is the order the
      harvest happened to write and a re-harvest must not move the calendar */
   for(const side of Object.keys(book).sort())
-    for(const m of albumMen(side)) all.push({side: side, no: m.no});
+    for(const m of albumMen(DAILY_BOOK, side)) all.push({side: side, no: m.no});
   if(!all.length) return null;
   const rnd = seeded(0x5ca1ab1e);
   for(let i = all.length - 1; i > 0; i--){
@@ -9538,9 +9755,9 @@ function dailyMan(day){
 /* the man himself, out of the deck, for the sticker */
 function dailyManCard(man){
   if(!man) return null;
-  const men = albumMen(man.side);
+  const men = albumMen(DAILY_BOOK, man.side);
   const m = men.find(x => String(x.no) === String(man.no));
-  return m ? {side: man.side, m: m} : null;
+  return m ? {book: DAILY_BOOK, side: man.side, m: m} : null;
 }
 
 /* today's state, created on demand and never on a render */
@@ -9629,14 +9846,18 @@ function dailyStreak(d){
      is three at random; he is the one on the card, which is the only prize in
      the app you can see coming and play towards. */
   m.album.packs = (m.album.packs || 0) + 1;
-  if(d.reached >= 6 && d.man){
-    const id = albumId(d.man.side, {no: d.man.no});
+  /* THE REAL MAN, NOT A STAND-IN BUILT OUT OF HIS SHIRT NUMBER. This used to
+     hand albumId a {no} and nothing else, which was fine while a number was
+     the whole of an id and is not fine now that a shared shirt puts his name
+     on the end of it. The card already knows how to find him in the book, so
+     ask it and pass the man the book actually holds. */
+  const card = (d.reached >= 6 && d.man) ? dailyManCard(d.man) : null;
+  if(card){
+    const id = albumId(DAILY_BOOK, card.side, card.m);
     if(id){
       const isNew = albumStick(id);
-      albumCheckPage(d.man.side);
-      const card = dailyManCard(d.man);
-      toast(card ? (card.m.n + (isNew ? " is yours." : " again. One for swapping."))
-                 : "The sticker is yours.");
+      albumCheckPage(DAILY_BOOK, card.side);
+      toast(card.m.n + (isNew ? " is yours." : " again. One for swapping."));
     }
   }
 }
@@ -10003,9 +10224,12 @@ let CUP_VIEW = null;
 function openCup(){ audio(); CUP_VIEW = {}; ALBUM_VIEW = null; render(); }
 function closeCup(){ audio(); CUP_VIEW = null; render(); }
 function cupLook(side){ audio(); CUP_VIEW = {pick: side || null}; render(); }
-function openAlbum(side){
+/* BOOK FIRST, THEN THE PAGE, which is the order every album function takes its
+   arguments in now. Called with nothing it opens the book you are collecting,
+   which is what every button on the front door means by "the album". */
+function openAlbum(book, side){
   audio();
-  ALBUM_VIEW = {side: side || null};
+  ALBUM_VIEW = {book: (book && albumIsBook(book)) ? book : albumCollecting(), side: side || null};
   render();
 }
 function closeAlbum(){ audio(); ALBUM_VIEW = null; render(); }
@@ -10352,35 +10576,53 @@ function aiTick(){
 /* ================= YOUR XI =================
    Eleven men out of the album, which is the only place they can come from:
    you can field a man when you have his sticker and not before. */
+/* AND THIS IS WHERE STICKER IDS GO TO HIDE. mine().dream.men is a persisted
+   array of the same strings the album's have map is keyed by, sitting a
+   thousand lines away from the album with nothing about it saying so. When the
+   id grew a book on the front, every one of those saved strings became
+   unreadable to the old parser here, which cut at the last slash and compared
+   what was in front of it to a slug: "wc2006:italy/10" gave it a slug of
+   "wc2006:italy", which matches no country, so dreamMan returned null, so
+   dreamHave filtered the man out, so an eleven somebody had spent a season
+   collecting emptied itself on first load with no error and nothing on the
+   screen. There is a migration for the saved ids and there is one parser now,
+   and this is why both exist. */
 const DREAM_SIDE = "Your XI";
 const DREAM_KIT = "#C99A2E";
 /* a man by his sticker id, which is the only name the album keeps */
 function dreamMan(id){
-  const book = albumBook();
-  if(!book || !id) return null;
-  const cut = String(id).lastIndexOf("/");
-  if(cut < 1) return null;
-  const slug = id.slice(0, cut), no = id.slice(cut + 1);
-  for(const side of Object.keys(book)){
-    const t = book[side];
-    if((t.slug || side) !== slug) continue;
-    const m = albumMen(side).find(x => String(x.no) === no);
-    if(!m) return null;
-    /* HIS COUNTRY TRAVELS WITH HIM, because on your own team sheet "Cannavaro"
-       next to "Zidane" wants to say which side each of them came off. */
-    return Object.assign({}, m, {from: side});
-  }
-  return null;
+  const p = albumParse(id);
+  if(!p) return null;
+  const book = albumBook(p.book);
+  if(!book) return null;
+  const side = albumSideOf(p.book, p.slug);
+  if(!side) return null;
+  /* MATCHED ON THE WHOLE ID rather than on the shirt number, which is what
+     makes the two men in Switzerland's 21 come out as two men: build each
+     candidate's id the way the album would and take the one that is the same
+     string. Anything that cannot round-trip is not a man we hold. */
+  const m = albumMen(p.book, side).find(x => albumId(p.book, side, x) === id);
+  if(!m) return null;
+  /* HIS COUNTRY TRAVELS WITH HIM, because on your own team sheet "Cannavaro"
+     next to "Zidane" wants to say which side each of them came off, and his
+     book travels with him because two of your eleven can now be the same
+     country in different summers. */
+  return Object.assign({}, m, {from: side, book: p.book});
 }
+/* EVERY MAN YOU HAVE, OFF EVERY SHELF. Not just the book you are collecting:
+   switching shelf must not make a side you have already built stop being a
+   side, and a Your XI that emptied every time somebody opened a different book
+   would be the same bug as the one above wearing a different coat. */
 const dreamOwned = () => {
-  const book = albumBook();
-  if(!book) return [];
   const out = [];
-  for(const side of Object.keys(book).sort())
-    for(const m of albumMen(side)){
-      const id = albumId(side, m);
-      if(albumHas(id)) out.push(Object.assign({}, m, {from: side, id: id}));
-    }
+  for(const bid of albumBooks()){
+    const book = albumBook(bid);
+    for(const side of Object.keys(book).sort())
+      for(const m of albumMen(bid, side)){
+        const id = albumId(bid, side, m);
+        if(albumHas(id)) out.push(Object.assign({}, m, {from: side, book: bid, id: id}));
+      }
+  }
   return out;
 };
 const dreamPicked = () => (mine().dream && Array.isArray(mine().dream.men)) ? mine().dream.men : [];
@@ -10410,7 +10652,9 @@ function dreamSquad(){
               squad: 11, xi: men, bench: [], xiRule: "yours"};
   return DREAM_SQ;
 }
-const dreamReady = () => !!(albumBook() && dreamSquad());
+/* ONE BOOK ON THE SHELF IS ENOUGH. The old test was "the album's pool has
+   landed", which was the same sentence when there was one of them. */
+const dreamReady = () => !!(albumBooks().length && dreamSquad());
 /* ---------- building it ---------- */
 let DREAM_VIEW = null;
 function openDream(){ audio(); DREAM_VIEW = {pos: null}; ALBUM_VIEW = null; CUP_VIEW = null; render(); }
@@ -10690,16 +10934,27 @@ function cupLine(r){
 /* WINNING IT FINISHES YOUR PAGE. Twenty-three stickers of the country you took
    all the way, which is a foil, which is their bench in The Dugout for every
    match after it. Seven matches for a squad you keep. */
-/* WINNING IT FINISHES YOUR PAGE, when the page exists. The album is the 2006
-   book and only the 2006 book, because a second album is a second collection
-   and that is a decision rather than a side effect of adding a pool. Win it
-   with a 2018 side and the prize is packs. */
+/* WINNING IT FINISHES YOUR PAGE, in the book of the tournament you won. This
+   used to read "if the year is not 2006 the prize is six packs", which was the
+   honest answer while there was one album and a second one would have been a
+   second collection nobody had decided on. There are fifteen books now and the
+   Cup's own pool is one of them by construction, so the rule can finally be
+   the sentence it always wanted to be: take a 2018 side all the way and it is
+   the 2018 page that closes.
+
+   THE PACKS STAY ON TOP OF IT. Five for winning it either way, and the page
+   was never the whole prize. A year whose book somehow has not landed falls
+   back to packs alone rather than paying nothing. */
 function cupCrown(side, year){
-  if(year && year !== "2006") return albumGive(6, "the World Cup");
-  const men = albumMen(side);
+  const book = cupPool(year || cupYear());
+  if(!albumIsBook(book) || !albumBook(book)) return albumGive(6, "the World Cup");
+  const men = albumMen(book, side);
   let stuck = 0;
-  for(const m of men) if(!albumHas(albumId(side, m))){ albumStick(albumId(side, m)); stuck++; }
-  albumCheckPage(side);
+  for(const m of men){
+    const id = albumId(book, side, m);
+    if(id && !albumHas(id)){ albumStick(id); stuck++; }
+  }
+  albumCheckPage(book, side);
   albumGive(5, "the World Cup");
   if(stuck) toast(side + " complete: " + stuck + " sticker" + (stuck === 1 ? "" : "s") + " for winning it.");
 }
@@ -10734,21 +10989,126 @@ function cupPlay(){
 const cupGroupMatch = () => !!(S && S.cup && S.cup.round === "group");
 
 /* ================= THE ALBUM ================= */
-/* THE ALBUM IS ONE POOL, and it is the 2006 World Cup, because that is the one
-   with an album. A second pool would be a second album, not a bigger one. */
-const ALBUM_POOL = "wc2006";
-const albumBook = () => TEAMS[ALBUM_POOL] || null;
-/* A STICKER IS A SLUG AND A SHIRT NUMBER. Not a name, because names change
-   spelling between harvests, and not an index, because indexes move. */
-const albumId = (side, m) => {
-  const t = (albumBook() || {})[side];
-  return (t && m) ? (t.slug || side) + "/" + m.no : null;
-};
-function albumMen(side){
-  const t = (albumBook() || {})[side];
+/* A SHELF OF BOOKS, ONE PER TOURNAMENT, which is ALBUM-PLAN section 1. This
+   used to be a single album welded to the 2006 World Cup by one module
+   constant, and every function under here read that constant rather than being
+   told which book it was working on. They all take a book id now, because the
+   day the shelf has two books on it a function that reads a constant is a
+   function that quietly answers about the wrong one, and it does it without
+   raising anything.
+
+   WHICH POOLS ARE BOOKS IS A RULE AND NOT A SECOND LIST. A book is a
+   tournament, and the pool registry has carried the word for that since long
+   before any of this: the group field. World Cups, Euros and the forty finals
+   are books. A league's clubs are not, because a club squad is whoever is
+   there this season and there is nothing in it to collect. So the next World
+   Cup becomes a book on the day its pool file lands, and there is nothing here
+   for anybody to remember to update. */
+const ALBUM_BOOK_GROUPS = {"World Cups": 1, "Euros": 1, "Finals": 1};
+const albumIsBook = id => !!(POOLS[id] && ALBUM_BOOK_GROUPS[POOLS[id].group]);
+/* the books whose squads have actually arrived, in the registry's own order */
+const albumBooks = () => Object.keys(POOLS).filter(id => albumIsBook(id) && TEAMS[id]);
+/* THE 2006 BOOK, BY NAME. Two things in the app were built when it was the
+   only book and are still pinned to it on purpose. They get their own
+   constants further down rather than sharing one, because they are pinned for
+   different reasons and section 6 may well move one without the other. */
+const ALBUM_HOME = "wc2006";
+/* THE BOOK THE DUGOUT'S BENCH IS EARNED IN. h2Bench says the rest of it; the
+   short version is that widening a foil's worth to fifteen books would take a
+   bench off everybody who plays The Dugout on the 2010 pool today, and that is
+   section 6's call rather than a side effect of this one. The daily has its own
+   constant of the same value for a completely different reason, which is why
+   these are two names and not one. */
+const DUGOUT_BOOK = ALBUM_HOME;
+const albumBook = book => TEAMS[book] || null;
+
+/* ---------- WHAT A STICKER IS CALLED ----------
+   book + ":" + slug + "/" + shirt number. "wc2006:italy/10".
+
+   The slug and the number were the id before there was a shelf, for a reason
+   that has not changed: a name changes spelling between harvests and an index
+   moves. What the book adds is the answer to "whose Italy", because italy/10
+   is Totti in 2006 and somebody else entirely at Euro 2020, and the two have
+   to be able to sit in one save without either being mistaken for the other.
+
+   AND THE SHIRT NUMBER IS NOT ALWAYS ENOUGH. Euro 2020 was played with
+   twenty-six man squads and late replacements, and three of those replacements
+   walked straight into the shirt of the man they came in for: Kobel took
+   Omlin's 21 for Switzerland, Kaminski took Mignolet's 12 for Belgium,
+   Ramsdale took Henderson's 13 for England. Six men, three numbers. Under slug
+   and number alone three of the six have no slot at all, which makes the Euro
+   2020 book impossible to finish and says nothing on the screen about why.
+
+   So the rule gains a clause rather than a special case: when a squad has more
+   than one man in a shirt, his short name goes on the end of his id. It goes
+   on BOTH of them and not only on the one who turned up second, because an id
+   that depends on which of the two the harvest happened to list first is an id
+   that moves the next time the harvest runs. "euro2020:switzerland/21/kobel"
+   and "euro2020:switzerland/21/omlin", and neither of them is the exception.
+
+   Yes, that puts a name into six ids out of 9,717, carrying exactly the
+   re-spelling risk that kept names out of the other 9,711. It is bounded, it
+   is the same answer the club-spells harvest already gives these six men
+   (Switzerland/21/Kobel), and album-test asserts across all sixteen pools that
+   no two men share an id. So the day a re-harvest creates a new pair the suite
+   says so, rather than somebody finding a page that will not close. */
+const albumTag = s => String(s == null ? "" : s).normalize("NFD")
+  .replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[^a-z0-9]+/g, "");
+/* HOW MANY MEN ARE IN EACH SHIRT, PER SQUAD, worked out once and kept. albumId
+   runs per man per render and albumCount walks a whole book, so counting the
+   squad inside the id builder would put a book's worth of nested loops on
+   every draw of the front door. TEAMS[book] never changes after its fetch
+   lands, so the count cannot go stale under it. */
+const ALBUM_SHIRTS = {};
+function albumShirts(book, side){
+  const key = book + "\u0000" + side;
+  if(ALBUM_SHIRTS[key]) return ALBUM_SHIRTS[key];
+  const n = {}, men = albumMen(book, side);
+  for(const m of men) n[String(m.no)] = (n[String(m.no)] || 0) + 1;
+  /* nothing is cached until there is a squad to count, so a call that beat the
+     fetch home does not freeze an empty answer in for the session */
+  if(men.length) ALBUM_SHIRTS[key] = n;
+  return n;
+}
+function albumId(book, side, m){
+  const t = (TEAMS[book] || {})[side];
+  if(!t || !m || m.no == null || m.no === "") return null;
+  const base = book + ":" + (t.slug || side) + "/" + m.no;
+  if(albumShirts(book, side)[String(m.no)] > 1){
+    const tag = albumTag(m.n);
+    /* a shared shirt with no name to tell the two apart is a harvest that has
+       gone wrong upstream. Hand back the plain id rather than one ending in a
+       bare slash, and let album-test's uniqueness check be the thing that
+       shouts about it. */
+    if(tag) return base + "/" + tag;
+  }
+  return base;
+}
+/* READING ONE BACK, and the only place in the file that takes an id apart.
+   That is the point of it. The last one was a lastIndexOf("/") buried in Your
+   XI, which worked perfectly right up until the day an id grew a third part,
+   and then went on working perfectly while returning the wrong answer. */
+function albumParse(id){
+  if(typeof id !== "string") return null;
+  const c = id.indexOf(":");
+  if(c < 1) return null;
+  const bits = id.slice(c + 1).split("/");
+  if(bits.length < 2 || !bits[0] || !bits[1]) return null;
+  return {book: id.slice(0, c), slug: bits[0], no: bits[1], tag: bits[2] || "", id: id};
+}
+function albumMen(book, side){
+  const t = (TEAMS[book] || {})[side];
   if(!t) return [];
   return [...(t.xi || []), ...(t.bench || [])];
 }
+/* WHICH COUNTRY A SLUG BELONGS TO in a given book, looked up rather than
+   matched on a prefix. The old line asked whether an id STARTED with a slug
+   and a slash, which is already wrong the moment one slug begins with another,
+   and is thoroughly wrong now that every id begins with a book. */
+const albumSideOf = (book, slug) => {
+  const t = TEAMS[book] || {};
+  return Object.keys(t).find(s => (t[s].slug || s) === slug) || null;
+};
 /* PAGE ORDER IS THE TOURNAMENT'S, not the alphabet's: groups in letter order,
    and inside a group the order the file already has, which is the order the
    squads page lists them in and the order the group table was drawn in. Page
@@ -10762,112 +11122,217 @@ function albumMen(side){
    is head to head, so every Euro book would come out quietly wrong with
    nothing on the screen to say so.
 
-   A book whose sides carry no group falls back to the alphabet, because the
-   album is one pool today and will not be forever. */
-const albumSides = () => {
-  const book = albumBook() || {};
-  const keys = Object.keys(book);
-  if(!keys.some(k => book[k].group)) return keys.sort();
+   A book whose sides carry no group falls back to the alphabet, which is the
+   forty finals and anything else that never had a group stage. */
+const albumSides = book => {
+  const b = albumBook(book) || {};
+  const keys = Object.keys(b);
+  if(!keys.some(k => b[k].group)) return keys.sort();
   /* "~" sorts after every letter, so a side the harvest somehow missed lands
      at the back of the shelf rather than in front of Group A. */
-  return keys.sort((a, b) => (book[a].group || "~").localeCompare(book[b].group || "~"));
+  return keys.sort((x, y) => (b[x].group || "~").localeCompare(b[y].group || "~"));
 };
-const albumHas = id => (mine().album.have[id] || 0) > 0;
+
+/* ---------- A BOOK'S OWN PROGRESS ----------
+   album.books[id] is {have, foils, seen, done}, which is ALBUM-PLAN section 7.
+
+   THE HAVE MAP IS KEYED BY THE WHOLE ID, book prefix and all, even though it
+   already sits under that book. The plan sketches it the short way and this is
+   a deliberate departure from the sketch, for one reason: mine().dream.men
+   stores sticker ids on the far side of the file with nothing around them to
+   say which shelf they came off, so an id has to be self-describing wherever
+   it travels. The moment there are two spellings of the same thing, every
+   function has to know which of the two it is holding, and a function that
+   guesses wrong about that is precisely the bug this whole stage exists to
+   fix. One grammar. The cost is seven bytes a sticker in a five megabyte
+   drawer, and the gain is that have[id] is a lookup and never a decision. */
+const albumBookRead = book => {
+  const A = mine().album;
+  const b = A.books && A.books[book];
+  return (b && typeof b === "object") ? b : null;
+};
+/* the writer's version, which creates the record. It is kept apart from the
+   reader on purpose: merely looking at a book you have never opened must not
+   leave an empty one behind in the save. */
+function albumBookState(book){
+  const A = mine().album;
+  if(!A.books || typeof A.books !== "object") A.books = {};
+  let b = A.books[book];
+  if(!b || typeof b !== "object") b = A.books[book] = {};
+  if(!b.have || typeof b.have !== "object") b.have = {};
+  if(!Array.isArray(b.foils)) b.foils = [];
+  if(!b.seen || typeof b.seen !== "object") b.seen = {};
+  if(typeof b.done !== "boolean") b.done = false;
+  return b;
+}
+/* WHICH BOOK THE PACKS COME FROM. Section 1: you collect one at a time, you
+   switch whenever you like, and every book keeps its progress while you are
+   away. A saved value that is not a book any more, from a renamed pool or a
+   file pasted off a build that had one this one does not, falls back to 2006
+   rather than leaving somebody looking at a shelf they cannot open. */
+const albumCollecting = () => {
+  const want = mine().album.collecting;
+  return (want && albumIsBook(want)) ? want : ALBUM_HOME;
+};
+function albumSetBook(id){
+  audio();
+  if(!albumIsBook(id) || !TEAMS[id]) return;
+  if(albumCollecting() === id) return;
+  mine().album.collecting = id;
+  mineSave();
+  toast("Packs come from " + ((POOLS[id] || {}).label || id) + " now.");
+  render();
+}
+/* HAVE YOU GOT HIM. The id says which book to look in, so this takes one
+   argument and cannot be asked about the wrong shelf. */
+const albumHas = id => {
+  const p = albumParse(id);
+  const b = p && albumBookRead(p.book);
+  return !!b && ((b.have || {})[id] || 0) > 0;
+};
 /* A PAGE IS DONE when every man on it is stuck in. The bench is part of the
    page on purpose: eleven out of twenty-three is not an album page. */
-function albumDone(side){
-  const men = albumMen(side);
-  return men.length > 0 && men.every(m => albumHas(albumId(side, m)));
+function albumDone(book, side){
+  const men = albumMen(book, side);
+  return men.length > 0 && men.every(m => albumHas(albumId(book, side, m)));
 }
-const albumFoil = side => mine().album.foils.indexOf(side) > -1;
-function albumCount(){
-  const book = albumBook();
-  if(!book) return {have: 0, all: 0};
+const albumFoil = (book, side) => {
+  const b = albumBookRead(book);
+  return !!b && Array.isArray(b.foils) && b.foils.indexOf(side) > -1;
+};
+const albumBookIsDone = book => { const b = albumBookRead(book); return !!(b && b.done); };
+/* HOW MANY DIFFERENT MEN YOU HOLD, ACROSS THE WHOLE SHELF, read straight off
+   the save rather than by walking fifteen squads and asking about each man.
+   The front door draws this on every render and the shelf is nine and a half
+   thousand men wide, which it was not when the album was one book. */
+const albumOwnedTotal = () => {
+  const books = mine().album.books || {};
+  let n = 0;
+  for(const k of Object.keys(books)) n += Object.keys((books[k] || {}).have || {}).length;
+  return n;
+};
+function albumCount(book){
+  const b = albumBook(book);
+  if(!b) return {have: 0, all: 0};
   let have = 0, all = 0;
-  for(const side of Object.keys(book))
-    for(const m of albumMen(side)){ all++; if(albumHas(albumId(side, m))) have++; }
+  for(const side of Object.keys(b))
+    for(const m of albumMen(book, side)){ all++; if(albumHas(albumId(book, side, m))) have++; }
   return {have: have, all: all};
 }
 /* ---------- earning ---------- */
+/* PACKS ARE NOT A BOOK'S, THEY ARE YOURS: section 7 keeps them at the top of
+   the album next to the swaps. Which book a pack turns into stickers from is
+   decided when you open it and not when you earn it, so winning a match on the
+   2010 pool and then switching shelf gives you a Euro 2008 pack. That is the
+   only version of the rule that does not punish somebody for changing their
+   mind between earning one and opening it. */
 function albumGive(n, why){
   const m = mine();
   m.album.packs = (m.album.packs || 0) + n;
   mineSave();
   if(why) toast(n + " pack" + (n === 1 ? "" : "s") + " for " + why + ".");
 }
-/* THE FIRST TIME YOU PLAY AS A COUNTRY, from that country only. It is the pack
-   that makes somebody pick a side they have never picked. */
-function albumFirstTime(side){
-  const m = mine();
-  m.album.seen = m.album.seen || {};
-  if(m.album.seen[side]) return;
-  m.album.seen[side] = 1;
-  const men = albumMen(side);
+/* THE FIRST TIME YOU PLAY AS A COUNTRY, from that country only, and out of the
+   book you were playing rather than the book you happen to be collecting: pick
+   Angola on the 2010 pool and it is 2010 Angolans you get, because those are
+   the men you just had on the pitch. */
+function albumFirstTime(book, side){
+  if(!albumIsBook(book) || !TEAMS[book]) return;
+  const b = albumBookState(book);
+  if(b.seen[side]) return;
+  b.seen[side] = 1;
+  const men = albumMen(book, side);
   if(!men.length){ mineSave(); return; }
   /* three from that squad, which is most of the way to a page nobody else has */
-  for(let i = 0; i < 3; i++) albumStick(albumId(side, men[Math.floor(Math.random() * men.length)]));
+  for(let i = 0; i < 3; i++) albumStick(albumId(book, side, men[Math.floor(Math.random() * men.length)]));
   mineSave();
   toast("Three " + side + " stickers for playing as them.");
 }
 /* ---------- opening ---------- */
 function albumStick(id){
-  if(!id) return false;
-  const have = mine().album.have;
+  const p = albumParse(id);
+  if(!p) return false;
+  const have = albumBookState(p.book).have;
   const dupe = (have[id] || 0) > 0;
   have[id] = (have[id] || 0) + 1;
   return !dupe;
 }
-/* ONE PACK IS THREE STICKERS, random across the whole album, doubles allowed,
-   because an album without doubles is a checklist. */
+/* ONE PACK IS THREE STICKERS, random across the book you are collecting,
+   doubles allowed, because an album without doubles is a checklist. */
 function albumOpen(){
   audio();
   const m = mine();
   if(!(m.album.packs > 0)) return;
-  const book = albumBook();
+  const id = albumCollecting(), book = albumBook(id);
   if(!book) return toast("The squads are still loading.", true);
   const all = [];
-  for(const side of Object.keys(book)) for(const man of albumMen(side)) all.push({side: side, m: man});
+  for(const side of Object.keys(book)) for(const man of albumMen(id, side)) all.push({side: side, m: man});
   if(!all.length) return;
   m.album.packs -= 1;
   const got = [];
   for(let i = 0; i < 3; i++){
     const p = all[Math.floor(Math.random() * all.length)];
-    const id = albumId(p.side, p.m);
-    const isNew = albumStick(id);
-    got.push({id: id, side: p.side, m: p.m, isNew: isNew});
+    const sid = albumId(id, p.side, p.m);
+    const isNew = albumStick(sid);
+    got.push({id: sid, book: id, side: p.side, m: p.m, isNew: isNew});
   }
   /* A FINISHED PAGE IS A FOIL, and it is checked here rather than on render so
      it happens once and can say so. */
-  for(const g of got) albumCheckPage(g.side);
+  for(const g of got) albumCheckPage(id, g.side);
   m.album.last = got;
   mineSave();
   S = null;
-  ALBUM_VIEW = {open: got};
+  ALBUM_VIEW = {book: id, open: got};
   render();
 }
-function albumCheckPage(side){
-  const m = mine();
-  if(!albumDone(side) || m.album.foils.indexOf(side) > -1) return;
-  m.album.foils.push(side);
+function albumCheckPage(book, side){
+  if(!albumDone(book, side)) return;
+  const b = albumBookState(book);
+  if(b.foils.indexOf(side) > -1) return;
+  b.foils.push(side);
   toast(side + " complete. Their bench is yours.");
+  albumCheckBook(book);
+}
+/* AND A FINISHED BOOK IS A FLAG THAT LATCHES. Section 7 carries done on every
+   book and section 6 says what it pays. The paying is not built yet, but the
+   flag is set by the thing that can see it happen rather than worked out again
+   later off a shelf somebody may by then have half traded away. */
+function albumCheckBook(book){
+  const b = albumBookState(book);
+  if(b.done) return;
+  const sides = albumSides(book);
+  if(!sides.length || !sides.every(s => b.foils.indexOf(s) > -1)) return;
+  b.done = true;
+  toast(((POOLS[book] || {}).label || book) + ", finished. Every page.");
 }
 /* ---------- doubles ---------- */
-const albumDupes = () => Object.keys(mine().album.have).filter(id => mine().album.have[id] > 1);
+const albumDupes = book => {
+  const b = albumBookRead(book);
+  return b ? Object.keys(b.have || {}).filter(id => b.have[id] > 1) : [];
+};
 /* THREE DOUBLES FOR ONE YOU CHOOSE, which is the oldest rule in the playground
-   and the only one that makes a double worth having. */
+   and the only one that makes a double worth having.
+
+   OUT OF THE SAME BOOK. Every book keeps its own pile, so three spare 2006
+   Italians do not buy a Euro 2008 Spaniard: letting them would turn a book you
+   had half filled into currency for one you had only just opened, and the
+   point of a shelf is that each book is finishable on its own. */
 function albumSwap(wantId){
   audio();
-  const m = mine(), dupes = albumDupes();
+  const p = albumParse(wantId);
+  if(!p) return;
+  const dupes = albumDupes(p.book);
   if(dupes.length < 3) return toast("You need three doubles.", true);
   if(albumHas(wantId)) return toast("You already have him.", true);
+  const b = albumBookState(p.book);
   for(let i = 0; i < 3; i++){
     const id = dupes[i];
-    m.album.have[id] -= 1;
-    if(m.album.have[id] <= 0) delete m.album.have[id];
+    b.have[id] -= 1;
+    if(b.have[id] <= 0) delete b.have[id];
   }
   albumStick(wantId);
-  const side = albumSides().filter(x => wantId.indexOf(((albumBook()[x] || {}).slug || x) + "/") === 0)[0];
-  if(side) albumCheckPage(side);
+  const side = albumSideOf(p.book, p.slug);
+  if(side) albumCheckPage(p.book, side);
   mineSave();
   render();
 }
@@ -11213,10 +11678,19 @@ function h2Bench(w){
      eleven and nobody to bring on, which is a real cost and the only reason
      anybody would finish a page. The 2006 pool only: the finals have no bench
      by design and a club squad has nothing to collect. */
-  /* THE DUGOUT ONLY, and the 2006 pool only. One on One is the Friday-night
+  /* THE DUGOUT ONLY, and the 2006 book only. One on One is the Friday-night
      product and it is not where progression belongs; the finals have no bench
-     by design; a club squad has nothing to collect. */
-  if(h2Tactical() && h2PoolId() === ALBUM_POOL && !albumFoil(h2Team(w))) list = [];
+     by design; a club squad has nothing to collect.
+
+     STILL THE 2006 BOOK, DELIBERATELY, now that there are fifteen of them.
+     Reading it as "whichever book this pool is" is the tidy generalisation and
+     it would walk up to everybody who plays The Dugout on the 2010 pool today
+     and take their bench away, because nobody has a 2010 page finished and
+     nobody knew they needed one. Widening what a foil is worth is a section 6
+     decision about earning, not a side effect of giving the album a shelf.
+     Its own constant, spelled out, sitting next to DAILY_BOOK's: the same
+     value for an unrelated reason, and one of the two will move first. */
+  if(h2Tactical() && h2PoolId() === DUGOUT_BOOK && !albumFoil(DUGOUT_BOOK, h2Team(w))) list = [];
   return list.map((p, i) => ({p: p, i: i})).filter(b => (((H.benchUsed && H.benchUsed[w]) || []).indexOf(b.i) === -1));
 }
 /* Can this side bring a man on for slot i right now? Not for a man who has
@@ -12314,9 +12788,12 @@ function h2Render(st){
           '. <button class="h2view" style="display:inline;margin:0" onclick="h2ClearTeams()">start again</button></div>'
         : '<div class="h2hintline">' + h2Kind(S.mode).blurb + '</div>') +
       /* YOUR XI PLAYS ANYBODY, and there is one of it, because there is one
-         album on the phone. It only appears on the pool the album is a book
-         of, since the men in it come from that book. */
-      ((h2PoolId() === ALBUM_POOL && dreamReady() && !H.teams.includes(DREAM_SIDE))
+         shelf on the phone. It turns up on the pool of the book you are
+         collecting, which is where somebody who has been opening packs is
+         standing anyway. The eleven itself is drawn from every book you own a
+         sticker in, so the button following the shelf is a matter of where it
+         is offered and never of who is eligible. */
+      ((h2PoolId() === albumCollecting() && dreamReady() && !H.teams.includes(DREAM_SIDE))
         ? '<button class="h2teambtn dreambtn" style="--kc:' + DREAM_KIT + '" onclick="h2PickTeam(' +
           JSON.stringify(DREAM_SIDE).replace(/"/g, "&quot;") + ')">' +
           '<span class="sw" style="background:' + DREAM_KIT + '"></span>' +
@@ -13067,7 +13544,7 @@ function render(){
      it again in the one branch that puts the canvas back, and there are no call
      sites to chase and none to forget. A requestAnimationFrame left running
      through a ninety minute match is a phone battery spent on nothing. */
-  hsStop();
+  BN.stop();
   renderBug(); mpRenderBar(); save();
   /* THE COMPUTER PLAYS AFTER THE SCREEN IS DRAWN, so the human sees what it is
      responding to. It is scheduled rather than run, and every scheduled action
@@ -13109,7 +13586,7 @@ function render(){
        this browser, a context that comes back null) leaves a menu with a blank
        square in the corner, which is survivable, where an exception out of
        render() is not. */
-    try{ hsStart(); }catch(e){}
+    try{ BN.start(); }catch(e){}
     return;
   }
 
@@ -14199,14 +14676,20 @@ function dailyCardHTML(){
               d.reached === 0 ? "Lost on the first pass." : "You got to " + DAILY[d.reached - 1].to + ".")
     : "You are " + (d.rung + 1) + " of " + DAILY.length + " up the pitch.";
   const A = mine().album;
-  const c = albumCount();
+  /* THE FRONT DOOR COUNTS THE BOOK YOU ARE COLLECTING, not the shelf. "412 of
+     9,717" is a number nobody can feel; "412 of 736" is a book somebody is
+     most of the way through, and the shelf is one tap away for the rest. */
+  const cbook = albumCollecting();
+  const c = albumCount(cbook);
   const albumRow = c.all ? '<button class="mm-ghost" onclick="openAlbum()">' +
-    'The album \u00b7 ' + c.have + ' of ' + c.all +
+    'The album \u00b7 ' +
+    esc((POOLS[cbook] || {}).short || (POOLS[cbook] || {}).label || cbook) +
+    ' \u00b7 ' + c.have + ' of ' + c.all +
     (A.packs > 0 ? ' \u00b7 ' + A.packs + ' pack' + (A.packs === 1 ? "" : "s") + ' to open' : "") +
     '</button>' : "";
-  /* YOUR XI, once there are eleven men to choose from. Before that it is a
-     button that leads to an empty room. */
-  const own = albumBook() ? albumCount().have : 0;
+  /* YOUR XI, once there are eleven men to choose from, counted across every
+     book: the eleven can be built out of any of them. */
+  const own = albumOwnedTotal();
   const dreamRow = own >= 11 ? '<button class="mm-ghost" onclick="openDream()">' +
     'Your XI \u00b7 ' + (dreamOk() ? 'ready' : dreamPicked().length + ' of 11') + '</button>' : "";
   return '<div class="mm-sect"><button class="mm-daily' + (done ? " done" : "") +
@@ -14240,7 +14723,7 @@ function cupRow_(){
 /* ---------- the screens ---------- */
 /* YOUR XI: the eleven you have filled, and every man you own under them. */
 function renderDream(st){
-  if(!albumBook()){
+  if(!albumBooks().length){
     st.innerHTML = '<div class="h2big">The squads are still loading.</div>' +
       '<button class="bigbtn ghost" onclick="closeDream()">Back</button>';
     return;
@@ -14271,7 +14754,7 @@ function renderDream(st){
           if(!m) return "";
           return '<button class="alslot want" onclick="dreamPick(' +
             JSON.stringify(id).replace(/"/g, "&quot;") + ')">' +
-            albumStickerHTML(m.from, m, true, false) + '</button>';
+            albumStickerHTML(m.book, m.from, m, true, false) + '</button>';
         }).join("") + '</div>'
       : '') +
     (picked.length ? '<button class="bigbtn ghost tinybtn" onclick="dreamClear()">Start again</button>' : '') +
@@ -14283,7 +14766,7 @@ function renderDream(st){
       ? '<div class="alpage">' + list.map(m =>
           '<button class="alslot want' + (picked.indexOf(m.id) > -1 ? " in" : "") +
           '" onclick="dreamPick(' + JSON.stringify(m.id).replace(/"/g, "&quot;") + ')">' +
-          albumStickerHTML(m.from, m, true, false) + '</button>').join("") + '</div>'
+          albumStickerHTML(m.book, m.from, m, true, false) + '</button>').join("") + '</div>'
       : '<div class="h2hintline">Open a pack and the men you get turn up here.</div>') +
     '<button class="bigbtn ghost" onclick="closeDream()">Back</button>';
 }
@@ -14507,7 +14990,7 @@ function dailyManHTML(d, big){
     '<div class="dmlab">' + (won ? "Yours" : d && d.done ? "He goes back in the box"
       : "Playing for") + '</div>' +
     '<div class="dmst">' +
-      albumStickerHTML(card.side, card.m, true, false) +
+      albumStickerHTML(card.book, card.side, card.m, true, false) +
       '<div class="dmveil">' + DAILY.map((_, i) =>
         '<i class="' + (i < peel ? "off" : "") + '" style="--s:' + i + '"></i>').join("") +
       '</div>' +
@@ -14519,82 +15002,135 @@ function dailyManHTML(d, big){
     '</div>' +
   '</div>';
 }
-function albumStickerHTML(side, m, has, dupe){
-  const t = (albumBook() || {})[side] || {};
+function albumStickerHTML(book, side, m, has, dupe){
+  const t = (albumBook(book) || {})[side] || {};
   const kit = t.kit || "#888";
   return '<div class="alst' + (has ? "" : " empty") + (dupe ? " dupe" : "") +
-    (albumFoil(side) && has ? " foil" : "") + '" style="--kit:' + kit + ';--kink:' + kitInk(kit) + '">' +
+    (albumFoil(book, side) && has ? " foil" : "") + '" style="--kit:' + kit + ';--kink:' + kitInk(kit) + '">' +
     '<div class="xshirt">' + (m.no || "") + '</div>' +
     '<div class="alsn">' + esc(m.n || "") + '</div>' +
     '<div class="alsp">' + esc(m.pos || "") + '</div>' +
   '</div>';
 }
+/* THE SPINE STRIP, which is as much of ALBUM-PLAN's shelf as belongs to this
+   stage. The shelf proper is section 5 and it is a drawing: covers, a year in
+   big type, a progress bar, a yellow spine on the one you are collecting. This
+   is the plumbing under it, and it exists now because state nobody can reach
+   is state nobody can test: album.collecting is not real until there is a way
+   to change it and see that the packs followed.
+
+   It borrows h2poolrow and h2poolb off the pool picker rather than inventing
+   classes, because it is the same question asked in the same shape, and
+   because a class written here would have to be unwritten when the covers
+   arrive. */
+function albumShelfHTML(now){
+  const ids = albumBooks();
+  if(ids.length < 2) return "";
+  const by = {}, order = [];
+  for(const id of ids){
+    const g = POOLS[id].group || "";
+    if(!by[g]){ by[g] = []; order.push(g); }
+    by[g].push(id);
+  }
+  for(const g of order) if(by[g].every(id => POOLS[id].short))
+    by[g].sort((a, b) => POOLS[a].short < POOLS[b].short ? -1 : 1);
+  const one = g => '<div class="h2poolrow">' + by[g].map(id =>
+    '<button class="h2poolb' + (id === now ? " on" : "") +
+    '" onclick="openAlbum(' + JSON.stringify(id).replace(/"/g, "&quot;") + ')">' +
+    esc((by[g].length > 1 && POOLS[id].short) || POOLS[id].label) + '</button>').join("") + '</div>';
+  return order.map(g => (g && by[g].length > 1
+    ? '<div class="h2poolg">' + esc(g) + '</div>' + one(g)
+    : one(g))).join("");
+}
   /* ---------- THE ALBUM ----------
-     Thirty-two pages, twenty-three slots each. A missing man is drawn and then
-     emptied rather than left out, because the gap with his number still in it
-     is the entire feeling. */
+     One book at a time, one page a country, twenty-three slots a page. A
+     missing man is drawn and then emptied rather than left out, because the
+     gap with his number still in it is the entire feeling.
+
+     WHICH BOOK IS ON THE TABLE IS NOT WHICH BOOK YOU ARE COLLECTING. You can
+     open any of them and look; the packs keep coming from the one you chose
+     until you say otherwise, which is what the button under the shelf strip is
+     for. Conflating the two would mean that idly flicking through Euro 2000
+     quietly moved your collection there. */
 function renderAlbum(st){
-    const book = albumBook();
+    const bid = (ALBUM_VIEW.book && albumIsBook(ALBUM_VIEW.book)) ? ALBUM_VIEW.book : albumCollecting();
+    const book = albumBook(bid);
     if(!book){ st.innerHTML = '<div class="h2big">The squads are still loading.</div>' +
       '<button class="bigbtn ghost" onclick="closeAlbum()">Back</button>'; return; }
     const A = mine().album;
+    const label = (POOLS[bid] || {}).label || bid;
 
     /* just opened a pack */
     if(ALBUM_VIEW.open){
       st.innerHTML =
         '<div class="kick">' + ico('trophy') + 'Three stickers</div>' +
         '<div class="alpack">' + ALBUM_VIEW.open.map(g =>
-          albumStickerHTML(g.side, g.m, true, !g.isNew)).join("") + '</div>' +
+          albumStickerHTML(g.book || bid, g.side, g.m, true, !g.isNew)).join("") + '</div>' +
         '<div class="h2hintline">' +
           (ALBUM_VIEW.open.filter(g => g.isNew).length
             ? ALBUM_VIEW.open.filter(g => g.isNew).length + " new."
             : "All doubles. It happens.") +
           ' You have ' + A.packs + ' pack' + (A.packs === 1 ? "" : "s") + ' left.</div>' +
         (A.packs > 0 ? '<button class="bigbtn" onclick="albumOpen()">Open another</button>' : "") +
-        '<button class="bigbtn ghost" onclick="openAlbum()">The album</button>';
+        '<button class="bigbtn ghost" onclick="openAlbum(' +
+          JSON.stringify(bid).replace(/"/g, "&quot;") + ')">The album</button>';
       return;
     }
 
     /* one country's page */
     if(ALBUM_VIEW.side){
-      const side = ALBUM_VIEW.side, men = albumMen(side);
-      const got = men.filter(m => albumHas(albumId(side, m))).length;
-      const dupes = albumDupes().length;
+      const side = ALBUM_VIEW.side, men = albumMen(bid, side);
+      const got = men.filter(m => albumHas(albumId(bid, side, m))).length;
+      const dupes = albumDupes(bid).length;
       st.innerHTML =
-        '<div class="kick">' + ico('users') + esc(side) +
-          (albumFoil(side) ? ' \u00b7 complete' : '') + '</div>' +
+        '<div class="kick">' + ico('users') + esc(side) + ' · ' + esc(label) +
+          (albumFoil(bid, side) ? ' · complete' : '') + '</div>' +
         '<div class="h2big">' + got + ' of ' + men.length + '</div>' +
-        (albumFoil(side)
+        (albumFoil(bid, side)
           ? '<div class="h2hintline" style="margin-top:0">Their bench is yours in The Dugout.</div>'
           : '<div class="h2hintline" style="margin-top:0">Finish the page and their bench is yours in The Dugout. ' +
             (dupes >= 3 ? 'Tap a gap to swap three doubles for him.' : 'You need three doubles to swap.') + '</div>') +
         '<div class="alpage">' + men.map(m => {
-          const id = albumId(side, m), has = albumHas(id);
+          const id = albumId(bid, side, m), has = albumHas(id);
           const can = !has && dupes >= 3;
           return (can ? '<button class="alslot want" onclick="albumSwapTo(' +
                         JSON.stringify(id).replace(/"/g, "&quot;") + ')">' : '<div class="alslot' + (has ? "" : " gap") + '">') +
-                 albumStickerHTML(side, m, has, false) +
+                 albumStickerHTML(bid, side, m, has, false) +
                  (can ? '</button>' : '</div>');
         }).join("") + '</div>' +
-        '<button class="bigbtn ghost" onclick="openAlbum()">All the pages</button>';
+        '<button class="bigbtn ghost" onclick="openAlbum(' +
+          JSON.stringify(bid).replace(/"/g, "&quot;") + ')">All the pages</button>';
       return;
     }
 
-    /* the whole album */
-    const c = albumCount();
+    /* the whole book */
+    const c = albumCount(bid);
+    const collecting = bid === albumCollecting();
     st.innerHTML =
-      '<div class="kick">' + ico('trophy') + 'The album \u00b7 2006</div>' +
+      '<div class="kick">' + ico('trophy') + 'The album · ' + esc(label) +
+        (albumBookIsDone(bid) ? ' · complete' : '') + '</div>' +
       '<div class="h2big">' + c.have + ' of ' + c.all + '</div>' +
-      (A.packs > 0
-        ? '<button class="bigbtn" onclick="albumOpen()">Open a pack \u00b7 ' + A.packs + ' waiting</button>'
-        : '<div class="h2hintline" style="margin-top:0">Packs come from playing. One for the daily, one for winning, ' +
-          'and three of a country the first time you play as them.</div>') +
-      '<div class="alpages">' + albumSides().map(side => {
-        const men = albumMen(side);
-        const got = men.filter(m => albumHas(albumId(side, m))).length;
+      albumShelfHTML(bid) +
+      (collecting
+        ? (A.packs > 0
+            ? '<button class="bigbtn" onclick="albumOpen()">Open a pack · ' + A.packs + ' waiting</button>'
+            : '<div class="h2hintline" style="margin-top:0">Packs come from playing. One for the daily, one for winning, ' +
+              'and three of a country the first time you play as them.</div>')
+        /* THE SWITCH IS A DELIBERATE TAP AND IT SAYS WHAT IT COSTS: nothing.
+           Every book keeps what is in it, which is the whole promise of a
+           shelf, so the button can afford to be plain about it. */
+        : '<button class="bigbtn" onclick="albumSetBook(' +
+            JSON.stringify(bid).replace(/"/g, "&quot;") + ')">Collect this one</button>' +
+          '<div class="h2hintline" style="margin-top:0">Your packs still come from ' +
+            esc((POOLS[albumCollecting()] || {}).label || albumCollecting()) +
+            '. Switching keeps everything in both.</div>') +
+      '<div class="alpages">' + albumSides(bid).map(side => {
+        const men = albumMen(bid, side);
+        const got = men.filter(m => albumHas(albumId(bid, side, m))).length;
         const t = book[side];
-        return '<button class="alpg' + (albumFoil(side) ? " foil" : "") +
+        return '<button class="alpg' + (albumFoil(bid, side) ? " foil" : "") +
           '" style="--kc:' + (t.kit || "#888") + '" onclick="openAlbum(' +
+          JSON.stringify(bid).replace(/"/g, "&quot;") + ', ' +
           JSON.stringify(side).replace(/"/g, "&quot;") + ')">' +
           '<span class="alpn">' + esc(side) + '</span>' +
           '<span class="alpc">' + got + '/' + men.length + '</span></button>';
@@ -14603,51 +15139,34 @@ function renderAlbum(st){
     return;
 }
 
-/* ======================== THE KEEPIE-UPPIE HERO ========================
-   A sixteen-bit number 10 juggling a ball, standing next to the wordmark in
-   the menu head. One letter per pixel, about 5KB of text sitting in this file
-   next to everything else: no image, no request, nothing for sw-clubs.js to
-   precache, and no photograph of anybody, which is the other half of why it is
-   here. ASSET-LICENSING.md lists a recognisable face on the app's most
-   prominent surface as the thing that undermines the informational footing,
-   and portretrecht attaches to a portrait, not to a shirt number and a haircut.
+/* ======================== THE BANNER ========================
+   Goal on the left, the wordmark in the middle, a number 10 on the right. He
+   keeps it up between both feet, then chips it in a bow over the type, off the
+   crossbar, and it drops back onto the same boot. Drawn in
+   planning/BALL2-BANNER.md, which supersedes the four-pose solo sprite.
 
-   THE SPLIT IS THE WHOLE TRICK. The man steps through four poses and the ball
-   runs a real parabola. A baked sprite sheet with steps(4) would animate the
-   man fine and lock the ball to four heights, which kills it, so this draws to
-   a canvas: four frames stamped once, then a handful of drawImage calls a
-   frame, cheaper than the gold shimmer already running on the title.
+   THE BOW IS WHY THE BANNER IS TALL. A ball arcing over a wordmark needs
+   somewhere to arc to, so this is 246 tall rather than the 150 a plain banner
+   would be. There is no short version of that idea.
 
-   THE HAIR IS THE ENTIRE LIKENESS. With no face on the sprite the silhouette
-   has to carry it, so the hair frames the face, pinches in at the jaw and
-   spills onto the shoulders over the collar. Changing him is a palette swap
-   and never a redraw: y and Y are the kit, w and W the shorts, h and H the
-   hair, and rows 20 to 24 of HS_BASE at cols 12 to 18 are the number. */
-const HS_PAL = {
-  ".": null,
-  K: "#16130f",   // outline
-  h: "#2b1f15",   // hair. Dark BROWN, not black: black merges with the outline
-                  // and the whole head turns into one unreadable slab.
-  H: "#46341f",   // hair highlight
-  s: "#b07648",   // skin
-  S: "#8d5b36",   // skin shade
-  y: "#f7dc35",   // shirt
-  Y: "#c9a82a",   // sleeve panel
-  w: "#ffffff",   // shorts, sock band
-  W: "#d5d5d0",   // white shade
-  b: "#2a2620",   // boot. Lifted off pure black so it survives the dark pitch.
-  B: "#5a5a66",   // boot highlight
-  g: "#ffffff",   // ball
-  G: "#bcc2cb",   // ball shade
-};
-/* HS_BASE is the head, torso and arms, rows 0 to 33. HS_LEGS holds the four
-   leg poses and is drawn from row 34 down. Splitting them that way is why the
-   bob costs nothing: the base shifts one pixel on two of the four frames and
-   the legs do not move with it, which is what sells the weight shift. In every
-   pose the standing leg holds cols 9 to 14 so the hips never drift, and the
-   clear gap to the juggling leg is what stops the raised boot reading as part
-   of the other one. */
-const HS_BASE = [
+   THE CANVAS SITS ON TOP OF THE TYPE, not behind it. The ball's whole job is to
+   cross in front of the letters, and a canvas underneath them would have it
+   disappear at exactly the moment it is doing the one thing it is there for.
+
+   Everything lives in this closure. The spec declares fifty-one names at the
+   top level, among them W, line, ball, goal and draw, which is fine on a page
+   of its own and is a collision nobody would enjoy finding in here. */
+const BN = (function(){
+const PAL={".":null,"K":"#16130f","w":"#ffffff","W":"#d5d5d0","b":"#2a2620","B":"#5a5a66","g":"#ffffff","G":"#bcc2cb","s":"#b07648","S":"#8d5b36","h":"#2b1f15","H":"#46341f","y":"#f7dc35","Y":"#c9a82a","c":"#f7dc35"};
+const BASE=[
+"................................",
+"................................",
+"................................",
+"................................",
+"................................",
+"................................",
+"................................",
+"................................",
 "..........KKKKKKKKKKKK..........",
 ".........KhhhhhhhhhhhhK.........",
 "........KhhhhhhhhhhhhhhK........",
@@ -14664,252 +15183,460 @@ const HS_BASE = [
 "........KhhhhhssssShhhhK........",
 "........KhhhhhhhhhhhhhhK........",
 "....KKKKKKKKKKKKKKKKKKKKKKKK....",
-"....KYYYYhhhhhyyyyhhhhhYYYYK....",
-"....KYYYYhhhyyyyyyyyhhhYYYYK....",
+"....KYYhhhhhhhhhhhhhhhhhhYYK....",
+"....KYYYYhhhhhhhhhhhhhhYYYYK....",
 "....KYYYYyyyyyyyyyyyyyyYYYYK....",
 "....KYYYYyyyyyyyyyyyyyyYYYYK....",
-"....KYYYYyyyyKyyKKKyyyyYYYYK....",
-"....KYYYYyyyKKyyKyKyyyyYYYYK....",
-"....KYYYYyyyyKyyKyKyyyyYYYYK....",
-"....KYYYYyyyyKyyKyKyyyyYYYYK....",
-"....KYYYYyyyKKKyKKKyyyyYYYYK....",
+"....KYYYYyyyyyyyyyyyyyyYYYYK....",
+"....KYYYYyyyyyyyyyyyyyyYYYYK....",
+"....KYYYYyyyyyyyyyyyyyyYYYYK....",
+"....KYYYYyyyyyyyyyyyyyyYYYYK....",
+"....KYYYYyyyyyyyyyyyyyyYYYYK....",
 "....KKKKKyyyyyyyyyyyyyyKKKKK....",
 "....KssssKyyyyyyyyyyyyKssssK....",
 "....KssssKyyyyyyyyyyyyKssssK....",
 "....KssssKyyyyyyyyyyyyKssssK....",
-"....KssssKyyyyyyyyyyyyKssssK....",
-"....KssssKyyyyyyyyyyyyKssssK....",
-"....KssssKyyyyyyyyyyyyKssssK....",
-"....KSsssKyyyyyyyyyyyyKsssSK....",
-"....KKKKKKKKKKKKKKKKKKKKKKKK...."];
-const HS_LEGS = [
-// 0: both planted
-["........KKKKKKKKKKKKKKKK........",
- "........KwwwwwwwwwwwwwwK........",
- "........KwwwwwwKKwwwwwwK........",
- "........KwwwwwwKKwwwwwwK........",
- "........KwwwwwwKKwwwwwwK........",
- "........KwwwWWWKKWWWwwwK........",
- "........KKKKKKKKKKKKKKKK........",
- ".........KssssK..KssssK.........",
- ".........KssssK..KssssK.........",
- ".........KssssK..KssssK.........",
- ".........KyyyyK..KyyyyK.........",
- ".........KyyyyK..KyyyyK.........",
- ".........KwwwwK..KwwwwK.........",
- ".........KyyyyK..KyyyyK.........",
- ".........KyyyyK..KyyyyK.........",
- "........KbbbbbK..KbbbbbK........",
- "........KbBBbbK..KbBBbbK........",
- "........KbbbbbK..KbbbbbK........",
- "........KKKKKKK..KKKKKKK........"],
-// 1: knee coming up, shin hanging under it
-["........KKKKKKKKKKKKKKKK........",
- "........KwwwwwwwwwwwwwwK........",
- "........KwwwwwwKKwwwwwwK........",
- "........KwwwwwwKKwwwwwwK........",
- "........KwwwwwwKKwwwwwwK........",
- "........KwwwWWWKKWWWwwwK........",
- "........KKKKKKKKKKKKKKKK........",
- ".........KssssK..KsssssK........",
- ".........KssssK..KsssssssK......",
- ".........KssssK..KKKKKsssssK....",
- ".........KyyyyK.......KyyyyK....",
- ".........KyyyyK.......KyyyyK....",
- ".........KwwwwK.......KwwwwK....",
- ".........KyyyyK.......KyyyyK....",
- ".........KyyyyK......KbbbbbbK...",
- "........KbbbbbK......KbBBbbbK...",
- "........KbBBbbK......KbbbbbbK...",
- "........KbbbbbK......KKKKKKKK...",
- "........KKKKKKK................."],
-// 2: thigh up flat, knee on the end of it, shin straight down. The touch.
-["........KKKKKKKKKKKKKKKK........",
- "........KwwwwwwwwwwwwwwK........",
- "........KwwwwwwKKwwwwwwK........",
- "........KwwwwwwKKwwwwwwK........",
- "........KwwwwwwKKwwwwwwwwwK.....",
- "........KwwwWWWKKwwssssssssK....",
- "........KKKKKKKKKKssssssssssK...",
- ".........KssssK...KKKKKsssssK...",
- ".........KssssK........KssssK...",
- ".........KssssK........KssssK...",
- ".........KyyyyK........KyyyyK...",
- ".........KyyyyK........KyyyyK...",
- ".........KwwwwK........KwwwwK...",
- ".........KyyyyK........KyyyyK...",
- ".........KyyyyK.......KbbbbbbK..",
- "........KbbbbbK.......KbBBbbbK..",
- "........KbBBbbK.......KbbbbbbK..",
- "........KbbbbbK.......KKKKKKKK..",
- "........KKKKKKK................."],
-// 3: the flick. Shin snaps up past the knee, toe pointed.
-["........KKKKKKKKKKKKKKKK........",
- "........KwwwwwwwwwwwwwwK........",
- "........KwwwwwwKKwwwwwwK........",
- "........KwwwwwwKKwwwwwwK........",
- "........KwwwwwwKKwwwwwwwwK......",
- "........KwwwWWWKKwwsssssssK.....",
- "........KKKKKKKKKKsssssssssK....",
- ".........KssssK..KKKyyyyyyyK....",
- ".........KssssK.KbbbbyyyyyyyK...",
- ".........KssssK.KbBBbKKKKKKKK...",
- ".........KyyyyK.KbbbbK..........",
- ".........KyyyyK.KKKKKK..........",
- ".........KwwwwK.................",
- ".........KyyyyK.................",
- ".........KyyyyK.................",
- "........KbbbbbK.................",
- "........KbBBbbK.................",
- "........KbbbbbK.................",
- "........KKKKKKK................."]];
-/* Two rotations, alternated, so the ball visibly spins rather than floating. */
-const HS_BALL = [
-["..KKKKK..",".KgggggK.","KggKKKggK","KgKKKKKgK","KggKKKggK","KgggggggK","KggggggGK",".KgGGGGK.","..KKKKK.."],
-["..KKKKK..",".KgggggK.","KgKKgggGK","KKKKggggK","KgKKgggGK","KgggggGGK","KggggGGGK",".KgGGGGK.","..KKKKK.."]];
+"....KssssKKKKKKKKKKKKKKssssK....",
+"....KssssK............KssssK....",
+"....KssssK............KssssK....",
+"....KSsssK............KsssSK....",
+"....KKKKKK............KKKKKK...."];
+const LEGS=[
+[
+"........KKKKKKKKKKKKKKKK........",
+"........KwwwwwwwwwwwwwwK........",
+"........KwwwwwwKKwwwwwwK........",
+"........KwwwwwwKKwwwwwwK........",
+"........KwwwwwwKKwwwwwwK........",
+"........KwwwWWWKKWWWwwwK........",
+"........KKKKKKKKKKKKKKKK........",
+".........KssssK..KssssK.........",
+".........KssssK..KssssK.........",
+".........KssssK..KssssK.........",
+".........KccccK..KccccK.........",
+".........KccccK..KccccK.........",
+".........KwwwwK..KwwwwK.........",
+".........KccccK..KccccK.........",
+".........KccccK..KccccK.........",
+"........KbbbbbK..KbbbbbK........",
+"........KbBBbbK..KbBBbbK........",
+"........KbbbbbK..KbbbbbK........",
+"........KKKKKKK..KKKKKKK........"],
+[
+"........KKKKKKKKKKKKKKKK........",
+"........KwwwwwwwwwwwwwwK........",
+"........KwwwwwwKKwwwwwwK........",
+"........KwwwwwwKKwwwwwwK........",
+"........KwwwwwwKKwwwwwwK........",
+"........KwwwWWWKKWWWwwwK........",
+"........KKKKKKKKKKKKKKKK........",
+".........KssssK..KssssK.........",
+".........KssssK..KssssK.........",
+".........KssssK..KssssK.........",
+".........KccccK..KccccK.........",
+".........KccccK..KccccK.........",
+".........KwwwwK..KwwwwK.........",
+".........KccccK..KccccK.........",
+".........KccccK.KbbbbbbK........",
+"........KbbbbbK.KbBBbbbK........",
+"........KbBBbbK.KbbbbbbK........",
+"........KbbbbbK.KKKKKKKK........",
+"........KKKKKKK................."],
+[
+"........KKKKKKKKKKKKKKKK........",
+"........KwwwwwwwwwwwwwwK........",
+"........KwwwwwwKKwwwwwwK........",
+"........KwwwwwwKKwwwwwwK........",
+"........KwwwwwwKKwwwwwwK........",
+"........KwwwWWWKKWWWwwwK........",
+"........KKKKKKKKKKKKKKKK........",
+".........KssssK..KsssssK........",
+".........KssssK..KsssssssK......",
+".........KssssK..KKKKKsssssK....",
+".........KccccK.......KccccK....",
+".........KccccK.......KccccK....",
+".........KwwwwK.......KwwwwK....",
+".........KccccK.......KccccK....",
+".........KccccK......KbbbbbbK...",
+"........KbbbbbK......KbBBbbbK...",
+"........KbBBbbK......KbbbbbbK...",
+"........KbbbbbK......KKKKKKKK...",
+"........KKKKKKK................."],
+[
+"........KKKKKKKKKKKKKKKK........",
+"........KwwwwwwwwwwwwwwK........",
+"........KwwwwwwKKwwwwwwK........",
+"........KwwwwwwKKwwwwwwK........",
+"........KwwwwwwKKwwwwwwwK.......",
+"........KwwwWWWKKwwsssssK.......",
+"........KKKKKKKKKKssssssssK.....",
+".........KssssK...KKKKssssK.....",
+".........KssssK.......KssssK....",
+".........KssssK.......KssssK....",
+".........KccccK.......KccccK....",
+".........KccccK.......KccccK....",
+".........KwwwwK.......KwwwwK....",
+".........KccccK.......KccccK....",
+".........KccccK......KbbbbbbK...",
+"........KbbbbbK......KbBBbbbK...",
+"........KbBBbbK......KbbbbbbK...",
+"........KbbbbbK......KKKKKKKK...",
+"........KKKKKKK................."],
+[
+"........KKKKKKKKKKKKKKKK........",
+"........KwwwwwwwwwwwwwwK........",
+"........KwwwwwwKKwwwwwwK........",
+"........KwwwwwwKKwwwwwwK........",
+"........KwwwwwwKKwwwwwwwwwK.....",
+"........KwwwWWWKKwwssssssssK....",
+"........KKKKKKKKKKssssssssssK...",
+".........KssssK...KKKKKsssssK...",
+".........KssssK........KssssK...",
+".........KssssK........KssssK...",
+".........KccccK........KccccK...",
+".........KccccK........KccccK...",
+".........KwwwwK........KwwwwK...",
+".........KccccK........KccccK...",
+".........KccccK.......KbbbbbbK..",
+"........KbbbbbK.......KbBBbbbK..",
+"........KbBBbbK.......KbbbbbbK..",
+"........KbbbbbK.......KKKKKKKK..",
+"........KKKKKKK................."],
+[
+"........KKKKKKKKKKKKKKKK........",
+"........KwwwwwwwwwwwwwwK........",
+"........KwwwwwwKKwwwwwwK........",
+"........KwwwwwwKKwwwwwwK........",
+"........KwwwwwwKKwwwwwwwwwK.....",
+"........KwwwWWWKKwwssssssssK....",
+"........KKKKKKKKKKssssssssssK...",
+".........KssssK...KKKKKsssssK...",
+".........KssssK........KccccK...",
+".........KssssK........KccccK...",
+".........KccccK........KccccK...",
+".........KccccK.......KbbbbbbK..",
+".........KwwwwK.......KbBBbbbK..",
+".........KccccK.......KbbbbbbK..",
+".........KccccK.......KKKKKKKK..",
+"........KbbbbbK.................",
+"........KbBBbbK.................",
+"........KbbbbbK.................",
+"........KKKKKKK................."],
+[
+"........KKKKKKKKKKKKKKKK........",
+"........KwwwwwwwwwwwwwwK........",
+"........KwwwwwwKKwwwwwwK........",
+"........KwwwwwwKKwwwwwwK........",
+"........KwwwwwwKKwwwwwwwwwK.....",
+"........KwwwWWWKKwwssssssssK....",
+"........KKKKKKKKKKssssssssssK...",
+".........KssssK...KKKcccccccK...",
+".........KssssK..KbbbbcccccccK..",
+".........KssssK..KbBBbKKKKKKKK..",
+".........KccccK..KbbbbK.........",
+".........KccccK..KKKKKK.........",
+".........KwwwwK.................",
+".........KccccK.................",
+".........KccccK.................",
+"........KbbbbbK.................",
+"........KbBBbbK.................",
+"........KbbbbbK.................",
+"........KKKKKKK................."],
+[
+"........KKKKKKKKKKKKKKKK........",
+"........KwwwwwwwwwwwwwwK........",
+"........KwwwwwwKKwwwwwwK........",
+"........KwwwwwwKKwwwwwwK........",
+"........KwwwwwwKKwwwwwwK........",
+"........KwwwWWWKKWWWwwwK........",
+"........KKKKKKKKKKKKKKKK........",
+".........KssssK..KsssssK........",
+".........KssssK..KssssssK.......",
+".........KssssK..KKKsssssK......",
+".........KccccK.....KccccK......",
+".........KccccK.....KccccK......",
+".........KwwwwK.....KwwwwK......",
+".........KccccK.....KccccK......",
+".........KccccK....KbbbbbbK.....",
+"........KbbbbbK....KbBBbbbK.....",
+"........KbBBbbK....KbbbbbbK.....",
+"........KbbbbbK....KKKKKKKK.....",
+"........KKKKKKK................."]];
+const BALL=[
+[
+"..KKKKK..",
+".KgggggK.",
+"KggKKKggK",
+"KgKKKKKgK",
+"KggKKKggK",
+"KgggggggK",
+"KggggggGK",
+".KgGGGGK.",
+"..KKKKK.."],
+[
+"..KKKKK..",
+".KgggggK.",
+"KgKKgggGK",
+"KKKKggggK",
+"KgKKgggGK",
+"KgggggGGK",
+"KggggGGGK",
+".KgGGGGK.",
+"..KKKKK.."]];
+/* flattened for the instant it is against the bar */
+const SQUASH=[".KKKKKKK.","KgggggggK","KgKKKKKgK","KggKKKggK","KgggggGGK",".KgGGGGK.","..KKKKK.."];
+const NUMBER=[".K..KKK","KK..K.K",".K..K.K",".K..K.K","KKK.KKK"];
+const NUM_X=12, NUM_X_FLIP=13, NUM_Y=28;
+const W=32, H=61, LEGTOP=42, BOB=[0,0,-1,-1,-1,-1,0,0];
 
-const HS_W = 32, HS_H = 53, HS_LEGTOP = 34;
-/* Headroom above the sprite for the ball's arc, so the canvas is taller than
-   the man, and one spare column beside him: the ball drifts out to col 24 at
-   the apex and is 9 wide, so 33 columns are used and 34 is the round number. */
-const HS_HR = 24, HS_CW = 34, HS_CH = HS_HR + HS_H;
-const HS_BOB = [0, -1, -1, 0];
-/* THE BOB NEEDED A SPARE ROW AT THE TOP. Two of the four frames lift the base
-   a pixel to sell the weight shift, and the baked frame was exactly HS_H tall,
-   so on those two fillRect drew the top row of the head at y -1 and the canvas
-   threw it away. The crown lost its black cap for 45% of the cycle, which at
-   94 touches a minute is a flicker you cannot unsee once you have seen it. One
-   row of pad fixes it, and the blit starts a row higher to give the row back,
-   so every other number below stays exactly what it was. */
-const HS_PAD = 1;
-/* Ball top at the instant of contact, measured in canvas rows. Not a guess:
-   the touch pose holds its raised boot with the top of it at canvas row 72,
-   the ball is 9 tall, and 72 minus 9 lands the bottom of the ball on the
-   laces. Move the boot in that grid and this has to move with it. */
-const HS_FOOT = HS_HR + 39;
+const CW=200, CH=82, HR=21, PX=3, GROUND=80;
+/* WHICH SIDE THE NEAR POST IS ON, and the only line you touch to turn the
+   goal round. With it on the left the frame is big at the banner's edge and
+   tapers in toward the type, instead of the tall post crowding the wordmark.
+   Everything below derives, including the bar height the ball has to meet. */
+const NEAR_LEFT=true;
+const POST_L=8, POST_R=49;
+const NEAR_X=NEAR_LEFT?POST_L:POST_R, FAR_X=NEAR_LEFT?POST_R:POST_L;
+const PWN=4, PWF=3, BAR_TH=4;
+const NT=14, NB=78, FT=28, FB=68;
+/* Everything converges on ONE horizon or the illusion dies: the bar is above
+   eye level so it drops as it recedes, the goal line is below it so it rises,
+   and the far post is shorter by the same ratio as its distance from that line. */
+/* span goes negative when the near post is on the left, which both lerps
+   handle without caring */
+const span=NEAR_X-FAR_X;
+const topAt=x=>NT+(FT-NT)*(NEAR_X-x)/span;
+const botAt=x=>NB+(FB-NB)*(NEAR_X-x)/span;
+/* painted extent of the frame, the mouth between the posts' inner faces, and
+   the two faces the side netting runs between */
+const GL=Math.min(NEAR_X,FAR_X);
+const GR=Math.max(NEAR_X,FAR_X)+(NEAR_LEFT?PWF:PWN);
+const MOUTH_L=NEAR_LEFT?NEAR_X+PWN:FAR_X+PWF;
+const MOUTH_R=NEAR_LEFT?FAR_X:NEAR_X;
+const NEAR_IN=NEAR_LEFT?NEAR_X+PWN:NEAR_X;
+const FAR_IN=NEAR_LEFT?FAR_X:FAR_X+PWF;
+let MAN_X=164, BOW=6, PERIOD=3400;
+/* TWO FEET OUT OF ONE LEG SET. Every pose works the same leg, so the other
+   foot comes from mirroring the LEGS rows only, leaving the body where it is.
+   He is already drawn mirrored to face the goal, so the near-side foot is the
+   UNmirrored legs and the back foot is the mirrored ones. */
+const LEGS_B=LEGS.map(p=>p.map(r=>[...r].reverse().join("")));
+const FOOT=()=>({x:MAN_X+2, y:HR+47});      // near side, and the one he shoots with
+const FOOT_B=()=>({x:MAN_X+21, y:HR+47});   // back foot
+/* WHERE HE AIMS. The bar is not level, so its y has to be read off topAt at
+   that x rather than stored. Hardcode it and flipping the goal silently moves
+   the bar out from under the ball. */
+const BAR={x:26, y:Math.round(topAt(30))+BAR_TH};
 
-/* a character grid stamped onto its own 1:1 canvas */
-const hsGrid = (w, h, rows, oy) => {
-  const c = document.createElement("canvas"); c.width = w; c.height = h;
-  const x = c.getContext("2d");
-  rows.forEach((row, y) => { for(let i = 0; i < row.length; i++){
-    const col = HS_PAL[row[i]]; if(!col) continue;
-    x.fillStyle = col; x.fillRect(i, y + oy, 1, 1);
-  }});
-  return c;
-};
-/* BUILT ON FIRST PAINT, NEVER ON LOAD. These were two module-scope consts that
-   ran createElement("canvas").getContext("2d") the moment the file was
-   evaluated. The test harness runs this script in a Node vm behind a DOM thin
-   enough to get through render(), and there is no canvas anywhere in it, so
-   getContext threw on the load line and took 24 of the 26 test files with it
-   before a single function had been defined. Nothing here is wanted until a
-   canvas is actually on screen, so nothing here is built until one is.
-   Stamping 1,700 rects a frame at 60fps would be wasteful when the art never
-   changes, which is why they were pre-built in the first place; building them
-   on the first paint keeps all of that and costs one null check. */
-let hsFrames = null, hsBalls = null;
-const hsBuild = () => {
-  if(hsFrames && hsBalls) return;
-  const fh = HS_H + HS_PAD;
-  const frames = [0, 1, 2, 3].map(i => {
-    const c = document.createElement("canvas"); c.width = HS_W; c.height = fh;
-    const x = c.getContext("2d");
-    x.drawImage(hsGrid(HS_W, fh, HS_BASE, HS_PAD + HS_BOB[i]), 0, 0);
-    x.drawImage(hsGrid(HS_W, fh, HS_LEGS[i], HS_PAD + HS_LEGTOP), 0, 0);
-    return c;
-  });
-  hsBalls = HS_BALL.map(r => hsGrid(9, 9, r, 0));
-  hsFrames = frames;
-};
+const POSTC="#eef3f5", POSTM="#c3d0d4", POSTD="#8d9ea3",
+      NET="rgba(205,232,212,.15)", NETD="rgba(205,232,212,.09)", FLASH="#fff6c8",
+      SHADOW="rgba(5,16,10,.45)";
 
-/* Which pose is held at this point in the touch. Contact is u = 0, so the
-   flick opens the cycle and the touch closes it: both planted 40%, knee coming
-   up 30%, the touch 15%, the flick 15%. */
-const hsPose = u => u < .02 ? 2 : u < .17 ? 3 : u < .57 ? 0 : u < .87 ? 1 : 2;
-
-const hsPaint = (ctx, s, u) => {
-  const c = ctx.canvas;
-  ctx.setTransform(1, 0, 0, 1, 0, 0);
-  ctx.clearRect(0, 0, c.width, c.height);
-  ctx.imageSmoothingEnabled = false;
-  const arc = 1 - Math.pow(2 * u - 1, 2);      // 0 at the boot, 1 at the apex
-  const by = Math.round(HS_FOOT - arc * HS_FOOT);
-  const bx = Math.round(21 + 3 * Math.sin(u * Math.PI));
-  ctx.fillStyle = hsInk;
-  /* THE BALL'S OWN SHADOW IS THE ONLY THING CARRYING THE HEIGHT. Without it he
-     is a man standing beside a white disc that slides up and down a flat
-     picture, and nothing on screen says how far off the ground the ball is. It
-     shrinks and fades as the ball climbs, and that is the entire cue. */
-  const sh = 1 - arc * .72;
-  ctx.globalAlpha = .30 * sh;
-  ctx.beginPath();
-  ctx.ellipse((bx + 4.5) * s, (HS_HR + HS_H - 2) * s, 6.5 * s * sh, 1.7 * s * sh, 0, 0, 6.284);
-  ctx.fill();
-  /* and the man's, which is also what stops a hard-edged sprite looking stuck
-     onto the page: it gives him a floor, and the header's rule gives him a
-     second one to stand on */
-  ctx.globalAlpha = .40;
-  ctx.beginPath();
-  ctx.ellipse(16 * s, (HS_HR + HS_H - 2) * s, 9.5 * s, 2.2 * s, 0, 0, 6.284);
-  ctx.fill();
-  ctx.globalAlpha = 1;
-  ctx.drawImage(hsFrames[hsPose(u)], 0, 0, HS_W, HS_H + HS_PAD,
-    0, (HS_HR - HS_PAD) * s, HS_W * s, (HS_H + HS_PAD) * s);
-  ctx.drawImage(hsBalls[Math.floor(u * 6) % 2], 0, 0, 9, 9, bx * s, by * s, 9 * s, 9 * s);
-};
-
-/* 94 touches a minute is the pace that reads as juggling rather than panic.
-   Raise it and he looks frantic; below about 70 he looks like he is
-   struggling. */
-const HS_TPM = 94;
-/* SCALE 2, NOT THE 3 THE SPEC ASKED FOR. Three was drawn against a hero title
-   at clamp(4.1rem,25vw,6.4rem) that this build has never had. The head he
-   actually stands in is an 87px stack of kicker, wordmark and tag line, and a
-   231px sprite beside that is not a hero, it is a poster with a caption under
-   it. Two puts the man at 106px against a 47px wordmark, which is the
-   proportion the preview had. One and four also land on whole pixels, so this
-   is a dial with four settings rather than a slider; anything fractional
-   shimmers. hsInk is the ground shadow, taken off the theme rather than
-   hardcoded, because the draft painted it #05100a, which is floodlit grass,
-   and this canvas stands on cream half the time. */
-let hsRAF = null, hsScale = 2, hsInk = "rgba(0,0,0,.45)";
-const hsReduced = () => { try{ return matchMedia("(prefers-reduced-motion:reduce)").matches; }
-  catch(e){ return false; } };
-
-function hsStart(){
-  const cv = document.getElementById("herosprite");
-  if(!cv || hsRAF) return;
-  hsBuild();
-  const ctx = cv.getContext("2d");
-  /* the markup already carries both of these, so this is belt and braces for a
-     canvas that arrived from somewhere else; assigning them also wipes the
-     backing store, which is what we want one line before the first paint */
-  cv.width = HS_CW * hsScale; cv.height = HS_CH * hsScale;
-  /* ONCE PER MENU RENDER, NOT ONCE PER FRAME. getComputedStyle inside a rAF
-     loop forces a style recalc sixty times a second for a colour that cannot
-     change without a render, and setTheme calls one. */
-  try{ hsInk = getComputedStyle(document.documentElement).getPropertyValue("--hsdrop").trim() || hsInk; }
-  catch(e){}
-  /* REDUCED MOTION PARKS HIM. u = .35 is the planted pose with the ball near
-     the top of its arc, the most readable single frame he has and the one
-     worth using anywhere a still is wanted: the share image, a store listing.
-     It leaves hsRAF null on purpose, so the next render repaints him rather
-     than being turned away by the guard above. */
-  if(hsReduced()){ hsPaint(ctx, hsScale, .35); return; }
-  /* THE PHASE IS READ OFF THE CLOCK, not off a start time. The menu re-renders
-     on every toggle tap, each re-render replaces the canvas, and so every one
-     of them has to restart the loop. A stored t0 would reset u to zero each
-     time and snap him back to the flick mid-juggle, which looks like a bug in
-     the animation rather than a bug in the plumbing. now % period has no
-     memory to get wrong, and it is one variable fewer. */
-  const period = 60000 / HS_TPM;
-  (function tick(now){
-    hsPaint(ctx, hsScale, (now % period) / period);
-    hsRAF = requestAnimationFrame(tick);
-  })(performance.now());
+/* ---- pre-render the eight poses once, mirrored, number stamped after ---- */
+function gridTo(ctx,rows,ox,oy,pal){
+  rows.forEach((row,y)=>{for(let i=0;i<row.length;i++){
+    const c=pal[row[i]]; if(!c) continue; ctx.fillStyle=c; ctx.fillRect(ox+i,oy+y,1,1);}});
 }
-const hsStop = () => { if(hsRAF){ cancelAnimationFrame(hsRAF); hsRAF = null; } };
+function build(i,side){
+  const t=document.createElement("canvas");t.width=W;t.height=H;
+  const tx=t.getContext("2d");
+  gridTo(tx,BASE,0,BOB[i],PAL); gridTo(tx,(side?LEGS_B:LEGS)[i],0,LEGTOP,PAL);
+  const c=document.createElement("canvas");c.width=W;c.height=H;
+  const x=c.getContext("2d");x.imageSmoothingEnabled=false;
+  x.translate(W,0);x.scale(-1,1);x.drawImage(t,0,0);x.setTransform(1,0,0,1,0,0);
+  gridTo(x,NUMBER,NUM_X_FLIP,NUM_Y+BOB[i],{K:PAL.K});
+  return c;
+}
+/* LAZILY, AND BOTH HALVES OR NEITHER. Building these at parse time calls
+   getContext, which the test harness does not have, and the app is loaded by
+   every one of its suites. Publishing FRAME before FRAME_B exists would also
+   leave the guard below satisfied with half the sprite, so they go up
+   together. */
+let FRAME=null, FRAME_B=null;
+function ballCanvas(rows){
+  const c=document.createElement("canvas");c.width=9;c.height=rows.length;
+  gridTo(c.getContext("2d"),rows,0,0,PAL);return c;
+}
+let BALLC=null, SQUASHC=null;
+function ready(){
+  if(FRAME && FRAME_B && BALLC) return true;
+  const poses=[];
+  for(let i=0;i<LEGS.length;i++) poses.push(i);   /* derived, never [0,1,2,3] */
+  const a=poses.map(i=>build(i,0)), b=poses.map(i=>build(i,1));
+  BALLC=BALL.map(ballCanvas); SQUASHC=ballCanvas(SQUASH);
+  FRAME=a; FRAME_B=b;
+  return true;
+}
+
+/* ---------------- the ball's day ----------------
+   0.00 flick it up · 0.22 catch it and CHIP it · 0.54 bar · back down to 0.90 */
+const lerp=(a,b,t)=>a+(b-a)*t;
+/* A PARABOLA THROUGH TWO POINTS WHOSE *ACTUAL* PEAK IS THE APEX ASKED FOR.
+   Setting the lift off the midpoint only works when both ends are level. This
+   one launches low off his boot and lands high on the bar, so the real peak
+   comes about two thirds of the way across and overshoots: at a requested apex
+   of 2 it reached -2 and the ball left the top of the frame. Solving
+   16L^2 + L(16A - 16y0 - 8dy) + dy^2 = 0 for the lift fixes it. */
+function bow(a,b,t,apex){
+  const y0=a.y, dy=b.y-a.y;
+  const B=16*apex-16*y0-8*dy, disc=B*B-64*dy*dy;
+  const L=disc>0 ? (-B+Math.sqrt(disc))/32 : Math.max(0,(y0+b.y)/2-apex);
+  return {x:lerp(a.x,b.x,t), y:y0+dy*t-4*L*t*(1-t)};
+}
+/* THE TOUCHES ARE A SCHEDULE, NOT A LADDER OF IFS. Near, back, near, back,
+   near, then he hits it. Six touches is too many to hand-wire: every time the
+   rhythm changes the poses have to follow it exactly or the boot swings at
+   nothing. The ball and the legs both read from this one list now. */
+const TOUCH=[
+  {t:.00,side:0},   // near foot
+  {t:.09,side:1},   // back foot
+  {t:.18,side:0},
+  {t:.27,side:1},
+  {t:.36,side:0},
+  {t:.45,side:0},   // sets himself on the same boot, then hits it
+];
+const SHOOT=TOUCH[TOUCH.length-1].t;
+const PH={fly:.72, ring:.76};
+function hop(a,b,t,h){
+  return {x:lerp(a.x,b.x,t), y:lerp(a.y,b.y,t)-h*4*t*(1-t), spin:0};
+}
+const legOf=u=>{let i=0; while(i+1<TOUCH.length && u>=TOUCH[i+1].t) i++; return i;};
+function ball(u){
+  const A=FOOT(), FEET=[A, FOOT_B()];
+  if(u>=SHOOT){
+    if(u<PH.fly)  return Object.assign(bow(A,BAR,(u-SHOOT)/(PH.fly-SHOOT),BOW),{spin:1});
+    if(u<PH.ring) return {x:BAR.x, y:BAR.y, hit:true, spin:1};
+    return Object.assign(bow(BAR,A,(u-PH.ring)/(1-PH.ring),BOW+9),{spin:1});
+  }
+  const i=legOf(u), cur=TOUCH[i], nxt=TOUCH[i+1];
+  /* changing feet is a low touch; staying on the same boot means he is setting
+     himself for the chip, so that one gets a bit more air */
+  return hop(FEET[cur.side],FEET[nxt.side],(u-cur.t)/(nxt.t-cur.t),
+             cur.side===nxt.side?16:11);
+}
+/* [pose, which leg]. 0 is the near foot, 1 the back one. */
+function pose(u){
+  if(u>=SHOOT){
+    const d=u-SHOOT;
+    if(d<.05) return [4,0];          // THE CHIP
+    if(d<.11) return [5,0];
+    if(d<.19) return [6,0];
+    if(d<.27) return [7,0];
+    if(u<.93) return [0,0];          // watching it there and back
+    if(u<.97) return [2,0];
+    return [3,0];
+  }
+  const i=legOf(u), cur=TOUCH[i], nxt=TOUCH[i+1];
+  const d=(u-cur.t)/(nxt.t-cur.t);
+  if(d<.26) return [4,cur.side];
+  if(d<.52) return [5,cur.side];
+  if(d<.74) return [7,cur.side];
+  return [3,nxt.side];               // the next leg already on its way up
+}
+
+/* ---------------- draw ---------------- */
+let cv=null, ctx=null;
+function line(x0,y0,x1,y1){            // integer line, so the netting stays crisp
+  const dx=Math.abs(x1-x0),dy=Math.abs(y1-y0),sx=x0<x1?1:-1,sy=y0<y1?1:-1;
+  let err=dx-dy,x=x0,y=y0;
+  for(;;){ ctx.fillRect(x,y,1,1); if(x===x1&&y===y1)break;
+    const e=2*err; if(e>-dy){err-=dy;x+=sx;} if(e<dx){err+=dx;y+=sy;} }
+}
+function goal(flash){
+  ctx.fillStyle=NET;
+  for(let x=MOUTH_L;x<=MOUTH_R;x+=3){
+    const t=Math.round(topAt(x))+BAR_TH, b=Math.round(botAt(x));
+    ctx.fillRect(x,t,1,b-t);
+  }
+  ctx.fillStyle=NETD;
+  for(let k=1;k<=5;k++) for(let x=MOUTH_L;x<=MOUTH_R;x++){
+    const t=topAt(x)+BAR_TH, b=botAt(x);
+    ctx.fillRect(x,Math.round(t+(b-t)*k/6),1,1);
+  }
+  /* side netting, running back from the near post: the depth cue */
+  for(let k=1;k<=3;k++){ const t=k/4;
+    line(NEAR_IN,Math.round(NT+(NB-NT)*t), FAR_IN,Math.round(FT+(FB-FT)*t)); }
+  /* the goal line it stands on, which is what stops it floating on the grass */
+  for(let x=0;x<CW;x++) ctx.fillRect(x,Math.round(botAt(x)),1,1);
+  /* the crossbar, dropping away as it recedes */
+  for(let x=GL;x<=GR;x++){
+    const t=Math.round(topAt(x));
+    ctx.fillStyle=POSTM; ctx.fillRect(x,t,1,BAR_TH);
+    ctx.fillStyle=POSTC; ctx.fillRect(x,t,1,1);
+    ctx.fillStyle=POSTD; ctx.fillRect(x,t+BAR_TH-1,1,1);
+  }
+  /* posts: the near one taller, thicker and brighter than the far one */
+  ctx.fillStyle=POSTM; ctx.fillRect(NEAR_X,NT,PWN,NB-NT);
+  ctx.fillStyle=POSTC; ctx.fillRect(NEAR_X,NT,1,NB-NT);
+  ctx.fillStyle=POSTD; ctx.fillRect(NEAR_X+PWN-1,NT,1,NB-NT);
+  ctx.fillRect(FAR_X,FT,PWF,FB-FT);
+  ctx.fillStyle=POSTM; ctx.fillRect(FAR_X,FT,1,FB-FT);
+  ctx.fillStyle=SHADOW;
+  ctx.fillRect(NEAR_X-1,NB,PWN+2,1); ctx.fillRect(FAR_X-1,FB,PWF+2,1);
+  /* THE BAR RINGS. Without it the ball just changes direction in mid air. */
+  if(flash){ ctx.fillStyle=FLASH;
+    for(let x=BAR.x-2;x<BAR.x+11;x++) ctx.fillRect(x,Math.round(topAt(x))-1,1,BAR_TH+1); }
+}
+function draw(u){
+  ctx.setTransform(PX,0,0,PX,0,0);
+  ctx.clearRect(0,0,CW,CH);
+  ctx.imageSmoothingEnabled=false;
+  const b=ball(u), [i,side]=pose(u);
+  goal(u>=PH.fly-.03 && u<PH.ring+.05);
+  ctx.fillStyle=SHADOW;
+  const h=Math.max(.18,(b.y+9)/GROUND);
+  ctx.beginPath();ctx.ellipse(b.x+4,GROUND,7*h,1.7*h,0,0,6.284);ctx.fill();
+  ctx.beginPath();ctx.ellipse(MAN_X+16,GROUND,9.5,2.1,0,0,6.284);ctx.fill();
+  ctx.drawImage((side?FRAME_B:FRAME)[i],MAN_X,HR);
+  const art=b.hit?SQUASHC:BALLC[b.spin?Math.floor(u*34)%2:Math.floor(u*14)%2];
+  ctx.drawImage(art,Math.round(b.x),Math.round(b.y)+(b.hit?2:0));
+}
+
+/* ---------------- the menu owns the loop ----------------
+   A requestAnimationFrame left running through a whole match is a phone
+   battery for nothing, so this starts and stops in render() alongside every
+   other screen decision. The phase is read off the clock rather than off a
+   stored start, because the menu re-renders on every tap and a stored t0 would
+   snap him back to the first touch each time. */
+let raf=null;
+function paint(u, el){
+  cv = el || document.getElementById("bnstage");
+  if(!cv || !cv.getContext) return false;
+  ctx=cv.getContext("2d");
+  ready();
+  draw(u);
+  return true;
+}
+function bnStart(){
+  if(raf) return;
+  /* reduced motion parks him mid-juggle with the ball up, which is also the
+     still worth using anywhere a still is wanted */
+  let still=false;
+  try{ still=matchMedia("(prefers-reduced-motion:reduce)").matches; }catch(e){}
+  if(still) return void paint(.38);
+  (function loop(now){
+    if(!paint(((now||0)%PERIOD)/PERIOD)) return void (raf=null);
+    raf=requestAnimationFrame(loop);
+  })(0);
+}
+function bnStop(){ if(raf){ cancelAnimationFrame(raf); raf=null; } }
+/* THE WHOLE CYCLE, NOT A SAMPLE OF IT. A screenshot only tests the instant it
+   lands on: the spec lost a function in a bulk edit and the page threw on every
+   frame after the chip, while three separate screenshots all happened to land
+   before it and looked fine. So step the lot and count. It goes through paint
+   rather than draw because draw has no canvas of its own. */
+function bnSweep(el, step){
+  let bad=0;
+  for(let u=0;u<=1;u+=(step||.0025)){ try{ if(!paint(u, el)) return -1; }catch(e){ bad++; } }
+  return bad;
+}
+/* THE ART GOES OUT WITH THEM. banner-test reads these as real arrays rather
+   than regexing the quoted rows out of the source, which means anything that
+   parses in the test is exactly what the app draws, and the pose count it
+   checks against is the one the code actually uses. */
+return { start:bnStart, stop:bnStop, sweep:bnSweep, paint:paint, poses:LEGS.length,
+         art:{PAL:PAL, BASE:BASE, LEGS:LEGS, BALL:BALL, SQUASH:SQUASH, NUMBER:NUMBER} };
+})();
 
 function renderSetup(st){
   const saved = (()=>{ try{ const s=JSON.parse(localStorage.getItem(SAVE_KEY)); return s && s.phase!=="setup" && s.phase!=="results" ? s : null; }catch(e){ return null; }})();
@@ -14930,13 +15657,13 @@ function renderSetup(st){
       `<button class="mm-pill" aria-pressed="${!!o.on}" onclick="${o.go}">${o.label}</button>`).join("") + '</div>';
 
   st.innerHTML = `
-    <div class="mm-head">
-      <div>
-        <div class="mm-kicker">Friday night</div>
-        <div class="mm-word" onclick="goHome()" title="Back to the start">BALL</div>
-        <div class="mm-tag">One phone, three of you, nobody googling</div>
+    <div class="mm-head mm-banner">
+      <div class="mm-kicker">Friday night</div>
+      <div class="banner" onclick="goHome()" title="Back to the start">
+        <div class="words"><h1>Ball</h1></div>
+        <canvas id="bnstage" width="600" height="246" aria-hidden="true"></canvas>
       </div>
-      <canvas id="herosprite" width="${HS_CW*hsScale}" height="${HS_CH*hsScale}" aria-hidden="true"></canvas>
+      <div class="mm-tag">One phone, three of you, nobody googling</div>
     </div>
 
     <div class="mm-page">
