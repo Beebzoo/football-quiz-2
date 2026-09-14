@@ -169,6 +169,40 @@ console.log("\n--- the squad pools ---");
   }
 }
 
+/* ---------- the elevens everybody can recite ----------
+   Structure checks pass on an eleven with Lahm in goal, which is exactly what
+   the 2014 harvest produced for a while. These are the sides the room would
+   notice, typed off the match rather than off the deck. */
+console.log("\n--- the finals, by name ---");
+{
+  const XI = {
+    "wc1998/France":    ["Barthez", "Thuram", "Leboeuf", "Desailly", "Lizarazu", "Karembeu", "Deschamps", "Petit", "Zidane", "Djorkaeff", "Guivarc'h"],
+    "wc1998/Brazil":    ["Taffarel", "Cafu", "Júnior Baiano", "Aldair", "Roberto Carlos", "César Sampaio", "Dunga", "Leonardo", "Rivaldo", "Bebeto", "Ronaldo"],
+    "wc2002/Brazil":    ["Marcos", "Lúcio", "Edmílson", "Roque Júnior", "Cafu", "Roberto Carlos", "Gilberto Silva", "Kléberson", "Ronaldinho", "Rivaldo", "Ronaldo"],
+    "wc2006/Italy":     ["Buffon", "Zambrotta", "Cannavaro", "Materazzi", "Grosso", "Camoranesi", "Pirlo", "Gattuso", "Perrotta", "Totti", "Toni"],
+    "wc2010/Spain":     ["Casillas", "Ramos", "Piqué", "Puyol", "Capdevila", "Busquets", "Xabi Alonso", "Xavi", "Pedro", "Iniesta", "Villa"],
+    "wc2014/Germany":   ["Neuer", "Lahm", "Boateng", "Hummels", "Höwedes", "Schweinsteiger", "Kramer", "Müller", "Özil", "Kroos", "Klose"],
+    "wc2014/Argentina": ["Romero", "Zabaleta", "Demichelis", "Garay", "Rojo", "Mascherano", "Biglia", "Pérez", "Messi", "Higuaín", "Lavezzi"],
+    "wc2018/France":    ["Lloris", "Pavard", "Varane", "Umtiti", "Hernandez", "Kanté", "Pogba", "Mbappé", "Griezmann", "Matuidi", "Giroud"],
+    "wc2022/Argentina": ["Martínez", "Molina", "Romero", "Otamendi", "Tagliafico", "De Paul", "Fernández", "Mac Allister", "Messi", "Álvarez", "Di María"],
+  };
+  const norm = x => String(x || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/[^a-z]/g, "");
+  for (const [where, want] of Object.entries(XI)) {
+    const [pool, sideName] = where.split("/");
+    const p = path.join(REPO, "assets", pool, "index.json");
+    if (!fs.existsSync(p)) { check(where + ": the pool is on disk", false, pool); continue; }
+    const t = JSON.parse(fs.readFileSync(p, "utf8"))[sideName];
+    if (!t) { check(where + ": the side is in the pool", false, sideName); continue; }
+    const got = (t.xi || []).map(m => norm(m.n) + "|" + norm(m.full));
+    const missing = want.filter(n => !got.some(g => g.indexOf(norm(n)) > -1));
+    check(where + ": the eleven who played it", missing.length === 0, "missing " + missing.join(", "));
+    /* AND THE KEEPER IS THE KEEPER, which is the failure this is really for */
+    const gk = (t.xi || [])[0];
+    check(where + ": " + want[0] + " is in goal",
+      gk && norm(gk.n + gk.full).indexOf(norm(want[0])) > -1, gk && gk.n);
+  }
+}
+
 console.log("\n--- service worker ---");
 const sw = fs.readFileSync(path.join(REPO, "sw.js"), "utf8");
 check("faces index is precached", sw.includes("assets/faces/index.json"));

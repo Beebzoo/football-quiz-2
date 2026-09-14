@@ -5710,6 +5710,12 @@ const POOLS = {
   wc2006: {label:"World Cup 2006", group:"World Cups", of:"classic",
            file:"assets/wc2006/index.json", flags:"assets/natflags/", ext:".png",
            blurb:"Thirty-two nations, and the eleven each of them actually started their last match with."},
+  wc1998: {label:"World Cup 1998", group:"World Cups", of:"classic",
+           file:"assets/wc1998/index.json", flags:"assets/natflags/", ext:".png",
+           blurb:"France. Thirty-two nations, twenty-two men each, and the eleven each of them started their last match with."},
+  wc2002: {label:"World Cup 2002", group:"World Cups", of:"classic",
+           file:"assets/wc2002/index.json", flags:"assets/natflags/", ext:".png",
+           blurb:"Korea and Japan. Thirty-two nations, and the eleven each of them started their last match with."},
   wc2010: {label:"World Cup 2010", group:"World Cups", of:"classic",
            file:"assets/wc2010/index.json", flags:"assets/natflags/", ext:".png",
            blurb:"South Africa. Thirty-two nations, and the eleven each of them started their last match with."},
@@ -5872,7 +5878,7 @@ function setTheme(t){
   applyTheme();
   render();
 }
-const BUILD = "14 Sep 2026 · 01:56";
+const BUILD = "14 Sep 2026 · 02:28";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five
@@ -9241,10 +9247,15 @@ function aiTick(){
 /* EVERY TOURNAMENT THE APP HAS A POOL FOR. Four kilobytes each, fetched like
    every other deck, and a year is simply not offered until both its table and
    its squads have landed. */
-const CUP_YEARS = ["2006", "2010", "2014", "2018", "2022"];
+/* NEWEST FIRST, which is the order anybody scans a shelf of wall charts in,
+   and the order the squads plan adds them in. */
+const CUP_YEARS = ["2022", "2018", "2014", "2010", "2006", "2002", "1998"];
 const cupPool = y => "wc" + y;
 const CUPS = {};
-let CUP_YEAR = CUP_YEARS[0];
+/* 2006 IS WHERE IT OPENS, not whichever year happens to be first in the list.
+   It is the tournament whose squads have been checked man by man, and it is
+   the one the album is a book of. */
+let CUP_YEAR = "2006";
 for(const y of CUP_YEARS)
   fetch("assets/cup/" + y + ".json").then(r => r.ok ? r.json() : null).then(j => {
     if(!j) return;

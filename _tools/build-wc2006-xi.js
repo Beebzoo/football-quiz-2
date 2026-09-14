@@ -87,13 +87,36 @@ const tidy = x => String(x || "")
 
 const cacheRead = k => { try { return JSON.parse(fs.readFileSync(path.join(CACHE, k), "utf8")); } catch (e) { return null; } };
 const cacheWrite = (k, v) => { try { fs.writeFileSync(path.join(CACHE, k), JSON.stringify(v)); } catch (e) {} };
-const get = url => new Promise((res, rej) => {
+const getOnce = url => new Promise((res, rej) => {
   https.get(url, { headers: { "User-Agent": UA } }, r => {
-    if (r.statusCode !== 200) return rej(new Error("HTTP " + r.statusCode));
+    if (r.statusCode !== 200) {
+      const e = new Error("HTTP " + r.statusCode);
+      e.status = r.statusCode;
+      r.resume();
+      return rej(e);
+    }
     let d = ""; r.setEncoding("utf8");
     r.on("data", c => d += c); r.on("end", () => res(d));
   }).on("error", rej);
 });
+/* A 429 COSTS A MINUTE, NOT AN HOUR. Wikipedia rate-limits politely and a
+   harvest that reads five hundred pages will meet it; until this existed, the
+   first one threw and took the rest of the run with it. Two seconds, four,
+   eight, sixteen, then give up. Only on a throttle or a server error: a 404
+   is an article that is not there, and asking again will not conjure it. */
+async function get(url) {
+  let wait = 2000;
+  for (let n = 0; ; n++) {
+    try { return await getOnce(url); }
+    catch (e) {
+      const retry = e.status === 429 || (e.status >= 500 && e.status < 600);
+      if (!retry || n >= 4) throw e;
+      console.log("  " + e.message + ", waiting " + (wait / 1000) + "s");
+      await new Promise(r => setTimeout(r, wait));
+      wait *= 2;
+    }
+  }
+}
 async function wikitext(title) {
   const key = "wct-" + crypto.createHash("sha1").update(title).digest("hex").slice(0, 16) + ".json";
   const hit = cacheRead(key);
@@ -148,6 +171,37 @@ const ALIAS = {
   "Ignacio María González": "Ignacio González",
   "Nikos Spiropoulos": "Nikos Spyropoulos",
   "Walter Julián Martínez": "Walter Martínez",
+  /* 2002 */
+  "Jenílson Ângelo de Souza": "Júnior",
+  "Luiz Bombonato Goulart": "Luizão",
+  "Pablo Gabriel García": "Pablo García",
+  "MacDonald Mukasi": "MacDonald Mukansi",
+  "Boukar Alioum": "Alioum Boukar",
+  /* 1998. Cameroon’s squad page spells him without the apostrophe. */
+  "Joseph N'Do": "Joseph Ndo",
+  "Mohammed Al-Deayea": "Mohamed Al-Deayea",
+  /* IN THE LINE-UPS AND NOT IN THE SQUAD LIST, which is two articles
+     disagreeing rather than something to paper over. */
+  "Khamis Al-Dosari": null,
+
+  /* 1998 */
+  "Ali El Khattabi": "Ali Elkhattabi",
+  "Fahad Al-Mehallel": "Fahd Al-Mehallel",
+  "César Augusto Ramírez": "César Ramírez",
+  /* SPAIN’S RIGHT-BACK, not Paraguay’s midfielder. Both squads carry an
+     Aguilera and the match report links his full legal name, which is the
+     kind of near-miss that credits a card to the wrong man in the wrong
+     country. Checked against the Spain v Bulgaria line-up. */
+  "Juan Carlos Aguilera": {n: "Carlos Aguilera", side: "Spain"},
+  /* he played under one name and Wikipedia files him under the other */
+  "Preki": "Predrag Radosavljević",
+
+  /* 2002. The deck spells him as one word, the reports as three. */
+  "Selim Ben Achour": "Benachour",
+  /* IN THE LINE-UP AND NOT IN THE SQUAD, which is two Wikipedia articles
+     disagreeing rather than something to paper over. Named here so the
+     harvest walks back a match instead of reporting him every run. */
+  "Mohammed Al-Jahani": null,
 };
 /* COUNTRY NAMES DIFFER between the kit titles and the deck keys. Checked one
    at a time against the deck rather than guessed. */
@@ -155,6 +209,8 @@ const SIDE_ALIAS = {
   "Korea Republic": "South Korea", "IR Iran": "Iran", "Côte d'Ivoire": "Ivory Coast",
   "Serbia & Montenegro": "Serbia and Montenegro", "USA": "United States",
   "Trinidad & Tobago": "Trinidad and Tobago", "Czechia": "Czech Republic",
+  "China": "China PR", "Ireland": "Republic of Ireland",
+  "Yugoslavia": "FR Yugoslavia",
 };
 
 function manIn(side, name, no) {
@@ -231,6 +287,12 @@ const ZONE = {
   CF: 4, ST: 4, FW: 4,
 };
 const SLOT_ZONE = [0, 1, 1, 1.3, 1.3, 2, 2.5, 3, 3.4, 4, 3.4];
+/* WHICH TOUCHLINE, where a position has one. The wish lists already know
+   (the left-back slot never asks for a RWB); the fallback did not, and put
+   Roberto Carlos on the right wing in 2002. */
+const flank = p => /^L/.test(p) && p !== "LF" ? "L" : /^R/.test(p) && p !== "RF" ? "R"
+  : p === "LF" ? "L" : p === "RF" ? "R" : null;
+const SLOT_FLANK = [null, null, null, "L", "R", null, null, null, "L", null, "R"];
 /* what it costs to put this man in this slot: his place on the wish list if he
    is on it, otherwise ten plus how far he has been moved. The keeper is not
    negotiable at any price. */
@@ -239,7 +301,20 @@ function cost(si, slot, man){
   if(at > -1) return at;
   if(si === 0 || man.pos === "GK") return 1000;
   const z = ZONE[man.pos];
-  return 10 + Math.abs(SLOT_ZONE[si] - (z === undefined ? 2.5 : z));
+  const moved = SLOT_ZONE[si] - (z === undefined ? 2.5 : z);
+  /* FORWARD IS FURTHER THAN BACK, and distance is charged SQUARED.
+     Forward, because what actually happens when a side changes shape is that
+     defenders come inward and midfielders go out, so a centre-half on the wing
+     reads worse than a winger tucked into midfield. Squared, because a flat
+     ten-plus-distance made every wrong slot cost about the same and the whole
+     decision fell to the on-list ties: Brazil in 2002 came out with Roque
+     Junior on the right wing, which was three points of pitch away and cost
+     three points. */
+  const far = moved > 0 ? moved * 1.6 : -moved;
+  /* CROSSING THE PITCH costs more than any distance up it that this ever
+     measures, and less than putting a defender in attack. */
+  const wrongSide = SLOT_FLANK[si] && flank(man.pos) && SLOT_FLANK[si] !== flank(man.pos);
+  return 10 + far * far + (wrongSide ? 6 : 0);
 }
 /* Order a real line-up into the app's slots, and say where it had to guess.
    The whole eleven at once rather than slot by slot: see the note at the top
@@ -262,8 +337,12 @@ function fit(lineup){
     if(bs < 0) break;
     pick[bs] = bm; taken[bm] = true;
   }
-  /* then swap any two until no swap is an improvement, which at eleven by
-     eleven settles in a handful of passes */
+  /* THEN SWAPS, AND THEN ROTATIONS, until neither is an improvement.
+     Swapping two is not enough on a back three: Brazil in 2002 needed Roque
+     Junior into the back four, Lucio out to left-back and Roberto Carlos up to
+     the wing, and no single swap improves on the way there. Eleven by eleven
+     makes 165 rotations, which costs nothing and gets out of exactly this. */
+  const at = i => (pick[i] < 0 ? null : C[i][pick[i]]);
   for(let pass = 0; pass < 12; pass++){
     let moved = false;
     for(let a = 0; a < n; a++) for(let b = a + 1; b < n; b++){
@@ -271,6 +350,16 @@ function fit(lineup){
       if(ma < 0 || mb < 0) continue;
       if(C[a][mb] + C[b][ma] < C[a][ma] + C[b][mb]){
         pick[a] = mb; pick[b] = ma; moved = true;
+      }
+    }
+    for(let a = 0; a < n; a++) for(let b = 0; b < n; b++) for(let c = 0; c < n; c++){
+      if(a === b || b === c || a === c) continue;
+      const ma = pick[a], mb = pick[b], mc = pick[c];
+      if(ma < 0 || mb < 0 || mc < 0) continue;
+      const now = at(a) + at(b) + at(c);
+      /* a takes b's man, b takes c's, c takes a's */
+      if(C[a][mb] + C[b][mc] + C[c][ma] < now){
+        pick[a] = mb; pick[b] = mc; pick[c] = ma; moved = true;
       }
     }
     if(!moved) break;
@@ -357,7 +446,10 @@ function extraPages(text, had){
        each half the first eleven rows are the eleven who started, whatever is
        listed under them: some tables carry substitutes who never came on, which
        is what broke counting to twenty-two. */
-    const halves = seg.split(/Manager:/);
+    /* MANAGERS, PLURAL, for a side with two of them: Sweden shared the job
+       between Lagerback and Soderberg in 2002 and all four of their matches
+       fell out of the harvest over the s. */
+    const halves = seg.split(/Managers?:/);
     if (halves.length < 3) continue;
     const rowsIn = t => {
       const out = [];
@@ -365,8 +457,12 @@ function extraPages(text, had){
          except the 2014 final, which wraps it in {{abbr}} so a reader can
          hover it, and that is the only place Germany's and Argentina's real
          elevens exist. */
-      for (const m of t.matchAll(/^\|\s*(?:\{\{\s*abbr\s*\|\s*)?([A-Z]{2,3})(?:\s*\|[^}]*\}\})?\s*\|\|\s*'''(\d+)'''\s*\|\|\s*\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/gm))
-        out.push({ pos: m[1], no: parseInt(m[2], 10), name: m[3] });
+      /* TWO BRANCHES, NOT ONE WITH AN OPTIONAL TAIL, and the tail cannot
+         cross a line. Written as one, the bare-code branch ran on into the
+         NEXT row's {{abbr}} looking for its }}, and read that row's shirt and
+         name: the 2014 final came out with Lahm in goal. */
+      for (const m of t.matchAll(/^\|\s*(?:\{\{\s*abbr\s*\|\s*([A-Z]{2,3})\s*\|[^}\n]*\}\}|([A-Z]{2,3}))\s*\|\|\s*'''(\d+)'''\s*\|\|\s*\[\[([^\]|]+)(?:\|[^\]]*)?\]\]/gm))
+        out.push({ pos: m[1] || m[2], no: parseInt(m[3], 10), name: m[4] });
       return out;
     };
     const a = rowsIn(halves[0]).slice(0, 11), b = rowsIn(halves[1]).slice(0, 11);

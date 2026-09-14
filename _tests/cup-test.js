@@ -295,7 +295,8 @@ const WC18 = R("assets/wc2018/index.json");
   /* ONLY THE ONES WHOSE TABLE AND SQUADS HAVE BOTH LANDED. This instance was
      handed 2006 and 2018 and not 2022, which is exactly what a phone on a slow
      connection looks like. */
-  check("the tournaments on the phone are the ones it has", ev(app, "cupYearsLive().join(',')") === "2006,2018",
+  check("the tournaments on the phone are the ones it has, newest first",
+    ev(app, "cupYearsLive().join(',')") === "2018,2006",
     ev(app, "cupYearsLive().join(',')"));
   check("and a year with no data is not offered", ev(app, "CUP_YEARS.indexOf('2022') > -1") === true,
     "2022 is not in the list at all");

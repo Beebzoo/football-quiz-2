@@ -63,13 +63,36 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 if (!fs.existsSync(CACHE)) fs.mkdirSync(CACHE, { recursive: true });
 const cacheRead = k => { try { return JSON.parse(fs.readFileSync(path.join(CACHE, k), "utf8")); } catch (e) { return null; } };
 const cacheWrite = (k, v) => { try { fs.writeFileSync(path.join(CACHE, k), JSON.stringify(v)); } catch (e) {} };
-const get = url => new Promise((res, rej) => {
+const getOnce = url => new Promise((res, rej) => {
   https.get(url, { headers: { "User-Agent": UA } }, r => {
-    if (r.statusCode !== 200) return rej(new Error("HTTP " + r.statusCode));
+    if (r.statusCode !== 200) {
+      const e = new Error("HTTP " + r.statusCode);
+      e.status = r.statusCode;
+      r.resume();
+      return rej(e);
+    }
     let d = ""; r.setEncoding("utf8");
     r.on("data", c => d += c); r.on("end", () => res(d));
   }).on("error", rej);
 });
+/* A 429 COSTS A MINUTE, NOT AN HOUR. Wikipedia rate-limits politely and a
+   harvest that reads five hundred pages will meet it; until this existed, the
+   first one threw and took the rest of the run with it. Two seconds, four,
+   eight, sixteen, then give up. Only on a throttle or a server error: a 404
+   is an article that is not there, and asking again will not conjure it. */
+async function get(url) {
+  let wait = 2000;
+  for (let n = 0; ; n++) {
+    try { return await getOnce(url); }
+    catch (e) {
+      const retry = e.status === 429 || (e.status >= 500 && e.status < 600);
+      if (!retry || n >= 4) throw e;
+      console.log("  " + e.message + ", waiting " + (wait / 1000) + "s");
+      await new Promise(r => setTimeout(r, wait));
+      wait *= 2;
+    }
+  }
+}
 /* THE SAME CACHE KEY build-wc2006-tournament.js uses, so a repo that has run
    that tool does not fetch a single page to run this one. */
 async function wikitext(title) {
@@ -93,12 +116,23 @@ for (const [name, t] of Object.entries(deck)) if (t.abbr) BY_CODE[t.abbr] = name
    say ESP and the match boxes say SPA. Each one checked against the deck by
    hand, because a wrong entry here silently files one side's results under
    another. */
-const CODE_ALIAS = { SPA: "ESP", HOL: "NED", NGR: "NGA" };
+const CODE_ALIAS = { SPA: "ESP", HOL: "NED", NGR: "NGA", CHN: "CHN", IRE: "IRL", FRY: "YUG" };
 const unknown = new Set();
-const side = code => {
-  const up = String(code || "").toUpperCase();
+/* THE SIDES BY NAME AS WELL, for the ones with no code. */
+const BY_NAME = {};
+for (const name of Object.keys(deck)) BY_NAME[name.toLowerCase()] = name;
+const NAME_ALIAS = { "yugoslavia": "FR Yugoslavia", "china": "China PR", "ireland": "Republic of Ireland" };
+const side = token => {
+  const raw = String(token || "").trim();
+  const up = raw.toUpperCase();
+  if (raw.length === 3) {
+    const n = BY_CODE[CODE_ALIAS[up] || up];
+    if (n) return n;
+  }
+  const byName = BY_NAME[NAME_ALIAS[raw.toLowerCase()] ? NAME_ALIAS[raw.toLowerCase()].toLowerCase() : raw.toLowerCase()];
+  if (byName) return byName;
   const n = BY_CODE[CODE_ALIAS[up] || up];
-  if (!n) unknown.add(code);
+  if (!n) unknown.add(raw);
   return n || null;
 };
 
@@ -107,13 +141,16 @@ const side = code => {
    {{#invoke:flagg|main|unpe|avar=fb|NED}} or {{#invoke:flag|fb|QAT}}. All of
    them are a three letter code in a template, and which template it is has
    never meant anything. */
-const CODE_RX = /\{\{\s*(?:fb(?:-rt|-big)?\s*\|\s*([A-Za-z]{3})(?:\s*\|[^}]*)?|#invoke:\s*flagg?\s*\|[^}]*?\|\s*([A-Za-z]{3})\s*)\}\}/g;
+/* A SIDE IS NOT ALWAYS A TRIGRAM: FR Yugoslavia has no code on Wikipedia, so
+   1998 writes {{fb-rt|FR Yugoslavia|name=FR Yugoslavia}} and puts the
+   country's name where the code goes. */
+const CODE_RX = /\{\{\s*(?:fb(?:-rt|-big)?\s*\|\s*([A-Za-z][A-Za-z .'-]{1,28}?)(?:\s*\|[^}]*)?|#invoke:\s*flagg?\s*\|[^}]*?\|\s*([A-Za-z]{3})\s*)\}\}/g;
 function codeHits(str) {
   const out = [];
   CODE_RX.lastIndex = 0;
   let m;
   while ((m = CODE_RX.exec(str)))
-    out.push({ code: (m[1] || m[2]).toUpperCase(), end: m.index + m[0].length });
+    out.push({ code: (m[1] || m[2]).trim(), end: m.index + m[0].length });
   return out;
 }
 const codesIn = str => codeHits(str).map(h => h.code);
@@ -221,6 +258,15 @@ function bracket(t) {
   return out;
 }
 
+/* the matches a page points at rather than carries */
+function extraPages(text) {
+  const out = [];
+  const rx = new RegExp("\\{\\{\\s*main\\s*\\|\\s*([^}|]*\\(" + YEAR + " FIFA World Cup\\))\\s*\\}\\}", "gi");
+  let m;
+  while ((m = rx.exec(text))) { const t = m[1].trim(); if (out.indexOf(t) < 0) out.push(t); }
+  return out;
+}
+
 (async () => {
   const groups = {};
   for (const g of GROUPS) {
@@ -232,7 +278,11 @@ function bracket(t) {
     let table = t;
     const where = tablesPage(t);
     if (where) table = groupSection(await wikitext(where.page), where.group);
-    groups[g] = { sides: standings(table), played: boxes(t) };  }
+    /* A GROUP MATCH CAN HAVE ITS OWN ARTICLE, and then the group page carries
+       a stub. Iran against the United States in 1998 is the famous one. */
+    let text = t;
+    for (const extra of extraPages(t)) text += "\n" + await wikitext(extra);
+    groups[g] = { sides: standings(table), played: boxes(text) };  }
   const ko = bracket(await wikitext(YEAR + " FIFA World Cup knockout stage"));
 
   /* ---------- the draw, read back off the bracket ----------

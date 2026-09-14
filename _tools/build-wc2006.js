@@ -246,6 +246,8 @@ function pickXI(players) {
     "trinidad and tobago": ["trinidad and tobago"],
     "iran": ["iran", "ir iran"],
     "saudi arabia": ["saudi arabia"],
+    "china pr": ["china pr", "china"],
+    "republic of ireland": ["republic of ireland", "ireland"],
   };
   const kitFor = name => {
     const keys = ALIAS[name.toLowerCase()] || [name.toLowerCase()];
@@ -262,8 +264,11 @@ function pickXI(players) {
   async function harvestKit(name) {
     const page = encodeURIComponent(name + " national football team");
     try {
+      /* REDIRECTS=1, which every other fetch in this repo passes. Without it
+         "China PR national football team" resolves to nothing, because the
+         article lives at "China national football team". */
       const raw = await get("https://en.wikipedia.org/w/api.php?action=parse&page=" +
-        page + "&prop=wikitext&format=json&formatversion=2");
+        page + "&prop=wikitext&redirects=1&format=json&formatversion=2");
       const w = JSON.parse(raw).parse.wikitext;
       const grab = k => { const m = w.match(new RegExp("\\|\\s*" + k + "\\s*=\\s*([A-Fa-f0-9]{6})")); return m ? "#" + m[1].toUpperCase() : null; };
       // a white shirt with coloured sleeves reads better as the sleeve colour
@@ -371,11 +376,27 @@ function pickXI(players) {
     "South Korea": ["South Korea", "Korea Republic"],
     "Ivory Coast": ["Ivory Coast", "Côte d'Ivoire"],
     "Iran": ["Iran", "IR Iran"],
+    /* FIFA calls them CHN. Without this the search misses, the code falls back
+       to the first three letters of the flag file (china-pr), and China ends
+       up wearing Chile’s trigram. */
+    "China PR": ["China PR", "China"],
+    "Republic of Ireland": ["Republic of Ireland", "Ireland"],
   };
   const rx = t => t.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   let TEAM_CODES = [], COUNTRY_CODES = [];
 
+  /* SIDES THAT NO LONGER EXIST, and therefore have no code left to look up.
+     FIFA used YUG for FR Yugoslavia through 1998 and 2002 qualifying, and
+     Wikidata records neither a FIFA nor an Olympic code for them because the
+     body is gone. Only for the genuinely defunct: anything still playing must
+     come off the harvest, which does not go stale. */
+  const ABBR_OVERRIDE = {
+    "FR Yugoslavia": "YUG",
+    "Yugoslavia": "YUG",
+    "Zaire": "ZAI",
+  };
   function codeFor(country) {
+    if (ABBR_OVERRIDE[country]) return ABBR_OVERRIDE[country];
     const names = CODE_ALIAS[country] || [country];
     // the men's senior side, named exactly
     for (const n of names) {

@@ -73,6 +73,9 @@ const SQUADS = YEAR + " FIFA World Cup squads";
    better than comparing 2022 to 2006 and calling the difference a bug. */
 const PUBLISHED_BY_YEAR = {
   "2006": { goals: 147, yellows: 345, reds: 28 },
+  /* 1998: 171, the record until 2014 equalled it. */
+  "1998": { goals: 171 },
+  "2002": { goals: 161 },
   /* 2010: 145, and the harvest lands on it exactly, which is the strongest
      evidence there is that the goal reader is right. */
   "2010": { goals: 145 },
@@ -92,13 +95,36 @@ if (!fs.existsSync(CACHE)) fs.mkdirSync(CACHE, { recursive: true });
 const cacheRead = k => { try { return JSON.parse(fs.readFileSync(path.join(CACHE, k), "utf8")); } catch (e) { return null; } };
 const cacheWrite = (k, v) => { try { fs.writeFileSync(path.join(CACHE, k), JSON.stringify(v)); } catch (e) {} };
 
-const get = url => new Promise((res, rej) => {
+const getOnce = url => new Promise((res, rej) => {
   https.get(url, { headers: { "User-Agent": UA } }, r => {
-    if (r.statusCode !== 200) return rej(new Error("HTTP " + r.statusCode));
+    if (r.statusCode !== 200) {
+      const e = new Error("HTTP " + r.statusCode);
+      e.status = r.statusCode;
+      r.resume();
+      return rej(e);
+    }
     let d = ""; r.setEncoding("utf8");
     r.on("data", c => d += c); r.on("end", () => res(d));
   }).on("error", rej);
 });
+/* A 429 COSTS A MINUTE, NOT AN HOUR. Wikipedia rate-limits politely and a
+   harvest that reads five hundred pages will meet it; until this existed, the
+   first one threw and took the rest of the run with it. Two seconds, four,
+   eight, sixteen, then give up. Only on a throttle or a server error: a 404
+   is an article that is not there, and asking again will not conjure it. */
+async function get(url) {
+  let wait = 2000;
+  for (let n = 0; ; n++) {
+    try { return await getOnce(url); }
+    catch (e) {
+      const retry = e.status === 429 || (e.status >= 500 && e.status < 600);
+      if (!retry || n >= 4) throw e;
+      console.log("  " + e.message + ", waiting " + (wait / 1000) + "s");
+      await new Promise(r => setTimeout(r, wait));
+      wait *= 2;
+    }
+  }
+}
 async function wikitext(title) {
   const key = "wct-" + crypto.createHash("sha1").update(title).digest("hex").slice(0, 16) + ".json";
   const hit = cacheRead(key);
@@ -172,6 +198,33 @@ const ALIAS = {
   "Ignacio María González": "Ignacio González",
   "Nikos Spiropoulos": "Nikos Spyropoulos",
   "Walter Julián Martínez": "Walter Martínez",
+  /* 2002 */
+  "Jenílson Ângelo de Souza": "Júnior",
+  "Luiz Bombonato Goulart": "Luizão",
+  "Pablo Gabriel García": "Pablo García",
+  "MacDonald Mukasi": "MacDonald Mukansi",
+  "Boukar Alioum": "Alioum Boukar",
+  /* 1998. Cameroon’s squad page spells him without the apostrophe. */
+  "Joseph N'Do": "Joseph Ndo",
+  "Mohammed Al-Deayea": "Mohamed Al-Deayea",
+  /* IN THE LINE-UPS AND NOT IN THE SQUAD LIST, which is two articles
+     disagreeing rather than something to paper over. */
+  "Khamis Al-Dosari": null,
+
+  /* 1998 */
+  "Ali El Khattabi": "Ali Elkhattabi",
+  "Fahad Al-Mehallel": "Fahd Al-Mehallel",
+  "César Augusto Ramírez": "César Ramírez",
+  /* SPAIN’S RIGHT-BACK, not Paraguay’s midfielder. Both squads carry an
+     Aguilera and the match report links his full legal name, which is the
+     kind of near-miss that credits a card to the wrong man in the wrong
+     country. Checked against the Spain v Bulgaria line-up. */
+  "Juan Carlos Aguilera": {n: "Carlos Aguilera", side: "Spain"},
+  /* he played under one name and Wikipedia files him under the other */
+  "Preki": "Predrag Radosavljević",
+  "Selim Ben Achour": "Selim Benachour",
+  "Mohammed Al-Jahani": null,
+
   /* on the pitch in Germany, not among the twenty-three their country's squad
      page lists. Two articles disagreeing, not something to paper over. */
   "Hussein Sulaimani": null,
@@ -295,7 +348,7 @@ function extraPages(text, had){
   let yel = 0, red = 0, rows = 0;
   /* THE POSITION IS SOMETIMES A TOOLTIP: see the note in build-wc2006-xi.js.
      Without this the 2014 final's cards and appearances are not counted. */
-  for (const m of text.matchAll(/^\|\s*(?:\{\{\s*abbr\s*\|\s*)?[A-Z]{2,3}(?:\s*\|[^}]*\}\})?\s*\|\|[^\n]*?\[\[([^\]|]+)(?:\|[^\]]*)?\]\]([^\n]*)$/gm)) {
+  for (const m of text.matchAll(/^\|\s*(?:\{\{\s*abbr\s*\|\s*[A-Z]{2,3}\s*\|[^}\n]*\}\}|[A-Z]{2,3})\s*\|\|[^\n]*?\[\[([^\]|]+)(?:\|[^\]]*)?\]\]([^\n]*)$/gm)) {
     const man = find(m[1]);
     rows++;
     if (!man) continue;
