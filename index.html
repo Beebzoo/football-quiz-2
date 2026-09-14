@@ -5884,7 +5884,7 @@ function setTheme(t){
   applyTheme();
   render();
 }
-const BUILD = "14 Sep 2026 · 02:47";
+const BUILD = "14 Sep 2026 · 02:53";
 const DECKS = {};
 const TEAMS = {};
 /* the inline bank IS the classic deck. Same array, not a copy, so the five
@@ -7138,6 +7138,10 @@ function deckFor(){
   return DECKS[S.mc ? S.mode + "-mc" : S.mode] || null;
 }
 function bankFor(t){ const d = deckFor(); return d ? d[t] : null; }
+/* A QUESTION THE RE-TIER HAS MOVED is still in its old tier, marked, because
+   taking it out would re-point every index above it and S.used holds indexes.
+   Every draw skips anything marked; nothing else has to know. */
+const liveQ = (bank, n) => !!(bank && bank[n]) && !bank[n].x;
 /* S.qd says which deck the loaded question came out of, and only The Dugout
    ever sets it. Without this the index would be read back out of the quiz's
    own bank and answer a different question entirely. */
@@ -8296,7 +8300,7 @@ function h2Draw(t, i, w){
     const bank = h2Bank(id, t);
     if(!bank) return false;
     const used = h2Used(id, t);
-    const avail = bank.map((_, n) => n).filter(n => !used.includes(n));
+    const avail = bank.map((_, n) => n).filter(n => !used.includes(n) && liveQ(bank, n));
     if(!avail.length) return false;
     /* HIS SPECIALISM FIRST, and only if the deck has enough of it left. A
        preference rather than a requirement: insisting would either repeat the
@@ -8801,7 +8805,7 @@ const dailyBankCache = {};
 function dailyBank(tier){
   if(dailyBankCache[tier]) return dailyBankCache[tier];
   const bank = (DECKS["classic-mc"] || {})[tier] || [];
-  const rows = bank.map((q, i) => ({k: qKey(q), i: i}));
+  const rows = bank.map((q, i) => ({k: qKey(q), i: i, x: !!q.x})).filter(r => !r.x);
   rows.sort((a, b) => a.k < b.k ? -1 : a.k > b.k ? 1 : 0);
   return (dailyBankCache[tier] = rows);
 }
@@ -9803,6 +9807,12 @@ function logOutcome(kind, ok, who){
   try{
     const log = JSON.parse(localStorage.getItem(LOG_KEY) || "[]");
     const row = {t: Date.now(), mode: S.mode, mc: !!S.mc, tier: S.tier, qi: S.qi, kind: kind, ok: !!ok};
+    /* THE QUESTION'S OWN NAME, which an index is not: append a pack to a tier
+       and every row filed before it points at a different question. Plus the
+       deck it came out of, because a ball in The Dugout draws from the man's
+       league rather than the quiz's own bank. */
+    try{ const Q = q(); if(Q && Q.q) row.k = qKey(Q); }catch(e){}
+    if(S.qd) row.qd = S.qd;
     /* the match this belonged to, so a report can find its own rows rather
        than every ball ever played on this phone */
     if(S.mid) row.mid = S.mid;
@@ -9887,6 +9897,24 @@ function outcomesTSV(){
     log.map(r => [new Date(r.t).toISOString(), r.mid || "", r.mode, r.mc ? 1 : 0, r.tier, r.qi,
       r.kind, r.ok ? 1 : 0, r.w == null ? "" : r.w, r.i == null ? "" : r.i,
       r.who || "", r.pos || "", r.lg || "", r.line || "", r.form || ""].join("\t")).join("\n");
+}
+/* THE WHOLE LOG AS A FILE, because there is no server and there is not going
+   to be one: this is how the data gets to a laptop, where several phones'
+   worth can be merged in a folder and _tools/retier.js reads the lot. */
+function downloadOutcomes(){
+  audio();
+  let log = [];
+  try{ log = JSON.parse(localStorage.getItem(LOG_KEY) || "[]"); }catch(e){}
+  if(!log.length) return toast("Nothing judged on this phone yet.", true);
+  const out = JSON.stringify({app: "BALL 2 outcomes", at: new Date().toISOString(), rows: log});
+  try{
+    const a = document.createElement("a");
+    if(typeof a.click !== "function") return toast("This browser will not save a file.", true);
+    a.href = "data:application/json;charset=utf-8," + encodeURIComponent(out);
+    a.download = "ball2-outcomes-" + dayKey() + ".json";
+    a.click();
+    toast(log.length + " outcomes saved.");
+  }catch(e){ toast("Could not save it.", true); }
 }
 function copyOutcomes(){
   const n = outcomesTSV().split("\n").length - 1;
@@ -12631,6 +12659,7 @@ function renderBoard(st){
           the raw material for re-tiering the bank from what people actually
           got, and it only accumulates from the day it starts being kept */""}
     <button class="bigbtn ghost tinybtn" onclick="copyOutcomes()">Copy every judged question to the clipboard</button>
+    <button class="bigbtn ghost tinybtn" onclick="downloadOutcomes()">Save them as a file, for re-tiering</button>
     <!-- THE ONLY BACKUP ANY OF THIS WILL EVER HAVE. There is no server and
          there never will be, so a cleared browser or a new phone takes the
          album, the streak and the record book with it unless somebody has
@@ -13281,7 +13310,7 @@ function resumeGame(){
 function pickTier(t){
   audio();
   if(isGuest()) return mpAct("pickTier",[t]);
-  const avail=bankFor(t).map((_,i)=>i).filter(i=>!S.used[t].includes(i));
+  const avail=bankFor(t).map((_,i)=>i).filter(i=>!S.used[t].includes(i) && liveQ(bankFor(t), i));
   if(!avail.length){ toast("No "+TIERS[t].label+" questions left!", true); return; }
   S.tier=t; S.qi=avail[Math.floor(Math.random()*avail.length)];
   S.used[t].push(S.qi);
@@ -13302,7 +13331,7 @@ function skipQuestion(){
   if(!["question","steal_q","w_answer"].includes(S.phase)) return;
   if(isGuest()) return mpAct("skipQuestion",[]);
   const t=S.tier;
-  const avail=bankFor(t).map((_,i)=>i).filter(i=>!S.used[t].includes(i));
+  const avail=bankFor(t).map((_,i)=>i).filter(i=>!S.used[t].includes(i) && liveQ(bankFor(t), i));
   if(!avail.length){ toast("No more "+TIERS[t].label+" questions to skip to!", true); return; }
   S.qi=avail[Math.floor(Math.random()*avail.length)];
   S.used[t].push(S.qi);
