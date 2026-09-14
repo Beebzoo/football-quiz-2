@@ -2863,6 +2863,50 @@
     padding:5px 6px;border-radius:var(--r2)}
   .mm-play{flex:none;padding:9px 15px;border:1px solid var(--gold-hi);border-radius:var(--r2);
     background:none;color:var(--gold-hi);font:700 13px/1 var(--ui);letter-spacing:.06em}
+  /* ---------------- THE DAILY'S SIX MARKS ----------------
+     The front door's most important row had two states wearing one face. Once a
+     streak was running, a daily you had played and a daily you had not both put
+     the same gold number on the right of the row, and the only thing telling
+     them apart was a sentence you had to stop and read. So the row carries the
+     ladder itself now, six marks under the name, filled as far as the ball got.
+     It is the same picture the share line posts into WhatsApp, so anybody who
+     has seen their own result once already knows how to read it.
+
+     GREEN AND RED ARE THE IN-APP LADDER'S OWN, #3E6B52 and #8C3A2A out of
+     .dlr.won and .dlr.lost, rather than the tier colours. A tier belongs on a
+     rung you are looking at one at a time, and six of them at nine pixels each
+     is confetti. What this row answers is how far, not which tier.
+
+     AN UNPLAYED ROW IS SIX OUTLINES, so the outline has to be visible or the
+     state that sells the whole thing is a row with a gap in it. That is why the
+     border is --line and not the --line-soft hairline next door: soft is ten
+     percent cream on the pitch green, which is a divider you are meant not to
+     notice, and six of those at nine pixels is nothing at all. */
+  .mm-lad{display:flex;align-items:center;gap:4px;padding:1px 0}
+  .mm-lad i{flex:none;width:9px;height:9px;border-radius:2px;background:none;
+    border:1px solid var(--line)}
+  .mm-lad i.won{border-color:#3E6B52;background:#3E6B52}
+  .mm-lad i.lost{border-color:#8C3A2A;background:#8C3A2A}
+  .mm-lad i.now{border-color:var(--gold-hi)}
+  /* THE NUMBER SITS WITH THE MARKS UNTIL THE DAY IS DONE, and then it moves to
+     the right of the row at twenty-four pixels. Finishing the daily makes your
+     own streak visibly bigger on the page, which costs nothing and is the only
+     reward the front door can hand out by itself. */
+  .mm-lad b{margin-left:4px;font:400 10px/1 var(--px16);color:var(--ink-dim)}
+  /* THE EVENING TURNS THE WHOLE LADDER GOLD. .mm-lad.risk i and .mm-lad i.won
+     weigh the same, two classes and an element each, so the later one takes the
+     border and leaves the fill alone. That is deliberate: on the one night this
+     fires, a rung already cleared keeps its green body and picks up the gold
+     edge with the rest of them, because what is at stake is the row and not any
+     one mark on it. */
+  .mm-lad.risk i{border-color:var(--gold-hi)}
+  .mm-lad.risk b{color:var(--gold-hi)}
+  /* A FINISHED DAY STOPS ASKING. The name drops to the dim ink, which is the
+     difference between a row that wants something from you and a row telling
+     you what already happened. It is also the first rule this class has ever
+     had: the markup has been shipping "mm-item done" with nothing behind it,
+     so the finished state of the front door's biggest row was invisible. */
+  .mm-item.done .nm{color:var(--ink-dim)}
   /* THE CUP. A wall chart on a phone is a column of ties rather than a tree:
      the tree only reads at A3, and what somebody actually wants to know is who
      is next and who is waiting. */
@@ -9970,6 +10014,50 @@ function dailyToday(){
   if(m.daily && m.daily.date === day) return m.daily;
   return null;
 }
+/* LATE IN THE DAY, AND ONLY WHEN THERE IS SOMETHING REAL TO LOSE.
+   Nothing else in this app has ever asked what the time is, and the reason to
+   start now is that a streak is the one thing in here a person can lose by
+   doing nothing at all. Everything below exists to keep this rare, because a
+   warning you see every day is furniture by the end of the week.
+
+   NINE IN THE EVENING. Earlier than that there is no news. Telling somebody at
+   four in the afternoon that they have not played yet is not a warning, it is
+   nagging, and they can see the hours left in the day out of the window. Nine
+   is the hour an evening has a shape: whatever is left of it is short and it is
+   countable, so the card can say how much rather than just that it is late.
+
+   ONE DAY COUNTS. A run of one looks like the least worth defending and is in
+   fact the one that decides everything, because the player who came back on the
+   Wednesday is the player who has a habit by Friday and the one who did not is
+   gone. What changes at one is the copy, not the rule: nobody is told they are
+   about to lose a streak of one, they are told they can make it two.
+
+   AND IT HAS TO BE YESTERDAY. streak.played is never zeroed on a gap: the only
+   place that writes it is dailyStreak, on a day somebody actually finished, so
+   a phone that ran to thirty and then stopped for a week still has thirty
+   sitting in storage. Without the check against yesterday's key that phone
+   would be told every night for the rest of its life that it is about to lose a
+   streak which died last Tuesday.
+
+   THE CLOCK IS AN ARGUMENT. It defaults to now, and the card hands down its
+   own, so a test can put the app at two minutes to midnight without waiting for
+   it and without freezing Date under the whole file. A rule about the hour that
+   can only be checked by being awake at the right hour is a rule nobody checks
+   twice.
+
+   It hands back the minutes left in the local day rather than a yes or no, so
+   the caller can say how long there is. Zero means say nothing at all. */
+function dailyRisk(now){
+  const m = mine(), st = m.streak || {};
+  const t = now || new Date();
+  const d = (m.daily && m.daily.date === dayKey(t)) ? m.daily : null;
+  if(d && d.done) return 0;                      // today is already in the bank
+  if(!(st.played >= 1)) return 0;
+  const y = new Date(t.getTime()); y.setDate(y.getDate() - 1);
+  if(st.last !== dayKey(y)) return 0;            // the streak is already gone
+  if(t.getHours() < 21) return 0;
+  return (23 - t.getHours()) * 60 + (60 - t.getMinutes());
+}
 function dailyStart(){
   audio();
   const m = mine(), day = dayKey();
@@ -10037,7 +10125,21 @@ function dailyOn(){
    not a streak. */
 function dailyStreak(d){
   const m = mine(), st = m.streak;
-  const y = new Date(); y.setDate(y.getDate() - 1);
+  /* YESTERDAY IS COUNTED BACK FROM THE DAY BEING SCORED, not from the clock at
+     the moment the sixth question lands. Those are the same date all day long
+     and a different one for anybody who taps Play at five to midnight: the day
+     is stamped when it starts, so a run begun on Tuesday and finished at eight
+     minutes past twelve was checked against Wednesday's yesterday, which is
+     Tuesday, which is not the day before the day they were playing. Their
+     streak reset to one for the crime of starting late. The card now tells
+     people to do exactly that after nine in the evening, so this had to be
+     right before the warning shipped, or the app would be handing out the
+     punishment it was warning them about.
+
+     It also unfreezes daily-test.js, which pins d.date to 20260914 and
+     streak.last to 20260913 and passed only because the wall clock happened to
+     agree with it on the day it was written. */
+  const y = dayFromKey(d.date); y.setDate(y.getDate() - 1);
   const yesterday = dayKey(y);
   if(st.last === d.date) return;                 // already counted today
   st.played = (st.last === yesterday) ? st.played + 1 : 1;
@@ -10094,6 +10196,80 @@ function dailyShare(){
    scales it down to a thumbnail. */
 const DSHOT = 600, DPX = 4;
 const dsnap = n => Math.round(n / DPX) * DPX;
+/* A BLENDER OF ITS OWN, and yes the sixteen-bit renderer already has one. That
+   one is shut inside the G3 closure along with the sprite palette it was
+   written for, so nothing out here can call it, and prying the closure open to
+   share four lines would mean editing the one module in this file that is least
+   safe to edit for the sake of the one that is most isolated. So these are its
+   four lines again, deliberately to the letter, because two blenders that are
+   the same code are a search away from each other and two that have drifted
+   apart are a bug. Two hexes and a fraction in, one hex out. */
+const dblend = (a, b, t) => "#" + [1, 3, 5].map(i => {
+  const A = parseInt(a.substr(i, 2), 16), B = parseInt(b.substr(i, 2), 16);
+  return Math.round(A + (B - A) * t).toString(16).padStart(2, "0");
+}).join("");
+/* THE TWO MARKS, as cells on the same four pixel grid the rest of the picture
+   is built on, because there is no CSS out here and no promise that a webfont
+   has landed. A glyph would have been one character of Silkscreen and a coin
+   toss over whether the face was fetched before the canvas was drawn.
+
+   They are read as [column, row] inside the thirty-two pixel core of a rung,
+   eight cells by eight. Both marks used to be the same little plus sign in two
+   colours, and a plus at the size a chat app shows this is a plus whichever one
+   it is. A tick and a diagonal cross are still telling each other apart when
+   the whole picture is a hundred pixels wide. */
+const DTICK = [[1,3],[2,4],[3,5],[4,4],[5,3],[6,2]];
+const DCROSS = [[1,1],[2,2],[3,3],[4,4],[5,5],[6,6],[6,1],[5,2],[4,3],[3,4],[2,5],[1,6]];
+/* THE SHIRT, AND IT IS THE APP'S OWN SHIRT. These twelve points are the exact
+   list in the two clip-path rules, the album sticker's and the head to head
+   kit's, in the same order and to the same digit. A clip-path lives in a
+   stylesheet and nothing on the page can read one back out as numbers, so this
+   is the third copy of the shape and there is no way around that. Writing it as
+   the same percentages in the same order is what keeps a diff between the three
+   readable by a person: if the shoulders ever move, the search that finds all
+   of them is a search for 42% 9%.
+
+   Held as fractions rather than pixels, so one table draws him at whatever size
+   the picture wants. */
+const DKIT = [[.30,0],[.42,.09],[.58,.09],[.70,0],[1,.22],[.86,.38],
+              [.78,.30],[.78,1],[.22,1],[.22,.30],[.14,.38],[0,.22]];
+/* A POLYGON TURNED INTO CELLS, which is the whole of what box() can draw. One
+   row at a time: find where the outline crosses the middle of that row, sort
+   the crossings, and count a cell in when its own middle falls inside a pair.
+
+   IN PAIRS, NOT FIRST TO LAST, because the armpits are real notches in this
+   shape. At the height of the sleeve seam a row of it is three separate runs of
+   kit with two gaps of grass between them, and filling from the leftmost
+   crossing to the rightmost would quietly paper over the two things that make
+   the silhouette a shirt rather than a bell.
+
+   Sampling the middle of the row rather than its top edge keeps a scanline off
+   the vertices, where a crossing counted twice leaves a hole in the hem. It
+   hands back a grid rather than drawing, because the caller wants to know which
+   cells are on the edge before it paints any of them, and an edge worked out
+   from the finished grid cannot leak the way a second inset polygon can: inset
+   a concave shape by translating and scaling it and the armpit moves the wrong
+   way, which spills the body out through the notch. */
+function dkitCells(cols, rows){
+  const grid = [];
+  for(let row = 0; row < rows; row++){
+    const t = (row + .5) / rows, xs = [], on = [];
+    for(let i = 0; i < DKIT.length; i++){
+      const a = DKIT[i], b = DKIT[(i + 1) % DKIT.length];
+      if((a[1] > t) === (b[1] > t)) continue;
+      xs.push(a[0] + (b[0] - a[0]) * (t - a[1]) / (b[1] - a[1]));
+    }
+    xs.sort((p, q) => p - q);
+    for(let col = 0; col < cols; col++){
+      const u = (col + .5) / cols;
+      let inside = false;
+      for(let i = 0; i + 1 < xs.length; i += 2) if(u >= xs[i] && u <= xs[i + 1]) inside = true;
+      on.push(inside);
+    }
+    grid.push(on);
+  }
+  return grid;
+}
 function dailyCanvas(){
   const d = dailyToday();
   if(!d || !d.done) return null;
@@ -10134,22 +10310,58 @@ function dailyCanvas(){
     box(bx, top ? by + bh - L : by, bw, L, ink);
   }
 
-  /* THE LADDER, keeper to striker, up the middle. Green cleared, red where it
-     was lost, and the ones never reached drawn but emptied, which is the same
-     rule the album's gaps follow. */
+  /* THE LADDER, keeper to striker, up the middle.
+
+     THE BAND IS THE TIER AND THE CORE IS THE RESULT, which is the division the
+     in-app ladder already makes and the picture used to ignore completely. Six
+     rungs came out in two colours, so nothing in the image said that the top
+     one is the BALL and the bottom one is a gimme, and the app and the thing
+     people actually send each other were telling different stories about the
+     same six questions. The band comes out of TIERS now, the one table the
+     in-app ladder and every question card already read, so the picture cannot
+     drift away from the game a second time.
+
+     THE TIER COULD NOT BE THE FILL. Extreme is #dc2626, red is how this app
+     says wrong on every other surface, and two of these six rungs are extreme,
+     so painting a cleared rung in its own tier colour would hand somebody a
+     fire-engine red block for a question they got right. The core stays the one
+     green for every rung cleared whatever it cost, the band says what it cost,
+     and that reading cannot go wrong on the day a question is retiered.
+
+     THE SIZES ARE CHOSEN FOR THE THUMBNAIL, not for this screen. The band is
+     eight pixels all round, still two at the quarter scale a chat app hands
+     you, and the core is thirty two, still eight. So the result reads first and
+     the difficulty second, in that order, at every size this will be seen at.
+
+     AND THE LOST RUNG BURNS RATHER THAN GLOWS. It used to be a bright red
+     square with a darker cross cut into it, which was fine while every rung was
+     the same colour and stopped being fine the moment the band became the tier:
+     a #d9534f core inside a #dc2626 band is one red sitting on another red at
+     precisely the rung the whole picture exists to point at. So the core drops
+     to the burnt red the cross was already using and the cross comes up to the
+     bright one. A dark hole with a red cross in it looks like somewhere
+     something went wrong, which is exactly what it is. */
   const rungs = DAILY.length, got = d.got || [];
   const step = 64, base = BOT - 44;
   const rungY = i => base - i * step;
+  const PAD = "#0a1f0f";
   for(let i = 0; i < rungs; i++){
     const y = rungY(i);
     const state = i < got.length ? (got[i] ? "won" : "lost") : "none";
+    const band = ((TIERS[DAILY[i].tier] || {}).color) || "#5a9e63";
+    const core = state === "won" ? "#5a9e63" : state === "lost" ? "#4a1414" : PAD;
+    const mark = (cells, c) => { for(const p of cells) box(cx - 16 + p[0] * 4, y - 16 + p[1] * 4, 4, 4, c); };
+    box(cx - 28, y - 28, 56, 56, PAD);
     /* A RUNG NEVER REACHED IS DRAWN AND EMPTIED, not left out, which is the
-       same rule the album gaps follow: the slot being there is the point. */
-    const col = state === "won" ? "#5a9e63" : state === "lost" ? "#d9534f" : "#1e402a";
-    box(cx - 20, y - 20, 40, 40, "#0a1f0f");
-    box(cx - 16, y - 16, 32, 32, col);
-    if(state === "won"){ box(cx - 8, y - 2, 16, 4, "#0a1f0f"); box(cx - 2, y - 8, 4, 16, "#0a1f0f"); }
-    if(state === "lost"){ box(cx - 10, y - 2, 20, 4, "#4a1414"); box(cx - 2, y - 10, 4, 20, "#4a1414"); }
+       same rule the album gaps follow: the slot being there is the point. Its
+       band is the tier sunk most of the way into the dark, because at full
+       strength the gold ring on a striker's rung nobody got to is the brightest
+       thing in the picture, pointing hard at the one thing you failed to do. It
+       is still the right colour, it has just stopped shouting. */
+    box(cx - 24, y - 24, 48, 48, state === "none" ? dblend(band, PAD, .58) : band);
+    box(cx - 16, y - 16, 32, 32, core);
+    if(state === "won") mark(DTICK, PAD);
+    if(state === "lost") mark(DCROSS, "#d9534f");
   }
 
   /* THE BALL BESIDE ITS RUNG, not on top of it: sat over the mark it is meant
@@ -10158,12 +10370,66 @@ function dailyCanvas(){
   /* ALL THE WAY MEANS THE STRIKER HAS IT, so the ball stands beside his rung
      rather than floating above the pitch where it clipped the goal line. */
   const bally = rungY(Math.min(reached, rungs - 1));
-  const ballx = cx + 48;
+  /* eight pixels further out than it used to sit, because the rungs grew from
+     forty wide to fifty six when the tier band went round them, and the ball
+     ended up resting on the corner of the very rung it is pointing at */
+  const ballx = cx + 56;
   box(ballx - 16, bally - 16, 32, 32, "#0a1f0f");
   box(ballx - 12, bally - 12, 24, 24, "#f8f1dd");
   box(ballx - 8, bally - 4, 16, 4, "#0a1f0f");
   box(ballx - 4, bally - 8, 8, 4, "#0a1f0f");
   box(ballx - 4, bally + 4, 8, 4, "#0a1f0f");
+
+  /* THE MAN AT THE TOP OF THE LADDER, and the app's own silhouette on the one
+     picture that ever leaves the phone. Every other surface in BALL 2 wears the
+     shirt, the album sticker and the head to head pitch both, and this was the
+     single place it had never appeared, for the plain reason that box() is
+     fillRect and a twelve point clip-path is not a rectangle. So he is
+     rasterised, which is the same answer the centre circle already gave when it
+     was drawn as forty-five little blocks rather than an arc.
+
+     HE STANDS OPPOSITE THE BALL, on the far side of the ladder from it and
+     level with the striker's rung. The ball says where the run stopped, he says
+     what it was running at, and on a day that went all the way the two of them
+     end up either side of the top rung, which is the picture worth sending to
+     anybody. The penalty box line runs behind him rather than round him,
+     because that is what a line painted on grass does when a man stands on it.
+
+     HE HAS TO SURVIVE A THUMBNAIL, which is what this whole image is for.
+     Eighty-eight pixels on a six hundred pixel square is fifteen across once a
+     chat app is done with it, and what reads at fifteen pixels is not the
+     collar or the hem, it is one fact: he is twice as wide at the shoulders as
+     at the waist, so he is the only thing on this pitch that is neither a
+     square nor a circle. Smaller than this and he is a smudge with no shape in
+     it, which is worse than not drawing him at all.
+
+     THE BODY IS A REAL COLOUR AND THE EDGE IS THE FULL GOLD. Flat gold all
+     through, a shape this size drowns the six rungs standing beside it. Drawn
+     as an outline on bare pitch he goes hollow, and filled with the dark green
+     of an unreached rung he and the rungs melt into one lump the moment the
+     picture is scaled down. So the body is the kit sunk most of the way to the
+     grass, which is a colour nothing else on this pitch wears, and the edge
+     keeps all of the gold so the silhouette still reads after the body has gone
+     to mud.
+
+     ALL SIX LIGHTS HIM UP. Then the body and the edge are the same
+     full-strength gold and he is one solid shirt, which is the grammar the
+     ladder beside him uses as well: filled for had it, hollow for did not. The
+     shadow is a second pass of the same cells offset one cell down and across,
+     the way the head to head kit carries a drop shadow in CSS, because on grass
+     stripes a shape with nothing under it floats. */
+  const kit = ((TIERS.ball || {}).color) || "#c9932e", hasHim = reached >= rungs;
+  const body = hasHim ? kit : dblend(kit, "#0b2a14", .6);
+  const KW = 88, KH = 96, shx = 152, shy = 108;
+  const grid = dkitCells(KW / DPX, KH / DPX);
+  const lit = (a, b) => !!(grid[a] && grid[a][b]);
+  for(const shadow of [1, 0])
+    for(let a = 0; a < grid.length; a++) for(let b = 0; b < grid[a].length; b++){
+      if(!lit(a, b)) continue;
+      const rim = !lit(a - 1, b) || !lit(a + 1, b) || !lit(a, b - 1) || !lit(a, b + 1);
+      box(shx + (b + shadow) * DPX, shy + (a + shadow) * DPX, DPX, DPX,
+        shadow ? PAD : rim ? kit : body);
+    }
 
   /* the words, in the app's own face when it has landed */
   const face = '"Silkscreen","Courier New",monospace';
@@ -16356,12 +16622,40 @@ function renderBoard(st){
 /* THE WAY IN, and the only thing on the front door that changes by itself.
    It says what today is, what you did with it, and what your streak is, which
    between them are the three reasons anybody opens an app on a Tuesday. */
-function dailyCardHTML(){
+function dailyCardHTML(now){
   if(!DECKS["classic-mc"]) return "";      // the pack has not landed yet
+  /* THE CLOCK COMES IN AT THE TOP AND EVERY DATE BELOW IS CUT FROM IT. The row
+     never cared what the time was until the evening warning arrived, and the
+     moment it did, the hour was being read three layers down inside a render,
+     which is a thing you can only test by staying up. One argument, defaulting
+     to now, and the whole row can be put at two minutes to midnight. */
+  const t = now || new Date();
   const m = mine(), st = m.streak || {played: 0, half: 0};
-  const d = (m.daily && m.daily.date === dayKey()) ? m.daily : null;
+  const d = (m.daily && m.daily.date === dayKey(t)) ? m.daily : null;
   const done = d && d.done;
-  const said = !d ? (dailyMan(dayKey()) ? "Six questions, one per rung, and a sticker on it."
+  /* THE WARNING OWNS THE SENTENCE WHEN THERE IS ONE. dailyRisk only answers
+     after nine in the evening and only with a run genuinely about to go, so
+     when it does answer there is nothing else this row could say that is worth
+     more, and it takes the line rather than being bolted underneath it.
+
+     THE TIME IS IN WORDS AND IT ALWAYS ROUNDS DOWN. "1h 54m left" is a parking
+     meter. The hours are floored, so half past ten says an hour when there is
+     an hour and a half, and three hours is only ever said at nine o'clock when
+     there really are three. Promising time that is not there is how an app
+     teaches somebody to stop believing it, and under is the only safe direction
+     to be wrong in.
+
+     AND A RUN OF ONE GETS ITS OWN SENTENCE, because "1 days on the line" is
+     what happens otherwise, and because a run of one is not a thing to defend,
+     it is a thing to double. */
+  const risk = dailyRisk(t);
+  const when = !risk ? ""
+    : risk >= 120 ? Math.floor(risk / 60) + " hours left today."
+    : risk >= 60 ? "An hour left today." : "Minutes left today.";
+  const said = risk ? (st.played === 1
+        ? "You played yesterday. Two minutes makes it two. " + when
+        : st.played + " days on the line. " + when)
+    : !d ? (dailyMan(dayKey(t)) ? "Six questions, one per rung, and a sticker on it."
                                         : "Six questions, one per rung. Two minutes.")
     : done ? (d.reached >= 6 ? "All the way to the striker." :
               d.reached === 0 ? "Lost on the first pass." : "You got to " + DAILY[d.reached - 1].to + ".")
@@ -16397,13 +16691,43 @@ function dailyCardHTML(){
      twenty pixel name and a line of the app's own voice under it. The album and
      Your XI are things you own: they are the same row two points smaller with a
      number on the right, because what you want from them is the count. */
+  /* SIX MARKS, THE SAME SIX THE SHARE LINE POSTS. A rung that was cleared is
+     filled, the one that broke the run is red, the ones never reached are
+     outlines, and the one being played right now wears the gold rim. This is
+     the rung DESIGN-TODO asked for on this row: it was prose, and prose is the
+     one thing nobody reads on a front door. The sentence underneath is still
+     there and still the app's own voice, it just is not carrying the facts on
+     its own any more. */
+  const got = (d && d.got) || [];
+  const pips = DAILY.map((r, i) =>
+    '<i' + (i < got.length ? (got[i] ? ' class="won"' : ' class="lost"')
+      : (d && !done && i === d.rung) ? ' class="now"' : "") + '></i>').join("");
+  /* A RUN IS ONLY A RUN WHILE IT IS STILL STANDING. streak.played keeps
+     whatever it reached forever, so a phone that played nine days and then went
+     quiet for a fortnight was still being shown a nine, right up to the moment
+     the next play quietly turned it into a one. The number is worth showing
+     while it is alive and worth dropping the day it is not, and the test for
+     alive is dailyStreak's own: counted today, or counted yesterday. A run of
+     one says a day, because one in a row is not a thing anybody says. */
+  const yd = new Date(t.getTime()); yd.setDate(yd.getDate() - 1);
+  const live = st.played > 0 && (st.last === dayKey(t) || st.last === dayKey(yd));
+  /* THE STREAK MOVES WHEN THE DAY IS DONE, and the right of the row belongs to
+     the button until then. This is the whole of the old bug: the right slot was
+     picked by whether a streak existed rather than by whether today had been
+     played, so from the second day onwards somebody with a streak got the same
+     gold number on the row morning and night, and a row with a number on it and
+     no button reads as a row that has already been dealt with. The button is
+     back every day until the day is actually in the bank, and it says Finish
+     rather than Play when there is a run half up the pitch waiting. */
+  const lad = '<span class="mm-lad' + (risk ? " risk" : "") + '">' + pips +
+    (!done && live ? '<b>' + (st.played === 1 ? "1 day" : st.played + " in a row") + '</b>' : "") + '</span>';
   const daily = '<button class="mm-item' + (done ? " done" : "") + '" onclick="dailyStart()">' +
-    '<span class="txt"><span class="nm">The Daily Ball</span>' +
+    '<span class="txt"><span class="nm">The Daily Ball</span>' + lad +
       '<span class="sub">' + esc(said) + '</span></span>' +
-    (st.played
+    (done
       ? '<span class="mm-count"><b>' + st.played + '</b><span>DAY' +
         (st.played === 1 ? "" : "S") + '</span></span>'
-      : '<span class="mm-play">Play</span>') +
+      : '<span class="mm-play">' + (d ? "Finish" : "Play") + '</span>') +
     '</button>';
   return '<div><div class="mm-eyebrow">Your club</div><div class="mm-list">' +
     daily + cupRow_() + albumRow + dreamRow +

@@ -263,6 +263,136 @@ const check = (n, c, x) => {
   run(app, 'importMine("{\\"app\\":\\"something else\\"}");'); await tick(100);
   check("and refuses anything that is not ours", ev(app, "mine().daily") !== null, "it took it");
 
+  console.log("\n--- the evening warning, on a clock we drive ---");
+  /* THE HOUR IS AN ARGUMENT, so this walks a whole evening in a few
+     milliseconds instead of waiting for one, and every date in here is cut from
+     the same fixed day. A test that reads the wall clock either sleeps until
+     nine or asserts nothing, and this suite already has one set of assertions
+     that passed by coincidence of the date they were written on. */
+  const AT = (h, mi) => "new Date(2026, 8, 14, " + h + ", " + (mi || 0) + ")";
+  const standing = (played, last) =>
+    'localStorage.removeItem("ball2-mine"); MINE = null; ' +
+    "mine().streak.played = " + played + "; mine().streak.last = " + last + "; " +
+    "delete mine().daily; mineSave();";
+  const risk = (h, mi) => ev(app, "dailyRisk(" + AT(h, mi) + ")");
+
+  run(app, standing(9, 20260913));
+  check("nothing at four in the afternoon", risk(16, 0) === 0, risk(16, 0));
+  check("nothing at a minute to nine", risk(20, 59) === 0, risk(20, 59));
+  check("three hours at nine on the dot", risk(21, 0) === 180, risk(21, 0));
+  check("an hour at eleven", risk(23, 0) === 60, risk(23, 0));
+  check("one minute at a minute to midnight", risk(23, 59) === 1, risk(23, 59));
+  /* IT CANNOT OVERSTATE. Every minute of the evening, the minutes it hands back
+     are the minutes there really are. */
+  let wrong = 0, worst = "";
+  for (let h = 21; h < 24; h++) for (let mi = 0; mi < 60; mi++) {
+    const want = 24 * 60 - (h * 60 + mi);
+    if (risk(h, mi) !== want) { wrong++; worst = h + ":" + mi + " gave " + risk(h, mi) + " want " + want; }
+  }
+  check("and every minute of the evening is counted honestly", wrong === 0, worst);
+  /* MIDNIGHT NEEDS NO SPECIAL CASE: the hour falls to zero and it goes quiet on
+     its own, even for the run that was still alive a minute earlier. */
+  run(app, standing(9, 20260914));
+  check("and it is quiet again at half past midnight",
+    ev(app, "dailyRisk(new Date(2026, 8, 15, 0, 30))") === 0,
+    ev(app, "dailyRisk(new Date(2026, 8, 15, 0, 30))"));
+
+  console.log("\n--- and the three ways it could have become a nag ---");
+  run(app, standing(0, 0));
+  check("nobody with no run is warned about one", risk(22, 0) === 0, risk(22, 0));
+  run(app, standing(9, 20260905));
+  check("a run that died last week is left alone", risk(22, 0) === 0, risk(22, 0));
+  run(app, standing(9, 20260913) +
+    "mine().daily = {date: 20260914, rung: 5, done: true, reached: 6, got: [1,1,1,1,1,1], spent: {}};");
+  check("and a day already in the bank says nothing", risk(22, 0) === 0, risk(22, 0));
+  /* A RUN OF ONE IS THE WEDNESDAY RETURN, which is the whole retention loop, so
+     it is warned like any other. What changes at one is the sentence. */
+  run(app, standing(1, 20260913));
+  check("but a run of one is still worth saving", risk(22, 0) === 120, risk(22, 0));
+
+  console.log("\n--- the front door's daily row ---");
+  /* NOTHING IN THE SUITE HAS EVER RENDERED THIS ROW, which is how a class with
+     no rule behind it and a right-hand slot that stopped asking to be tapped
+     both shipped. */
+  const row = (h, mi) => ev(app, "dailyCardHTML(" + AT(h, mi) + ")").split("</button>")[0];
+  run(app, standing(9, 20260913));
+  const untouched = row(10, 0);
+  check("six marks, one per rung", (untouched.match(/<i/g) || []).length === 6,
+    (untouched.match(/<i/g) || []).length);
+  check("none of them filled before the day is opened",
+    !/class="won"/.test(untouched) && !/class="lost"/.test(untouched), untouched);
+  /* THE REGRESSION THAT WOULD HAVE CAUGHT THE OLD BUG: a streak used to take
+     the Play pill away and leave a number in its place, every day, forever. */
+  check("a nine day run still gets the Play pill", /mm-play">Play</.test(untouched), untouched);
+  check("and no streak number in the button's place", !/mm-count/.test(untouched), untouched);
+  check("the run is named small, beside the marks", /9 in a row/.test(untouched), untouched);
+
+  run(app, standing(9, 20260913) +
+    "mine().daily = {date: 20260914, rung: 2, done: false, got: [true, true], spent: {}};");
+  const midrun = row(10, 0);
+  check("a day half up the pitch says Finish", /mm-play">Finish</.test(midrun), midrun);
+  check("two marks filled and the third live",
+    (midrun.match(/class="won"/g) || []).length === 2 && /class="now"/.test(midrun), midrun);
+
+  run(app, standing(10, 20260914) +
+    "mine().daily = {date: 20260914, rung: 4, done: true, reached: 4, got: [1,1,1,1,0], spent: {}};");
+  const finished = row(10, 0);
+  check("a finished day hands the right slot back to the number",
+    /mm-count/.test(finished) && !/mm-play/.test(finished), finished);
+  check("and marks itself done, which now has a rule behind it",
+    /class="mm-item done"/.test(finished), finished.slice(0, 120));
+  check("four green and the one that broke it",
+    (finished.match(/class="won"/g) || []).length === 4 &&
+    (finished.match(/class="lost"/g) || []).length === 1, finished);
+
+  console.log("\n--- what the row says as the evening goes ---");
+  run(app, standing(9, 20260913));
+  check("nothing different at a minute to nine",
+    !/mm-lad risk/.test(row(20, 59)) && /Six questions/.test(row(20, 59)), row(20, 59));
+  const nine = row(21, 0);
+  check("at nine the ladder goes gold", /mm-lad risk/.test(nine), nine);
+  check("and it names the run and the time it has left",
+    /9 days on the line\. 3 hours left today\./.test(nine), nine);
+  check("half ten rounds down to an hour",
+    /An hour left today\./.test(row(22, 30)), row(22, 30));
+  check("eleven still says an hour, because there is one",
+    /An hour left today\./.test(row(23, 0)), row(23, 0));
+  check("and two minutes to midnight says minutes",
+    /Minutes left today\./.test(row(23, 58)), row(23, 58));
+  run(app, standing(1, 20260913));
+  check("a run of one is asked to double rather than told it is at risk",
+    /You played yesterday\. Two minutes makes it two\./.test(row(22, 0)), row(22, 0));
+  check("and is never told it has 1 days on the line", !/1 days/.test(row(22, 0)), row(22, 0));
+  check("nor that it is 1 in a row", /<b>1 day<\/b>/.test(row(22, 0)), row(22, 0));
+
+  console.log("\n--- a dead run is not a run ---");
+  /* streak.played is never zeroed on a gap, so the front door has to do the
+     arithmetic itself or it shows a nine to a phone that stopped a fortnight
+     ago, right up until the next play quietly turns it into a one. */
+  run(app, standing(9, 20260901));
+  const stale = row(10, 0);
+  check("a fortnight of silence stops showing the nine", !/in a row/.test(stale), stale);
+  check("and the row goes back to asking", /mm-play">Play</.test(stale), stale);
+
+  console.log("\n--- the streak is scored against the day it was played ---");
+  /* THE 23:58 CASE. The daily is stamped when it starts, so a run begun on the
+     Tuesday and finished at two minutes past midnight must still count as the
+     Tuesday. This used to read yesterday off the wall clock, which made the
+     fixtures below pass only on 14 Sep 2026 and punished anybody who took the
+     evening warning literally. */
+  run(app, 'localStorage.removeItem("ball2-mine"); MINE = null; ' +
+    "mine().streak.played = 30; mine().streak.last = 20251231; " +
+    "mine().daily = {date: 20260101, reached: 4, got: [1,1,1,1,0], done: true, spent: {}}; " +
+    "dailyStreak(mine().daily);");
+  check("new year's day carries on from new year's eve",
+    ev(app, "mine().streak.played") === 31, ev(app, "mine().streak.played"));
+  run(app, 'localStorage.removeItem("ball2-mine"); MINE = null; ' +
+    "mine().streak.played = 30; mine().streak.last = 20251229; " +
+    "mine().daily = {date: 20260101, reached: 4, got: [1,1,1,1,0], done: true, spent: {}}; " +
+    "dailyStreak(mine().daily);");
+  check("and a real gap still starts again at one",
+    ev(app, "mine().streak.played") === 1, ev(app, "mine().streak.played"));
+
   console.log("\n" + (fails ? fails + " FAILED" : "ALL PASS"));
   process.exit(fails ? 1 : 0);
 })().catch(e => { console.error(e); process.exit(1); });
