@@ -391,6 +391,17 @@
     --on-fill:rgba(227,180,83,.12);
     --on-line:rgba(227,180,83,.5);
     --on-ink:#E3B453;
+    /* THE FRONT PAGE'S FURNITURE, AND AT NIGHT IT DOES NOT MOVE. Every value
+       here is what the rule that reads it already resolved to, because the
+       night page is the pitch itself and cream furniture on it is chalk on
+       grass, which was right before any of this. The tokens exist so the paper
+       page can draw the same picture the other way up. */
+    --grass-eye:#9C9478;                      /* was --ink-dim */
+    --grass-dim:#9C9478;                      /* was --ink-dim */
+    --grass-rule:rgba(248,241,221,.18);       /* was --line */
+    --grass-line:rgba(248,241,221,.10);       /* was --line-soft */
+    --grass-go:#E3B453;                       /* was --gold-hi */
+    --grass-live:#E3B453;                     /* was --gold-hi */
     --desk:#0B0E08;
     --drop:rgba(0,0,0,.45);
     /* the hero's ground shadow. At night it only has to be darker than the
@@ -458,6 +469,25 @@
     --flood:transparent;
     --chalkline:rgba(45,74,62,.14);
     --chalkline-soft:rgba(45,74,62,.09);
+    /* THE FRONT PAGE'S FURNITURE, DRAWN THE OTHER WAY UP. The night page is
+       grass with chalk on it; paper is chalk, so the lines on it are grass.
+
+       AND THE TWO INK VALUES ARE A CONTRAST FIX AS MUCH AS A COLOUR. They
+       replace --ink-dim, which is 3.54 to 1 on this page and carries the
+       section labels, every subtitle, every value and the streak caption, all
+       of it small type that needs 4.5. The forest is --green's own value, so
+       nothing new is invented; the sage is the lightest green that clears AA.
+
+       THE LINES DO NOT GET LOUDER. --grass-line is 1.33 where the sand it
+       replaces was 1.31, because a row divider is meant to be felt rather than
+       read. --grass-rule is the exception at 1.64 against 1.47: a section rule
+       on this page is a pitch marking, and those are meant to be seen. */
+    --grass-eye:#2D4A3E;      /* 9.01:1, the forest --green already carries */
+    --grass-dim:#57735F;      /* 4.84:1, the lightest sage that clears AA */
+    --grass-rule:#B3C9AE;     /* 1.64:1 against 1.47, a chalk line you see */
+    --grass-line:#CBDCC6;     /* 1.33:1 against 1.31, a divider you feel */
+    --grass-go:#2D4A3E;       /* 9.01:1, where the gold outline was 2.79 */
+    --grass-live:#3E6B52;     /* 5.67:1 under cream ink, a match that is on */
     /* gold on cream has nowhere near the contrast it has at night, so the
        kicker goes forest green, and a hairline on paper reads as a mistake
        rather than a rule, so the header rule doubles. */
@@ -1887,8 +1917,8 @@
      drawn by the eyebrow itself rather than by an extra element, so every one
      of the seven call sites gets it without being touched. */
   .mm-eyebrow{display:flex;align-items:center;gap:10px;padding-bottom:10px;margin-bottom:0;
-    font:400 10px/1 var(--px16);letter-spacing:.16em;text-transform:uppercase;color:var(--ink-dim)}
-  .mm-eyebrow::after{content:"";flex:1;height:1px;background:var(--line)}
+    font:400 10px/1 var(--px16);letter-spacing:.16em;text-transform:uppercase;color:var(--grass-eye)}
+  .mm-eyebrow::after{content:"";flex:1;height:1px;background:var(--grass-rule)}
   .mm-sect{display:flex;flex-direction:column;gap:10px}
 
   /* the front door, and the two beside it */
@@ -1917,7 +1947,7 @@
      .mm-ghost alone, because the summary is never a flex item: the thing
      sitting in .mm-foot is the <details> around it, so a flex property up here
      would do nothing at all while looking for all the world like it did. */
-  .mm-ghost,.rules summary{padding:13px;border-radius:var(--r2);border:1px solid var(--line);
+  .mm-ghost,.rules summary{padding:13px;border-radius:var(--r2);border:1px solid var(--grass-rule);
     background:none;color:var(--ink-soft);font:600 14px/1 var(--ui);
     cursor:pointer;transition:transform .06s ease,border-color .15s ease}
   .mm-ghost{flex:1}
@@ -1950,8 +1980,8 @@
   .mm-pill[aria-pressed="true"]{border-color:var(--on-line);background:var(--on-fill);color:var(--on-ink);font-weight:700}
 
   /* the players, as a team sheet */
-  .mm-sheet{display:flex;flex-direction:column;border-top:1px solid var(--line-soft)}
-  .mm-row{display:flex;align-items:center;gap:12px;padding:11px 2px;border-bottom:1px solid var(--line-soft)}
+  .mm-sheet{display:flex;flex-direction:column;border-top:1px solid var(--grass-line)}
+  .mm-row{display:flex;align-items:center;gap:12px;padding:11px 2px;border-bottom:1px solid var(--grass-line)}
   .mm-row span{font:700 13px/1 var(--ui);color:var(--ink-dim);width:16px;flex:none}
   .mm-row input{flex:1;min-width:0;border:none;background:none;color:var(--ink);
     font:700 19px/1 var(--ui);outline:none;padding:2px 0}
@@ -1968,7 +1998,7 @@
      pxBallHTML, where the art is turned into rectangles. */
   .mm-kick .pxball{width:27px;height:27px;flex:none;display:block}
 
-  .mm-foot{display:flex;flex-direction:column;gap:10px;padding-top:16px;border-top:1px solid var(--line-soft)}
+  .mm-foot{display:flex;flex-direction:column;gap:10px;padding-top:16px;border-top:1px solid var(--grass-line)}
   /* ONE ITALIC VOICE, NOT TWO. The last match line and the notes under the
      controls are the same thing, the app speaking in its own voice, and they
      had drifted to 13px on 1.4 leading with six pixels of padding under one of
@@ -1978,7 +2008,7 @@
      both at 13px on 1.35, so .mm-last is gone and the line it carried wears
      this. The padding goes with it, because .mm-foot owns the space above that
      row and was paying for it twice. */
-  .mm-note{font:400 13px/1.35 var(--serif);font-style:italic;color:var(--ink-dim)}
+  .mm-note{font:400 13px/1.35 var(--serif);font-style:italic;color:var(--grass-dim)}
 
   /* Night and day. Small, at the bottom, next to the other thing you only
      touch once: this is a preference, not a feature. */
@@ -3356,29 +3386,35 @@
      of the page and scaling one looks like the page itself flinched. */
   .mm-list{display:flex;flex-direction:column}
   .mm-item{display:flex;align-items:center;gap:12px;width:100%;padding:14px 0;border:none;
-    border-bottom:1px solid var(--line-soft);background:none;text-align:left;cursor:pointer;
+    border-bottom:1px solid var(--grass-line);background:none;text-align:left;cursor:pointer;
     font-family:var(--ui);color:inherit;transition:opacity .15s ease}
   .mm-item:last-child{border-bottom:none}
   .mm-item:active{opacity:.7}
   .mm-item .txt{flex:1;display:flex;flex-direction:column;gap:3px;min-width:0}
   .mm-item .nm{font:700 20px/1 var(--ui);color:var(--ink)}
   .mm-item .nm.sm{font-size:18px}
-  .mm-item .sub{font:400 13px/1.3 var(--serif);font-style:italic;color:var(--ink-dim)}
-  .mm-item .val{flex:none;font:600 13px/1 var(--ui);color:var(--ink-dim)}
+  .mm-item .sub{font:400 13px/1.3 var(--serif);font-style:italic;color:var(--grass-dim)}
+  .mm-item .val{flex:none;font:600 13px/1 var(--ui);color:var(--grass-dim)}
   /* the figure is the app's own, at the size the handoff drew its stand-in */
   .mm-item .fig{flex:none}
   .mm-item .fig.dim{opacity:.55}
   .mm-count{flex:none;display:flex;flex-direction:column;align-items:center;gap:3px}
   .mm-count b{font:700 24px/1 var(--ui);color:var(--gold-hi)}
-  .mm-count span{font:400 10px/1 var(--px16);color:var(--ink-dim)}
+  .mm-count span{font:400 10px/1 var(--px16);color:var(--grass-dim)}
   /* SILKSCREEN LIVES HERE, ON THE EYEBROWS AND ON THE TWO THEME BUTTONS, AND
      NOWHERE ELSE. It is latin-1 only, so it is fine for ON, for 1 PACK and for
      the hard-coded words DARK and LIGHT, and it would quietly drop the accent
      off anything with a name in it. */
   .mm-chip{flex:none;font:400 10px/1 var(--px16);color:var(--bg);background:var(--gold-hi);
     padding:5px 6px;border-radius:var(--r2)}
-  .mm-play{flex:none;padding:9px 15px;border:1px solid var(--gold-hi);border-radius:var(--r2);
-    background:none;color:var(--gold-hi);font:700 13px/1 var(--ui);letter-spacing:.06em}
+  /* ONE CLASS WAS CARRYING TWO MEANINGS. The packs you are owed and the fact
+     that a match is running had the same gold badge, and on a page whose
+     furniture is green now the split is free: gold is what you have won, green
+     is the game itself. At night both are gold, because green on grass is not
+     a badge. */
+  .mm-chip.live{background:var(--grass-live)}
+  .mm-play{flex:none;padding:9px 15px;border:1px solid var(--grass-go);border-radius:var(--r2);
+    background:none;color:var(--grass-go);font:700 13px/1 var(--ui);letter-spacing:.06em}
   /* ---------------- THE DAILY'S SIX MARKS ----------------
      The front door's most important row had two states wearing one face. Once a
      streak was running, a daily you had played and a daily you had not both put
@@ -20572,7 +20608,7 @@ function renderSetup(st){
       <button class="mm-item" onclick="setPlay('${play}')" aria-pressed="${on}">
         ${h2FigHTML(on ? "" : "dim", kit, 30, null)}
         <span class="txt"><span class="nm">${name}</span><span class="sub">${sub}</span></span>
-        ${on?'<span class="mm-chip">ON</span>':""}
+        ${on?'<span class="mm-chip live">ON</span>':""}
       </button>`;
   };
   const seg = (opts) => '<div class="mm-seg">' + opts.map(o =>
