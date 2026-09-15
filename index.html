@@ -11,7 +11,7 @@
      this app since the sweep. The app opens dark unless the phone asks for
      light, and dark is the pitch green, so the bar starts there and is
      corrected for a light-theme person before they ever see the page. -->
-<meta name="theme-color" content="#FDF6E2">
+<meta name="theme-color" content="#DCEBD0">
 <!-- BOTH LOOKS, DECLARED BEFORE THE STYLESHEET PARSES. Without this the browser
      has no way to know the app has a dark theme, because the theme is switched
      by a data-theme attribute rather than by a media query, and Chrome and Edge
@@ -400,6 +400,7 @@
     --grass-dim:#9C9478;                      /* was --ink-dim */
     --grass-rule:rgba(248,241,221,.18);       /* was --line */
     --grass-line:rgba(248,241,221,.10);       /* was --line-soft */
+    --grass-nm:#F8F1DD;                       /* was --ink */
     --grass-go:#E3B453;                       /* was --gold-hi */
     --grass-live:#E3B453;                     /* was --gold-hi */
     --desk:#0B0E08;
@@ -433,19 +434,29 @@
     --bn-net:rgba(45,74,62,.26); --bn-net-d:rgba(45,74,62,.15);
     --bn-flash:#b8860b; --bn-shadow:rgba(70,58,34,.22);
 
-    --card:#FFFCF4;                /* paper, a shade above the ground */
+    --card:#EEF6E8;                /* a shade above the grass, 1.13:1 over it */
     --chalk:#2A2620;
     --chalk-dim:#5C5344;
     --blue:#2050B8;
     --ok:#1E7A4C;
     --bad:#B42B1B;
     --shadow:0 6px 18px rgba(42,38,32,.14);
-    --bg:#FDF6E2;                  /* warm paper, never white */
-    --ink:#2A2620;                 /* charcoal, never black */
-    --ink-soft:#5C5344;
-    --ink-dim:#8C8170;
-    --line:#DBCCA6;
-    --line-soft:#E4D8BC;
+    /* GRASS PAPER, NOT CREAM. The cream had red leading green by 27; this has
+       green leading red by 15, which is the whole difference between a page
+       about football and a page that is a pitch in flat daylight. It is 79%
+       light where the cream was 92%, so it is still unmistakably a light theme:
+       charcoal on it reads 12.06 to 1 against the old 13.93. */
+    --bg:#DCEBD0;                  /* the pitch, in daylight */
+    --ink:#2A2620;                 /* charcoal, never black. 12.06:1 */
+    --ink-soft:#3A4A3E;            /* 7.55:1, and it leans green now */
+    /* AND THIS ONE IS A FIX. At #8C8170 on the cream it was 3.54 to 1, which
+       fails AA for small text, and it carries captions all over the app. On a
+       darker ground it would have fallen to 3.33. It clears 4.5 now. */
+    --ink-dim:#506B5A;             /* 4.69:1, the first time this has passed */
+    /* both re-picked to land on the weight they had on cream, because a darker
+       ground quietens every hairline for free: 1.47 -> 1.46, 1.31 -> 1.29 */
+    --line:#AEC7A4;
+    --line-soft:#BED2B4;
     --line-head:#2D4A3E;
     --panel:transparent;
     --gold:#C99A2E; --gold-hi:#B98E28;
@@ -462,10 +473,12 @@
     /* on paper the shadow goes warm charcoal. #05100a, which is what the
        sprite was drawn against, is floodlit grass and punches a cold hole in
        the cream. */
-    /* FLAT. Mown bands on cream are streaks and a floodlight on cream is a
-       smudge behind the wordmark. Paper is paper: one colour, and the green
-       rule under the header does the dividing. */
-    --mow-a:#FDF6E2; --mow-b:#FDF6E2;
+    /* MOWN, AND THAT NOTE WAS ABOUT A DIFFERENT PAGE. Bands on cream were
+       streaks because cream is not grass; on grass paper they are what grass
+       paper is for. The two bands sit 1.0716 apart, which is the ratio the
+       night pitch's own bands already use and which was settled by looking.
+       The floodlight stays off: a light source belongs on a night pitch. */
+    --mow-a:#DCEBD0; --mow-b:#D4E4C6;
     --flood:transparent;
     --chalkline:rgba(45,74,62,.14);
     --chalkline-soft:rgba(45,74,62,.09);
@@ -482,12 +495,13 @@
        replaces was 1.31, because a row divider is meant to be felt rather than
        read. --grass-rule is the exception at 1.64 against 1.47: a section rule
        on this page is a pitch marking, and those are meant to be seen. */
-    --grass-eye:#2D4A3E;      /* 9.01:1, the forest --green already carries */
-    --grass-dim:#57735F;      /* 4.84:1, the lightest sage that clears AA */
-    --grass-rule:#B3C9AE;     /* 1.64:1 against 1.47, a chalk line you see */
-    --grass-line:#CBDCC6;     /* 1.33:1 against 1.31, a divider you feel */
-    --grass-go:#2D4A3E;       /* 9.01:1, where the gold outline was 2.79 */
-    --grass-live:#3E6B52;     /* 5.67:1 under cream ink, a match that is on */
+    --grass-eye:#1E4033;      /* 9.17:1 */
+    --grass-dim:#3F5C48;      /* 5.94:1 */
+    --grass-rule:#A1BD97;     /* 1.64:1, the weight it had on the cream */
+    --grass-line:#BCD0B2;     /* 1.32:1, ditto */
+    --grass-nm:#24463A;       /* 8.37:1, past AAA at 20px bold */
+    --grass-go:#1E4033;       /* 9.17:1, where the gold outline was 2.79 */
+    --grass-live:#2F6B4A;     /* 5.07:1 under the page's own ink */
     /* gold on cream has nowhere near the contrast it has at night, so the
        kicker goes forest green, and a hairline on paper reads as a mistake
        rather than a rule, so the header rule doubles. */
@@ -2774,8 +2788,21 @@
      ink was being written on it. The rule three hundred lines up says outright
      that this one follows the look and the pitch is green in both; this was the
      line breaking it. The image still goes, because mown bands behind a
-     sixteen-bit pitch is two grass textures arguing. */
-  body.pixel #pitchbg{background:var(--bg) !important;background-image:none !important}
+     sixteen-bit pitch is two grass textures arguing.
+
+     AND THAT ARGUMENT IS ONLY EVER HAD ON A MATCH SCREEN, which is what the
+     scope is for now. h2Pixel is a hardcoded true, so this rule fires on every
+     screen there is, and killing the image everywhere killed the mown bands
+     under the menu, the album and the Cup as well. #pitchbg was written to
+     carry them: it has a 72px gradient of its own and a note saying the bands
+     say pitch quite enough, which is why it has no centre circle and no halfway
+     line. That has not drawn since the skin went permanent, and --mow-a,
+     --mow-b and --flood have been dead tokens in both themes.
+
+     A MATCH STILL GETS THE FLAT BACKDROP. h2hmode is on exactly while a pitch
+     is on screen, which is exactly when two grass textures would argue. */
+  body.pixel #pitchbg{background:var(--bg) !important}
+  body.pixel.h2hmode #pitchbg{background-image:none !important}
   body.pixel .h2stage{background:none;box-shadow:none;border-radius:0}
 
   /* ---------------- the goal scene ----------------
@@ -3391,7 +3418,10 @@
   .mm-item:last-child{border-bottom:none}
   .mm-item:active{opacity:.7}
   .mm-item .txt{flex:1;display:flex;flex-direction:column;gap:3px;min-width:0}
-  .mm-item .nm{font:700 20px/1 var(--ui);color:var(--ink)}
+  /* THE LAST LARGE THING ON THE PAGE WITH NO GREEN IN IT. Six bold black
+     names on grass is not a picture football makes. Forest, 8.37:1, which is
+     past AAA at this size. */
+  .mm-item .nm{font:700 20px/1 var(--ui);color:var(--grass-nm)}
   .mm-item .nm.sm{font-size:18px}
   .mm-item .sub{font:400 13px/1.3 var(--serif);font-style:italic;color:var(--grass-dim)}
   .mm-item .val{flex:none;font:600 13px/1 var(--ui);color:var(--grass-dim)}
