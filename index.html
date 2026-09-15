@@ -2016,7 +2016,14 @@
     height:calc(var(--ush) * 4.6 / 22);
     transition:height .34s cubic-bezier(.34,1.32,.64,1)}
   .uspeek.up{height:var(--usup)}
-  .usman{position:absolute;left:0;top:0;width:100%;height:var(--usup);overflow:hidden}
+  /* THE WINDOW IS THE HEIGHT OF THE BUTTON, and that is the whole of what was
+     wrong. This used to be a fixed --usup with overflow:hidden, so it drew ten
+     units of man whatever the button said and the button's height only moved
+     his top about: ducking somebody slid his shirt down over the banner instead
+     of cutting him off at it, because .usheads sits inside the eyebrow and its
+     children paint on top of it. One thing has a size now and it is the
+     button. */
+  .usman{position:absolute;left:0;top:0;width:100%;height:100%;overflow:hidden}
   .usman .fig{position:absolute;left:50%;top:0;transform:translateX(-50%)}
   .uspeek:focus-visible{outline:3px solid #f7e3a6;outline-offset:2px}
   /* THE FINGERS, AND THEY ARE THE WHOLE JOKE. They do not go up with him: a
@@ -19112,23 +19119,21 @@ const US = [
 const US_KEY = "ball2-us";
 /* TWO, BECAUSE THE PILLS SAY TWO. The count control on the setup page offers
    2 players or 3 players and nothing else, so this is the app's own floor read
-   back rather than a number chosen here. */
+   back rather than a number chosen here. It is a floor on the COUNT and never
+   on the men: an empty wall is a fine thing to look at and the page opened in
+   exactly that state, two players and two placeholders, long before any of this
+   existed. */
 const US_FLOOR = 2;
-/* EVERYBODY IS UP UNTIL SOMEBODY IS NOT, which matches the count this page has
-   defaulted to since it was written. */
+/* NOBODY IS UP UNTIL SOMEBODY TAPS. The joke is three people behind a wall and
+   it cannot land if nobody is behind the wall, so the resting state is heads and
+   hands and popping up is the thing you do. An empty list is a real answer here
+   and comes back as one; only names that are not one of us are dropped. */
 function usLoad(){
   try{
     const v = JSON.parse(localStorage.getItem(US_KEY));
-    if(Array.isArray(v)){
-      const keep = v.filter(k => US.some(m => m.k === k));
-      /* THE FLOOR APPLIES TO WHAT COMES BACK OFF THE DISK TOO. localStorage
-         outlives the rule that wrote it, and a saved list of one would sit
-         under the floor for ever, because the tap guard only stops you going
-         down and never brings you back up. */
-      if(keep.length >= US_FLOOR) return keep;
-    }
+    if(Array.isArray(v)) return v.filter(k => US.some(m => m.k === k));
   }catch(e){}
-  return US.map(m => m.k);
+  return [];
 }
 let usUp = usLoad();
 const usOn = k => usUp.indexOf(k) !== -1;
@@ -19146,6 +19151,10 @@ function usApply(){
   for(let i = 0; i < US.length; i++) setupNames[i] = i < on.length ? on[i].n : "";
   setupCount = Math.max(US_FLOOR, on.length);
 }
+/* EVERY HEAD ANSWERS. There was a floor of two on the MEN here, so once one had
+   ducked the other two stopped responding and the page had three heads on it and
+   two that did nothing. A control that ignores you is worse than one that is not
+   there, and the floor was never about the men anyway: see usApply. */
 function usTap(k){
   audio();
   /* the same courtesy every other control on this page pays: whatever has been
@@ -19153,9 +19162,7 @@ function usTap(k){
      inputs away */
   snapshotNames();
   const at = usUp.indexOf(k);
-  /* TWO IS A QUIZ AND ONE IS NOT, so the second-to-last man stays up. */
-  if(at !== -1){ if(usUp.length <= US_FLOOR) return; usUp.splice(at, 1); }
-  else usUp.push(k);
+  if(at !== -1) usUp.splice(at, 1); else usUp.push(k);
   usApply(); usRemember(); render();
 }
 /* HANGING ON THE BANNER, WHICH IS ALREADY A LINE ACROSS THE PAGE. Nothing here

@@ -127,6 +127,15 @@ const check = (n, c, x) => {
      only as "it feels jumpy". */
   check("the space above the bar is reserved for the tallest state",
     /\.mm-club\{[^}]*padding-top:var\(--usup\)/.test(SRC), "the page will shift on a tap");
+  /* THE WINDOW IS THE HEIGHT OF THE BUTTON, and this is the one that shipped
+     broken. .usman used to be a fixed --usup with overflow:hidden, so it drew
+     ten units of man whatever the button said and the button's height only
+     moved his top about: ducking somebody slid his shirt down OVER the banner
+     instead of cutting him off at it, because .usheads lives inside the eyebrow
+     and its children paint on top of it. Exactly one thing may have a size. */
+  check("the clipping window is the button's own height, not a fixed one",
+    /\.usman\{[^}]*height:100%;overflow:hidden\}/.test(SRC),
+    "the window has its own height again, so nobody will be clipped");
   check("and the row hangs off the bar rather than sitting in the flow",
     /\.usheads\{position:absolute;[^}]*bottom:100%/.test(SRC), "it is in the flow");
   /* THE FINGERS DO NOT RISE WITH HIM, which is the whole joke and is one rule. */
@@ -134,47 +143,72 @@ const check = (n, c, x) => {
     /\.uspeek\.up \.usgrip\{opacity:0/.test(SRC) && !/\.uspeek\.up[^{]*\.usgrip\{[^}]*bottom/.test(SRC),
     "the hands go up with him");
 
-  console.log("\n--- tapping a head ---");
-  check("everybody is on to start with", up().length === 3 && count() === 3,
-    JSON.stringify(up()) + " / " + count());
-  const first = ev(app, "US[0].k");
-  run(app, "usTap(" + JSON.stringify(first) + ");");
-  await tick();
-  check("tapping one sits him out", up().indexOf(first) === -1, JSON.stringify(up()));
-  check("the count follows him off", count() === 2, count());
-  check("and the slot he left is emptied, not left holding his name",
-    names()[2] === "", JSON.stringify(names()));
-  run(app, "usTap(" + JSON.stringify(first) + ");");
-  await tick();
-  check("tapping him again brings him back", up().length === 3 && count() === 3,
-    JSON.stringify(up()) + " / " + count());
+  console.log("\n--- they start behind the wall ---");
+  /* THE JOKE IS THREE PEOPLE HIDING and it cannot land if nobody is hiding, so
+     a fresh page has everybody down. This is asserted on the markup as well as
+     the state, because "up" is a class and a state that never reached the class
+     would look exactly like a bug in the CSS. */
+  run(app, 'localStorage.removeItem("ball2-us"); usUp = usLoad(); render();');
+  await tick(220);
+  check("nobody is up on a fresh page", up().length === 0, JSON.stringify(up()));
+  check("and no head on the page is wearing a shirt",
+    rx(stage(app), "uspeek us-[a-z]+ up") === 0, rx(stage(app), "uspeek us-[a-z]+ up"));
 
-  console.log("\n--- two is a quiz and one is not ---");
+  console.log("\n--- and every one of them answers ---");
+  /* THERE USED TO BE A FLOOR OF TWO ON THE MEN, so once one had ducked the
+     other two stopped responding: three heads on the page and two that did
+     nothing. A control that ignores you is worse than one that is not there.
+     Every man is walked up and back down to prove all three take a tap. */
+  const keys = ev(app, "US.map(m => m.k)");
+  for (const k of keys) { run(app, "usTap(" + JSON.stringify(k) + ");"); await tick(90); }
+  check("tapping each of them brings all three up", up().length === keys.length,
+    JSON.stringify(up()));
+  check("and the page shows three shirts", rx(stage(app), "uspeek us-[a-z]+ up") === 3,
+    rx(stage(app), "uspeek us-[a-z]+ up"));
+  for (const k of keys) { run(app, "usTap(" + JSON.stringify(k) + ");"); await tick(90); }
+  check("and tapping each again puts all three back down", up().length === 0,
+    JSON.stringify(up()));
+
+  console.log("\n--- the floor is on the count, not on the people ---");
   run(app, "setMode('classic'); setPlay('board');");
   await tick(220);
   const pills = (stage(app).match(/setCount\((\d)\)/g) || []).map(x => +x.replace(/\D/g, ""));
   check("the page offers two counts and they are 2 and 3",
     pills.length === 2 && Math.min(...pills) === 2, JSON.stringify(pills));
-  const keys = ev(app, "US.map(m => m.k)");
-  run(app, "usTap(" + JSON.stringify(keys[0]) + "); usTap(" + JSON.stringify(keys[1]) + ");");
+  /* AN EMPTY WALL IS A FINE THING TO LOOK AT. With nobody up the count sits at
+     the minimum and the boxes fall back to the placeholders they have always
+     had, which is the state this page opened in long before any of this. */
+  check("with nobody up the count is still a quiz", count() >= Math.min(...pills), count());
+  check("and the boxes are handed back to their placeholders",
+    names().slice(0, 3).every(n => !n), JSON.stringify(names()));
+  run(app, "usTap(" + JSON.stringify(keys[0]) + ");");
   await tick();
-  check("the second-to-last man will not step off", up().length === 2, JSON.stringify(up()));
-  check("so the count never leaves the range the pills offer",
-    count() >= Math.min(...pills), count());
+  check("one man up still leaves room for a second", count() >= Math.min(...pills), count());
+  check("and he is in the first box", names()[0] === ev(app, "US[0].n"), JSON.stringify(names()));
+  run(app, "usTap(" + JSON.stringify(keys[1]) + "); usTap(" + JSON.stringify(keys[2]) + ");");
+  await tick();
+  check("all three up is a three-player quiz", count() === 3, count());
+  check("and the slot behind a man who ducks gets emptied", (() => {
+    run(app, "usTap(" + JSON.stringify(keys[2]) + ");");
+    return names()[2] === "";
+  })(), JSON.stringify(names()));
 
   console.log("\n--- and it remembers, within reason ---");
   check("what is up is written down",
-    JSON.parse(ev(app, 'localStorage.getItem("ball2-us")')).length === 2,
+    JSON.parse(ev(app, 'localStorage.getItem("ball2-us")')).length === up().length,
     ev(app, 'localStorage.getItem("ball2-us")'));
-  run(app, 'localStorage.setItem("ball2-us", JSON.stringify(["mar"]));');
-  check("a saved list of one is refused on the way back in",
-    ev(app, "usLoad().length") === 3, JSON.stringify(ev(app, "usLoad()")));
+  /* AN EMPTY LIST IS A REAL ANSWER NOW, so it has to survive the round trip:
+     a load that quietly refilled the wall would undo the last tap. */
+  run(app, 'localStorage.setItem("ball2-us", "[]");');
+  check("an empty wall comes back empty rather than refilling itself",
+    ev(app, "usLoad().length") === 0, JSON.stringify(ev(app, "usLoad()")));
   run(app, 'localStorage.setItem("ball2-us", JSON.stringify(["nobody","mar","bra"]));');
-  check("and a name that is not one of us is dropped",
-    ev(app, "usLoad().indexOf('nobody')") === -1, JSON.stringify(ev(app, "usLoad()")));
+  check("a name that is not one of us is dropped",
+    ev(app, "usLoad().indexOf('nobody')") === -1 && ev(app, "usLoad().length") === 2,
+    JSON.stringify(ev(app, "usLoad()")));
   run(app, 'localStorage.setItem("ball2-us", "not json at all");');
   check("rubbish on the disk does not take the front door down",
-    ev(app, "usLoad().length") === 3, JSON.stringify(ev(app, "usLoad()")));
+    ev(app, "usLoad().length") === 0, JSON.stringify(ev(app, "usLoad()")));
 
   console.log("\n" + (fails ? fails + " FAILED" : "ALL PASS"));
   process.exit(fails ? 1 : 0);
