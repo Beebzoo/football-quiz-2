@@ -466,8 +466,18 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
     const ratio = m ? +("0." + m[1]) : null;
     check("the men are a footballer's build, not a snowman's",
       ratio !== null && ratio <= 0.45, "shoulders are " + ratio + " of height");
+    /* THE FACT RATHER THAN THE SOURCE LINE. This used to match the literal
+       "o.them ? 34 : 48" in index.html, which says nothing about the men and
+       everything about how that ternary happened to be typed: naming the two
+       numbers broke it while the sides went on being different sizes. The
+       difference is the point, because it is most of how you tell your side
+       from his at a glance before colour or label gets a look in, so the
+       difference is what gets asserted. */
+    const man = JSON.parse(ev(app, "JSON.stringify(H2_MAN)"));
     check("and his eleven are drawn smaller than yours",
-      /o\.them \? 34 : 48/.test(css), "the two sides are the same size");
+      man.them < man.mine, "yours " + man.mine + ", his " + man.them);
+    check("and a man on the floor is between the two",
+      man.down > man.them && man.down < man.mine, "down is " + man.down);
   }
   check("and the ball is lofted, higher for a longer ball",
     /--lift:\d+px/.test(stage(app)), "no arc on the pass");
@@ -617,6 +627,80 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
     scout() !== ev(app, "h2Of(9, 1)") && !!scout(), scout());
   check("and he is a man still on the pitch",
     ev(app, "!h2IsOff(1, h2NearestTo(0, 0, 1))") === true, "he is off");
+
+  /* ---------- two sides in the same colour ---------- */
+  console.log("\n--- the visitor changes when the two of them look alike ---");
+  const kits = (a, b) => {
+    run(app, 'S = freshState(["You","It"], false, "classic", 0, "pitch", true); h2Start(); ' +
+      'h2AsActor(() => { h2PickTeam(' + JSON.stringify(a) + '); h2PickTeam(' + JSON.stringify(b) + '); });');
+    return {home: ev(app, "h2Kit(0)"), away: ev(app, "h2Kit(1)"), own: ev(app, "h2KitOwn(1)")};
+  };
+  /* every one of these is a real pair the 2006 draw can produce */
+  for (const [a, b, what] of [
+    ["Netherlands", "Ivory Coast", "two oranges"],
+    ["Germany", "England", "two whites"],
+    ["Italy", "France", "two blues"],
+    ["Mexico", "Saudi Arabia", "two greens, on green grass"],
+  ]) {
+    const k = kits(a, b);
+    check(what + ", so " + b + " change", k.away !== k.own, k.away + " is still " + k.own);
+    check("and " + a + " do not", k.home === ev(app, "h2KitOwn(0)"), "the home side changed");
+    check("and the two of them are clear of each other now",
+      ev(app, 'h2KitGap("' + k.home + '","' + k.away + '")') >= ev(app, "H2_CLASH"),
+      Math.round(ev(app, 'h2KitGap("' + k.home + '","' + k.away + '")')));
+  }
+  /* AND IT HAS TO LEAVE MOST FIXTURES ALONE. A rule that fires every time is
+     not a clash rule, it is a repaint, and it would throw away the one thing a
+     kit is for. */
+  for (const [a, b] of [["Netherlands", "Germany"], ["Brazil", "Argentina"], ["Italy", "Ghana"]]) {
+    const k = kits(a, b);
+    check(a + " against " + b + " is already readable, so nobody changes",
+      k.away === k.own, k.away + " instead of " + k.own);
+  }
+  /* THE CHANGE STRIP CANNOT LOSE ITSELF IN THE PITCH, which is the half of this
+     that two green sides would have exposed: a strip that separated them and
+     then vanished into the turf would have fixed nothing. */
+  for (const c of ev(app, "JSON.stringify(H2_CHANGE)") && JSON.parse(ev(app, "JSON.stringify(H2_CHANGE)")))
+    check("the change strip " + c + " is clear of the grass",
+      ev(app, 'h2KitGap("' + c + '","#3AA04A")') >= 200,
+      Math.round(ev(app, 'h2KitGap("' + c + '","#3AA04A")')));
+
+  /* ---------- the buttons are wired to something ---------- */
+  console.log("\n--- where your line stands ---");
+  run(app, 'S = freshState(["Martijn","Route One"], false, "classic", 0, "manager", true); ' +
+    'S.players[1].ai = "route1"; S.players[1].level = "ere"; h2Start(); ' +
+    'h2AsActor(() => { h2PickTeam("Netherlands"); h2PickTeam("Mexico"); }); ' +
+    'S.h2h.tossed = true; S.h2h.who = 1; S.h2h.at = 0; h2TackleOn = true; ' +
+    'S.phase = "h_mark"; render();');
+  await tick(150);
+  /* THE HANDLER IS READ BACK OFF THE BUTTON, the way a browser would. This
+     rendered onclick="h2SetLine("high")" for a year: the attribute ends at the
+     second quote, the handler is "h2SetLine(", and nothing happens. Calling
+     h2SetLine from a test passes happily the whole time that is true. */
+  const lineBtns = () => [...stage(app)
+    .matchAll(/<button class="[^"]*h2lineb[^"]*" onclick="([^"]*)">([^<]+)</g)]
+    .map(m => ({click: m[1].replace(/&quot;/g, '"'), label: m[2]}));
+  const btns = lineBtns();
+  check("all three are on the screen", btns.length === 3, btns.length + " buttons");
+  for (const b of btns)
+    check(b.label + " carries a handler a browser can read",
+      b.click.indexOf("h2SetLine(" + String.fromCharCode(34)) === 0 &&
+      b.click.slice(-2) === String.fromCharCode(34) + ")", b.click);
+  for (const b of btns) {
+    run(app, b.click);
+    await tick(80);
+    const now = ev(app, "h2Line(h2Other())");
+    check("tapping " + b.label + " actually moves the line",
+      b.click.indexOf('"' + now + '"') > -1, "line is " + now + " after " + b.click);
+  }
+  /* AND THE CLASS, NOT ONLY THE CASE. Eight handlers in the file interpolate
+     JSON into an attribute and all eight escape it. The ninth was the bug. */
+  const src = fs.readFileSync(path.join(REPO, "index.html"), "utf8");
+  const loose = src.split(/\r?\n/).filter(l =>
+    /on(click|input|change)="/.test(l) && l.indexOf("JSON.stringify(") > -1 &&
+    l.indexOf("&quot;") < 0 && l.indexOf('replace(/"/g') < 0);
+  check("every handler that interpolates JSON escapes its quotes",
+    loose.length === 0, loose.map(l => l.trim().slice(0, 70)).join(" | "));
 
   console.log(fails ? "\n" + fails + " FAILED" : "\nall green");
   process.exit(fails ? 1 : 0);

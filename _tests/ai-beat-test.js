@@ -219,14 +219,27 @@ const check = (n, c, x) => {
      the shape breaks this loudly instead of making it flaky. */
   run(app, "AI_BEAT = AI_NORMAL;");
   run(app, "ARMED = 0; FIRED = 0; " + onThePitch("pitch", 1) + 'S.phase = "h_pick";');
+  /* THE MAN IS PINNED AND THE CLOCK IS THE VARIABLE. Everything in the comment
+     above rests on the pass being a BALL, and it was, while aiPass took the
+     first man off a sort. It is a weighted draw now, and this section used to
+     ask him three separate times: in the condition, again in the message, which
+     is evaluated either way, and a third time inside aiTick on the render. One
+     cheaper man out of any of those and the beat is shorter than the window.
+     Which man he picks is tested properly in ai-test; what is being tested here
+     is the split between the two timers, so he is given a man and the clock is
+     left as the only thing moving. */
+  run(app, "var __realPass = aiPass; " +
+    "var __pin = aiOptions().filter(function(o){ return o.line === 6; })[0].i; " +
+    "aiPass = function(){ return __pin; };");
   check("he is finding the front line, which is a BALL",
-    ev(app, "h2Priced(S.h2h.at, aiPass())") === "ball", ev(app, "h2Priced(S.h2h.at, aiPass())"));
+    ev(app, "h2Priced(S.h2h.at, __pin)") === "ball", ev(app, "h2Priced(S.h2h.at, __pin)"));
   run(app, "render();");
   await tick(1150);
   check("the look lands and the ball is armed behind it",
     ev(app, "S.h2h.sel") != null && ev(app, "S.phase") === "h_pick",
     "sel " + ev(app, "S.h2h.sel") + ", phase " + ev(app, "S.phase"));
   /* and now the yank, with the ball still in the air */
+  run(app, "aiPass = __realPass;");          // he chooses for himself again
   run(app, 'S.phase = "h_goal";');
   const held = ev(app, "JSON.stringify(S)");
   await tick(800);
