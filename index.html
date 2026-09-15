@@ -11,7 +11,7 @@
      this app since the sweep. The app opens dark unless the phone asks for
      light, and dark is the pitch green, so the bar starts there and is
      corrected for a light-theme person before they ever see the page. -->
-<meta name="theme-color" content="#123D24">
+<meta name="theme-color" content="#FDF6E2">
 <!-- BOTH LOOKS, DECLARED BEFORE THE STYLESHEET PARSES. Without this the browser
      has no way to know the app has a dark theme, because the theme is switched
      by a data-theme attribute rather than by a media query, and Chrome and Edge
@@ -321,7 +321,13 @@
 
      --turf and the two card colours are NOT theme-aware on purpose. A yellow
      card is yellow, a red card is red, and grass is grass. */
-  :root, :root[data-theme="dark"]{
+  /* THE NIGHT IS NOW ONLY EVER THE STAMPED ATTRIBUTE. It used to sit on bare
+     :root as well, which made it the palette the page painted in the gap
+     between html{background:var(--sky)} resolving and applyTheme stamping the
+     root, so a cold start flashed dark green before it went cream. Nothing
+     about the night changed except that it stopped being what you get when
+     nobody has said anything. */
+  :root[data-theme="dark"]{
     /* Scrollbars, form controls and the canvas the browser paints behind the
        page all follow this. It was being worked around by hand before. */
     color-scheme:dark;
@@ -371,7 +377,15 @@
     --chalkline-soft:rgba(248,241,221,.07);
     --head-rule:1px;
   }
-  :root[data-theme="light"]{
+  /* AND PAPER IS WHAT YOU GET WHEN NOBODY HAS SAID ANYTHING. Bare :root carries
+     it, so it is on the page from the first byte of CSS rather than from
+     whenever the script reaches applyTheme, and there is no flash to fix. The
+     stamped form stays on the selector because it costs nothing and says out
+     loud that the day is a theme you can be on deliberately rather than only a
+     fallback. Weight still works out: a stamped night at (0,2,0) beats this at
+     (0,1,0), and a stamped day matches the half of this selector it is named
+     in. */
+  :root, :root[data-theme="light"]{
     /* "only" rather than plain "light", which is the difference between saying
        which scheme is in use and telling the browser not to second-guess it. The
        case that broke was the light theme on a phone set to dark, and plain
@@ -7266,19 +7280,28 @@ const playableAs = (id, play) => canEver(id, play) && modeLive(id);
    "am I on the new one?" is a question the phone can answer by itself:
    nearly everything built lately happens during a match, so a stale phone
    and a fresh one look identical on the menu. */
-/* ---------- NIGHT AND DAY ----------
-   A night pitch is what the app is for, so that is the default, but the
-   phone's own setting gets the first word. After that it is whatever he last
-   chose, remembered rather than guessed at again.
+/* ---------- DAY AND NIGHT ----------
+   Paper is the default. It used to be the night pitch, with the phone's own
+   setting given the first word, which meant the real rule was "dark unless your
+   phone is light" and the word default was doing very little work. The app
+   opens on paper now whatever the phone says, and the night is one tap away on
+   the front page for anybody who wants it.
 
-   Applied to the root element rather than the body, because the page
-   background is set on html and it would otherwise stay the old colour
-   behind everything. */
-let THEME = "dark";
+   THE SYSTEM PREFERENCE IS DELIBERATELY NOT READ. Honouring it would hand a
+   phone that is set to dark the night pitch on first open, which is the exact
+   thing that has just been asked not to happen. A preference somebody set for
+   their whole phone is a weaker signal here than a choice made about this app,
+   and that choice is remembered the moment it is made.
+
+   Applied to the root element rather than the body, because the page background
+   is set on html and it would otherwise stay the old colour behind everything.
+   The bare :root block up in the stylesheet carries the day for the same
+   reason, so there is nothing to correct on the first frame and this line only
+   ever has work to do for somebody who has chosen the night. */
+let THEME = "light";
 try{
   const saved = localStorage.getItem("ball2-theme");
-  THEME = saved === "light" || saved === "dark" ? saved
-        : (matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark");
+  if(saved === "light" || saved === "dark") THEME = saved;
 }catch(e){}
 /* THE BROWSER CHROME follows the look too. It was a fixed broadcast green from
    before there were two themes, so the bar above the app stayed green on paper. */
