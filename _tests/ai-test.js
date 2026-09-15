@@ -232,7 +232,20 @@ const check = (n, c, x) => {
      and started hitting Hard balls is not the Bus, and a Route One who plays it
      backwards is nobody at all. */
   check("the Bus still keeps it safe", spread.bus.safe >= 75, spread.bus.safe + "% safe");
-  check("Route One still goes forward", spread.route1.fwd >= 65, spread.route1.fwd + "% forward");
+  /* ALL FOUR LOOK FORWARD, which only Route One was ever asked about. The other
+     three were the ones playing it back: at the old weights Tiki-taka and the
+     Pressers went forward about sixty per cent of the time and the Bus
+     fifty-two, because a man in midfield has more men behind him than in front
+     and five modest weights outvote three good ones. Measured after: 96, 92, 89
+     and 76, and these floors sit a long way under each, because every flake this
+     suite has had was an assertion sitting too close to its own data.
+
+     THE BUS IS ALLOWED TO BE SLOWER. He is meant to be, and he is, but slower is
+     not backwards: what makes him slow is the tier he will not go above, which
+     the line above this one holds. */
+  for (const [id, floor] of [["route1", 80], ["tiki", 75], ["press", 72], ["bus", 58]])
+    check(id + " is looking to play forward", spread[id].fwd >= floor,
+      spread[id].fwd + "% forward, floor " + floor);
 
   /* ---------- and the cup gets harder as it goes ---------- */
   console.log("\n--- the cup is a run rather than a draw ---");

@@ -475,8 +475,10 @@
     --pick-glow:transparent; --pick-lift:transparent;
     --pick-fill:var(--on-fill);
     --door:var(--gold-fill); --door-wash:none; --door-wash-on:none;
-    --mark-line:var(--terracotta); --mark-ink:var(--terracotta);
-    --mark-wash-a:rgba(196,113,79,.18); --mark-wash-b:rgba(196,113,79,.08);
+    /* --mark-ink is the danger-man line above the grid and nothing else. The
+       line, the wash and its second stop were the marked card's old glow, which
+       is board colours now, so they answered nobody. */
+    --mark-ink:var(--terracotta);
     --warm-ink:var(--gold-hi);
   }
   html{background:var(--sky)}
@@ -2702,6 +2704,8 @@
      can read a sentence in. */
   body.pixel .qcard{border-radius:0;border:3px solid var(--board-ink);
     box-shadow:4px 4px 0 rgba(0,0,0,.45)}
+  /* the men you are marking get the same box as everything else on the board */
+  body.pixel .h2markbtn{border-radius:0;border-width:2px;box-shadow:3px 3px 0 rgba(0,0,0,.35)}
   body.pixel .h2opt{border-radius:0;border-width:2px}
   body.pixel .h2opt .k{border-radius:0}
   body.pixel .qcard .atext{border-radius:0}
@@ -4238,22 +4242,45 @@
     transform:translate(-50%,-50%);box-shadow:0 1px 2px rgba(0,0,0,.6)}
   .h2shapen{font:700 .78rem/1 var(--ui);letter-spacing:.02em}
   .h2lineb{padding:11px 6px;font-size:.86rem;line-height:1.15;--ac:#8fd8c4}
+  /* EVERY MAN IS A CARD, and they are board chips for the same reason the four
+     options are: this is a match screen and the rest of the match is the board.
+
+     THEY USED TO BE NOTHING AT ALL ON PAPER. background:var(--paper) resolves
+     through --panel to transparent in the light theme and the border was white
+     at twenty per cent on cream, so the whole grid was bare names with nothing
+     round them. Reaching for --card instead would not have saved it: measured
+     against the page it is 1.05 to 1 in the light theme and 1.34 in the dark,
+     invisible in both.
+
+     ONE SET OF COLOURS WORKS ON BOTH PAGES BECAUSE THE WORK SWAPS HANDS. On the
+     light page the fill does it, a dark green card on cream at 9.43 to 1. On the
+     dark page the fill all but disappears at 1.20 and the edge does it instead
+     at 4.30. There is always one of the two carrying the shape. */
   .h2markbtn{
     display:flex;flex-direction:column;align-items:center;gap:2px;min-width:0;
     padding:9px 4px;border-radius:12px;
-    background:var(--paper);border:1px solid rgba(255,255,255,.2);color:var(--text);
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.06);
+    background:var(--board-hi);border:1px solid var(--board-line);color:var(--board-ink);
+    box-shadow:none;
   }
   .h2markbtn:active{transform:scale(.97)}
+  /* A PICKED MAN GOES BRIGHTER, WHICH TOOK TWO GOES. The first attempt put a
+     deep terracotta behind him and every shade of it landed between 1.02 and
+     1.42 to 1 against the unmarked chip: identical in brightness, different
+     only in hue, so the two states separated only for somebody already looking
+     for the difference. Things that have been picked get brighter. This sits at
+     3.47 against an unmarked man and carries dark ink at 5.79, and it takes the
+     board's white edge rather than the green one, so the two you have chosen
+     are the two bright cards with a white line round them. */
   .h2markbtn.on{
-    border-color:var(--mark-line);color:var(--mark-ink);
-    background:linear-gradient(180deg,var(--mark-wash-a),var(--mark-wash-b));
-    box-shadow:0 0 0 1px var(--mark-line) inset, 0 0 16px rgba(224,74,52,.28);
+    border-color:var(--board-ink);color:#241B08;
+    background:#D4825C;
+    box-shadow:none;
   }
-  .h2mno{font:800 .95rem/1 var(--ui);color:var(--text-dim);font-variant-numeric:tabular-nums}
-  .h2markbtn.on .h2mno{color:var(--mark-ink)}
+  .h2mno{font:800 .95rem/1 var(--ui);color:var(--board-dim);font-variant-numeric:tabular-nums}
+  .h2markbtn.on .h2mno{color:#241B08}
   .h2mnm{font:700 .74rem/1.15 var(--ui);text-align:center;word-break:break-word}
-  .h2mps{font:600 .6rem/1 var(--ui);letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim)}
+  .h2mps{font:600 .6rem/1 var(--ui);letter-spacing:.1em;text-transform:uppercase;color:var(--board-dim)}
+  .h2markbtn.on .h2mps{color:#3E2A16}
 
   /* a booking, worn on the shirt for the rest of the match */
   .h2card{
@@ -11841,6 +11868,19 @@ const aiRank = t => H2_ORDER.indexOf(t);
    still cluster, because whoever is best on the board is best again from the
    same board a moment later. The man who had it last is cut hardest, the one
    before him less, and by four passes ago he is a full price again. */
+/* HOW HARD HE LOOKS FORWARD, in one place because it is one idea and it wants
+   turning as a whole. These read as extreme and are not, because the board is
+   against them: a man in midfield has five or six behind him and three or four
+   in front, so at the old 2.4 against .5 the many quiet weights outvoted the few
+   loud ones and both thinking sides went forward about sixty per cent of the
+   time. At these, a backward ball is what he plays when there is nothing in
+   front, which is what looking to play forward actually means.
+
+   THE BUS LOOKS LESS FAR, and that is the whole of what is left of him sitting
+   deep. His character is the tier he will not go above, not a habit of turning
+   round, and a side that can only play cheap balls advances slowly without
+   being told to. */
+const AI_FWD = 7, AI_BACK = .3, AI_FWD_BUS = 3;
 const AI_FED_KEEP = 3;
 function aiStale(w, i){
   const H = h2();
@@ -11896,7 +11936,14 @@ function aiPass(){
          take the deepest safe man every single time, and now he takes a safe
          man. Deeper is still better, and whoever had it last is still cut. */
       const safe = opts.filter(o => H2_SAFE.includes(o.t));
-      pick = aiDraw(safe.length ? safe : opts, o => (.25 + o.y / 100) * stale(o));
+      /* HE LOOKS FORWARD, JUST NOT AS FAR. This used to weigh (.25 + o.y/100),
+         which is a preference for the DEEPEST man available and is the reason he
+         passed backwards all afternoon. That was never his character: his
+         character is the filter on the line above, and it does the work by
+         itself, because a side that will only play Easy and Normal balls cannot
+         get up the pitch quickly however much it wants to. */
+      pick = aiDraw(safe.length ? safe : opts,
+        o => (fwd(o) ? AI_FWD_BUS : AI_BACK) * stale(o));
       break;
     }
     case "tiki":
@@ -11904,7 +11951,8 @@ function aiPass(){
          whole policy so it carries the most weight, and the ladder is only five
          rungs, so squaring the gap is what keeps Easy clearly ahead of Hard
          rather than mildly ahead. */
-      pick = aiDraw(opts, o => { const c = 5 - aiRank(o.t); return c * c * (fwd(o) ? 2.4 : .5) * stale(o); });
+      pick = aiDraw(opts, o => { const c = 5 - aiRank(o.t);
+        return c * c * (fwd(o) ? AI_FWD : AI_BACK) * stale(o); });
       break;
     case "press":
       /* THE PRESSERS. The ladder as written, leaning to the dear end of what he
@@ -11912,7 +11960,7 @@ function aiPass(){
          and Easy is what he takes when the board has nothing else. */
       pick = aiDraw(opts, o => { const r = aiRank(o.t);
         const want = r === 2 ? 4 : r === 3 ? 2.2 : r === 1 ? 1.5 : r === 4 ? .8 : .45;
-        return want * (fwd(o) ? 2 : .5) * stale(o); });
+        return want * (fwd(o) ? AI_FWD : AI_BACK) * stale(o); });
       break;
     default:
       /* ROUTE ONE. The front line if the front line is on, whatever it costs,
@@ -11942,7 +11990,8 @@ function aiPass(){
          variety is the half that was asked for. Six is four balls in five to
          the front two, which anybody can name after one match, and still seven
          to nine men over a possession. */
-      pick = aiDraw(opts, o => (o.line === 6 ? 6 : 1) * (fwd(o) ? 2.6 : .4) * (1.25 - o.y / 100) * stale(o));
+      pick = aiDraw(opts, o => (o.line === 6 ? 6 : 1) * (fwd(o) ? AI_FWD : AI_BACK) *
+        (1.25 - o.y / 100) * stale(o));
   }
   aiFeed(H.who, pick);
   return pick;
@@ -11962,6 +12011,16 @@ function aiShoot(){
     case "route1": return Math.random() < .8;
     case "bus":    return h2Spot(H.at, H.who).line === 6;
     default: {
+      /* NOTHING IN FRONT OF HIM MEANS SHOOT, which is the other half of the
+         complaint about balls going backwards and is not about passing at all.
+         A man on the front line has nobody ahead of him by definition, so every
+         option he has is a turn, and no amount of forward bias can fix that.
+         The rule below only let fly when the shot was no dearer than the best
+         pass, and the best pass from up there is a cheap one rolled back to
+         midfield, so the shot almost never won and the striker almost always
+         turned round. */
+      const at = h2Spot(H.at, H.who).y;
+      if(!aiOptions().some(o => o.y < at)) return true;
       const best = aiOptions().sort((a, b) => aiRank(a.t) - aiRank(b.t))[0];
       return !best || aiRank(shot) <= aiRank(best.t);
     }
