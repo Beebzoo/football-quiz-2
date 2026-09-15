@@ -8,7 +8,13 @@
 # app is loaded inside a fixed-width iframe and scaled to fit; and file://
 # fetches fail, so the banks never load unless the folder is actually served.
 set -e
-REPO="/c/dev/_Personal/Hobbies/Football Quiz"
+# WHERE THE APP IS: worked out from where this script is, the way shot-h2h.sh
+# does it at its line 62, and not typed. This line used to read
+# /c/dev/_Personal/Hobbies/Football Quiz, which is BALL 1 and still exists on
+# this machine, so running this took a perfectly good screenshot of the wrong
+# game and exited 0. A hardcoded path that resolves is worse than one that does
+# not: the broken one tells you.
+REPO=$(cd "$(dirname "$0")/.." && pwd)
 OUT="$1"
 SCALE="${2:-.55}"   # .55 fits a whole phone screen; 1 to inspect detail
 SCROLL="${3:-0}"    # scroll the app itself, to see the lower half at 1:1

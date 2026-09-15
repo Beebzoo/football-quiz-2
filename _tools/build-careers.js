@@ -260,8 +260,25 @@ const nameKey = n => n.normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().re
    this app and therefore an accent colour to draw the dot in; everything else
    gets no dot, which is honest rather than invented.                       */
 async function spellsMode() {
-  const POOLS = ["wc1998", "wc2002", "wc2006", "wc2010", "wc2014", "wc2018", "wc2022", "wc2026",
-    "euro2000", "euro2004", "euro2008", "euro2012", "euro2016", "euro2020", "euro2024"];
+  /* WHICH POOLS --all MEANS, from the app's own registry rather than from a list
+     typed on this line. The list that used to sit here held fifteen ids and was
+     right on the day it was written, which is the trouble with a typed list: the
+     next tournament added to POOLS would have been missing from it and nothing
+     would have said so.
+
+     Filtered to the ids build-man-leagues.js can actually harvest, because this
+     mode reads _models/mlqid-<pool>.json and that file only exists for a pool
+     that harvest has run on. Its line 152 accepts wc<year> and euro<year> and
+     nothing else, so the same shape is the honest filter here. It comes to the
+     same fifteen pools today, and it will come to sixteen on its own. */
+  const POOLS = (() => {
+    const html = fs.readFileSync(HTML, "utf8");
+    const a = html.indexOf("const POOLS = {"), b = html.indexOf("const QUIZZES = {");
+    if (a < 0 || b < a) throw new Error("could not find the POOLS registry in index.html");
+    return [...html.slice(a, b).matchAll(/^\s*"?([a-z0-9-]+)"?:\s*\{/gm)]
+      .map(m => m[1]).filter(id => /^(wc|euro)\d{4}$/.test(id));
+  })();
+  if (!POOLS.length) throw new Error("the POOLS registry parsed to no harvestable pools, which cannot be right");
   const one = arg("--pool");
   const want = process.argv.includes("--all") ? POOLS : (one ? [one] : ["wc2006"]);
 

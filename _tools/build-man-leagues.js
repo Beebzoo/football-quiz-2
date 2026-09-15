@@ -50,6 +50,18 @@ const VERBOSE = process.argv.includes("--verbose");
    --dump <file> writes every man's clubs and leagues out to be read. */
 const WHO = (i => i > -1 ? process.argv[i + 1] : null)(process.argv.indexOf("--who"));
 const DUMP = (i => i > -1 ? (process.argv[i + 1] || "man-leagues.txt") : null)(process.argv.indexOf("--dump"));
+/* --pages <file> is how a pool that is not a competition and a year gets its
+   squad pages: one Wikipedia article title per line, blank lines and lines
+   starting with # ignored. A pool id like finals has no "<year> <competition>
+   squads" article to read, so without this the only way to resolve its men is
+   the name search, and the heading above is about why that is the path that
+   puts three Luis Garcias on the table. Somebody has to go and find those
+   article titles; this file will not make them up.
+   --name-search-only says "yes, I know, do it anyway", because there are pools
+   where a name search is genuinely all there is, and that should be a sentence
+   somebody typed rather than something that quietly happened. */
+const PAGES_FILE = (i => i > -1 ? process.argv[i + 1] : null)(process.argv.indexOf("--pages"));
+const NAME_ONLY = process.argv.includes("--name-search-only");
 
 /* country of the club -> which deck its questions come from. Anything not on
    this list has no deck of its own and falls back to the classic bank, which
@@ -150,10 +162,49 @@ console.log(men.length + " men across " + Object.keys(sides).length + " sides");
 /* A POOL ID IS A COMPETITION AND A YEAR: wc2006, euro2004. The titles live in
    _tournament.js so this file and the three harvesters cannot drift apart. */
 const SQUAD_PAGES = (() => {
+  /* a file of titles beats the guess, for the pools that need one */
+  if (PAGES_FILE) {
+    /* said in a sentence rather than as an ENOENT stack, because the whole
+       point of this flag is that somebody went and found the titles and a
+       mistyped path should not read as the tool being broken */
+    if (!fs.existsSync(PAGES_FILE)) {
+      console.error("--pages " + PAGES_FILE + " is not a file. One Wikipedia article title per line.");
+      process.exit(1);
+    }
+    return fs.readFileSync(PAGES_FILE, "utf8").split(/\r?\n/)
+      .map(l => l.trim()).filter(l => l && !l.startsWith("#"));
+  }
   const m = /^(wc|euro)(\d{4})$/.exec(POOL);
   if (!m) return [];
   const COMPS = require("./_tournament.js").COMPS;
   return [COMPS[m[1]].title(m[2]) + " squads"];
+})();
+
+/* WHAT A SIDE ACTUALLY IS, when the deck's own key is not a country.
+   The tie that stops this picking the wrong Luis Garcia is his citizenship
+   against the side he played for, and it reads the deck key to get the side.
+   That works for every tournament pool, where the key IS the country. It does
+   not work for the finals pool, where the key is the card's title: "Brazil .
+   World Cup final 1970" normalises to something that happens to contain
+   "brazil" and so ties by luck, while "Ajax . European Cup final 1972"
+   normalises to something no citizenship label will ever match.
+
+   The real team name for those forty sides is already on disk, in the team
+   field of assets/xi/index.json, which is where build-finals-pool.js got the
+   line-ups in the first place, and all forty of its titles match a finals deck
+   key exactly. So it is read rather than typed. It is only consulted for a pool
+   with no squad page, which today means finals and nothing else, and a
+   tournament side key is never one of these titles, so the wc and euro path
+   cannot reach it: SIDE_TEAM is an empty object on every run that has a squad
+   page and the expression below is unchanged for them. */
+const SIDE_TEAM = (() => {
+  if (SQUAD_PAGES.length) return {};
+  const at = path.join(REPO, "assets/xi/index.json");
+  if (!fs.existsSync(at)) return {};
+  const out = {};
+  for (const row of Object.values(JSON.parse(fs.readFileSync(at, "utf8"))))
+    if (row && row.title && row.team) out[row.title] = row.team;
+  return out;
 })();
 async function wikitext(title){
   const key = "mlw-" + require("crypto").createHash("sha1").update(title).digest("hex").slice(0, 16) + ".json";
@@ -271,6 +322,62 @@ async function entities(ids) {
   return out;
 }
 
+/* ---------- A POOL WITH NO SQUAD PAGE STOPS HERE ----------
+   Every number this harvest produces rests on resolving a man through the
+   article his own squad page links him from, which the top of this file spends
+   a paragraph on. A pool id that is not wc<year> or euro<year> has no squad
+   page, so SQUAD_PAGES comes back empty, squadLinks() returns nothing, and all
+   of them fall through to the name search, which is the path the header warns
+   about.
+
+   It used to just run. It would have finished, printed a coverage number and
+   looked exactly like a good run, and the only way to know it was not one was
+   to read the whole thing man by man. That silent degradation was the real
+   defect, so it refuses instead, and it prices the refusal offline first,
+   before a single call goes out, because the two numbers below are the ones
+   that decide whether the run is worth making. Everything already cached under
+   _models is a call that will not be made again; the rest is fresh traffic.
+
+   WHAT WOULD STILL BE MISSING if you do run it, plainly, for the finals pool.
+   The men in the country sides now tie on a real country name out of
+   assets/xi, which is better than the substring accident they used to tie on.
+   The men in the club sides cannot tie on citizenship at all, because Ajax is
+   not a passport, so they are settled on club record and prose alone, and
+   several of them played before 1970 and have thin Wikidata. Those are the ones
+   that come back as the wrong person, and no flag here fixes that. What would
+   fix it is a source of per-man article links for a pool with no squad page,
+   the way the tournament pools have, and that source is not in this repo.
+
+   AND IF IT EVER DOES RUN GREEN: assets/finals/index.json carrying careers
+   turns _tests/assets-test.js red on purpose, trips the equality gate in
+   _tools/check-man-leagues.js, and contradicts the paragraph at
+   _tools/build-finals-pool.js:26. Three files, one commit. */
+if (!SQUAD_PAGES.length && !NAME_ONLY) {
+  const names = [...new Set(men.map(m => m.full || m.n))];
+  const key = n => "mlq-" + require("crypto").createHash("sha1").update(String(n)).digest("hex").slice(0, 16) + ".json";
+  const fresh = names.filter(n => !fs.existsSync(path.join(MODELS, key(n))));
+  const ties = Object.keys(SIDE_TEAM).length;
+  console.error("");
+  console.error("NOT RUNNING. There is no squad page for pool \"" + POOL + "\".");
+  console.error("  Resolution here goes through the article a squad page links each man from, which");
+  console.error("  is the whole reason this harvest is exact rather than a name search. Without one,");
+  console.error("  all " + men.length + " men fall to the Wikidata name search, and the paragraph at the top of");
+  console.error("  this file is about why that is the path that picks the wrong Luis Garcia.");
+  console.error("");
+  console.error("  What a name-search run would cost: " + names.length + " distinct names, " +
+    (names.length - fresh.length) + " already cached,");
+  console.error("  so " + fresh.length + " fresh wbsearchentities calls, plus wbgetentities in batches for up");
+  console.error("  to five candidates each, plus the label rescue and the club spells against");
+  console.error("  query.wikidata.org. No en.wikipedia.org traffic at all, because there is no");
+  console.error("  squad page to read.");
+  console.error("  Sides this can name a real team for, out of assets/xi: " + ties + " of " + Object.keys(sides).length);
+  console.error("");
+  console.error("  Two ways forward:");
+  console.error("    --pages <file>          a list of article titles, one per line, for this pool");
+  console.error("    --name-search-only      run it anyway, and read the result man by man");
+  process.exit(1);
+}
+
 (async () => {
   /* ---------- 3. resolve ---------- */
   /* the squad lists first: exact, and they cannot pick the wrong Raul */
@@ -326,7 +433,9 @@ async function entities(ids) {
   let tied = 0, sure = 0;
   for (const m of men) {
     if (m.viaArticle) { sure++; tied++; continue; }
-    const sideish = norm(m.side);
+    /* the side's real team name where assets/xi gave us one, its deck key
+       otherwise, which is every tournament pool */
+    const sideish = norm(SIDE_TEAM[m.side] || m.side);
     let best = null, bestScore = -1;
     for (const id of m.cands) {
       const e = ents[id];
@@ -385,7 +494,7 @@ async function entities(ids) {
     for (const m of lost) {
       const cands = (byLabel[m.full || m.n] || []).filter(hasTeams);
       if (!cands.length) continue;
-      const sideish = norm(m.side);
+      const sideish = norm(SIDE_TEAM[m.side] || m.side);
       /* the passport decides, and a man with clubs beats one without */
       const best = cands.map(id => {
         const cits = claimIds(ents[id], "P27").map(c => labelOf(c, countryEnts));

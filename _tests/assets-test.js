@@ -263,9 +263,148 @@ check("the 221 face images are NOT precached", !/assets\/faces\/[a-z0-9-]+\.jpg/
     vm.runInNewContext(sw, sandbox);
   } catch (e) { threw = e.message; }
   check("the service worker evaluates without throwing", threw === null, threw);
-  check("and it lists something to precache",
-    Array.isArray(sandbox.EXTRA_ASSETS) ? sandbox.EXTRA_ASSETS.length > 20 : "EXTRA_ASSETS did not survive evaluation",
-    sandbox.EXTRA_ASSETS && sandbox.EXTRA_ASSETS.length);
+
+  /* THE LINE THAT USED TO BE HERE WAS THE DEFECT IT WAS MEANT TO CATCH, and it
+     is worth writing down how rather than quietly deleting it, because the
+     shape of the mistake is an easy one to make again. It read
+
+       check("and it lists something to precache",
+         Array.isArray(sandbox.EXTRA_ASSETS) ? sandbox.EXTRA_ASSETS.length > 20
+           : "EXTRA_ASSETS did not survive evaluation", ...)
+
+     and handed that sentence to check() as the condition. A non-empty string is
+     truthy, so the branch that meant "I could not see the list at all" printed
+     PASS. And it took that branch on every run it ever had: a top-level const in
+     a vm script lives in the script's own lexical scope and never lands on the
+     sandbox object, so sandbox.EXTRA_ASSETS was always undefined. The check
+     counted nothing and asserted nothing for as long as it existed, in the one
+     part of this file whose whole job is to notice that the service worker has
+     quietly stopped working.
+
+     So: ask the script for its own bindings, with an epilogue appended to the
+     source, and measure everything below off the real arrays. The epilogue asks
+     for three names and no more, on purpose. Every question underneath is a
+     question about what ends up in ASSETS, which is the only list the install
+     ever sees, so naming CLUB_DECKS or POOL_FILES here would tie this test to
+     how sw.js happens to be assembled today and make it throw on the day
+     somebody renames a part rather than breaks the whole. */
+  const probe = { self: { addEventListener() {} }, caches: {}, clients: {}, fetch: () => {} };
+  let got = null, probeThrew = null;
+  try {
+    vm.runInNewContext(sw + "\n;this.__SW = { ASSETS, EXTRA_ASSETS, CACHE };", probe);
+    got = probe.__SW;
+  } catch (e) { probeThrew = e.message; }
+  check("the precache lists can be read back out of the evaluated file", probeThrew === null,
+    probeThrew + "   <- ASSETS, EXTRA_ASSETS or CACHE is gone from sw.js, or was renamed");
+
+  if (got) {
+    check("EXTRA_ASSETS is a real array with something in it",
+      Array.isArray(got.EXTRA_ASSETS) && got.EXTRA_ASSETS.length > 20,
+      "EXTRA_ASSETS is " + (Array.isArray(got.EXTRA_ASSETS) ? got.EXTRA_ASSETS.length + " long" : typeof got.EXTRA_ASSETS));
+    check("ASSETS is a real array and is the longer of the two",
+      Array.isArray(got.ASSETS) && got.ASSETS.length > got.EXTRA_ASSETS.length,
+      "ASSETS is " + (Array.isArray(got.ASSETS) ? got.ASSETS.length + " long" : typeof got.ASSETS));
+
+    const unique = [...new Set(got.ASSETS)].filter(p => p !== "./");
+    let bytes = 0;
+
+    /* addAll IS ALL OR NOTHING. One entry that 404s and the whole install
+       rejects, the cache is never written, and nothing on screen says a word:
+       the app simply stops working offline and keeps looking fine online. This
+       is the check that would say so, and it is cheap, so it opens all of them
+       rather than sampling. */
+    const gone = unique.filter(p => { const f = path.join(REPO, p);
+      if (!fs.existsSync(f)) return true; bytes += fs.statSync(f).size; return false; });
+    check("every precached path is on disk, because addAll is all or nothing",
+      gone.length === 0, gone.length + " missing, e.g. " + gone.slice(0, 3).join(", "));
+    console.log("      " + got.ASSETS.length + " entries, " + unique.length + " unique files, " +
+      (bytes / 1048576).toFixed(2) + "MB, cache " + got.CACHE);
+
+    /* AND THE SAME FILE IS ONLY ASKED FOR ONCE. Seven lists written by four
+       tools go into ASSETS and several of them legitimately name the same
+       crest, so the install de-duplicates rather than making every list know
+       what the other six hold. That is one expression in one place and it would
+       be an easy thing to lose in a tidy-up, so it is asserted rather than
+       trusted. */
+    check("the install de-duplicates the list before handing it to addAll",
+      /addAll\(\s*\[\s*\.\.\.new Set\(ASSETS\)\s*\]\s*\)/.test(sw),
+      "sw.js hands ASSETS to addAll as it stands, repeats and all");
+
+    /* EVERY POOL IN THE REGISTRY IS IN THE INSTALL. Thirteen of the twenty-two
+       were not: the menu offered them on a phone with no signal and tapping one
+       did nothing, because only the six club pools and three hand-typed entries
+       were ever precached. This does not care WHICH list supplies the path,
+       only that ASSETS ends up holding it, so the hand-typed entries in
+       EXTRA_ASSETS and the generated POOL_FILES both satisfy it and neither is
+       load-bearing on its own. It goes red on the day somebody adds a pool to
+       index.html and does not run node _tools/sw-clubs.js, which is the day it
+       is for. */
+    const inAssets = new Set(got.ASSETS);
+    /* the registry again, parsed the way the squad-pool section above parses
+       it. Re-read rather than shared, because that one lives inside its own
+       block and reaching across two hundred lines for a variable is how a test
+       grows a dependency nobody can see. */
+    const html = fs.readFileSync(path.join(REPO, "index.html"), "utf8");
+    const reg = [...html.slice(html.indexOf("const POOLS = {"), html.indexOf("const QUIZZES = {")).matchAll(
+      /^\s*"?([a-z0-9-]+)"?:\s*\{[\s\S]*?file:\s*"([^"]+)"[\s\S]*?flags:\s*(null|"[^"]*")[\s\S]*?ext:\s*"([^"]*)"/gm)]
+      .map(m => ({ id: m[1], file: m[2], flags: m[3] === "null" ? null : m[3].slice(1, -1), ext: m[4] }));
+    check("the pool registry parses for the service worker check too", reg.length >= 3, reg.length + " pools found");
+    const notCached = reg.filter(r => !inAssets.has(r.file));
+    check("every pool the app declares is precached", notCached.length === 0,
+      notCached.length + " not in ASSETS: " + notCached.map(r => r.id).join(", ") +
+      "   (run node _tools/sw-clubs.js)");
+
+    /* AND SO IS EVERY CUP YEAR, which is a separate list in index.html and not
+       a pool: the Cup mode fetches assets/cup/<year>.json and those used to be
+       typed into EXTRA_ASSETS one line each. */
+    const cup = (() => { const m = /const CUP_YEARS = \[([^\]]*)\]/.exec(html);
+      return m ? [...m[1].matchAll(/"(\d{4})"/g)].map(x => x[1]) : []; })();
+    const coldCup = cup.filter(y => !inAssets.has("assets/cup/" + y + ".json"));
+    check("every cup year the app declares is precached", cup.length > 0 && coldCup.length === 0,
+      cup.length ? coldCup.join(", ") + " not in ASSETS" : "CUP_YEARS did not parse out of index.html");
+
+    /* AND THE BADGES THOSE POOLS DRAW. A pool file in the cache whose picker
+       paints a screen of grey boxes is half the job, and it is the half nobody
+       notices until the wifi goes. Only the badges a side actually names: a
+       side with no flag gets a kit-coloured swatch by design, and the whole of
+       assets/natflags is a separate decision from this one. */
+    const badges = new Set();
+    for (const r of reg) {
+      if (!r.flags || !inAssets.has(r.file)) continue;
+      const p = path.join(REPO, r.file);
+      if (!fs.existsSync(p)) continue;
+      for (const t of Object.values(JSON.parse(fs.readFileSync(p, "utf8"))))
+        if (t && t.flag) badges.add(r.flags + t.flag + r.ext);
+    }
+    const coldBadges = [...badges].filter(b => !inAssets.has(b));
+    check("every badge a precached pool names is precached too", coldBadges.length === 0,
+      coldBadges.length + " of " + badges.size + " cold, e.g. " + coldBadges.slice(0, 3).join(", "));
+
+    /* A LIST DECLARED AND NEVER SPREAD IS NOT A PRECACHE, it is a comment that
+       looks like one. sw.js carries two of them: NATFLAGS, 156 national flag
+       codes, and MANAGER_LOGOS, 291 crests written with a comment saying they
+       exist so the dugout deck survives the pub wifi, and neither is in ASSETS.
+       Only nine MANAGER_LOGOS slugs are cached at all and those nine are there
+       by accident, because CAREER_LOGOS happens to name the same crest.
+
+       This asserts the set is EXACTLY those two, which fails in both directions
+       on purpose. A new dead list fails it, which is the bug this is here for.
+       Reviving NATFLAGS or MANAGER_LOGOS also fails it, which is right: that is
+       a decision about install weight with a measured price on it, and it
+       should be taken by a person deleting a name from this line rather than
+       arrived at by a tool. The prices, counted off disk against the install as
+       it stands with the pool badges in it: NATFLAGS is 156 codes of which 84
+       are not cached any other way, so 60KB; MANAGER_LOGOS is 291 crests of
+       which 282 are not, so 4.07MB, a quarter again on a 17.4MB install. */
+    const DEAD_ON_PURPOSE = ["MANAGER_LOGOS", "NATFLAGS"];
+    const declared = [...sw.matchAll(/^const ([A-Z][A-Z_0-9]*) = (.*)$/gm)]
+      .filter(m => /^\[/.test(m[2]) || /\.split\(/.test(m[2]))   // list-shaped, so CACHE is not a candidate
+      .map(m => m[1]);
+    const dead = declared.filter(n => n !== "ASSETS" && !sw.includes("..." + n)).sort();
+    check("the only lists sw.js declares and never uses are the two known ones",
+      dead.join(",") === DEAD_ON_PURPOSE.join(","),
+      "dead now: [" + dead.join(", ") + "], recorded: [" + DEAD_ON_PURPOSE.join(", ") + "]");
+  }
 }
 
 console.log(fails ? `\n${fails} FAILING CHECK(S)` : "\nAll checks passed.");
