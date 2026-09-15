@@ -157,6 +157,57 @@ function boot() {
   });
   check("no shape is more than a quarter of its tier", worst.pct <= 25, `${worst.pct}% in ${worst.t}: "${worst.top}"`);
 
+  /* ---------- a specialism has something to draw from ---------- */
+  console.log("\n--- the eleven specialisms ---");
+  const CATS = ["champions", "scorers", "transfers", "managers", "grounds",
+    "records", "europe", "cups", "relegation", "imports", "stories"];
+  /* Known unfeedable from this bank and named rather than skipped, so the day
+     somebody writes questions for them this line says they can stop being an
+     exception. The bank is world football: it has one going-down row in seven
+     thousand, nine foreign-legion rows and sixteen domestic cup rows. */
+  const SHORT = ["relegation", "imports", "cups"];
+  const PER_CAT = 8;        // rows of one category in one tier before it is a pool
+  const WORKING = 5;        // categories that must clear that, per tier
+
+  const catPer = {};
+  let catTagged = 0, catRows = 0;
+  const strays = new Set();
+  TIERS.forEach(t => {
+    catPer[t] = {};
+    JSON.parse(ev(`JSON.stringify(BANK.${t})`)).forEach(r => {
+      catRows++;
+      if (!r.cat) return;
+      catTagged++;
+      if (CATS.indexOf(r.cat) < 0) strays.add(r.cat);
+      catPer[t][r.cat] = (catPer[t][r.cat] || 0) + 1;
+    });
+  });
+  TIERS.forEach(t => {
+    const live = CATS.filter(c => (catPer[t][c] || 0) >= PER_CAT);
+    console.log(`      ${t.padEnd(9)} ${String(Object.values(catPer[t]).reduce((a, b) => a + b, 0)).padStart(4)} tagged, ` +
+      `${live.length} of 11 with a real pool: ${live.join(" ")}`);
+  });
+  console.log(`      ${"LIVE".padEnd(9)} ${catTagged} of ${catRows} rows carry a category, ` +
+    `${Math.round(catTagged / catRows * 100)}%`);
+
+  check("the classic bank carries categories at all", catTagged > 900, catTagged + " of " + catRows);
+  check("and every one is on the closed list of eleven", strays.size === 0, [...strays].join(", "));
+  /* THE PACKS ARE THE GAP AND IT IS A NUMBER RATHER THAN A NOTE. The inline
+     bank is tagged and the five packs are not, so this is fourteen per cent and
+     the next job is the other eighty-six. It can only go up. */
+  check("the tagged share has not gone backwards",
+    catTagged / catRows >= 0.13, Math.round(catTagged / catRows * 100) + "%");
+  /* AND EVERY TIER HAS ENOUGH WORKING CATEGORIES TO BE WORTH FILTERING ON,
+     because h2Draw filters one tier at a time and a category that is fat across
+     the bank and empty in this tier leaves its man drawing from everything. */
+  const weak = TIERS.filter(t => CATS.filter(c => (catPer[t][c] || 0) >= PER_CAT).length < WORKING);
+  check("every tier has at least five categories with a real pool", weak.length === 0,
+    weak.map(t => t + " has " + CATS.filter(c => (catPer[t][c] || 0) >= PER_CAT).length).join(", "));
+  /* the three that cannot be fed are still the three that cannot be fed */
+  const fed = SHORT.filter(c => TIERS.some(t => (catPer[t][c] || 0) >= PER_CAT));
+  check("the three unfeedable categories are still unfeedable", fed.length === 0,
+    "these now have a pool, so take them off SHORT: " + fed.join(", "));
+
   console.log(fails ? `\n${fails} FAILING CHECK(S)` : "\nAll checks passed.");
   process.exit(fails ? 1 : 0);
 })().catch(e => { console.log("HARNESS ERROR:", e); process.exit(2); });
