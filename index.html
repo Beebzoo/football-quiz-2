@@ -3650,9 +3650,14 @@
   .h2marks{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:8px 0 10px}
   /* three ways to set up, same furniture as every other ghost row */
   .h2lines{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:8px 0 4px}
-  /* the five shapes, each drawn rather than named: a 5-3-2 explains itself in
-     a way the words never will */
+  /* the shapes, each drawn rather than named: a 5-3-2 explains itself in a way
+     the words never will. Ten of them now, which is three rows of three and one
+     on its own, and a lone button under the left-hand column reads as a mistake
+     rather than as the last of a list. The rule below moves it to the middle,
+     and it fires only when the count leaves exactly one over, so the day an
+     eleventh shape lands it stops applying on its own. */
   .h2shapes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0 6px}
+  .h2shapes>.h2shapeb:last-child:nth-child(3n+1){grid-column:2}
   .h2shapeb{display:flex;flex-direction:column;align-items:center;gap:6px;padding:9px 6px}
   .h2mini{position:relative;display:block;width:100%;aspect-ratio:3/4;border-radius:7px;
     background:linear-gradient(180deg,#1d5c37,#0f3d26);
@@ -8355,7 +8360,7 @@ const H2_SAFE = ["easy", "normal"];        // what counts as knocking it about
    being the same vertical line. Only y decides the difficulty, so moving a man
    sideways changes the picture and not the ladder. */
 /* The shape the whole game was tuned on, and still the default everywhere.
-   In The Dugout it is one of five, and everything positional reads h2Shape(w)
+   In The Dugout it is one of ten, and everything positional reads h2Shape(w)
    rather than this. */
 const H2_SQUAD = [
   {n:"GK",  no:1,  long:"the keeper",          line:0, x:50, y:94},
@@ -8371,9 +8376,19 @@ const H2_SQUAD = [
   {n:"RW",  no:7,  long:"the right winger",     line:6, x:84, y:25},
 ];
 /* ---------- THE SHAPES ----------
-   Five ladders. Only y feeds h2TierFor, so moving a man up the page makes
+   Ten ladders. Only y feeds h2TierFor, so moving a man up the page makes
    every ball to him dearer and every ball from him cheaper, and that is the
    whole mechanism: no new rules, a different board.
+
+   THE FIRST FIVE WERE DESIGNED AND THE LAST FIVE WERE COUNTED. The five at the
+   top were drawn as a set of ladders to play against each other, before there
+   was a harvest to check them against. The five at the bottom are here because
+   the deck records the shape every side actually lined up in, off the same
+   match report the eleven came from, and until they were added more than half
+   of the sides carrying a real formation were drawn in a 4-2-3-1 they never
+   played. The argument for each of them, and for the one label that is
+   deliberately NOT drawn under its own name, is written above them where the
+   table turns into harvested ground.
 
    from  = which man of the XI stands here, indexing the 4-2-3-1 order the
            deck is built in, so the same eleven are rearranged and never
@@ -8458,19 +8473,236 @@ const H2_SHAPES = {
       {from:8,  n:"ST",  no:11, long:"the second striker",   line:6, x:40, y:26, shot:"hard"},
       {from:9,  n:"ST",  no:9,  long:"the striker",          line:6, x:60, y:26, shot:"hard"},
     ]},
+
+  /* ---------- AND FIVE OFF THE HARVEST ----------
+     Everything above this line was drawn to be played against. Everything
+     below it was drawn because a real side lined up in it and the board had
+     nowhere to put them.
+
+     WHAT THE DECK ACTUALLY HOLDS, counted over every file in POOLS rather than
+     remembered. 562 sides carry an eleven and 434 of those carry a recorded
+     shape. 200 of the 434 named one of the five above, which is 4-4-2 on 94
+     sides, 4-3-3 on 55, 5-3-2 on 25, 3-5-2 on 23 and 4-2-3-1 on 3. The other
+     234 named 4-5-1 on 183 sides, 5-4-1 on 18, 3-4-3 on 14, 3-6-1 on 14,
+     5-2-3 on 4 and 4-6-0 on 1, and every one of those was drawn as a 4-2-3-1
+     with nothing said about it. The five boards below take all of them but the
+     4-6-0, which is one side and is sent to the 4-5-1 by H2_SHAPE_SAME for the
+     reason written over that table. The 128 sides with no recorded shape keep
+     the default, and that is honest rather than lazy: 114 of them are club
+     sides out of the six clubs.json files, which carry no formation at all, 12
+     are the finals sides the harvester refused, and the last two are Saudi
+     Arabia in 2002 and in 2006.
+
+     WHERE THE MEN COME FROM, which is the part that is easy to get wrong and
+     impossible to see once it is wrong. A shape does not choose an eleven, it
+     rearranges the one the deck already fitted into the 4-2-3-1 order, so
+     "from" is a claim about which of those eleven belongs in this slot. And
+     because h2Fit buckets on pos while every detailed position string falls
+     through to pool.MF, the fitted order IS the harvested order, which makes
+     every from below a checkable claim rather than a guess. Each one was
+     checked, by reading the sides carrying that label back out of the pools
+     and tallying what stands in each slot.
+
+     WHAT CAME BACK. All 14 of the 3-4-3 sides arrive in one identical
+     template, GK CB CB LM CB CM CM RF LF CF RM, so slot 3 is the left
+     midfielder and slot 4 is the third centre-back, which is the opposite way
+     round to the way it reads. The 5-4-1 has the right wing-back in slot 4 in
+     10 of its 18 sides and the left in slot 5 in 9, both together in 9, so
+     that is the largest single template rather than a majority and the rest
+     come out in the right bands rather than in the right boots. The 3-6-1 has
+     an attacking midfielder in slot 7 in 13 of 14 and in both 7 and 10 in 9 of
+     14, with the right midfielder in slot 4 and the left in slot 8 in 10 of
+     14. Three of the four 5-2-3 sides arrive as GK CB CB CB RWB LWB CM CM LF
+     CF RF, and the fourth is Jamaica in 1998, whose men are tagged DF and MF
+     and FW with nothing finer, so there is nothing there to be faithful to.
+
+     WHERE THEY STAND. The frame is the one described at the top of this
+     section and none of these invents a second sense for it. Back threes
+     borrow the 3-5-2's 30, 50 and 70, back fives the 5-3-2's 26, 50 and 74,
+     wing-backs sit at 8 to 12 and 88 to 92 and take their y from how far up
+     the label says they belong, a holding midfielder sits around 66, and a
+     front line lives between 20 and 26. The line number follows the label's
+     own count, so a 5-4-1's wide men are line 2 defenders and a 3-6-1's are
+     line 3 midfielders.
+
+     WHICH MEANS THE 3-4-3 AND THE 3-6-1 CARRY NO LINE 2 AT ALL, and that is
+     worth saying out loud because two rules read that number. h2DLineHTML
+     draws the back line off line 1 or line 2, so both of them still draw one,
+     off the three centre-backs. Route one in h2TierFor fires from line 2 or
+     lower, so in those two shapes it fires from the keeper and the three
+     centre-backs and never from the wide men, who are midfielders in both of
+     those names. That is the right reading of a wing-back the label counts in
+     midfield, and it is a real difference between these two boards and the
+     5-4-1, where the same men are line 2 and can hit it.
+
+     WHAT THEY COST. Every shape here gives at least two men a shot, the two
+     most defensive included, and that floor is deliberate. h2CanShoot refuses
+     a man who has been sent off, so a side with one shooter is a side one red
+     card away from being unable to score at all, and a match nobody can finish
+     is not a shape, it is a bug with a blurb. */
+  "4-5-1": {
+    label: "4-5-1", blurb: "One up, five across. Only one man to aim at, and the wide pair are down in the band.",
+    slots: [
+      {from:0,  n:"GK", no:1,  long:"the keeper",            line:0, x:50, y:94},
+      {from:1,  n:"CB", no:4,  long:"the left centre-back",  line:1, x:34, y:82},
+      {from:2,  n:"CB", no:5,  long:"the right centre-back", line:1, x:66, y:82},
+      {from:3,  n:"LB", no:3,  long:"the left back",         line:2, x:12, y:77},
+      {from:4,  n:"RB", no:2,  long:"the right back",        line:2, x:88, y:77},
+      {from:5,  n:"CM", no:6,  long:"the holding midfielder",line:3, x:40, y:66},
+      {from:6,  n:"CM", no:8,  long:"the other midfielder",  line:3, x:60, y:64},
+      {from:8,  n:"LM", no:11, long:"the left midfielder",   line:3, x:11, y:58},
+      {from:10, n:"RM", no:7,  long:"the right midfielder",  line:3, x:89, y:58},
+      {from:7,  n:"AM", no:10, long:"the one off the front", line:4, x:50, y:46, shot:"extreme"},
+      {from:9,  n:"9",  no:9,  long:"the lone striker",      line:6, x:50, y:22, shot:"hard"},
+    ]},
+  "3-4-3": {
+    label: "3-4-3", blurb: "Three at the back and three up front, so the width is midfield's problem.",
+    slots: [
+      {from:0,  n:"GK", no:1,  long:"the keeper",            line:0, x:50, y:94},
+      {from:1,  n:"CB", no:4,  long:"the left centre-back",  line:1, x:30, y:82},
+      {from:2,  n:"CB", no:5,  long:"the middle centre-back",line:1, x:50, y:85},
+      {from:4,  n:"CB", no:3,  long:"the right centre-back", line:1, x:70, y:82},
+      {from:3,  n:"LM", no:2,  long:"the left midfielder",   line:3, x:10, y:62},
+      {from:5,  n:"CM", no:6,  long:"the holding midfielder",line:3, x:38, y:66},
+      {from:6,  n:"CM", no:8,  long:"the other midfielder",  line:3, x:62, y:62},
+      {from:10, n:"RM", no:7,  long:"the right midfielder",  line:3, x:90, y:62},
+      /* THE FRONT THREE TUCK IN, at 22 and 78 rather than out on the paint.
+         The wide midfielders in this same shape are standing at 10 and 90, so
+         forwards on the touchline would be outside nothing and inside nobody,
+         and a 3-4-3 is the one name in the table where the width is explicitly
+         somebody else's job. The harvest says the same thing from the other
+         side: all 14 sides tag these two LF and RF rather than LW and RW. They
+         are still wide of 25 and 75, so h2RunSpot still sends them round the
+         outside of the widest defender rather than straight through. */
+      {from:8,  n:"LF", no:11, long:"the left forward",      line:6, x:22, y:24, shot:"extreme"},
+      {from:9,  n:"9",  no:9,  long:"the striker",           line:6, x:50, y:20, shot:"hard"},
+      {from:7,  n:"RF", no:10, long:"the right forward",     line:6, x:78, y:24, shot:"extreme"},
+    ]},
+  "3-6-1": {
+    label: "3-6-1", blurb: "Two behind the striker and six in the middle, so the ball goes round rather than through.",
+    slots: [
+      {from:0,  n:"GK",  no:1,  long:"the keeper",           line:0, x:50, y:94},
+      {from:1,  n:"CB",  no:4,  long:"the left centre-back", line:1, x:30, y:82},
+      {from:2,  n:"CB",  no:5,  long:"the middle centre-back",line:1, x:50, y:85},
+      {from:3,  n:"CB",  no:3,  long:"the right centre-back", line:1, x:70, y:82},
+      {from:8,  n:"LM",  no:2,  long:"the left midfielder",  line:3, x:8,  y:60},
+      {from:5,  n:"CM",  no:6,  long:"the holding midfielder",line:3, x:40, y:68},
+      {from:6,  n:"CM",  no:8,  long:"the other midfielder", line:3, x:60, y:64},
+      {from:4,  n:"RM",  no:7,  long:"the right midfielder", line:3, x:92, y:60},
+      /* BOTH OF THEM LABELLED AM, because both of them are one: the harvest
+         has an attacking midfielder in slot 7 in 13 of the 14 sides and in
+         slot 10 in 9 of them. Two men on one pitch wearing a spot called "10"
+         reads as a shirt number printed twice, and a shape with two tens is
+         the one thing this name is actually about. */
+      {from:7,  n:"AM",  no:10, long:"the left of the two",  line:5, x:36, y:46, shot:"extreme"},
+      {from:10, n:"AM",  no:11, long:"the right of the two", line:5, x:64, y:44, shot:"extreme"},
+      {from:9,  n:"9",   no:9,  long:"the striker",          line:6, x:50, y:24, shot:"hard"},
+    ]},
+  "5-4-1": {
+    label: "5-4-1", blurb: "Five across the back, four across the middle, and one man to hit.",
+    slots: [
+      {from:0,  n:"GK",  no:1,  long:"the keeper",           line:0, x:50, y:94},
+      {from:1,  n:"CB",  no:4,  long:"the left centre-back", line:1, x:26, y:84},
+      {from:2,  n:"CB",  no:5,  long:"the middle centre-back",line:1, x:50, y:86},
+      {from:3,  n:"CB",  no:3,  long:"the right centre-back", line:1, x:74, y:84},
+      {from:5,  n:"LWB", no:2,  long:"the left wing-back",   line:2, x:10, y:76},
+      {from:4,  n:"RWB", no:7,  long:"the right wing-back",  line:2, x:90, y:76},
+      {from:8,  n:"LM",  no:11, long:"the left midfielder",  line:3, x:12, y:60},
+      {from:6,  n:"CM",  no:6,  long:"the holding midfielder",line:3, x:38, y:66},
+      {from:10, n:"RM",  no:10, long:"the right midfielder", line:3, x:88, y:60},
+      {from:7,  n:"CM",  no:8,  long:"the other midfielder", line:4, x:62, y:58, shot:"extreme"},
+      {from:9,  n:"9",   no:9,  long:"the striker",          line:6, x:50, y:26, shot:"hard"},
+    ]},
+  "5-2-3": {
+    label: "5-2-3", blurb: "A back five and a front three, with two in the middle and a canyon between them.",
+    slots: [
+      {from:0,  n:"GK",  no:1,  long:"the keeper",           line:0, x:50, y:94},
+      {from:1,  n:"CB",  no:4,  long:"the left centre-back", line:1, x:26, y:84},
+      {from:2,  n:"CB",  no:5,  long:"the middle centre-back",line:1, x:50, y:86},
+      {from:3,  n:"CB",  no:3,  long:"the right centre-back", line:1, x:74, y:84},
+      {from:5,  n:"LWB", no:2,  long:"the left wing-back",   line:2, x:10, y:74},
+      {from:4,  n:"RWB", no:7,  long:"the right wing-back",  line:2, x:90, y:74},
+      {from:6,  n:"CM",  no:6,  long:"the holding midfielder",line:3, x:38, y:66},
+      {from:7,  n:"CM",  no:8,  long:"the other midfielder", line:3, x:62, y:64},
+      {from:8,  n:"LF",  no:11, long:"the left forward",     line:6, x:20, y:26, shot:"extreme"},
+      {from:9,  n:"9",   no:9,  long:"the striker",          line:6, x:50, y:22, shot:"hard"},
+      {from:10, n:"RF",  no:10, long:"the right forward",    line:6, x:80, y:26, shot:"extreme"},
+    ]},
 };
 const H2_SHAPE_DEFAULT = "4-2-3-1";
 /* which shape a side is in. One on One and the board never change it, so they
    are always the 4-2-3-1 the whole game was tuned on. */
-/* THE SHAPE THEY ACTUALLY PLAYED, where the app has one of ours that matches.
-   The deck records the real shape off the match report, and five of the app's
-   formations are common enough that most sides land on one. It is only a
-   DEFAULT: the picker is still a picker, and a manager who wants Italy in a
-   4-3-3 can have it. */
+/* WHAT THE RECORD CALLS IT, AND WHAT WE DRAW, which are the same string for
+   293 of the 434 sides that carry one and are not for the other 141, and the
+   gap between them is worth a table rather than a shrug.
+
+   THE HARVESTER DOES NOT READ A FORMATION OFF THE PAGE, IT COUNTS ONE. See
+   shapeOf at _tools/build-elevens.js:409, which tallies how many of the eleven
+   are tagged as defenders and how many as forwards and prints
+   defenders-midfielders-forwards. Its forward count is CF, ST, FW, LF and RF,
+   so a winger tagged LW or RW and a ten tagged AM both fall into the middle
+   number. That one fact is why 183 sides carry "4-5-1" and only three carry
+   "4-2-3-1", and why the 4-5-1 bucket holds France in 2000 with Zidane behind
+   Dugarry and Henry and Djorkaeff either side of them, Spain in 2010 with Xavi
+   behind Villa, Italy in 2020 with Insigne, Immobile and Chiesa, and France in
+   2018 with Griezmann behind Giroud. A name that cannot tell those sides from
+   a flat five is a name we cannot draw off, so the men get read instead.
+
+   AND THE MEN ARE SITTING IN THE SAME OBJECT. Tallying the fitted positions of
+   all 183 of them: 140 carry a winger or a wide forward in both slot 8 and
+   slot 10, and 126 carry an AM or an SS in slot 7. The modal signature is GK
+   CB CB LB RB CM CM AM LW CF RW on 93 sides, which is a 4-2-3-1 written out,
+   and the harvester's own SLOTS list at _tools/build-elevens.js:296 is that
+   same shape, so those elevens are already written in the order it reads them
+   in. The other 43 are genuinely flat or genuinely narrow: 38 carry LM and RM
+   in 8 and 10, and 5 carry two attacking midfielders either side of the
+   striker and no wide man at all. So 4-5-1 is not aliased as a label, it is
+   resolved per side by the when() below, and both boards are real. The 140 get
+   the 4-2-3-1 they lined up in, the 43 get the flat 4-5-1 the name describes,
+   and neither group is told something about itself its own eleven denies.
+
+   IT READS THE DECK'S ELEVEN AND NOT THE MANAGER'S. The recorded shape belongs
+   to the recorded line-up, so a manager who leaves a winger out has changed
+   his side rather than changed what Italy played in 2006, and the board he
+   starts on should not flip because of a swap he made on the squad screen. He
+   can still tap any of the ten, which is the whole point of a picker.
+
+   4-6-0 is Spain against Italy in 2012 and nobody else, and it is the same
+   fact one step further on: that eleven had nobody tagged as a centre forward,
+   so the count printed a nought. The 4-5-1 is where it belongs, because the
+   man the fit puts in the striker's slot is Silva, tagged AM, and standing a
+   midfielder where the striker stands is exactly what a false nine is. One
+   side, one line, decided rather than fallen into.
+
+   A label that is neither drawn nor listed here still returns null and the
+   side still starts in the default, which is the behaviour it always had and
+   is the only floor that makes sense: the app cannot invent a ladder for a
+   string it has never seen. The appended test in _tests/dugout-test.js reads
+   the pool files off disk and fails the day a harvest introduces one. */
+const H2_WIDE_FWD = {LW:1, RW:1, LF:1, RF:1};
+const H2_SHAPE_SAME = {
+  "4-5-1": {id:"4-2-3-1",
+            when: xi => !!(H2_WIDE_FWD[(xi[8] || {}).pos] && H2_WIDE_FWD[(xi[10] || {}).pos]),
+            says:"because this eleven has a winger tagged on each flank, which is the one thing that count cannot say"},
+  "4-6-0": {id:"4-5-1",
+            says:"because nobody in it is listed as a centre forward, so the man in the striker's slot is a midfielder standing where a striker stands"},
+};
+/* WHAT THE RECORD SAYS, for prose. The screen is allowed to name the thing the
+   match report named even where the board draws it under another name, and
+   keeping the two apart is what stops a hint line telling a manager that Spain
+   in 2012 lined up in something nobody at the time called it. */
+const h2ShapeSaid = w => { const q = h2Squad(w); return (q && q.xiShape) || null; };
+/* THE SHAPE THEY ACTUALLY PLAYED, resolved onto a board that can draw it. It
+   is still only a DEFAULT: the picker is still a picker, and a manager who
+   wants Italy in a 4-3-3 can have it. What changed is that it is now reached
+   at all, because h2Start no longer seeds the default over the top of it. */
 function h2RealShape(w){
-  const q = h2Squad(w);
-  const id = q && q.xiShape;
-  return (id && H2_SHAPES[id]) ? id : null;
+  const said = h2ShapeSaid(w);
+  if(!said) return null;
+  const same = H2_SHAPE_SAME[said];
+  const q = (same && same.when) ? h2Squad(w) : null;
+  const id = (same && (!same.when || same.when((q && q.xi) || []))) ? same.id : said;
+  return H2_SHAPES[id] ? id : null;
 }
 function h2Shape(w){
   const H = S && S.h2h;
@@ -8483,6 +8715,19 @@ const h2ShapeId = w => {
   return (h2Tactical() && H && H.form && H.form[w]) ||
          (h2Tactical() && h2RealShape(w)) || H2_SHAPE_DEFAULT;
 };
+/* WHAT TO CALL IT ON A SCREEN THAT IS NOT THE PICKER. The team sheet and the
+   outcome record both printed the board and called it the shape, which was
+   true while the board was always the recorded name and became a false
+   statement the moment 141 sides started being drawn under another one. A
+   sheet reading 4-2-3-1 for a side the deck records as a 4-5-1 is the same lie
+   this whole change exists to remove, moved somewhere quieter, so both names
+   go out together and neither is dropped. It says both only where the board IS
+   the resolved one: a manager who overrules the record has picked a shape, and
+   his sheet should read the shape he picked. */
+function h2ShapeName(w){
+  const id = h2ShapeId(w), said = h2ShapeSaid(w);
+  return (said && said !== id && h2RealShape(w) === id) ? said + " as " + id : id;
+}
 /* the shape of whoever "mine" means, which is how the drawing asks */
 const h2ShapeV = mine => h2Shape(h2Side(mine));
 
@@ -8902,6 +9147,24 @@ function h2RunSpot(i, w, mine){
     y = me.y - H2_PUSH / 1.3;
   }
   else return null;
+  /* A RUN IS FORWARD, and with ten shapes on the board that has to be said
+     rather than assumed. Both branches above read the opposition to find the
+     space, and the wide man's branch reads their line 2, which was written
+     when line 2 meant a full-back standing near his own box. Against a shape
+     whose wide defenders start up at halfway the same sum hands a winger a
+     spot behind the one he set off from, and a man who runs backwards is a
+     drawing nobody can read and a ladder that prices his next ball as a gift.
+
+     THIS IS NOT A NEW BUG AND THE FIVE NEW SHAPES DID NOT BRING IT. Sweeping
+     every ordered pairing of the original five, a 4-2-3-1 winger and a 4-3-3
+     winger already ran backwards at a 3-5-2's high wing-backs, four instances
+     across two pairings, and nothing in the suite noticed because the shape
+     test only ever played a shape against a mirror of itself. So this moves
+     those four as well as protecting the new ones, and it is the only thing
+     in this patch that changes a run the original five already made. It fires
+     only on a run that came out wrong, which is the narrowest thing that fixes
+     it, and four is the smallest step that still reads as a run. */
+  if(y >= me.y) y = me.y - 4;
   x = Math.max(4, Math.min(96, Math.round(x)));
   y = Math.max(6, Math.min(94, Math.round(y)));
   return mine ? {x: x, y: y} : {x: 100 - x, y: 100 - y};
@@ -9391,8 +9654,17 @@ function h2Start(){
            subs:[H2_SUBS, H2_SUBS], subbed:[{}, {}], benchUsed:[[], []], sub:null, subQ:false,
            /* where each side's defence stands, in The Dugout */
            line:["mid", "mid"],
-           /* which shape each side is in, The Dugout only */
-           form:[H2_SHAPE_DEFAULT, H2_SHAPE_DEFAULT],
+           /* WHICH SHAPE EACH SIDE IS IN, The Dugout only, and EMPTY here on
+              purpose. It used to be seeded with the default, which made the
+              first branch of h2Shape's chain true from the moment a match
+              existed, so the shape the deck recorded was never once reached:
+              the note over h2RealShape described an intention the code could
+              not carry out, and the hint line on the picker could only fire
+              for a side whose record happened to say 4-2-3-1. Empty lets the
+              chain do what it was written to do, and h2SquadDone writes the
+              resolved shape into it before the picker opens, so nothing
+              downstream ever has to cope with a null. */
+           form:[null, null],
            /* the clock, and the shootout once it is running */
            min:0, so:null,
            /* THE ELEVEN EACH MANAGER NAMED, and the twelve he left out, as
@@ -12455,7 +12727,7 @@ const LOG_MAX = 8000;
    later. */
 function h2LogWho(w, i){
   const m = h2Man(i, w), sp = h2Spot(i, w);
-  return {
+  const row = {
     w: w, i: i,
     who: (m && (m.n || m.full)) || (sp && sp.n) || null,
     pos: (sp && sp.n) || null,
@@ -12463,6 +12735,17 @@ function h2LogWho(w, i){
     line: h2Tactical() ? h2Line(1 - w) : null,   // the line he was playing AGAINST
     form: h2Tactical() ? h2ShapeId(w) : null,
   };
+  /* AND WHAT THE RECORD CALLED IT, where that is not what he played on. form
+     stays the BOARD, because the board is the ladder every tier in this row
+     was priced off, and a column that meant the ladder on Tuesday and the
+     label on Wednesday would make every row filed before tonight unreadable.
+     But a side the deck records as a 4-5-1 and draws as a 4-2-3-1 has two true
+     names, and filing only the one this file chose loses the one that came off
+     a match report. Written only when the two differ, because the log is eight
+     thousand rows in localStorage and a column that repeats the one next to it
+     is the kind of thing that quietly doubles a file. */
+  if(row.form){ const said = h2ShapeSaid(w); if(said && said !== row.form) row.said = said; }
+  return row;
 }
 function logOutcome(kind, ok, who){
   if(!S || S.tier == null || S.qi == null) return;
@@ -12606,12 +12889,12 @@ function outcomesTSV(){
      before tonight has it blank, which is correct rather than missing: those
      rows were logged when the two were genuinely indistinguishable, so the
      honest value is nothing rather than a nought. */
-  return "time\tmatch\tmode\tmc\ttier\tqi\tkind\tok\tout\tside\tslot\tman\tspot\tleague\tvline\tshape\tshot\tdive\n" +
+  return "time\tmatch\tmode\tmc\ttier\tqi\tkind\tok\tout\tside\tslot\tman\tspot\tleague\tvline\tshape\tshot\tdive\trecord\n" +
     log.map(r => [new Date(r.t).toISOString(), r.mid || "", r.mode, r.mc ? 1 : 0,
       r.tier || "", r.qi == null ? "" : r.qi,
       r.kind, r.ok ? 1 : 0, r.out ? 1 : "", r.w == null ? "" : r.w, r.i == null ? "" : r.i,
       r.who || "", r.pos || "", r.lg || "", r.line || "", r.form || "",
-      r.shot || "", r.dive || ""].join("\t")).join("\n");
+      r.shot || "", r.dive || "", r.said || ""].join("\t")).join("\n");
 }
 /* THE WHOLE LOG AS A FILE, because there is no server and there is not going
    to be one: this is how the data gets to a laptop, where several phones'
@@ -13367,6 +13650,21 @@ function h2SquadDone(){
   };
   if(w === 0){ H.picking = 1; render(); return; }
   H.picking = null;
+  /* AND THE SHAPE THEY PLAYED IS ALREADY ON THE TABLE WHEN HE GETS THERE. Both
+     elevens have just been named, the next screen is the one where a shape is
+     chosen, and what it should open on is what the record says rather than a
+     house default. Written here rather than at h2Start because this is the
+     first moment there is a side to ask, and written at all rather than left
+     to h2Shape's fallback so that H.form holds a real string from here to full
+     time: the pitch, the team sheet and the outcome record all read one field
+     and cannot end up disagreeing about where a man is standing.
+
+     ONLY INTO AN EMPTY SLOT. Coming back into the squad screen after a shape
+     has been chosen would otherwise throw the manager's pick away and quietly
+     stand him back in the record's shape, which is the same class of bug as
+     the one this patch exists to fix. */
+  H.form = H.form || [null, null];
+  for(let i = 0; i < 2; i++) if(!H.form[i]) H.form[i] = h2RealShape(i) || H2_SHAPE_DEFAULT;
   S.phase = "h_shape";
   render();
 }
@@ -15241,14 +15539,23 @@ function h2Render(st){
   if(S.phase === "h_shape"){
     const w = H.shaping || 0;
     const picker = S.players[w];
-    const mine = H.form && H.form[w] || H2_SHAPE_DEFAULT;
+    /* THE ONE THIS SIDE IS IN, through the same accessor the match reads, so
+       the lit button is the shape that gets played if he taps Done and says
+       nothing. Reading H.form straight would light the default on any route
+       that reached this screen without the seed above, while the pitch quietly
+       used the recorded shape, which is the same lie in a new place. */
+    const mine = h2ShapeId(w);
     const kit = h2Kit(w);
     st.innerHTML =
       '<div class="kick">' + ico('clipboard') + 'The Dugout \u00b7 ' + esc(h2Team(w) || picker.name) + '</div>' +
       '<div class="h2big">' + esc(picker.name) + ', how are you setting up?</div>' + h2TurnHTML() +
       '<div class="h2hintline" style="margin-top:0">' +
         (h2RealShape(w) && mine === h2RealShape(w)
-          ? 'They played ' + esc(h2RealShape(w)) + ' that day, so that is where this starts. '
+          ? 'They played ' + esc(h2ShapeSaid(w)) + ' that day, so that is where this starts. ' +
+            (h2ShapeSaid(w) === mine ? ''
+              : 'The record counts an eleven rather than names a shape, so the board is the ' +
+                esc(mine) + ', ' + ((H2_SHAPE_SAME[h2ShapeSaid(w)] || {}).says ||
+                'because that is the board this eleven fits') + '. ')
           : '') +
         'Only the distances matter. Push a man up and every ball to him ' +
         'costs more and every ball from him costs less, so the shape IS the ladder.</div>' +
@@ -15343,7 +15650,7 @@ function h2Render(st){
           '<div class="h2sheet-h">' + esc(h2Team(w) || S.players[w].name) + '</div>' +
           (h2XiSays(w) ? '<div class="h2sheet-r"><i>Eleven</i><b>' +
             esc("v " + (h2Squad(w).xiVs || "")) + '</b></div>' : "") +
-          '<div class="h2sheet-r"><i>Shape</i><b>' + esc(h2ShapeId(w)) + '</b></div>' +
+          '<div class="h2sheet-r"><i>Shape</i><b>' + esc(h2ShapeName(w)) + '</b></div>' +
           '<div class="h2sheet-r"><i>Line</i><b>' + esc(H2_LINES[h2Line(w)].label) + '</b></div>' +
           '<div class="h2sheet-r"><i>Traits</i><b>' +
             (named.length ? esc(named.join(", ")) : "none") + '</b></div>' +

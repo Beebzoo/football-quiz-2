@@ -89,9 +89,16 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
 
   /* a man with two leagues should use both across enough passes */
   start("manager", "Italy", "Costa Rica");
+  /* ASK WHERE HE IS STANDING, which is what slotOf is for and what the note on
+     it says. Italy in 2006 is recorded as a 4-5-1 and now starts in one, so
+     slot 9 is the man off the front and Toni is the slot behind him. This was
+     the only assertion in the file still reading a man out of a slot number
+     that only meant him in the 4-2-3-1. */
+  const TONI = slotOf("Toni", 0);
+  check("Toni is in the Italian eleven", TONI > -1, TONI);
   const seen = {};
-  for (let i = 0; i < 40; i++) { await passTo(SIX, ST); seen[qd()] = (seen[qd()] || 0) + 1; run(app, "h2Next();"); }
-  const toni = lg(ST, 0) || [];
+  for (let i = 0; i < 40; i++) { await passTo(SIX, TONI); seen[qd()] = (seen[qd()] || 0) + 1; run(app, "h2Next();"); }
+  const toni = lg(TONI, 0) || [];
   check("Toni played in two leagues", toni.length === 2, JSON.stringify(toni));
   check("and forty balls to him used both", Object.keys(seen).length === 2, JSON.stringify(seen));
   check("and nothing but those two", Object.keys(seen).every(k => toni.includes(k)), JSON.stringify(seen));
@@ -187,9 +194,9 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   run(app, 'DECKS.seriea = ' + JSON.stringify(R("assets/seriea/index.json")) + ";");
   run(app, 'DECKS.bundesliga = ' + JSON.stringify(R("assets/bundesliga/index.json")) + ";");
 
-  console.log("\n--- the five shapes are all legal elevens ---");
+  console.log("\n--- the ten shapes are all legal elevens ---");
   const shapes = ev(app, "Object.keys(H2_SHAPES)");
-  check("there are five of them", shapes.length === 5, JSON.stringify(shapes));
+  check("there are ten of them", shapes.length === 10, JSON.stringify(shapes));
   for (const id of shapes) {
     const sl = ev(app, "H2_SHAPES[" + JSON.stringify(id) + "].slots");
     const froms = sl.map(p => p.from).sort((x, y) => x - y);
@@ -306,8 +313,8 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   run(app, "h2SquadDone();"); await tick(120);
   check("and then it asks for a shape", ev(app, "S.phase") === "h_shape", ev(app, "S.phase"));
   check("the first man is up", (ev(app, "S.h2h.shaping") || 0) === 0, ev(app, "S.h2h.shaping"));
-  check("all five are offered, drawn rather than named",
-    (stage(app).match(/h2shapeb/g) || []).length === 5 && /h2mini/.test(stage(app)),
+  check("all ten are offered, drawn rather than named",
+    (stage(app).match(/h2shapeb/g) || []).length === 10 && /h2mini/.test(stage(app)),
     (stage(app).match(/h2shapeb/g) || []).length);
   run(app, 'h2SetShape("4-3-3");'); await tick(120);
   check("his pick sticks", ev(app, "S.h2h.form[0]") === "4-3-3", JSON.stringify(ev(app, "S.h2h.form")));
@@ -552,6 +559,227 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
     ev(app, 'canEver("premier","manager")') === false, ev(app, 'canEver("premier","manager")'));
   check("nor can Career Path", ev(app, 'canEver("career","manager")') === false, ev(app, 'canEver("career","manager")'));
   check("but Let's Ball is still fine on the pitch", ev(app, 'canEver("classic","pitch")') === true, "no");
+
+  /* ================================================================
+     THE DECK'S SHAPES ARE SHAPES THE APP CAN DRAW
+
+     Nothing in this suite ever read xiShape. That is how 234 of the 434 sides
+     carrying a recorded formation came to be standing in a 4-2-3-1 they never
+     played without one assertion going red: every check about shapes was about
+     the table, and none was about the gap between the table and the harvest.
+     These are about the gap, and they read the pools off disk rather than off
+     a list typed in here, so the day a harvest lands a new formation this is
+     the file that says so.
+     ================================================================ */
+  console.log("\n--- every formation the harvest recorded lands somewhere on purpose ---");
+  const shSides = [];
+  for (const dir of fs.readdirSync(path.join(REPO, "assets"))) {
+    for (const f of ["index.json", "clubs.json"]) {
+      const p = path.join(REPO, "assets", dir, f);
+      if (!fs.existsSync(p)) continue;
+      const pool = JSON.parse(fs.readFileSync(p, "utf8"));
+      for (const k of Object.keys(pool)) {
+        const t = pool[k];
+        if (!t || !Array.isArray(t.xi) || t.xi.length !== 11 || !t.xiShape) continue;
+        shSides.push({at: dir + " " + k, said: t.xiShape, xi: t.xi.map(m => ({pos: (m || {}).pos}))});
+      }
+    }
+  }
+  /* RESOLVED BY THE APP'S OWN TABLE, inside the sandbox and in one hop. It
+     calls h2Fit for the order and H2_SHAPE_SAME for the decision, so this
+     tests the rule that ships rather than a copy of it written out here. */
+  run(app, "var SH_SIDES = " + JSON.stringify(shSides) + ";");
+  const shOut = ev(app, "(() => {" +
+    "const out = {n:0, own:0, other:0, lost:0, strays:{}, byLabel:{}, examples:{}};" +
+    "for(const s of SH_SIDES){" +
+    "  out.n++;" +
+    "  const same = H2_SHAPE_SAME[s.said];" +
+    "  const id = (same && (!same.when || same.when(h2Fit(s.xi)))) ? same.id : s.said;" +
+    "  const key = s.said + ' -> ' + id;" +
+    "  out.byLabel[key] = (out.byLabel[key] || 0) + 1;" +
+    "  if(!out.examples[key]) out.examples[key] = s.at;" +
+    "  if(!H2_SHAPES[id]){ out.lost++; out.strays[s.said] = (out.strays[s.said] || 0) + 1; }" +
+    "  else if(id === s.said) out.own++; else out.other++;" +
+    "} return out; })()");
+  check("the pools were walked and the sides that record a shape were found",
+    shOut.n === 434, shOut.n + " sides with a recorded shape, expected 434");
+  /* THE ONE THAT MATTERS. A label nothing knows about falls silently into the
+     default, which is how this bug lived: it never threw, it just said
+     something false about a real eleven. */
+  check("no recorded formation falls through to the default unnoticed",
+    shOut.lost === 0, JSON.stringify(shOut.strays));
+  check("so every side that records a shape is drawn on a board chosen for it",
+    shOut.own + shOut.other === shOut.n && shOut.n > 0, shOut.own + " + " + shOut.other + " of " + shOut.n);
+  /* AND THE SPLIT IS PINNED rather than printed. These two numbers are the
+     whole claim of the change, so they are written down: if a harvest retags a
+     man and a side moves between boards, this comes red and somebody looks,
+     which is the point. 293 under the name the record gives them, 141 on a
+     board with another name because their own eleven says so. */
+  check("293 of them are drawn under the name the record gives them",
+    shOut.own === 293, shOut.own);
+  check("and 141 on a board their eleven fits better than their label does",
+    shOut.other === 141, shOut.other);
+  check("which is all 434 of them, and none left over",
+    shOut.own + shOut.other === 434 && shOut.lost === 0,
+    JSON.stringify(shOut.byLabel));
+  /* THE TWO BUCKETS OF 4-5-1, which is the reading the whole table turns on:
+     140 of the 183 have a winger tagged on both flanks and are drawn as the
+     4-2-3-1 they lined up in, and 43 do not and are drawn flat. */
+  check("140 of the 4-5-1 sides carry wingers and get the 4-2-3-1",
+    shOut.byLabel["4-5-1 -> 4-2-3-1"] === 140, shOut.byLabel["4-5-1 -> 4-2-3-1"]);
+  check("and 43 of them are flat or narrow and get the 4-5-1 board",
+    shOut.byLabel["4-5-1 -> 4-5-1"] === 43, shOut.byLabel["4-5-1 -> 4-5-1"]);
+  check("and Spain's 4-6-0 is the only side sent anywhere by name alone",
+    shOut.byLabel["4-6-0 -> 4-5-1"] === 1 && /euro2012/.test(shOut.examples["4-6-0 -> 4-5-1"] || ""),
+    shOut.examples["4-6-0 -> 4-5-1"]);
+  check("every entry in the table points at a board that exists",
+    ev(app, "Object.keys(H2_SHAPE_SAME).every(k => !!H2_SHAPES[H2_SHAPE_SAME[k].id])") === true,
+    "an entry goes nowhere");
+  check("and every entry carries the reason it was made, for the screen to print",
+    ev(app, "Object.keys(H2_SHAPE_SAME).every(k => typeof H2_SHAPE_SAME[k].says === 'string' && H2_SHAPE_SAME[k].says.length > 20)") === true,
+    "an entry has no reason on it");
+
+  console.log("\n--- ten boards, and every one of them a side the game can play ---");
+  const shIds = ev(app, "Object.keys(H2_SHAPES)");
+  check("there are ten", shIds.length === 10, JSON.stringify(shIds));
+  const shSeen = {};
+  for (const id of shIds) {
+    const sl = ev(app, "H2_SHAPES[" + JSON.stringify(id) + "].slots");
+    const froms = sl.map(p => p.from).sort((x, y) => x - y);
+    check(id + ": eleven slots, every man once, keeper first",
+      sl.length === 11 && JSON.stringify(froms) === JSON.stringify([0,1,2,3,4,5,6,7,8,9,10]) &&
+      sl[0].from === 0 && sl[0].line === 0, JSON.stringify(froms));
+    check(id + ": eleven shirts, one to eleven",
+      JSON.stringify(sl.map(p => p.no).sort((x, y) => x - y)) === JSON.stringify([1,2,3,4,5,6,7,8,9,10,11]),
+      JSON.stringify(sl.map(p => p.no)));
+    /* NOBODY STANDS ON ANYBODY. Two men on one spot is a drawing that hides a
+       man and a mark the other side can never find. */
+    check(id + ": nobody is standing on anybody, and everybody is on the pitch",
+      new Set(sl.map(p => p.x + "," + p.y)).size === 11 &&
+      sl.every(p => p.x >= 0 && p.x <= 100 && p.y >= 0 && p.y <= 100 && p.line >= 0 && p.line <= 6),
+      JSON.stringify(sl.map(p => p.x + "," + p.y)));
+    /* SLOTS RUN BACK TO FRONT. The sub table, the captions and h2DLineHTML all
+       read a slot number, so a shape listed in some other order would be
+       correct and unreadable. */
+    check(id + ": the slots run back to front",
+      sl.every((p, i) => i === 0 || p.line >= sl[i - 1].line), JSON.stringify(sl.map(p => p.line)));
+    /* TWO SHOOTERS IS THE FLOOR. h2CanShoot refuses a man who has been sent
+       off, so one shooter is one red card away from a side that cannot score. */
+    check(id + ": at least two men can shoot, so a red card cannot end the side",
+      sl.filter(p => p.shot).length >= 2, sl.filter(p => p.shot).length);
+    const key = JSON.stringify(sl.map(p => p.from + "@" + p.x + "," + p.y));
+    check(id + ": is a board of its own and not a second name for one",
+      !shSeen[key], "the same eleven in the same places as " + shSeen[key]);
+    shSeen[key] = id;
+  }
+
+  console.log("\n--- every run goes forward, against every shape and not just its own ---");
+  /* THE HOLE THE OTHER SHAPE TEST LEFT. The loop above this one plays a shape
+     against a mirror of itself, which cannot see the failure that actually
+     exists: a wide forward runs round the OUTSIDE of their widest line 2 man,
+     and against a shape whose line 2 stands at halfway that spot is behind the
+     one he set off from. Four such instances were on the board before this
+     change, across the 4-2-3-1 and the 4-3-3 playing a 3-5-2, and a green
+     suite had been reporting them as fine for as long as they existed. The
+     guard in h2RunSpot is one line and nothing would have noticed it being
+     deleted, so the whole grid is pinned at nought here. */
+  start("manager", "Netherlands", "Italy");
+  const shBack = ev(app, "(() => {" +
+    "const ids = Object.keys(H2_SHAPES), bad = [];" +
+    "for(const a of ids) for(const b of ids){" +
+    "  S.h2h.form = [a, b];" +
+    "  h2Shape(0).forEach((p, i) => {" +
+    "    if(!h2Runs(i, 0)) return;" +
+    "    const sp = h2RunSpot(i, 0, true);" +
+    "    if(!sp || sp.y >= p.y) bad.push(a + ' at ' + b + ': ' + p.n + ' from ' + p.y + ' to ' + (sp ? sp.y : 'nowhere'));" +
+    "  });" +
+    "} return bad; })()");
+  check(shIds.length * shIds.length + " orderings and nobody runs the wrong way",
+    shBack.length === 0, shBack.length + ", first " + shBack.slice(0, 3).join("; "));
+  /* AND SOMEBODY IS ACTUALLY RUNNING in all of them, so the check above cannot
+     be passing because nothing moved. */
+  const shRunners = ev(app, "(() => { const out = {}; for(const id of Object.keys(H2_SHAPES)){" +
+    "S.h2h.form = [id, id]; out[id] = h2Shape(0).filter((p, i) => h2Runs(i, 0)).length; } return out; })()");
+  check("and every shape has men making runs to check",
+    Object.values(shRunners).every(n => n >= 2), JSON.stringify(shRunners));
+
+  console.log("\n--- a side is stood in the shape it played, before anybody taps anything ---");
+  start("manager", "Italy", "Australia");
+  check("Italy in 2006 are recorded as a 4-5-1", ev(app, "h2ShapeSaid(0)") === "4-5-1", ev(app, "h2ShapeSaid(0)"));
+  /* THEIR WIDE PAIR ARE TAGGED LM AND RM, so they get the flat board the label
+     describes rather than the 4-2-3-1 the label cannot distinguish it from. */
+  check("and their eleven has no winger in it, so they are drawn flat",
+    ev(app, "h2ShapeId(0)") === "4-5-1" && ev(app, "h2Shape(0)[10].line") === 6 &&
+    ev(app, "h2Shape(0).filter(p => p.line === 6).length") === 1,
+    ev(app, "h2ShapeId(0)"));
+  check("Australia's 3-6-1 comes through under its own name",
+    ev(app, "h2ShapeSaid(1)") === "3-6-1" && ev(app, "h2ShapeId(1)") === "3-6-1",
+    ev(app, "h2ShapeSaid(1)") + " drawn as " + ev(app, "h2ShapeId(1)"));
+  start("manager", "France", "Netherlands");
+  check("France in 2006 are recorded as a 4-5-1 too", ev(app, "h2ShapeSaid(0)") === "4-5-1",
+    ev(app, "h2ShapeSaid(0)"));
+  check("but Malouda and Ribery are wingers, so Zidane gets to stand off the striker",
+    ev(app, "h2ShapeId(0)") === "4-2-3-1" && ev(app, "h2Shape(0)[7].line") === 5,
+    ev(app, "h2ShapeId(0)"));
+  check("and the same label on the same day can reach two different boards",
+    ev(app, "h2ShapeSaid(0)") === "4-5-1" && ev(app, "h2ShapeId(1)") === "4-2-3-1", "no");
+  /* THROUGH THE GRAMMAR AND NOT BY NAME, so the rule is the rule rather than
+     four sides somebody happened to check. */
+  let shWrong = [];
+  for (const side of ["Italy", "Germany", "Brazil", "England", "Ghana", "Angola", "Mexico", "Spain", "Portugal", "Argentina"]) {
+    start("manager", side, "Italy");
+    const ok = ev(app, "(() => { const said = h2ShapeSaid(0); if(!said) return true; " +
+      "const same = H2_SHAPE_SAME[said]; " +
+      "const want = (same && (!same.when || same.when(h2Squad(0).xi))) ? same.id : said; " +
+      "return h2ShapeId(0) === want; })()");
+    if (ok !== true) shWrong.push(side + " recorded " + ev(app, "h2ShapeSaid(0)") + " and drawn " + ev(app, "h2ShapeId(0)"));
+  }
+  check("every side kicks off on the board its own record resolves to",
+    shWrong.length === 0, shWrong.join("; "));
+  check("and One on One is told none of it",
+    (run(app, 'S = freshState(["Martijn","Bram"], false, "classic", 0, "pitch", false); h2Start(); h2PickTeam("Italy"); h2PickTeam("Australia");'),
+     ev(app, "h2ShapeId(0)") === "4-2-3-1" && ev(app, "h2ShapeId(1)") === "4-2-3-1"),
+    ev(app, "h2ShapeId(0)") + "/" + ev(app, "h2ShapeId(1)"));
+
+  console.log("\n--- and the screens say which name is which ---");
+  run(app, 'S = freshState(["Martijn","Bram"], false, "classic", 0, "manager", false); h2Start(); ' +
+           'h2PickTeam("France"); h2PickTeam("Italy"); render();');
+  await tick(160);
+  check("it asks for the elevens first", ev(app, "S.phase") === "h_squad", ev(app, "S.phase"));
+  run(app, "h2SquadDone(); h2SquadDone();"); await tick(160);
+  check("and then for a shape", ev(app, "S.phase") === "h_shape", ev(app, "S.phase"));
+  check("which opens on the board the record resolved to, written into the state",
+    ev(app, "S.h2h.form[0]") === "4-2-3-1" && ev(app, "S.h2h.form[1]") === "4-5-1",
+    JSON.stringify(ev(app, "S.h2h.form")));
+  check("the lit button is that one",
+    /h2shapeb sel[^>]*4-2-3-1/.test(stage(app)), "the wrong button is lit");
+  check("the line above it quotes the record rather than the board",
+    /They played 4-5-1 that day/.test(stage(app)), "the record is not named");
+  check("and then owns up to the difference instead of papering over it",
+    /the board is the 4-2-3-1/.test(stage(app)) && /winger tagged on each flank/.test(stage(app)),
+    "nothing said about the two names");
+  /* AND THE TEAM SHEET CARRIES BOTH, because printing the board and calling it
+     the shape is the same false statement this change exists to remove. */
+  check("the team sheet says both names", ev(app, "h2ShapeName(0)") === "4-5-1 as 4-2-3-1",
+    ev(app, "h2ShapeName(0)"));
+  check("and the outcome record files the board it was played on and the name on the report",
+    ev(app, "h2LogWho(0, 9).form") === "4-2-3-1" && ev(app, "h2LogWho(0, 9).said") === "4-5-1",
+    JSON.stringify(ev(app, "h2LogWho(0, 9)")));
+  /* IT IS STILL A PICKER, and a manager who overrules the record is not told
+     he played something he did not. */
+  run(app, 'h2SetShape("5-4-1");'); await tick(140);
+  check("a manager can still overrule it", ev(app, "S.h2h.form[0]") === "5-4-1",
+    JSON.stringify(ev(app, "S.h2h.form")));
+  check("and the sheet then reads the shape he picked, with no claim about the record",
+    ev(app, "h2ShapeName(0)") === "5-4-1", ev(app, "h2ShapeName(0)"));
+  check("and the hint stops saying they played it",
+    !/They played 4-5-1 that day/.test(stage(app)), "it still says they played it");
+  /* AND GOING BACK DOES NOT EAT IT. The seed only fills an empty slot, so a
+     route that re-enters the squad screen cannot quietly stand him back in the
+     record's shape. */
+  run(app, "S.h2h.picking = 1; h2SquadDone();"); await tick(140);
+  check("and a second trip through the squad screen leaves his pick alone",
+    ev(app, "S.h2h.form[0]") === "5-4-1", JSON.stringify(ev(app, "S.h2h.form")));
 
   console.log("\n" + (fails ? fails + " FAILED" : "ALL PASS"));
   process.exit(fails ? 1 : 0);
