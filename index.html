@@ -7472,7 +7472,20 @@ function bzPull(){
    this deck costs no new images at all. Rebuild with _tools/build-managers.js.
    Careers run in date order with repeat spells folded, which is why Mourinho
    shows Chelsea twice but not four times. */
+/* THE DUGOUT DECK. 227 careers from Wikidata, every club resolved to a crest
+   already in assets/logos, so it costs no new images at all. Careers run in
+   date order with repeat spells folded, which is why Mourinho shows Chelsea
+   twice rather than four times. Rebuild with _tools/build-managers.js.
+
+   This was declared and never fetched, which is the whole reason the mode did
+   nothing: cdeck handed back an empty list and newCareer said the deck was
+   still loading, for ever. */
 let MGRS=null;
+fetch("assets/managers/index.json").then(r=>r.json()).then(m=>{
+  MGRS=m;
+  if(!S || S.phase==="setup") render();
+}).catch(()=>{});
+
 /* ---------- the faces ----------
    221 of the 227 dugout careers have a freely licensed portrait on Wikimedia
    Commons, pulled by _tools/build-faces.js with every photographer credited in
@@ -7683,6 +7696,11 @@ const PICTURE_MODES = {
      the BALL tier and to nothing else. Its own colour now, so the drawer has
      nine modes and nine accents. */
   career: {label:"Career Path", ic:"route", ac:"#2fa07c"},
+  /* THE SAME GAME OVER THE OTHER DECK, which is why it needed no engine: the
+     crests come out in the order he took the jobs and you shout the manager.
+     Its clipboard and its green are the ones it had before the fork, so a
+     phone that has played it before finds it where it was. */
+  mgr:    {label:"Manager Path", ic:"clipboard", ac:"#7fd4a3"},
   badge:  {label:"Badge Zoom",  ic:"zoom",  ac:"#b9a0e8"},
 };
 const MODE_ROW = id => QUIZZES[id] || PICTURE_MODES[id] || null;
@@ -19001,6 +19019,9 @@ let setupMc = false;
 function modeReady(id, play, mc){
   if(!id) return false;
   if(id==="career") return true;
+  /* the dugout deck is a fetch, so it is ready when it has landed. Career Path
+     is unconditional because ITS deck is inline. */
+  if(id==="mgr")    return !!(MGRS && MGRS.length);
   if(id==="badge")  return !!BADGE;
   if(!DECKS[mc ? id + "-mc" : id]) return false;
   /* a quiz can go on a pitch if its DEFAULT POOL has landed. It is the pool
@@ -19010,7 +19031,7 @@ function modeReady(id, play, mc){
   return true;
 }
 /* and is it playable in ANY combination, which is what greys out a tile */
-const modeLive = id => id==="career" || id==="badge" ? modeReady(id) :
+const modeLive = id => id==="career" || id==="mgr" || id==="badge" ? modeReady(id) :
   !!(DECKS[id] || DECKS[id + "-mc"]);
 let setupTarget = 100;
 // keep whatever names are already typed when flipping a toggle
@@ -21306,10 +21327,15 @@ function resumeGame(){
   if(!S.usedC) S.usedC=[]; // saves from before career mode existed
   if(S.ref===undefined) S.ref=null; // saves from before referee mode existed
   if(!S.usedM) S.usedM=[]; // saves from before manager path existed
-  /* This build carries four modes. A match parked in any of the others
-     cannot be resumed: its phases and its deck are not here any more. The
-     same treatment Higher or Lower and Career Reverse already got. */
-  const RETIRED = ["written","mgr","stadium","nations","kit","xi","tline","duel","rush",
+  /* A match parked in a mode this build does not carry cannot be resumed: its
+     phases and its deck are not here any more. The same treatment Higher or
+     Lower and Career Reverse already got.
+
+     mgr COMES OFF THIS LIST because the mode is back. Everything a parked
+     manager match needs is here: the deck is fetched, cdeck and cused branch on
+     it, and usedM is already defaulted two lines above for saves that predate
+     it. */
+  const RETIRED = ["written","stadium","nations","kit","xi","tline","duel","rush",
                    "alum","wall","mys","ord","bid","spec","rr","mc","hilo","crev"];
   if(RETIRED.includes(S.mode) || S.rr || String(S.phase||"").startsWith("w_")){
     toast("That mode is not in this build. Pick a mode.");

@@ -1,4 +1,4 @@
-/* The four modes this build carries, driven for real.
+/* The five modes this build carries, driven for real.
 
      node _tests/modes-test.js
 
@@ -38,7 +38,7 @@ const load = f => JSON.parse(fs.readFileSync(path.join(REPO, f), "utf8"));
      toggles rather than two more ids. */
   check("every mode is a quiz or a picture mode",
     ev(app, "Object.keys(MODE_META).sort().join(',')") ===
-      "badge,belgian,bundesliga,career,classic,ere,laliga,premier,seriea",
+      "badge,belgian,bundesliga,career,classic,ere,laliga,mgr,premier,seriea",
     ev(app, "Object.keys(MODE_META).sort().join(',')"));
   check("six leagues plus the classic bank",
     ev(app, "Object.keys(QUIZZES).length") === 7, ev(app, "Object.keys(QUIZZES).length"));
@@ -49,7 +49,7 @@ const load = f => JSON.parse(fs.readFileSync(path.join(REPO, f), "utf8"));
     ev(app, "matchLabel({mode:'classic'})") === "Let's Ball", ev(app, "matchLabel({mode:'classic'})"));
   check("every mode has a label", ev(app, "Object.keys(MODE_META).every(m=>!!matchLabel({mode:m}))"),
     "a mode is missing its label");
-  check("the pitch is offered for every quiz and for neither picture mode",
+  check("the pitch is offered for every quiz and for none of the picture modes",
     ev(app, "Object.keys(MODE_META).filter(canPitch).sort().join(',')") ===
       "belgian,bundesliga,classic,ere,laliga,premier,seriea",
     ev(app, "Object.keys(MODE_META).filter(canPitch).sort().join(',')"));
@@ -92,10 +92,42 @@ const load = f => JSON.parse(fs.readFileSync(path.join(REPO, f), "utf8"));
   check("a career is dealt", !!ev(app, "S.career"), ev(app, "JSON.stringify(S.career)").slice(0, 60));
   check("it is on its own phase", String(ev(app, "S.phase")).startsWith("c_"), ev(app, "S.phase"));
 
+  console.log("\n--- Manager Path ---");
+  /* THE SAME ENGINE OVER THE OTHER DECK, so the checks worth having are that
+     the deck arrived and that the game knows which of the two it is playing.
+     An empty MGRS used to leave newCareer saying "still loading" for ever, so
+     the count is asserted rather than the truthiness. */
+  run(app, "MGRS = " + JSON.stringify(load("assets/managers/index.json")));
+  check("the dugout deck landed", ev(app, "MGRS.length") > 200, ev(app, "MGRS && MGRS.length"));
+  check("and the mode reads as ready", ev(app, 'modeReady("mgr")') === true, ev(app, 'modeReady("mgr")'));
+  run(app, 'S = freshState(["Martijn","Bram"], false, "mgr", 0); newCareer(); render();');
+  await tick(320);
+  check("a dugout career is dealt", !!ev(app, "S.career"), ev(app, "JSON.stringify(S.career)").slice(0, 60));
+  check("it is on the career phases", String(ev(app, "S.phase")).startsWith("c_"), ev(app, "S.phase"));
+  /* IT DRAWS FROM THE OTHER DECK AND MARKS THE OTHER USED-LIST, which is the
+     one thing that would be silently wrong if cdeck or cused stopped
+     branching: the game would play perfectly and deal footballers. */
+  check("it drew a manager, not a player",
+    ev(app, "MGRS.some(m => m.n === cdeck()[S.career.ci].n)"), "the deck is the player one");
+  check("and it is the manager used-list being marked",
+    ev(app, "S.usedM.length") === 1 && ev(app, "S.usedC.length") === 0,
+    "usedM " + ev(app, "S.usedM.length") + " / usedC " + ev(app, "S.usedC.length"));
+  check("the screen says which dugout it is", /jobs in this dugout career/.test(stage(app)),
+    "it is calling them clubs in a career");
+
   console.log("\n--- a save from a mode that is gone ---");
   run(app, 'S = freshState(["Martijn","Bram"], false, "classic", 0); S.mode="stadium"; save();'); await tick(260);
   run(app, 'S = null; resumeGame();'); await tick(300);
   check("it is refused, not crashed into", ev(app, "S") === null, ev(app, "S && S.mode"));
+  /* AND A PARKED MANAGER MATCH IS NOT ONE OF THOSE ANY MORE. mgr came off the
+     retired list when the mode came back, and the save is the half of that
+     nothing else here would notice: a mode can be perfectly playable from the
+     menu while every parked game in it is still thrown away on sight. */
+  run(app, 'S = freshState(["Martijn","Bram"], false, "mgr", 0); newCareer(); save();');
+  await tick(300);
+  run(app, 'S = null; resumeGame();'); await tick(320);
+  check("but a parked manager match is picked back up",
+    ev(app, "S && S.mode") === "mgr", ev(app, "S && S.mode"));
 
   console.log(fails ? "\n" + fails + " FAILED" : "\nall green");
   process.exit(fails ? 1 : 0);
