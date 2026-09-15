@@ -780,6 +780,298 @@
     .clubcard.pop{animation:none}
     .bigreveal{display:none}
   }
+
+  /* ---------------- OPENING A PACK ----------------
+     This is the payoff the whole retention loop is built to produce, and until
+     tonight it was three cards arriving at once under a line of text, which is
+     a receipt rather than a moment. So they are handed over one at a time, on a
+     dim, and each one is given the four beats the album plan asks for: the
+     country, the number the man wears said out loud, the card coming up out of
+     the packet, and then the verdict landing on it.
+
+     IT IS AN OVERLAY ON THE BODY AND NOT A STATE OF THE STAGE, and that one
+     decision settles most of what follows. The stage is written with innerHTML
+     on every render, so anything staged inside it is a brand new element with
+     no previous value to travel from and no way to survive the next render,
+     which is the trap .dmveil already sits in on the daily screen. Out here the
+     reveal is built once, plays, and lifts. It also means the screen the
+     sequence is going to end on is drawn by renderAlbum before the first flag
+     has dropped and sits underneath the whole time, which is why tapping
+     through is exact rather than approximate: a skip does not reconstruct the
+     ending, it takes the lid off one that has been there since the beginning.
+
+     EVERY CARD IS BUILT BY albumStickerHTML WITH THE ARGUMENTS THE PACK SCREEN
+     USES, so the card shown mid-reveal and the card left behind are the same
+     object out of the same builder, down to the class string. Nothing in here
+     appends to that string, which matters because album-test matches
+     "alst empty", " fresh" and " shut" as literal text with the attribute's
+     quote attached. What the reveal adds it adds around the card: the stamp is
+     a sibling of it and all the staging is scoped by a parent class, so the
+     card is never told that it is being revealed.
+
+     WHERE THE STAMP CAME FROM, since the paperwork disagrees with itself. The
+     album plan wants NEW and DOUBLE stamped on the card; the card as rewritten
+     puts its news in the rim and in the band along its foot, with an argument
+     about the middle of it belonging to the kit that is still correct. So the
+     stamp lives on the reveal and the rim lives on the card. A stamp is a thing
+     that happens to you once, at the moment it is handed over, and it leaves
+     with the overlay; the rim is what the card looks like for the rest of its
+     life in the book. Both documents get what they were actually asking for and
+     the app still has one card builder.
+
+     THE STACKING NUMBER IS DELIBERATELY LOW, which is the opposite of what a
+     full-screen moment usually wants and is the right answer here. Everything
+     else in this family sits at forty and above so that nothing can get in
+     front of it. This one has to let two things through. The toast is at
+     twenty, and albumCheckPage fires one a few milliseconds before the reveal
+     goes up; that toast is the only sentence in the whole app that tells a
+     player a bench has just been unlocked, and it is gone at two and two tenths
+     while the sequence runs past three, so a sheet in front of it means the
+     reward for finishing a page is announced to nobody. The online match bar is
+     at forty, and a game other people are waiting in outranks a sticker. So the
+     reveal goes under both and over everything the album itself draws, and
+     neither of the two takes pointer events, so neither can swallow the tap. */
+  .pkrv{position:fixed;inset:0;z-index:19;display:flex;align-items:center;
+    justify-content:center;cursor:pointer;-webkit-tap-highlight-color:transparent;
+    transition:opacity .26s ease}
+  /* IT TAKES THE TAP, which is the one place it parts company with .bigreveal
+     above. That one is pointer-events:none because it is weather passing over a
+     screen that is still live underneath. This one is holding a sequence
+     somebody has to be able to end, so the whole of it is the button, and
+     swallowing the tap is also what stops a skip landing on whichever album
+     control happened to be under the thumb. */
+  .pkrv::before{content:"";position:absolute;inset:0;
+    background:rgba(3,9,5,.86);backdrop-filter:blur(3px);
+    animation:pkrvdim .22s ease both}
+  @keyframes pkrvdim{from{opacity:0}to{opacity:1}}
+  /* AND IT LEAVES THE WAY IT ARRIVED, WHICH TOOK A THIRD GO TO GET RIGHT. The
+     first version simply removed the node, so an eighty-six per cent black
+     sheet appeared between one frame and the next and vanished the same way,
+     which on a phone reads as the screen glitching rather than as something
+     being laid over it. A transition is the cheap fix here and, unusually for
+     this file, it genuinely fires: the sheet has been in the document for three
+     seconds by the time the class lands, so it has a previous value to travel
+     from, which is exactly what an element written by innerHTML never has. Both
+     ways out use the same two lines and only the duration differs, because
+     somebody who has tapped has told you they want it gone now. */
+  .pkrv.pkrv-done{opacity:0;pointer-events:none}
+  .pkrv.pkrv-fast{transition-duration:.13s}
+  .pkrv-now{position:relative;display:flex;align-items:center;justify-content:center}
+  /* ONE OPACITY TRACK OVER THE WHOLE OF A CARD'S LIFE, linear, for the reason
+     the ball celebration gives for splitting its two: everything inside this is
+     eased and arriving, and an eased fade laid over that has the set half gone
+     before it has finished assembling. The length is written onto the element
+     because the last card of the three lives longer than the other two, and the
+     six per cent of nothing at each end is not a gap, it is the shutter that
+     makes three cards read as three things.
+
+     NINETY-FOUR PER CENT IS WHERE THE VERDICT STOPS BEING SAFE, and that number
+     is why the beat below is a thousand and forty rather than the nine hundred
+     it started at. The stamp's entrance ends at eight hundred and eighty
+     milliseconds; at nine hundred this track began pulling the card away at
+     eight hundred and forty-six, so the verdict was being read out while the
+     page it was written on was already leaving. A beat and a stamp that collide
+     like that are not four beats, they are three and a smudge. At a thousand
+     and forty the fade starts at nine hundred and seventy-eight and the verdict
+     gets a tenth of a second of absolute stillness, which is the whole of what
+     it was for. */
+  .pkrv-set{position:relative;display:flex;flex-direction:column;align-items:center;
+    gap:9px;padding:0 20px;text-align:center;
+    animation:pkrvlife var(--life,1040ms) linear both}
+  @keyframes pkrvlife{0%{opacity:0}6%{opacity:1}94%{opacity:1}100%{opacity:0}}
+
+  /* BEAT ONE, THE COUNTRY, IN TWO PIECES BECAUSE ONE BOOK MAKES IT TWO. The
+     flag drops on a kit-coloured tile and the name lands on a bar of its own
+     underneath it. Putting the name beside the flag is the prettier drawing for
+     the fifteen books that have flags and it is the wrong container for the one
+     that does not: the finals book keys a side by club and final, and the
+     longest of those keys is forty-seven characters, "Manchester United" and a
+     Champions League final in 1999, counted out of the pool file rather than
+     guessed at. Forty-seven characters next to a flag inside eighty-six per
+     cent of a three hundred and ninety pixel screen is three wrapped lines
+     shoving the card down and off the bottom. On its own full-width bar it
+     truncates instead, and this is still the only surface in the entire app
+     where the whole of that name is ever printed.
+
+     AND IT IS PAINTED ON THE KIT RATHER THAN IN IT. The plan asks for the name
+     set in the side's own colour, and a census of the shelf says that is
+     unreadable across a good part of it: a hundred and eighteen of the four
+     hundred and forty-eight sides come back #FFFFFF and plenty of the rest come
+     back near enough to black, so type set directly in --kit on a dark sheet is
+     either shouting or invisible depending on who you drew. The card settled
+     this months ago with kitInk, which is one function answering what colour
+     the ink on a given kit should be, so the plate and the bar ask it too and
+     the reveal is lettered by the same rule as the thing it is revealing. */
+  .pkrv-plate{width:min(30vw,120px);aspect-ratio:3/2;border-radius:6px;
+    display:grid;place-items:center;overflow:hidden;color:var(--kink,#fff);
+    background:linear-gradient(168deg,var(--kit,#888888),
+      color-mix(in srgb,var(--kit,#888888) 74%,#0B0B0B));
+    box-shadow:0 0 0 1px color-mix(in srgb,var(--kink,#fff) 30%,transparent),
+      0 10px 26px rgba(0,0,0,.5);
+    animation:pkrvdrop .26s cubic-bezier(.2,1.6,.3,1) both}
+  .pkrv-flag{width:100%;height:100%;object-fit:cover;display:block}
+  /* THE BOOK WITH NO FLAGS GETS THE SAME TILE with the side's own three letters
+     standing in the hole the image would have filled. One book in sixteen is
+     the forty finals, and every side in it carries flag:null under a pool that
+     carries flags:null to match, so a reveal opening on an image opens on a
+     broken one for a whole book. The sticker already answers this twice over,
+     by asking both halves of the question before it builds an img and by
+     falling back to the side's own name when the abbreviation is missing, and
+     copying both answers beats inventing a third. */
+  .pkrv-abbr{font:800 clamp(1.3rem,8vw,1.9rem)/1 var(--ui);font-style:normal;
+    letter-spacing:.08em}
+  .pkrv-side{max-width:86vw;padding:5px 14px;border-radius:5px;
+    color:var(--kink,#fff);background:var(--kit,#888888);
+    font:800 clamp(.92rem,4.8vw,1.3rem)/1.18 var(--ui);letter-spacing:.03em;
+    text-transform:uppercase;white-space:nowrap;overflow:hidden;
+    text-overflow:ellipsis;
+    animation:pkrvbar .24s .08s cubic-bezier(.22,.8,.3,1) both}
+  @keyframes pkrvdrop{from{opacity:0;transform:translateY(-26px) scale(1.14)}
+                      to{opacity:1;transform:none}}
+  @keyframes pkrvbar{from{opacity:0;transform:translateY(10px) scaleX(.88)}
+                     to{opacity:1;transform:none}}
+
+  /* BEAT TWO, WHAT HE IS. Lora italic, because the plan asks for it and because
+     the serif is already this app's voice for an aside rather than a fact, and
+     the position letters ride behind it in the interface face so that the line
+     says both the thing a supporter would say out loud and the thing the card
+     prints in its foot. */
+  .pkrv-pos{animation:pkrvpos .22s .14s ease-out both}
+  .pkrv-pos em{font:italic 400 clamp(1rem,4.6vw,1.3rem)/1.2 var(--serif);color:#F2EFE6}
+  .pkrv-pos s{text-decoration:none;margin-left:9px;font:700 .66rem/1 var(--ui);
+    letter-spacing:.16em;text-transform:uppercase;color:rgba(242,239,230,.5)}
+  @keyframes pkrvpos{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
+
+  /* BEAT THREE, THE CARD, AND IT WIPES RATHER THAN PEELS. The two documents ask
+     for two different drawings here and only one of them can be built. A peel
+     is a verb about taking something off a card that was covered, which is
+     precisely what the daily screen does and why the six strips live over
+     there. Nothing is covering a card coming out of a packet, so this one is
+     clipped up from its bottom edge and pushed the last twenty pixels with it,
+     which is a sticker being drawn out rather than uncovered. Clipping the
+     wrapper and not the card is deliberate: .alst is a size container, every
+     child of it measures itself in cqw against that box, and clipping is the
+     one way to hide a card without touching the box those measurements come
+     from. The eight pixels of corner are written into the clip as well, for the
+     reason the note over .alst's border gives for keeping that radius in
+     pixels: a card whose corners square off while it is arriving and round
+     again once it has landed is a card that changes shape on the way in. */
+  .pkrv-hold{position:relative;width:min(52vw,204px);margin-top:3px}
+  .pkrv-card{animation:pkrvwipe .34s .3s cubic-bezier(.2,.9,.3,1.05) both}
+  @keyframes pkrvwipe{from{clip-path:inset(100% 0 0 0 round 8px);transform:translateY(20px)}
+                      to{clip-path:inset(0 0 0 0 round 8px);transform:none}}
+  /* and then it assembles itself in the order the plan names, the faint number
+     first, the man onto it, the surname standing up last, which is three delays
+     on three elements the card already has rather than three new ones.
+
+     EVERY ONE OF THESE BEATS THE CARD'S OWN RULE ON WEIGHT AND NOT ON ORDER,
+     which is worth stating out loud because this block sits two and a half
+     thousand lines above the album's stylesheet and the comment at the bottom
+     of that block is a long warning about rules held up by nothing but where
+     they were written. Nothing here is in that ladder. A descendant selector
+     with .pkrv-card in front of it outweighs the bare .alst rule it overrides
+     whichever of the two the file happens to reach first, so an alphabetiser
+     that would kill half the album block cannot touch any of this. */
+  .pkrv-card .alsbg{animation:pkrvghost .24s .38s ease-out both}
+  @keyframes pkrvghost{from{opacity:0}to{opacity:1}}
+  .pkrv-card .alsfig{animation:pkrvman .3s .44s cubic-bezier(.2,1.6,.3,1) both}
+  @keyframes pkrvman{from{opacity:0;transform:translateY(14px) scale(.86)}
+                     to{opacity:1;transform:none}}
+  /* THE ROTATION HAS TO BE IN BOTH ENDS OF THIS KEYFRAME. The surname is set
+     vertically and turned a half circle by an ordinary rule, so a keyframe that
+     animates transform without repeating that rotation lands the name upside
+     down and reading the wrong way. It is the same trap the ring under the man
+     on the pitch fell into, and the note up there says to put it back. The
+     transform-origin is left alone for the same family of reasons: .alsn is
+     absolutely positioned across the middle sixty per cent of the card and
+     .alst is overflow:hidden, so turning it about its bottom edge rather than
+     its centre maps the whole box below the card and the name disappears. */
+  .pkrv-card .alsn{animation:pkrvstand .28s .5s cubic-bezier(.2,.9,.3,1.05) both}
+  @keyframes pkrvstand{from{opacity:0;transform:rotate(180deg) translateY(-14px)}
+                       to{opacity:1;transform:rotate(180deg)}}
+  /* THE SHEEN IS THE FOIL'S OWN GRADIENT GIVEN SOMEWHERE TO GO, and it is
+     scoped to the reveal because .alst.foil::before is on every foiled card in
+     the book and a shelf full of cards raking light at each other is a
+     Christmas tree. The gradient was already the right drawing, it only ever
+     lacked a background-size to travel across, which is the same move the mode
+     intro makes over its title and the leaderboard makes over first place. It
+     parks rather than running off the far edge, because the card a player is
+     looking at when the stamp lands ought to still have gold sitting on it. */
+  .pkrv-card .alst.foil::before{background-size:220% 100%;
+    animation:pkrvsheen .48s .36s ease-out both}
+  @keyframes pkrvsheen{from{background-position:200% 0}70%,to{background-position:0 0}}
+
+  /* BEAT FOUR, THE VERDICT, AND ALL OF IT LANDS ON ONE FRAME. The stamp turns
+     up, the tick or the star arrives in the card's foot band, and a double goes
+     flat. That last one earns its three lines: a double is drawn dim everywhere
+     else in the album because that is what a double is, but on the reveal it
+     arrives at full brightness like anything else and then loses it, which is
+     the difference between being told you got a double and watching one happen.
+     The rim is not held back with them, because the rim is the colour of the
+     object and comes in with the card. What waits for the beat is the news
+     itself, which is the stamp plus whichever of the tick or the star the card
+     has earned, because news has a moment it arrives at.
+
+     THE THREE STATES ARE PREFIXED AND THAT IS NOT TIDINESS. The first draft
+     wrote them as .pkrv-stamp.new, .pkrv-stamp.shut and .pkrv-stamp.dupe, and
+     shut and dupe already mean something on .alst two and a half thousand lines
+     down this stylesheet. No bare rule for either exists in the file today, so
+     nothing would have collided this week, which is exactly the shape of thing
+     that bites in six. */
+  .pkrv-stamp{position:absolute;right:-9px;bottom:16%;padding:4px 9px;border-radius:4px;
+    font:800 .82rem/1 var(--ui);letter-spacing:.1em;text-transform:uppercase;
+    animation:pkrvstamp .26s .62s cubic-bezier(.2,1.6,.3,1) both}
+  .pkrv-stamp.pkrv-new{background:#2C5A43;color:#BEF0D4;box-shadow:0 0 0 2px rgba(95,155,120,.5)}
+  .pkrv-stamp.pkrv-shut{background:#3B2B08;color:var(--gold-hi);box-shadow:0 0 0 2px rgba(227,180,83,.55)}
+  .pkrv-stamp.pkrv-dupe{background:#25231D;color:#9A8A5E;box-shadow:0 0 0 2px rgba(154,138,94,.32)}
+  @keyframes pkrvstamp{from{opacity:0;transform:scale(2.4) rotate(-14deg)}
+                       to{opacity:1;transform:scale(1) rotate(-9deg)}}
+  .pkrv-card .alst.fresh::after,.pkrv-card .alst.shut::after{
+    animation:pkrvnews .26s .62s cubic-bezier(.2,1.6,.3,1) both}
+  @keyframes pkrvnews{from{opacity:0;transform:scale(2.2)}to{opacity:1;transform:none}}
+  .pkrv-card .alst.dupe{animation:pkrvflat .26s .62s ease-out both}
+  @keyframes pkrvflat{from{opacity:1}to{opacity:.6}}
+  /* AND A CLOSED PAGE SAYS SO IN WORDS, WHICH LOOKS LIKE A DUPLICATE OF THE
+     TOAST AND IS NOT. The toast fires from inside albumCheckPage the instant
+     the foil latches, which is before the sheet goes up, and it hides itself at
+     two and two tenths. The card that closed the page can be the third of the
+     three, which does not arrive until two and one tenth. So the one sentence
+     in the app that announces a bench is on screen for a tenth of a second
+     alongside the thing it is about, and most of the time it has already gone.
+     This says it again, next to the gold card, while somebody is looking at it.
+     It promises a bench only where there is one, which is the fix the toast
+     underneath has now had too. */
+  .pkrv-sub{max-width:86vw;color:var(--gold-hi);font:700 .74rem/1.35 var(--ui);
+    animation:pkrvpos .26s .62s ease-out both}
+
+  /* THE WAY OUT, said quietly and said on every card from the first frame,
+     because somebody on their fourth pack of the evening should not have to
+     guess that the screen is tappable and should not be made to discover it
+     three seconds at a time. It sits at seventy-four pixels and not at the
+     twenty-two it started on, which is the one number on this sheet that was
+     simply wrong: .toast is bottom:24px with twelve pixels of padding, so its
+     box runs from twenty-four to about sixty-six, it is centred, it does not
+     wrap, and it is a z-index above this. A skip hint at twenty-two is ten
+     pixels of centred type underneath a green pill, on precisely the pack the
+     whole low stacking argument was written for. It takes no pointer events
+     either, because the tap belongs to the sheet and a line of type that ate
+     one would be a button that only works where the words are. */
+  .pkrv-tap{position:absolute;left:0;right:0;bottom:74px;text-align:center;
+    pointer-events:none;font:600 10px/1 var(--ui);letter-spacing:.16em;
+    text-transform:uppercase;color:rgba(242,239,230,.4)}
+  /* AND THE SETTING GETS THE SAME TWO LOCKS THE BIG REVEAL CARRIES. The real
+     one is in the JS, where a reveal is never built at all for somebody who
+     asked for less movement, so they are looking at the finished pack screen
+     the instant it exists with nothing held back: the cards are already lit,
+     the doubles already dimmed, the line underneath already names the page that
+     closed and counts what was new, and a foil's roar is fired straight away
+     because a sound is not a movement and carries news of its own. This rule is
+     the second lock, for the same reason .bigreveal has one. It costs nothing
+     and it means a reveal built by some route nobody has thought of yet still
+     cannot cover the screen. */
+  @media (prefers-reduced-motion: reduce){
+    .pkrv{display:none}
+  }
   button{font:inherit;color:inherit;background:none;border:none;cursor:pointer;touch-action:manipulation}
   button:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
 
@@ -2339,6 +2631,13 @@
   body.pixel .sb-t.on::after{box-shadow:none;animation:none}
   body.pixel .sb-dots s{border-radius:0;width:2px;height:2px}
   body.pixel .h2ctier{border-radius:0}
+  /* the pack reveal in the pixel skin: the plate, the name bar and the stamp
+     are chrome and lose their corners with the rest of it, and the one line of
+     serif in the whole app goes pixel too, because a Lora italic sitting over a
+     sixteen-bit card is the exact tell this block exists to stop */
+  body.pixel .pkrv-plate,body.pixel .pkrv-side,body.pixel .pkrv-stamp{border-radius:0}
+  body.pixel .pkrv-stamp{box-shadow:3px 3px 0 rgba(0,0,0,.5)}
+  body.pixel .pkrv-pos em{font:400 .8rem/1.3 var(--px16);font-style:normal}
 
   /* ---------------- the ground the pitch sits on ----------------
      Flat mid-dark rather than the night look's soft near-black. A gradient
@@ -12583,6 +12882,333 @@ function albumOpen(){
   S = null;
   ALBUM_VIEW = {book: id, open: got};
   render();
+  /* THE FINISHED SCREEN IS PAINTED FIRST AND THE REVEAL GOES OVER THE TOP OF
+     IT. That order is the design and not an accident of where the line fell: by
+     the time anybody sees a flag drop, the screen the sequence is going to end
+     on already exists underneath it, so ending the sequence early cannot land
+     anywhere else. It also keeps album.last and the markup honest for the four
+     hundred packs album-test opens inside one expression, because nothing about
+     the draw, the save or the render has been moved behind a timer. */
+  packReveal(got);
+}
+/* ---------- HANDING THEM OVER, ONE AT A TIME ----------
+   A pack is the only thing in this game that is purely a gift, and it was
+   arriving as a grid. The sequence gives each of the three the same four beats:
+   the country on a plate in its own colours with its name on a bar underneath,
+   the number he wears said the way a person would say it, the card coming up
+   out of the packet and assembling itself, and the verdict stamped on it.
+
+   THE CLOCK, AND WHY IT IS THIS LONG. A thousand and forty milliseconds a card
+   and a little under two tenths to sit with the last one, so the whole thing
+   runs three and three tenths of a second. That is longer than any single
+   moment in the app and shorter per object than all of them: the badge reveal
+   spends a second and a quarter handing over one crest and the mode intro
+   spends one and eight tenths saying one word. Three of anything costs three
+   times, and the honest choices were to shorten the sequence until it said
+   nothing or to put a way out on the screen, so there is a way out on the
+   screen, on the first card, not withheld until somebody has sat through one.
+
+   THE BEAT IS SET BY THE STAMP AND NOT BY TASTE. The verdict's entrance ends
+   eight hundred and eighty milliseconds into a card and .pkrv-set starts
+   pulling that card away at ninety-four per cent of whatever this number is, so
+   anything under about nine hundred and forty has the last beat arriving into a
+   fade. It sat at nine hundred for a day and the stamp was being read while the
+   card was already going. A tenth of a second of stillness is not much and it
+   is the difference between four beats and three and a smudge, and most of what
+   the three cards cost for it was taken back out of the tail below, so the
+   whole thing still comes in a shade over three and a quarter seconds.
+
+   ONE HANDLE, ONE TIMER, ONE PLACE IT IS CLEARED, because this app has been
+   bitten by a stale timer before and a sequence that can be walked out of
+   halfway is exactly the shape that bites. There is never more than one pending
+   timeout while the sequence is running: every hop schedules the next only
+   after it has run, the handle lives in PACK_REVEAL.t, and only packRevealStop
+   touches it. Stop nulls the state before it clears anything, so calling it
+   twice is free and a hop that somehow outlived its own clearTimeout finds
+   nothing to write into, and every hop opens by asking whether the state is
+   still there at all. The sheet's fade out is the one thing that outlives the
+   state, and it gets a handle of its own for the same reason rather than being
+   left to a callback nobody can cancel.
+
+   WHAT ACTUALLY KILLS IT. The tap kills it, and so does the last hop of the
+   sequence itself, and so does a second pack opened on top of the first. The
+   fourth route is the one that matters, and it is packRevealCheck sitting near
+   the top of render.
+
+   THREE THINGS ALBUM-PLAN SECTION 4 ASKS FOR THAT ARE NOT HERE, said out loud
+   rather than quietly dropped, because the next person to read that document
+   will come looking for them. It says the sequence replaces the three-cards-
+   at-once screen rather than sitting behind it, and it sits behind it: replacing
+   means building the pack screen twice and having a skip reconstruct an ending
+   from whatever state the sequence stopped in, and layering means there is one
+   screen, written once, with a lid over it, which is the only version of this
+   where a skip landing in exactly the right place is a fact about the shape
+   rather than a hope about two code paths agreeing. It says the slot in the
+   book lights up behind the card, and there is nothing behind the card: the
+   dim is eighty-six per cent black over the whole screen, so anything lit
+   underneath it would be an animation nobody can see, and the three cards are
+   already sitting there in full the moment the sheet lifts. And it says a
+   double slides off to the swap pile, which cannot be drawn honestly, because
+   there is no swap pile on this screen to slide to; the double gets its stamp
+   and loses its brightness on the beat instead, which says the same thing
+   about the same card without pointing at a place that is not there. */
+const PACK_BEAT  = 1040;  // one card to the next
+const PACK_STING = 300;   // .pkrv-card's delay in the stylesheet: where it makes a noise
+const PACK_TAIL  = 180;   // and how much longer the last one is left standing there
+/* THE NUMBER HE WEARS, IN WORDS, AND ONLY AS FAR AS ELEVEN. "The ten" is a
+   thing football says and "the twenty-three" is not, so past the eleven that
+   have names the line falls back to printing the number, which is what anybody
+   reading a squad list out loud would do anyway. That cut-off is not a guess: I
+   counted the pool files and ten thousand one hundred and fifty-seven men carry
+   a shirt number, of whom five thousand three hundred and fifty-five wear above
+   eleven, so a table that ran to ninety-nine would be putting "The twenty-two"
+   on more than half the album. Every man in a pack is guaranteed to have a
+   number: albumId hands back null for a man the harvest landed without one and
+   albumOpen filters those men out before it draws. */
+const PACK_WORDS = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven",
+                    "Eight", "Nine", "Ten", "Eleven"];
+function packManLine(m){
+  const w = PACK_WORDS[m.no];
+  return '<em>' + (w ? "The " + w : "Number " + esc(String(m.no == null ? "" : m.no))) + '</em>' +
+    (m.pos ? '<s>' + esc(m.pos) + '</s>' : "");
+}
+/* THE STING IS A SOUND, AND IT IS MADE OF WHAT IS ALREADY ON THE DISK. The plan
+   says a short sting is one more file through build-sounds.py, and it is, but
+   there are exactly two wavs in assets/sfx today and inventing a third in a
+   comment ships a reveal that is silent on every phone. The five synthesised
+   stings are already there and already unlocked, because audio() is the first
+   line of albumOpen, well before any of this starts.
+
+   IT IS TIERED THE WAY goalFx IS TIERED, for the reason written over that line:
+   a thing worth ten that celebrates exactly like a thing worth one is the app
+   not paying attention. A double gets the tick, which is an acknowledgement
+   rather than a reward. A man you needed gets the pop. The card that closed
+   somebody's page gets the ching and then the crowd, and the crowd is the goal
+   recording itself, the loudest noise the app owns, spent on the rarest thing
+   in the loop, which is what it is for.
+
+   THE ROAR IS LATCHED TO ONE A PACK AND THE LATCH IS SET WHETHER OR NOT
+   ANYBODY CAN HEAR IT. Two of the three cards closing a page inside one packet
+   is rare and entirely possible, and two crowd recordings starting nine tenths
+   of a second apart is a fight breaking out rather than a celebration. Setting
+   the latch above the mute matters because packRevealStop pays the roar if it
+   is still owed: a muted pack that left it owed would be handing a silent
+   sequence's debt to a tap, and h2Sfx would swallow it anyway, but the state
+   would have been lying in the meantime.
+
+   AND ALL OF IT ANSWERS THE ONE MUTE THERE IS. h2Sfx asks already; the
+   synthesised stings ask nobody, which is why the mode intro and the badge
+   reveal make noise at a player who turned the sound off. That is a bug those
+   two screens have rather than a precedent to copy, and it would be worse here,
+   where the switch is not even reachable: it lives on the pitch and the album
+   has no toggle at all, so somebody who muted a match and then opened a pack
+   would have no way to work out where the noise was coming from. If a real
+   sting is ever cut, this function is the only thing that changes, plus the
+   line in sw.js that makes the file work offline. */
+function packRevealSting(P, g){
+  const roar = !!(g.shut && P.roar);
+  if(roar) P.roar = 0;
+  if(!h2Sound) return;
+  if(g.shut){ ching(); if(roar) h2Sfx("goal", .95); }
+  else if(g.isNew) popfx();
+  else tick();
+}
+/* ONE CARD'S WHOLE SCREEN BUILT IN ONE GO, because four beats written as four
+   visits to the DOM is four things that can be interrupted halfway and four
+   more chances to restart an animation that was already running. Everything
+   mounts together and the stylesheet spaces it out with delays, which is the
+   arrangement the shot scene already uses and states outright: the CSS owns the
+   look and the JS owns the beat. The only reason a timer is involved inside a
+   single card is that a noise cannot be given a delay in a stylesheet. */
+function packRevealSetHTML(g, life){
+  const t = (albumBook(g.book) || {})[g.side] || {};
+  const p = POOLS[g.book] || {};
+  const kit = /^#[0-9a-fA-F]{6}$/.test(t.kit || "") ? t.kit : "#888888";
+  return '<div class="pkrv-set" style="--life:' + life + 'ms;--kit:' + kit +
+      ';--kink:' + kitInk(kit) + '">' +
+    '<div class="pkrv-plate">' +
+      ((p.flags && t.flag)
+        ? '<img class="pkrv-flag" src="' + esc(p.flags + t.flag + (p.ext || "")) + '" alt="">'
+        /* the same fallback the card uses, side name and all, because an empty
+           plate is a worse answer than a long one and the two ought to agree */
+        : '<i class="pkrv-abbr">' + esc(t.abbr || g.side) + '</i>') +
+    '</div>' +
+    '<div class="pkrv-side">' + esc(g.side) + '</div>' +
+    '<div class="pkrv-pos">' + packManLine(g.m) + '</div>' +
+    '<div class="pkrv-hold">' +
+      '<div class="pkrv-card">' +
+        albumStickerHTML(g.book, g.side, g.m, true, !g.isNew, g.shut ? 2 : (g.isNew ? 1 : 0)) +
+      '</div>' +
+      '<b class="pkrv-stamp ' + (g.shut ? "pkrv-shut" : g.isNew ? "pkrv-new" : "pkrv-dupe") + '">' +
+        (g.shut ? "Complete" : g.isNew ? "New" : "Double") + '</b>' +
+    '</div>' +
+    (g.shut ? '<div class="pkrv-sub">' + esc(g.side) + ' complete' +
+      ((t.bench || []).length ? '. Their bench is yours' : "") + '</div>' : "") +
+  '</div>';
+}
+let PACK_REVEAL = null;
+/* THE SHEET ON ITS WAY OUT, AND THE ONE HANDLE THAT TAKES IT AWAY. The fade has
+   to outlive the state that ran the sequence, because the state is nulled the
+   instant anybody asks for this to stop and the element is still on screen for
+   another tenth of a second travelling to nothing. Parking it here rather than
+   closing over it in a callback is what keeps the promise the rest of this
+   feature makes: there is a variable holding every live thing and a function
+   that empties it, so leaving the screen can take the corpse with it instead of
+   waiting politely for a timer nobody can reach. */
+let PACK_GONE = null;
+function packRevealSweep(){
+  const G = PACK_GONE;
+  if(!G) return;
+  PACK_GONE = null;
+  clearTimeout(G.t);
+  try{ G.el.remove(); }catch(e){}
+}
+function packReveal(got){
+  packRevealStop(1);
+  packRevealSweep();
+  if(!got || !got.length) return;
+  /* LESS MOVEMENT IS NOT LESS NEWS. Nothing gets built, so the screen
+     underneath is the answer, and it is already carrying every piece of
+     information the sequence was going to deliver: the cards are lit, the
+     doubles are dimmed, and the line beneath them names the page that closed
+     and counts what was new. The one thing that would genuinely be lost is the
+     roar, because that lives in the sequence rather than on the screen, so it
+     is fired here instead, once, however many pages closed. A noise is not a
+     movement and the setting was never asked about it.
+
+     aiStill IS THE ONE THAT CAN BE CALLED FROM HERE, and its name is about
+     where the question first came up rather than about what it asks. There is a
+     shorter-looking still() further down the file and it is private to the goal
+     scene's module, so reaching for it from the album is a reference error
+     rather than a borrow. aiStill is the app's only reduced-motion read that
+     lives at the top level, and it already wraps the query in a try, because
+     several of the places that call it are running in a harness with no browser
+     underneath. */
+  if(aiStill()){
+    if(got.some(g => g.shut)) h2Sfx("goal", .95);
+    return;
+  }
+  let o, now;
+  /* the overlay is decoration over a screen that is already finished and
+     already correct, so a browser that will not hand us an element is a browser
+     that quietly gets no reveal rather than one that loses its pack */
+  try{
+    o = document.createElement("div");
+    o.classList.add("pkrv");
+    o.addEventListener("click", packRevealTap);
+    now = document.createElement("div");
+    now.classList.add("pkrv-now");
+    /* THE WAY OUT IS WRITTEN ONCE AND LEFT ALONE. It used to live inside the
+       markup each card builds, which meant the only line on the screen telling
+       you the sheet is a button was destroyed and rebuilt three times while you
+       were reading it. It belongs to the sheet, not to the sticker. */
+    const tap = document.createElement("div");
+    tap.classList.add("pkrv-tap");
+    tap.innerHTML = "Tap to skip";
+    o.appendChild(now);
+    o.appendChild(tap);
+    document.body.appendChild(o);
+  }catch(e){ return; }
+  PACK_REVEAL = {got: got, el: o, now: now, i: 0, laid: 0, t: 0,
+                 roar: got.some(g => g.shut) ? 1 : 0};
+  packRevealStep();
+}
+function packRevealStep(){
+  const P = PACK_REVEAL;
+  if(!P) return;
+  P.t = 0;
+  /* the card already on the screen has got as far as its wipe, so this is the
+     hop that makes the noise, and what is left of the beat afterwards is the
+     wait for the next one */
+  if(P.laid){
+    P.laid = 0;
+    /* a sound that goes wrong must not be able to stop the sequence, because
+       the thing left behind if it does is a full-screen dim with nothing
+       pending underneath it and only a tap to get out. Nothing in here can
+       throw today, beep returns early on a context the browser refused and
+       h2Sfx wraps its own Audio, but a silent card is a survivable card and a
+       parked sheet is not */
+    try{ packRevealSting(P, P.got[P.i]); }catch(e){}
+    P.i += 1;
+    P.t = setTimeout(packRevealStep, PACK_BEAT - PACK_STING +
+      (P.i < P.got.length ? 0 : PACK_TAIL));
+    return;
+  }
+  if(P.i >= P.got.length) return packRevealStop(0);
+  P.laid = 1;
+  /* the last of the three is written with a longer life than the other two so
+     its stamp gets the tail to sit in, rather than being swept off the screen
+     by a fourth card that does not exist.
+
+     AND THIS IS THE ONE DOM WRITE IN THE FEATURE THAT IS NOT OTHERWISE INSIDE A
+     TRY. It cannot throw today, because albumOpen has just built the same three
+     cards through the same builders a few milliseconds ago, but it is the only
+     write here that runs off a timer and a throw out of it would leave a
+     full-screen dim parked with nothing pending behind it and only a tap to get
+     out. The catch takes the sheet away, which is the same answer everything
+     else in here gives to a browser that will not co-operate. */
+  try{
+    P.now.innerHTML = packRevealSetHTML(P.got[P.i],
+      PACK_BEAT + (P.i === P.got.length - 1 ? PACK_TAIL : 0));
+  }catch(e){ return packRevealStop(1); }
+  P.t = setTimeout(packRevealStep, PACK_STING);
+}
+/* THE TAP, WHICH IS THE SAME ENDING ARRIVING EARLY. It is wrapped rather than
+   handed to the listener directly so that the event object cannot turn up as
+   the argument that decides how fast the sheet leaves. */
+function packRevealTap(){ packRevealStop(1); }
+/* THE ONLY PLACE A TIMER IS CLEARED AND THE ONLY PLACE THE SHEET IS HANDED
+   OVER TO ITS FADE. The state is nulled before anything else happens, so a
+   click landing on an overlay that is already going does nothing, and so does a
+   hop that somehow outlived its own clearTimeout.
+
+   THE ROAR IS THE ONE THING A SKIP DOES NOT GET TO CANCEL. A page closing is
+   the biggest event this album has and the bench behind it has just been
+   unlocked, and somebody tapping through the animation is telling you they have
+   seen reveals before rather than that they do not want the news. So if it is
+   still owed it is paid here, on the way out, which also means the two ways of
+   saying "make this stop", a tap and the reduced-motion setting, behave the
+   same way instead of disagreeing for no stated reason. */
+function packRevealStop(fast){
+  const P = PACK_REVEAL;
+  if(!P) return;
+  PACK_REVEAL = null;
+  clearTimeout(P.t);
+  if(P.roar){ P.roar = 0; h2Sfx("goal", .95); }
+  packRevealSweep();
+  PACK_GONE = {el: P.el, t: 0};
+  try{
+    P.el.classList.add("pkrv-done");
+    if(fast) P.el.classList.add("pkrv-fast");
+  }catch(e){}
+  PACK_GONE.t = setTimeout(packRevealSweep, fast ? 130 : 260);
+}
+/* IS THE PACK THIS WAS STARTED FOR STILL THE PACK ON THE SCREEN. Identity on
+   the array itself, because that array is handed to ALBUM_VIEW.open and to
+   nothing else, so it cannot be true by coincidence: a second pack is a second
+   array even when it draws the same three men, and every other screen in the
+   app either has no ALBUM_VIEW at all or has one with no open on it.
+
+   AND THE GUEST BRANCHES ARE NAMED RATHER THAN ASSUMED, because this is where
+   the first draft was quietly wrong. Every way out of this screen does go
+   through render, and going through render is not the same as being caught by
+   the condition: a guest's state handler sets S from a host broadcast and calls
+   render, and the three guest branches below return before the album branch is
+   ever reached, so ALBUM_VIEW is untouched and an identity test on its open
+   array cheerfully answers "still my pack" while a sheet sits over a live
+   answer screen for three seconds. albumOpen sets S to null, so only an
+   incoming broadcast can reach that, but a phone being handed a turn while its
+   owner is opening a pack is an ordinary evening rather than a freak. Asking
+   guestRole costs one comparison and it returns null the moment S is null,
+   which is every single time this runs on the ordinary path.
+
+   THE SECOND LINE TAKES THE CORPSE TOO. A sheet that is already fading when
+   somebody leaves has no state left to catch it, so the sweep is asked for
+   separately rather than folded into the line above it. */
+function packRevealCheck(){
+  const mine = !!(ALBUM_VIEW && ALBUM_VIEW.open) && !guestRole();
+  if(PACK_REVEAL && !(mine && ALBUM_VIEW.open === PACK_REVEAL.got)) packRevealStop(1);
+  if(PACK_GONE && !mine) packRevealSweep();
 }
 /* A PAGE CLOSES ONCE, and now it says so out loud. Two things need to know
    which sticker did it rather than merely that it happened: the line under the
@@ -12595,7 +13221,16 @@ function albumCheckPage(book, side){
   const b = albumBookState(book);
   if(b.foils.indexOf(side) > -1) return false;
   b.foils.push(side);
-  toast(side + " complete. Their bench is yours.");
+  /* AND IT ONLY OFFERS A BENCH WHERE THERE IS ONE, which this has been getting
+     wrong since the finals book landed. Fifteen of the sixteen books are squad
+     lists with a dozen men sitting behind the eleven; the finals are forty
+     line-ups and nothing behind them, every one of them carrying bench:[], and
+     this sentence has been telling anybody who closed one of those pages that
+     they had just unlocked a substitutes' bench that does not exist. The reveal
+     needed the same check on the card it prints the same news on, and finding
+     it there is what turned this up. */
+  const t = (albumBook(book) || {})[side] || {};
+  toast(side + " complete." + ((t.bench || []).length ? " Their bench is yours." : ""));
   albumCheckBook(book);
   return true;
 }
@@ -16235,6 +16870,12 @@ function render(){
      meantime. */
   try{ aiTick(); }catch(e){}
   const st=$("#stage");
+  /* THE PACK REVEAL IS AN OVERLAY ON THE BODY, so it is the one piece of the
+     album that a change of screen does not carry away with it. This is asked
+     before anything below can return early, which matters because three of the
+     guest branches further down do exactly that, and it costs one identity
+     comparison on a pass that is about to rebuild the entire stage anyway. */
+  packRevealCheck();
   const P=S ? S.players[S.turn] : null;
 
   /* A guest's own phone drives their turn. Roles the host screen already

@@ -509,6 +509,426 @@ const check = (n, c, x) => {
     ev(app, 'albumDupes("wc2006").length') === 1,
     ev(app, 'albumDupes("wc2006").length') + " doubles left");
 
+  /* ================= AND THEY ARE HANDED OVER ONE AT A TIME =================
+     The pack screen was three cards arriving at once, and everything below is
+     about the sequence that now goes over the top of it. The overlay is
+     appended to document.body, which this harness deliberately keeps no list
+     of, so none of it can be read out of the stage. That is not a hole in the
+     test, it is the thing being tested: the stage holds the finished screen and
+     only the finished screen, from the first frame to the last, and the reveal
+     is read where it actually lives, off PACK_REVEAL.
+
+     AND IT IS DRIVEN RATHER THAN SAMPLED. A reveal that is only checked at its
+     end has not been checked at all, because the end of this one is a screen
+     that was painted before it started, so every assertion about it would pass
+     against a sequence that never ran. So the clock below is stepped card by
+     card and each card's whole panel is compared against what the builder says
+     that card should look like, which is the only way to catch a sequence that
+     shows the right three men in the wrong order or shows one of them twice.
+
+     THE COIN IS PINNED FOR THE TWO RUNS THAT ARE COMPARED WITH EACH OTHER.
+     albumPackDraw walks its own array and hands back the first man with weight
+     left on him, so with Math.random at nought a packet is exactly the first
+     three drawable men of the first side in the book, every run, on every
+     machine. Without that, comparing a pack somebody sat through against a pack
+     somebody skipped is comparing two different packs. */
+  const src = fs.readFileSync(path.join(REPO, "index.html"), "utf8").split("\r\n").join("\n");
+  const panel = () => ev(app, "PACK_REVEAL ? PACK_REVEAL.now.innerHTML : ''");
+  const wants = n => ev(app, "packRevealSetHTML(mine().album.last[" + n + "], PACK_BEAT + (" +
+    n + " === mine().album.last.length - 1 ? PACK_TAIL : 0))");
+  const pinned = stmt => run(app, "(() => { const R0 = Math.random; Math.random = () => 0; " +
+    "try { " + stmt + " } finally { Math.random = R0; } })();");
+
+  console.log("\n--- the pack is handed over one sticker at a time ---");
+  clean();
+  run(app, "mine().album.packs = 1; albumOpen();");
+  const endScreen = stage(app);
+  /* THE WHOLE ARGUMENT FOR THE DESIGN IS THIS ONE ASSERTION. The screen the
+     sequence is going to finish on exists before the first flag has dropped,
+     which is what makes a skip exact rather than a reconstruction. */
+  check("the screen it ends on is already painted before anything moves",
+    (endScreen.match(/class="alst/g) || []).length === 3 &&
+    /You have 0 packs left/.test(endScreen),
+    (endScreen.match(/class="alst/g) || []).length + " cards");
+  check("and a reveal is running over the top of it",
+    ev(app, "!!PACK_REVEAL") === true, "nothing started");
+  /* identity rather than equality, because identity is exactly what
+     packRevealCheck asks on every render and a test that asked the softer
+     question would pass while the real guard was broken */
+  check("on the pack that was just drawn rather than on a copy of it",
+    ev(app, "PACK_REVEAL.got === mine().album.last") === true, "a different array");
+  check("and none of it is written into the stage",
+    stage(app).indexOf("pkrv") < 0, "the sheet leaked into the screen");
+
+  const p0 = panel();
+  check("beat one names the country the card came out of",
+    p0.indexOf(ev(app, 'esc(mine().album.last[0].side)')) > -1, p0.slice(0, 140));
+  check("in the kit and the ink the card itself is lettered with",
+    /--kit:#[0-9A-Fa-f]{6};--kink:(#fff|#17301f)/.test(p0), p0.slice(0, 180));
+  check("beat two says his number the way a person would say it",
+    /<em>(The (One|Two|Three|Four|Five|Six|Seven|Eight|Nine|Ten|Eleven)|Number \d+)<\/em>/.test(p0),
+    (p0.match(/<em>[^<]*<\/em>/) || ["no line"])[0]);
+  check("beat three is the pack screen's own card, not a second drawing of one",
+    (p0.match(/class="alst[^"]*"/g) || []).length === 1,
+    (p0.match(/class="alst[^"]*"/g) || []).join(" | "));
+  /* THE CLASS STRING IS THE CONTRACT. Nothing in the reveal may get in front of
+     empty or behind fresh and shut, and nothing it adds may begin with those
+     four letters, because the slot counts further up this file read the
+     attribute as literal text. */
+  check("with exactly the class string the pack screen gives it",
+    /^class="alst( dupe)?( foil)?( fresh| shut)?"$/.test((p0.match(/class="alst[^"]*"/g) || [""])[0]),
+    (p0.match(/class="alst[^"]*"/g) || [""])[0]);
+  check("and nothing the reveal adds opens with those four letters",
+    !/class="alst[a-z]/.test(p0), (p0.match(/class="alst[a-z-]+/g) || []).slice(0, 3).join(" | "));
+  /* THE PAPERWORK DISAGREED ABOUT THIS ONE. The plan wanted NEW and DOUBLE
+     stamped on the card and the card wanted its news in the rim, so the stamp
+     went on the reveal and the rim stayed on the card. */
+  check("beat four stamps the verdict on the reveal and leaves the card alone",
+    /class="pkrv-stamp pkrv-(new|dupe|shut)"/.test(p0) && />(New|Double|Complete)</.test(p0),
+    (p0.match(/pkrv-stamp[^<]*</) || ["no stamp"])[0]);
+  /* AND THE STAMP'S SECOND CLASS IS PREFIXED. shut and dupe already mean
+     something on .alst two and a half thousand lines down the same stylesheet;
+     there is no bare rule for either today, which is precisely how a collision
+     like that waits six weeks before it bites. */
+  check("and its state is prefixed rather than borrowing a word the card owns",
+    !/class="pkrv-stamp (new|shut|dupe)"/.test(src), "the stamp took a bare word");
+  /* THE WAY OUT BELONGS TO THE SHEET AND NOT TO THE STICKER, so it is written
+     once and survives all three cards instead of being destroyed and rebuilt
+     underneath somebody who is reading it. */
+  check("the way out is on the sheet rather than rebuilt with every card",
+    p0.indexOf("pkrv-tap") < 0 &&
+    (src.match(/classList\.add\("pkrv-tap"\)/g) || []).length === 1,
+    "the skip hint is inside the card markup");
+  /* AND IT IS CLEAR OF THE TOAST. .toast is bottom:24px with twelve pixels of
+     padding and a z-index above this sheet, so a hint at twenty-two sits
+     underneath a green pill on exactly the pack that closes a page. */
+  check("and it sits clear of the toast rather than under it",
+    /\.pkrv-tap\{position:absolute;left:0;right:0;bottom:74px/.test(src),
+    "the skip hint is back in the toast's box");
+
+  /* ---------- and now step it ---------- */
+  console.log("\n--- and the sequence is stepped, not sampled ---");
+  check("card one on the sheet is card one out of the packet", p0 === wants(0), "a different card");
+  await tick(1100);
+  check("a beat later the second man is up", panel() === wants(1), "still on the first");
+  check("and the screen underneath has not been touched", stage(app) === endScreen, "it repainted");
+  await tick(1040);
+  check("and a beat after that the third", panel() === wants(2), "wrong card");
+  check("which is given the tail to stand in that the other two do not get",
+    panel().indexOf("--life:" + ev(app, "PACK_BEAT + PACK_TAIL") + "ms") > -1,
+    (panel().match(/--life:[0-9]+ms/) || ["no life"])[0]);
+  check("and the stage is still the screen it was at the first frame",
+    stage(app) === endScreen, "it repainted");
+  await tick(1600);
+  check("the sequence finished on its own", ev(app, "PACK_REVEAL") === null, "it is still going");
+  check("and took its sheet with it", ev(app, "PACK_GONE") === null, "the sheet is still in the page");
+  const sat = stage(app);
+  check("landing on the screen that was painted before the first flag dropped",
+    sat === endScreen, "sitting through it changed the screen");
+
+  /* ---------- and skipping lands in exactly the same place ---------- */
+  console.log("\n--- and tapping through lands on the same screen, byte for byte ---");
+  clean();
+  pinned("mine().album.packs = 1; albumOpen();");
+  const pinnedSat = stage(app);
+  await tick(3600);
+  check("a pinned pack sits through to the same screen it started on",
+    ev(app, "PACK_REVEAL") === null && stage(app) === pinnedSat, "the sat-through run moved");
+  clean();
+  pinned("mine().album.packs = 1; albumOpen();");
+  await tick(150);
+  check("the same three men come out of the same coin", panel() === wants(0), "a different packet");
+  run(app, "packRevealTap();");
+  /* THE STATE GOES IN THE SAME SYNCHRONOUS CALL and the element is allowed a
+     tenth of a second to travel to nothing, because a full-screen dim that
+     appears and vanishes between frames reads as the screen glitching. */
+  check("a tap ends the sequence at once", ev(app, "PACK_REVEAL") === null, "still running");
+  check("and the sheet leaves rather than being yanked",
+    ev(app, '!!PACK_GONE && PACK_GONE.el.classList.contains("pkrv-done") ' +
+      '&& PACK_GONE.el.classList.contains("pkrv-fast")') === true, "it was removed mid-frame");
+  check("landing on precisely the screen the third card would have landed on",
+    stage(app) === pinnedSat, "the two ways out disagree");
+  check("without having repainted anything to get there",
+    stage(app).indexOf("pkrv") < 0, "the skip rebuilt the screen");
+  await tick(400);
+  check("and the sheet is out of the page a moment later",
+    ev(app, "PACK_GONE") === null, "the fade left a node behind");
+  check("with nothing waking up behind it",
+    ev(app, "PACK_REVEAL") === null && stage(app) === pinnedSat, "a timer came back");
+
+  /* ---------- the verdict has to be allowed to rest ---------- */
+  console.log("\n--- and the last beat of a card is over before the card leaves ---");
+  /* .pkrv-set fades from ninety-four per cent of its life and the stamp's
+     entrance ends at its delay plus its duration. At the nine hundred this
+     started on those two crossed, so the verdict was being read out while the
+     page it was written on was already going. */
+  const stampEnd = 620 + 260;
+  check("the stamp's entrance is a real animation with a real delay",
+    /animation:pkrvstamp \.26s \.62s/.test(src), "the stamp moved");
+  /* AND EVERYTHING ELSE IN BEAT FOUR LANDS ON THE SAME FRAME IT DOES, which is
+     what the block above it claims and what makes the arithmetic below one sum
+     rather than four. The tick, the star, the double going flat and the line
+     naming the page all hang off the stamp's delay. */
+  check("and the rest of the verdict lands on the frame the stamp does",
+    (src.match(/\.26s \.62s/g) || []).length === 4, (src.match(/\.26s \.62s/g) || []).length);
+  check("and it is over before the card starts to fade, with room to spare",
+    ev(app, "PACK_BEAT") * 0.94 - stampEnd > 60,
+    Math.round(ev(app, "PACK_BEAT") * 0.94 - stampEnd) + "ms of stillness");
+  check("and the whole of it still lands near three and a quarter seconds",
+    ev(app, "PACK_BEAT * 3 + PACK_TAIL") === 3300, ev(app, "PACK_BEAT * 3 + PACK_TAIL"));
+
+  /* ================= AND IT CANNOT BE LEFT RUNNING =================
+     A reveal that can be interrupted is a reveal that can leak a timer into a
+     screen that has gone, and this app has lost a day to that before. */
+  console.log("\n--- it cannot be left running over a screen that has gone ---");
+  clean();
+  run(app, "mine().album.packs = 1; albumOpen();");
+  check("a reveal is up", ev(app, "!!PACK_REVEAL") === true, "nothing started");
+  run(app, "closeAlbum();");
+  check("walking out of the album takes it with you, in the same call",
+    ev(app, "PACK_REVEAL") === null, "it survived the exit");
+  check("and the sheet goes with it rather than fading over whatever you left for",
+    ev(app, "PACK_GONE") === null, "a dim is sitting over the menu");
+  await tick(1500);
+  check("and no timer came back to write into the screen you left for",
+    ev(app, "PACK_REVEAL") === null && ev(app, "ALBUM_VIEW") === null, "something is still running");
+
+  /* THE HOLE THE FIRST DRAFT HAD. Going through render is not the same as being
+     caught by the condition: the guest branches return before the album branch
+     is ever reached, so an identity test on ALBUM_VIEW.open still answers "my
+     pack" while a sheet sits over a live answer screen. */
+  clean();
+  run(app, "mine().album.packs = 1; albumOpen();");
+  run(app, "globalThis.__gr = guestRole; globalThis.guestRole = () => 'answer';");
+  run(app, "packRevealCheck();");
+  check("a phone handed a turn mid pack loses the sheet, not the turn",
+    ev(app, "PACK_REVEAL") === null && ev(app, "PACK_GONE") === null,
+    "the sheet is sitting over an answer screen");
+  run(app, "globalThis.guestRole = __gr;");
+
+  clean();
+  run(app, "mine().album.packs = 2; albumOpen();");
+  const first = ev(app, "PACK_REVEAL.el");
+  run(app, "albumOpen();");
+  check("a second pack replaces the sequence rather than stacking on it",
+    ev(app, "PACK_REVEAL.el") !== first &&
+    ev(app, "PACK_REVEAL.got === mine().album.last") === true &&
+    ev(app, "PACK_REVEAL.i") === 0, "the old sequence is still the one on screen");
+  check("and the first sheet is out of the page at once rather than crossfading",
+    ev(app, "PACK_GONE") === null, "two dims on the screen");
+  run(app, "packRevealStop(1);");
+  check("and stopping something already stopped is free",
+    ev(app, "(() => { packRevealStop(1); packRevealStop(0); return PACK_REVEAL; })()") === null,
+    "it threw");
+  run(app, "packRevealSweep();");
+  /* ONE HANDLE FOR THE SEQUENCE AND ONE FOR THE SHEET LEAVING, each cleared in
+     exactly one place, which is the whole of the cancellation story and the
+     only reason any of the above holds. */
+  check("there is one clear site for the sequence and one for the fade",
+    (src.match(/clearTimeout\(P\.t\)/g) || []).length === 1 &&
+    (src.match(/clearTimeout\(G\.t\)/g) || []).length === 1,
+    (src.match(/clearTimeout\([PG]\.t\)/g) || []).join(" "));
+  check("and render is where the question is asked, once, on every pass",
+    (src.match(/^  packRevealCheck\(\);$/gm) || []).length === 1,
+    (src.match(/packRevealCheck\(\);/g) || []).length + " calls");
+
+  /* ================= THE ROAR ================= */
+  console.log("\n--- a closed page roars once, and a tap does not cancel the news ---");
+  run(app, 'globalThis.__sfx = []; globalThis.__sfx0 = h2Sfx; ' +
+    'globalThis.h2Sfx = (n, v) => __sfx.push(n + "/" + v);');
+  /* A PAGE CLOSED ON DEMAND RATHER THAN ON THE FOUR HUNDREDTH PACKET. Own every
+     man on the first side but the first three, pin the coin, and the third card
+     out of the packet is the one that latches the foil, every run. */
+  const shutPack = () => { clean(); pinned(
+    'const b = albumBookState("wc2006"), side = Object.keys(albumBook("wc2006"))[0], ' +
+    '  men = albumMen("wc2006", side).filter(m => albumId("wc2006", side, m)); ' +
+    'globalThis.__page = side; ' +
+    'for(let i = 3; i < men.length; i++) b.have[albumId("wc2006", side, men[i])] = 1; ' +
+    'mine().album.packs = 1; mineSave(); __sfx.length = 0; albumOpen();'); };
+  shutPack();
+  check("the page closed", ev(app, 'albumFoil("wc2006", __page)') === true, "never closed");
+  check("and the card that closed it is stamped complete, in gold",
+    ev(app, 'packRevealSetHTML(mine().album.last[2], 1).indexOf("pkrv-stamp pkrv-shut") > -1'),
+    "no gold stamp");
+  check("wearing the card's own gold rim as well as the stamp",
+    ev(app, '/class="alst[^"]*foil[^"]* shut"/.test(packRevealSetHTML(mine().album.last[2], 1))'),
+    "no rim on the reveal");
+  check("the roar is owed and not yet paid",
+    ev(app, "PACK_REVEAL.roar") === 1 && ev(app, "JSON.stringify(__sfx)") === "[]",
+    ev(app, "JSON.stringify(__sfx)"));
+  run(app, "packRevealTap();");
+  /* SKIPPING IS SOMEBODY SAYING THEY HAVE SEEN REVEALS BEFORE, not that they do
+     not want the news, and a page closing is the one thing the sequence carries
+     that is not also written on the screen underneath. */
+  check("and a tap pays it on the way out rather than cancelling it",
+    ev(app, "JSON.stringify(__sfx)") === JSON.stringify(["goal/0.95"]),
+    ev(app, "JSON.stringify(__sfx)"));
+  check("and only ever once", ev(app, "PACK_REVEAL") === null, "still owed somewhere");
+  await tick(300);
+  /* TWO PAGES CAN CLOSE INSIDE ONE PACKET, and two crowd recordings starting
+     nine tenths of a second apart is a fight rather than a celebration. */
+  run(app, '__sfx.length = 0; (() => { const got = [' +
+    '{book: "wc2006", side: "Italy", m: albumMen("wc2006","Italy")[0], isNew: true, shut: true},' +
+    '{book: "wc2006", side: "Italy", m: albumMen("wc2006","Italy")[1], isNew: true, shut: true},' +
+    '{book: "wc2006", side: "Italy", m: albumMen("wc2006","Italy")[2], isNew: true, shut: false}];' +
+    'ALBUM_VIEW = {book: "wc2006", open: got}; packReveal(got); })();');
+  await tick(2600);
+  check("a packet that closes two pages still roars exactly once",
+    ev(app, "JSON.stringify(__sfx)") === JSON.stringify(["goal/0.95"]),
+    ev(app, "JSON.stringify(__sfx)"));
+  run(app, "packRevealStop(1); packRevealSweep();");
+  /* AND NO RECORDING IS ASKED FOR THAT IS NOT ON THE DISK. There are two wavs
+     in assets/sfx and sw.js caches those two, so a stem named in here that
+     nobody harvested is a sound no phone will ever play and an offline install
+     that goes looking for it. */
+  const stems = (src.match(/h2Sfx\("[a-z]+"/g) || []).map(x => x.slice(7, -1));
+  check("and every recording the app asks for is on the disk",
+    stems.length > 0 && stems.every(n => fs.existsSync(path.join(REPO, "assets/sfx/" + n + ".wav"))),
+    stems.join(", "));
+
+  /* ================= LESS MOVEMENT IS NOT LESS NEWS ================= */
+  console.log("\n--- and a man who asked for less movement gets the end of it at once ---");
+  clean();
+  run(app, "globalThis.__mm = matchMedia; matchMedia = () => ({matches: true, addEventListener(){}});");
+  run(app, "__sfx.length = 0;");
+  shutPack();
+  check("no reveal is built at all", ev(app, "PACK_REVEAL") === null, "it was built anyway");
+  const rm = stage(app);
+  check("and the finished screen is there instead, with the three cards on it",
+    (rm.match(/class="alst/g) || []).length === 3, (rm.match(/class="alst/g) || []).length);
+  /* THE POINT OF THE SETTING IS LESS MOVEMENT AND NOT LESS INFORMATION, so
+     every piece of news the sequence was going to carry has to be on this
+     screen: which were new, which page closed, and how many are left. */
+  check("with nothing that carries news suppressed",
+    / shut"/.test(rm) && /That closed /.test(rm) && /You have 0 packs left/.test(rm),
+    "the pack screen lost its markings");
+  /* THE ROAR IS SOUND AND NOT MOVEMENT, and it is the one thing the sequence
+     carries that the screen does not, so it fires here exactly as it does on a
+     tap. The two ways of saying make this stop now agree. */
+  check("and the roar still goes, once, the same as a tap pays it",
+    ev(app, "JSON.stringify(__sfx)") === JSON.stringify(["goal/0.95"]),
+    ev(app, "JSON.stringify(__sfx)"));
+  run(app, "matchMedia = globalThis.__mm; globalThis.h2Sfx = __sfx0;");
+  check("and the setting is answered in the stylesheet as well as in the code",
+    /@media \(prefers-reduced-motion: reduce\)\{\n    \.pkrv\{display:none\}\n  \}/.test(src),
+    "no second lock");
+
+  /* ================= THE BENCH THAT IS NOT THERE ================= */
+  console.log("\n--- and nobody is promised a bench that does not exist ---");
+  run(app, "TEAMS.finals = " + JSON.stringify(R("assets/finals/index.json")) + ";");
+  /* FIFTEEN BOOKS ARE SQUAD LISTS WITH A DOZEN MEN BEHIND THE ELEVEN AND THE
+     SIXTEENTH IS FORTY LINE-UPS WITH NOBODY. The toast has been offering that
+     bench to all of them since the finals book landed. */
+  check("the finals book really does carry no bench",
+    ev(app, "Object.keys(TEAMS.finals).every(k => (TEAMS.finals[k].bench || []).length === 0)") === true,
+    "the premise moved");
+  check("and a World Cup side really does carry one",
+    ev(app, '(TEAMS.wc2006[Object.keys(TEAMS.wc2006)[0]].bench || []).length') > 0, "no bench");
+  const said = () => ev(app, 'document.querySelector("#toast").textContent');
+  clean();
+  run(app, '(() => { const b = albumBookState("finals"), side = Object.keys(TEAMS.finals)[0]; ' +
+    'for(const m of albumMen("finals", side)) b.have[albumId("finals", side, m)] = 1; ' +
+    'albumCheckPage("finals", side); })();');
+  check("closing a finals page says it is complete and stops there",
+    / complete\.$/.test(said()) && said().indexOf("bench") < 0, said());
+  clean();
+  run(app, '(() => { const b = albumBookState("wc2006"), side = "Italy"; ' +
+    'for(const m of albumMen("wc2006", side)) b.have[albumId("wc2006", side, m)] = 1; ' +
+    'albumCheckPage("wc2006", side); })();');
+  check("and closing a World Cup page still hands over the bench",
+    said() === "Italy complete. Their bench is yours.", said());
+  /* AND THE CARD SAYS THE SAME THING THE TOAST SAYS, which is not a duplicate:
+     the toast fires before the sheet goes up and hides at two and two tenths,
+     and the card that closed the page can be the third of the three, which does
+     not arrive until two and one tenth. */
+  const finCard = ev(app, '(() => { const side = Object.keys(TEAMS.finals)[0]; ' +
+    'return packRevealSetHTML({book: "finals", side: side, m: TEAMS.finals[side].xi[0], ' +
+    'isNew: true, shut: true}, 1000); })()');
+  check("the gold card in a benchless book says complete and offers nothing more",
+    /class="pkrv-sub">[^<]*complete<\/div>/.test(finCard) && finCard.indexOf("bench") < 0,
+    (finCard.match(/class="pkrv-sub">[^<]*/) || ["no line"])[0]);
+  const itaCard = ev(app, 'packRevealSetHTML({book: "wc2006", side: "Italy", ' +
+    'm: albumMen("wc2006","Italy")[0], isNew: true, shut: true}, 1000)');
+  check("and the one in a book that has a bench offers it",
+    /class="pkrv-sub">Italy complete\. Their bench is yours<\/div>/.test(itaCard),
+    (itaCard.match(/class="pkrv-sub">[^<]*/) || ["no line"])[0]);
+
+  /* ================= THE BOOK WITH NO FLAGS =================
+     Beat one is a flag dropping in, and one book in sixteen has none: forty
+     sides carrying flag:null under a pool carrying flags:null to match. */
+  console.log("\n--- the book with no flags still gets a first beat ---");
+  check("it asks for no image", finCard.indexOf("<img") < 0, "broken flag");
+  check("putting the side's own abbreviation where the flag would have gone",
+    finCard.indexOf('class="pkrv-abbr">' + ev(app, "TEAMS.finals[Object.keys(TEAMS.finals)[0]].abbr") +
+      "<") > -1, (finCard.match(/pkrv-abbr">[^<]*/) || ["nothing"])[0]);
+  check("and it falls back to the side's own name rather than to nothing at all",
+    ev(app, '(() => { const side = Object.keys(TEAMS.finals)[0]; ' +
+      'const keep = TEAMS.finals[side].abbr; TEAMS.finals[side].abbr = ""; ' +
+      'const h = packRevealSetHTML({book: "finals", side: side, m: TEAMS.finals[side].xi[0], ' +
+      '  isNew: true, shut: false}, 1000); TEAMS.finals[side].abbr = keep; ' +
+      'return h.indexOf("pkrv-abbr") > -1 && h.indexOf(side + "</i>") > -1; })()') === true,
+    "an empty plate");
+  /* AND THE LONGEST KEY IN THE POOL GOES ON ITS OWN FULL-WIDTH BAR. Forty-seven
+     characters is Manchester United and a Champions League final, and forty-
+     seven characters beside a flag inside eighty-six per cent of a phone is
+     three wrapped lines shoving the card off the bottom of the screen. */
+  const longest = ev(app, "Object.keys(TEAMS.finals).sort((a,b) => b.length - a.length)[0]");
+  check("the longest side name in the app is longer than anybody planned for",
+    longest.length > 40, longest.length + ": " + longest);
+  check("and it gets a bar of its own rather than a line beside the flag",
+    ev(app, 'packRevealSetHTML({book: "finals", side: ' + JSON.stringify(longest) +
+      ', m: TEAMS.finals[' + JSON.stringify(longest) + '].xi[0], isNew: true, shut: false}, 1000)')
+      .indexOf('<div class="pkrv-side">' + longest + "</div>") > -1,
+    "the name is not on its own row");
+  check("which truncates instead of wrapping the card down the screen",
+    /\.pkrv-side\{[^}]*white-space:nowrap;overflow:hidden;\s*text-overflow:ellipsis/.test(src),
+    "the bar wraps");
+  run(app, "delete TEAMS.finals;");
+
+  /* ================= THE TWO PLACES THE CLOCK IS WRITTEN DOWN ================= */
+  console.log("\n--- and the two places the clock is written down still agree ---");
+  check("the sting fires at the frame the card actually starts moving on",
+    ev(app, "PACK_STING") === 300 && /\.pkrv-card\{animation:pkrvwipe \.34s \.3s/.test(src),
+    ev(app, "PACK_STING") + " against the stylesheet");
+  /* THE NUMBER BEAT STOPS AT ELEVEN ON PURPOSE. Ten thousand one hundred and
+     fifty-seven men in the sixteen books carry a shirt number and five thousand
+     three hundred and fifty-five of them wear above eleven, so a table running
+     to ninety-nine would put "The twenty-two" on more than half the album, and
+     nobody says that at a ground. */
+  check("a number with a name gets said, and one without gets read out",
+    ev(app, 'packManLine({no: 10, pos: "AM"})').indexOf("<em>The Ten</em>") === 0 &&
+    ev(app, 'packManLine({no: 22, pos: "CB"})').indexOf("<em>Number 22</em>") === 0,
+    ev(app, 'packManLine({no: 22, pos: "CB"})'));
+  check("and the table is pinned at eleven so it cannot quietly creep back up",
+    ev(app, "PACK_WORDS.length") === 12, ev(app, "PACK_WORDS.length"));
+  /* THE ROTATION TRAP, which the pitch's marker ring fell into and documented:
+     a transform that lives only in a keyframe takes the element's positioning
+     with it. The surname is turned a half circle by an ordinary rule, so both
+     ends of its keyframe have to repeat that or the name lands upside down. */
+  const stand = src.slice(src.indexOf("@keyframes pkrvstand"), src.indexOf("@keyframes pkrvstand") + 200);
+  check("the surname still knows which way up it is",
+    stand.split("rotate(180deg)").length - 1 === 2,
+    stand.split("rotate(180deg)").length - 1 + " of 2");
+  /* AND NOTHING TOUCHES ITS ORIGIN. .alsn runs across the middle sixty per cent
+     of a card that is overflow:hidden, so turning it about its bottom edge
+     rather than its centre maps the whole box below the card and the name is
+     simply gone. */
+  check("about its own centre, which is the only place it fits",
+    !/\.pkrv-card \.alsn\{[^}]*transform-origin/.test(src), "the name rotates off the card");
+  check("the foil's sheen is scoped to the reveal rather than switched on across the book",
+    /\.pkrv-card \.alst\.foil::before\{background-size/.test(src) &&
+    !/\n  \.alst\.foil::before\{[^}]*animation/.test(src), "every foil in the album is shimmering");
+  check("and it parks on the card rather than running off the far edge",
+    /@keyframes pkrvsheen\{from\{background-position:200% 0\}70%,to\{background-position:0 0\}\}/.test(src),
+    "the gold has gone by the time the stamp lands");
+  /* THE SHEET ARRIVES AND LEAVES RATHER THAN APPEARING AND VANISHING. An eighty
+     six per cent black sheet cut in and out between frames reads as the screen
+     glitching; .bigreveal fades its own dim for the same reason. */
+  check("the dim fades in and the sheet fades out",
+    /animation:pkrvdim \.22s ease both/.test(src) &&
+    /\.pkrv\{[^}]*transition:opacity \.26s ease\}/.test(src) &&
+    /\.pkrv\.pkrv-done\{opacity:0;pointer-events:none\}/.test(src), "it still cuts");
+
   console.log("\n" + (fails ? fails + " FAILED" : "ALL PASS"));
   process.exit(fails ? 1 : 0);
 })().catch(e => { console.error(e); process.exit(1); });
