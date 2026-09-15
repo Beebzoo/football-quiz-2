@@ -10117,6 +10117,11 @@ function h2Start(){
               on the table, and whether the loaded question is a sub's one
               fresh go (so a second miss is not offered a second sub) */
            subs:[H2_SUBS, H2_SUBS], subbed:[{}, {}], benchUsed:[[], []], sub:null, subQ:false,
+           /* the last few men the computer has found, per side, so it stops
+              playing the same two all match. Read defensively everywhere it is
+              used, because a match parked on the build before this comes back
+              without it. */
+           fed:[[], []],
            /* where each side's defence stands, in The Dugout */
            line:["mid", "mid"],
            /* WHICH SHAPE EACH SIDE IS IN, The Dugout only, and EMPTY here on
@@ -11593,12 +11598,18 @@ const AI_LEVELS = {
 /* EACH PERSONALITY IS A POLICY, not an engine. Four paragraphs of football,
    each one teaching a rule the app never explains out loud. */
 const AI_MEN = {
+  /* THE SENTENCES ARE READ ON THE SETUP SCREEN BY SOMEBODY CHOOSING WHO TO
+     PLAY, so they are a promise about what he will do and they have to be
+     keepable. Route One and Tiki-taka both used to be exact, because both used
+     to take the first man off a sort, and both now draw from a weighted list so
+     that the same two men do not get every ball. "Every time" and "the striker
+     gets it" were true of the old code and are not true of this one. */
   route1: {label: "Route One", side: "England", shape: "4-4-2", line: "mid",
-           says: "Hits it long and early. If the striker is on, the striker gets it."},
+           says: "Hits it long and early. Four times in five it is aimed at the front two."},
   bus:    {label: "The Bus", side: "Italy", shape: "5-3-2", line: "low",
            says: "Nothing above Normal. He will invite the press and shoot from the striker only."},
   tiki:   {label: "Tiki-taka", side: "Spain", shape: "4-3-3", line: "high",
-           says: "The shortest ball forward, every time, until the press comes."},
+           says: "The short ball forward, over and over, until the press comes."},
   press:  {label: "The Pressers", side: "Germany", shape: "4-2-3-1", line: "high",
            says: "Plays the ladder as written and prefers the hard one."},
 };
@@ -11641,44 +11652,116 @@ function aiOptions(){
   return out;
 }
 const aiRank = t => H2_ORDER.indexOf(t);
+/* HOW MUCH THE MAN HE JUST FED IS WORTH NOW, which is the half of this that
+   actually stops him playing the same two men all night. Weights on their own
+   still cluster, because whoever is best on the board is best again from the
+   same board a moment later. The man who had it last is cut hardest, the one
+   before him less, and by four passes ago he is a full price again. */
+const AI_FED_KEEP = 3;
+function aiStale(w, i){
+  const H = h2();
+  const seen = (H && H.fed && H.fed[w]) || [];
+  const k = seen.indexOf(i);
+  return k < 0 ? 1 : k === 0 ? .2 : k === 1 ? .5 : .78;
+}
+function aiFeed(w, i){
+  const H = h2();
+  if(!H) return;
+  if(!H.fed) H.fed = [[], []];
+  const seen = H.fed[w] || (H.fed[w] = []);
+  const k = seen.indexOf(i);
+  if(k > -1) seen.splice(k, 1);
+  seen.unshift(i);
+  if(seen.length > AI_FED_KEEP) seen.length = AI_FED_KEEP;
+}
+/* ONE MAN DRAWN OUT OF A WEIGHTED HAT. Nothing here is allowed to weigh zero,
+   because a policy that rules a man out entirely is an argmax wearing a
+   different coat, and the whole point is that the second best comes up. */
+function aiDraw(list, weigh){
+  let tot = 0;
+  const w = list.map(o => { const v = Math.max(.02, weigh(o)); tot += v; return v; });
+  let r = Math.random() * tot;
+  for(let k = 0; k < list.length; k++){ r -= w[k]; if(r <= 0) return list[k].i; }
+  return list[list.length - 1].i;
+}
+/* WHERE HE PUTS IT. Each of these used to end in [0] of a sort, so the same man
+   won the same comparison every possession of every match: the Pressers did not
+   even sort, and hard[0] is whichever hard option sits lowest in the shape. The
+   rules are the same rules, expressed as how much he wants each man rather than
+   which one he wants most, and then one is drawn. The numbers are deliberately
+   lopsided: a four against a one is still that man four times in five, which is
+   a personality, where a two against a one would be a shrug. */
 function aiPass(){
   const H = h2();
-  const man = aiMan(H.who);
   const opts = aiOptions();
   if(!opts.length) return null;
-  const forward = opts.filter(o => o.y < h2Spot(H.at, H.who).y);
+  const from = h2Spot(H.at, H.who).y;
+  const fwd = o => o.y < from;
+  const stale = o => aiStale(H.who, o.i);
+  let pick;
   switch(aiOf(H.who)){
     case "bus": {
-      /* THE BUS. Nothing above Normal, ever, which means he keeps it at the
-         back and invites the press onto himself. Losing to him teaches you
-         what the press is for. */
+      /* THE BUS. Nothing above Normal, EVER, which is a rule and not a leaning,
+         and it is the one thing about him that cannot be a weight. Weighting an
+         unsafe ball at a quarter had him break his own rule about one
+         possession in twenty-five, which is often enough that losing to him
+         stops teaching you what the press is for and starts looking like luck.
+
+         So the filter decides what he is allowed to play and the draw decides
+         which of those he plays, which is where his variety belongs: he used to
+         take the deepest safe man every single time, and now he takes a safe
+         man. Deeper is still better, and whoever had it last is still cut. */
       const safe = opts.filter(o => H2_SAFE.includes(o.t));
-      if(safe.length) return safe.sort((a, b) => a.y - b.y)[0].i;
-      return opts.sort((a, b) => aiRank(a.t) - aiRank(b.t))[0].i;
+      pick = aiDraw(safe.length ? safe : opts, o => (.25 + o.y / 100) * stale(o));
+      break;
     }
-    case "tiki": {
-      /* TIKI-TAKA. The shortest ball that is not backwards, which walks into
-         the press over and over until it learns to commit. */
-      const near = forward.length ? forward : opts;
-      return near.sort((a, b) => (aiRank(a.t) - aiRank(b.t)) || (b.y - a.y))[0].i;
-    }
-    case "press": {
-      /* THE PRESSERS. The ladder as written, leaning to the dear end of what
-         it can afford, which is the closest thing here to playing properly. */
-      const want = forward.length ? forward : opts;
-      const hard = want.filter(o => aiRank(o.t) === 2);
-      if(hard.length) return hard[0].i;
-      return want.sort((a, b) => aiRank(b.t) - aiRank(a.t))[0].i;
-    }
-    default: {
+    case "tiki":
+      /* TIKI-TAKA. The short one, forward if forward is on. Cheapness is the
+         whole policy so it carries the most weight, and the ladder is only five
+         rungs, so squaring the gap is what keeps Easy clearly ahead of Hard
+         rather than mildly ahead. */
+      pick = aiDraw(opts, o => { const c = 5 - aiRank(o.t); return c * c * (fwd(o) ? 2.4 : .5) * stale(o); });
+      break;
+    case "press":
+      /* THE PRESSERS. The ladder as written, leaning to the dear end of what he
+         can afford. Hard is what he is after, Extreme is the next best thing,
+         and Easy is what he takes when the board has nothing else. */
+      pick = aiDraw(opts, o => { const r = aiRank(o.t);
+        const want = r === 2 ? 4 : r === 3 ? 2.2 : r === 1 ? 1.5 : r === 4 ? .8 : .45;
+        return want * (fwd(o) ? 2 : .5) * stale(o); });
+      break;
+    default:
       /* ROUTE ONE. The front line if the front line is on, whatever it costs,
-         and the furthest man forward otherwise. The simplest policy and the
+         and up the pitch otherwise. Still the simplest policy and still the
          funniest to lose to. */
-      const up = opts.filter(o => o.line === 6);
-      if(up.length) return up[0].i;
-      return opts.sort((a, b) => a.y - b.y)[0].i;
-    }
+      /* FORWARD IS STATED RATHER THAN IMPLIED. Leaning on the y term alone only
+         ran from 1.25 down to .25, which the staleness cut could out-vote, so
+         once he had fed the front line he turned round and went backwards, and
+         a Route One who plays it back is not Route One. Measured before and
+         after: 45 per cent of his balls went forward, against 92 now.
+
+         AND THE FRONT-LINE THUMB IS SIX, which is the one number here that was
+         measured before it was written down rather than after. At five, eight
+         small weights beat two big ones and the front two took only sixty-five
+         per cent of his balls, which is not a lean anybody would name a
+         personality after. So it was measured properly, four hundred draws for
+         the lean and five full walks for the spread, at five weights:
+
+           weight   front two   men used over eighty balls
+                4        74%    10 10 10 8 10
+                6        82%     9  8  7  9  7
+                8        86%     7  9  8  8  9
+               10        91%     8  9  9  7  8
+               12        88%     7  8  9  7  6
+
+         Twelve buys three points of character for three men of variety, and the
+         variety is the half that was asked for. Six is four balls in five to
+         the front two, which anybody can name after one match, and still seven
+         to nine men over a possession. */
+      pick = aiDraw(opts, o => (o.line === 6 ? 6 : 1) * (fwd(o) ? 2.6 : .4) * (1.25 - o.y / 100) * stale(o));
   }
+  aiFeed(H.who, pick);
+  return pick;
 }
 /* WHEN IT SHOOTS. Route One shoots the moment it can; the Bus only from the
    striker; the other two when the shot is no dearer than the best pass. */
@@ -11687,7 +11770,12 @@ function aiShoot(){
   if(!h2CanShoot(H.at)) return false;
   const shot = h2ShotTier(H.at, H.who);
   switch(aiOf(H.who)){
-    case "route1": return true;
+    /* FOUR TIMES IN FIVE, NOT ALWAYS. Letting fly the moment he can is the
+       whole of Route One and it stays the whole of Route One, but "always" was
+       doing damage next to a pass he never varied either: you learned the exact
+       spot he would shoot from and there was nothing left to read. The fifth
+       ball is the one that makes the other four worth watching. */
+    case "route1": return Math.random() < .8;
     case "bus":    return h2Spot(H.at, H.who).line === 6;
     default: {
       const best = aiOptions().sort((a, b) => aiRank(a.t) - aiRank(b.t))[0];
@@ -12449,7 +12537,27 @@ const cupGroupOf = side => { const C = cupOf();
    the same judgement: how hard the computer plays, and who wins a tie that
    2006 never staged. */
 const cupRank  = side => { const C = cupOf(); return (C && C.rank[side]) || 1; };
-const cupLevel = side => cupRank(side) >= 6 ? "champs" : cupRank(side) >= 4 ? "ere" : "sunday";
+/* HOW HARD HE ANSWERS, which used to be the side's seeding rank and nothing
+   else. That made the tournament exactly as hard as the draw and no harder: a
+   nation that went out bottom of its group in the real thing played at Sunday
+   League in the FINAL, and a run could get easier the further it went, which is
+   the wrong shape for a cup run.
+
+   So the round moves it up. Nothing changes in the group or the last sixteen,
+   the quarter-final and the semi are a step dearer than the side alone would
+   be, and the final is two, which puts every final at Champions League whoever
+   is standing there. That is the point of a final.
+
+   IT IS VISIBLE RATHER THAN A THUMB ON THE SCALE. The card before kick-off
+   prints the level as Form and the group preview prints it beside every side,
+   so the number that moved is on the screen before anybody accepts a tie. A
+   difficulty that climbs quietly is a difficulty that feels like cheating. */
+const AI_LADDER = ["sunday", "ere", "champs"];
+const CUP_STEP = {group: 0, r16: 0, qf: 1, sf: 1, final: 2};
+const cupLevel = (side, round) => {
+  const base = cupRank(side) >= 6 ? 2 : cupRank(side) >= 4 ? 1 : 0;
+  return AI_LADDER[Math.min(AI_LADDER.length - 1, base + (CUP_STEP[round] || 0))];
+};
 const CUP_SAYS = {7: "won it", 6: "lost the final", 5: "lost the semi-final",
                   4: "went out in the quarter-final", 3: "went out in the last sixteen",
                   2: "finished third in their group", 1: "finished bottom of their group"};
@@ -12694,7 +12802,7 @@ function cupPlay(){
   S.pool = pool;
   S.cup = {round: c.round, v: them, year: c.year};
   S.players[1].ai = cupStyle(them);
-  S.players[1].level = cupLevel(them);
+  S.players[1].level = cupLevel(them, c.round);
   h2Start();
   /* BOTH SIDES AT ONCE, which is the one place in the app that is neither seat.
      h2PickTeam now refuses a pick that belongs to the computer, and the second
@@ -18692,7 +18800,7 @@ function cupPickScreen(st){
         'in the slot the draw actually gave whoever finished there.</div>' +
       '<div class="cupodds">' + C.groups[g].sides.filter(x => x !== pick).map(x =>
         '<div><span class="cupdot ' + cupHard(x) + '"></span>' + esc(x) +
-        '<i>' + AI_LEVELS[cupLevel(x)].label + ' \u00b7 ' + AI_MEN[cupStyle(x)].label + '</i></div>').join("") +
+        '<i>' + AI_LEVELS[cupLevel(x, "group")].label + ' \u00b7 ' + AI_MEN[cupStyle(x)].label + '</i></div>').join("") +
       '</div>' +
       '<button class="bigbtn" onclick="cupStart(' + JSON.stringify(pick).replace(/"/g, "&quot;") + ')">' +
         'Take ' + esc(pick) + ' to Germany</button>' +
@@ -18730,7 +18838,7 @@ const cupHard = side => cupRank(side) >= 6 ? "hot" : cupRank(side) >= 4 ? "warm"
 
 /* ---------- the card before kick-off ---------- */
 function cupCardHTML(c, them){
-  const lv = AI_LEVELS[cupLevel(them)], st_ = AI_MEN[cupStyle(them)];
+  const lv = AI_LEVELS[cupLevel(them, c.round)], st_ = AI_MEN[cupStyle(them)];
   return '<div class="cupcard" style="--kc:' + cupKit(them) + '">' +
     '<div class="cupch">' + (cupFlag(them) ? '<img src="' + cupFlag(them) + '" alt="">' : '') +
       '<div><b>' + esc(them) + '</b><i>' +

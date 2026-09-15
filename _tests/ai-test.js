@@ -147,9 +147,19 @@ const check = (n, c, x) => {
   /* ROUTE ONE goes to the front line from anywhere, which is the simplest
      policy and the funniest to lose to. */
   setUp("route1", "4-4-2");
-  const r1 = ev(app, "aiPass()");
-  check("Route One picks a man on the front line",
-    ev(app, "h2Shape(1)[" + r1 + "].line") === 6, r1 + " is on line " + ev(app, "h2Shape(1)[" + r1 + "].line"));
+  /* HE AIMS AT THE FRONT LINE, which used to be a single draw because he used
+     to take the first man off a sort and the answer never moved. It is a
+     weighted draw now, so asking once asks a coin rather than the policy, and
+     one unlucky draw would read as Route One being broken. A hundred draws and a
+     floor of sixty is a stronger claim than the old line made: it
+     measures how hard he leans rather than where one ball happened to go.
+     Measured at about eighty-two, which is five
+     standard deviations clear of the floor, the margin this suite has learned
+     to want. */
+  const r1 = ev(app, "(() => { let up = 0; for(let k = 0; k < 100; k++){ " +
+    "S.h2h.at = 0; S.h2h.sel = null; S.h2h.fed = [[], []]; " +
+    "const to = aiPass(); if(to != null && h2Shape(1)[to].line === 6) up++; } return up; })()");
+  check("Route One aims at the front line", r1 >= 60, r1 + " of 100 draws");
   /* THE BUS never plays above Normal, which is what teaches you the press. */
   setUp("bus", "5-3-2");
   let over = 0;
@@ -175,6 +185,77 @@ const check = (n, c, x) => {
   run(app, 'S = freshState(["A","B"], false, "classic", 0, "pitch", true); h2Start(); render();');
   await tick(400);
   check("two humans are left alone", ev(app, "S.phase") === "h_teams", ev(app, "S.phase"));
+
+  /* ---------- he stops playing the same two men ---------- */
+  console.log("\n--- he spreads it around ---");
+  const BALLS = 80, MEN_FLOOR = 4;
+  /* the match's own loop: shoot if he would shoot, otherwise pass, then the
+     ball goes where he put it and he is asked again from there */
+  const walk = () => ev(app, `(() => {
+    const seen = {}, tier = {}; let up = 0, passes = 0;
+    S.h2h.who = 1; S.h2h.at = 0; S.h2h.sel = null; S.h2h.fed = [[], []];
+    for(let n = 0; n < ${BALLS}; n++){
+      if(aiShoot()){ S.h2h.at = 0; continue; }
+      const from = h2Spot(S.h2h.at, 1).y, to = aiPass();
+      if(to == null) break;
+      passes++;
+      if(h2Spot(to, 1).y < from) up++;
+      seen[to] = 1;
+      const t = h2Priced(S.h2h.at, to);
+      tier[t] = (tier[t] || 0) + 1;
+      S.h2h.at = to;
+    }
+    const safe = (tier.easy || 0) + (tier.normal || 0);
+    return {men: Object.keys(seen).length, passes: passes,
+            fwd: passes ? Math.round(up / passes * 100) : 0,
+            safe: passes ? Math.round(safe / passes * 100) : 0};
+  })()`);
+  const asAi = id => run(app,
+    'S = freshState(["You","It"], false, "classic", 0, "pitch", true); ' +
+    'S.players[1].ai = "' + id + '"; S.players[1].level = "ere"; h2Start(); ' +
+    'h2AsActor(() => { h2PickTeam("Netherlands"); h2PickTeam("Italy"); }); ' +
+    'S.h2h.tossed = true;');
+
+  const spread = {};
+  for (const id of ["route1", "bus", "tiki", "press"]) {
+    asAi(id);
+    await tick(40);
+    const r = walk();
+    spread[id] = r;
+    console.log(`      ${id.padEnd(8)} ${String(r.men).padStart(2)} of 11 men over ${r.passes} balls, ${r.fwd}% forward, ${r.safe}% safe`);
+  }
+  for (const id of ["route1", "bus", "tiki", "press"])
+    check(id + " uses more than " + MEN_FLOOR + " men", spread[id].men > MEN_FLOOR, spread[id].men + " men");
+
+  /* AND THE CHARACTER SURVIVED THE VARIETY, which is the thing variety is
+     easiest to buy at the cost of. A Bus that has learned to spread it around
+     and started hitting Hard balls is not the Bus, and a Route One who plays it
+     backwards is nobody at all. */
+  check("the Bus still keeps it safe", spread.bus.safe >= 75, spread.bus.safe + "% safe");
+  check("Route One still goes forward", spread.route1.fwd >= 65, spread.route1.fwd + "% forward");
+
+  /* ---------- and the cup gets harder as it goes ---------- */
+  console.log("\n--- the cup is a run rather than a draw ---");
+  /* CUPS is the store cupOf reads, and it is writable, so the ranks can be
+     stated here rather than waiting on a real tournament to load. */
+  run(app, 'CUPS[cupYear()] = {rank: {Minnow: 1, Decent: 4, Giants: 7}};');
+  const lv = (side, round) => ev(app, 'cupLevel(' + JSON.stringify(side) + ', ' + JSON.stringify(round) + ')');
+  for (const side of ["Minnow", "Decent", "Giants"])
+    console.log(`      ${side.padEnd(7)} ${["group","r16","qf","sf","final"].map(r => lv(side, r)).join(" -> ")}`);
+  check("a weak side is still weak in the group", lv("Minnow", "group") === "sunday", lv("Minnow", "group"));
+  check("and a step dearer by the quarter-final", lv("Minnow", "qf") === "ere", lv("Minnow", "qf"));
+  check("every final is a real one, whoever is in it", lv("Minnow", "final") === "champs", lv("Minnow", "final"));
+  check("the winners are the hardest from the first whistle", lv("Giants", "group") === "champs", lv("Giants", "group"));
+  /* it can only ever go up, which is what stops a run getting easier as it
+     goes, and was the actual complaint: the old rule read the seeding and
+     nothing else, so a minnow in the final answered at Sunday League. */
+  const rounds = ["group", "r16", "qf", "sf", "final"];
+  const climbs = ["Minnow", "Decent", "Giants"].every(sd => {
+    let last = -1;
+    return rounds.every(r => { const k = ["sunday", "ere", "champs"].indexOf(lv(sd, r));
+      if(k < last) return false; last = k; return true; });
+  });
+  check("no round is ever easier than the one before it", climbs, "a run got easier as it went");
 
   console.log("\n" + (fails ? fails + " FAILED" : "ALL PASS"));
   process.exit(fails ? 1 : 0);
