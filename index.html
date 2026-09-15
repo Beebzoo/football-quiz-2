@@ -554,7 +554,15 @@
     --warm-ink:var(--gold-hi);
   }
   html{background:var(--sky)}
-  body.careermode{color:var(--text);border-color:var(--edge-soft)}
+  /* NO border-color HERE ANY MORE, and its absence is load bearing. The only
+     border the body ever has is the touchline down each side, set inside the
+     hover media query, and a media query adds NO specificity: that rule is a
+     bare body at (0,1) and this selector is a class at (0,1,1). So this line
+     quietly repainted the touchline in the sand hairline it had just stopped
+     being, on every desktop, and the stylesheet read green the whole time.
+     The touchline carries its own themed token now, so this was not competing
+     with it, it was the older version of it left lying about. */
+  body.careermode{color:var(--text)}
   body.careermode .clock .digits{color:var(--text)}
   body.careermode .clock.hot .digits{color:#ff8a7a}
   body.careermode .sub{color:var(--text-dim)}
@@ -2619,6 +2627,30 @@
   body.pixel .fig .f-head::before{content:"";position:absolute;left:var(--px);
     top:calc(var(--px) * 2);width:var(--px);height:var(--px);background:var(--o);
     box-shadow:calc(var(--px) * 2) 0 0 0 var(--o)}
+  /* THESE THREE HAVE FACES, AND NOBODY ELSE IN THE APP DOES. The rule four
+     lines up sets background-image:none !important on every part and every
+     pseudo of every figure, which is right for a crowd of identical men and is
+     exactly what would silently eat three faces: the same shape of bug as the
+     mown bands that stopped drawing when this skin went permanent. So these say
+     !important back, deliberately, rather than hoping to out-specify it.
+
+     THE HEAD ITSELF GOES. The drawing is the whole head, hair and all, in a
+     24 by 16 box that is the head's four rows by six columns including the one
+     unit of overhang each side, so the skin block's own hair bar and its two
+     eye pixels have to stop being drawn or they sit on top of the face. */
+  body.pixel .fig.us .f-head{background:none !important;box-shadow:none !important}
+  body.pixel .fig.us .f-head::before{display:none !important}
+  body.pixel .fig.us .f-head::after{left:calc(var(--px) * -1);right:calc(var(--px) * -1);
+    top:0;height:calc(var(--px) * 4);background:none !important;box-shadow:none !important;
+    background-image:var(--usface) !important;background-repeat:no-repeat !important;
+    background-size:100% 100% !important}
+  /* and the flag on the chest, small, at the same left offset the number is
+     centred around so the two do not fight */
+  body.pixel .fig.us .f-torso{background-image:var(--usflag) !important;
+    background-repeat:no-repeat !important;
+    background-size:calc(var(--px) * 1.55) auto !important;
+    background-position:calc(var(--px) * 0.6) calc(var(--px) * 1) !important}
+
   /* torso: six wide, rows 5-12, a darker column down the right for depth */
   body.pixel .fig .f-torso{left:calc(var(--px) * 2);top:calc(var(--px) * 5);
     width:calc(var(--px) * 6);height:calc(var(--px) * 8);background:var(--kit);
@@ -4391,6 +4423,79 @@
     transform:translate(-50%,-50%);
     box-shadow:0 0 0 1.5px rgba(10,28,18,.55), 0 1px 2px rgba(0,0,0,.6)}
   .h2shapen{font:700 .78rem/1 var(--ui);letter-spacing:.02em}
+
+  /* ---------------- the three of us, behind the halfway line ----------------
+     A strip of grass under the banner with three men behind the line. The slot
+     clips, which is what lets a whole figure hide behind three chalk pixels,
+     and it is the only reason the lift can be one transform. */
+  .usline{position:relative;margin:2px 0 4px;padding:0;
+    background:
+      repeating-linear-gradient(180deg,
+        rgba(255,255,255,.035) 0 12.5%, rgba(0,0,0,.035) 12.5% 25%),
+      linear-gradient(180deg,#1d5c37,#0f3d26);
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.14);border-radius:10px;overflow:hidden}
+  .uschalk{position:absolute;left:0;right:0;height:2px;background:#f2f6ee;opacity:.7}
+  .uschalk.t{top:10px}
+  .uschalk.b{bottom:26px}
+  .usmen{position:relative;height:116px;overflow:hidden;
+    display:flex;align-items:flex-end;justify-content:center;gap:clamp(18px,9vw,56px);
+    padding-bottom:26px}
+  /* HE IS DROPPED BY HOWEVER MUCH HE IS NOT SHOWING, which is the whole trick:
+     one transform, no layout, nothing else on the strip moves. --usshow is how
+     much of him clears the line. */
+  .uspeek{position:relative;flex:none;background:none;border:0;padding:0;cursor:pointer;
+    width:44px;height:var(--usshow);display:flex;align-items:flex-end;justify-content:center}
+  .uspeek .fig{transform:translateY(calc(96px - var(--usshow)));
+    transition:transform .34s cubic-bezier(.34,1.32,.64,1)}
+  .uspeek{--usshow:26px}
+  .uspeek.up{--usshow:82px}
+  .uspeek:focus-visible{outline:3px solid #f7e3a6;outline-offset:2px}
+  /* THE FINGERS, AND THEY ARE THE WHOLE JOKE. They do not go up with him: a
+     hand on a wall stays on the wall and the man behind it rises, which is the
+     only reason this reads as somebody looking over something rather than a
+     sprite sliding up a slot. Four a side, the middle two longest, mirrored so
+     the pair reads as two hands rather than one hand printed twice. No gap
+     between them: each carries the body's own outline, the way the legs do. */
+  .usgrip{position:absolute;bottom:24px;display:flex;align-items:flex-end;pointer-events:none;
+    transition:opacity .18s ease, transform .3s ease}
+  .usgrip.l{right:calc(50% + 6px);flex-direction:row-reverse}
+  .usgrip.r{left:calc(50% + 6px)}
+  .usgrip i{display:block;width:4px;height:7px;background:var(--usskin);
+    box-shadow:0 0 0 2px #0b0b0b, inset 0 -2px 0 rgba(0,0,0,.15)}
+  .usgrip i:first-child{height:5px}
+  .usgrip i:last-child{height:5px}
+  .usgrip i:nth-child(2){height:8px}
+  /* AND HE LETS GO ON THE WAY UP. Leaving them gripping hands him his own arms
+     back at the same time, and two sets of hands is worse than none. */
+  .uspeek.up .usgrip{opacity:0;transform:translateY(4px)}
+  .ussay{position:relative;padding:0 10px 7px;text-align:center;
+    font:400 8px/1 var(--px16);letter-spacing:.14em;text-transform:uppercase;
+    color:rgba(242,246,238,.62)}
+  @media (prefers-reduced-motion: reduce){
+    .uspeek .fig{transition:none}
+    .usgrip{transition:none}
+  }
+  /* WHAT EACH OF THE THREE LOOKS LIKE, which is true whatever the app is
+     wearing. These were written next to the rules that paint with them, inside
+     the sixteen-bit block, and pixel-test threw them out and was right to: that
+     block is the skin and every selector in it starts with body.pixel. A rule
+     that is only READ from there is not a skin rule.
+
+     The faces are inline SVG rather than nine files in assets/, because nine
+     small drawings behind a service worker is nine more chances for the offline
+     story to be wrong, and assets-test has enough to police already. */
+  .us-ale{--usskin:#C98C5C}
+  .us-ale .fig.us{--skin:#C98C5C;
+    --usface:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAxNiI+PGRlZnM+PGNsaXBQYXRoIGlkPSJqYXciPjxwYXRoIGQ9Ik00LjcgNS40IEM0LjcgMS41IDcuOSAtMC40IDEyIC0wLjQgQzE2LjEgLTAuNCAxOS4zIDEuNSAxOS4zIDUuNCBMMTkuMyAxMC40IEMxOS4zIDE0LjIgMTYuMSAxNS45IDEyIDE1LjkgQzcuOSAxNS45IDQuNyAxNC4yIDQuNyAxMC40IFoiLz48L2NsaXBQYXRoPjwvZGVmcz48cGF0aCBkPSJNNC43IDUuNCBDNC43IDEuNSA3LjkgLTAuNCAxMiAtMC40IEMxNi4xIC0wLjQgMTkuMyAxLjUgMTkuMyA1LjQgTDE5LjMgMTAuNCBDMTkuMyAxNC4yIDE2LjEgMTUuOSAxMiAxNS45IEM3LjkgMTUuOSA0LjcgMTQuMiA0LjcgMTAuNCBaIiBmaWxsPSIjQzk4QzVDIi8+PHBhdGggZD0iTTQuNyA0LjMgQzQuNyAxLjEgNy45IC0wLjQgMTIgLTAuNCBDMTYuMSAtMC40IDE5LjMgMS4xIDE5LjMgNC4zIEMxNy42IDUuMyAxNS4wIDYuMyAxMiA2LjMgQzkuMCA2LjMgNi40IDUuMyA0LjcgNC4zIFoiIGZpbGw9IiM3QTVCM0UiLz48cGF0aCBkPSJNNC4wNSAxMi40IEMzLjQ1IDYuNCA0LjQgMy4wIDcuMSAxLjcgQzYuMyA0LjkgNi4yIDguNyA2LjY1IDEyLjQgWiIgZmlsbD0iIzNBMkExQyIvPjxwYXRoIGQ9Ik0xOS45NSAxMi40IEMyMC41NSA2LjQgMTkuNiAzLjAgMTYuOSAxLjcgQzE3LjcgNC45IDE3LjggOC43IDE3LjM1IDEyLjQgWiIgZmlsbD0iIzNBMkExQyIvPjxlbGxpcHNlIGN4PSI0LjMiIGN5PSI5LjQiIHJ4PSIwLjk1IiByeT0iMS42IiBmaWxsPSIjQzk4QzVDIi8+PGVsbGlwc2UgY3g9IjE5LjciIGN5PSI5LjQiIHJ4PSIwLjk1IiByeT0iMS42IiBmaWxsPSIjQzk4QzVDIi8+PGVsbGlwc2UgY3g9IjQuNDUiIGN5PSI5LjQiIHJ4PSIwLjQyIiByeT0iMC44MCIgZmlsbD0iI0FFNzQ0OCIvPjxlbGxpcHNlIGN4PSIxOS41NSIgY3k9IjkuNCIgcng9IjAuNDIiIHJ5PSIwLjgwIiBmaWxsPSIjQUU3NDQ4Ii8+PGcgY2xpcC1wYXRoPSJ1cmwoI2phdykiPjxwYXRoIGQ9Ik02LjAgOS4yIEM1LjYgMTMuOSA4LjQgMTYuNCAxMiAxNi40IEMxNS42IDE2LjQgMTguNCAxMy45IDE4LjAgOS4yIEwxNi40IDEwLjggQzE2LjYgMTMuMCAxNC44IDEzLjggMTIgMTMuOCBDOS4yIDEzLjggNy40IDEzLjAgNy42IDEwLjggWiIgZmlsbD0iIzMzMjMxQSIvPjxwYXRoIGQ9Ik03LjcgMTIuNCBDOC41IDE1LjUgMTUuNSAxNS41IDE2LjMgMTIuNCBMMTYuMyAxNi42IEw3LjcgMTYuNiBaIiBmaWxsPSIjMzMyMzFBIi8+PC9nPjxwYXRoIGQ9Ik02LjcgNy45IFE4LjU1IDcuMjAgMTAuNCA3LjcgTDEwLjQgOC40MiBROC41NSA3Ljk1IDYuNyA4LjYyIFoiIGZpbGw9IiMzMzIzMUEiLz48cGF0aCBkPSJNMTcuMzAgNy45IFExNS40NSA3LjIwIDEzLjYwIDcuNyBMMTMuNjAgOC40MiBRMTUuNDUgNy45NSAxNy4zMCA4LjYyIFoiIGZpbGw9IiMzMzIzMUEiLz48ZWxsaXBzZSBjeD0iOC43IiBjeT0iOS45IiByeD0iMS4zNCIgcnk9IjEuMDQiIGZpbGw9IiNFRkU0RDQiLz48Y2lyY2xlIGN4PSI4LjciIGN5PSI5Ljk1MDAwMDAwMDAwMDAwMSIgcj0iMC45NiIgZmlsbD0iIzRBMzUyNCIvPjxjaXJjbGUgY3g9IjguNyIgY3k9IjkuOTUwMDAwMDAwMDAwMDAxIiByPSIwLjQ4IiBmaWxsPSIjMTYxMTBDIi8+PHBhdGggZD0iTTcuMzYgOS4zMyBROC43IDguMzQgMTAuMDQgOS4zMyBMMTAuMDQgOC41NSBROC43IDcuNzIgNy4zNiA4LjU1IFoiIGZpbGw9IiMxNjExMEMiLz48ZWxsaXBzZSBjeD0iMTUuMyIgY3k9IjkuOSIgcng9IjEuMzQiIHJ5PSIxLjA0IiBmaWxsPSIjRUZFNEQ0Ii8+PGNpcmNsZSBjeD0iMTUuMyIgY3k9IjkuOTUwMDAwMDAwMDAwMDAxIiByPSIwLjk2IiBmaWxsPSIjNEEzNTI0Ii8+PGNpcmNsZSBjeD0iMTUuMyIgY3k9IjkuOTUwMDAwMDAwMDAwMDAxIiByPSIwLjQ4IiBmaWxsPSIjMTYxMTBDIi8+PHBhdGggZD0iTTEzLjk2IDkuMzMgUTE1LjMgOC4zNCAxNi42NCA5LjMzIEwxNi42NCA4LjU1IFExNS4zIDcuNzIgMTMuOTYgOC41NSBaIiBmaWxsPSIjMTYxMTBDIi8+PHBhdGggZD0iTTExLjIgMTAuNCBDMTAuNiAxMS43IDEwLjUgMTIuNSAxMiAxMi43IEMxMy41IDEyLjUgMTMuNCAxMS43IDEyLjggMTAuNCBaIiBmaWxsPSIjQUU3NDQ4Ii8+PHBhdGggZD0iTTkuMSAxMy4zIEMxMC40IDEyLjkgMTMuNiAxMi45IDE0LjkgMTMuMyBDMTQuNCAxNS4xIDkuNiAxNS4xIDkuMSAxMy4zIFoiIGZpbGw9IiM0QTFGMTgiLz48cGF0aCBkPSJNOS42IDEzLjQ1IEMxMC44IDEzLjE1IDEzLjIgMTMuMTUgMTQuNCAxMy40NSBDMTQuMiAxMy45NSA5LjggMTMuOTUgOS42IDEzLjQ1IFoiIGZpbGw9IiNGMkVBREEiLz48cGF0aCBkPSJNMTIgMTIuNTUgQzEzLjQgMTIuNCAxNC42IDEyLjYgMTUuNCAxMy4xIEMxNC42IDEyLjIgMTMuMiAxMS45NSAxMiAxMi4yNSBDMTAuOCAxMS45NSA5LjQgMTIuMiA4LjYgMTMuMSBDOS40IDEyLjYgMTAuNiAxMi40IDEyIDEyLjU1IFoiIGZpbGw9IiM1NTQwMkMiLz48L3N2Zz4=");
+    --usflag:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA5IDYiPjxyZWN0IHdpZHRoPSIzIiBoZWlnaHQ9IjYiIGZpbGw9IiNGNUYyRUEiLz48cmVjdCB4PSIzIiB3aWR0aD0iMyIgaGVpZ2h0PSI2IiBmaWxsPSIjMDA1NUE0Ii8+PHJlY3QgeD0iNiIgd2lkdGg9IjMiIGhlaWdodD0iNiIgZmlsbD0iI0ZGQ0UwMCIvPjxyZWN0IHg9IjAuMyIgeT0iMC4zIiB3aWR0aD0iOC40IiBoZWlnaHQ9IjUuNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMGIwYjBiIiBzdHJva2Utd2lkdGg9IjAuNiIvPjwvc3ZnPg==")}
+  .us-mar{--usskin:#EFC49A}
+  .us-mar .fig.us{--skin:#EFC49A;
+    --usface:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAxNiI+PGRlZnM+PGNsaXBQYXRoIGlkPSJqYXciPjxwYXRoIGQ9Ik00LjcgNS40IEM0LjcgMS41IDcuOSAtMC40IDEyIC0wLjQgQzE2LjEgLTAuNCAxOS4zIDEuNSAxOS4zIDUuNCBMMTkuMyAxMC40IEMxOS4zIDE0LjIgMTYuMSAxNS45IDEyIDE1LjkgQzcuOSAxNS45IDQuNyAxNC4yIDQuNyAxMC40IFoiLz48L2NsaXBQYXRoPjwvZGVmcz48cGF0aCBkPSJNNC43IDUuNCBDNC43IDEuNSA3LjkgLTAuNCAxMiAtMC40IEMxNi4xIC0wLjQgMTkuMyAxLjUgMTkuMyA1LjQgTDE5LjMgMTAuNCBDMTkuMyAxNC4yIDE2LjEgMTUuOSAxMiAxNS45IEM3LjkgMTUuOSA0LjcgMTQuMiA0LjcgMTAuNCBaIiBmaWxsPSIjRUZDNDlBIi8+PHBhdGggZD0iTTIuOSA5LjQgQzIuMiAyLjggNi42IC0wLjkgMTIgLTAuOSBDMTcuNCAtMC45IDIxLjggMi44IDIxLjEgOS40IEwxOS42IDkuNCBDMTkuOSA0LjYgMTYuOCAyLjQgMTIgMi40IEM3LjIgMi40IDQuMSA0LjYgNC40IDkuNCBaIiBmaWxsPSIjQzA4QTJFIi8+PGVsbGlwc2UgY3g9IjQuMyIgY3k9IjkuNiIgcng9IjAuOTUiIHJ5PSIxLjUiIGZpbGw9IiNFRkM0OUEiLz48ZWxsaXBzZSBjeD0iMTkuNyIgY3k9IjkuNiIgcng9IjAuOTUiIHJ5PSIxLjUiIGZpbGw9IiNFRkM0OUEiLz48ZWxsaXBzZSBjeD0iNC40NSIgY3k9IjkuNiIgcng9IjAuNDIiIHJ5PSIwLjc1IiBmaWxsPSIjRDlBNTdDIi8+PGVsbGlwc2UgY3g9IjE5LjU1IiBjeT0iOS42IiByeD0iMC40MiIgcnk9IjAuNzUiIGZpbGw9IiNEOUE1N0MiLz48ZyBjbGlwLXBhdGg9InVybCgjamF3KSI+PHBhdGggZD0iTTQuNiA4LjYgQzQuNiAxNC40IDguMSAxNi40IDEyIDE2LjQgQzE1LjkgMTYuNCAxOS40IDE0LjQgMTkuNCA4LjYgTDE3LjUgOC42IEMxNy41IDEyLjkgMTUuMyAxNC4zIDEyIDE0LjMgQzguNyAxNC4zIDYuNSAxMi45IDYuNSA4LjYgWiIgZmlsbD0iI0E4NUYyNiIvPjxwYXRoIGQ9Ik03LjQgMTIuOSBDOC42IDE1LjIgMTUuNCAxNS4yIDE2LjYgMTIuOSBMMTYuNiAxNi42IEw3LjQgMTYuNiBaIiBmaWxsPSIjQTg1RjI2Ii8+PC9nPjxwYXRoIGQ9Ik02LjEgOC4wNSBROC4yMCA3LjExIDEwLjMgNy43IEwxMC4zIDguNTUgUTguMjAgOC4wMCA2LjEgOC45MCBaIiBmaWxsPSIjOTU2ODE4Ii8+PHBhdGggZD0iTTE3LjkwIDguMDUgUTE1LjgwIDcuMTEgMTMuNzAgNy43IEwxMy43MCA4LjU1IFExNS44MCA4LjAwIDE3LjkwIDguOTAgWiIgZmlsbD0iIzk1NjgxOCIvPjxlbGxpcHNlIGN4PSI4LjUiIGN5PSI5LjkiIHJ4PSIxLjMiIHJ5PSIxIiBmaWxsPSIjRUZFNEQ0Ii8+PGNpcmNsZSBjeD0iOC41IiBjeT0iOS45NTAwMDAwMDAwMDAwMDEiIHI9IjAuOTIiIGZpbGw9IiM0RTczOTAiLz48Y2lyY2xlIGN4PSI4LjUiIGN5PSI5Ljk1MDAwMDAwMDAwMDAwMSIgcj0iMC40NiIgZmlsbD0iIzIwMzAzRSIvPjxwYXRoIGQ9Ik03LjIwIDkuMzUgUTguNSA4LjQwIDkuODAgOS4zNSBMOS44MCA4LjYwIFE4LjUgNy44MCA3LjIwIDguNjAgWiIgZmlsbD0iIzIwMzAzRSIvPjxlbGxpcHNlIGN4PSIxNS41IiBjeT0iOS45IiByeD0iMS4zIiByeT0iMSIgZmlsbD0iI0VGRTRENCIvPjxjaXJjbGUgY3g9IjE1LjUiIGN5PSI5Ljk1MDAwMDAwMDAwMDAwMSIgcj0iMC45MiIgZmlsbD0iIzRFNzM5MCIvPjxjaXJjbGUgY3g9IjE1LjUiIGN5PSI5Ljk1MDAwMDAwMDAwMDAwMSIgcj0iMC40NiIgZmlsbD0iIzIwMzAzRSIvPjxwYXRoIGQ9Ik0xNC4yMCA5LjM1IFExNS41IDguNDAgMTYuODAgOS4zNSBMMTYuODAgOC42MCBRMTUuNSA3LjgwIDE0LjIwIDguNjAgWiIgZmlsbD0iIzIwMzAzRSIvPjxwYXRoIGQ9Ik0xMS4yIDEwLjYgQzEwLjYgMTIuMSAxMC41IDEyLjkgMTIgMTMuMSBDMTMuNSAxMi45IDEzLjQgMTIuMSAxMi44IDEwLjYgWiIgZmlsbD0iI0Q5QTU3QyIvPjxwYXRoIGQ9Ik0xMiAxMy4xNSBDMTAuOSAxMi44IDkuNSAxMi45NSA4LjkgMTMuNyBDOS43IDEzLjc1IDEwLjQgMTMuOTUgMTEgMTQuMiBDMTEuMzUgMTQuMzUgMTEuNyAxNC4zNSAxMiAxNC4yNSBDMTIuMyAxNC4zNSAxMi42NSAxNC4zNSAxMyAxNC4yIEMxMy42IDEzLjk1IDE0LjMgMTMuNzUgMTUuMSAxMy43IEMxNC41IDEyLjk1IDEzLjEgMTIuOCAxMiAxMy4xNSBaIiBmaWxsPSIjOEE0QTE4Ii8+PHBhdGggZD0iTTkuOSAxNC44NSBRMTIgMTUuNiAxNC4xIDE0Ljg1IFExMiAxNS4xNSA5LjkgMTQuODUgWiIgZmlsbD0iIzZFMzEyMiIvPjxwYXRoIGQ9Ik0zLjYgNy42IEMzLjMgMy4yIDYuOSAwLjYgMTIgMC42IEMxNy4xIDAuNiAyMC43IDMuMiAyMC40IDcuNiBDMTkuMyA1LjEgMTcuNCA0LjYgMTUuMiA1LjMgQzEzLjQgNS45IDEyLjkgNS4yIDExLjQgNC44IEM5LjQgNC4zIDcuMiA0LjggNi4yIDYuMSBDNS42IDUuNCA0LjYgNS42IDMuNiA3LjYgWiIgZmlsbD0iI0U0QkM2MyIvPjwvc3ZnPg==");
+    --usflag:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA5IDYiPjxyZWN0IHdpZHRoPSI5IiBoZWlnaHQ9IjIiIGZpbGw9IiNBRTFDMjgiLz48cmVjdCB5PSIyIiB3aWR0aD0iOSIgaGVpZ2h0PSIyIiBmaWxsPSIjRjVGMkVBIi8+PHJlY3QgeT0iNCIgd2lkdGg9IjkiIGhlaWdodD0iMiIgZmlsbD0iIzIxNDY4QiIvPjxyZWN0IHg9IjAuMyIgeT0iMC4zIiB3aWR0aD0iOC40IiBoZWlnaHQ9IjUuNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMGIwYjBiIiBzdHJva2Utd2lkdGg9IjAuNiIvPjwvc3ZnPg==")}
+  .us-bra{--usskin:#D9A574}
+  .us-bra .fig.us{--skin:#D9A574;
+    --usface:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAxNiI+PGRlZnM+PGNsaXBQYXRoIGlkPSJqYXciPjxwYXRoIGQ9Ik00LjcgNS40IEM0LjcgMS41IDcuOSAtMC40IDEyIC0wLjQgQzE2LjEgLTAuNCAxOS4zIDEuNSAxOS4zIDUuNCBMMTkuMyAxMC40IEMxOS4zIDE0LjIgMTYuMSAxNS45IDEyIDE1LjkgQzcuOSAxNS45IDQuNyAxNC4yIDQuNyAxMC40IFoiLz48L2NsaXBQYXRoPjwvZGVmcz48cGF0aCBkPSJNNC43IDUuNCBDNC43IDEuNSA3LjkgLTAuNCAxMiAtMC40IEMxNi4xIC0wLjQgMTkuMyAxLjUgMTkuMyA1LjQgTDE5LjMgMTAuNCBDMTkuMyAxNC4yIDE2LjEgMTUuOSAxMiAxNS45IEM3LjkgMTUuOSA0LjcgMTQuMiA0LjcgMTAuNCBaIiBmaWxsPSIjRDlBNTc0Ii8+PHBhdGggZD0iTTMuNCA5IEMyLjggMyA3IC0wLjYgMTIgLTAuNiBDMTcgLTAuNiAyMS4yIDMgMjAuNiA5IEwxOSA5IEMxOS4yIDQuNCAxNi40IDIuNCAxMiAyLjQgQzcuNiAyLjQgNC44IDQuNCA1IDkgWiIgZmlsbD0iIzRBMzUyNCIvPjxjaXJjbGUgY3g9IjYuMiIgY3k9IjMuNCIgcj0iMi41IiBmaWxsPSIjNEEzNTI0Ii8+PGNpcmNsZSBjeD0iOS40IiBjeT0iMS45IiByPSIyLjciIGZpbGw9IiM0QTM1MjQiLz48Y2lyY2xlIGN4PSIxMi44IiBjeT0iMS43IiByPSIyLjgiIGZpbGw9IiM0QTM1MjQiLz48Y2lyY2xlIGN4PSIxNi4xIiBjeT0iMi4zIiByPSIyLjYiIGZpbGw9IiM0QTM1MjQiLz48Y2lyY2xlIGN4PSIxOC42IiBjeT0iNC4yIiByPSIyLjMiIGZpbGw9IiM0QTM1MjQiLz48Y2lyY2xlIGN4PSI0LjYiIGN5PSI1LjgiIHI9IjIuMSIgZmlsbD0iIzRBMzUyNCIvPjxjaXJjbGUgY3g9IjE5LjUiIGN5PSI2LjQiIHI9IjIiIGZpbGw9IiM0QTM1MjQiLz48Y2lyY2xlIGN4PSI3LjMiIGN5PSIzLjIiIHI9IjEuMjUiIGZpbGw9IiM2RTUxMzYiLz48Y2lyY2xlIGN4PSIxMC42IiBjeT0iMi4xIiByPSIxLjM1IiBmaWxsPSIjNkU1MTM2Ii8+PGNpcmNsZSBjeD0iMTQuMiIgY3k9IjIuMiIgcj0iMS4yIiBmaWxsPSIjNkU1MTM2Ii8+PGNpcmNsZSBjeD0iMTcuMiIgY3k9IjMuNiIgcj0iMS4wNSIgZmlsbD0iIzZFNTEzNiIvPjxlbGxpcHNlIGN4PSI0LjMiIGN5PSI5LjgiIHJ4PSIwLjk1IiByeT0iMS41IiBmaWxsPSIjRDlBNTc0Ii8+PGVsbGlwc2UgY3g9IjE5LjciIGN5PSI5LjgiIHJ4PSIwLjk1IiByeT0iMS41IiBmaWxsPSIjRDlBNTc0Ii8+PGVsbGlwc2UgY3g9IjQuNDUiIGN5PSI5LjgiIHJ4PSIwLjQyIiByeT0iMC43NSIgZmlsbD0iI0JDODg1MyIvPjxlbGxpcHNlIGN4PSIxOS41NSIgY3k9IjkuOCIgcng9IjAuNDIiIHJ5PSIwLjc1IiBmaWxsPSIjQkM4ODUzIi8+PGcgY2xpcC1wYXRoPSJ1cmwoI2phdykiPjxwYXRoIGQ9Ik01LjkgMTEuMiBDNi4zIDE1LjEgOSAxNi40IDEyIDE2LjQgQzE1IDE2LjQgMTcuNyAxNS4xIDE4LjEgMTEuMiBDMTYuOSAxMy42IDE0LjcgMTQuNSAxMiAxNC41IEM5LjMgMTQuNSA3LjEgMTMuNiA1LjkgMTEuMiBaIiBmaWxsPSIjOEE2RTRFIiBvcGFjaXR5PSIuNSIvPjxwYXRoIGQ9Ik03LjIgMTMuNiBDOC42IDE1LjYgMTUuNCAxNS42IDE2LjggMTMuNiBMMTYuOCAxNi42IEw3LjIgMTYuNiBaIiBmaWxsPSIjOEE2RTRFIiBvcGFjaXR5PSIuNSIvPjwvZz48cGF0aCBkPSJNNi4zIDguMyBROC40MCA3LjMzIDEwLjUgOCBMMTAuNSA4Ljk1IFE4LjQwIDguMzMgNi4zIDkuMjUgWiIgZmlsbD0iIzJFMjAxNiIvPjxwYXRoIGQ9Ik0xNy43MCA4LjMgUTE1LjYwIDcuMzMgMTMuNTAgOCBMMTMuNTAgOC45NSBRMTUuNjAgOC4zMyAxNy43MCA5LjI1IFoiIGZpbGw9IiMyRTIwMTYiLz48ZWxsaXBzZSBjeD0iOC42IiBjeT0iMTAuMiIgcng9IjEuMjgiIHJ5PSIwLjk4IiBmaWxsPSIjRUZFNEQ0Ii8+PGNpcmNsZSBjeD0iOC42IiBjeT0iMTAuMjUiIHI9IjAuOTAiIGZpbGw9IiM0QTM1MjQiLz48Y2lyY2xlIGN4PSI4LjYiIGN5PSIxMC4yNSIgcj0iMC40NSIgZmlsbD0iIzE3MTEwQiIvPjxwYXRoIGQ9Ik03LjMyIDkuNjYgUTguNiA4LjczIDkuODggOS42NiBMOS44OCA4LjkzIFE4LjYgOC4xNCA3LjMyIDguOTMgWiIgZmlsbD0iIzE3MTEwQiIvPjxlbGxpcHNlIGN4PSIxNS40IiBjeT0iMTAuMiIgcng9IjEuMjgiIHJ5PSIwLjk4IiBmaWxsPSIjRUZFNEQ0Ii8+PGNpcmNsZSBjeD0iMTUuNCIgY3k9IjEwLjI1IiByPSIwLjkwIiBmaWxsPSIjNEEzNTI0Ii8+PGNpcmNsZSBjeD0iMTUuNCIgY3k9IjEwLjI1IiByPSIwLjQ1IiBmaWxsPSIjMTcxMTBCIi8+PHBhdGggZD0iTTE0LjEyIDkuNjYgUTE1LjQgOC43MyAxNi42OCA5LjY2IEwxNi42OCA4LjkzIFExNS40IDguMTQgMTQuMTIgOC45MyBaIiBmaWxsPSIjMTcxMTBCIi8+PHBhdGggZD0iTTExLjIgMTAuOSBDMTAuNiAxMi4zIDEwLjUgMTMuMSAxMiAxMy4zIEMxMy41IDEzLjEgMTMuNCAxMi4zIDEyLjggMTAuOSBaIiBmaWxsPSIjQkM4ODUzIi8+PHBhdGggZD0iTTEyIDEzLjI1IEMxMC44IDEyLjg1IDkuNCAxMy4wIDguOSAxMy43NSBDOS43IDEzLjggMTAuMyAxMy45NSAxMC45IDE0LjIgQzExLjMgMTQuMzUgMTEuNjUgMTQuMzUgMTIgMTQuMjUgQzEyLjM1IDE0LjM1IDEyLjcgMTQuMzUgMTMuMSAxNC4yIEMxMy43IDEzLjk1IDE0LjMgMTMuOCAxNS4xIDEzLjc1IEMxNC42IDEzLjAgMTMuMiAxMi44NSAxMiAxMy4yNSBaIiBmaWxsPSIjNDMzMDFGIi8+PHBhdGggZD0iTTEwLjEgMTUuMDUgUTEyIDE1Ljg1IDEzLjkgMTUuMDUgUTEyIDE1LjM1IDEwLjEgMTUuMDUgWiIgZmlsbD0iIzZCMzIyNiIvPjwvc3ZnPg==");
+    --usflag:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA5IDYiPjxyZWN0IHdpZHRoPSI5IiBoZWlnaHQ9IjYiIGZpbGw9IiNDMTI3MkQiLz48cG9seWdvbiBwb2ludHM9IjQuNTAsMC45NSA0Ljk2LDIuMzcgNi40NSwyLjM3IDUuMjQsMy4yNCA1LjcwLDQuNjYgNC41MCwzLjc4IDMuMzAsNC42NiAzLjc2LDMuMjQgMi41NSwyLjM3IDQuMDQsMi4zNyIgZmlsbD0iIzAwNjIzMyIvPjxyZWN0IHg9IjAuMyIgeT0iMC4zIiB3aWR0aD0iOC40IiBoZWlnaHQ9IjUuNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMGIwYjBiIiBzdHJva2Utd2lkdGg9IjAuNiIvPjwvc3ZnPg==")}
 
   /* ---------------- naming the eleven ----------------
      THE PITCH AND THE BENCH SIDE BY SIDE WHERE THERE IS ROOM. The container
@@ -18982,6 +19087,95 @@ const NAMES_KEY = "ball-names";
    and referee mode plays the first two with the third holding the phone, so
    the pair who play most sit at the top and Ale gets the third box either way. */
 const REGULARS = ["Martijn","Bram","Ale"];
+/* THE THREE OF US, WITH FACES ON. REGULARS is the same three and stays the
+   authority on which name box a man fills; this is what he looks like. The art
+   is inline rather than three more files in assets/, because nine small SVGs
+   behind a service worker is nine more chances for the offline story to be
+   wrong and assets-test has enough to police already.
+
+   ORDER IS WHERE THEY STAND, not where they are listed: the name boxes are
+   REGULARS' order and always were, this is the order on the grass. */
+const US = [
+  {k:"ale", n:"Ale", no:21, kit:"#FFE400", skin:"#C98C5C"},
+  {k:"mar", n:"Martijn", no:14, kit:"#FF5533", skin:"#EFC49A"},
+  {k:"bra", n:"Bram", no:7, kit:"#FF0000", skin:"#D9A574"},
+];
+const US_KEY = "ball2-us";
+/* TWO, BECAUSE THE PILLS SAY TWO. setupCount is offered as 2 players or 3
+   players and nothing else, so this is the app's own floor read back rather
+   than a number chosen here. */
+const US_FLOOR = 2;
+/* EVERYBODY IS UP UNTIL SOMEBODY IS NOT, which matches the count this page has
+   defaulted to since it was written. Three names, three boxes, three men. */
+function usLoad(){
+  try{
+    const v = JSON.parse(localStorage.getItem(US_KEY));
+    if(Array.isArray(v)){
+      const keep = v.filter(k => US.some(m => m.k === k));
+      /* THE FLOOR APPLIES TO WHAT COMES BACK OFF THE DISK TOO. localStorage
+         outlives the rule that wrote it, and a saved list of one would sit
+         under the floor for ever because the tap guard only stops you going
+         down, never brings you back up. */
+      if(keep.length >= US_FLOOR) return keep;
+    }
+  }catch(e){}
+  return US.map(m => m.k);
+}
+let usUp = usLoad();
+const usOn = k => usUp.indexOf(k) !== -1;
+function usRemember(){ try{ localStorage.setItem(US_KEY, JSON.stringify(usUp)); }catch(e){} }
+/* THE NAME BOXES ARE STILL THE ONLY SOURCE OF TRUTH. startGame reads them at
+   kick-off and always has, so this writes into them rather than setting up a
+   second opinion about who is playing. Typing over a name still wins.
+
+   AND THE SLOTS BEHIND THEM GET CLEARED. Writing the men who are up into the
+   first slots and stopping leaves whoever was dropped sitting in the one after,
+   which nothing reads while the count is down and everything reads the moment
+   it goes back up. */
+function usApply(){
+  const on = US.filter(m => usOn(m.k));
+  for(let i = 0; i < US.length; i++) setupNames[i] = i < on.length ? on[i].n : "";
+  setupCount = Math.max(US_FLOOR, on.length);
+}
+function usTap(k){
+  audio();
+  /* the same courtesy every other control on this page pays: whatever has been
+     typed into the boxes goes into setupNames before the re-render throws the
+     inputs away */
+  snapshotNames();
+  const at = usUp.indexOf(k);
+  /* TWO IS A QUIZ, ONE IS NOT, and the app has always said so: the count
+     control on this page offers exactly two pills, 2 players and 3 players.
+     Dropping to one would set a count nothing else here can produce and no pill
+     could light, so the second-to-last man stays up. */
+  if(at !== -1){ if(usUp.length <= US_FLOOR) return; usUp.splice(at, 1); }
+  else usUp.push(k);
+  usApply(); usRemember(); render();
+}
+/* BEHIND THE LINE, AND THE ONE YOU TAP COMES UP. The lift is a transform on the
+   figure and nothing else moves, so it costs one property and it turns itself
+   off under prefers-reduced-motion. The fingers are eight little boxes in his
+   own skin rather than a drawing, so a fourth man the day somebody else starts
+   playing costs nothing but a row in US. */
+function usStripHTML(){
+  return '<div class="usline">' +
+    '<div class="uschalk t"></div><div class="uschalk b"></div>' +
+    '<div class="usmen">' + US.map(m => {
+      const up = usOn(m.k);
+      return '<button class="uspeek us-' + m.k + (up ? ' up' : '') + '" aria-pressed="' + up + '"' +
+        ' onclick="usTap(' + JSON.stringify(m.k).replace(/"/g, "&quot;") + ')"' +
+        ' aria-label="' + esc(m.n + (up ? ", playing. Tap to sit him out." : ", sitting out. Tap to bring him on.")) + '">' +
+        '<span class="usgrip l"><i></i><i></i><i></i><i></i></span>' +
+        '<span class="usgrip r"><i></i><i></i><i></i><i></i></span>' +
+        h2FigHTML("us", m.kit, 96, m.no) +
+      '</button>';
+    }).join("") + '</div>' +
+    /* ONE VOICE. This said "us" at three and "you" at two, which is two
+       different people talking on one line. */
+    '<div class="ussay">' + esc(usUp.length === US.length ? "The three of us."
+      : usUp.length === 2 ? "Two of us." : usUp.length + " of us.") + '</div>' +
+  '</div>';
+}
 /* The order these were in before. A phone that has played already has the old
    one saved, and a saved name beats a default, so an untouched set of the old
    regulars is moved across once. Anything typed over the top is left alone. */
@@ -20855,6 +21049,7 @@ function renderSetup(st){
     </div>
 
     <div class="mm-page">
+      ${usStripHTML()}
       ${saved?`<div class="mm-sect">
         <div>
           <div class="mm-eyebrow">Where you left off</div>

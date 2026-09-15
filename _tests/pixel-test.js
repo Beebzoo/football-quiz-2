@@ -281,6 +281,27 @@ const tick = (ms = 200) => new Promise(r => setTimeout(r, ms));
   check("latin only, which is the decision rather than an oversight",
     !/silkscreen[^"]*latin-ext/.test(sw), "latin-ext crept in");
 
+  /* ---------- the touchline ----------
+     THE SAME FAILURE AS THE LEAK ABOVE, ONE FLOOR DOWN. The skin's scoping is
+     checked here because a rule that loses is silent and a browser is the only
+     thing that would say so. This is that, exactly: the app is framed down each
+     side by a touchline set inside @media (hover:hover), and a media query adds
+     NO specificity, so that rule is a bare body at (0,1). body.careermode is a
+     class at (0,1,1) and it carried a border-color of its own, left over from
+     when the frame was a sand hairline. It won. The stylesheet said green and
+     every desktop drew sand, for two commits, until somebody photographed it.
+
+     So: the body's border colour is allowed exactly one author. Any rule that
+     sets border-color on the body ELEMENT outranks the media query by
+     construction, whatever it intends to do, so the count is the assertion. */
+  console.log("\n--- the touchline has one author ---");
+  const bodyBorderColor = (html.match(/^\s*body[a-z.\-]*\{[^}]*border-color/gm) || []);
+  check("nothing outranks the touchline on its own colour",
+    bodyBorderColor.length === 0, bodyBorderColor.join(" | "));
+  check("and the touchline is still the thing setting it",
+    /body\{[^}]*border-left:3px solid var\(--touchline\)/.test(html.replace(/\s+/g, " ")),
+    "the frame stopped being a touchline");
+
   console.log("\n" + (fails ? fails + " FAILED" : "ALL PASS"));
   process.exit(fails ? 1 : 0);
 })().catch(e => { console.error(e); process.exit(1); });
