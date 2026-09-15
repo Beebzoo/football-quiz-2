@@ -702,6 +702,35 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   check("every handler that interpolates JSON escapes its quotes",
     loose.length === 0, loose.map(l => l.trim().slice(0, 70)).join(" | "));
 
+  /* ---------- putting the phone down ---------- */
+  console.log("\n--- the card is put down rather than switched off ---");
+  run(app, 'S = freshState(["Martijn","Bram"], false, "classic", 0, "pitch", true); h2Start(); ' +
+    'h2AsActor(() => { h2PickTeam("Netherlands"); h2PickTeam("Italy"); }); ' +
+    'S.h2h.tossed = true; S.h2h.who = 0; S.h2h.at = 0; ' +
+    'S.h2h.hand = {w:1, next:"h_pick", down:true}; S.phase = "h_hand"; render();');
+  await tick(120);
+  check("the handover card is up", ev(app, "S.phase") === "h_hand", ev(app, "S.phase"));
+  /* IT MEASURES THE CARD BEFORE THE RENDER, and the two things it measures with
+     are things a browser has and this harness does not. A throw there would
+     leave the match sitting on a card nobody can dismiss, so the measuring is
+     wrapped and this is the check that the wrapping holds. */
+  let threw = null;
+  try { run(app, "h2HandGo();"); } catch (e) { threw = e.message; }
+  await tick(120);
+  check("dismissing it does not need a layout to exist", threw === null, threw);
+  check("and the possession carries on", ev(app, "S.phase") === "h_pick", ev(app, "S.phase"));
+  check("with the card cleared behind it", ev(app, "S.h2h.hand") === null, "the hand is still set");
+  /* TWO TAPS, ONE GHOST. This app has left a timer running over a live screen
+     twice before, in the goal hold and in the pack reveal, so the handle being
+     singular is asserted rather than trusted. */
+  run(app, 'S.h2h.hand = {w:0, next:"h_pick", down:true}; S.phase = "h_hand"; render();');
+  await tick(60);
+  run(app, "h2HandGo(); h2HandGo();");
+  await tick(100);
+  check("tapping it twice leaves nothing behind",
+    ev(app, "h2LiftEl") === null, "a ghost is still held");
+  check("and still ends up on the next screen", ev(app, "S.phase") === "h_pick", ev(app, "S.phase"));
+
   console.log(fails ? "\n" + fails + " FAILED" : "\nall green");
   process.exit(fails ? 1 : 0);
 })();

@@ -4192,6 +4192,28 @@
      colour is how that reads, but shorter and quieter: nobody is being asked
      to pick the phone up, and a full-height shout that clears itself after a
      beat is a screen that teaches you to tap at it. */
+  /* THE CARD GOING DOWN ON THE TABLE. A copy of the card's own rectangle in its
+     own colour, left behind on the body while the next screen is drawn beneath
+     it, so the two are never seen cutting from one to the other. It travels up
+     because up is where that colour reappears: the scoreboard's stripe for this
+     side is the same h2Kit value the card was painted in.
+
+     ON THE BODY RATHER THAN ON THE CARD, because render() rebuilds the stage
+     from a string and the card does not survive the render that replaces it.
+     pointer-events:none so it cannot eat the first tap on the screen underneath,
+     which is live the whole time this is playing. */
+  .h2liftaway{position:fixed;z-index:18;pointer-events:none;border-radius:18px;
+    animation:h2liftaway .34s cubic-bezier(.35,0,.55,1) both}
+  @keyframes h2liftaway{
+    0%{opacity:1;transform:translateY(0) scale(1)}
+    55%{opacity:.7}
+    100%{opacity:0;transform:translateY(-13%) scale(.955)}
+  }
+  @media (prefers-reduced-motion: reduce){
+    /* nothing is lost by cutting: the card has already done its job by the time
+       it is dismissed, and this only ever existed to soften the seam */
+    .h2liftaway{display:none}
+  }
   .h2hand.h2wait{min-height:38vh;gap:10px}
   .h2hand.h2wait .h2handwho{font-size:clamp(1.5rem,8vw,2.2rem)}
   .h2hand.h2wait .h2handbadge{width:clamp(64px,19vw,92px);height:clamp(64px,19vw,92px)}
@@ -14893,13 +14915,54 @@ function h2Hand(w, next, down){
   S.phase = "h_hand";
   render();
 }
+/* THE CARD'S GHOST, and only ever one of them. A handover can be tapped twice
+   before the first has finished, and a second overlay with the first still
+   running leaves a coloured sheet over a live screen with nothing to take it
+   off again. */
+let h2LiftEl = null, h2LiftTimer = null;
+function h2LiftAway(box, tint){
+  try{
+    if(h2LiftTimer){ clearTimeout(h2LiftTimer); h2LiftTimer = null; }
+    if(h2LiftEl && h2LiftEl.parentNode){ h2LiftEl.parentNode.removeChild(h2LiftEl); }
+    h2LiftEl = null;
+    if(!box || !tint || !document.body) return;
+    const el = document.createElement("div");
+    el.className = "h2liftaway";
+    el.style.left = box.left + "px";  el.style.top = box.top + "px";
+    el.style.width = box.width + "px"; el.style.height = box.height + "px";
+    el.style.background = tint;
+    document.body.appendChild(el);
+    h2LiftEl = el;
+    /* the class removes itself on a timer rather than on animationend, because
+       an animation that never starts, which is what a reduced-motion display:none
+       gives you, never ends either */
+    h2LiftTimer = setTimeout(() => {
+      h2LiftTimer = null;
+      if(h2LiftEl && h2LiftEl.parentNode) h2LiftEl.parentNode.removeChild(h2LiftEl);
+      h2LiftEl = null;
+    }, 420);
+  }catch(e){ h2LiftEl = null; h2LiftTimer = null; }
+}
 function h2HandGo(){
   audio();
   const H = h2();
   const next = (H.hand && H.hand.next) || "h_pick";
+  /* MEASURED BEFORE THE RENDER, because the card is gone after it. Wrapped
+     because the test harness has a document with no layout in it, and a
+     handover that threw here would take the possession with it. */
+  let box = null, tint = null;
+  try{
+    const card = document.querySelector(".h2hand");
+    if(card && card.getBoundingClientRect){
+      const r = card.getBoundingClientRect();
+      box = {left: r.left, top: r.top, width: r.width, height: r.height};
+      tint = getComputedStyle(card).backgroundColor;
+    }
+  }catch(e){}
   H.hand = null;
   S.phase = next;
   render();
+  h2LiftAway(box, tint);
 }
 /* Tapping a man in the ATTACKER's eleven adds him to the marks or takes him
    off again, up to H2_MARKS. Nothing is committed until he taps done, so a
