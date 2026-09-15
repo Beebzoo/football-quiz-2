@@ -2,642 +2,800 @@
  "easy": [
   {
    "q": "Which club is nicknamed \"Los Merengues\"?",
-   "a": "Real Madrid"
+   "a": "Real Madrid",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"The Red Devils\"?",
-   "a": "Manchester United"
+   "a": "Manchester United",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"The Citizens\"?",
-   "a": "Manchester City"
+   "a": "Manchester City",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"The Herons\"?",
-   "a": "Inter Miami CF"
+   "a": "Inter Miami CF",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Die Bayern\"?",
-   "a": "Bayern München"
+   "a": "Bayern München",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Die Werkself\"?",
-   "a": "Bayer Leverkusen"
+   "a": "Bayer Leverkusen",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Die Schwarzgelben\"?",
-   "a": "Borussia Dortmund"
+   "a": "Borussia Dortmund",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"The Villans\"?",
-   "a": "Aston Villa"
+   "a": "Aston Villa",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"La Vecchia Signora\"?",
-   "a": "Juventus"
+   "a": "Juventus",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Rojiblancos\"?",
-   "a": "Atletico Madrid"
+   "a": "Atletico Madrid",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"The Garibaldis\"?",
-   "a": "Nottingham Forest"
+   "a": "Nottingham Forest",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Leões\"?",
-   "a": "Sporting CP"
+   "a": "Sporting CP",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"I Lariani\"?",
-   "a": "Como 1907"
+   "a": "Como 1907",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"De club aan de Maas\"?",
-   "a": "Feyenoord"
+   "a": "Feyenoord",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"As Águias\"?",
-   "a": "Benfica"
+   "a": "Benfica",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Dragões\"?",
-   "a": "FC Porto"
+   "a": "FC Porto",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"I Viola\"?",
-   "a": "Fiorentina"
+   "a": "Fiorentina",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"The Blades\"?",
-   "a": "Sheffield United"
+   "a": "Sheffield United",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Les Rouge et Blanc\"?",
-   "a": "AS Monaco"
+   "a": "AS Monaco",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Txuri-Urdin\"?",
-   "a": "Real Sociedad"
+   "a": "Real Sociedad",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"The Rs\"?",
-   "a": "Queens Park Rangers"
+   "a": "Queens Park Rangers",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Die Königsblauen\"?",
-   "a": "Schalke 04"
+   "a": "Schalke 04",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Heliopolitanos\"?",
-   "a": "Real Betis"
+   "a": "Real Betis",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"The Baggies\"?",
-   "a": "West Bromwich Albion"
+   "a": "West Bromwich Albion",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"The Black and Gold\"?",
-   "a": "Los Angeles FC"
+   "a": "Los Angeles FC",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Die Schwaben\"?",
-   "a": "VFB Stuttgart"
+   "a": "VFB Stuttgart",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"The Canaries\"?",
-   "a": "Norwich City"
+   "a": "Norwich City",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Xeneize\"?",
-   "a": "Boca Juniors"
+   "a": "Boca Juniors",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"The Potters\"?",
-   "a": "Stoke City"
+   "a": "Stoke City",
+   "cat": "records"
   }
  ],
  "normal": [
   {
    "q": "Which club is nicknamed \"The Swans\"?",
-   "a": "Swansea City"
+   "a": "Swansea City",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Die Fohlen\"?",
-   "a": "Borussia Monchengladbach"
+   "a": "Borussia Monchengladbach",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Flu\"?",
-   "a": "Fluminense"
+   "a": "Fluminense",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Die Rothosen\"?",
-   "a": "Hamburger SV"
+   "a": "Hamburger SV",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Énosi\"?",
-   "a": "Aek Athens"
+   "a": "Aek Athens",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"The Bluebirds\"?",
-   "a": "Cardiff City"
+   "a": "Cardiff City",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"The Magpies\"?",
-   "a": "Notts County"
+   "a": "Notts County",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Periquitos Blanc-i-blaus\"?",
-   "a": "Espanyol"
+   "a": "Espanyol",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"De Kaasboeren\"?",
-   "a": "AZ Alkmaar"
+   "a": "AZ Alkmaar",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Mengão\"?",
-   "a": "Flamengo"
+   "a": "Flamengo",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Los Franjirrojos\"?",
-   "a": "Rayo Vallecano"
+   "a": "Rayo Vallecano",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Metro\"?",
-   "a": "New York Red Bulls"
+   "a": "New York Red Bulls",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"The Pigeons\"?",
-   "a": "New York City FC"
+   "a": "New York City FC",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Modri\"?",
-   "a": "Dinamo Zagreb"
+   "a": "Dinamo Zagreb",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"I Friulani\"?",
-   "a": "Udinese"
+   "a": "Udinese",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Cider Army\"?",
-   "a": "Bristol City"
+   "a": "Bristol City",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Mavi Şimşekler\"?",
-   "a": "Adana Demirspor"
+   "a": "Adana Demirspor",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Galo\"?",
-   "a": "Atletico Mineiro"
+   "a": "Atletico Mineiro",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Le Racing\"?",
-   "a": "Rc Strasbourg Alsace"
+   "a": "Rc Strasbourg Alsace",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Blauw-Zwart\"?",
-   "a": "Club Brugge"
+   "a": "Club Brugge",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Die Eisernen\"?",
-   "a": "Union Berlin"
+   "a": "Union Berlin",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Abnāʾ al-Qādisiyyah\"?",
-   "a": "Al Qadsiah"
+   "a": "Al Qadsiah",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Die Werderaner\"?",
-   "a": "Werder Bremen"
+   "a": "Werder Bremen",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Ushi\"?",
-   "a": "Vissel Kobe"
+   "a": "Vissel Kobe",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Železná Sparta\"?",
-   "a": "Sparta Praha"
+   "a": "Sparta Praha",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Les Sang et Or\"?",
-   "a": "Rc Lens"
+   "a": "Rc Lens",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Die Nullfünfer\"?",
-   "a": "Mainz 05"
+   "a": "Mainz 05",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Alviverde\"?",
-   "a": "Palmeiras"
+   "a": "Palmeiras",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Die Alte Dame\"?",
-   "a": "Hertha BSC"
+   "a": "Hertha BSC",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Os Arcebispos\"?",
-   "a": "SC Braga"
+   "a": "SC Braga",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"La Lepra\"?",
-   "a": "Newells Old Boys"
+   "a": "Newells Old Boys",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Sainté\"?",
-   "a": "AS Saint Etienne"
+   "a": "AS Saint Etienne",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Bili\"?",
-   "a": "Hajduk Split"
+   "a": "Hajduk Split",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Die roten Teufel\"?",
-   "a": "FC Kaiserslautern"
+   "a": "FC Kaiserslautern",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"The Falcons\"?",
-   "a": "Emirates Club"
+   "a": "Emirates Club",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Black-and-Red\"?",
-   "a": "DC United"
+   "a": "DC United",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"The Revs\"?",
-   "a": "New England Revolution"
+   "a": "New England Revolution",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Gorritxoak\"?",
-   "a": "Osasuna"
+   "a": "Osasuna",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"De Superfriezen\"?",
-   "a": "SC Heerenveen"
+   "a": "SC Heerenveen",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Figueira\"?",
-   "a": "Figueirense"
+   "a": "Figueirense",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Recre\"?",
-   "a": "Recreativo Huelva"
+   "a": "Recreativo Huelva",
+   "cat": "records"
   }
  ],
  "hard": [
   {
    "q": "Which club is nicknamed \"The Rave Green\"?",
-   "a": "Seattle Sounders FC"
+   "a": "Seattle Sounders FC",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"I Blucerchiati\"?",
-   "a": "Sampdoria"
+   "a": "Sampdoria",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"The Pride of the IJssel\"?",
-   "a": "Go Ahead Eagles"
+   "a": "Go Ahead Eagles",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Le CFM\"?",
-   "a": "CF Montreal"
+   "a": "CF Montreal",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Die Schwoazn\"?",
-   "a": "Sturm Graz"
+   "a": "Sturm Graz",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Die Löwen\"?",
-   "a": "1860 Munich"
+   "a": "1860 Munich",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Bilo-sini\"?",
-   "a": "Dynamo Kyiv"
+   "a": "Dynamo Kyiv",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"The Men in Red\"?",
-   "a": "Chicago Fire FC"
+   "a": "Chicago Fire FC",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Imortal Tricolor\"?",
-   "a": "Gremio"
+   "a": "Gremio",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"The Terrors\"?",
-   "a": "Dundee United"
+   "a": "Dundee United",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"The Blue-and-White\"?",
-   "a": "Vancouver Whitecaps FC"
+   "a": "Vancouver Whitecaps FC",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Os Conquistadores\"?",
-   "a": "Vitoria De Guimaraes"
+   "a": "Vitoria De Guimaraes",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Albos\"?",
-   "a": "Nacional Uy"
+   "a": "Nacional Uy",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"The Quakes\"?",
-   "a": "San Jose Earthquakes"
+   "a": "San Jose Earthquakes",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"The Fishermen\"?",
-   "a": "Fleetwood Town"
+   "a": "Fleetwood Town",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Utreg\"?",
-   "a": "FC Utrecht"
+   "a": "FC Utrecht",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Les Rouge-et-Bleu\"?",
-   "a": "Paris Saint Germain"
+   "a": "Paris Saint Germain",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Les Rouches\"?",
-   "a": "Standard Liege"
+   "a": "Standard Liege",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"The Spiders\"?",
-   "a": "Queens Park FC"
+   "a": "Queens Park FC",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"PTFC\"?",
-   "a": "Portland Timbers"
+   "a": "Portland Timbers",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"El Paranaense\"?",
-   "a": "Athletico Paranaense"
+   "a": "Athletico Paranaense",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Los Maños\"?",
-   "a": "Real Zaragoza"
+   "a": "Real Zaragoza",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Manyas\"?",
-   "a": "Penarol"
+   "a": "Penarol",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"El Cacique\"?",
-   "a": "Colo Colo"
+   "a": "Colo Colo",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Trots van het Noorden\"?",
-   "a": "FC Groningen"
+   "a": "FC Groningen",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Blauwvingers\"?",
-   "a": "Pec Zwolle"
+   "a": "Pec Zwolle",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Le Club Doyen\"?",
-   "a": "Le Havre AC"
+   "a": "Le Havre AC",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Der Club\"?",
-   "a": "FC Nurnberg"
+   "a": "FC Nurnberg",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Les Grenats\"?",
-   "a": "FC Metz"
+   "a": "FC Metz",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Al Ameed\"?",
-   "a": "Al Ahli Doha"
+   "a": "Al Ahli Doha",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Tigrene\"?",
-   "a": "FC Nordsjaelland"
+   "a": "FC Nordsjaelland",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Vilacondenses\"?",
-   "a": "Rio Ave"
+   "a": "Rio Ave",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Pids\"?",
-   "a": "Colorado Rapids"
+   "a": "Colorado Rapids",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"The Аrmy Men\"?",
-   "a": "CSKA Sofia"
+   "a": "CSKA Sofia",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"De Hvii e\"?",
-   "a": "Agf Aarhus"
+   "a": "Agf Aarhus",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Big V\"?",
-   "a": "Melbourne Victory"
+   "a": "Melbourne Victory",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"De Kasteelheren\"?",
-   "a": "Sparta Rotterdam"
+   "a": "Sparta Rotterdam",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"De Residentieclub\"?",
-   "a": "Ado Den Haag"
+   "a": "Ado Den Haag",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Club of the Nation\"?",
-   "a": "Wydad"
+   "a": "Wydad",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Trójkolorowi\"?",
-   "a": "Gornik Zabrze"
+   "a": "Gornik Zabrze",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Fortunezen\"?",
-   "a": "Fortuna Sittard"
+   "a": "Fortuna Sittard",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Racinguistas\"?",
-   "a": "Racing Santander"
+   "a": "Racing Santander",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Los Pincharratas\"?",
-   "a": "Estudiantes De LA Plata"
+   "a": "Estudiantes De LA Plata",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Inter\"?",
-   "a": "Internacional"
+   "a": "Internacional",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Kolejorz\"?",
-   "a": "Lech Poznan"
+   "a": "Lech Poznan",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Sakura\"?",
-   "a": "Cerezo Osaka"
+   "a": "Cerezo Osaka",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Parel van het Zuiden\"?",
-   "a": "NAC Breda"
+   "a": "NAC Breda",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Maritimistas\"?",
-   "a": "Maritimo"
+   "a": "Maritimo",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"The Flower of Shanghai\"?",
-   "a": "Shanghai Shenhua"
+   "a": "Shanghai Shenhua",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Taishan Dui\"?",
-   "a": "Shandong Taishan"
+   "a": "Shandong Taishan",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Canalla\"?",
-   "a": "Rosario Central"
+   "a": "Rosario Central",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"KSC\"?",
-   "a": "Karlsruher"
+   "a": "Karlsruher",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"The Yellow-Blues\"?",
-   "a": "SC Cambuur"
+   "a": "SC Cambuur",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Universitarios\"?",
-   "a": "Pumas Unam"
+   "a": "Pumas Unam",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Zagrebaši\"?",
-   "a": "NK Zagreb"
+   "a": "NK Zagreb",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Lokosi\"?",
-   "a": "Lokomotiva Zagreb"
+   "a": "Lokomotiva Zagreb",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Us MVV ke\"?",
-   "a": "MVV Maastricht"
+   "a": "MVV Maastricht",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Superboeren\"?",
-   "a": "De Graafschap"
+   "a": "De Graafschap",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Widzewiacy\"?",
-   "a": "Widzew Lodz"
+   "a": "Widzew Lodz",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Les Mimos\"?",
-   "a": "Asec Mimosas"
+   "a": "Asec Mimosas",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Hanseaten\"?",
-   "a": "Hansa Rostock"
+   "a": "Hansa Rostock",
+   "cat": "records"
   }
  ],
  "ball": [],
  "extreme": [
   {
    "q": "Which club is nicknamed \"Faris Ad-Dahna\"?",
-   "a": "Al Ettifaq"
+   "a": "Al Ettifaq",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Os Branquiazuis\"?",
-   "a": "Deportivo LA Coruna"
+   "a": "Deportivo LA Coruna",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"The Red Knights\"?",
-   "a": "Al Duhail"
+   "a": "Al Duhail",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"De Kanaries\"?",
-   "a": "Sint Truidense"
+   "a": "Sint Truidense",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Verdão de Araras\"?",
-   "a": "Uniao Sao Joao"
+   "a": "Uniao Sao Joao",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Os Galgos\"?",
-   "a": "Campomaiorense"
+   "a": "Campomaiorense",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Tricolores\"?",
-   "a": "Willem Ii"
+   "a": "Willem Ii",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Crveni\"?",
-   "a": "Rnk Split"
+   "a": "Rnk Split",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"The Peregrines\"?",
-   "a": "Al Shahania"
+   "a": "Al Shahania",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Rot-Weiß\"?",
-   "a": "Kickers Offenbach"
+   "a": "Kickers Offenbach",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Die Himmelblauen\"?",
-   "a": "Chemnitzer FC"
+   "a": "Chemnitzer FC",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Pantera\"?",
-   "a": "Botafogo Sp"
+   "a": "Botafogo Sp",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Violette\"?",
-   "a": "SV Austria Salzburg"
+   "a": "SV Austria Salzburg",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Die Blauen-Götter\"?",
-   "a": "Stuttgarter Kickers"
+   "a": "Stuttgarter Kickers",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Les Tango\"?",
-   "a": "Stade Lavallois"
+   "a": "Stade Lavallois",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Zholto-Sinie\"?",
-   "a": "BATE Borisov"
+   "a": "BATE Borisov",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Di Röe\"?",
-   "a": "Helsingborgs"
+   "a": "Helsingborgs",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"De Koempels\"?",
-   "a": "Roda Jc Kerkrade"
+   "a": "Roda Jc Kerkrade",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"El Rojo Paisa\"?",
-   "a": "Independiente Medellin"
+   "a": "Independiente Medellin",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"La Gloria\"?",
-   "a": "Instituto Cordoba"
+   "a": "Instituto Cordoba",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Taiyō-Ō\"?",
-   "a": "Kashiwa Reysol"
+   "a": "Kashiwa Reysol",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Leão\"?",
-   "a": "Sport Recife"
+   "a": "Sport Recife",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"The Good Old\"?",
-   "a": "VVV Venlo"
+   "a": "VVV Venlo",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Los Morados\"?",
-   "a": "Saprissa"
+   "a": "Saprissa",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Şimşekler\"?",
-   "a": "Alanyaspor"
+   "a": "Alanyaspor",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"De Blauwwitte Draken\"?",
-   "a": "FC Den Bosch"
+   "a": "FC Den Bosch",
+   "cat": "records"
   },
   {
    "q": "Which club is nicknamed \"Los Tiburones\"?",
-   "a": "Atletico Junior"
+   "a": "Atletico Junior",
+   "cat": "records"
   }
  ]
 }

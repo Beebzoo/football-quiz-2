@@ -2,2247 +2,2806 @@
  "easy": [
   {
    "q": "Who won the Eredivisie in 2025/26?",
-   "a": "PSV Eindhoven"
+   "a": "PSV Eindhoven",
+   "cat": "champions"
   },
   {
    "q": "Who won the Eredivisie in 2024/25?",
-   "a": "PSV Eindhoven"
+   "a": "PSV Eindhoven",
+   "cat": "champions"
   },
   {
    "q": "Who won the Eredivisie in 2023/24?",
-   "a": "PSV Eindhoven"
+   "a": "PSV Eindhoven",
+   "cat": "champions"
   },
   {
    "q": "Who won the Eredivisie in 2022/23?",
-   "a": "Feyenoord Rotterdam"
+   "a": "Feyenoord Rotterdam",
+   "cat": "champions"
   },
   {
    "q": "Who won the Eredivisie in 2021/22?",
-   "a": "AFC Ajax"
+   "a": "AFC Ajax",
+   "cat": "champions"
   },
   {
    "q": "Who won the Eredivisie in 2020/21?",
-   "a": "AFC Ajax"
+   "a": "AFC Ajax",
+   "cat": "champions"
   },
   {
    "q": "Who won the Eredivisie in 2018/19?",
-   "a": "AFC Ajax"
+   "a": "AFC Ajax",
+   "cat": "champions"
   },
   {
    "q": "Who won La Liga in 2025/26?",
-   "a": "Barcelona"
+   "a": "Barcelona",
+   "cat": "champions"
   },
   {
    "q": "Who won La Liga in 2024/25?",
-   "a": "Barcelona"
+   "a": "Barcelona",
+   "cat": "champions"
   },
   {
    "q": "Who won La Liga in 2023/24?",
-   "a": "Real Madrid"
+   "a": "Real Madrid",
+   "cat": "champions"
   },
   {
    "q": "Who won La Liga in 2022/23?",
-   "a": "Barcelona"
+   "a": "Barcelona",
+   "cat": "champions"
   },
   {
    "q": "Who won La Liga in 2021/22?",
-   "a": "Real Madrid"
+   "a": "Real Madrid",
+   "cat": "champions"
   },
   {
    "q": "Who won La Liga in 2020/21?",
-   "a": "Atlético Madrid"
+   "a": "Atlético Madrid",
+   "cat": "champions"
   },
   {
    "q": "Who won La Liga in 2019/20?",
-   "a": "Real Madrid"
+   "a": "Real Madrid",
+   "cat": "champions"
   },
   {
    "q": "Who won La Liga in 2018/19?",
-   "a": "Barcelona"
+   "a": "Barcelona",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 2025/26?",
-   "a": "Arsenal"
+   "a": "Arsenal",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 2024/25?",
-   "a": "Liverpool"
+   "a": "Liverpool",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 2023/24?",
-   "a": "Manchester City"
+   "a": "Manchester City",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 2022/23?",
-   "a": "Manchester City"
+   "a": "Manchester City",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 2021/22?",
-   "a": "Manchester City"
+   "a": "Manchester City",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 2020/21?",
-   "a": "Manchester City"
+   "a": "Manchester City",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 2019/20?",
-   "a": "Liverpool"
+   "a": "Liverpool",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 2018/19?",
-   "a": "Manchester City"
+   "a": "Manchester City",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 2025/26?",
-   "a": "Bayern Munich"
+   "a": "Bayern Munich",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 2019/20?",
-   "a": "Bayern Munich"
+   "a": "Bayern Munich",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 2018/19?",
-   "a": "Bayern Munich"
+   "a": "Bayern Munich",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 2025/26?",
-   "a": "Inter Milan"
+   "a": "Inter Milan",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 2024/25?",
-   "a": "SSC Napoli"
+   "a": "SSC Napoli",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 2023/24?",
-   "a": "Inter Milan"
+   "a": "Inter Milan",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 2022/23?",
-   "a": "SSC Napoli"
+   "a": "SSC Napoli",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 2021/22?",
-   "a": "Milan"
+   "a": "Milan",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 2020/21?",
-   "a": "Inter Milan"
+   "a": "Inter Milan",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 2019/20?",
-   "a": "Juventus"
+   "a": "Juventus",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 2018/19?",
-   "a": "Juventus"
+   "a": "Juventus",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 2025/26?",
-   "a": "Paris Saint-Germain"
+   "a": "Paris Saint-Germain",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 2023/24?",
-   "a": "Paris Saint-Germain"
+   "a": "Paris Saint-Germain",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 2022/23?",
-   "a": "Paris Saint-Germain"
+   "a": "Paris Saint-Germain",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 2021/22?",
-   "a": "Paris Saint-Germain"
+   "a": "Paris Saint-Germain",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 2020/21?",
-   "a": "Lille OSC"
+   "a": "Lille OSC",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 2019/20?",
-   "a": "Paris Saint-Germain"
+   "a": "Paris Saint-Germain",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 2018/19?",
-   "a": "Paris Saint-Germain"
+   "a": "Paris Saint-Germain",
+   "cat": "champions"
   },
   {
    "q": "Who won the Primeira Liga in 2025/26?",
-   "a": "Porto"
+   "a": "Porto",
+   "cat": "champions"
   },
   {
    "q": "Who won the Primeira Liga in 2022/23?",
-   "a": "Benfica"
+   "a": "Benfica",
+   "cat": "champions"
   },
   {
    "q": "Who won the Primeira Liga in 2021/22?",
-   "a": "Porto"
+   "a": "Porto",
+   "cat": "champions"
   },
   {
    "q": "Who won the Primeira Liga in 2020/21?",
-   "a": "Sporting CP"
+   "a": "Sporting CP",
+   "cat": "champions"
   },
   {
    "q": "Who won the Champions League in 2025/26?",
-   "a": "Paris Saint-Germain"
+   "a": "Paris Saint-Germain",
+   "cat": "europe"
   },
   {
    "q": "Who won the Champions League in 2024/25?",
-   "a": "Paris Saint-Germain"
+   "a": "Paris Saint-Germain",
+   "cat": "europe"
   },
   {
    "q": "Who won the Champions League in 2023/24?",
-   "a": "Real Madrid"
+   "a": "Real Madrid",
+   "cat": "europe"
   },
   {
    "q": "Who won the Champions League in 2022/23?",
-   "a": "Manchester City"
+   "a": "Manchester City",
+   "cat": "europe"
   },
   {
    "q": "Who won the Champions League in 2021/22?",
-   "a": "Real Madrid"
+   "a": "Real Madrid",
+   "cat": "europe"
   },
   {
    "q": "Who won the Champions League in 2020/21?",
-   "a": "Chelsea"
+   "a": "Chelsea",
+   "cat": "europe"
   },
   {
    "q": "Who won the Champions League in 2019/20?",
-   "a": "Bayern Munich"
+   "a": "Bayern Munich",
+   "cat": "europe"
   },
   {
    "q": "Who won the Champions League in 2018/19?",
-   "a": "Liverpool"
+   "a": "Liverpool",
+   "cat": "europe"
   },
   {
    "q": "Who won the KNVB Cup in 2022/23?",
-   "a": "PSV Eindhoven"
+   "a": "PSV Eindhoven",
+   "cat": "cups"
   },
   {
    "q": "Who won the KNVB Cup in 2021/22?",
-   "a": "PSV Eindhoven"
+   "a": "PSV Eindhoven",
+   "cat": "cups"
   },
   {
    "q": "Who won the KNVB Cup in 2020/21?",
-   "a": "AFC Ajax"
+   "a": "AFC Ajax",
+   "cat": "cups"
   },
   {
    "q": "Who won the KNVB Cup in 2018/19?",
-   "a": "AFC Ajax"
+   "a": "AFC Ajax",
+   "cat": "cups"
   },
   {
    "q": "Who won the Copa del Rey in 2022/23?",
-   "a": "Real Madrid"
+   "a": "Real Madrid",
+   "cat": "cups"
   },
   {
    "q": "Who won the Copa del Rey in 2021/22?",
-   "a": "Real Betis Balompié"
+   "a": "Real Betis Balompié",
+   "cat": "cups"
   },
   {
    "q": "Who won the Copa del Rey in 2020/21?",
-   "a": "Barcelona"
+   "a": "Barcelona",
+   "cat": "cups"
   },
   {
    "q": "Who won the Copa del Rey in 2019/20?",
-   "a": "Real Sociedad"
+   "a": "Real Sociedad",
+   "cat": "cups"
   },
   {
    "q": "Who won the Copa del Rey in 2018/19?",
-   "a": "Valencia CF"
+   "a": "Valencia CF",
+   "cat": "cups"
   },
   {
    "q": "Which club plays its home games at Johan Cruyff Arena?",
-   "a": "AFC Ajax"
+   "a": "AFC Ajax",
+   "cat": "grounds"
   },
   {
    "q": "In which year were AFC Ajax founded?",
-   "a": "1900"
+   "a": "1900",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at De Kuip?",
-   "a": "Feyenoord Rotterdam"
+   "a": "Feyenoord Rotterdam",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Feyenoord Rotterdam founded?",
-   "a": "1908"
+   "a": "1908",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Philips Stadion?",
-   "a": "PSV Eindhoven"
+   "a": "PSV Eindhoven",
+   "cat": "grounds"
   },
   {
    "q": "In which year were PSV Eindhoven founded?",
-   "a": "1913"
+   "a": "1913",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Bernabéu?",
-   "a": "Real Madrid"
+   "a": "Real Madrid",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Real Madrid founded?",
-   "a": "1902"
+   "a": "1902",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Metropolitano Stadium?",
-   "a": "Atlético Madrid"
+   "a": "Atlético Madrid",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Atlético Madrid founded?",
-   "a": "1903"
+   "a": "1903",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Mestalla Stadium?",
-   "a": "Valencia CF"
+   "a": "Valencia CF",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Valencia CF founded?",
-   "a": "1919"
+   "a": "1919",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at San Mamés Stadium?",
-   "a": "Athletic Club"
+   "a": "Athletic Club",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Athletic Club founded?",
-   "a": "1898"
+   "a": "1898",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Ramón Sánchez Pizjuán Stadium?",
-   "a": "Sevilla"
+   "a": "Sevilla",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Sevilla founded?",
-   "a": "1905"
+   "a": "1905",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at RCDE Stadium?",
-   "a": "RCD Espanyol de Barcelona"
+   "a": "RCD Espanyol de Barcelona",
+   "cat": "grounds"
   },
   {
    "q": "In which year were RCD Espanyol de Barcelona founded?",
-   "a": "1900"
+   "a": "1900",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Estadi de Sarrià?",
-   "a": "RCD Espanyol de Barcelona"
+   "a": "RCD Espanyol de Barcelona",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Estadio de la Cerámica?",
-   "a": "Villarreal CF"
+   "a": "Villarreal CF",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Villarreal CF founded?",
-   "a": "1923"
+   "a": "1923",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Anoeta Stadium?",
-   "a": "Real Sociedad"
+   "a": "Real Sociedad",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Real Sociedad founded?",
-   "a": "1909"
+   "a": "1909",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Estadio Benito Villamarín?",
-   "a": "Real Betis Balompié"
+   "a": "Real Betis Balompié",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Real Betis Balompié founded?",
-   "a": "1907"
+   "a": "1907",
+   "cat": "records"
   },
   {
    "q": "In which year were Manchester United founded?",
-   "a": "1878"
+   "a": "1878",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Anfield?",
-   "a": "Liverpool"
+   "a": "Liverpool",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Liverpool founded?",
-   "a": "1892"
+   "a": "1892",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Emirates Stadium?",
-   "a": "Arsenal"
+   "a": "Arsenal",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Arsenal founded?",
-   "a": "1886"
+   "a": "1886",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Etihad Stadium?",
-   "a": "Manchester City"
+   "a": "Manchester City",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Manchester City founded?",
-   "a": "1894"
+   "a": "1894",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Hill Dickinson Stadium?",
-   "a": "Everton"
+   "a": "Everton",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Everton founded?",
-   "a": "1878"
+   "a": "1878",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Tottenham Hotspur Stadium?",
-   "a": "Tottenham Hotspur"
+   "a": "Tottenham Hotspur",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Tottenham Hotspur founded?",
-   "a": "1882"
+   "a": "1882",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Villa Park?",
-   "a": "Aston Villa"
+   "a": "Aston Villa",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Aston Villa founded?",
-   "a": "1874"
+   "a": "1874",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at St James’ Park?",
-   "a": "Newcastle United"
+   "a": "Newcastle United",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Newcastle United founded?",
-   "a": "1892"
+   "a": "1892",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Leicester City Stadium?",
-   "a": "Leicester City"
+   "a": "Leicester City",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Leicester City founded?",
-   "a": "1884"
+   "a": "1884",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Elland Road?",
-   "a": "Leeds United"
+   "a": "Leeds United",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Leeds United founded?",
-   "a": "1919"
+   "a": "1919",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Craven Cottage?",
-   "a": "Fulham"
+   "a": "Fulham",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Fulham founded?",
-   "a": "1879"
+   "a": "1879",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at London Stadium?",
-   "a": "West Ham United"
+   "a": "West Ham United",
+   "cat": "grounds"
   },
   {
    "q": "In which year were West Ham United founded?",
-   "a": "1895"
+   "a": "1895",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Molineux Stadium?",
-   "a": "Wolverhampton Wanderers"
+   "a": "Wolverhampton Wanderers",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Wolverhampton Wanderers founded?",
-   "a": "1877"
+   "a": "1877",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at St Mary's Stadium?",
-   "a": "Southampton"
+   "a": "Southampton",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Southampton founded?",
-   "a": "1885"
+   "a": "1885",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at The Hawthorns?",
-   "a": "West Bromwich Albion"
+   "a": "West Bromwich Albion",
+   "cat": "grounds"
   },
   {
    "q": "In which year were West Bromwich Albion founded?",
-   "a": "1878"
+   "a": "1878",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Selhurst Park?",
-   "a": "Crystal Palace"
+   "a": "Crystal Palace",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Crystal Palace founded?",
-   "a": "1905"
+   "a": "1905",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Celtic Park?",
-   "a": "Celtic"
+   "a": "Celtic",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Celtic founded?",
-   "a": "1887"
+   "a": "1887",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Liberty Stadium?",
-   "a": "Swansea City"
+   "a": "Swansea City",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Swansea City founded?",
-   "a": "1912"
+   "a": "1912",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Stadium of Light?",
-   "a": "Sunderland"
+   "a": "Sunderland",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Sunderland founded?",
-   "a": "1879"
+   "a": "1879",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at City Ground?",
-   "a": "Nottingham Forest"
+   "a": "Nottingham Forest",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Nottingham Forest founded?",
-   "a": "1865"
+   "a": "1865",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Ewood Park?",
-   "a": "Blackburn Rovers"
+   "a": "Blackburn Rovers",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Blackburn Rovers founded?",
-   "a": "1875"
+   "a": "1875",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Turf Moor?",
-   "a": "Burnley"
+   "a": "Burnley",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Burnley founded?",
-   "a": "1882"
+   "a": "1882",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Dean Court?",
-   "a": "AFC Bournemouth"
+   "a": "AFC Bournemouth",
+   "cat": "grounds"
   },
   {
    "q": "In which year were AFC Bournemouth founded?",
-   "a": "1899"
+   "a": "1899",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Ibrox Stadium?",
-   "a": "Rangers"
+   "a": "Rangers",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Rangers founded?",
-   "a": "1872"
+   "a": "1872",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Allianz Arena?",
-   "a": "Bayern Munich"
+   "a": "Bayern Munich",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Waldstadion?",
-   "a": "Eintracht Frankfurt"
+   "a": "Eintracht Frankfurt",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Westfalenstadion?",
-   "a": "Borussia Dortmund"
+   "a": "Borussia Dortmund",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at BayArena?",
-   "a": "Bayer 04 Leverkusen"
+   "a": "Bayer 04 Leverkusen",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Arena AufSchalke?",
-   "a": "Schalke 04"
+   "a": "Schalke 04",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at MHPArena?",
-   "a": "VfB Stuttgart"
+   "a": "VfB Stuttgart",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at ista-Borussia-Park?",
-   "a": "Borussia Mönchengladbach"
+   "a": "Borussia Mönchengladbach",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Weserstadion?",
-   "a": "SV Werder Bremen"
+   "a": "SV Werder Bremen",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Volkswagen Arena?",
-   "a": "VfL Wolfsburg"
+   "a": "VfL Wolfsburg",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Volksparkstadion?",
-   "a": "Hamburger SV"
+   "a": "Hamburger SV",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at RheinEnergie Stadion?",
-   "a": "1. FC Köln"
+   "a": "1. FC Köln",
+   "cat": "grounds"
   }
  ],
  "normal": [
   {
    "q": "Who won the Eredivisie in 2017/18?",
-   "a": "PSV Eindhoven"
+   "a": "PSV Eindhoven",
+   "cat": "champions"
   },
   {
    "q": "Who won the Eredivisie in 2016/17?",
-   "a": "Feyenoord Rotterdam"
+   "a": "Feyenoord Rotterdam",
+   "cat": "champions"
   },
   {
    "q": "Who won the Eredivisie in 2015/16?",
-   "a": "PSV Eindhoven"
+   "a": "PSV Eindhoven",
+   "cat": "champions"
   },
   {
    "q": "Who won the Eredivisie in 2014/15?",
-   "a": "PSV Eindhoven"
+   "a": "PSV Eindhoven",
+   "cat": "champions"
   },
   {
    "q": "Who won the Eredivisie in 2013/14?",
-   "a": "AFC Ajax"
+   "a": "AFC Ajax",
+   "cat": "champions"
   },
   {
    "q": "Who won the Eredivisie in 2012/13?",
-   "a": "AFC Ajax"
+   "a": "AFC Ajax",
+   "cat": "champions"
   },
   {
    "q": "Who won the Eredivisie in 2011/12?",
-   "a": "AFC Ajax"
+   "a": "AFC Ajax",
+   "cat": "champions"
   },
   {
    "q": "Who won the Eredivisie in 2010/11?",
-   "a": "AFC Ajax"
+   "a": "AFC Ajax",
+   "cat": "champions"
   },
   {
    "q": "Who won the Eredivisie in 2008/09?",
-   "a": "AZ Alkmaar"
+   "a": "AZ Alkmaar",
+   "cat": "champions"
   },
   {
    "q": "Who won La Liga in 2017/18?",
-   "a": "Barcelona"
+   "a": "Barcelona",
+   "cat": "champions"
   },
   {
    "q": "Who won La Liga in 2016/17?",
-   "a": "Real Madrid"
+   "a": "Real Madrid",
+   "cat": "champions"
   },
   {
    "q": "Who won La Liga in 2015/16?",
-   "a": "Barcelona"
+   "a": "Barcelona",
+   "cat": "champions"
   },
   {
    "q": "Who won La Liga in 2014/15?",
-   "a": "Barcelona"
+   "a": "Barcelona",
+   "cat": "champions"
   },
   {
    "q": "Who won La Liga in 2012/13?",
-   "a": "Barcelona"
+   "a": "Barcelona",
+   "cat": "champions"
   },
   {
    "q": "Who won La Liga in 2009/10?",
-   "a": "Barcelona"
+   "a": "Barcelona",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 2017/18?",
-   "a": "Manchester City"
+   "a": "Manchester City",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 2016/17?",
-   "a": "Chelsea"
+   "a": "Chelsea",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 2015/16?",
-   "a": "Leicester City"
+   "a": "Leicester City",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 2014/15?",
-   "a": "Chelsea"
+   "a": "Chelsea",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 2013/14?",
-   "a": "Manchester City"
+   "a": "Manchester City",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 2012/13?",
-   "a": "Manchester United"
+   "a": "Manchester United",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 2011/12?",
-   "a": "Manchester City"
+   "a": "Manchester City",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 2010/11?",
-   "a": "Manchester United"
+   "a": "Manchester United",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 2009/10?",
-   "a": "Chelsea"
+   "a": "Chelsea",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 2008/09?",
-   "a": "Manchester United"
+   "a": "Manchester United",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 2024/25?",
-   "a": "Bayern Munich"
+   "a": "Bayern Munich",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 2023/24?",
-   "a": "Bayer 04 Leverkusen"
+   "a": "Bayer 04 Leverkusen",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 2022/23?",
-   "a": "Bayern Munich"
+   "a": "Bayern Munich",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 2021/22?",
-   "a": "Bayern Munich"
+   "a": "Bayern Munich",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 2020/21?",
-   "a": "Bayern Munich"
+   "a": "Bayern Munich",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 2017/18?",
-   "a": "Bayern Munich"
+   "a": "Bayern Munich",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 2016/17?",
-   "a": "Bayern Munich"
+   "a": "Bayern Munich",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 2015/16?",
-   "a": "Bayern Munich"
+   "a": "Bayern Munich",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 2014/15?",
-   "a": "Bayern Munich"
+   "a": "Bayern Munich",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 2013/14?",
-   "a": "Bayern Munich"
+   "a": "Bayern Munich",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 2011/12?",
-   "a": "Borussia Dortmund"
+   "a": "Borussia Dortmund",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 2009/10?",
-   "a": "Bayern Munich"
+   "a": "Bayern Munich",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 2017/18?",
-   "a": "Juventus"
+   "a": "Juventus",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 2016/17?",
-   "a": "Juventus"
+   "a": "Juventus",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 2015/16?",
-   "a": "Juventus"
+   "a": "Juventus",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 2014/15?",
-   "a": "Juventus"
+   "a": "Juventus",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 2013/14?",
-   "a": "Juventus"
+   "a": "Juventus",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 2011/12?",
-   "a": "Juventus"
+   "a": "Juventus",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 2009/10?",
-   "a": "Inter Milan"
+   "a": "Inter Milan",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 2017/18?",
-   "a": "Paris Saint-Germain"
+   "a": "Paris Saint-Germain",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 2016/17?",
-   "a": "Monaco"
+   "a": "Monaco",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 2015/16?",
-   "a": "Paris Saint-Germain"
+   "a": "Paris Saint-Germain",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 2014/15?",
-   "a": "Paris Saint-Germain"
+   "a": "Paris Saint-Germain",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 2013/14?",
-   "a": "Paris Saint-Germain"
+   "a": "Paris Saint-Germain",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 2012/13?",
-   "a": "Paris Saint-Germain"
+   "a": "Paris Saint-Germain",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 2010/11?",
-   "a": "Lille OSC"
+   "a": "Lille OSC",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 2008/09?",
-   "a": "Girondins de Bordeaux"
+   "a": "Girondins de Bordeaux",
+   "cat": "champions"
   },
   {
    "q": "Who won the Primeira Liga in 2018/19?",
-   "a": "Benfica"
+   "a": "Benfica",
+   "cat": "champions"
   },
   {
    "q": "Who won the Primeira Liga in 2017/18?",
-   "a": "Porto"
+   "a": "Porto",
+   "cat": "champions"
   },
   {
    "q": "Who won the Primeira Liga in 2012/13?",
-   "a": "Porto"
+   "a": "Porto",
+   "cat": "champions"
   },
   {
    "q": "Who won the Primeira Liga in 2011/12?",
-   "a": "Porto"
+   "a": "Porto",
+   "cat": "champions"
   },
   {
    "q": "Who won the Primeira Liga in 2009/10?",
-   "a": "Benfica"
+   "a": "Benfica",
+   "cat": "champions"
   },
   {
    "q": "Who won the Champions League in 2017/18?",
-   "a": "Real Madrid"
+   "a": "Real Madrid",
+   "cat": "europe"
   },
   {
    "q": "Who won the Champions League in 2016/17?",
-   "a": "Real Madrid"
+   "a": "Real Madrid",
+   "cat": "europe"
   },
   {
    "q": "Who won the Champions League in 2015/16?",
-   "a": "Real Madrid"
+   "a": "Real Madrid",
+   "cat": "europe"
   },
   {
    "q": "Who won the Champions League in 2014/15?",
-   "a": "Barcelona"
+   "a": "Barcelona",
+   "cat": "europe"
   },
   {
    "q": "Who won the Champions League in 2013/14?",
-   "a": "Real Madrid"
+   "a": "Real Madrid",
+   "cat": "europe"
   },
   {
    "q": "Who won the Champions League in 2011/12?",
-   "a": "Chelsea"
+   "a": "Chelsea",
+   "cat": "europe"
   },
   {
    "q": "Who won the Champions League in 2009/10?",
-   "a": "Inter Milan"
+   "a": "Inter Milan",
+   "cat": "europe"
   },
   {
    "q": "Who won the KNVB Cup in 2017/18?",
-   "a": "Feyenoord Rotterdam"
+   "a": "Feyenoord Rotterdam",
+   "cat": "cups"
   },
   {
    "q": "Who won the KNVB Cup in 2016/17?",
-   "a": "SBV Vitesse"
+   "a": "SBV Vitesse",
+   "cat": "cups"
   },
   {
    "q": "Who won the KNVB Cup in 2015/16?",
-   "a": "Feyenoord Rotterdam"
+   "a": "Feyenoord Rotterdam",
+   "cat": "cups"
   },
   {
    "q": "Who won the KNVB Cup in 2014/15?",
-   "a": "Groningen"
+   "a": "Groningen",
+   "cat": "cups"
   },
   {
    "q": "Who won the KNVB Cup in 2013/14?",
-   "a": "PEC Zwolle"
+   "a": "PEC Zwolle",
+   "cat": "cups"
   },
   {
    "q": "Who won the KNVB Cup in 2012/13?",
-   "a": "AZ Alkmaar"
+   "a": "AZ Alkmaar",
+   "cat": "cups"
   },
   {
    "q": "Who won the KNVB Cup in 2011/12?",
-   "a": "PSV Eindhoven"
+   "a": "PSV Eindhoven",
+   "cat": "cups"
   },
   {
    "q": "Who won the KNVB Cup in 2010/11?",
-   "a": "Twente"
+   "a": "Twente",
+   "cat": "cups"
   },
   {
    "q": "Who won the Copa del Rey in 2017/18?",
-   "a": "Barcelona"
+   "a": "Barcelona",
+   "cat": "cups"
   },
   {
    "q": "Who won the Copa del Rey in 2016/17?",
-   "a": "Barcelona"
+   "a": "Barcelona",
+   "cat": "cups"
   },
   {
    "q": "Who won the Copa del Rey in 2015/16?",
-   "a": "Barcelona"
+   "a": "Barcelona",
+   "cat": "cups"
   },
   {
    "q": "Who won the Copa del Rey in 2014/15?",
-   "a": "Barcelona"
+   "a": "Barcelona",
+   "cat": "cups"
   },
   {
    "q": "Who won the Copa del Rey in 2013/14?",
-   "a": "Real Madrid"
+   "a": "Real Madrid",
+   "cat": "cups"
   },
   {
    "q": "Who won the Copa del Rey in 2012/13?",
-   "a": "Atlético Madrid"
+   "a": "Atlético Madrid",
+   "cat": "cups"
   },
   {
    "q": "Who won the Copa del Rey in 2011/12?",
-   "a": "Barcelona"
+   "a": "Barcelona",
+   "cat": "cups"
   },
   {
    "q": "Who won the Copa del Rey in 2010/11?",
-   "a": "Real Madrid"
+   "a": "Real Madrid",
+   "cat": "cups"
   },
   {
    "q": "Who won the Copa del Rey in 2009/10?",
-   "a": "Sevilla"
+   "a": "Sevilla",
+   "cat": "cups"
   },
   {
    "q": "Who won the Copa del Rey in 2008/09?",
-   "a": "Barcelona"
+   "a": "Barcelona",
+   "cat": "cups"
   },
   {
    "q": "Which club plays its home games at De Grolsch Veste?",
-   "a": "Twente"
+   "a": "Twente",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Twente founded?",
-   "a": "1965"
+   "a": "1965",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at AFAS Stadion?",
-   "a": "AZ Alkmaar"
+   "a": "AZ Alkmaar",
+   "cat": "grounds"
   },
   {
    "q": "In which year were AZ Alkmaar founded?",
-   "a": "1967"
+   "a": "1967",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Euroborg?",
-   "a": "Groningen"
+   "a": "Groningen",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Groningen founded?",
-   "a": "1971"
+   "a": "1971",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Abe Lenstra Stadion?",
-   "a": "SC Heerenveen"
+   "a": "SC Heerenveen",
+   "cat": "grounds"
   },
   {
    "q": "In which year were SC Heerenveen founded?",
-   "a": "1920"
+   "a": "1920",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Sparta Stadion Het Kasteel?",
-   "a": "Sparta Rotterdam"
+   "a": "Sparta Rotterdam",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Sparta Rotterdam founded?",
-   "a": "1888"
+   "a": "1888",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at GelreDome?",
-   "a": "SBV Vitesse"
+   "a": "SBV Vitesse",
+   "cat": "grounds"
   },
   {
    "q": "In which year were SBV Vitesse founded?",
-   "a": "1892"
+   "a": "1892",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Klarenbeek?",
-   "a": "SBV Vitesse"
+   "a": "SBV Vitesse",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Stadion Galgenwaard?",
-   "a": "Utrecht"
+   "a": "Utrecht",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Utrecht founded?",
-   "a": "1970"
+   "a": "1970",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at WerkTalent Stadion?",
-   "a": "ADO Den Haag"
+   "a": "ADO Den Haag",
+   "cat": "grounds"
   },
   {
    "q": "In which year were ADO Den Haag founded?",
-   "a": "1905"
+   "a": "1905",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Abanca Balaídos Stadium?",
-   "a": "Celta de Vigo"
+   "a": "Celta de Vigo",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Celta de Vigo founded?",
-   "a": "1923"
+   "a": "1923",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Estadio Municipal de Abanca Riazor?",
-   "a": "Deportivo de A Coruña"
+   "a": "Deportivo de A Coruña",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Deportivo de A Coruña founded?",
-   "a": "1906"
+   "a": "1906",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Campo de Fútbol de Vallecas?",
-   "a": "Rayo Vallecano"
+   "a": "Rayo Vallecano",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Rayo Vallecano founded?",
-   "a": "1924"
+   "a": "1924",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Estadi Ciutat de València?",
-   "a": "Levante UD"
+   "a": "Levante UD",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Levante UD founded?",
-   "a": "1909"
+   "a": "1909",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Estadi Mallorca Son Moix?",
-   "a": "RCD Mallorca"
+   "a": "RCD Mallorca",
+   "cat": "grounds"
   },
   {
    "q": "In which year were RCD Mallorca founded?",
-   "a": "1916"
+   "a": "1916",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at El Sadar Stadium?",
-   "a": "Club Atlético Osasuna"
+   "a": "Club Atlético Osasuna",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Club Atlético Osasuna founded?",
-   "a": "1920"
+   "a": "1920",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Estadio Coliseum?",
-   "a": "Getafe CF"
+   "a": "Getafe CF",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Getafe CF founded?",
-   "a": "1983"
+   "a": "1983",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Estadio Nuevo Los Cármeness?",
-   "a": "Granada CF"
+   "a": "Granada CF",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Granada CF founded?",
-   "a": "1931"
+   "a": "1931",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at La Rosaleda Stadium?",
-   "a": "Málaga CF"
+   "a": "Málaga CF",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Málaga CF founded?",
-   "a": "1904"
+   "a": "1904",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at La Romareda?",
-   "a": "Real Zaragoza"
+   "a": "Real Zaragoza",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Real Zaragoza founded?",
-   "a": "1932"
+   "a": "1932",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Estadio Torrero?",
-   "a": "Real Zaragoza"
+   "a": "Real Zaragoza",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Ibercaja Stadium?",
-   "a": "Real Zaragoza"
+   "a": "Real Zaragoza",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at New Stadium La Romareda?",
-   "a": "Real Zaragoza"
+   "a": "Real Zaragoza",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Estadio Nuevo José Zorrilla?",
-   "a": "Real Valladolid"
+   "a": "Real Valladolid",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Real Valladolid founded?",
-   "a": "1928"
+   "a": "1928",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Estadio Multiusos de San Lázaro?",
-   "a": "SD Compostela"
+   "a": "SD Compostela",
+   "cat": "grounds"
   },
   {
    "q": "In which year were SD Compostela founded?",
-   "a": "1928"
+   "a": "1928",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Montilivi Stadium?",
-   "a": "Girona"
+   "a": "Girona",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Girona founded?",
-   "a": "1930"
+   "a": "1930",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at El Molinón-Enrique Castro Quini?",
-   "a": "Sporting de Gijón"
+   "a": "Sporting de Gijón",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Sporting de Gijón founded?",
-   "a": "1905"
+   "a": "1905",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Mendizorrotza Stadium?",
-   "a": "Deportivo Alavés"
+   "a": "Deportivo Alavés",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Deportivo Alavés founded?",
-   "a": "1921"
+   "a": "1921",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Campos de Sport de El Sardinero?",
-   "a": "Racing de Santander"
+   "a": "Racing de Santander",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Racing de Santander founded?",
-   "a": "1913"
+   "a": "1913",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Estadio de los Juegos Mediterraneos?",
-   "a": "Unión Deportiva Almería"
+   "a": "Unión Deportiva Almería",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Unión Deportiva Almería founded?",
-   "a": "1989"
+   "a": "1989",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Estadio Manuel Martínez Valero?",
-   "a": "Elche CF"
+   "a": "Elche CF",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Elche CF founded?",
-   "a": "1923"
+   "a": "1923",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Gran Canaria Stadium?",
-   "a": "UD Las Palmas"
+   "a": "UD Las Palmas",
+   "cat": "grounds"
   },
   {
    "q": "In which year were UD Las Palmas founded?",
-   "a": "1949"
+   "a": "1949",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Estadio Heliodoro Rodríguez López?",
-   "a": "C.D. Tenerife"
+   "a": "C.D. Tenerife",
+   "cat": "grounds"
   },
   {
    "q": "In which year were C.D. Tenerife founded?",
-   "a": "1922"
+   "a": "1922",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Ipurúa Municipal Stadium?",
-   "a": "SD Eibar"
+   "a": "SD Eibar",
+   "cat": "grounds"
   },
   {
    "q": "In which year were SD Eibar founded?",
-   "a": "1940"
+   "a": "1940",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Estadio Nuevo Mirandilla?",
-   "a": "Cádiz"
+   "a": "Cádiz",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Cádiz founded?",
-   "a": "1910"
+   "a": "1910",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Estadio Municipal de Butarque?",
-   "a": "CD Leganés"
+   "a": "CD Leganés",
+   "cat": "grounds"
   },
   {
    "q": "In which year were CD Leganés founded?",
-   "a": "1928"
+   "a": "1928",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Carlos Tartiere Stadium?",
-   "a": "Real Oviedo"
+   "a": "Real Oviedo",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Real Oviedo founded?",
-   "a": "1926"
+   "a": "1926",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Britannia Stadium?",
-   "a": "Stoke City"
+   "a": "Stoke City",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Stoke City founded?",
-   "a": "1863"
+   "a": "1863",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Vicarage Road?",
-   "a": "Watford"
+   "a": "Watford",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Watford founded?",
-   "a": "1881"
+   "a": "1881",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at St Andrew's?",
-   "a": "Birmingham City"
+   "a": "Birmingham City",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Birmingham City founded?",
-   "a": "1875"
+   "a": "1875",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Brighton Community Stadium?",
-   "a": "Brighton & Hove Albion"
+   "a": "Brighton & Hove Albion",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Brighton & Hove Albion founded?",
-   "a": "1901"
+   "a": "1901",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Riverside Stadium?",
-   "a": "Middlesbrough"
+   "a": "Middlesbrough",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Middlesbrough founded?",
-   "a": "1876"
+   "a": "1876",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Cardiff City Stadium?",
-   "a": "Cardiff City"
+   "a": "Cardiff City",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Cardiff City founded?",
-   "a": "1899"
+   "a": "1899",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Carrow Road?",
-   "a": "Norwich City"
+   "a": "Norwich City",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Norwich City founded?",
-   "a": "1902"
+   "a": "1902",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Toughsheet Community Stadium?",
-   "a": "Bolton Wanderers"
+   "a": "Bolton Wanderers",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Bolton Wanderers founded?",
-   "a": "1874"
+   "a": "1874",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Kiyan Prince Foundation Stadium?",
-   "a": "Queens Park Rangers"
+   "a": "Queens Park Rangers",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Queens Park Rangers founded?",
-   "a": "1882"
+   "a": "1882",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at DW Stadium?",
-   "a": "Wigan Athletic"
+   "a": "Wigan Athletic",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Wigan Athletic founded?",
-   "a": "1932"
+   "a": "1932",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at MKM Stadium?",
-   "a": "Hull City"
+   "a": "Hull City",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Hull City founded?",
-   "a": "1904"
+   "a": "1904",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Portman Road?",
-   "a": "Ipswich Town"
+   "a": "Ipswich Town",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Ipswich Town founded?",
-   "a": "1878"
+   "a": "1878",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Madejski Stadium?",
-   "a": "Reading"
+   "a": "Reading",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Reading founded?",
-   "a": "1871"
+   "a": "1871",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Bramall Lane?",
-   "a": "Sheffield United"
+   "a": "Sheffield United",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Sheffield United founded?",
-   "a": "1889"
+   "a": "1889",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Griffin Park?",
-   "a": "Brentford"
+   "a": "Brentford",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Brentford founded?",
-   "a": "1889"
+   "a": "1889",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Pride Park Stadium?",
-   "a": "Derby County"
+   "a": "Derby County",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Derby County founded?",
-   "a": "1884"
+   "a": "1884",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Pittodrie Stadium?",
-   "a": "Aberdeen"
+   "a": "Aberdeen",
+   "cat": "grounds"
   },
   {
    "q": "In which year were Aberdeen founded?",
-   "a": "1903"
+   "a": "1903",
+   "cat": "records"
   },
   {
    "q": "Which club plays its home games at Kirklees Stadium?",
-   "a": "Huddersfield Town"
+   "a": "Huddersfield Town",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Fratton Park?",
-   "a": "Portsmouth"
+   "a": "Portsmouth",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Coventry Building Society Arena?",
-   "a": "Coventry City"
+   "a": "Coventry City",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at WWK Arena?",
-   "a": "Augsburg"
+   "a": "Augsburg",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Berlin Olympic Stadium?",
-   "a": "Hertha BSC"
+   "a": "Hertha BSC",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at SNP Arena?",
-   "a": "TSG 1899 Hoffenheim"
+   "a": "TSG 1899 Hoffenheim",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Red Bull Arena?",
-   "a": "RB Leipzig"
+   "a": "RB Leipzig",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Dreisamstadion?",
-   "a": "SC Freiburg"
+   "a": "SC Freiburg",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Europa-Park-Stadion?",
-   "a": "SC Freiburg"
+   "a": "SC Freiburg",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Niedersachsenstadion?",
-   "a": "Hannover 96"
+   "a": "Hannover 96",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Stadion An der Alten Försterei?",
-   "a": "1. FC Union Berlin"
+   "a": "1. FC Union Berlin",
+   "cat": "grounds"
   }
  ],
  "hard": [
   {
    "q": "Who won La Liga in 2007/08?",
-   "a": "Real Madrid"
+   "a": "Real Madrid",
+   "cat": "champions"
   },
   {
    "q": "Who won La Liga in 2004/05?",
-   "a": "Barcelona"
+   "a": "Barcelona",
+   "cat": "champions"
   },
   {
    "q": "Who won La Liga in 2002/03?",
-   "a": "Real Madrid"
+   "a": "Real Madrid",
+   "cat": "champions"
   },
   {
    "q": "Who won La Liga in 1999/00?",
-   "a": "Deportivo de A Coruña"
+   "a": "Deportivo de A Coruña",
+   "cat": "champions"
   },
   {
    "q": "Who won La Liga in 1997/98?",
-   "a": "Barcelona"
+   "a": "Barcelona",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 2007/08?",
-   "a": "Manchester United"
+   "a": "Manchester United",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 2006/07?",
-   "a": "Manchester United"
+   "a": "Manchester United",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 2005/06?",
-   "a": "Chelsea"
+   "a": "Chelsea",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 2004/05?",
-   "a": "Chelsea"
+   "a": "Chelsea",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 2003/04?",
-   "a": "Arsenal"
+   "a": "Arsenal",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 2002/03?",
-   "a": "Manchester United"
+   "a": "Manchester United",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 2001/02?",
-   "a": "Arsenal"
+   "a": "Arsenal",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 2000/01?",
-   "a": "Manchester United"
+   "a": "Manchester United",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 1999/00?",
-   "a": "Manchester United"
+   "a": "Manchester United",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 1998/99?",
-   "a": "Manchester United"
+   "a": "Manchester United",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 1997/98?",
-   "a": "Arsenal"
+   "a": "Arsenal",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 1996/97?",
-   "a": "Manchester United"
+   "a": "Manchester United",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 2007/08?",
-   "a": "Bayern Munich"
+   "a": "Bayern Munich",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 2004/05?",
-   "a": "Bayern Munich"
+   "a": "Bayern Munich",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 2002/03?",
-   "a": "Bayern Munich"
+   "a": "Bayern Munich",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 2000/01?",
-   "a": "Bayern Munich"
+   "a": "Bayern Munich",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 1997/98?",
-   "a": "1. FC Kaiserslautern"
+   "a": "1. FC Kaiserslautern",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 2006/07?",
-   "a": "Inter Milan"
+   "a": "Inter Milan",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 2004/05?",
-   "a": "Juventus"
+   "a": "Juventus",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 2001/02?",
-   "a": "Juventus"
+   "a": "Juventus",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 1999/00?",
-   "a": "Lazio"
+   "a": "Lazio",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 1996/97?",
-   "a": "Juventus"
+   "a": "Juventus",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 2005/06?",
-   "a": "Olympique Lyonnais"
+   "a": "Olympique Lyonnais",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 2003/04?",
-   "a": "Olympique Lyonnais"
+   "a": "Olympique Lyonnais",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 2000/01?",
-   "a": "Nantes"
+   "a": "Nantes",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 1998/99?",
-   "a": "Girondins de Bordeaux"
+   "a": "Girondins de Bordeaux",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 1996/97?",
-   "a": "Monaco"
+   "a": "Monaco",
+   "cat": "champions"
   },
   {
    "q": "Who won the Primeira Liga in 2016/17?",
-   "a": "Benfica"
+   "a": "Benfica",
+   "cat": "champions"
   },
   {
    "q": "Who won the Primeira Liga in 2015/16?",
-   "a": "Benfica"
+   "a": "Benfica",
+   "cat": "champions"
   },
   {
    "q": "Who won the Primeira Liga in 2014/15?",
-   "a": "Benfica"
+   "a": "Benfica",
+   "cat": "champions"
   },
   {
    "q": "Who won the Primeira Liga in 2013/14?",
-   "a": "Benfica"
+   "a": "Benfica",
+   "cat": "champions"
   },
   {
    "q": "Who won the Primeira Liga in 2007/08?",
-   "a": "Porto"
+   "a": "Porto",
+   "cat": "champions"
   },
   {
    "q": "Who won the Primeira Liga in 2006/07?",
-   "a": "Porto"
+   "a": "Porto",
+   "cat": "champions"
   },
   {
    "q": "Who won the Primeira Liga in 2003/04?",
-   "a": "Porto"
+   "a": "Porto",
+   "cat": "champions"
   },
   {
    "q": "Who won the Primeira Liga in 2002/03?",
-   "a": "Porto"
+   "a": "Porto",
+   "cat": "champions"
   },
   {
    "q": "Who won the Primeira Liga in 2001/02?",
-   "a": "Sporting CP"
+   "a": "Sporting CP",
+   "cat": "champions"
   },
   {
    "q": "Who won the Primeira Liga in 2000/01?",
-   "a": "Boavista"
+   "a": "Boavista",
+   "cat": "champions"
   },
   {
    "q": "Who won the Primeira Liga in 1999/00?",
-   "a": "Sporting CP"
+   "a": "Sporting CP",
+   "cat": "champions"
   },
   {
    "q": "Who won the Primeira Liga in 1998/99?",
-   "a": "Porto"
+   "a": "Porto",
+   "cat": "champions"
   },
   {
    "q": "Who won the Primeira Liga in 1996/97?",
-   "a": "Porto"
+   "a": "Porto",
+   "cat": "champions"
   },
   {
    "q": "Who won the Champions League in 2006/07?",
-   "a": "Milan"
+   "a": "Milan",
+   "cat": "europe"
   },
   {
    "q": "Who won the Champions League in 2004/05?",
-   "a": "Liverpool"
+   "a": "Liverpool",
+   "cat": "europe"
   },
   {
    "q": "Who won the Champions League in 2001/02?",
-   "a": "Real Madrid"
+   "a": "Real Madrid",
+   "cat": "europe"
   },
   {
    "q": "Who won the Champions League in 1999/00?",
-   "a": "Real Madrid"
+   "a": "Real Madrid",
+   "cat": "europe"
   },
   {
    "q": "Who won the Champions League in 1996/97?",
-   "a": "Borussia Dortmund"
+   "a": "Borussia Dortmund",
+   "cat": "europe"
   },
   {
    "q": "Who won the Copa del Rey in 2007/08?",
-   "a": "Valencia CF"
+   "a": "Valencia CF",
+   "cat": "cups"
   },
   {
    "q": "Who won the Copa del Rey in 2006/07?",
-   "a": "Sevilla"
+   "a": "Sevilla",
+   "cat": "cups"
   },
   {
    "q": "Who won the Copa del Rey in 2005/06?",
-   "a": "RCD Espanyol de Barcelona"
+   "a": "RCD Espanyol de Barcelona",
+   "cat": "cups"
   },
   {
    "q": "Who won the Copa del Rey in 2002/03?",
-   "a": "RCD Mallorca"
+   "a": "RCD Mallorca",
+   "cat": "cups"
   },
   {
    "q": "Who won the Copa del Rey in 2000/01?",
-   "a": "Real Zaragoza"
+   "a": "Real Zaragoza",
+   "cat": "cups"
   },
   {
    "q": "Which club plays its home games at Asito Stadion?",
-   "a": "Heracles Almelo"
+   "a": "Heracles Almelo",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Stadion de Goffert?",
-   "a": "N.E.C."
+   "a": "N.E.C.",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at MAC³PARK stadion?",
-   "a": "PEC Zwolle"
+   "a": "PEC Zwolle",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at De Adelaarshorst?",
-   "a": "Go Ahead Eagles"
+   "a": "Go Ahead Eagles",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Mandemakers Stadion?",
-   "a": "RKC Waalwijk"
+   "a": "RKC Waalwijk",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Stadion Woudestein?",
-   "a": "Excelsior Rotterdam"
+   "a": "Excelsior Rotterdam",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at De Koel?",
-   "a": "VVV-Venlo"
+   "a": "VVV-Venlo",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Parkstad Limburg Stadion?",
-   "a": "Roda JC Kerkrade"
+   "a": "Roda JC Kerkrade",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at De Vijverberg?",
-   "a": "De Graafschap"
+   "a": "De Graafschap",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Rat Verlegh Stadion?",
-   "a": "NAC Breda"
+   "a": "NAC Breda",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at De Oude Meerdijk?",
-   "a": "Emmen"
+   "a": "Emmen",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Cambuur Stadion?",
-   "a": "SC Cambuur"
+   "a": "SC Cambuur",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Kras Stadion?",
-   "a": "Volendam"
+   "a": "Volendam",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Yanmar Stadion?",
-   "a": "Almere City"
+   "a": "Almere City",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Estadio El Alcoraz?",
-   "a": "Sociedad Deportiva Huesca"
+   "a": "Sociedad Deportiva Huesca",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Estadio José Rico Pérez?",
-   "a": "Hércules CF"
+   "a": "Hércules CF",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Johan Cruijff Stadium?",
-   "a": "Barcelona Atlètic"
+   "a": "Barcelona Atlètic",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Estadio Nuevo Arcángel?",
-   "a": "Córdoba CF"
+   "a": "Córdoba CF",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Estadio Nuevo Colombino?",
-   "a": "Recreativo de Huelva"
+   "a": "Recreativo de Huelva",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Nuevo Estadio Los Pajaritos?",
-   "a": "Club Deportivo Numancia de Soria"
+   "a": "Club Deportivo Numancia de Soria",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Estadio Carlos Belmonte?",
-   "a": "Albacete Balompié"
+   "a": "Albacete Balompié",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Estadio Anxo Carro?",
-   "a": "Club Deportivo Lugo"
+   "a": "Club Deportivo Lugo",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Estadio Nueva Condomina?",
-   "a": "Real Murcia"
+   "a": "Real Murcia",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Estadio Municipal de Chapín?",
-   "a": "Xerez C.D."
+   "a": "Xerez C.D.",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Nou Estadi Costa Daurada?",
-   "a": "Gimnàstic de Tarragona"
+   "a": "Gimnàstic de Tarragona",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Nou Estadi Castalia?",
-   "a": "CD Castellón"
+   "a": "CD Castellón",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Estadio Municipal de Anduva?",
-   "a": "CD Mirandés"
+   "a": "CD Mirandés",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Estadio Reino de León?",
-   "a": "Cultural y Deportiva Leonesa"
+   "a": "Cultural y Deportiva Leonesa",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Estadio El Helmántico?",
-   "a": "UD Salamanca"
+   "a": "UD Salamanca",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Estadio Municipal de Santo Domingo?",
-   "a": "AD Alcorcón"
+   "a": "AD Alcorcón",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Stadium Gal?",
-   "a": "Real Unión"
+   "a": "Real Unión",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Estadio Cartagonova?",
-   "a": "Cartagena"
+   "a": "Cartagena",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Miniestadi?",
-   "a": "Barcelona C"
+   "a": "Barcelona C",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Estadi de la Nova Creu Alta?",
-   "a": "Centre d'Esports Sabadell Futbol Club"
+   "a": "Centre d'Esports Sabadell Futbol Club",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Campo Municipal de Gobela?",
-   "a": "Arenas Club de Getxo"
+   "a": "Arenas Club de Getxo",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Estadio El Plantío?",
-   "a": "Burgos CF"
+   "a": "Burgos CF",
+   "cat": "grounds"
   }
  ],
  "extreme": [
   {
    "q": "Who won the Eredivisie in 1988/89?",
-   "a": "PSV Eindhoven"
+   "a": "PSV Eindhoven",
+   "cat": "champions"
   },
   {
    "q": "Who won the Eredivisie in 1986/87?",
-   "a": "PSV Eindhoven"
+   "a": "PSV Eindhoven",
+   "cat": "champions"
   },
   {
    "q": "Who won the Eredivisie in 1985/86?",
-   "a": "PSV Eindhoven"
+   "a": "PSV Eindhoven",
+   "cat": "champions"
   },
   {
    "q": "Who won the Eredivisie in 1983/84?",
-   "a": "Feyenoord Rotterdam"
+   "a": "Feyenoord Rotterdam",
+   "cat": "champions"
   },
   {
    "q": "Who won the Eredivisie in 1982/83?",
-   "a": "AFC Ajax"
+   "a": "AFC Ajax",
+   "cat": "champions"
   },
   {
    "q": "Who won the Eredivisie in 1980/81?",
-   "a": "AZ Alkmaar"
+   "a": "AZ Alkmaar",
+   "cat": "champions"
   },
   {
    "q": "Who won La Liga in 1994/95?",
-   "a": "Real Madrid"
+   "a": "Real Madrid",
+   "cat": "champions"
   },
   {
    "q": "Who won La Liga in 1992/93?",
-   "a": "Barcelona"
+   "a": "Barcelona",
+   "cat": "champions"
   },
   {
    "q": "Who won La Liga in 1989/90?",
-   "a": "Real Madrid"
+   "a": "Real Madrid",
+   "cat": "champions"
   },
   {
    "q": "Who won La Liga in 1987/88?",
-   "a": "Real Madrid"
+   "a": "Real Madrid",
+   "cat": "champions"
   },
   {
    "q": "Who won La Liga in 1984/85?",
-   "a": "Barcelona"
+   "a": "Barcelona",
+   "cat": "champions"
   },
   {
    "q": "Who won La Liga in 1982/83?",
-   "a": "Athletic Club"
+   "a": "Athletic Club",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 1995/96?",
-   "a": "Manchester United"
+   "a": "Manchester United",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 1994/95?",
-   "a": "Blackburn Rovers"
+   "a": "Blackburn Rovers",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 1993/94?",
-   "a": "Manchester United"
+   "a": "Manchester United",
+   "cat": "champions"
   },
   {
    "q": "Who won the Premier League in 1992/93?",
-   "a": "Manchester United"
+   "a": "Manchester United",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 1995/96?",
-   "a": "Borussia Dortmund"
+   "a": "Borussia Dortmund",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 1993/94?",
-   "a": "Bayern Munich"
+   "a": "Bayern Munich",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 1990/91?",
-   "a": "1. FC Kaiserslautern"
+   "a": "1. FC Kaiserslautern",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 1988/89?",
-   "a": "Bayern Munich"
+   "a": "Bayern Munich",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 1986/87?",
-   "a": "Bayern Munich"
+   "a": "Bayern Munich",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 1983/84?",
-   "a": "VfB Stuttgart"
+   "a": "VfB Stuttgart",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 1981/82?",
-   "a": "Hamburger SV"
+   "a": "Hamburger SV",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 1994/95?",
-   "a": "Juventus"
+   "a": "Juventus",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 1991/92?",
-   "a": "Milan"
+   "a": "Milan",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 1989/90?",
-   "a": "SSC Napoli"
+   "a": "SSC Napoli",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 1987/88?",
-   "a": "Milan"
+   "a": "Milan",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 1984/85?",
-   "a": "Hellas Verona"
+   "a": "Hellas Verona",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 1982/83?",
-   "a": "Roma"
+   "a": "Roma",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 1993/94?",
-   "a": "Paris Saint-Germain"
+   "a": "Paris Saint-Germain",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 1991/92?",
-   "a": "Olympique de Marseille"
+   "a": "Olympique de Marseille",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 1988/89?",
-   "a": "Olympique de Marseille"
+   "a": "Olympique de Marseille",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 1986/87?",
-   "a": "Girondins de Bordeaux"
+   "a": "Girondins de Bordeaux",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 1984/85?",
-   "a": "Girondins de Bordeaux"
+   "a": "Girondins de Bordeaux",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 1981/82?",
-   "a": "Monaco"
+   "a": "Monaco",
+   "cat": "champions"
   },
   {
    "q": "Who won the Primeira Liga in 2004/05?",
-   "a": "Benfica"
+   "a": "Benfica",
+   "cat": "champions"
   },
   {
    "q": "Who won the Primeira Liga in 1994/95?",
-   "a": "Porto"
+   "a": "Porto",
+   "cat": "champions"
   },
   {
    "q": "Who won the Champions League in 1994/95?",
-   "a": "AFC Ajax"
+   "a": "AFC Ajax",
+   "cat": "europe"
   },
   {
    "q": "Who won the Champions League in 1991/92?",
-   "a": "Barcelona"
+   "a": "Barcelona",
+   "cat": "europe"
   },
   {
    "q": "Who won the Champions League in 1989/90?",
-   "a": "Milan"
+   "a": "Milan",
+   "cat": "europe"
   },
   {
    "q": "Who won the Champions League in 1987/88?",
-   "a": "PSV Eindhoven"
+   "a": "PSV Eindhoven",
+   "cat": "europe"
   },
   {
    "q": "Who won the Champions League in 1984/85?",
-   "a": "Juventus"
+   "a": "Juventus",
+   "cat": "europe"
   },
   {
    "q": "Who won the Champions League in 1982/83?",
-   "a": "Hamburger SV"
+   "a": "Hamburger SV",
+   "cat": "europe"
   },
   {
    "q": "Who won the Copa del Rey in 1983/84?",
-   "a": "Athletic Club"
+   "a": "Athletic Club",
+   "cat": "cups"
   },
   {
    "q": "Which club plays its home games at Jan Louwers Stadion?",
-   "a": "Eindhoven"
+   "a": "Eindhoven",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at M-Scores Stadion?",
-   "a": "Dordrecht"
+   "a": "Dordrecht",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at De Vliert?",
-   "a": "Den Bosch"
+   "a": "Den Bosch",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at BUKO Stadion?",
-   "a": "SC Telstar"
+   "a": "SC Telstar",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at De Geusselt?",
-   "a": "MVV Maastricht"
+   "a": "MVV Maastricht",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Sportpark De Toekomst?",
-   "a": "Jong Ajax"
+   "a": "Jong Ajax",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Haarlem Stadion?",
-   "a": "HFC Haarlem"
+   "a": "HFC Haarlem",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Sportpark Berg & Bos?",
-   "a": "AGOVV Apeldoorn"
+   "a": "AGOVV Apeldoorn",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Heesen Yachts Stadion?",
-   "a": "TOP Oss"
+   "a": "TOP Oss",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at MySteel Stadion?",
-   "a": "Helmond Sport"
+   "a": "Helmond Sport",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at De Langeleegte?",
-   "a": "SC Veendam"
+   "a": "SC Veendam",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Olympic Stadium?",
-   "a": "AFC DWS"
+   "a": "AFC DWS",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Atik Stadion?",
-   "a": "RBC Roosendaal"
+   "a": "RBC Roosendaal",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at La Victoria Stadium?",
-   "a": "Real Jaén"
+   "a": "Real Jaén",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Estadio El Toralín?",
-   "a": "Sociedad Deportiva Ponferradina"
+   "a": "Sociedad Deportiva Ponferradina",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Estadio El Collao?",
-   "a": "CD Alcoyano"
+   "a": "CD Alcoyano",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Municipal Stadium of A Malata?",
-   "a": "Racing Club de Ferrol"
+   "a": "Racing Club de Ferrol",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Alfredo di Stéfano Stadium?",
-   "a": "Real Madrid Femenino"
+   "a": "Real Madrid Femenino",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Estadio Fernando Torres?",
-   "a": "Fuenlabrada"
+   "a": "Fuenlabrada",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Nou Sardenya?",
-   "a": "CE Europa"
+   "a": "CE Europa",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Estadio Cerro del Espino?",
-   "a": "Atlético Madrid B"
+   "a": "Atlético Madrid B",
+   "cat": "grounds"
   },
   {
    "q": "Which club plays its home games at Estadio Francisco de la Hera?",
-   "a": "Extremadura UD"
+   "a": "Extremadura UD",
+   "cat": "grounds"
   }
  ],
  "ball": [
   {
    "q": "Who won the Eredivisie in 1979/80?",
-   "a": "AFC Ajax"
+   "a": "AFC Ajax",
+   "cat": "champions"
   },
   {
    "q": "Who won the Eredivisie in 1977/78?",
-   "a": "PSV Eindhoven"
+   "a": "PSV Eindhoven",
+   "cat": "champions"
   },
   {
    "q": "Who won the Eredivisie in 1976/77?",
-   "a": "AFC Ajax"
+   "a": "AFC Ajax",
+   "cat": "champions"
   },
   {
    "q": "Who won the Eredivisie in 1975/76?",
-   "a": "PSV Eindhoven"
+   "a": "PSV Eindhoven",
+   "cat": "champions"
   },
   {
    "q": "Who won the Eredivisie in 1973/74?",
-   "a": "Feyenoord Rotterdam"
+   "a": "Feyenoord Rotterdam",
+   "cat": "champions"
   },
   {
    "q": "Who won the Eredivisie in 1972/73?",
-   "a": "AFC Ajax"
+   "a": "AFC Ajax",
+   "cat": "champions"
   },
   {
    "q": "Who won the Eredivisie in 1970/71?",
-   "a": "Feyenoord Rotterdam"
+   "a": "Feyenoord Rotterdam",
+   "cat": "champions"
   },
   {
    "q": "Who won the Eredivisie in 1969/70?",
-   "a": "AFC Ajax"
+   "a": "AFC Ajax",
+   "cat": "champions"
   },
   {
    "q": "Who won the Eredivisie in 1966/67?",
-   "a": "AFC Ajax"
+   "a": "AFC Ajax",
+   "cat": "champions"
   },
   {
    "q": "Who won the Eredivisie in 1964/65?",
-   "a": "Feyenoord Rotterdam"
+   "a": "Feyenoord Rotterdam",
+   "cat": "champions"
   },
   {
    "q": "Who won the Eredivisie in 1962/63?",
-   "a": "PSV Eindhoven"
+   "a": "PSV Eindhoven",
+   "cat": "champions"
   },
   {
    "q": "Who won the Eredivisie in 1961/62?",
-   "a": "Feyenoord Rotterdam"
+   "a": "Feyenoord Rotterdam",
+   "cat": "champions"
   },
   {
    "q": "Who won La Liga in 1979/80?",
-   "a": "Real Madrid"
+   "a": "Real Madrid",
+   "cat": "champions"
   },
   {
    "q": "Who won La Liga in 1977/78?",
-   "a": "Real Madrid"
+   "a": "Real Madrid",
+   "cat": "champions"
   },
   {
    "q": "Who won La Liga in 1974/75?",
-   "a": "Real Madrid"
+   "a": "Real Madrid",
+   "cat": "champions"
   },
   {
    "q": "Who won La Liga in 1972/73?",
-   "a": "Atlético Madrid"
+   "a": "Atlético Madrid",
+   "cat": "champions"
   },
   {
    "q": "Who won La Liga in 1969/70?",
-   "a": "Atlético Madrid"
+   "a": "Atlético Madrid",
+   "cat": "champions"
   },
   {
    "q": "Who won La Liga in 1967/68?",
-   "a": "Real Madrid"
+   "a": "Real Madrid",
+   "cat": "champions"
   },
   {
    "q": "Who won La Liga in 1964/65?",
-   "a": "Real Madrid"
+   "a": "Real Madrid",
+   "cat": "champions"
   },
   {
    "q": "Who won La Liga in 1962/63?",
-   "a": "Real Madrid"
+   "a": "Real Madrid",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 1979/80?",
-   "a": "Bayern Munich"
+   "a": "Bayern Munich",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 1976/77?",
-   "a": "Borussia Mönchengladbach"
+   "a": "Borussia Mönchengladbach",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 1974/75?",
-   "a": "Borussia Mönchengladbach"
+   "a": "Borussia Mönchengladbach",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 1972/73?",
-   "a": "Bayern Munich"
+   "a": "Bayern Munich",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 1969/70?",
-   "a": "Borussia Mönchengladbach"
+   "a": "Borussia Mönchengladbach",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 1967/68?",
-   "a": "1. FC Nürnberg"
+   "a": "1. FC Nürnberg",
+   "cat": "champions"
   },
   {
    "q": "Who won the Bundesliga in 1965/66?",
-   "a": "TSV 1860 Munich"
+   "a": "TSV 1860 Munich",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 1979/80?",
-   "a": "Inter Milan"
+   "a": "Inter Milan",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 1977/78?",
-   "a": "Juventus"
+   "a": "Juventus",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 1974/75?",
-   "a": "Juventus"
+   "a": "Juventus",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 1972/73?",
-   "a": "Juventus"
+   "a": "Juventus",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 1969/70?",
-   "a": "Cagliari Calcio"
+   "a": "Cagliari Calcio",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 1967/68?",
-   "a": "Milan"
+   "a": "Milan",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 1964/65?",
-   "a": "Inter Milan"
+   "a": "Inter Milan",
+   "cat": "champions"
   },
   {
    "q": "Who won Serie A in 1962/63?",
-   "a": "Inter Milan"
+   "a": "Inter Milan",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 1979/80?",
-   "a": "Nantes"
+   "a": "Nantes",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 1976/77?",
-   "a": "Nantes"
+   "a": "Nantes",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 1974/75?",
-   "a": "Saint-Étienne"
+   "a": "Saint-Étienne",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 1972/73?",
-   "a": "Nantes"
+   "a": "Nantes",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 1969/70?",
-   "a": "Saint-Étienne"
+   "a": "Saint-Étienne",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 1967/68?",
-   "a": "Saint-Étienne"
+   "a": "Saint-Étienne",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 1964/65?",
-   "a": "Nantes"
+   "a": "Nantes",
+   "cat": "champions"
   },
   {
    "q": "Who won Ligue 1 in 1962/63?",
-   "a": "Monaco"
+   "a": "Monaco",
+   "cat": "champions"
   },
   {
    "q": "Who won the Primeira Liga in 1972/73?",
-   "a": "Benfica"
+   "a": "Benfica",
+   "cat": "champions"
   },
   {
    "q": "Who won the Primeira Liga in 1971/72?",
-   "a": "Benfica"
+   "a": "Benfica",
+   "cat": "champions"
   },
   {
    "q": "Who won the Primeira Liga in 1970/71?",
-   "a": "Benfica"
+   "a": "Benfica",
+   "cat": "champions"
   },
   {
    "q": "Who won the Primeira Liga in 1968/69?",
-   "a": "Benfica"
+   "a": "Benfica",
+   "cat": "champions"
   },
   {
    "q": "Who won the Primeira Liga in 1966/67?",
-   "a": "Benfica"
+   "a": "Benfica",
+   "cat": "champions"
   },
   {
    "q": "Who won the Primeira Liga in 1965/66?",
-   "a": "Sporting CP"
+   "a": "Sporting CP",
+   "cat": "champions"
   },
   {
    "q": "Who won the Primeira Liga in 1963/64?",
-   "a": "Benfica"
+   "a": "Benfica",
+   "cat": "champions"
   },
   {
    "q": "Who won the Primeira Liga in 1961/62?",
-   "a": "Sporting CP"
+   "a": "Sporting CP",
+   "cat": "champions"
   },
   {
    "q": "Who won the Champions League in 1979/80?",
-   "a": "Nottingham Forest"
+   "a": "Nottingham Forest",
+   "cat": "europe"
   },
   {
    "q": "Who won the Champions League in 1977/78?",
-   "a": "Liverpool"
+   "a": "Liverpool",
+   "cat": "europe"
   },
   {
    "q": "Who won the Champions League in 1974/75?",
-   "a": "Bayern Munich"
+   "a": "Bayern Munich",
+   "cat": "europe"
   },
   {
    "q": "Who won the Champions League in 1972/73?",
-   "a": "AFC Ajax"
+   "a": "AFC Ajax",
+   "cat": "europe"
   },
   {
    "q": "Who won the Champions League in 1969/70?",
-   "a": "Feyenoord Rotterdam"
+   "a": "Feyenoord Rotterdam",
+   "cat": "europe"
   },
   {
    "q": "Who won the Champions League in 1967/68?",
-   "a": "Manchester United"
+   "a": "Manchester United",
+   "cat": "europe"
   },
   {
    "q": "Who won the Champions League in 1964/65?",
-   "a": "Inter Milan"
+   "a": "Inter Milan",
+   "cat": "europe"
   },
   {
    "q": "Who won the Champions League in 1962/63?",
-   "a": "Milan"
+   "a": "Milan",
+   "cat": "europe"
   },
   {
    "q": "Who won the Copa del Rey in 1979/80?",
-   "a": "Real Madrid"
+   "a": "Real Madrid",
+   "cat": "cups"
   },
   {
    "q": "Who won the Copa del Rey in 1972/73?",
-   "a": "Athletic Club"
+   "a": "Athletic Club",
+   "cat": "cups"
   },
   {
    "q": "Who won the Copa del Rey in 1969/70?",
-   "a": "Athletic Club"
+   "a": "Athletic Club",
+   "cat": "cups"
   }
  ]
 }

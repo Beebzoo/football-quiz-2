@@ -161,13 +161,18 @@ function boot() {
   console.log("\n--- the eleven specialisms ---");
   const CATS = ["champions", "scorers", "transfers", "managers", "grounds",
     "records", "europe", "cups", "relegation", "imports", "stories"];
-  /* Known unfeedable from this bank and named rather than skipped, so the day
-     somebody writes questions for them this line says they can stop being an
-     exception. The bank is world football: it has one going-down row in seven
-     thousand, nine foreign-legion rows and sixteen domestic cup rows. */
-  const SHORT = ["relegation", "imports", "cups"];
+  /* THERE IS NO SHORT LIST ANY MORE, and how it went is the argument for
+     writing a guard this way round. Three categories could not be fed from the
+     inline bank: relegation had one row in 6,984, imports nine, cups sixteen.
+     They were named here rather than skipped, so that feeding them would FAIL
+     this test rather than pass it quietly. Tagging the five packs fed them, and
+     it failed and named all three, which is exactly what it was for.
+
+       relegation   1 -> 59, a pool in four tiers of five
+       imports      9 -> 226, a pool in four tiers
+       cups        16 -> 152, a pool in all five */
   const PER_CAT = 8;        // rows of one category in one tier before it is a pool
-  const WORKING = 5;        // categories that must clear that, per tier
+  const WORKING = 10;       // categories that must clear that, per tier
 
   const catPer = {};
   let catTagged = 0, catRows = 0;
@@ -192,21 +197,29 @@ function boot() {
 
   check("the classic bank carries categories at all", catTagged > 900, catTagged + " of " + catRows);
   check("and every one is on the closed list of eleven", strays.size === 0, [...strays].join(", "));
-  /* THE PACKS ARE THE GAP AND IT IS A NUMBER RATHER THAN A NOTE. The inline
-     bank is tagged and the five packs are not, so this is fourteen per cent and
-     the next job is the other eighty-six. It can only go up. */
+  /* AND THE SHARE IS A NUMBER RATHER THAN A NOTE. This read thirteen per cent
+     when only the inline bank was tagged and the five packs were the gap. The
+     packs are tagged now, so it reads eighty-five, and the floor moves with it.
+     The 1,029 rows still carrying nothing are the ones with no honest home
+     among the eleven, which is a real answer: h2Draw falls back to the whole
+     tier, so they are still asked. */
   check("the tagged share has not gone backwards",
-    catTagged / catRows >= 0.13, Math.round(catTagged / catRows * 100) + "%");
+    catTagged / catRows >= 0.82, Math.round(catTagged / catRows * 100) + "%");
   /* AND EVERY TIER HAS ENOUGH WORKING CATEGORIES TO BE WORTH FILTERING ON,
      because h2Draw filters one tier at a time and a category that is fat across
      the bank and empty in this tier leaves its man drawing from everything. */
   const weak = TIERS.filter(t => CATS.filter(c => (catPer[t][c] || 0) >= PER_CAT).length < WORKING);
-  check("every tier has at least five categories with a real pool", weak.length === 0,
+  check("every tier has at least ten categories with a real pool", weak.length === 0,
     weak.map(t => t + " has " + CATS.filter(c => (catPer[t][c] || 0) >= PER_CAT).length).join(", "));
-  /* the three that cannot be fed are still the three that cannot be fed */
-  const fed = SHORT.filter(c => TIERS.some(t => (catPer[t][c] || 0) >= PER_CAT));
-  check("the three unfeedable categories are still unfeedable", fed.length === 0,
-    "these now have a pool, so take them off SHORT: " + fed.join(", "));
+  /* AND THE THREE THAT HAD NOTHING HAVE A POOL SOMEWHERE, which is what tagging
+     the packs was for. Kept as its own line rather than folded into the floor
+     above, because those three are what a regression would hit first: they are
+     the thinnest, and they are thin because the bank is world football rather
+     than one league's foreign legion. */
+  const WAS_STARVED = ["relegation", "imports", "cups"];
+  const starved = WAS_STARVED.filter(c => !TIERS.some(t => (catPer[t][c] || 0) >= PER_CAT));
+  check("the three that used to have nothing all have a pool now", starved.length === 0,
+    "back to starving: " + starved.join(", "));
 
   console.log(fails ? `\n${fails} FAILING CHECK(S)` : "\nAll checks passed.");
   process.exit(fails ? 1 : 0);
