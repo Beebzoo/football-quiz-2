@@ -374,6 +374,33 @@ const WC18 = R("assets/wc2018/index.json");
   run(app, "closeCup(); render();"); await tick(130);
   check("closing it goes back", !/cupLook/.test(stage(app)), "still on the Cup");
 
+  /* ---------- and the other way out of a run ---------- */
+  console.log("\n--- going out still lets you take somebody else ---");
+  clean();
+  run(app, 'openCup(); cupStart("Trinidad and Tobago");'); await tick(120);
+  file(0, 1); file(0, 1); file(0, 1);
+  check("the run is over", ev(app, "mine().cup.alive") === false, ev(app, "mine().cup.alive"));
+  run(app, "render();"); await tick(120);
+  check("and the out screen offers another nation", /Take another nation/.test(stage(app)),
+    "no way out of the out screen");
+  /* THE SCREEN, NOT THE FLAG. Asking whether mine().cup went null would have
+     passed against the broken version too, because the bug was never in the
+     clearing: nothing called it, and renderCup reads cupRun() before it reads
+     CUP_VIEW, so a spent run drew the out screen for ever. */
+  run(app, "cupLook();"); await tick(130);
+  check("taking another nation reaches the picker", /Pick a/.test(stage(app)),
+    "still on the out screen");
+  check("and the spent run is gone", ev(app, "mine().cup") == null,
+    JSON.stringify(ev(app, "mine().cup")));
+  /* AND IT MUST NEVER EAT A LIVE ONE, because the picker's own navigation is
+     the same function: Somebody else calls it bare, every nation in the list
+     calls it with a name. */
+  run(app, 'cupStart("Trinidad and Tobago");'); await tick(120);
+  run(app, "cupLook();"); await tick(120);
+  check("a run still going survives the same button", ev(app, "mine().cup") != null,
+    "it ate a live run");
+  run(app, "cupQuit();"); await tick(120);
+
   console.log("\n" + (fails ? fails + " FAILED" : "ALL PASS"));
   process.exit(fails ? 1 : 0);
 })().catch(e => { console.error(e); process.exit(1); });

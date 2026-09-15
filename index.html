@@ -400,6 +400,11 @@
     --grass-dim:#9C9478;                      /* was --ink-dim */
     --grass-rule:rgba(248,241,221,.18);       /* was --line */
     --grass-edge:rgba(248,241,221,.18);       /* was --line */
+    /* THE GROUND OUTSIDE THE TOUCHLINE, a shade darker than the pitch so the
+       column reads as the surface rather than as a panel. This replaces a
+       hardcoded #e8edf2 that had no theme condition on it, which put a pale
+       grey wall at 10.37 to 1 round the dark app on every desktop. */
+    --offpitch:#0A2415;                       /* 1.35:1 under the night green */
     --grass-line:rgba(248,241,221,.10);       /* was --line-soft */
     --grass-nm:#F8F1DD;                       /* was --ink */
     --grass-go:#E3B453;                       /* was --gold-hi */
@@ -504,6 +509,7 @@
     --grass-dim:#57735F;      /* 4.84:1, the lightest sage that clears AA */
     --grass-rule:#4F7F61;     /* 4.28:1 at two pixels, a line on the grass */
     --grass-edge:#B3C9AE;     /* 1.64:1, the outline of a quiet button */
+    --offpitch:#D3DFCC;       /* 1.28:1, the ground outside the touchline */
     --grass-line:#CBDCC6;     /* 1.33:1, a divider you feel rather than read */
     /* THE HEADINGS GO BACK TO CHARCOAL. Six green names on cream turned out to
        be green everywhere and emphasis nowhere: the green has to be spent on
@@ -2321,12 +2327,19 @@
   .bigbtn.ghost kbd,.bigbtn.gold kbd{background:rgba(16,24,40,.04);border-color:#cdd6df;color:#5c6b7a}
   @media (hover:hover) and (pointer:fine){
     kbd{display:inline-block}
+    /* THE TOUCHLINES. These two run the whole length of the app and were its
+       palest lines at 1.47 to 1, which is backwards on a page whose section
+       rules are two pixels of pitch green. Same green, one pixel thicker,
+       because this is the outside edge and it is the line holding the rest in. */
     body{
       max-width:520px;
-      border-left:1px solid var(--line);border-right:1px solid var(--line);
+      border-left:3px solid var(--grass-rule);border-right:3px solid var(--grass-rule);
       min-height:100vh;
     }
-    html{background:#e8edf2}
+    /* AND THE GROUND OUTSIDE THEM FOLLOWS THE THEME, which it never did: this
+       was a hardcoded cold grey with no condition on it, invisible against the
+       cream at 1.09 to 1 and a bright wall against the night pitch at 10.37. */
+    html{background:var(--offpitch)}
   }
   /* ===================== ONE ON ONE =====================
      A broadcast camera on a phone. The pitch is a plane in 3D: tilt it back on
@@ -8938,7 +8951,7 @@ function qVisual(revealed){
    other and it is in. That is what stops the opponent ever being a spectator
    for long, and it is the one thing in the mode nobody can revise for. */
 
-const H2_TARGET = 2;                       // first to this many goals
+const H2_TARGET = 3;                       // first to this many goals
 const H2_KITS   = ["#e04a34", "#3d7ae8"];  // home red, away blue
 /* HOW BIG A MAN IS ON THE PITCH, named rather than written into the middle of
    the render, because it is a number somebody will want to move again after
@@ -9733,7 +9746,10 @@ const h2Line  = w => (h2Tactical() && S.h2h && S.h2h.line && S.h2h.line[w]) || "
    a pass does. At H2_MINUTES the whistle goes at the next dead ball: the pass
    or the loss that took it there plays out, a shot already in the air still
    gets its save, and a penalty is still taken. H2_TARGET stays underneath it
-   as the mercy rule: two goals ends it early.
+   as the mercy rule: three goals ends it early. It was two, which meant a side
+   that scored twice in the first half hour blew the whistle on itself and the
+   ninety minutes rarely got to decide anything. At three the early burst is a
+   lead rather than a finish.
 
    Level at the whistle is penalties. The taker faces H2_SO_TAKER and then the
    pair of them play the corner duel exactly as they would in open play, one
@@ -12249,7 +12265,21 @@ let ALBUM_VIEW = null;
 let CUP_VIEW = null;
 function openCup(){ audio(); CUP_VIEW = {}; ALBUM_VIEW = null; render(); }
 function closeCup(){ audio(); CUP_VIEW = null; render(); }
-function cupLook(side){ audio(); CUP_VIEW = {pick: side || null}; render(); }
+/* A SPENT RUN HAS TO GO OR THE PICKER IS UNREACHABLE. renderCup asks cupRun()
+   before it reads CUP_VIEW, and cupRun hands back whatever is in mine().cup
+   alive or not, so Take another nation re-rendered straight into the out screen
+   and looked like a dead button. Clearing it loses nothing: cupFile has already
+   pushed the line into mine().cups by the time a run can be finished, which is
+   why that list exists, and the next cupStart would have overwritten this
+   anyway. The guard is there because cupLook is also the picker's own
+   navigation, where there is no run to protect but also none to eat. */
+function cupLook(side){
+  audio();
+  const spent = cupRun();
+  if(spent && !spent.alive) cupBlank();
+  CUP_VIEW = {pick: side || null};
+  render();
+}
 /* BOOK FIRST, THEN THE PAGE, which is the order every album function takes its
    arguments in now. Called with nothing it opens the book you are collecting,
    which is what every button on the front door means by "the album". */

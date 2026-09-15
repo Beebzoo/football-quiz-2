@@ -232,10 +232,17 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   await pass(TEN);
   run(app, "h2Judge(true)"); await tick(160);
   check("two is ten", H("min") === 10, H("min"));
+  /* BOTH ENDS OF THE MATCH, whatever they are set to. This used to look for the
+     literal "first to 2 or 90 minutes", so turning H2_TARGET, which three notes
+     in the app call a dial, broke a check about whether a sentence is complete.
+     Asking the app for its own numbers tests the sentence instead of restating
+     the constant, the way h2h-test reads H2_MAN rather than regexing the figure
+     sizes out of the source. */
   check("the toss line names both ends of the match", (() => {
     run(app, 'S.phase = "h_toss"; S.h2h.tossed = false; render();');
-    return stage(app).includes("first to 2 or 90 minutes");
-  })(), "no ninety");
+    const want = "first to " + ev(app, "H2_TARGET") + " or " + ev(app, "H2_MINUTES") + " minutes";
+    return stage(app).includes(want);
+  })(), "the toss line does not name the goals and the clock");
 
   console.log("\n--- the whistle ---");
   await start();

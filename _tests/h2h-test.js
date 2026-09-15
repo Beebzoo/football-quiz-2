@@ -572,8 +572,19 @@ const GK = 0, LCB = 1, RCB = 2, LWB = 3, RWB = 4, SIX = 5, EIGHT = 6, TEN = 7, L
   check("then the man who conceded restarts on his own line", who() === 1 && pos() === GK, who() + "/" + pos());
   check("and play is live again", phase() === "h_pick", phase());
 
-  await score();
-  check("and two wins it", ev(app, "S.players[0].score") === 2, ev(app, "S.players[0].score"));
+  /* TO THE TARGET, NOT TO A NUMBER. This was two hand-written goals and an
+     assertion that said "and two wins it", so moving H2_TARGET, which the app
+     calls a dial in three separate places, broke a check about whether reaching
+     the target ends a match. One goal is already on the board above, and the
+     kick-off between goals is conditional because the last one does not get
+     one: that is exactly what the check below this is asking. */
+  const TARGET = ev(app, "H2_TARGET");
+  while (ev(app, "S.players[0].score") < TARGET) {
+    await score();
+    if (ev(app, "S.players[0].score") < TARGET) await kickOn();
+  }
+  check("and reaching the target wins it", ev(app, "S.players[0].score") === TARGET,
+    ev(app, "S.players[0].score") + " of " + TARGET);
   check("the winner gets his celebration too", phase() === "h_goal", phase());
   await kickOn();
   check("the match is over", phase() === "results", phase());
