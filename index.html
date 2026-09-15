@@ -399,6 +399,7 @@
     --grass-eye:#9C9478;                      /* was --ink-dim */
     --grass-dim:#9C9478;                      /* was --ink-dim */
     --grass-rule:rgba(248,241,221,.18);       /* was --line */
+    --grass-edge:rgba(248,241,221,.18);       /* was --line */
     --grass-line:rgba(248,241,221,.10);       /* was --line-soft */
     --grass-nm:#F8F1DD;                       /* was --ink */
     --grass-go:#E3B453;                       /* was --gold-hi */
@@ -491,13 +492,18 @@
        of it small type that needs 4.5. The forest is --green's own value, so
        nothing new is invented; the sage is the lightest green that clears AA.
 
-       THE LINES DO NOT GET LOUDER. --grass-line is 1.33 where the sand it
-       replaces was 1.31, because a row divider is meant to be felt rather than
-       read. --grass-rule is the exception at 1.64 against 1.47: a section rule
-       on this page is a pitch marking, and those are meant to be seen. */
+       THE LINES DO NOT ALL WANT THE SAME WEIGHT, which is why there are three
+       of them. --grass-line is the line under a row at 1.33, where the sand it
+       replaced was 1.31: a divider is meant to be felt rather than read.
+       --grass-edge is the outline of a quiet button, which wants to hold a
+       shape without asking for anything. --grass-rule is the line that runs out
+       of a section label across the page, and on this page that is a marking
+       painted on grass, so it is 2px at 4.28, past the 3 a graphical object
+       needs and well under the label's own 9.01 so the label still leads. */
     --grass-eye:#2D4A3E;      /* 9.01:1, the forest --green already carries */
     --grass-dim:#57735F;      /* 4.84:1, the lightest sage that clears AA */
-    --grass-rule:#B3C9AE;     /* 1.64:1, a chalk line you are meant to see */
+    --grass-rule:#4F7F61;     /* 4.28:1 at two pixels, a line on the grass */
+    --grass-edge:#B3C9AE;     /* 1.64:1, the outline of a quiet button */
     --grass-line:#CBDCC6;     /* 1.33:1, a divider you feel rather than read */
     /* THE HEADINGS GO BACK TO CHARCOAL. Six green names on cream turned out to
        be green everywhere and emphasis nowhere: the green has to be spent on
@@ -1937,7 +1943,13 @@
      of the seven call sites gets it without being touched. */
   .mm-eyebrow{display:flex;align-items:center;gap:10px;padding-bottom:10px;margin-bottom:0;
     font:400 10px/1 var(--px16);letter-spacing:.16em;text-transform:uppercase;color:var(--grass-eye)}
-  .mm-eyebrow::after{content:"";flex:1;height:1px;background:var(--grass-rule)}
+  /* A PITCH MARKING, NOT A DIVIDER. A hairline is the right weight for the line
+     under a row, where the job is to separate two things without being looked
+     at. This one runs out of a section label across the page, and on this page
+     that is a line painted on grass, so it is two pixels and it is green enough
+     to read as one: 4.28 to 1, past the 3 a graphical object needs, and well
+     under the label's own 9.01 so the label still leads. */
+  .mm-eyebrow::after{content:"";flex:1;height:2px;background:var(--grass-rule)}
   .mm-sect{display:flex;flex-direction:column;gap:10px}
 
   /* the front door, and the two beside it */
@@ -1966,7 +1978,7 @@
      .mm-ghost alone, because the summary is never a flex item: the thing
      sitting in .mm-foot is the <details> around it, so a flex property up here
      would do nothing at all while looking for all the world like it did. */
-  .mm-ghost,.rules summary{padding:13px;border-radius:var(--r2);border:1px solid var(--grass-rule);
+  .mm-ghost,.rules summary{padding:13px;border-radius:var(--r2);border:1px solid var(--grass-edge);
     background:none;color:var(--ink-soft);font:600 14px/1 var(--ui);
     cursor:pointer;transition:transform .06s ease,border-color .15s ease}
   .mm-ghost{flex:1}
