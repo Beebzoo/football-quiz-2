@@ -405,6 +405,11 @@
        hardcoded #e8edf2 that had no theme condition on it, which put a pale
        grey wall at 10.37 to 1 round the dark app on every desktop. */
     --offpitch:#0A2415;                       /* 1.35:1 under the night green */
+    /* THE TOUCHLINE STAYS CHALK AT NIGHT. The night page is pitch green
+       already, so a green edge drawn on it is not an edge: the banner's own
+       grass lands at 3.67 against this ground and reads as a second green
+       rather than as a line. */
+    --touchline:rgba(248,241,221,.18);        /* what the frame already was */
     --grass-line:rgba(248,241,221,.10);       /* was --line-soft */
     --grass-nm:#F8F1DD;                       /* was --ink */
     --grass-go:#E3B453;                       /* was --gold-hi */
@@ -510,6 +515,12 @@
     --grass-rule:#4F7F61;     /* 4.28:1 at two pixels, a line on the grass */
     --grass-edge:#B3C9AE;     /* 1.64:1, the outline of a quiet button */
     --offpitch:#D3DFCC;       /* 1.28:1, the ground outside the touchline */
+    /* THE PITCH IN THE BANNER, which is what the frame round the app should be:
+       grass, not one of the markings painted on it. The banner mows in two
+       bands and this is the shaded one, because the lit #3AA04A is 3.08 against
+       the page but only 2.41 against the strip outside, and a touchline has to
+       hold on both sides of itself. This is 4.03 and 3.15. */
+    --touchline:#2F8A3F;      /* the banner's own shaded mown band */
     --grass-line:#CBDCC6;     /* 1.33:1, a divider you feel rather than read */
     /* THE HEADINGS GO BACK TO CHARCOAL. Six green names on cream turned out to
        be green everywhere and emphasis nowhere: the green has to be spent on
@@ -2333,7 +2344,7 @@
        because this is the outside edge and it is the line holding the rest in. */
     body{
       max-width:520px;
-      border-left:3px solid var(--grass-rule);border-right:3px solid var(--grass-rule);
+      border-left:3px solid var(--touchline);border-right:3px solid var(--touchline);
       min-height:100vh;
     }
     /* AND THE GROUND OUTSIDE THEM FOLLOWS THE THEME, which it never did: this
@@ -2780,6 +2791,11 @@
     box-shadow:4px 4px 0 rgba(0,0,0,.45)}
   /* the men you are marking get the same box as everything else on the board */
   body.pixel .h2markbtn{border-radius:0;border-width:2px;box-shadow:3px 3px 0 rgba(0,0,0,.35)}
+  /* the team sheet: the pitch gets the same solid white edge every board has,
+     and the name plates and the empty slots square off with everything else */
+  body.pixel .h2xipitch{border-radius:0;box-shadow:inset 0 0 0 2px #f2f6ee}
+  body.pixel .h2xislot b{border-radius:0}
+  body.pixel .h2xislot.empty i{border-radius:0}
   body.pixel .h2opt{border-radius:0;border-width:2px}
   body.pixel .h2opt .k{border-radius:0}
   body.pixel .qcard .atext{border-radius:0}
@@ -4352,12 +4368,74 @@
   .h2shapes{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0 6px}
   .h2shapes>.h2shapeb:last-child:nth-child(3n+1){grid-column:2}
   .h2shapeb{display:flex;flex-direction:column;align-items:center;gap:6px;padding:9px 6px}
+  /* MOWN, AND IN THE SAME EIGHT BANDS THE REAL PITCH USES, so the card and the
+     ground you play on are recognisably one place. The gradient underneath
+     stays: it is the light falling down the pitch and the bands ride on it. */
   .h2mini{position:relative;display:block;width:100%;aspect-ratio:3/4;border-radius:7px;
-    background:linear-gradient(180deg,#1d5c37,#0f3d26);
+    overflow:hidden;
+    background:
+      repeating-linear-gradient(180deg,
+        rgba(255,255,255,.035) 0 12.5%, rgba(0,0,0,.035) 12.5% 25%),
+      linear-gradient(180deg,#1d5c37,#0f3d26);
     box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)}
+  /* THE LINES ARE PAINT ON GRASS, so they are white held back rather than a
+     grey: a marking reads as a marking because it is the same white everywhere
+     and slightly worn, not because it is dark. */
+  .h2minil{position:absolute;inset:0;width:100%;height:100%;display:block;
+    stroke:rgba(255,255,255,.34);stroke-width:.7;fill:none;pointer-events:none}
+  /* AND A RING ON EVERY DOT. These are painted in the side's kit and a good
+     many kits in here are white or near it, so on the pale mown band a white
+     dot had nothing holding its edge. It is the same problem the change strip
+     solves, one size down. */
   .h2mini i{position:absolute;width:13%;aspect-ratio:1;border-radius:50%;
-    transform:translate(-50%,-50%);box-shadow:0 1px 2px rgba(0,0,0,.6)}
+    transform:translate(-50%,-50%);
+    box-shadow:0 0 0 1.5px rgba(10,28,18,.55), 0 1px 2px rgba(0,0,0,.6)}
   .h2shapen{font:700 .78rem/1 var(--ui);letter-spacing:.02em}
+
+  /* ---------------- naming the eleven ----------------
+     THE PITCH AND THE BENCH SIDE BY SIDE WHERE THERE IS ROOM. The container
+     query rather than a media query because this screen lives in a 520px
+     column on a desktop and the full width on a phone, so the window is not
+     what decides whether there is space for two columns. */
+  .h2pickwrap{container-type:inline-size;display:grid;gap:10px;margin:8px 0 10px}
+  @container (min-width: 430px){
+    .h2pickwrap{grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);align-items:start}
+  }
+  /* THE HEIGHT IS CAPPED AND THE WIDTH IS NOT. A full-width phone pitch at 3/4
+     is 533px tall, which is most of a screen before you have seen one
+     substitute. Letting the ratio give up width instead keeps the whole
+     decision on one screen, which is the point of drawing it at all. */
+  .h2xipitch{position:relative;width:100%;aspect-ratio:3/4;max-height:52vh;
+    margin:0 auto;border-radius:10px;overflow:hidden;
+    background:
+      repeating-linear-gradient(180deg,
+        rgba(255,255,255,.035) 0 12.5%, rgba(0,0,0,.035) 12.5% 25%),
+      linear-gradient(180deg,#1d5c37,#0f3d26);
+    box-shadow:inset 0 0 0 1px rgba(255,255,255,.14)}
+  /* A MAN IS A SHIRT WITH A NAME UNDER IT. The name gets a plate rather than
+     sitting on the grass: some mown bands are pale and a good many kits are
+     white, so a surname has to hold on both, which is the mark cards' problem
+     one size down. */
+  .h2xislot{position:absolute;transform:translate(-50%,-50%);
+    display:flex;flex-direction:column;align-items:center;gap:2px;
+    width:22%;min-width:0;padding:0;border:none;background:none;cursor:pointer}
+  .h2xislot b{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+    font:700 .58rem/1.35 var(--ui);color:#F2F6EE;
+    padding:1px 4px;border-radius:4px;background:rgba(9,26,17,.72)}
+  .h2xislot:active{transform:translate(-50%,-50%) scale(.94)}
+  /* THE SAME SIZE AS A FILLED ONE ON PURPOSE, so the pitch does not twitch as
+     it fills up, and it names the position rather than showing a gap. */
+  .h2xislot.empty i{display:flex;align-items:center;justify-content:center;
+    width:26px;height:32px;font:700 .54rem/1 var(--ui);font-style:normal;
+    letter-spacing:.04em;color:rgba(242,246,238,.72);
+    border:1.5px dashed rgba(242,246,238,.42);border-radius:5px}
+  .h2picksubs{display:flex;flex-direction:column;gap:6px;min-width:0}
+  .h2subhead{font:600 .6rem/1 var(--ui);letter-spacing:.1em;text-transform:uppercase;
+    color:var(--board-dim)}
+  .h2picksubs .h2bench.h2squad{margin:0;grid-template-columns:repeat(3,1fr)}
+  @container (min-width: 430px){
+    .h2picksubs .h2bench.h2squad{grid-template-columns:repeat(2,1fr)}
+  }
   .h2lineb{padding:11px 6px;font-size:.86rem;line-height:1.15;--ac:#8fd8c4}
   /* EVERY MAN IS A CARD, and they are board chips for the same reason the four
      options are: this is a match screen and the rest of the match is the board.
@@ -15299,9 +15377,41 @@ function h2ShapeDone(){
 }
 /* a shape drawn small: eleven dots where the men stand, which says more
    about what a formation does than its name ever will */
+/* THE MARKINGS, ONCE, BECAUSE EVERY MINI PITCH IN THE APP WANTS THE SAME ONES.
+   The viewBox is 75 by 100 because the card is 3/4, so the mapping is one to
+   one: a mismatched ratio under preserveAspectRatio="none" would stretch the
+   centre circle into an ellipse and thicken the vertical strokes against the
+   horizontal ones, which is exactly the tell that makes a drawn pitch look
+   drawn.
+
+   THE NUMBERS ARE A REAL PITCH. A penalty area is 40.3m across 68m of width,
+   which is 59 per cent, and 16.5m into 105m of length, which is 16. The
+   six-yard box is 18.3 by 5.5, so 27 and 5. The centre circle is 9.15m, which
+   is 8.7 per cent of the length. Invented markings look wrong to anybody who
+   has seen a real pitch and they can rarely say why. */
+const H2_MINI_LINES = (() => {
+  const W = 75, H = 100, m = 2;               // the touchline inset
+  const cx = W / 2;
+  const boxW = W * 0.59, boxD = H * 0.16;     // penalty area
+  const sixW = W * 0.27, sixD = H * 0.05;     // six-yard box
+  const r = H * 0.087;                        // centre circle
+  const box = (top) => '<rect x="' + (cx - boxW / 2).toFixed(2) + '" y="' +
+      (top ? m : H - m - boxD).toFixed(2) + '" width="' + boxW.toFixed(2) +
+      '" height="' + boxD.toFixed(2) + '"/>';
+  const six = (top) => '<rect x="' + (cx - sixW / 2).toFixed(2) + '" y="' +
+      (top ? m : H - m - sixD).toFixed(2) + '" width="' + sixW.toFixed(2) +
+      '" height="' + sixD.toFixed(2) + '"/>';
+  return '<svg class="h2minil" viewBox="0 0 ' + W + ' ' + H + '" preserveAspectRatio="none" ' +
+    'aria-hidden="true" fill="none">' +
+    '<rect x="' + m + '" y="' + m + '" width="' + (W - m * 2) + '" height="' + (H - m * 2) + '"/>' +
+    '<line x1="' + m + '" y1="' + (H / 2) + '" x2="' + (W - m) + '" y2="' + (H / 2) + '"/>' +
+    '<circle cx="' + cx + '" cy="' + (H / 2) + '" r="' + r.toFixed(2) + '"/>' +
+    box(true) + box(false) + six(true) + six(false) +
+    '</svg>';
+})();
 function h2MiniHTML(id, kit){
   const sl = (H2_SHAPES[id] || H2_SHAPES[H2_SHAPE_DEFAULT]).slots;
-  return '<span class="h2mini">' + sl.map(p =>
+  return '<span class="h2mini">' + H2_MINI_LINES + sl.map(p =>
     '<i style="left:' + p.x + '%;top:' + p.y + '%;background:' + kit + '"></i>').join("") + '</span>';
 }
 function h2SetLine(k){
@@ -17100,6 +17210,25 @@ function h2Render(st){
     const carried = {};
     for(const i of sel) for(const l of lgOf(pool[i])) carried[l] = (carried[l] || 0) + 1;
     const carry = Object.entries(carried).sort((a, b) => b[1] - a[1]);
+    /* THE ELEVEN, ARRANGED BY THE FUNCTION THE MATCH USES. h2Fit is what
+       h2SquadDone calls to crystallise a lineup, so this is not a preview of
+       where they might play: it is where they will play. Handed a short list it
+       returns nulls, which is what draws the empty slots while he is choosing.
+       h2Shape reads the same id the next screen opens on. */
+    const slots = h2Shape(w);
+    const fitted = h2Fit(sel.map(n => pool[n]));
+    const benched = pool.map((_, i) => i).filter(i => sel.indexOf(i) === -1);
+    const sheetHTML =
+      '<div class="h2xipitch">' + H2_MINI_LINES + slots.map((sp, k) => {
+        const man = fitted[k];
+        /* THE HOLE NAMES ITSELF. Ten men and a gap is a question; ten men and
+           an empty LB is an answer. */
+        if(!man) return '<span class="h2xislot empty" style="left:' + sp.x + '%;top:' +
+          sp.y + '%"><i>' + esc(sp.n) + '</i></span>';
+        return '<button class="h2xislot" style="left:' + sp.x + '%;top:' + sp.y +
+          '%" onclick="h2SquadPick(' + pool.indexOf(man) + ')">' +
+          albumBadgeHTML(kit, man.no) + '<b>' + esc(man.n) + '</b></button>';
+      }).join("") + '</div>';
     st.innerHTML =
       '<div class="kick">' + ico('clipboard') + 'The Dugout \u00b7 ' + esc(h2Team(w) || picker.name) + '</div>' +
       '<div class="h2big">' + esc(picker.name) + ', name your eleven.</div>' + h2TurnHTML() +
@@ -17107,12 +17236,15 @@ function h2Render(st){
         (h2XiSays(w) ? esc(h2XiSays(w)) + ' is already ticked. ' : '') +
         'A ball to a man asks a question from a league he played in, ' +
         'so this is you choosing the decks. One of them has to be a goalkeeper.</div>' +
-      '<div class="h2bench h2squad">' + pool.map((p, i) => {
-        const on = sel.indexOf(i) > -1;
+      '<div class="h2pickwrap">' + sheetHTML +
+      '<div class="h2picksubs"><div class="h2subhead">' +
+        (benched.length === 1 ? "One on the bench" : benched.length + " on the bench") +
+      '</div><div class="h2bench h2squad">' + benched.map(i => {
+        const p = pool[i];
         const ls = lgOf(p);
-        return '<button class="h2markbtn' + (on ? ' on' : '') + '" style="--ac:' + kit +
+        return '<button class="h2markbtn" style="--ac:' + kit +
           '" onclick="h2SquadPick(' + i + ')"' +
-          (!on && left <= 0 ? ' disabled' : '') + '>' +
+          (left <= 0 ? ' disabled' : '') + '>' +
           /* THE NUMBER PUTS THE SHIRT ON. This screen was three spans
              of type per man and the first of them was a bare number, which is
              the one item in a squad list that already has a picture attached
@@ -17137,7 +17269,7 @@ function h2Render(st){
           '<span class="h2mnm">' + esc(p.n) + '</span>' +
           '<span class="h2mps">' + esc(p.pos || "") + (ls.length ? ' \u00b7 ' + ls.length : '') + '</span>' +
         '</button>';
-      }).join("") + '</div>' +
+      }).join("") + '</div></div></div>' +
       '<div class="h2hintline">' + (
         left > 0 ? esc(left + " more to pick.")
         : gks === 0 ? "Eleven, but no goalkeeper. Somebody has to go in goal."
