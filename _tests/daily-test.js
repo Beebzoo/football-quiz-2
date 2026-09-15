@@ -314,7 +314,23 @@ const check = (n, c, x) => {
   /* NOTHING IN THE SUITE HAS EVER RENDERED THIS ROW, which is how a class with
      no rule behind it and a right-hand slot that stopped asking to be tapped
      both shipped. */
-  const row = (h, mi) => ev(app, "dailyCardHTML(" + AT(h, mi) + ")").split("</button>")[0];
+  /* THE DAILY ROW, ASKED FOR BY NAME. This used to take everything before the
+     first </button> in what dailyCardHTML returns, which worked only while the
+     daily row happened to be the first button in the club section. It is not:
+     that function returns the whole Your club block, banner and all, and the
+     three of us hang off the banner above it with a button each. So the first
+     button became a head and every check below was reading it.
+
+     It is the same shape as the four flakes this suite has already had, where
+     an assertion about one element was checked against everything around it.
+     Finding the row by its own handler cannot drift, whatever else the section
+     grows. */
+  const row = (h, mi) => {
+    const all = ev(app, "dailyCardHTML(" + AT(h, mi) + ")");
+    const at = all.indexOf('onclick="dailyStart()"');
+    if (at < 0) return "";
+    return all.slice(all.lastIndexOf("<button", at)).split("</button>")[0];
+  };
   run(app, standing(9, 20260913));
   const untouched = row(10, 0);
   check("six marks, one per rung", (untouched.match(/<i/g) || []).length === 6,
