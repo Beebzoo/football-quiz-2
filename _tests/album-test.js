@@ -30,6 +30,26 @@ const head = harness.slice(0, harness.indexOf("/* ---------- drive an instance f
 eval(head.replace(/^const (fs|vm|path) = require\(.*\);$/gm, ""));
 
 const stage = ctx => ctx.__els["stage"] ? ctx.__els["stage"].innerHTML : "";
+/* THE PAGE GRID, SLICED OUT OF THE SCREEN, because a country page can now carry
+   a card that is not in it. Picking a sticker up lifts it into a full-screen
+   overlay written after the sheet, and that overlay holds a second real drawing
+   of the front face, so a count of class="alst" across the whole stage stopped
+   being an invariant and became a number that depends on whether somebody is
+   holding a card.
+
+   The count is worth keeping, because it is what catches a child class that
+   merely begins with those four letters, and a failure there would read as a bug
+   in the album rather than as a bug in a class name. So it is scoped instead of
+   dropped: every slot in the book lives between .alsheet and .alsheet-f, that is
+   still exactly twenty-three whatever is going on elsewhere on the screen, and
+   what is outside the sheet gets its own check a few lines below rather than
+   being quietly folded into this one. */
+const sheet = ctx => { const h = stage(ctx),
+  a = h.indexOf('<div class="alsheet">'), b = h.indexOf('<div class="alsheet-f">');
+  return (a < 0 || b < 0) ? "" : h.slice(a, b); };
+const offsheet = ctx => { const h = stage(ctx),
+  a = h.indexOf('<div class="alsheet">'), b = h.indexOf('<div class="alsheet-f">');
+  return (a < 0 || b < 0) ? h : h.slice(0, a) + h.slice(b); };
 const ev = (c, e) => vm.runInContext("(" + e + ")", c);
 const run = (c, s) => vm.runInContext(s, c);
 const tick = (ms = 130) => new Promise(r => setTimeout(r, ms));
@@ -159,8 +179,11 @@ const check = (n, c, x) => {
   check("with all thirty-two pages", (stage(app).match(/openAlbum\(/g) || []).length >= 32,
     (stage(app).match(/openAlbum\(/g) || []).length);
   run(app, 'openAlbum("wc2006", "Italy"); render();'); await tick(140);
-  check("a page shows all twenty-three", (stage(app).match(/class="alst/g) || []).length === 23,
-    (stage(app).match(/class="alst/g) || []).length);
+  check("a page shows all twenty-three", (sheet(app).match(/class="alst/g) || []).length === 23,
+    (sheet(app).match(/class="alst/g) || []).length);
+  check("and nothing is lying on top of the sheet",
+    (offsheet(app).match(/class="alst/g) || []).length === 0,
+    (offsheet(app).match(/class="alst/g) || []).length);
   /* THE GAP IS THE FEELING. A missing man is drawn and emptied, never left
      out, because his number and his name still being there is the whole thing. */
   check("and the ones you do not have are still drawn",
@@ -928,6 +951,518 @@ const check = (n, c, x) => {
     /animation:pkrvdim \.22s ease both/.test(src) &&
     /\.pkrv\{[^}]*transition:opacity \.26s ease\}/.test(src) &&
     /\.pkrv\.pkrv-done\{opacity:0;pointer-events:none\}/.test(src), "it still cuts");
+
+  /* ======================= THE CARD TURNS OVER =======================
+     ALBUM-PLAN section 3, and the last of the album's own list of unbuilt
+     things. What is being asserted down here is not that a card can rotate. It
+     is the four rules that decide whether the back is honest: a card turns over
+     only when there is something real behind it, every row on it comes out of a
+     file rather than out of a builder's imagination, the two ways of having no
+     career are told apart, and the file it all depends on is asked for somewhere
+     that costs nobody anything.
+
+     FETCH REJECTS IN THIS HARNESS, which is not a limitation but the most
+     interesting case there is. spells.json is a lazy second file and somebody on
+     a bad connection, or offline on a book they have never opened, gets a card
+     that has to be a card anyway. So the careers are pushed in by hand where the
+     subject is what the back says, and the rejection is left to run where the
+     subject is what the loader does about it. */
+  console.log("\n--- where the careers come from, and what they cost ---");
+  /* NOTHING IN THE APP HAD EVER OPENED THESE FILES. Fifteen of them, 1,980,274
+     bytes, 40,181 spells joining 6,420 of the 10,157 men on the shelf, written by
+     build-squads.js and read by nobody until now. */
+  const shelf = ev(app, "Object.keys(POOLS).filter(albumIsBook)");
+  check("all sixteen books are on the shelf", shelf.length === 16, shelf.length);
+  const withfile = shelf.filter(b => ev(app, "albumSpellsFile(" + JSON.stringify(b) + ")"));
+  check("and fifteen of them know where their career file is",
+    withfile.length === 15, withfile.length);
+  check("and every one of those files is actually on the disk",
+    withfile.every(b => fs.existsSync(path.join(REPO,
+      ev(app, "albumSpellsFile(" + JSON.stringify(b) + ")")))),
+    withfile.map(b => ev(app, "albumSpellsFile(" + JSON.stringify(b) + ")")).join(" "));
+  /* THE SIXTEENTH IS THE FINALS BOOK, which has no careers and never had: forty
+     real starting elevens, no bench, no harvest. It is spotted by its group
+     rather than by its name, so nothing is ever requested for a file that has
+     never existed and the day a second group of line-ups lands it is already
+     right. */
+  check("and the book with no careers asks for no file",
+    ev(app, 'albumSpellsFile("finals")') === null, ev(app, 'albumSpellsFile("finals")'));
+  /* AND IT IS NOT IN THE BOOT LOOP, which is the whole cost argument. loadPool
+     fetches every row in POOLS in parallel at start-up, and 1.89MB of club
+     histories have no business on that wire while somebody reads a menu. */
+  const flat = src.split("\n").join("");
+  check("nothing fetches a career file at boot",
+    !/function loadPool\(id\)\{[\s\S]{0,600}spells/.test(flat),
+    "the careers went into loadPool");
+  /* ASKED FOR ON THE BOOK SCREEN AND AGAIN ON THE PAGE, which is two call sites
+     on purpose. The book screen is the one screen every route to a page goes
+     through, so asking there buys the fetch the time it takes to choose a page.
+     The page asks again because that is the retry point. */
+  check("and it is asked for on the book screen and again on the page",
+    (src.match(/albumWantSpells\(bid\);/g) || []).length === 2,
+    (src.match(/albumWantSpells\([a-z]*\);/g) || []).length);
+  /* NOR IS IT PRECACHED. sw.js installs 607 distinct files at 18,415,395 bytes,
+     which is 17.56MB; fifteen more would take it to 19.45MB, a tenth again on
+     every install, for a face most people will never open. That file is network
+     first and caches every successful GET, so the book you actually collect is
+     offline from the second time you open it. If the bargain is ever revisited,
+     this is the line that says so. */
+  check("and no career file is in the service worker install",
+    fs.readFileSync(path.join(REPO, "sw.js"), "utf8").indexOf("spells.json") < 0,
+    "spells went into the install without the size argument being re-made");
+
+  console.log("\n--- and a book it cannot get is given up on rather than promised forever ---");
+  /* THE OFFLINE PATH IS NOT A 404 AND MUST NOT BE TREATED AS ONE. sw.js falls
+     back to caches.match("index.html") for anything it cannot serve, and
+     index.html is precached, so an uncached spells.json requested offline comes
+     back as a 200 carrying an HTML document: r.ok is true, r.json() rejects, and
+     the loader lands in its catch. That is a connection problem rather than a
+     missing file, so it is counted instead of believed. Two consecutive misses
+     and the book is dropped for the session, which is what stops a walk through
+     thirty-two pages with no signal firing thirty-two doomed requests. */
+  run(app, "for(const k in SPELLS) delete SPELLS[k]; " +
+    "for(const k in SPELLS_ON) delete SPELLS_ON[k]; " +
+    "for(const k in SPELLS_MISS) delete SPELLS_MISS[k];");
+  run(app, 'openAlbum("wc2006", "Italy");'); await tick(90);
+  check("one failure is a bad moment and the book still says the clubs are coming",
+    ev(app, "SPELLS_MISS.wc2006") === 1 && ev(app, 'albumSpellsState("wc2006")') === 1,
+    ev(app, "SPELLS_MISS.wc2006") + " / " + ev(app, 'albumSpellsState("wc2006")'));
+  run(app, 'openAlbum("wc2006", "Brazil");'); await tick(90);
+  check("two is a book that is not coming, and it stops claiming otherwise",
+    ev(app, "SPELLS.wc2006") === null && ev(app, 'albumSpellsState("wc2006")') === 0,
+    JSON.stringify(ev(app, "SPELLS.wc2006")) + " / " + ev(app, 'albumSpellsState("wc2006")'));
+  run(app, "__FETCHES = 0; __RF = fetch; fetch = u => { __FETCHES++; return __RF(u); };");
+  run(app, 'openAlbum("wc2006", "France"); openAlbum("wc2006", "Spain"); openAlbum("wc2006");');
+  await tick(90);
+  check("and three more pages of it ask for nothing at all",
+    ev(app, "__FETCHES") === 0, ev(app, "__FETCHES"));
+  run(app, "fetch = __RF;");
+  /* A 404 IS DIFFERENT AND IS PERMANENT STRAIGHT AWAY, because a response that
+     is not ok is a file that is not there rather than a connection that is not
+     working, and asking twice for a file that has been deleted is asking twice
+     for nothing. */
+  check("a response that is not ok is permanent on the first answer",
+    /r\.ok \? r\.json\(\) : null/.test(src) && /if\(!b\)\{ SPELLS\[book\] = null; return; \}/.test(src),
+    "a missing file is being retried like a dropped connection");
+
+  console.log("\n--- a card you own turns over, and one you do not does not ---");
+  clean();
+  run(app, "for(const k in SPELLS) delete SPELLS[k]; " +
+    "for(const k in SPELLS_ON) delete SPELLS_ON[k]; " +
+    "for(const k in SPELLS_MISS) delete SPELLS_MISS[k];");
+  run(app, 'openAlbum("wc2006", "Italy");'); await tick(60);
+  check("a page of gaps offers nothing to turn over",
+    (stage(app).match(/albumTurn\(/g) || []).length === 0,
+    (stage(app).match(/albumTurn\(/g) || []).length);
+  check("and says nothing about turning one",
+    !/turns over/.test(stage(app)), "it invited a tap on a card nobody has");
+  run(app, '(() => { for(const m of albumMen("wc2006", "Italy")) ' +
+    'albumStick(albumId("wc2006", "Italy", m)); mineSave(); })(); render();'); await tick(60);
+  check("a page you have finished offers all twenty-three",
+    (stage(app).match(/albumTurn\(/g) || []).length === 23,
+    (stage(app).match(/albumTurn\(/g) || []).length);
+  /* ONE HINT LINE AND NOT TWO. The page already carries a sentence about the
+     bench and a sentence about swapping, and a third italic line stacked under
+     them in the same type at the same width is a page giving instructions
+     instead of a page saying something. */
+  check("and the invitation is a clause in the line that was already there",
+    (stage(app).match(/h2hintline/g) || []).length === 1 &&
+    /Tap one you have and it turns over\./.test(stage(app)),
+    (stage(app).match(/h2hintline/g) || []).length + " hint lines");
+  /* THE HANDLER IS ON THE SLOT AND NEVER ON THE CARD. packRevealSetHTML builds
+     the same card through the same builder inside a sheet where a tap already
+     means skip, so a handler at .alst level would exist on that one too. */
+  check("the tap is on the slot rather than on the sticker",
+    !/class="alst[^"]*"[^>]*onclick/.test(stage(app)) &&
+    /<button class="alslot alspick" onclick="albumTurn\(/.test(stage(app)),
+    "the handler moved onto the card");
+  /* AND IT IS NOT WEARING want. That class means a man you have not got: it is
+     on the gap you can afford, on the swap pile and on Your XI. A card you
+     already have is the opposite of that, so it gets one declaration of its
+     own rather than a name that would then be false wherever it appears. */
+  check("and a card you already have is not labelled as one you want",
+    /\.alslot\.alspick\{cursor:pointer\}/.test(src) &&
+    (stage(app).match(/alslot want/g) || []).length === 0,
+    (stage(app).match(/class="alslot[^"]*"/g) || []).slice(0, 2).join(" | "));
+
+  console.log("\n--- what is behind it ---");
+  const itid = ev(app, '(() => { const m = albumMen("wc2006", "Italy").find(x => x.no === 10); ' +
+    'return albumId("wc2006", "Italy", m); })()');
+  run(app, "albumTurn(" + JSON.stringify(itid) + ");"); await tick(60);
+  check("turning one puts a card in your hand",
+    (stage(app).match(/class="alturn"/g) || []).length === 1 &&
+    (stage(app).match(/class="albk"/g) || []).length === 1,
+    (stage(app).match(/class="alturn"/g) || []).length);
+  /* THE SHEET NEVER CHANGES AND THE THING ON TOP OF IT IS COUNTED SEPARATELY.
+     The raised card is a second real drawing of the front, because the turn
+     starts on the front and rotates away from it, so the front has to be there
+     to rotate. Holding the old whole-stage count at twenty-three would have
+     meant drawing the slot it came out of as a hole, which is a lovely idea
+     nobody can see behind a full-screen dim. */
+  check("the page underneath is still exactly twenty-three slots",
+    (sheet(app).match(/class="alst/g) || []).length === 23,
+    (sheet(app).match(/class="alst/g) || []).length);
+  check("and the card in your hand is one more front, lying on top of it",
+    (offsheet(app).match(/class="alst/g) || []).length === 1,
+    (offsheet(app).match(/class="alst/g) || []).length);
+  check("nothing the turn brings with it opens with those four letters",
+    (stage(app).match(/class="alst[a-z]/g) || []).length === 0,
+    (stage(app).match(/class="alst[a-z-]+/g) || []).slice(0, 3).join(" | "));
+  const back = () => (stage(app).match(/<div class="albk">[\s\S]*?<div class="alturn-t"/) || [""])[0];
+  /* THE WHOLE NAME, which is the one thing the back has that the front cannot:
+     full is on all 10,157 men in the app and has never once reached a screen,
+     because a shirt carries a surname. */
+  check("the back gives him his whole name", /<b>Francesco Totti<\/b>/.test(back()),
+    (back().match(/<b>[^<]*<\/b>/) || ["no name"])[0]);
+  check("and the front is still only the surname",
+    /class="alsn">Totti</.test(stage(app)), "the front grew a first name");
+  check("with the number, the position and the side on one line under it",
+    /<s>10 \u00b7 AM \u00b7 ITA<\/s>/.test(back()),
+    (back().match(/<s>[^<]*<\/s>/) || ["no line"])[0]);
+  /* club, caps and dob are on every one of the 9,717 men in the fifteen squad
+     books and not one of the three is referenced anywhere else in index.html
+     today, so this is the first screen any of them has reached. */
+  check("and the four facts the squad file has always carried",
+    /<i>Born<\/i><span>27 Sep 1976 \u00b7 29 that summer<\/span>/.test(back()) &&
+    /<i>Club<\/i><span>Roma<\/span>/.test(back()) &&
+    /<i>Caps<\/i><span>51<\/span>/.test(back()) &&
+    /<i>2006<\/i><span>7 games \u00b7 1 goal<\/span>/.test(back()),
+    (back().match(/<i>[^<]*<\/i><span>[^<]*<\/span>/g) || []).join(" | "));
+  /* 2006 IS ONE OF THE SIX BOOKS WITH NO CAREER GOALS COLUMN AT ALL, so the caps
+     row here is a bare number and would carry goals in one of the eight that
+     have them. The plan says six books; on disk it is six with none and a
+     seventh, wc2010, carrying six men out of 736. */
+  check("and a book with no career goals column prints caps on their own",
+    back().indexOf("<i>Caps</i><span>51 \u00b7") < 0, "2006 grew a goals column");
+  /* THE CARD YOU JUST PAID THREE DOUBLES FOR STAYS GOLD WHEN YOU PICK IT UP. lit
+     is the light albumSwap puts on him, and a card that is gold in the sheet and
+     plain in your hand is the app forgetting what it told you a moment ago. */
+  run(app, "ALBUM_VIEW.lit = " + JSON.stringify(itid) + "; render();"); await tick(60);
+  check("a man you have just been given is still lit in your hand",
+    /class="alturn-a"><div class="alst fresh"/.test(stage(app)),
+    (stage(app).match(/alturn-a"><div class="alst[^"]*"/) || ["no card"])[0]);
+  run(app, "ALBUM_VIEW.lit = null; render();"); await tick(60);
+  /* 2,142 men carry capg:0 and 152 carry caps:0, so every row tests for the
+     field being there rather than for it being true. A truthiness test loses a
+     row those men are entitled to. */
+  check("a real zero is printed rather than treated as a gap",
+    ev(app, 'albumBackHTML("wc2006", "Italy", {n:"X", full:"X", no:99, pos:"GK", ' +
+      'club:"Somewhere", caps:0, capg:0, app:0})')
+      .indexOf("<i>Caps</i><span>0 \u00b7 0 goals</span>") > -1,
+    ev(app, 'albumBackHTML("wc2006", "Italy", {n:"X", full:"X", no:99, pos:"GK", ' +
+      'club:"Somewhere", caps:0, capg:0, app:0})'));
+  /* g is on 1,359 of the 9,717 and that is not a hole in the harvest, it is the
+     truth about footballers, so appearances without goals is no goals and not a
+     missing row. A man with neither loses the row, which is the plan's rule. */
+  check("appearances without goals reads as no goals",
+    ev(app, 'albumBackHTML("wc2006", "Italy", {n:"X", no:99, pos:"CB", app:3})')
+      .indexOf("3 games \u00b7 no goals") > -1,
+    ev(app, 'albumBackHTML("wc2006", "Italy", {n:"X", no:99, pos:"CB", app:3})'));
+  check("and a man with neither loses the row rather than being given a nought",
+    ev(app, 'albumBackHTML("wc2006", "Italy", {n:"X", no:99, pos:"CB"})')
+      .indexOf("<i>2006</i>") < 0,
+    ev(app, 'albumBackHTML("wc2006", "Italy", {n:"X", no:99, pos:"CB"})'));
+
+  console.log("\n--- the career, which is the row the plan wants most ---");
+  run(app, 'SPELLS.wc2006 = albumSpellsIndex(' +
+    JSON.stringify(R("assets/wc2006/spells.json")) + '); render();'); await tick(60);
+  check("Totti's career comes off the file rather than out of a builder",
+    /<span>AS Roma<\/span>/.test(back()) && /<u>1993\u2013/.test(back()),
+    back().slice(back().indexOf("albk-l"), back().indexOf("albk-l") + 220));
+  /* the six slugs a spell row can carry are the six the quiz drawer already has
+     an accent for, so the dot is that accent rather than a second palette, and
+     it stays right the day somebody repaints the drawer. */
+  check("and a league on a spell wears the quiz drawer's own colour",
+    back().indexOf('--lgc:' + ev(app, "QUIZZES.seriea.ac")) > -1,
+    (back().match(/--lgc:[^"]*/g) || []).join(" "));
+  /* 21,012 of the 40,181 spell rows are clubs outside the six decks, so an
+     uncoloured dot is the commoner case rather than the broken one, and it still
+     has to be a dot: a row with no bullet in a list where every other row has one
+     reads as a rendering failure. */
+  const buffon = () => ev(app, 'albumBackHTML("wc2006", "Italy", ' +
+    'albumMen("wc2006", "Italy").find(m => m.no === 1))');
+  check("and a club outside the six keeps its dot and loses only the colour",
+    /<em><\/em><u>2018\u20132019<\/u><span>Paris Saint-Germain<\/span>/.test(buffon()),
+    (buffon().match(/<em[^>]*><\/em><u>[^<]*<\/u><span>[^<]*/g) || []).join(" | "));
+  /* 3,116 rows of 40,181 have no end year, which is not missing data, it is a
+     man who had not left when the article was written, so the dash is left
+     hanging. A spell inside one year prints that year once, which happens a
+     great deal on loan. */
+  check("an unfinished spell says so rather than inventing an end",
+    ev(app, 'albumYears({c:"x", f:2011})') === "2011\u2013" &&
+    ev(app, 'albumYears({c:"x", f:2005, t:2005})') === "2005",
+    ev(app, 'albumYears({c:"x", f:2011})') + " / " + ev(app, 'albumYears({c:"x", f:2005, t:2005})'));
+  check("and the file agrees, on the two men in this book who have one",
+    /<u>2018\u2013<\/u><span>FC Calcio Acri<\/span>/.test(
+      ev(app, 'albumBackHTML("wc2006", "Costa Rica", ' +
+        'albumMen("wc2006", "Costa Rica").find(m => m.no === 5))')) &&
+    /<u>2005<\/u><span>LA Galaxy<\/span>/.test(
+      ev(app, 'albumBackHTML("wc2006", "Costa Rica", ' +
+        'albumMen("wc2006", "Costa Rica").find(m => m.no === 4))')),
+    "the open and the one-season spells are not printed as the file has them");
+  /* THREE ROWS IN 40,181 CARRY A FROM-YEAR OF 1: Roberto Carlos at Anzhi, once
+     in each of the 1998, 2002 and 2006 books, and the same three are the only
+     rows anywhere with an end before a beginning. A line reading 1 to 2012 makes
+     a whole card look untrustworthy, so the year goes and the club keeps its
+     line, in the place the file put it. */
+  check("a year no footballer could have played in is dropped, and the club stays",
+    ev(app, 'albumYears({c:"x", f:1, t:2012})') === "2012" &&
+    ev(app, 'albumYears({c:"x", f:1999, t:1990})') === "1999\u2013" &&
+    /<u>2012<\/u><span>FC Anzhi Makhachkala<\/span>/.test(
+      ev(app, 'albumBackHTML("wc2006", "Brazil", ' +
+        'albumMen("wc2006", "Brazil").find(m => m.no === 6))')),
+    ev(app, 'albumYears({c:"x", f:1, t:2012})'));
+  /* FOUR KEYS OUT OF 6,420 CARRY A SURNAME, which is the career harvest arriving
+     independently at albumId's own rule for the three Euro 2020 shirts that two
+     men each wore. Falling back to the plain key would hand Ramsdale's card
+     Henderson's career, and there is no plain key for a shared shirt in any of
+     the fifteen files, so the fallback could only ever be wrong. */
+  run(app, "TEAMS.euro2020 = " + JSON.stringify(R("assets/euro2020/index.json")) + ";");
+  run(app, 'SPELLS.euro2020 = albumSpellsIndex(' +
+    JSON.stringify(R("assets/euro2020/spells.json")) + ');');
+  const shirt13 = ev(app, 'albumMen("euro2020", "England").filter(m => m.no === 13).map(m => m.n)');
+  check("two men in one shirt, which is what Euro 2020 did to three squads",
+    shirt13.length === 2, shirt13.join(" "));
+  const car13 = shirt13.map(n => ev(app, 'albumBackHTML("euro2020", "England", ' +
+    'albumMen("euro2020", "England").find(m => m.n === ' + JSON.stringify(n) + '))'));
+  check("and each of them gets his own career rather than the other's",
+    car13[0] !== car13[1] && car13[0].indexOf("albk-l") > -1 && car13[1].indexOf("albk-l") > -1 &&
+    car13.filter(c => c.indexOf("Arsenal") > -1).length === 1,
+    "one shirt, one career");
+  check("and a shared shirt with no name to go on gets nothing, not the other man's",
+    ev(app, 'albumSpells("euro2020", "England", {n:"", no:13})') === null,
+    JSON.stringify(ev(app, 'albumSpells("euro2020", "England", {n:"", no:13})')));
+  /* BOTH ENDS OF THE KEY GO THROUGH albumTag, which the album's own ids have
+     done since the day they were written. The join works on the raw side name
+     today, but it works by the index and the harvest happening to agree on
+     spelling, and the first re-harvest that writes one of them differently would
+     drop a squad's careers with nothing on any screen to say why. */
+  check("the join is tagged at both ends rather than trusting two spellings to match",
+    !!ev(app, 'SPELLS.euro2020["england/13/henderson"]') &&
+    !ev(app, 'SPELLS.euro2020["England/13/Henderson"]'),
+    Object.keys(ev(app, "SPELLS.euro2020")).slice(0, 2).join(" | "));
+
+  console.log("\n--- the two ways of having no career are different sentences ---");
+  /* A MAN WITH NOTHING AND A FILE THAT HAS NOT LANDED look identical from inside
+     the builder and must not look identical on the card. Counted off the fifteen
+     squad books: 6,420 men get a career, 1,528 have a league and no career, and
+     1,769 have neither, which sums to 9,717. */
+  const nowt = '{n:"X", full:"X Y", no:99, pos:"CB", club:"C", caps:2, dob:"1980-01-01"}';
+  run(app, "delete SPELLS.wc2006;");
+  check("before the file lands it says it has not looked yet",
+    ev(app, 'albumSpellsState("wc2006")') === 1 &&
+    ev(app, 'albumBackHTML("wc2006", "Italy", ' + nowt + ')')
+      .indexOf('<div class="albk-w">Clubs not here yet.</div>') > -1,
+    ev(app, 'albumBackHTML("wc2006", "Italy", ' + nowt + ')'));
+  run(app, 'SPELLS.wc2006 = albumSpellsIndex(' +
+    JSON.stringify(R("assets/wc2006/spells.json")) + ');');
+  check("and once it has, it says it looked and there was nothing",
+    ev(app, 'albumSpellsState("wc2006")') === 2 &&
+    ev(app, 'albumBackHTML("wc2006", "Italy", ' + nowt + ')')
+      .indexOf('<div class="albk-w">No club career on file.</div>') > -1,
+    ev(app, 'albumBackHTML("wc2006", "Italy", ' + nowt + ')'));
+  check("which is true of a real man in this book and not just a made-up one",
+    ev(app, 'albumBackHTML("wc2006", "Costa Rica", ' +
+      'albumMen("wc2006", "Costa Rica").find(m => m.no === 18))')
+      .indexOf("No club career on file.") > -1,
+    "the 1,769 men with neither got silence instead of a sentence");
+  /* ALBUM-PLAN's fifth row is the leagues, and it is drawn for the 1,528 men in
+     the middle and nowhere else: printed under a career it would repeat in words
+     what the coloured dots beside the clubs have already said, and printed
+     instead of one it is the only thing on the card that is about football
+     rather than about paperwork. */
+  const solis = ev(app, 'albumBackHTML("wc2006", "Costa Rica", ' +
+    'albumMen("wc2006", "Costa Rica").find(m => m.no === 8))');
+  check("a man with no career falls back to the leagues he played in",
+    /albk-t">Leagues<\/div><ul class="albk-l"><li><em style="--lgc:[^"]*"><\/em><span>Premier League<\/span>/
+      .test(solis), solis.slice(solis.indexOf("albk-c")));
+  check("and a man with a career is never given both",
+    buffon().indexOf('albk-t">Leagues') < 0 && buffon().indexOf('albk-t">Clubs') > -1,
+    "the card said it twice");
+
+  console.log("\n--- a file that lands under a card somebody is holding ---");
+  /* THE ONE-LINE VERSION OF THIS IS render(), and render() rebuilds the stage out
+     of strings, which rebuilds the raised card as well: alturnover starts again
+     from zero and a card halfway through turning snaps back and turns a second
+     time. So the arrival writes the career straight into the block already on the
+     screen. The harness's querySelectorAll always returns nothing, so the nodes
+     are stood in for here; what is under test is the part that is ours, which is
+     which nodes it agrees to touch and what it writes into them. */
+  check("the arrival paints rather than re-rendering the page under your thumb",
+    /albumSpellPaint\(book\);/.test(src) &&
+    !/function albumWantSpells\(book\)\{[\s\S]*?\n\}/.exec(src)[0].match(/render\(\)/),
+    "the fetch callback rebuilds the stage");
+  run(app, 'delete SPELLS.wc2006; __PAINT = [' +
+    '{__bk:"wc2006", __sp:' + JSON.stringify(itid) + ', innerHTML:"", ' +
+      'getAttribute(k){ return k === "data-bk" ? this.__bk : this.__sp; }}, ' +
+    '{__bk:"euro2020", __sp:"euro2020:england/13/henderson", innerHTML:"", ' +
+      'getAttribute(k){ return k === "data-bk" ? this.__bk : this.__sp; }}]; ' +
+    '__QSA = document.querySelectorAll; document.querySelectorAll = () => __PAINT;');
+  run(app, 'SPELLS.wc2006 = albumSpellsIndex(' +
+    JSON.stringify(R("assets/wc2006/spells.json")) + '); albumSpellPaint("wc2006");');
+  check("the card on the table gets its clubs written into it",
+    /albk-t">Clubs<\/div><ul class="albk-l">/.test(ev(app, "__PAINT[0].innerHTML")) &&
+    ev(app, "__PAINT[0].innerHTML").indexOf("AS Roma") > -1,
+    ev(app, "__PAINT[0].innerHTML").slice(0, 160));
+  /* AND IT ASKS WHICH BOOK THE NODE CAME FROM, which is not paranoia: a fetch for
+     one book can perfectly well land after somebody has walked to another book's
+     page, and a paint that matched only on the shape of the block would write one
+     book's careers into another book's card. */
+  check("and a card from another book is left exactly as it was",
+    ev(app, "__PAINT[1].innerHTML") === "", ev(app, "__PAINT[1].innerHTML"));
+  run(app, "document.querySelectorAll = __QSA;");
+
+  console.log("\n--- the thin back, and the book that has no back at all ---");
+  /* 440 MEN IN ONE BOOK OF SIXTEEN carry a name, a full name, a number, a
+     position and a captain's flag, and absolutely nothing else. Counted across
+     all 440: no club, no caps, no date of birth, no appearances, no leagues, and
+     no spells.json beside the pool. And full is byte-identical to n for 440 of
+     440 of them, which is what kills the obvious way of making those cards turn
+     anyway: the full name is the one field that has never reached a screen, and
+     on those men it is the surname already standing up the front of the card. */
+  run(app, "TEAMS.finals = " + JSON.stringify(R("assets/finals/index.json")) + ";");
+  const fmen = ev(app, '(() => { const out = []; for(const s of albumSides("finals")) ' +
+    'for(const m of albumMen("finals", s)) out.push([s, m]); return out; })()');
+  check("the finals book is 440 men", fmen.length === 440, fmen.length);
+  check("and the whole name on every one of them is the surname the front prints",
+    fmen.every(r => r[1].full === r[1].n), fmen.filter(r => r[1].full !== r[1].n).length + " differ");
+  check("and none of them carries a second fact to put on a back",
+    fmen.every(r => !r[1].club && r[1].caps == null && !r[1].dob && r[1].app == null &&
+      !(r[1].lg && r[1].lg.length)), "somebody in there has a career after all");
+  /* SO THE RULE ASKS FOR TWO FACTS AND NOT ONE. A single field is too easy: the
+     day that harvest gains a date of birth, all 440 would start turning over to a
+     back carrying one row and a header that repeats the front, which is the exact
+     card this is refusing to draw. */
+  check("one fact is not a card",
+    ev(app, 'albumBackful("wc2006", "Italy", {n:"X", no:99, pos:"CB", dob:"1970-01-01"})') === false,
+    "a date of birth on its own was enough");
+  check("two of them is",
+    ev(app, 'albumBackful("wc2006", "Italy", {n:"X", no:99, pos:"CB", dob:"1970-01-01", caps:3})') === true,
+    "too strict");
+  check("and so is a career, whatever else is missing",
+    ev(app, 'albumBackful("wc2006", "Italy", albumMen("wc2006", "Italy")[0])') === true, "no");
+  check("every man in the fifteen squad books has a back",
+    ev(app, 'albumSides("wc2006").every(s => albumMen("wc2006", s)' +
+      '.every(m => albumBackful("wc2006", s, m)))'), "a squad man came up empty");
+  check("and not one of the 440 does",
+    ev(app, 'albumSides("finals").every(s => !albumMen("finals", s)' +
+      '.some(m => albumBackful("finals", s, m)))'), "somebody in the finals book has a back");
+  const fpage = nm => { const sd = ev(app, 'albumSides("finals").find(s => s.indexOf(' +
+      JSON.stringify(nm) + ') === 0)');
+    run(app, '(() => { for(const m of albumMen("finals", ' + JSON.stringify(sd) + ')) ' +
+      'albumStick(albumId("finals", ' + JSON.stringify(sd) + ', m)); mineSave(); })();');
+    run(app, 'openAlbum("finals", ' + JSON.stringify(sd) + ');'); };
+  fpage("Brazil \u00b7 World Cup final 1970"); await tick(60);
+  check("so a finished page of them turns nothing over",
+    (stage(app).match(/albumTurn\(/g) || []).length === 0,
+    (stage(app).match(/albumTurn\(/g) || []).length);
+  /* AND THE PAGE SAYS WHY, once, rather than leaving eleven cards that ignore a
+     tap to read as eleven cards that are broken. The scoreline is the one real
+     fact those pages have and it belongs here rather than on eleven identical
+     backs, because it is a fact about the side and not about any of the men. */
+  check("and the page says so, with the one real fact it has",
+    /The final: Brazil 4-1 Italy\. There is nothing else on file for these eleven/
+      .test(stage(app)),
+    (stage(app).match(/h2hintline[^>]*>[^<]*/) || ["no hint"])[0]);
+  check("and it is still one line rather than a second one stacked under the first",
+    (stage(app).match(/h2hintline/g) || []).length === 1,
+    (stage(app).match(/h2hintline/g) || []).length);
+  /* FIFTEEN OF THE FORTY SIDES IN THAT BOOK ARE CLUBS RATHER THAN COUNTRIES,
+     which is why nothing in that sentence says country and why the scoreline is
+     read off the side rather than assembled out of a nation and a year. */
+  fpage("AC Milan"); await tick(60);
+  check("and a club side in the same book gets the same sentence and its own result",
+    /The final: AC Milan 4-0 Steaua Bucharest\. There is nothing else on file/
+      .test(stage(app)),
+    (stage(app).match(/h2hintline[^>]*>[^<]*/) || ["no hint"])[0]);
+  /* xiVs IS A FULL RESULT ON A FINALS SIDE AND A BARE OPPONENT NAME ON A SQUAD
+     SIDE, so the test is the shape of the string rather than the name of the
+     book. Counted: 40 of the 40 finals sides carry a digit in it and 0 of the 408
+     squad sides do, which is why "France" can never turn up under a label reading
+     The final. */
+  check("the scoreline is found by its shape and not by the name of the book",
+    ev(app, 'albumSides("finals").every(s => /\\d/.test(String(TEAMS.finals[s].xiVs || "")))') &&
+    ev(app, 'albumSides("wc2006").every(s => !/\\d/.test(String(TEAMS.wc2006[s].xiVs || "")))'),
+    "a squad side carries a digit in xiVs");
+  run(app, 'openAlbum("wc2006", "Italy");'); await tick(60);
+  check("and a squad page is never told it has nothing to turn",
+    !/There is nothing else on file/.test(stage(app)) &&
+    /Tap one you have and it turns over\./.test(stage(app)), "the wrong hint");
+  run(app, "delete TEAMS.finals;");
+
+  console.log("\n--- it is the coin's trick, and the book forgets it straight away ---");
+  /* THE COIN IS THE ONLY 3D IN THE FILE AND THIS IS THE SECOND. One substitution:
+     rotateY where the coin takes rotateX, because a trading card turns about its
+     long axis and a coin turns about its short one. */
+  check("one wrapper owns the perspective and the element inside it owns the turn",
+    /\.alturn-c\{[^}]*perspective:900px\}/.test(src) &&
+    /\.alturn-s\{[^}]*transform-style:preserve-3d/.test(src) &&
+    !/\.alturn-c\{[^}]*transform-style/.test(src), "the two jobs are on one element");
+  /* AND THE PERSPECTIVE IS NOT ON THE FULL-SCREEN WRAPPER, which is the whole
+     reason the dim works. A perspective value other than none makes an element
+     the containing block for its position:fixed descendants, exactly the way a
+     transform does, so putting it on .alturn would resolve the dim against the
+     card's own box: a card-sized dark rectangle hidden behind an opaque card, and
+     a page that never dims at all. */
+  check("and the sheet that catches the tap is not trapped inside the card",
+    /\.alturn\{position:fixed;inset:0;z-index:18/.test(src) &&
+    !/\.alturn\{[^}]*(perspective|transform|filter|contain)/.test(src) &&
+    /\.alturn::before\{content:"";position:absolute;inset:0;/.test(src),
+    (src.match(/\.alturn\{[^}]*\}/) || ["no rule"])[0]);
+  /* the resting transform and the animated one are the same expression, which is
+     the whole reason reduced motion needs no second code path, and it has to be a
+     keyframe rather than a transition because every screen here is an innerHTML
+     string and a transition has no start value on an element born this frame. */
+  check("and its resting state is already the face it turns to",
+    /\.alturn-s\{[^}]*transform:rotateY\(180deg\);animation:alturnover/.test(src) &&
+    /@keyframes alturnover\{from\{transform:rotateY\(0deg\)\}to\{transform:rotateY\(180deg\)\}\}/.test(src),
+    "the two states disagree");
+  check("both faces are hidden from behind and the back is pre-turned",
+    /\.alturn-a,\.alturn-b\{backface-visibility:hidden/.test(src) &&
+    /\.alturn-b\{position:absolute;inset:0;transform:rotateY\(180deg\)\}/.test(src),
+    "you can see through the card");
+  /* .alst is container-type:inline-size and overflow:hidden, so the back cannot
+     live inside it and the wrapper has to carry the card's own width or every cqw
+     on the front resolves against a different box. */
+  check("and the card's own box is untouched, because every cqw on it depends on that",
+    /\.alturn-c\{position:relative;width:min\(66vw,264px\)/.test(src) &&
+    /\.alst\{position:relative;container-type:inline-size/.test(src),
+    "the size container moved");
+  check("reduced motion drops the turn and keeps the card",
+    /@media \(prefers-reduced-motion: reduce\)\{\n    \.alturn::before,\.alturn-s\{animation:none\}\n  \}/.test(src),
+    "no reduced motion rule for the turn");
+  /* ALBUM-PLAN: the book remembers nothing about which way up a card is. Every
+     function that navigates builds ALBUM_VIEW from scratch, so this is true by
+     construction rather than by anybody remembering to clear it. */
+  run(app, "albumTurn(" + JSON.stringify(itid) + ");"); await tick(60);
+  check("a card is up", /class="alturn"/.test(stage(app)), "nothing turned");
+  run(app, "albumTurn(" + JSON.stringify(itid) + ");"); await tick(60);
+  check("tapping it again puts it back, and the counts go back to where they were",
+    !/class="alturn"/.test(stage(app)) &&
+    (sheet(app).match(/class="alst/g) || []).length === 23 &&
+    (offsheet(app).match(/class="alst/g) || []).length === 0,
+    (sheet(app).match(/class="alst/g) || []).length + " in the sheet, " +
+    (offsheet(app).match(/class="alst/g) || []).length + " on top of it");
+  run(app, 'albumTurn(' + JSON.stringify(itid) + '); openAlbum("wc2006", "Brazil");'); await tick(60);
+  check("and walking to another page puts it down without being asked",
+    !/class="alturn"/.test(stage(app)) && !ev(app, "!!ALBUM_VIEW.turn"), "still in hand");
+  /* NOR CAN IT COLLIDE WITH THE REVEAL. That sheet is built on document.body,
+     takes every tap as a skip, and draws its cards through the same builder, so
+     the only thing keeping the two apart is that the turn is bound to a slot the
+     reveal never builds. Its z-index is 19 against the turn's 18, so even if some
+     later screen managed both, the sequence that is mid-count wins. */
+  run(app, 'ALBUM_VIEW = {book:"wc2006", side:"Italy", turn:' + JSON.stringify(itid) + '};');
+  const p9 = ev(app, 'packRevealSetHTML({book:"wc2006", side:"Italy", ' +
+    'm: albumMen("wc2006","Italy")[0], isNew:true, shut:false}, 1)');
+  check("the reveal's own card offers nothing to turn",
+    p9.indexOf("albumTurn") < 0 && p9.indexOf("alturn") < 0 && p9.indexOf("albk") < 0,
+    p9.slice(0, 160));
+  check("and its class string is still exactly what the pack screen gives it",
+    /^class="alst( dupe)?( foil)?( fresh| shut)?"$/.test((p9.match(/class="alst[^"]*"/g) || [""])[0]),
+    (p9.match(/class="alst[^"]*"/g) || [""])[0]);
+  check("and the sheet that is mid-sequence stays on top of a card in the hand",
+    /\.pkrv\{position:fixed;inset:0;z-index:19/.test(src) &&
+    /\.alturn\{position:fixed;inset:0;z-index:18/.test(src), "the turn got above the reveal");
 
   console.log("\n" + (fails ? fails + " FAILED" : "ALL PASS"));
   process.exit(fails ? 1 : 0);

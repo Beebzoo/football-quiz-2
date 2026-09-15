@@ -3784,6 +3784,149 @@
      nine characters of type instead of a second screen explaining the order. */
   .alsx{display:block;margin-top:3px;text-align:center;
     font:600 10px/1 var(--ui);color:var(--ink-dim)}
+  /* ---------------- THE CARD HAS A BACK, AND YOU PICK IT UP TO SEE IT ----------------
+     ALBUM-PLAN section 3 asks for a flip on the sticker with the two faces as
+     one card, and that is what this is, but the card does not turn over where
+     it is stuck down, and the reason is arithmetic rather than taste. The page
+     is four columns inside a body capped at 480px, so a slot is 102px at the
+     widest the app ever gets and about 72px on a phone that is actually 360
+     across. A career is six clubs on the median man and twenty-six on the
+     longest run in the fifteen files, and six lines of type inside 72 pixels of
+     width lands near five and a half pixel type. There is no version of that
+     anybody can read, so the choice was between a back that carries the career
+     and a back that turns over in its slot, and the career is the row the plan
+     wants most and the only one the harvest can really fill.
+
+     So you pick the sticker up. It comes off the page into the middle of the
+     screen at 264px, turns over there, and a tap puts it back. That is what
+     anybody does with a sticker album on a table, and it is still one card with
+     two faces rather than the dossier on a screen of its own that ALBUM-PLAN
+     superseded: nothing navigates, the page stays where it was underneath, and
+     there is no back button because there is nowhere to go back from.
+
+     THE TURN IS THE COIN'S TRICK WITH ONE SUBSTITUTION. .h2coin spins about
+     rotateX because a coin turns about its short axis; a trading card turns
+     about its long one, so this is rotateY and everything else transfers
+     unchanged. The wrapper owns the perspective and the rotating element owns
+     the transform, which is the rule the coin's own comment states outright,
+     and it matters twice as much here because .alst is a size container with
+     overflow:hidden: a second face inside it would be clipped away, and a
+     wrapper that did not carry the card's own width would move what every cqw
+     on the front measures itself against. .alturn-c sets one width, .alturn-s
+     turns, and .alst goes on believing it is the width it always was.
+
+     AND THE PERSPECTIVE IS ON .alturn-c AND NOT ON .alturn, WHICH IS THE WHOLE
+     REASON THE DIM WORKS. Per CSS Transforms level 2 a perspective value other
+     than none makes an element the containing block for its position:fixed
+     descendants, exactly the way a transform does. Put it on the full-screen
+     wrapper and the dim inside that wrapper resolves against the card's own box
+     instead of the viewport, which is a card-sized dark rectangle hidden behind
+     an opaque card and a page that never dims at all. So .alturn is
+     position:fixed with no transform and no perspective on it, the dim is an
+     absolute ::before inside that fixed box, and the perspective sits one level
+     down on the element that actually needs it. A tap anywhere on the darkened
+     page puts the card back, because the dim really is the page.
+
+     THE RESTING TRANSFORM AND THE ANIMATED ONE ARE THE SAME EXPRESSION, again
+     copied off the coin. The card lives at rotateY(180deg), which is the back
+     showing, and alturnover walks it there from zero. That is why the reduced
+     motion rule below needs no second code path and no JS at all: kill the
+     animation and the base transform is already the answer. It also has to be a
+     keyframe rather than a transition, because every screen in this app is an
+     innerHTML string rebuilt by render() and a transition has no start value to
+     run from on an element that was born on this frame.
+
+     IT DOES NOT TURN BACK ON AN ANIMATION, and that is a real cost written down
+     rather than hidden. No element survives two renders, and the one place that
+     does animate an exit keeps a global and a timer alive through it
+     (PACK_GONE). A tap puts the card back instantly. Opening is the half worth
+     animating anyway, since that is the half where somebody is waiting to see
+     something. */
+  .alturn{position:fixed;inset:0;z-index:18;display:flex;flex-direction:column;
+    align-items:center;justify-content:center;gap:14px;cursor:pointer;
+    -webkit-tap-highlight-color:transparent}
+  /* under .pkrv's 19 on purpose. The two can never be up together, because the
+     reveal only ever sits over the pack screen and a card is only ever picked
+     up off a country page, but if some later screen manages it then the sheet
+     that is mid-sequence and counting has to be the one on top. */
+  .alturn::before{content:"";position:absolute;inset:0;
+    background:rgba(3,9,5,.86);backdrop-filter:blur(3px);
+    animation:alturndim .18s ease both}
+  @keyframes alturndim{from{opacity:0}to{opacity:1}}
+  .alturn-c{position:relative;width:min(66vw,264px);perspective:900px}
+  .alturn-s{position:relative;transform-style:preserve-3d;
+    transform:rotateY(180deg);animation:alturnover .46s cubic-bezier(.3,.85,.3,1) both}
+  @keyframes alturnover{from{transform:rotateY(0deg)}to{transform:rotateY(180deg)}}
+  .alturn-a,.alturn-b{backface-visibility:hidden;-webkit-backface-visibility:hidden}
+  .alturn-b{position:absolute;inset:0;transform:rotateY(180deg)}
+  .alturn-t{position:relative;font:600 10px/1 var(--ui);letter-spacing:.16em;
+    text-transform:uppercase;color:rgba(242,239,230,.4)}
+  /* THE SLOT YOU CAN PICK UP GETS THE POINTER AND NOT THE WORD want. The swap
+     chooser, Your XI and the gap you can afford all wear .alslot.want, and want
+     means a man you have not got. A card you already have is the opposite of
+     that, so it gets a class of its own carrying the one declaration it needs,
+     rather than borrowing a name that would then be false on a third of the
+     buttons wearing it. */
+  .alslot.alspick{cursor:pointer}
+  /* THE BACK IS PAPER AND THE FRONT IS KIT, which is most of why anybody would
+     turn it over. The front is a block of one country's colour with almost no
+     type on it; the back is the printed side, so it takes the sheet's own stock
+     rather than the app's dark ground, and the album ends up with both halves of
+     a real sticker in it. It also means the back never has to ask kitInk what
+     colour to write in, because it is not wearing a kit: a hundred and eighteen
+     of the four hundred and forty-eight sides in the books come back white out
+     of the harvest, and a white back would have been a blank card for a quarter
+     of the shelf. */
+  .albk{position:absolute;inset:0;overflow:hidden;border-radius:8px;
+    display:flex;flex-direction:column;background:#F4ECD8;color:#241B08;
+    border:2px solid rgba(36,27,8,.3)}
+  .albk-h{flex:none;padding:9px 10px 7px;background:#241B08;color:#F2EFE6}
+  /* the full name, which is on all 10,157 men and has never once reached a
+     screen: the three places index.html mentions it are all fallbacks nobody
+     reads. The front prints the surname because the front is a shirt, so the
+     back is the only place the man gets his whole name. */
+  .albk-h b{display:block;font:800 15px/1.06 var(--ui)}
+  .albk-h s{display:block;margin-top:4px;text-decoration:none;
+    font:700 9px/1 var(--ui);letter-spacing:.13em;text-transform:uppercase;
+    color:var(--gold-hi)}
+  .albk-f{flex:none;display:grid;grid-template-columns:auto 1fr;gap:2px 9px;
+    padding:8px 10px;border-bottom:2px solid rgba(36,27,8,.16)}
+  .albk-f i{font-style:normal;white-space:nowrap;color:#8A7A4E;
+    font:700 8px/1.6 var(--ui);letter-spacing:.11em;text-transform:uppercase}
+  .albk-f span{font:600 11px/1.45 var(--ui)}
+  .albk-c{flex:1;min-height:0;display:flex;flex-direction:column;padding:7px 10px 9px}
+  .albk-t{flex:none;margin-bottom:5px;color:#8A7A4E;
+    font:700 8px/1 var(--ui);letter-spacing:.13em;text-transform:uppercase}
+  /* THE CAREER SCROLLS RATHER THAN BEING CUT OFF AT WHATEVER FITS. A dozen rows
+     fit at this size and the median career is six, so most men never see a
+     scrollbar, but the longest run in the fifteen files is twenty-six spells and
+     a card that silently drops the last eleven clubs of a career is a card that
+     is quietly wrong about a man. overscroll-behavior keeps the flick inside the
+     card instead of dragging the album page about underneath it, and a scroll is
+     not a click, so flicking the list does not put the card down. */
+  .albk-l{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;
+    margin:0;padding:0;list-style:none}
+  .albk-l li{display:flex;align-items:baseline;gap:6px;padding:1px 0}
+  /* the league colour dot ALBUM-PLAN asks for, and it is the accent the quiz
+     drawer already wears for that league rather than a second palette. 19,169 of
+     the 40,181 spell rows carry a league at all, so a club outside the six decks
+     is the commoner case rather than the broken one: it takes the paper's own
+     grey and the column still lines up rather than going ragged. */
+  .albk-l em{flex:none;width:5px;height:5px;border-radius:50%;
+    background:var(--lgc,rgba(36,27,8,.2))}
+  .albk-l u{flex:none;width:58px;text-decoration:none;color:#6A5B33;
+    font:600 9px/1.55 var(--ui);font-variant-numeric:tabular-nums}
+  .albk-l span{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+    font:700 10px/1.55 var(--ui)}
+  .albk-w{font:600 10px/1.4 var(--ui);color:#8A7A4E}
+  /* REDUCED MOTION, AND IT IS THE COIN'S ANSWER RATHER THAN .pkrv'S. The reveal
+     hides itself outright under this setting, because the reveal is decoration
+     wrapped round a result you have already been given. The back of a card is
+     the thing that was asked for, so it still arrives; it just arrives without
+     turning, which is what the base transform on .alturn-s already is. */
+  @media (prefers-reduced-motion: reduce){
+    .alturn::before,.alturn-s{animation:none}
+  }
   .h2repbox{margin:14px 0 4px}
   .h2rep{background:var(--panel);border:1px solid var(--line);border-radius:12px;
          padding:10px 12px;margin:8px 0}
@@ -11658,6 +11801,83 @@ function openAlbum(book, side){
   render();
 }
 function closeAlbum(){ audio(); ALBUM_VIEW = null; render(); }
+/* WHICH CARD IS IN YOUR HAND, and it is one id on ALBUM_VIEW rather than
+   anything saved. ALBUM-PLAN is explicit that the book remembers nothing about
+   which way up a card is, and ALBUM_VIEW is built from scratch by every function
+   that navigates, so walking to another page or back to the shelf puts the card
+   down by itself with nothing here having to remember to.
+
+   IT MUTATES ALBUM_VIEW RATHER THAN REPLACING IT, which matters because
+   albumSwap writes ALBUM_VIEW.lit to light the man you have just paid three
+   doubles for, and a fresh view object built in here would put that light out
+   the moment you turned any card over.
+
+   TAPPING THE SAME CARD AGAIN PUTS IT BACK, which is the plan's wording, and the
+   tap that actually lands is the one on the sheet over the page, since a card
+   that is up covers the slot it came out of. Both routes are one line.
+
+   AND IT IS BOUND TO THE SLOT AND NEVER TO .alst. The pack reveal builds the
+   same card through the same builder inside its own overlay, so a handler at
+   card level would exist on a card that is mid-sequence, where a tap already
+   means skip and where the reveal's own comment says in as many words that
+   swallowing the tap is what stops a skip landing on whichever album control
+   happened to be under the thumb. Your XI and the swap pile wrap their cards in
+   buttons that already do something else. The one uncontested tap in the whole
+   album is a card you own on a country page, which is exactly the one the plan
+   asked for, and this goes there and nowhere else. */
+/* THE CARD OFF THE PAGE, written last so it sits over everything the page has
+   already put out, and written into #stage rather than onto document.body. The
+   reveal goes on the body because it has to survive a render and be torn down by
+   packRevealCheck on its own terms. This is the opposite kind of thing, a piece
+   of the country page that happens to be on top of it, and it wants to be
+   rebuilt and thrown away by render() like every other part of that screen. It
+   also puts the whole of it inside the test harness's stage(), and a thing
+   nobody can assert on is a thing that quietly stops working.
+
+   THE LIFTED CARD IS A SECOND REAL DRAWING OF THE FRONT, and that is worth
+   saying out loud because album-test counts the literal class="alst across a
+   page. The turn starts on the front and rotates away from it, so the front has
+   to be there to rotate, and the alternative that holds the count still is to
+   draw the slot it came out of as a hole for the duration, which is a lovely
+   idea nobody can see behind a full-screen dim. The suite scopes that count to
+   the sheet instead, where every slot lives, and asserts separately that a raised
+   card puts exactly one more front outside the sheet and that putting it down
+   takes it away again. The invariant is still an invariant; it just says where it
+   applies.
+
+   IT PROVES THE CARD BELONGS TO THIS PAGE BEFORE DRAWING IT. ALBUM_VIEW.turn
+   lives only as long as the object it sits on, but a swap rewrites that object
+   while keeping part of it, so the id is parsed and checked against the book and
+   the side actually on the table. A card you no longer own does not come up
+   either, which is the case where the man you were reading about was paid out in
+   a swap between one render and the next.
+
+   AND IT CARRIES THE SWAP'S GOLD UP WITH IT. lit is the light albumSwap puts on
+   the man you have just paid three doubles for, and it is computed here exactly
+   the way the slot ladder computes it, because a card that is gold in the sheet
+   and plain the moment you pick it up is the app forgetting what it just told
+   you. */
+function albumTurnHTML(book, side){
+  if(!ALBUM_VIEW || !ALBUM_VIEW.turn) return "";
+  const id = ALBUM_VIEW.turn, p = albumParse(id);
+  if(!p || p.book !== book || albumSideOf(book, p.slug) !== side) return "";
+  const m = albumManOf(id);
+  if(!m || !albumHas(id) || !albumBackful(book, side, m)) return "";
+  const lit = (id === ALBUM_VIEW.lit) ? (ALBUM_VIEW.shut ? 2 : 1) : 0;
+  return '<div class="alturn" onclick="albumTurn(0)">' +
+    '<div class="alturn-c"><div class="alturn-s">' +
+      '<div class="alturn-a">' + albumStickerHTML(book, side, m, true, false, lit) + '</div>' +
+      '<div class="alturn-b">' + albumBackHTML(book, side, m) + '</div>' +
+    '</div></div>' +
+    '<div class="alturn-t">Tap to put it back</div>' +
+  '</div>';
+}
+function albumTurn(id){
+  audio();
+  if(!ALBUM_VIEW) return;
+  ALBUM_VIEW.turn = (id && ALBUM_VIEW.turn !== id) ? id : null;
+  render();
+}
 /* THE CHOOSER, WHICH IS WHERE A TAP ON A GAP GOES NOW. It used to run the swap
    on the spot and take the first three doubles off the top of the map, which is
    the one part of swapsies nobody has ever enjoyed. The whole ritual is deciding
@@ -12497,6 +12717,218 @@ const ALBUM_HOME = "wc2006";
    these are two names and not one. */
 const DUGOUT_BOOK = ALBUM_HOME;
 const albumBook = book => TEAMS[book] || null;
+
+/* ---------- THE CAREER FILES, AND WHY THEY DO NOT COME IN WITH THE SQUADS ----------
+   assets/<pool>/spells.json has sat on disk beside every squad file since
+   build-squads.js wrote it and nothing in the app has ever opened one. Fifteen
+   files, 1,980,274 bytes, 40,181 spells, joining 6,420 of the 10,157 men on the
+   shelf. Every figure in this block was counted off the files rather than
+   remembered, and the counting is what settled most of the decisions below.
+
+   THE OBVIOUS PLACE TO FETCH IT IS THE WRONG PLACE. loadPool walks every row in
+   POOLS at boot, in parallel, ungated, and adding the career files to it would
+   put 1.89MB of club histories on the wire on every cold start of the app, for
+   fifteen books at once, while somebody is looking at a menu. The question
+   loadPool exists to answer is who you can play as, and at that point nobody has
+   asked about anybody's career.
+
+   SO IT LOADS WHEN YOU REACH A BOOK, AND AGAIN WHEN YOU REACH A PAGE OF IT. The
+   book screen is the one screen every route to a country page goes through, so
+   asking there buys the fetch however long it takes somebody to choose a page,
+   which on anything but a cold mobile connection is the whole of it. The page
+   asks a second time because that is the retry point: the call is idempotent and
+   costs one property read after the first, so the only thing the second call can
+   do is catch a book whose first attempt died. It is not asked on the shelf,
+   which has no book on the table yet, and not on the first flip, because
+   fetching once the card is already in the air guarantees the first card anybody
+   ever turns shows the empty state for as long as a round trip takes, and a card
+   that turns over to a spinner is worse than one that turns over to what it
+   knows.
+
+   AND IT IS NOT PRECACHED. sw.js installs 607 distinct files at 18,415,395
+   bytes, which is 17.56MB; fifteen more would take it to 19.45MB, 10.75 per cent
+   on top of every install, for a face most people will never open. The precedent
+   is already written into that file: the 680 portraits are deliberately left out
+   of it for this exact reason, and a back with fewer rows on it is a far softer
+   failure than a face that will not draw. sw.js is network first and caches
+   every successful GET, so the book you actually collect is offline from the
+   second time you open it.
+
+   FOUR STATES, AND THE FOURTH ONE IS THE ONE THAT MATTERS. SPELLS[book] is
+   undefined when nobody has asked, an object when the map is in, and null when
+   we asked and were answered with nothing. Without that last state a 404, which
+   is the permanent and correct answer for any book that loses its file, is
+   indistinguishable from a fetch still in flight, and every card in that book
+   would sit forever on a promise the app is never going to keep while
+   re-requesting on every page somebody walked to. Null means never again this
+   session, and the card simply does not draw the block, which is ALBUM-PLAN's
+   own rule for a row with no data behind it.
+
+   THE TWO FAILURES ARE NOT THE SAME FAILURE, which is why the split is on r.ok
+   rather than on anything else. A response that is not ok is a file that is not
+   there, and that is permanent straight away. A response that IS ok and then
+   fails to parse is the offline path, and it is worth retrying: sw.js's fetch
+   handler falls back to caches.match("index.html") for anything it cannot serve
+   from the network or the cache, and index.html is precached, so an uncached
+   spells.json requested offline comes back as a 200 carrying an HTML document.
+   r.ok is true, r.json() rejects, and we land in the catch. That is a connection
+   problem rather than a missing file, so it gets counted instead of believed,
+   and the book is given up on after two consecutive misses rather than being
+   asked again on every page of a book somebody walks through with no signal. Two
+   is enough to cover one bad moment and small enough that walking thirty-two
+   pages offline costs two requests rather than thirty-two.
+
+   WHICH BOOKS HAVE ONE IS A RULE AND NOT A SECOND LIST, in the same shape as
+   ALBUM_BOOK_GROUPS above. The finals book has no careers, which its own row in
+   POOLS already says in prose: forty real starting elevens, no bench and no
+   careers. That makes it a fact about the group rather than about the book, so
+   the day a second group of line-ups lands it gets a line here instead of a
+   special case, and no request is ever fired for a file that has never existed
+   and never will. */
+const ALBUM_CAREER_GROUPS = {"World Cups": 1, "Euros": 1};
+const albumSpellsFile = book => {
+  const row = POOLS[book];
+  return (row && row.file && ALBUM_CAREER_GROUPS[row.group])
+    ? row.file.replace(/index\.json$/, "spells.json") : null;
+};
+const SPELLS = {};
+const SPELLS_ON = {};
+const SPELLS_MISS = {};
+const ALBUM_SPELL_TRIES = 2;
+/* THE FILE IS KEYED BY THE SIDE'S OWN NAME AND A SHIRT NUMBER, and four keys out
+   of 6,420 carry a surname on the end as well: Switzerland/21/Kobel,
+   Belgium/12/Mignolet, England/13/Henderson, England/13/Ramsdale. That is the
+   career harvest arriving independently at albumId's own disambiguation rule for
+   the three Euro 2020 shirts that two men each wore, which is a pleasant thing
+   to find in somebody else's file.
+
+   BOTH ENDS OF THE KEY GO THROUGH albumTag, and the album's own ids have done
+   that since the day they were written, for twenty lines of reasons sitting
+   above albumTag itself. The join works on the raw side name today, counted
+   across all fifteen files, but it works by the index and the harvest happening
+   to agree on spelling, and the first re-harvest that writes T\u00FCrkiye where the
+   pool says Turkey drops twenty-six careers off the shelf with nothing on any
+   screen to say why. Tagged, it joins 6,420 men with zero keys left over and no
+   two sides in any book tagging to the same string, both counted, so the
+   stricter rule costs exactly nothing and cannot drift. */
+function albumSpellsIndex(raw){
+  const out = {};
+  for(const k in raw){
+    const bits = k.split("/");
+    if(bits.length < 2) continue;
+    out[albumTag(bits[0]) + "/" + bits[1] +
+      (bits.length > 2 ? "/" + albumTag(bits.slice(2).join(" ")) : "")] = raw[k];
+  }
+  return out;
+}
+/* GIVING UP ON A BOOK, counted rather than immediate, because one failed fetch
+   on a train is not the same event as a file that is not there and the two want
+   opposite answers. */
+function albumSpellsMiss(book){
+  SPELLS_MISS[book] = (SPELLS_MISS[book] || 0) + 1;
+  if(SPELLS_MISS[book] >= ALBUM_SPELL_TRIES) SPELLS[book] = null;
+}
+function albumWantSpells(book){
+  const url = albumSpellsFile(book);
+  if(!url || SPELLS[book] !== undefined || SPELLS_ON[book]) return;
+  SPELLS_ON[book] = 1;
+  fetch(url).then(r => r.ok ? r.json() : null).then(b => {
+    SPELLS_ON[book] = 0;
+    /* not ok is a file that is not there, and that is permanent */
+    if(!b){ SPELLS[book] = null; return; }
+    SPELLS[book] = albumSpellsIndex(b);
+    SPELLS_MISS[book] = 0;
+    albumSpellPaint(book);
+  }).catch(() => { SPELLS_ON[book] = 0; albumSpellsMiss(book); });
+}
+/* WHEN THE FILE LANDS UNDER A CARD SOMEBODY IS ALREADY HOLDING. The one-line
+   version of this is render(), and render() rebuilds the whole stage out of
+   strings, which means it rebuilds the raised card as well: the .alturn-s the
+   player is looking at is replaced by a brand new element, alturnover starts
+   again from zero, and a card that was halfway through turning snaps back and
+   turns a second time. So the arrival writes the career straight into the block
+   already on the screen and touches nothing else, which is a text change inside
+   a card that does not move.
+
+   IT CHECKS WHICH BOOK THE NODE CAME FROM, which is not paranoia. A fetch for
+   Euro 2020 can perfectly well land after somebody has walked to a Euro 2024
+   page, and a paint that matched only on the shape of the block would write one
+   book's careers into another book's card. The node carries its book and its
+   sticker id, and both have to agree before a word of it is rewritten.
+
+   This is the one place in the album that touches the DOM directly rather than
+   handing render() a string, which is why the whole of it sits in a try. A
+   career that failed to repaint is a card showing the line it was already
+   showing; a throw in here would be a fetch callback taking the app down. */
+function albumSpellPaint(book){
+  try{
+    const list = document.querySelectorAll(".albk-c[data-bk]");
+    for(let i = 0; i < list.length; i++){
+      const el = list[i];
+      if(el.getAttribute("data-bk") !== book) continue;
+      const p = albumParse(el.getAttribute("data-sp"));
+      if(!p || p.book !== book) continue;
+      const side = albumSideOf(book, p.slug), m = albumManOf(p.id);
+      if(!side || !m) continue;
+      const body = albumCareerHTML(book, side, m);
+      if(body) el.innerHTML = body;
+    }
+  }catch(e){}
+}
+/* 0 this book has no career file and never will, or we asked and were answered
+   with nothing. 1 it is coming. 2 it is here. Three states rather than two,
+   because "there is nothing for this man" and "nobody has looked yet" are
+   different sentences and the card has to be able to say whichever one is
+   true. */
+const albumSpellsState = book =>
+  (!albumSpellsFile(book) || SPELLS[book] === null) ? 0 : SPELLS[book] ? 2 : 1;
+function albumSpells(book, side, m){
+  const idx = SPELLS[book];
+  if(!idx || !m || m.no == null || m.no === "") return null;
+  const base = albumTag(side) + "/" + m.no;
+  /* A SHARED SHIRT TAKES THE TAGGED KEY OR NOTHING. Falling back to the plain
+     key when the tagged one is missing would hand Ramsdale's card Henderson's
+     career, and there is no plain key for a shared shirt in any of the fifteen
+     files anyway, so the fallback could only ever be wrong. */
+  if(albumShirts(book, side)[String(m.no)] > 1){
+    const tag = albumTag(m.n);
+    return (tag && idx[base + "/" + tag]) || null;
+  }
+  return idx[base] || null;
+}
+/* WHETHER THERE IS A CARD BEHIND A MAN AT ALL, which is what decides whether his
+   sticker turns over, and it is deliberately a question about the man rather
+   than about the book he is in.
+
+   THE FORTY FINALS SIDES ARE 440 MEN AND THE ONLY FIELDS ANY OF THEM CARRIES
+   ANYWHERE IN THAT FILE ARE n, full, no, pos AND cap. Counted, across all 440:
+   no club, no caps, no date of birth, no appearances, no leagues, and no
+   spells.json beside the pool. And full is byte-identical to n for 440 of 440 of
+   them, one hundred per cent, which is worth writing down because it kills the
+   obvious way of making those cards turn anyway. The full name is the one field
+   on a man that has never reached a screen in this app, and on those 440 it is
+   the surname already standing up the front of the card. So a finals back would
+   be the surname the front has, the number the front has, the position the front
+   has, and the side name the page heading is printing in bold three lines above
+   it. A card that invites a tap and then shows you what you were already looking
+   at is a worse card than one that does not turn, so those do not turn, and the
+   page says why once instead of eleven cards each ignoring a tap.
+
+   IT ASKS FOR TWO FACTS AND NOT ONE. A single field is too easy to satisfy: the
+   day the finals harvest gains a date of birth, all 440 of those cards would
+   start turning over to a back carrying one row and a header that repeats the
+   front, which is the exact card this is refusing to draw. Two of {club, caps,
+   dob, app}, or a career that actually joined, is a real back. Counted, that is
+   true for all 9,717 men in the fifteen squad books and false for all 440 in the
+   finals book, and nobody anywhere sits on exactly one of the four, so no card
+   can change its mind about turning when a career file lands under it. */
+const albumBackful = (book, side, m) => {
+  if(!m) return false;
+  const sp = albumSpells(book, side, m);
+  if(sp && sp.length) return true;
+  return ((m.club ? 1 : 0) + (m.caps != null ? 1 : 0) +
+          (m.dob ? 1 : 0) + (m.app != null ? 1 : 0)) >= 2;
+};
 
 /* ---------- WHAT A STICKER IS CALLED ----------
    book + ":" + slug + "/" + shirt number. "wc2006:italy/10".
@@ -18545,6 +18977,150 @@ function albumBadgeHTML(kit, no){
   return '<span class="xshirt alsbadge" style="--kit:' + k + ';--kink:' + kitInk(k) + '">' +
     (no == null || no === "" ? "" : no) + '</span>';
 }
+const ALBUM_MONTHS = "Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split(" ");
+/* Every one of the 9,717 dates of birth in the squad books is a clean
+   YYYY-MM-DD, no partials and no nulls, counted rather than assumed. It is split
+   rather than handed to Date because a Date built from a bare date string is
+   midnight UTC, which prints as the previous day everywhere west of Greenwich
+   and would move every birthday in the album by one for anybody playing it in
+   Montreal. And it falls back to printing whatever it was handed rather than to
+   an empty string, because a date a later harvest gets wrong should turn up on a
+   card looking wrong instead of as a row that quietly went missing. */
+const albumDate = v => {
+  const b = String(v == null ? "" : v).split("-");
+  return (b.length === 3 && ALBUM_MONTHS[+b[1] - 1])
+    ? (+b[2]) + " " + ALBUM_MONTHS[+b[1] - 1] + " " + b[0] : String(v == null ? "" : v);
+};
+/* THE YEARS ON A SPELL, WRITTEN OUT IN FULL. 1993 to 2004 rather than 1993 to
+   04, which is the convention a fixture list uses and which goes ambiguous the
+   moment a career crosses a century, as plenty of these do. It costs two
+   characters in a column that has room for them.
+
+   3,116 rows of the 40,181 carry no end year, and that is not a hole, it is the
+   spell that had not finished when the article was written, so it prints as an
+   open dash and says so. Three rows carry a from-year of 1: Roberto Carlos at
+   Anzhi, once each in the 1998, 2002 and 2006 books, and those same three are
+   the only rows anywhere with an end before a beginning. A line reading 1 to
+   2012 is visibly broken in the way that makes a whole card look untrustworthy,
+   so a year outside the span a footballer could have played in is dropped and
+   the club keeps its line. The row stays where the file put it rather than being
+   moved to the end, because the harvest's order is the harvest's to answer for
+   and quietly re-sorting three rows to hide a bad year is the app editorialising
+   data it did not gather. */
+const albumYears = sp => {
+  const ok = y => typeof y === "number" && y >= 1850 && y <= 2100;
+  const f = ok(sp.f) ? sp.f : null;
+  const t = (ok(sp.t) && (f == null || sp.t >= f)) ? sp.t : null;
+  if(f == null) return t == null ? "" : String(t);
+  if(t == null) return f + "\u2013";
+  return t === f ? String(f) : f + "\u2013" + t;
+};
+/* The six slugs a spell row can carry are the six the quiz drawer already has an
+   accent colour for, so this asks QUIZZES rather than keeping a colour table of
+   its own. Anything else, and 21,012 of the 40,181 spell rows are something
+   else, gets no property at all and falls to the stylesheet's grey. */
+const albumDotHTML = k => '<em' +
+  ((QUIZZES[k] || {}).ac ? ' style="--lgc:' + QUIZZES[k].ac + '"' : "") + '></em>';
+/* ---------- THE CAREER BLOCK, THE ONE PART OF THE BACK THAT CAN ARRIVE LATE ----------
+   It is its own builder rather than four lines inside albumBackHTML because
+   albumSpellPaint has to be able to build exactly this and nothing else when a
+   file lands under a card somebody is already holding. Everything above it on
+   the card comes out of the squad file, which was in before the page drew.
+
+   THERE ARE FOUR THINGS IT CAN SAY AND THEY ARE FOUR DIFFERENT SENTENCES.
+   A career, which is the row ALBUM-PLAN wants most and the reason any of this
+   was worth building: 6,420 men of the 9,717 in the squad books have one.
+   The leagues, which is the plan's fifth row, for the 1,528 who have a league
+   and no career. It is drawn there and only there: printed under a career it
+   would repeat in words what the coloured dots beside the clubs have already
+   said, and printed instead of one it is the only thing on the card that is
+   about football rather than about paperwork. The two are never both drawn.
+   "Clubs not here yet." for a man whose book's file has not landed, because
+   silence there would be the card claiming he had no clubs when what it means is
+   that it has not looked.
+   And "No club career on file." for the 1,769 who have neither, once the file is
+   actually in. We looked and there is nothing reads differently from we have not
+   looked yet, and this is the one place on the card where the true sentence is
+   free. 6,420 plus 1,528 plus 1,769 is 9,717, counted.
+
+   Nothing spins and nothing is greyed out. The card turns over immediately
+   carrying every row the squad file can already fill, and this block is the only
+   part of it that ever has to wait. */
+function albumCareerHTML(book, side, m){
+  const sp = albumSpells(book, side, m) || [];
+  const lg = (!sp.length && Array.isArray(m.lg)) ? m.lg : [];
+  const st = albumSpellsState(book);
+  /* a book with no file and no answer coming has nothing to say here, so it says
+     nothing, which is the plan's own rule for a row with no data */
+  if(!sp.length && !lg.length && st === 0) return "";
+  return '<div class="albk-t">' + (lg.length ? "Leagues" : "Clubs") + '</div>' +
+    (sp.length
+      ? '<ul class="albk-l">' + sp.map(x => '<li>' + albumDotHTML(x.lg) +
+          '<u>' + albumYears(x) + '</u><span>' + esc(x.c || "") + '</span></li>').join("") + '</ul>'
+      : lg.length
+        ? '<ul class="albk-l">' + lg.map(k => '<li>' + albumDotHTML(k) +
+            '<span>' + esc((QUIZZES[k] || {}).label || k) + '</span></li>').join("") + '</ul>'
+        : st === 1
+          ? '<div class="albk-w">Clubs not here yet.</div>'
+          : '<div class="albk-w">No club career on file.</div>');
+}
+/* ---------------- THE BACK OF THE STICKER ----------------
+   ALBUM-PLAN section 3 lists six rows for the back and then gives the rule that
+   governs all of them: no ratings, no invented numbers, and a row with no data
+   for a man is not drawn. That rule does most of the work here, because the six
+   rows are filled to wildly different depths and two of them are the same fact
+   wearing different clothes.
+
+   THE FULL NAME, BIG, AT THE TOP. The plan's first row is name, number and
+   position, and the front already prints all three, so repeating them would be
+   the back copying the front. What the back can do that the front cannot is
+   print the whole name: full is on all 10,157 men and has never once reached a
+   screen, because the front is a shirt and a shirt carries a surname. Number,
+   position, side and the captain's armband go on one small line under it, which
+   is the trading card's furniture rather than a row of its own.
+
+   BORN, CLUB, CAPS AND THE TOURNAMENT, as a fact box. club, caps and dob are on
+   all 9,717 men in the squad books and none of the three is referenced anywhere
+   else in the app today. capg is not on the man everywhere: eight books carry it
+   for everybody, six carry it for nobody, and wc2010 carries it for six men out
+   of 736, which is why the plan's line about six books is one book out and why
+   wc2010 reads here as not having it. All of these test against null rather than
+   for truth, because 2,142 men carry capg:0 and 152 carry caps:0, and those are
+   real zeroes a man is entitled to have printed. */
+function albumBackHTML(book, side, m){
+  const t = (albumBook(book) || {})[side] || {};
+  const row = POOLS[book] || {};
+  const id = albumId(book, side, m);
+  const fact = [];
+  const add = (k, v) => { if(v) fact.push('<i>' + k + '</i><span>' + v + '</span>'); };
+  const goals = n => n === 1 ? "1 goal" : n + " goals";
+  add("Born", m.dob ? esc(albumDate(m.dob)) +
+    (m.age == null ? "" : ' \u00B7 ' + m.age + ' that summer') : "");
+  add("Club", m.club ? esc(m.club) : "");
+  add("Caps", m.caps == null ? "" :
+    m.caps + (m.capg == null ? "" : ' \u00B7 ' + goals(m.capg)));
+  /* THE TOURNAMENT ROW IS LABELLED WITH THE TOURNAMENT, because "5 games" on its
+     own, on a card that also says 119 caps, is a number nobody can place. app is
+     on 7,880 of the 9,717 and g on only 1,359, and that second figure is not a
+     gap in the harvest, it is the truth about footballers, so a man with
+     appearances and no goals reads as no goals rather than losing the row. A man
+     with neither loses it, which is the plan's rule again. */
+  add(esc(String(row.short || row.label || book)), m.app == null ? "" :
+    (m.app === 1 ? "1 game" : m.app + " games") + ' \u00B7 ' +
+    (m.g ? goals(m.g) : "no goals"));
+  const career = albumCareerHTML(book, side, m);
+  return '<div class="albk">' +
+    '<div class="albk-h"><b>' + esc(m.full || m.n || "") + '</b><s>' +
+      (m.no == null || m.no === "" ? "" : m.no + ' \u00B7 ') +
+      esc(m.pos || "") + ' \u00B7 ' + esc(t.abbr || side) +
+      (m.cap ? ' \u00B7 Captain' : "") + '</s></div>' +
+    (fact.length ? '<div class="albk-f">' + fact.join("") + '</div>' : "") +
+    /* the block names its book and its man so that a file arriving a second
+       later can find this exact card and no other one */
+    (career ? '<div class="albk-c" data-bk="' + esc(book) + '"' +
+      (id ? ' data-sp="' + esc(id) + '"' : "") + '>' + career + '</div>' : "") +
+  '</div>';
+}
 /* THE SPINE STRIP, which is as much of ALBUM-PLAN's shelf as belongs to this
    stage. The shelf proper is section 5 and it is a drawing: covers, a year in
    big type, a progress bar, a yellow spine on the one you are collecting. This
@@ -18710,15 +19286,54 @@ function renderAlbum(st){
     /* one country's page */
     if(ALBUM_VIEW.side){
       const side = ALBUM_VIEW.side, men = albumMen(bid, side);
+      /* THE CAREER FILE IS ASKED FOR AGAIN HERE, on arrival at the only screen in
+         the app that has a card anybody can turn over. The book screen below
+         asked first and this is almost always a no-op, which is the point: it is
+         the retry, and it is what catches a book whose first attempt died on a
+         bad connection. On the finals book it is a no-op outright. */
+      albumWantSpells(bid);
       const got = men.filter(m => albumHas(albumId(bid, side, m))).length;
       const dupes = albumDupes(bid).length;
+      /* ONE HINT LINE AND NOT TWO. This page already carries a sentence about the
+         bench and a sentence about swapping, and stacking a third italic line
+         underneath them in the same type at the same width is a page giving
+         instructions rather than a page saying something. So the turn earns a
+         clause in the line that is already there.
+
+         IT ONLY SPEAKS WHEN IT IS TRUE. Telling somebody to tap one they have on
+         a page where they have none is the app talking to itself, so the
+         invitation waits until there is an owned card with a back on it. And
+         where NO man on the page has a back, which is the forty finals pages and
+         nowhere else, it says so instead, because eleven cards that all ignore a
+         tap read as eleven cards that are broken.
+
+         THE SCORELINE IS THE ONE REAL FACT THOSE PAGES HAVE, and it is printed
+         here rather than on eleven identical backs, because it is a fact about
+         the side and not about any of the men on it. xiVs is a full result on a
+         finals side and a bare opponent name on a squad side, and the test is the
+         shape of the string rather than the name of the book: counted, 40 of the
+         40 finals sides carry a digit in it and 0 of the 408 squad sides do, so
+         "France" can never turn up under a label reading The final, and a second
+         book of single line-ups would come out right without anybody having to
+         remember this line. Fifteen of the forty are clubs rather than countries,
+         which is why nothing in here says country. */
+      const canTurn = men.some(m => albumHas(albumId(bid, side, m)) && albumBackful(bid, side, m));
+      const thin = got > 0 && !men.some(m => albumBackful(bid, side, m));
+      const score = /\d/.test(String(book[side].xiVs == null ? "" : book[side].xiVs))
+        ? String(book[side].xiVs) : "";
+      const hint = [
+        albumFoil(bid, side)
+          ? 'Their bench is yours in The Dugout.'
+          : 'Finish the page and their bench is yours in The Dugout. ' +
+            (dupes >= 3 ? 'Tap a gap and pick which three doubles go.' : 'You need three doubles to swap.'),
+        canTurn ? 'Tap one you have and it turns over.' : "",
+        thin ? (score ? 'The final: ' + esc(score) + '. ' : "") +
+          'There is nothing else on file for these eleven, so none of them turns over.' : ""
+      ].filter(Boolean).join(" ");
       st.innerHTML =
         '<div class="kick">' + ico('trophy') + esc(label) +
-          (albumFoil(bid, side) ? ' · complete' : '') + '</div>' +
-        (albumFoil(bid, side)
-          ? '<div class="h2hintline" style="margin-top:0">Their bench is yours in The Dugout.</div>'
-          : '<div class="h2hintline" style="margin-top:0">Finish the page and their bench is yours in The Dugout. ' +
-            (dupes >= 3 ? 'Tap a gap and pick which three doubles go.' : 'You need three doubles to swap.') + '</div>') +
+          (albumFoil(bid, side) ? ' \u00B7 complete' : '') + '</div>' +
+        '<div class="h2hintline" style="margin-top:0">' + hint + '</div>' +
         '<div class="alsheet"><div class="alsheet-h">' +
           /* h2Badge resolves against the pool you are PLAYING, and the book on
              the table is not that, so the page builds its own. The finals book
@@ -18730,8 +19345,18 @@ function renderAlbum(st){
         '<div class="alpage">' + men.map(m => {
           const id = albumId(bid, side, m), has = albumHas(id);
           const can = !has && dupes >= 3;
+          /* A GAP DOES NOT TURN OVER, because there is nothing behind a hole, and
+             a man the harvest landed with nothing on him does not either. Those
+             are the only two reasons a card stays where it is. Note the order of
+             the ladder: a slot you can afford to fill is a swap button first,
+             because a man you have not got is a man you want more than you want
+             to read the back of one you already have. */
+          const turn = has && !!id && albumBackful(bid, side, m);
           return (can ? '<button class="alslot want" onclick="albumSwapTo(' +
-                        JSON.stringify(id).replace(/"/g, "&quot;") + ')">' : '<div class="alslot' + (has ? "" : " gap") + '">') +
+                        JSON.stringify(id).replace(/"/g, "&quot;") + ')">'
+                 : turn ? '<button class="alslot alspick" onclick="albumTurn(' +
+                        JSON.stringify(id).replace(/"/g, "&quot;") + ')">'
+                 : '<div class="alslot' + (has ? "" : " gap") + '">') +
                  /* ALBUM_VIEW.lit is set by a swap and by nothing else, and any
                     navigation at all rebuilds the view and clears it, so the man
                     you just paid for is lit exactly once, on the one screen where
@@ -18741,16 +19366,24 @@ function renderAlbum(st){
                     or every numberless slot on the page lights up together. */
                  albumStickerHTML(bid, side, m, has, false,
                    (id && id === ALBUM_VIEW.lit) ? (ALBUM_VIEW.shut ? 2 : 1) : 0) +
-                 (can ? '</button>' : '</div>');
+                 ((can || turn) ? '</button>' : '</div>');
         }).join("") + '</div>' +
         '<div class="alsheet-f"><span>' + (book[side].group ? 'Group ' + esc(book[side].group) : "") +
           '</span><span>Page ' + (albumSides(bid).indexOf(side) + 1) + '</span></div></div>' +
         '<button class="bigbtn ghost" onclick="openAlbum(' +
-          JSON.stringify(bid).replace(/"/g, "&quot;") + ')">All the pages</button>';
+          JSON.stringify(bid).replace(/"/g, "&quot;") + ')">All the pages</button>' +
+        albumTurnHTML(bid, side);
       return;
     }
 
     /* the whole book */
+    /* THE CAREER FILE, ASKED FOR ONE SCREEN EARLY. Every route to a country page
+       comes through this book's own screen first, so asking here buys the fetch
+       the second or two it takes a person to pick a page, and on anything but a
+       cold mobile connection the careers are in by the time a card is turned
+       over. It is guarded inside albumWantSpells, so on every render after the
+       first it costs one property read. */
+    albumWantSpells(bid);
     const c = albumCount(bid);
     const collecting = bid === albumCollecting();
     st.innerHTML =
