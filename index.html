@@ -312,6 +312,32 @@
     /* NOT the grass. #pitchbg is the page backdrop behind the whole app, and
        .h2pitch is the surface a match is played on. The first follows the look
        and the second is green in both, which is why they are separate. */
+
+    /* THE BOARD THE MATCH IS PLAYED ON, and it is one object. The scoreboard
+       above the pitch and the question card below it used to be their own
+       near-black, so a match read as a black bar, a green pitch and another
+       black bar rather than as one thing. These are taken off the pitch itself:
+       the board is the ground the stripes are cut into, the line is the darker
+       of the two stripe greens, and the ink is the white the markings are
+       painted in.
+
+       THEY DO NOT FOLLOW THE LOOK, for the same reason the yellow card and the
+       grass do not. A board that is dark green in both themes has to carry its
+       own ink in both themes, and taking var(--text) is what put charcoal on a
+       dark green card and made the light theme unreadable in a match. */
+    --board:#123D24;
+    --board-hi:#1B4A2C;            /* an option sitting on it */
+    /* MEASURED RATHER THAN PICKED. This does two jobs, the edge of every chip
+       and the square the letter sits in, and they pull opposite ways: a
+       brighter green is a clearer edge against the board and a worse ground
+       for white type. #2F8A3F left the edge at 2.81 to 1, under the three
+       that a control boundary wants, and the letter at 3.98, under the four
+       and a half that type wants. This clears both at 4.30, with the letter
+       going dark instead of white to get there, which is also the more
+       sixteen-bit of the two: a bright key with a dark glyph on it. */
+    --board-line:#3FAE52;          /* the pitch's own bright stripe */
+    --board-ink:#F2F6EE;           /* the white the lines are painted in */
+    --board-dim:#8FB79E;           /* the same sage as the One on One rule */
   }
   /* THE ELEVEN THE SWEEP FORGOT. These are 2019 names still declared on bare
      :root above, and nothing redefined them when the two themes arrived, so
@@ -1245,7 +1271,9 @@
 
   /* ---------- stage ---------- */
   #stage{flex:1;display:flex;flex-direction:column;padding:18px 16px 20px;gap:14px}
-  .kick{font:700 .7rem/1 var(--ui);letter-spacing:.14em;text-transform:uppercase;color:var(--chalk-dim)}
+  /* ON THE BOARD RATHER THAN ON THE PAGE, so it takes the board's dim rather
+     than the theme's, which in the light theme was a warm grey on dark green. */
+  .kick{font:700 .7rem/1 var(--ui);letter-spacing:.14em;text-transform:uppercase;color:var(--board-dim)}
   h1.title{
     font:800 clamp(2.2rem,11vw,3rem)/1.02 var(--ui);
     letter-spacing:-.03em;text-wrap:balance;
@@ -1419,18 +1447,30 @@
      the night, and it glared on a phone in a dark pub.
      The tier colour arrives as a lit edge and as the lamp on the chip,
      never as a band of paint. */
+  /* THE OTHER END OF THE SAME BOARD. Three greens nobody chose together used to
+     meet here: a scorebug in rgba(10,26,16), a pitch in #3aa04a stripes and this
+     in rgba(13,34,21). It is the board's green now, with the pitch's own stripe
+     as its edge, so the match reads as one object from the scoreline to the
+     fourth option.
+
+     AND IT CARRIES ITS OWN INK RATHER THAN var(--text). It is dark green in
+     both looks, so in the light theme var(--text) was charcoal and this card
+     was charcoal on near-black. The question escaped because .qtext states its
+     own colour; the four options did not, which is the unreadable screen in the
+     report. The faint glow at the top stays, because that is the floodlight and
+     it is the one thing here that is not flat. */
   .qcard{
     position:relative;
     background:
       radial-gradient(120% 72% at 50% -12%, rgba(255,252,215,.075), transparent 62%),
-      linear-gradient(180deg, rgba(13,34,21,.90), rgba(6,17,10,.94) 58%, rgba(10,26,16,.92));
-    border:1px solid rgba(200,232,210,.15);
+      var(--board);
+    border:1px solid var(--board-line);
     border-radius:10px;                       /* the board's radius, not a card's */
     padding:18px 16px;display:flex;flex-direction:column;gap:12px;
-    color:var(--text);
+    color:var(--board-ink);
     box-shadow:
-      inset 0 1px 0 var(--paper),
-      0 12px 30px rgba(0,0,0,.5);
+      inset 0 1px 0 rgba(255,255,255,.07),
+      0 12px 30px rgba(0,0,0,.4);
     overflow:hidden;
   }
   /* THE CARD ARRIVES, and it arrives the same way whoever is answering. It used
@@ -2657,7 +2697,14 @@
      Flat mid-dark rather than the night look's soft near-black. A gradient
      behind a hard-edged pitch is the tell, and the grass wants something to
      sit ON rather than to fade into. */
-  body.pixel #pitchbg{background:#0b2a14 !important;background-image:none !important}
+  /* THE BACKDROP FOLLOWS THE LOOK, WHICH IT ALWAYS SHOULD HAVE. This forced
+     #0b2a14 with an !important, so with the skin on the page behind the whole
+     app was dark green whatever the theme said, and the light theme's charcoal
+     ink was being written on it. The rule three hundred lines up says outright
+     that this one follows the look and the pitch is green in both; this was the
+     line breaking it. The image still goes, because mown bands behind a
+     sixteen-bit pitch is two grass textures arguing. */
+  body.pixel #pitchbg{background:var(--bg) !important;background-image:none !important}
   body.pixel .h2stage{background:none;box-shadow:none;border-radius:0}
 
   /* ---------------- the goal scene ----------------
@@ -3957,12 +4004,18 @@
   /* Four options. Wide targets, because this gets tapped on a phone that is
      being passed across a table, and a clear right/wrong once it is called. */
   .h2mc{display:grid;gap:7px;margin-top:10px}
+  /* THEY SIT ON THE BOARD, SO THEY ARE LIT OFF THE BOARD. A five per cent white
+     fill and var(--edge) were both reading off the theme while the card under
+     them never did, which in the light theme is a pale tan hairline and no fill
+     at all, on dark green. The letter no longer dims itself either: an A that is
+     eighty per cent of the way to the background is not a label, it is a smudge,
+     and this is the one thing on the screen you tap. */
   .h2opt{display:flex;align-items:center;gap:10px;width:100%;padding:11px 12px;
-    border-radius:11px;border:1px solid var(--edge);
-    background:rgba(255,255,255,.05);color:inherit;cursor:pointer;text-align:left;
+    border-radius:11px;border:1px solid var(--board-line);
+    background:var(--board-hi);color:var(--board-ink);cursor:pointer;text-align:left;
     font:700 .95rem/1.2 var(--ui);transition:all .18s}
   .h2opt .k{flex:none;width:21px;height:21px;border-radius:6px;display:grid;place-items:center;
-    background:rgba(255,255,255,.1);font:800 .74rem var(--ui);opacity:.8}
+    background:var(--board-line);color:var(--board);font:800 .74rem var(--ui)}
   .h2opt:disabled{cursor:default}
   .h2opt.right{border-color:#3ddc91;background:rgba(61,220,145,.16);
     box-shadow:0 0 0 1px #3ddc91 inset, 0 0 18px -6px #3ddc91}
@@ -3974,11 +4027,15 @@
 
   /* the scoreline */
   /* ---------- the scorebug ---------- */
+  /* THE SAME GREEN AS THE PITCH IT SITS ON TOP OF. This was its own near-black
+     gradient, so the top of a match was a black bar above a green pitch. It is
+     the board now, with the pitch's darker stripe as its edge, and it carries
+     its own ink because it is dark in both looks. */
   .sb{display:flex;align-items:stretch;justify-content:center;margin:2px auto 3px;
     width:100%;max-width:400px;border-radius:11px;overflow:hidden;
-    background:linear-gradient(180deg,rgba(10,26,16,.96),rgba(6,18,11,.98));
-    border:1px solid rgba(255,255,255,.14);
-    box-shadow:0 8px 22px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.09)}
+    background:var(--board);color:var(--board-ink);
+    border:1px solid var(--board-line);
+    box-shadow:0 8px 22px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.07)}
   .sb-t{flex:1 1 0;display:flex;align-items:center;gap:8px;padding:8px 9px;min-width:0;
     position:relative;transition:background .3s}
   .sb-t::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--tc)}
@@ -9487,21 +9544,23 @@ const h2Live    = w => h2Shape(w).map((_, i) => i).filter(i => !h2IsOff(w, i));
 let h2Anim = null;
 /* THE SECOND SKIN. Remembered the way the other three toggles are, and read
    at boot rather than on first render so the first frame is already right. */
-let h2Pixel = false;
-try{ h2Pixel = localStorage.getItem("ball2-pixel") === "1"; }catch(e){}
+/* SIXTEEN-BIT IS THE LOOK, not one of two. It was a per-phone choice in
+   localStorage and a button in the match toggles, which left the app with two
+   looks to keep honest and most people never seeing the one it was designed
+   around. Pinned rather than deleted, so every body.pixel rule keeps its scope
+   and the night look is one word from coming back.
+
+   WHAT THIS LEAVES BEHIND, because it should be found on purpose rather than by
+   accident: the non-pixel branch of the match CSS is now unreachable. Sweeping
+   it is a few hundred lines of deletion that forecloses going back, so it is a
+   decision for a person rather than a tidy-up to do quietly here. */
+const h2Pixel = true;
 function h2ApplyPixel(){
   try{ document.body.classList.toggle("pixel", !!h2Pixel); }catch(e){}
 }
 /* on before the first frame, so a resumed match does not draw once in the
    wrong look and then snap into the right one */
 try{ h2ApplyPixel(); }catch(e){}
-function h2TogglePixel(){
-  audio();
-  h2Pixel = !h2Pixel;
-  try{ localStorage.setItem("ball2-pixel", h2Pixel ? "1" : "0"); }catch(e){}
-  h2ApplyPixel();
-  render();
-}
 let h2Tilt = true;
 try{ h2Tilt = localStorage.getItem("ball2-h2h-flat") !== "1"; }catch(e){}
 function h2ToggleView(){
@@ -16468,7 +16527,6 @@ function h2TogglesHTML(){
     '<button class="h2view" onclick="h2ToggleView()">' + (h2Tilt ? "Flat view" : "3D view") + '</button>' +
     '<button class="h2view" onclick="h2ToggleSound()">' + (h2Sound ? "Sound off" : "Sound on") + '</button>' +
     '<button class="h2view" onclick="h2ToggleTackle()">' + (h2TackleOn ? "Tackles off" : "Tackles on") + '</button>' +
-    '<button class="h2view" onclick="h2TogglePixel()">' + (h2Pixel ? "Night look" : "16-bit") + '</button>' +
   '</div>';
 }
 

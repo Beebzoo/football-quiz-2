@@ -161,11 +161,19 @@ const NIGHT = html.slice(0, blkStart) + html.slice(blkEnd);
      paints him, which is a text check on where the rules live because there is
      no browser here. Same shape pixel-test.js uses, for the same reason. */
   console.log("\n--- and he is drawn in both looks ---");
-  run(app, "h2TogglePixel();"); await tick(120);
-  check("the sixteen-bit skin changes nothing about the markup",
+  /* THE CLASS COMES OFF AND GOES BACK ON BY HAND. This used to toggle the skin,
+     and the skin is not a setting any more: it is a class on the body and
+     nothing else. Taking the class away is what the toggle was doing, and it is
+     the truer test of the claim, which is that nothing in the builder asks which
+     look is on, so the markup cannot move when the look does. */
+  run(app, 'document.body.classList.remove("pixel"); render();'); await tick(120);
+  check("the night look changes nothing about the markup",
     stage(app).includes('class="fig ref"') &&
     (stage(app).match(/class="tossman/g) || []).length === 3, "the referee went missing");
-  run(app, "h2TogglePixel();"); await tick(120);
+  run(app, 'document.body.classList.add("pixel"); render();'); await tick(120);
+  check("and neither does putting the skin back",
+    stage(app).includes('class="fig ref"') &&
+    (stage(app).match(/class="tossman/g) || []).length === 3, "the referee went missing");
   check("the night look draws his badge", /\.fig\.ref \.f-torso::after\{/.test(NIGHT), "no badge rule");
   check("the sixteen-bit one draws it again, on the grid",
     /body\.pixel \.fig\.ref \.f-torso::after\{/.test(SKIN) &&

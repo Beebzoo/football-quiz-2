@@ -394,8 +394,11 @@ const HUMAN = {
   /* the chrome is the one thing that does NOT go, because a row of buttons that
      turns up a beat after the pitch shoves the whole pitch down the phone at the
      moment the eye is trying to find a ball on it */
+  /* the sixteen-bit button used to be the second of the two named here and the
+     skin is not a setting any more, so it looks for the two this line has always
+     said it was looking for */
   check("but the view and sound buttons have not moved",
-    stage().indexOf("h2ToggleView()") > -1 && stage().indexOf("h2TogglePixel()") > -1, "the toggles went");
+    stage().indexOf("h2ToggleView()") > -1 && stage().indexOf("h2ToggleSound()") > -1, "the toggles went");
   const bookedAtHold = booked();
   /* A REDRAW IN THE MIDDLE OF THE HOLD DOES NOT WAKE HIM UP, and this is the
      half of the gate worth asserting rather than assuming: the screen redraws

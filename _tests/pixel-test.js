@@ -174,20 +174,22 @@ const tick = (ms = 200) => new Promise(r => setTimeout(r, ms));
 (async () => {
   const app = makeInstance("pixel");
   await tick(340);
-  check("it starts on the night look", ev(app, "h2Pixel") === false, ev(app, "h2Pixel"));
-  run(app, "h2TogglePixel();"); await tick(120);
-  check("tapping it turns the skin on", ev(app, "h2Pixel") === true, ev(app, "h2Pixel"));
-  check("and it is remembered the way the others are",
-    ev(app, 'localStorage.getItem("ball2-pixel")') === "1",
-    ev(app, 'localStorage.getItem("ball2-pixel")'));
-  check("the class lands on the body",
+  /* IT IS THE LOOK, NOT ONE OF TWO. This used to assert a toggle: off at the
+     start, on after a tap, remembered in localStorage, off again after another.
+     There is no toggle and no setting now, so the promise has changed and these
+     say the new one. It is a stronger claim than the old one, not a weaker one:
+     the old pair proved a switch worked, and these prove there is no switch. */
+  check("the sixteen-bit skin is simply on", ev(app, "h2Pixel") === true, ev(app, "h2Pixel"));
+  check("and the class is on the body from the first render",
     ev(app, 'document.body.classList.contains("pixel")') === true, "not on the body");
-  run(app, "h2TogglePixel();"); await tick(120);
-  check("and tapping it again puts the night back", ev(app, "h2Pixel") === false, ev(app, "h2Pixel"));
-  check("which is remembered too", ev(app, 'localStorage.getItem("ball2-pixel")') === "0",
+  /* the toggle is GONE rather than renamed and left lying about, which matters
+     twice over: h2Pixel is a const now, so anything still trying to flip it
+     would throw rather than quietly do nothing */
+  check("there is no way to turn it off any more",
+    ev(app, 'typeof h2TogglePixel') === "undefined", ev(app, 'typeof h2TogglePixel'));
+  check("and nothing is left in storage pretending it is a setting",
+    ev(app, 'localStorage.getItem("ball2-pixel")') === null,
     ev(app, 'localStorage.getItem("ball2-pixel")'));
-  check("and the class comes off",
-    ev(app, 'document.body.classList.contains("pixel")') === false, "still on the body");
 
   /* IT MUST NOT TOUCH THE RULES. A skin that changed a price would not be a
      skin, and this is the one thing a screenshot could never tell you. */
@@ -199,7 +201,10 @@ const tick = (ms = 200) => new Promise(r => setTimeout(r, ms));
   const before = [];
   for (let a = 0; a < 11; a++) for (let b = 0; b < 11; b++)
     if (a !== b) before.push(ev(app, "h2TierFor(" + a + "," + b + ")"));
-  run(app, "h2TogglePixel();"); await tick(120);
+  /* THE CLASS COMES OFF AND GOES BACK ON BY HAND, because that is what the
+     toggle was doing and it is the truer statement of the rule anyway: the skin
+     IS a class on the body, and a class on the body must not move the ladder. */
+  run(app, 'document.body.classList.remove("pixel");'); await tick(120);
   const after = [];
   for (let a = 0; a < 11; a++) for (let b = 0; b < 11; b++)
     if (a !== b) after.push(ev(app, "h2TierFor(" + a + "," + b + ")"));
@@ -207,7 +212,7 @@ const tick = (ms = 200) => new Promise(r => setTimeout(r, ms));
     before.join() === after.join(), "the ladder moved");
   check("and the shot does too",
     ev(app, "H2_SHOT_AT(9,0)") === ev(app, "H2_SHOT_AT(9,0)"), "n/a");
-  run(app, "h2TogglePixel();");
+  run(app, 'document.body.classList.add("pixel");');
 
   /* ---------- a light kit keeps a waist ---------- */
   console.log("\n--- a white kit still has a waist ---");
